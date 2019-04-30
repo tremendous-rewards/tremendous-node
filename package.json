@@ -1,6 +1,6 @@
 {
   "name": "tremendous",
-  "version": "1.0.0",
+  "version": "0.0.5",
   "description": "A node.js client for the Tremendous API",
   "keywords": [
     "tremendous",
@@ -38,12 +38,12 @@
   "_npmVersion": "2.15.5",
   "_nodeVersion": "4.4.5",
   "maintainers": [
-    " <ben@giftrocket.com>"
+    " <developers@tremendous.com>"
   ],
   "directories": {
     "example": "examples",
     "test": "test"
   },
-  "author": "Ben <ben@tremendous.com> (https://www.tremendous.com/rewards)",
+  "author": "Tremendous Developers <developers@tremendous.com> (https://www.tremendous.com/rewards)",
   "license": "MIT"
 }

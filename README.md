@@ -73,15 +73,6 @@ client.getFundingSources({}, function(err, results) {
 });
 ```
 
-### Styles
-A style defines the presentation of your gift.  The styles endpoint returns an array of card designs.
-
-```javascript
-client.getStyles({}, function(err, results) {
-  console.log(JSON.stringify(results, null, 2));
-});
-```
-
 ### Gifts
 Retrieve a single or many historical gifts sent by your account.
 
