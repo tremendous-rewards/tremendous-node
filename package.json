@@ -22,7 +22,7 @@
   "main": "index.js",
   "dependencies": {
     "jsonwebtoken": "8.1.x",
-    "lodash": "4.16.x",
+    "lodash": "4.17.x",
     "request": "2.74.x"
   },
   "devDependencies": {
