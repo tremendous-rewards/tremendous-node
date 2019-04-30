@@ -74,12 +74,9 @@ client.getFundingSources({}, function(err, results) {
 ```
 
 ### Gifts
-Retrieve a single or many historical gifts sent by your account.
+Retrieve a gift sent by your account.
 
 ```javascript
-client.getGifts({offset: 10}, function(err, results) {
-  console.log(JSON.stringify(results, null, 2));
-});
 
 client.getGift("[GIFT_ID]", function(err, results) {
   console.log(JSON.stringify(results, null, 2));
