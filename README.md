@@ -1,7 +1,7 @@
 tremendous-node
 ==============
 
-A node.js client library for the [Tremendous API][1].
+A node.js client library for the [Tremendous API v1][1] and [Tremendous API v2][2].
 
 ## Installation
 
@@ -11,24 +11,33 @@ $ npm install tremendous
 
 ## Getting started
 
-All API requests require an access token.  A sandbox access token is assigned upon signup through the [Tremendous Dashboard][2]. Once you are ready to move to production, you will be assigned a production access token.
+All API requests require an access token.  A sandbox access token is assigned upon signup through the [Tremendous Dashboard][3]. Once you are ready to move to production, you will be assigned a production access token.
 
 ### Authentication
-
+##### API v1
 ```javascript
-var Tremendous = require('tremendous');
+var Tremendous = require('tremendous').v1;
+```
+
+##### API v2
+```javascript
+var Tremendous = require('tremendous').v2;
+```
 
 // Sandbox environment
+```javascript
 var client = new Tremendous("[SANDBOX_ACCESS_TOKEN]", "https://testflight.tremendous.com");
+```
 
 // Production environment
+```javascript
 var client = new Tremendous("[PRODUCTION_ACCESS_TOKEN]", "https://www.tremendous.com");
 ```
 
 
 ### Orders
 
-See [API documentation][3] for all Order options, including `delivery_method`.  Use the FoundingSources resource to look up a valid method for your payment (i.e. credit card, ACH, etc).
+See [API documentation][4] for all Order options, including `delivery_method`.  Use the FoundingSources resource to look up a valid method for your payment (i.e. credit card, ACH, etc).
 
 ```javascript
 // Create a new order, specifying your gift options
@@ -92,5 +101,6 @@ client.getCatalog(function(err, results) {
 ```
 
 [1]: https://tremendous.com/docs
-[2]: https://tremendous.com/rewards
-[3]: https://tremendous.com/docs
+[2]: https://tremendous.com/docs/v2
+[3]: https://tremendous.com/rewards
+[4]: https://tremendous.com/docs
