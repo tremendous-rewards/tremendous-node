@@ -1,4 +1,4 @@
-tremendous-node
+tremendous
 ==============
 
 A node.js client library for the [Tremendous API][1].
@@ -19,10 +19,10 @@ All API requests require an access token.  A sandbox access token is assigned up
 var Tremendous = require('tremendous');
 
 // Sandbox environment
-var client = new Tremendous("[SANDBOX_ACCESS_TOKEN]", "https://testflight.tremendous.com");
+var client = new Tremendous("[SANDBOX_ACCESS_TOKEN]", "https://testflight.tremendous.com/api/v2");
 
 // Production environment
-var client = new Tremendous("[PRODUCTION_ACCESS_TOKEN]", "https://www.tremendous.com");
+var client = new Tremendous("[PRODUCTION_ACCESS_TOKEN]", "https://www.tremendous.com/api/v2");
 ```
 
 
@@ -33,32 +33,35 @@ See [API documentation][3] for all Order options, including `delivery_method`.  
 ```javascript
 // Create a new order, specifying your gift options
 // as an array of objects.
-client.createOrder({
-  "funding_source_id": "QEW8P5NHEW95",
-  "gifts": [
-    {
-      "amount": 40,
-      "message": "Such a great way to show appreciation to others!",
-      "catalog": ["Q24BD9EZ332JT", "OKMHM2X2OHYV"],
-      "recipient": {
-        "email": "john@smith.com",
-        "name": "John Smith",
-        "delivery_method": "EMAIL"
-      }
+
+const order_data = {
+  payment: {
+    funding_source_id: "{FUNDING_SOURCE_ID}",
+  },
+  reward: {
+    value: {
+      denomination: 25,
+      currency_code: "USD"
+    },
+    campaign_id: "{CAMPAIGN_ID}",
+    delivery: {
+      method: "EMAIL",
+    },
+    recipient: {
+      name: "Tremendous Recipient",
+      email: "steve@stevens.com"
     }
-  ]
-}, function(err, results) {
+  }
+}
+
+client.createOrder(order_data, function(err, results) {
   console.log(JSON.stringify(err, null, 2));
   console.log(JSON.stringify(results, null, 2));
 });
 
-// Return historical orders, optionally passing a starting offset for results.
-client.getOrders({offset: 10}, function(err, results) {
-  console.log(JSON.stringify(results, null, 2));
-});
 
-// Return a order by order_id
-client.getOrder("[ORDER_ID]", function(err, result) {
+// Return a reward by ID
+client.getReward("{REWARD_ID}", function(err, result) {
   console.log(JSON.stringify(result, null, 2));
 });
 ```
@@ -73,20 +76,10 @@ client.getFundingSources({}, function(err, results) {
 });
 ```
 
-### Gifts
-Retrieve a gift sent by your account.
+### Products
 
 ```javascript
-
-client.getGift("[GIFT_ID]", function(err, results) {
-  console.log(JSON.stringify(results, null, 2));
-});
-```
-
-### Catalog
-
-```javascript
-client.getCatalog(function(err, results) {
+client.getProducts(function(err, results) {
   console.log(JSON.stringify(results, null, 2));
 });
 ```
