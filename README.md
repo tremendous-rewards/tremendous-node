@@ -11,7 +11,7 @@ $ npm install tremendous
 
 ## Getting started
 
-All API requests require an access token.  A sandbox access token is assigned upon signup through the [Tremendous Dashboard][2]. Once you are ready to move to production, you will be assigned a production access token.
+All API requests require an access token.  A sandbox access token is assigned upon signup through the [Tremendous Sandbox Environment][2]. Once you are ready to move to production, you will be assigned a production access token.
 
 ### Authentication
 
@@ -85,5 +85,5 @@ client.getProducts(function(err, results) {
 ```
 
 [1]: https://tremendous.com/docs
-[2]: https://tremendous.com/rewards
+[2]: https://testflight.tremendous.com/rewards
 [3]: https://tremendous.com/docs
