@@ -28,7 +28,7 @@ var client = new Tremendous("[PRODUCTION_ACCESS_TOKEN]", "https://www.tremendous
 
 ### Orders
 
-See [API documentation][3] for all Order options, including `delivery_method`.  Use the FoundingSources resource to look up a valid method for your payment (i.e. credit card, ACH, etc).
+See [API documentation][3] for all Order attributes.
 
 ```javascript
 // Create a new order, specifying your gift options
