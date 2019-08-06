@@ -36,14 +36,14 @@ See [API documentation][3] for all Order attributes.
 
 const order_data = {
   payment: {
-    funding_source_id: "{FUNDING_SOURCE_ID}",
+    funding_source_id: "[FUNDING_SOURCE_ID]",
   },
   reward: {
     value: {
       denomination: 25,
       currency_code: "USD"
     },
-    campaign_id: "{CAMPAIGN_ID}",
+    campaign_id: "[CAMPAIGN_ID]",
     delivery: {
       method: "EMAIL",
     },
@@ -61,7 +61,7 @@ client.createOrder(order_data, function(err, results) {
 
 
 // Return a reward by ID
-client.getReward("{REWARD_ID}", function(err, result) {
+client.getReward("[REWARD_ID]", function(err, result) {
   console.log(JSON.stringify(result, null, 2));
 });
 ```
@@ -79,7 +79,7 @@ client.getFundingSources({}, function(err, results) {
 ### Products
 
 ```javascript
-client.getProducts(function(err, results) {
+client.getProducts({}, function(err, results) {
   console.log(JSON.stringify(results, null, 2));
 });
 ```
