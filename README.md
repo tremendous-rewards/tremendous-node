@@ -19,10 +19,10 @@ All API requests require an access token.  A sandbox access token is assigned up
 var Tremendous = require('tremendous');
 
 // Sandbox environment
-var client = new Tremendous("[SANDBOX_ACCESS_TOKEN]", "https://testflight.tremendous.com/api/v2");
+var client = new Tremendous("[SANDBOX_ACCESS_TOKEN]", "https://testflight.tremendous.com/api/v2/");
 
 // Production environment
-var client = new Tremendous("[PRODUCTION_ACCESS_TOKEN]", "https://www.tremendous.com/api/v2");
+var client = new Tremendous("[PRODUCTION_ACCESS_TOKEN]", "https://www.tremendous.com/api/v2/");
 ```
 
 
