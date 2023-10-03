@@ -28,7 +28,7 @@
   "devDependencies": {
     "istanbul": "0.4.x",
     "jscs": "2.7.x",
-    "jshint": "2.8.x",
+    "jshint": "2.13.x",
     "mocha": "2.3.x",
     "proxyquire": "1.7.x",
     "xyz": "0.5.x"
