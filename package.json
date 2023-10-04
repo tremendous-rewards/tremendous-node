@@ -23,7 +23,7 @@
   "dependencies": {
     "jsonwebtoken": "8.1.x",
     "lodash": "4.17.x",
-    "request": "2.74.x"
+    "request": "2.88.x"
   },
   "homepage": "https://github.com/Giftrocket/tremendous-node#readme",
   "scripts": {},
