@@ -21,7 +21,7 @@
   ],
   "main": "index.js",
   "dependencies": {
-    "jsonwebtoken": "8.1.x",
+    "jsonwebtoken": "9.0.x",
     "lodash": "4.17.x",
     "request": "2.88.x"
   },
