@@ -2,9 +2,7 @@
 
 set -e
 
-spec="$1"
-
-test -f "$spec" || (echo "USAGE: $0 [PATH TO SPEC FILE]" && exit 1)
+test -f "$1" && spec="$1" || spec=$(./bin/download-spec)
 
 docker run --rm \
   -v ./:/output \
