@@ -1,0 +1,28 @@
+name: Run tests
+
+on: [push, pull_request]
+
+jobs:
+  test:
+    if: github.repository == 'tremendous-rewards/tremendous-node'
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: ['18.x', '20.x', '21.x']
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+      - run: npm ci
+      - run: npm run build
+      - run: npm run test
+        env:
+          SANDBOX_API_TOKEN:  ${{ secrets.SANDBOX_API_TOKEN }}
+          TEST_CAMPAIGN_ID:  ${{ secrets.TEST_CAMPAIGN_ID }}
+          TEST_PRODUCT_ID:  ${{ secrets.TEST_PRODUCT_ID }}
+          TEST_RECIPIENT_EMAIL:  ${{ secrets.TEST_RECIPIENT_EMAIL }}

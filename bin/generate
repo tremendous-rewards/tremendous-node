@@ -1,0 +1,21 @@
+#!/bin/bash
+
+set -e
+
+spec="$1"
+
+test -f "$spec" || (echo "USAGE: $0 [PATH TO SPEC FILE]" && exit 1)
+
+docker run --rm \
+  -v ./:/output \
+  -v $(realpath $spec):/spec.yml \
+  -v ~/tmp:/input \
+  openapitools/openapi-generator-cli generate \
+  -i /spec.yml \
+  -g typescript-axios \
+  -o /output \
+  -t /output/templates/typescript-axios \
+  -p npmName=tremendous,supportsES6=true,modelPropertyNaming=original
+
+rm git_push.sh
+rm tsconfig.esm.json

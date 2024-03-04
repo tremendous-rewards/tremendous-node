@@ -1,0 +1,13 @@
+.openapi-generator*
+/.github
+/.gitignore
+/bin
+/RELEASING.md
+/CONTRIBUTING.md
+*.ts
+!dist/*.d.ts
+/templates
+/test
+/tmp
+/tsconfig.json
+/UPGRADING.md
