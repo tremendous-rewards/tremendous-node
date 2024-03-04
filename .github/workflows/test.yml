@@ -1,6 +1,14 @@
 name: Run tests
 
-on: [push, pull_request]
+on:
+  push:
+    branches-ignore:
+      - 'dependabot/**'
+    tags-ignore:
+      - 'v*'
+  pull_request:
+    branches:
+      - 'main'
 
 jobs:
   test:
