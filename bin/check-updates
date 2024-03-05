@@ -11,7 +11,7 @@ current=$(cat ./*.ts | md5sum | awk '{print $1}')
 changed=$(cat ./*.ts | md5sum | awk '{print $1}')
 
 if [[ "$current" == "$changed" ]]; then
-  echo "Generate code hasn't changed"
+  echo "Generated code hasn't changed"
   test -n "$CI" && echo "changed=false" >> "$GITHUB_OUTPUT"
 else
   echo "Changes found"
