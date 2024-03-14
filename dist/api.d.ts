@@ -274,7 +274,7 @@ export interface CreateOrder200ResponseOrder {
      */
     'created_at': string;
     /**
-     * Execution status of a given order  <table>   <thead>     <tr>       <th>         Status       </th>       <th>         Description       </th>     </tr>   </thead>   <tbody>     <tr>       <td>         <code>           CANCELED         </code>       </td>       <td>         The order and all of its rewards were canceled.       </td>     </tr>     <tr>       <td>         <code>           CART         </code>       </td>       <td>         The order has been created, but hasn\'t yet been processed.       </td>     </tr>     <tr>       <td>         <code>           EXECUTED         </code>       </td>       <td>         The order has been executed. Payment has been handled and rewards are being delivered (if applicable).       </td>     </tr>     <tr>       <td>         <code>           FAILED         </code>       </td>       <td>         The order could not be processed due to an error. E.g. due to insufficient funds in the account.       </td>     </tr>     <tr>       <td>         <code>           PENDING APPROVAL         </code>       </td>       <td>         The order has been created but needs approval to be executed.       </td>     </tr>   </tbody> </table>
+     * Execution status of a given order  <table>   <thead>     <tr>       <th>         Status       </th>       <th>         Description       </th>     </tr>   </thead>   <tbody>     <tr>       <td>         <code>           CANCELED         </code>       </td>       <td>         The order and all of its rewards were canceled.       </td>     </tr>     <tr>       <td>         <code>           CART         </code>       </td>       <td>         The order has been created, but hasn\'t yet been processed.       </td>     </tr>     <tr>       <td>         <code>           EXECUTED         </code>       </td>       <td>         The order has been executed. Payment has been handled and rewards are being delivered (if applicable).       </td>     </tr>     <tr>       <td>         <code>           FAILED         </code>       </td>       <td>         The order could not be processed due to an error. E.g. due to insufficient funds in the account.       </td>     </tr>     <tr>       <td>         <code>           PENDING APPROVAL         </code>       </td>       <td>         The order has been created but needs approval to be executed.       </td>     </tr>     <tr>       <td>         <code>           PENDING INTERNAL PAYMENT APPROVAL         </code>       </td>       <td>         The order has been created but it is under review and requires approval from our team.       </td>     </tr>    </tbody> </table>
      * @type {string}
      * @memberof CreateOrder200ResponseOrder
      */
@@ -304,6 +304,7 @@ export declare const CreateOrder200ResponseOrderStatusEnum: {
     readonly Executed: "EXECUTED";
     readonly Failed: "FAILED";
     readonly PendingApproval: "PENDING APPROVAL";
+    readonly PendingInternalPaymentApproval: "PENDING INTERNAL PAYMENT APPROVAL";
 };
 export type CreateOrder200ResponseOrderStatusEnum = typeof CreateOrder200ResponseOrderStatusEnum[keyof typeof CreateOrder200ResponseOrderStatusEnum];
 /**
@@ -1283,15 +1284,15 @@ export interface GetOrganization200Response {
 /**
  *
  * @export
- * @interface GetProduct200Response
+ * @interface GetProductResponse
  */
-export interface GetProduct200Response {
+export interface GetProductResponse {
     /**
      *
-     * @type {ListProducts200ResponseProductsInner}
-     * @memberof GetProduct200Response
+     * @type {ListProductsResponseProductsInner}
+     * @memberof GetProductResponse
      */
-    'product': ListProducts200ResponseProductsInner;
+    'product': ListProductsResponseProductsInner;
 }
 /**
  *
@@ -1612,7 +1613,7 @@ export interface ListFundingSources200ResponseFundingSourcesInnerMeta {
      * @type {string}
      * @memberof ListFundingSources200ResponseFundingSourcesInnerMeta
      */
-    'bank_name'?: string;
+    'bank_name'?: string | null;
     /**
      * **Only available when `method` is set to `bank_account`.**  Last 4 digits of the account number
      * @type {string}
@@ -1878,7 +1879,7 @@ export interface ListOrders200ResponseOrdersInner {
      */
     'created_at': string;
     /**
-     * Execution status of a given order  <table>   <thead>     <tr>       <th>         Status       </th>       <th>         Description       </th>     </tr>   </thead>   <tbody>     <tr>       <td>         <code>           CANCELED         </code>       </td>       <td>         The order and all of its rewards were canceled.       </td>     </tr>     <tr>       <td>         <code>           CART         </code>       </td>       <td>         The order has been created, but hasn\'t yet been processed.       </td>     </tr>     <tr>       <td>         <code>           EXECUTED         </code>       </td>       <td>         The order has been executed. Payment has been handled and rewards are being delivered (if applicable).       </td>     </tr>     <tr>       <td>         <code>           FAILED         </code>       </td>       <td>         The order could not be processed due to an error. E.g. due to insufficient funds in the account.       </td>     </tr>     <tr>       <td>         <code>           PENDING APPROVAL         </code>       </td>       <td>         The order has been created but needs approval to be executed.       </td>     </tr>   </tbody> </table>
+     * Execution status of a given order  <table>   <thead>     <tr>       <th>         Status       </th>       <th>         Description       </th>     </tr>   </thead>   <tbody>     <tr>       <td>         <code>           CANCELED         </code>       </td>       <td>         The order and all of its rewards were canceled.       </td>     </tr>     <tr>       <td>         <code>           CART         </code>       </td>       <td>         The order has been created, but hasn\'t yet been processed.       </td>     </tr>     <tr>       <td>         <code>           EXECUTED         </code>       </td>       <td>         The order has been executed. Payment has been handled and rewards are being delivered (if applicable).       </td>     </tr>     <tr>       <td>         <code>           FAILED         </code>       </td>       <td>         The order could not be processed due to an error. E.g. due to insufficient funds in the account.       </td>     </tr>     <tr>       <td>         <code>           PENDING APPROVAL         </code>       </td>       <td>         The order has been created but needs approval to be executed.       </td>     </tr>     <tr>       <td>         <code>           PENDING INTERNAL PAYMENT APPROVAL         </code>       </td>       <td>         The order has been created but it is under review and requires approval from our team.       </td>     </tr>    </tbody> </table>
      * @type {string}
      * @memberof ListOrders200ResponseOrdersInner
      */
@@ -1908,6 +1909,7 @@ export declare const ListOrders200ResponseOrdersInnerStatusEnum: {
     readonly Executed: "EXECUTED";
     readonly Failed: "FAILED";
     readonly PendingApproval: "PENDING APPROVAL";
+    readonly PendingInternalPaymentApproval: "PENDING INTERNAL PAYMENT APPROVAL";
 };
 export type ListOrders200ResponseOrdersInnerStatusEnum = typeof ListOrders200ResponseOrdersInnerStatusEnum[keyof typeof ListOrders200ResponseOrdersInnerStatusEnum];
 /**
@@ -2029,78 +2031,78 @@ export type ListOrganizations200ResponseOrganizationsInnerStatusEnum = typeof Li
 /**
  *
  * @export
- * @interface ListProducts200Response
+ * @interface ListProductsResponse
  */
-export interface ListProducts200Response {
+export interface ListProductsResponse {
     /**
      *
-     * @type {Array<ListProducts200ResponseProductsInner>}
-     * @memberof ListProducts200Response
+     * @type {Array<ListProductsResponseProductsInner>}
+     * @memberof ListProductsResponse
      */
-    'products': Array<ListProducts200ResponseProductsInner>;
+    'products': Array<ListProductsResponseProductsInner>;
 }
 /**
  * A product represents one way to payout a reward to it\'s recipient. Think:  * Amazon.com gift card (ID: `OKMHM2X2OHYV`) * Donations to Save the Children (ID: `ESRNAD533W5A`) * Virtual Visa debit card (ID: `Q24BD9EZ332JT`)  each of which is one specific product on Tremendous.  > 📘 All available products > > See this [list](https://www.tremendous.com/catalog)  Products can be limited in their availability to recipients by  * geography (field `countries`) * currency (field `currencies`) * amount of the reward (field `skus`)   * e.g. adidas gift cards accept any amount between 5 and 200 USD.  See the description of each respective parameter for further details.
  * @export
- * @interface ListProducts200ResponseProductsInner
+ * @interface ListProductsResponseProductsInner
  */
-export interface ListProducts200ResponseProductsInner {
+export interface ListProductsResponseProductsInner {
     /**
      *
      * @type {string}
-     * @memberof ListProducts200ResponseProductsInner
+     * @memberof ListProductsResponseProductsInner
      */
     'id': string;
     /**
      * Name of the product
      * @type {string}
-     * @memberof ListProducts200ResponseProductsInner
+     * @memberof ListProductsResponseProductsInner
      */
     'name': string;
     /**
      * Detailed description of the product. Mostly used for products with a `category` of `charities`.
      * @type {string}
-     * @memberof ListProducts200ResponseProductsInner
+     * @memberof ListProductsResponseProductsInner
      */
     'description': string;
     /**
      * The category of this product  <table>   <thead>     <tr>       <th>Category</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td><code>ach</code></td>       <td>Bank transfer to the recipient</td>     </tr>     <tr>       <td><code>charity</code></td>       <td>Donations to a charity</td>     </tr>     <tr>       <td><code>merchant_card</code></td>       <td>A gift card for a certain merchant (e.g. Amazon)</td>     </tr>     <tr>       <td><code>paypal</code></td>       <td>Payout via PayPal</td>     </tr>     <tr>       <td><code>venmo</code></td>       <td>Payout via Venmo</td>     </tr>     <tr>       <td><code>visa_card</code></td>       <td>Payout in form of a Visa debit card</td>     </tr>   </tbody> </table>
      * @type {string}
-     * @memberof ListProducts200ResponseProductsInner
+     * @memberof ListProductsResponseProductsInner
      */
-    'category': ListProducts200ResponseProductsInnerCategoryEnum;
+    'category': ListProductsResponseProductsInnerCategoryEnum;
     /**
      * Legal disclosures for this product. Can be in HTML format.
      * @type {string}
-     * @memberof ListProducts200ResponseProductsInner
+     * @memberof ListProductsResponseProductsInner
      */
     'disclosure': string;
     /**
      * Products may are restricted in their usage based on the amount of the reward. The `skus` array defines bands of denominations in which this product may be used for payouts.
-     * @type {Array<ListProducts200ResponseProductsInnerSkusInner>}
-     * @memberof ListProducts200ResponseProductsInner
+     * @type {Array<ListProductsResponseProductsInnerSkusInner>}
+     * @memberof ListProductsResponseProductsInner
      */
-    'skus'?: Array<ListProducts200ResponseProductsInnerSkusInner>;
+    'skus'?: Array<ListProductsResponseProductsInnerSkusInner>;
     /**
      * Available currencies for this product
      * @type {Array<string>}
-     * @memberof ListProducts200ResponseProductsInner
+     * @memberof ListProductsResponseProductsInner
      */
-    'currency_codes': Array<ListProducts200ResponseProductsInnerCurrencyCodesEnum>;
+    'currency_codes': Array<ListProductsResponseProductsInnerCurrencyCodesEnum>;
     /**
      * List of countries in which this product is available to recipients.
-     * @type {Array<ListProducts200ResponseProductsInnerCountriesInner>}
-     * @memberof ListProducts200ResponseProductsInner
+     * @type {Array<ListProductsResponseProductsInnerCountriesInner>}
+     * @memberof ListProductsResponseProductsInner
      */
-    'countries': Array<ListProducts200ResponseProductsInnerCountriesInner>;
+    'countries': Array<ListProductsResponseProductsInnerCountriesInner>;
     /**
      * List of product images associated with this product (e.g. logos or images of the gift cards)
-     * @type {Array<ListProducts200ResponseProductsInnerImagesInner>}
-     * @memberof ListProducts200ResponseProductsInner
+     * @type {Array<ListProductsResponseProductsInnerImagesInner>}
+     * @memberof ListProductsResponseProductsInner
      */
-    'images': Array<ListProducts200ResponseProductsInnerImagesInner>;
+    'images': Array<ListProductsResponseProductsInnerImagesInner>;
 }
-export declare const ListProducts200ResponseProductsInnerCategoryEnum: {
+export declare const ListProductsResponseProductsInnerCategoryEnum: {
     readonly Ach: "ach";
     readonly Charity: "charity";
     readonly MerchantCard: "merchant_card";
@@ -2108,8 +2110,8 @@ export declare const ListProducts200ResponseProductsInnerCategoryEnum: {
     readonly Venmo: "venmo";
     readonly VisaCard: "visa_card";
 };
-export type ListProducts200ResponseProductsInnerCategoryEnum = typeof ListProducts200ResponseProductsInnerCategoryEnum[keyof typeof ListProducts200ResponseProductsInnerCategoryEnum];
-export declare const ListProducts200ResponseProductsInnerCurrencyCodesEnum: {
+export type ListProductsResponseProductsInnerCategoryEnum = typeof ListProductsResponseProductsInnerCategoryEnum[keyof typeof ListProductsResponseProductsInnerCategoryEnum];
+export declare const ListProductsResponseProductsInnerCurrencyCodesEnum: {
     readonly Usd: "USD";
     readonly Cad: "CAD";
     readonly Eur: "EUR";
@@ -2227,60 +2229,60 @@ export declare const ListProducts200ResponseProductsInnerCurrencyCodesEnum: {
     readonly Zar: "ZAR";
     readonly Zmk: "ZMK";
 };
-export type ListProducts200ResponseProductsInnerCurrencyCodesEnum = typeof ListProducts200ResponseProductsInnerCurrencyCodesEnum[keyof typeof ListProducts200ResponseProductsInnerCurrencyCodesEnum];
+export type ListProductsResponseProductsInnerCurrencyCodesEnum = typeof ListProductsResponseProductsInnerCurrencyCodesEnum[keyof typeof ListProductsResponseProductsInnerCurrencyCodesEnum];
 /**
  *
  * @export
- * @interface ListProducts200ResponseProductsInnerCountriesInner
+ * @interface ListProductsResponseProductsInnerCountriesInner
  */
-export interface ListProducts200ResponseProductsInnerCountriesInner {
+export interface ListProductsResponseProductsInnerCountriesInner {
     /**
      * ISO 3166 country code
      * @type {string}
-     * @memberof ListProducts200ResponseProductsInnerCountriesInner
+     * @memberof ListProductsResponseProductsInnerCountriesInner
      */
     'abbr': string;
 }
 /**
  *
  * @export
- * @interface ListProducts200ResponseProductsInnerImagesInner
+ * @interface ListProductsResponseProductsInnerImagesInner
  */
-export interface ListProducts200ResponseProductsInnerImagesInner {
+export interface ListProductsResponseProductsInnerImagesInner {
     /**
      * URL to this image
      * @type {string}
-     * @memberof ListProducts200ResponseProductsInnerImagesInner
+     * @memberof ListProductsResponseProductsInnerImagesInner
      */
     'src': string;
     /**
      * Type of image
      * @type {string}
-     * @memberof ListProducts200ResponseProductsInnerImagesInner
+     * @memberof ListProductsResponseProductsInnerImagesInner
      */
-    'type': ListProducts200ResponseProductsInnerImagesInnerTypeEnum;
+    'type': ListProductsResponseProductsInnerImagesInnerTypeEnum;
 }
-export declare const ListProducts200ResponseProductsInnerImagesInnerTypeEnum: {
+export declare const ListProductsResponseProductsInnerImagesInnerTypeEnum: {
     readonly Card: "card";
     readonly Logo: "logo";
 };
-export type ListProducts200ResponseProductsInnerImagesInnerTypeEnum = typeof ListProducts200ResponseProductsInnerImagesInnerTypeEnum[keyof typeof ListProducts200ResponseProductsInnerImagesInnerTypeEnum];
+export type ListProductsResponseProductsInnerImagesInnerTypeEnum = typeof ListProductsResponseProductsInnerImagesInnerTypeEnum[keyof typeof ListProductsResponseProductsInnerImagesInnerTypeEnum];
 /**
  *
  * @export
- * @interface ListProducts200ResponseProductsInnerSkusInner
+ * @interface ListProductsResponseProductsInnerSkusInner
  */
-export interface ListProducts200ResponseProductsInnerSkusInner {
+export interface ListProductsResponseProductsInnerSkusInner {
     /**
      * Minimal denomination that this product supports (in the product\'s currency)
      * @type {number}
-     * @memberof ListProducts200ResponseProductsInnerSkusInner
+     * @memberof ListProductsResponseProductsInnerSkusInner
      */
     'min': number;
     /**
      * Maximum denomination that this product supports (in the product\'s currency)
      * @type {number}
-     * @memberof ListProducts200ResponseProductsInnerSkusInner
+     * @memberof ListProductsResponseProductsInnerSkusInner
      */
     'max': number;
 }
@@ -2660,7 +2662,7 @@ export interface ListWebhooks200ResponseWebhooksInner {
      * @type {string}
      * @memberof ListWebhooks200ResponseWebhooksInner
      */
-    'url': string;
+    'url': string | null;
     /**
      * Private key for the webhook
      * @type {string}
@@ -2921,7 +2923,7 @@ export interface Order {
      */
     'created_at': string;
     /**
-     * Execution status of a given order  <table>   <thead>     <tr>       <th>         Status       </th>       <th>         Description       </th>     </tr>   </thead>   <tbody>     <tr>       <td>         <code>           CANCELED         </code>       </td>       <td>         The order and all of its rewards were canceled.       </td>     </tr>     <tr>       <td>         <code>           CART         </code>       </td>       <td>         The order has been created, but hasn\'t yet been processed.       </td>     </tr>     <tr>       <td>         <code>           EXECUTED         </code>       </td>       <td>         The order has been executed. Payment has been handled and rewards are being delivered (if applicable).       </td>     </tr>     <tr>       <td>         <code>           FAILED         </code>       </td>       <td>         The order could not be processed due to an error. E.g. due to insufficient funds in the account.       </td>     </tr>     <tr>       <td>         <code>           PENDING APPROVAL         </code>       </td>       <td>         The order has been created but needs approval to be executed.       </td>     </tr>   </tbody> </table>
+     * Execution status of a given order  <table>   <thead>     <tr>       <th>         Status       </th>       <th>         Description       </th>     </tr>   </thead>   <tbody>     <tr>       <td>         <code>           CANCELED         </code>       </td>       <td>         The order and all of its rewards were canceled.       </td>     </tr>     <tr>       <td>         <code>           CART         </code>       </td>       <td>         The order has been created, but hasn\'t yet been processed.       </td>     </tr>     <tr>       <td>         <code>           EXECUTED         </code>       </td>       <td>         The order has been executed. Payment has been handled and rewards are being delivered (if applicable).       </td>     </tr>     <tr>       <td>         <code>           FAILED         </code>       </td>       <td>         The order could not be processed due to an error. E.g. due to insufficient funds in the account.       </td>     </tr>     <tr>       <td>         <code>           PENDING APPROVAL         </code>       </td>       <td>         The order has been created but needs approval to be executed.       </td>     </tr>     <tr>       <td>         <code>           PENDING INTERNAL PAYMENT APPROVAL         </code>       </td>       <td>         The order has been created but it is under review and requires approval from our team.       </td>     </tr>    </tbody> </table>
      * @type {string}
      * @memberof Order
      */
@@ -2951,6 +2953,7 @@ export declare const OrderStatusEnum: {
     readonly Executed: "EXECUTED";
     readonly Failed: "FAILED";
     readonly PendingApproval: "PENDING APPROVAL";
+    readonly PendingInternalPaymentApproval: "PENDING INTERNAL PAYMENT APPROVAL";
 };
 export type OrderStatusEnum = typeof OrderStatusEnum[keyof typeof OrderStatusEnum];
 /**
@@ -2984,7 +2987,7 @@ export interface OrderBase {
      */
     'created_at': string;
     /**
-     * Execution status of a given order  <table>   <thead>     <tr>       <th>         Status       </th>       <th>         Description       </th>     </tr>   </thead>   <tbody>     <tr>       <td>         <code>           CANCELED         </code>       </td>       <td>         The order and all of its rewards were canceled.       </td>     </tr>     <tr>       <td>         <code>           CART         </code>       </td>       <td>         The order has been created, but hasn\'t yet been processed.       </td>     </tr>     <tr>       <td>         <code>           EXECUTED         </code>       </td>       <td>         The order has been executed. Payment has been handled and rewards are being delivered (if applicable).       </td>     </tr>     <tr>       <td>         <code>           FAILED         </code>       </td>       <td>         The order could not be processed due to an error. E.g. due to insufficient funds in the account.       </td>     </tr>     <tr>       <td>         <code>           PENDING APPROVAL         </code>       </td>       <td>         The order has been created but needs approval to be executed.       </td>     </tr>   </tbody> </table>
+     * Execution status of a given order  <table>   <thead>     <tr>       <th>         Status       </th>       <th>         Description       </th>     </tr>   </thead>   <tbody>     <tr>       <td>         <code>           CANCELED         </code>       </td>       <td>         The order and all of its rewards were canceled.       </td>     </tr>     <tr>       <td>         <code>           CART         </code>       </td>       <td>         The order has been created, but hasn\'t yet been processed.       </td>     </tr>     <tr>       <td>         <code>           EXECUTED         </code>       </td>       <td>         The order has been executed. Payment has been handled and rewards are being delivered (if applicable).       </td>     </tr>     <tr>       <td>         <code>           FAILED         </code>       </td>       <td>         The order could not be processed due to an error. E.g. due to insufficient funds in the account.       </td>     </tr>     <tr>       <td>         <code>           PENDING APPROVAL         </code>       </td>       <td>         The order has been created but needs approval to be executed.       </td>     </tr>     <tr>       <td>         <code>           PENDING INTERNAL PAYMENT APPROVAL         </code>       </td>       <td>         The order has been created but it is under review and requires approval from our team.       </td>     </tr>    </tbody> </table>
      * @type {string}
      * @memberof OrderBase
      */
@@ -3008,6 +3011,7 @@ export declare const OrderBaseStatusEnum: {
     readonly Executed: "EXECUTED";
     readonly Failed: "FAILED";
     readonly PendingApproval: "PENDING APPROVAL";
+    readonly PendingInternalPaymentApproval: "PENDING INTERNAL PAYMENT APPROVAL";
 };
 export type OrderBaseStatusEnum = typeof OrderBaseStatusEnum[keyof typeof OrderBaseStatusEnum];
 /**
@@ -3156,7 +3160,7 @@ export interface OrderForCreateReward {
     'delivery'?: CreateOrderRequestRewardDelivery;
 }
 /**
- * Execution status of a given order  <table>   <thead>     <tr>       <th>         Status       </th>       <th>         Description       </th>     </tr>   </thead>   <tbody>     <tr>       <td>         <code>           CANCELED         </code>       </td>       <td>         The order and all of its rewards were canceled.       </td>     </tr>     <tr>       <td>         <code>           CART         </code>       </td>       <td>         The order has been created, but hasn\'t yet been processed.       </td>     </tr>     <tr>       <td>         <code>           EXECUTED         </code>       </td>       <td>         The order has been executed. Payment has been handled and rewards are being delivered (if applicable).       </td>     </tr>     <tr>       <td>         <code>           FAILED         </code>       </td>       <td>         The order could not be processed due to an error. E.g. due to insufficient funds in the account.       </td>     </tr>     <tr>       <td>         <code>           PENDING APPROVAL         </code>       </td>       <td>         The order has been created but needs approval to be executed.       </td>     </tr>   </tbody> </table>
+ * Execution status of a given order  <table>   <thead>     <tr>       <th>         Status       </th>       <th>         Description       </th>     </tr>   </thead>   <tbody>     <tr>       <td>         <code>           CANCELED         </code>       </td>       <td>         The order and all of its rewards were canceled.       </td>     </tr>     <tr>       <td>         <code>           CART         </code>       </td>       <td>         The order has been created, but hasn\'t yet been processed.       </td>     </tr>     <tr>       <td>         <code>           EXECUTED         </code>       </td>       <td>         The order has been executed. Payment has been handled and rewards are being delivered (if applicable).       </td>     </tr>     <tr>       <td>         <code>           FAILED         </code>       </td>       <td>         The order could not be processed due to an error. E.g. due to insufficient funds in the account.       </td>     </tr>     <tr>       <td>         <code>           PENDING APPROVAL         </code>       </td>       <td>         The order has been created but needs approval to be executed.       </td>     </tr>     <tr>       <td>         <code>           PENDING INTERNAL PAYMENT APPROVAL         </code>       </td>       <td>         The order has been created but it is under review and requires approval from our team.       </td>     </tr>    </tbody> </table>
  * @export
  * @enum {string}
  */
@@ -3166,6 +3170,7 @@ export declare const OrderStatus: {
     readonly Executed: "EXECUTED";
     readonly Failed: "FAILED";
     readonly PendingApproval: "PENDING APPROVAL";
+    readonly PendingInternalPaymentApproval: "PENDING INTERNAL PAYMENT APPROVAL";
 };
 export type OrderStatus = typeof OrderStatus[keyof typeof OrderStatus];
 /**
@@ -3199,7 +3204,7 @@ export interface OrderWithLink {
      */
     'created_at': string;
     /**
-     * Execution status of a given order  <table>   <thead>     <tr>       <th>         Status       </th>       <th>         Description       </th>     </tr>   </thead>   <tbody>     <tr>       <td>         <code>           CANCELED         </code>       </td>       <td>         The order and all of its rewards were canceled.       </td>     </tr>     <tr>       <td>         <code>           CART         </code>       </td>       <td>         The order has been created, but hasn\'t yet been processed.       </td>     </tr>     <tr>       <td>         <code>           EXECUTED         </code>       </td>       <td>         The order has been executed. Payment has been handled and rewards are being delivered (if applicable).       </td>     </tr>     <tr>       <td>         <code>           FAILED         </code>       </td>       <td>         The order could not be processed due to an error. E.g. due to insufficient funds in the account.       </td>     </tr>     <tr>       <td>         <code>           PENDING APPROVAL         </code>       </td>       <td>         The order has been created but needs approval to be executed.       </td>     </tr>   </tbody> </table>
+     * Execution status of a given order  <table>   <thead>     <tr>       <th>         Status       </th>       <th>         Description       </th>     </tr>   </thead>   <tbody>     <tr>       <td>         <code>           CANCELED         </code>       </td>       <td>         The order and all of its rewards were canceled.       </td>     </tr>     <tr>       <td>         <code>           CART         </code>       </td>       <td>         The order has been created, but hasn\'t yet been processed.       </td>     </tr>     <tr>       <td>         <code>           EXECUTED         </code>       </td>       <td>         The order has been executed. Payment has been handled and rewards are being delivered (if applicable).       </td>     </tr>     <tr>       <td>         <code>           FAILED         </code>       </td>       <td>         The order could not be processed due to an error. E.g. due to insufficient funds in the account.       </td>     </tr>     <tr>       <td>         <code>           PENDING APPROVAL         </code>       </td>       <td>         The order has been created but needs approval to be executed.       </td>     </tr>     <tr>       <td>         <code>           PENDING INTERNAL PAYMENT APPROVAL         </code>       </td>       <td>         The order has been created but it is under review and requires approval from our team.       </td>     </tr>    </tbody> </table>
      * @type {string}
      * @memberof OrderWithLink
      */
@@ -3229,6 +3234,7 @@ export declare const OrderWithLinkStatusEnum: {
     readonly Executed: "EXECUTED";
     readonly Failed: "FAILED";
     readonly PendingApproval: "PENDING APPROVAL";
+    readonly PendingInternalPaymentApproval: "PENDING INTERNAL PAYMENT APPROVAL";
 };
 export type OrderWithLinkStatusEnum = typeof OrderWithLinkStatusEnum[keyof typeof OrderWithLinkStatusEnum];
 /**
@@ -3329,7 +3335,7 @@ export interface OrderWithoutLink {
      */
     'created_at': string;
     /**
-     * Execution status of a given order  <table>   <thead>     <tr>       <th>         Status       </th>       <th>         Description       </th>     </tr>   </thead>   <tbody>     <tr>       <td>         <code>           CANCELED         </code>       </td>       <td>         The order and all of its rewards were canceled.       </td>     </tr>     <tr>       <td>         <code>           CART         </code>       </td>       <td>         The order has been created, but hasn\'t yet been processed.       </td>     </tr>     <tr>       <td>         <code>           EXECUTED         </code>       </td>       <td>         The order has been executed. Payment has been handled and rewards are being delivered (if applicable).       </td>     </tr>     <tr>       <td>         <code>           FAILED         </code>       </td>       <td>         The order could not be processed due to an error. E.g. due to insufficient funds in the account.       </td>     </tr>     <tr>       <td>         <code>           PENDING APPROVAL         </code>       </td>       <td>         The order has been created but needs approval to be executed.       </td>     </tr>   </tbody> </table>
+     * Execution status of a given order  <table>   <thead>     <tr>       <th>         Status       </th>       <th>         Description       </th>     </tr>   </thead>   <tbody>     <tr>       <td>         <code>           CANCELED         </code>       </td>       <td>         The order and all of its rewards were canceled.       </td>     </tr>     <tr>       <td>         <code>           CART         </code>       </td>       <td>         The order has been created, but hasn\'t yet been processed.       </td>     </tr>     <tr>       <td>         <code>           EXECUTED         </code>       </td>       <td>         The order has been executed. Payment has been handled and rewards are being delivered (if applicable).       </td>     </tr>     <tr>       <td>         <code>           FAILED         </code>       </td>       <td>         The order could not be processed due to an error. E.g. due to insufficient funds in the account.       </td>     </tr>     <tr>       <td>         <code>           PENDING APPROVAL         </code>       </td>       <td>         The order has been created but needs approval to be executed.       </td>     </tr>     <tr>       <td>         <code>           PENDING INTERNAL PAYMENT APPROVAL         </code>       </td>       <td>         The order has been created but it is under review and requires approval from our team.       </td>     </tr>    </tbody> </table>
      * @type {string}
      * @memberof OrderWithoutLink
      */
@@ -3359,6 +3365,7 @@ export declare const OrderWithoutLinkStatusEnum: {
     readonly Executed: "EXECUTED";
     readonly Failed: "FAILED";
     readonly PendingApproval: "PENDING APPROVAL";
+    readonly PendingInternalPaymentApproval: "PENDING INTERNAL PAYMENT APPROVAL";
 };
 export type OrderWithoutLinkStatusEnum = typeof OrderWithoutLinkStatusEnum[keyof typeof OrderWithoutLinkStatusEnum];
 /**
@@ -3569,10 +3576,10 @@ export interface Product {
     'disclosure': string;
     /**
      * Products may are restricted in their usage based on the amount of the reward. The `skus` array defines bands of denominations in which this product may be used for payouts.
-     * @type {Array<ListProducts200ResponseProductsInnerSkusInner>}
+     * @type {Array<ListProductsResponseProductsInnerSkusInner>}
      * @memberof Product
      */
-    'skus'?: Array<ListProducts200ResponseProductsInnerSkusInner>;
+    'skus'?: Array<ListProductsResponseProductsInnerSkusInner>;
     /**
      * Available currencies for this product
      * @type {Array<string>}
@@ -3581,16 +3588,16 @@ export interface Product {
     'currency_codes': Array<ProductCurrencyCodesEnum>;
     /**
      * List of countries in which this product is available to recipients.
-     * @type {Array<ListProducts200ResponseProductsInnerCountriesInner>}
+     * @type {Array<ListProductsResponseProductsInnerCountriesInner>}
      * @memberof Product
      */
-    'countries': Array<ListProducts200ResponseProductsInnerCountriesInner>;
+    'countries': Array<ListProductsResponseProductsInnerCountriesInner>;
     /**
      * List of product images associated with this product (e.g. logos or images of the gift cards)
-     * @type {Array<ListProducts200ResponseProductsInnerImagesInner>}
+     * @type {Array<ListProductsResponseProductsInnerImagesInner>}
      * @memberof Product
      */
-    'images': Array<ListProducts200ResponseProductsInnerImagesInner>;
+    'images': Array<ListProductsResponseProductsInnerImagesInner>;
 }
 export declare const ProductCategoryEnum: {
     readonly Ach: "ach";
@@ -4407,7 +4414,7 @@ export interface Webhook {
      * @type {string}
      * @memberof Webhook
      */
-    'url': string;
+    'url': string | null;
     /**
      * Private key for the webhook
      * @type {string}
@@ -5475,7 +5482,7 @@ export declare const ProductsApiFp: (configuration?: Configuration) => {
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    getProduct(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GetProduct200Response>>;
+    getProduct(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GetProductResponse>>;
     /**
      * Retrieve a list of available products
      * @summary List products
@@ -5484,7 +5491,7 @@ export declare const ProductsApiFp: (configuration?: Configuration) => {
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    listProducts(country?: string, currency?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListProducts200Response>>;
+    listProducts(country?: string, currency?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListProductsResponse>>;
 };
 /**
  * ProductsApi - factory interface
@@ -5498,7 +5505,7 @@ export declare const ProductsApiFactory: (configuration?: Configuration, basePat
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    getProduct(id: string, options?: any): AxiosPromise<GetProduct200Response>;
+    getProduct(id: string, options?: any): AxiosPromise<GetProductResponse>;
     /**
      * Retrieve a list of available products
      * @summary List products
@@ -5507,7 +5514,7 @@ export declare const ProductsApiFactory: (configuration?: Configuration, basePat
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    listProducts(country?: string, currency?: string, options?: any): AxiosPromise<ListProducts200Response>;
+    listProducts(country?: string, currency?: string, options?: any): AxiosPromise<ListProductsResponse>;
 };
 /**
  * ProductsApi - object-oriented interface
@@ -5524,7 +5531,7 @@ export declare class ProductsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof ProductsApi
      */
-    getProduct(id: string, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<GetProduct200Response, any>>;
+    getProduct(id: string, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<GetProductResponse, any>>;
     /**
      * Retrieve a list of available products
      * @summary List products
@@ -5534,7 +5541,7 @@ export declare class ProductsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof ProductsApi
      */
-    listProducts(country?: string, currency?: string, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<ListProducts200Response, any>>;
+    listProducts(country?: string, currency?: string, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<ListProductsResponse, any>>;
 }
 /**
  * RewardsApi - axios parameter creator

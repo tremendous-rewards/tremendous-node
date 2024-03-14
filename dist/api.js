@@ -22,7 +22,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.OrderWithoutLinkStatusEnum = exports.OrderWithLinkStatusEnum = exports.OrderStatus = exports.OrderBasePaymentChannelEnum = exports.OrderBaseStatusEnum = exports.OrderStatusEnum = exports.MemberWithoutEventsStatusEnum = exports.MemberWithoutEventsRoleEnum = exports.MemberWithEventsStatusEnum = exports.MemberWithEventsRoleEnum = exports.MemberBaseStatusEnum = exports.MemberBaseRoleEnum = exports.MemberStatusEnum = exports.MemberRoleEnum = exports.ListRewards200ResponseRewardsInnerValueCurrencyCodeEnum = exports.ListRewards200ResponseRewardsInnerDeliveryStatusEnum = exports.ListRewards200ResponseRewardsInnerDeliveryMethodEnum = exports.ListProducts200ResponseProductsInnerImagesInnerTypeEnum = exports.ListProducts200ResponseProductsInnerCurrencyCodesEnum = exports.ListProducts200ResponseProductsInnerCategoryEnum = exports.ListOrganizations200ResponseOrganizationsInnerStatusEnum = exports.ListOrders200ResponseOrdersInnerPaymentChannelEnum = exports.ListOrders200ResponseOrdersInnerStatusEnum = exports.ListMembers200ResponseMembersInnerStatusEnum = exports.ListMembers200ResponseMembersInnerRoleEnum = exports.ListInvoices200ResponseInvoicesInnerStatusEnum = exports.ListFundingSources200ResponseFundingSourcesInnerMetaNetworkEnum = exports.ListFundingSources200ResponseFundingSourcesInnerMetaAccountTypeEnum = exports.ListFundingSources200ResponseFundingSourcesInnerTypeEnum = exports.ListFundingSources200ResponseFundingSourcesInnerMethodEnum = exports.InvoiceStatusEnum = exports.GetMember200ResponseMemberEventsInnerTypeEnum = exports.GetMember200ResponseMemberStatusEnum = exports.GetMember200ResponseMemberRoleEnum = exports.FundingSourceTypeEnum = exports.FundingSourceMethodEnum = exports.DeliveryStatus = exports.DeliveryMethod = exports.DeliveryDetailsWithLinkStatusEnum = exports.DeliveryDetailsWithLinkMethodEnum = exports.DeliveryDetailsStatusEnum = exports.DeliveryDetailsMethodEnum = exports.CurrencyCodes = exports.CreateOrganization200ResponseOrganizationStatusEnum = exports.CreateOrderRequestRewardDeliveryMethodEnum = exports.CreateOrder200ResponseOrderRewardsInnerDeliveryStatusEnum = exports.CreateOrder200ResponseOrderRewardsInnerDeliveryMethodEnum = exports.CreateOrder200ResponseOrderStatusEnum = exports.CreateMemberRequestRoleEnum = exports.CreateMemberRoleEnum = void 0;
+exports.OrderWithoutLinkStatusEnum = exports.OrderWithLinkStatusEnum = exports.OrderStatus = exports.OrderBasePaymentChannelEnum = exports.OrderBaseStatusEnum = exports.OrderStatusEnum = exports.MemberWithoutEventsStatusEnum = exports.MemberWithoutEventsRoleEnum = exports.MemberWithEventsStatusEnum = exports.MemberWithEventsRoleEnum = exports.MemberBaseStatusEnum = exports.MemberBaseRoleEnum = exports.MemberStatusEnum = exports.MemberRoleEnum = exports.ListRewards200ResponseRewardsInnerValueCurrencyCodeEnum = exports.ListRewards200ResponseRewardsInnerDeliveryStatusEnum = exports.ListRewards200ResponseRewardsInnerDeliveryMethodEnum = exports.ListProductsResponseProductsInnerImagesInnerTypeEnum = exports.ListProductsResponseProductsInnerCurrencyCodesEnum = exports.ListProductsResponseProductsInnerCategoryEnum = exports.ListOrganizations200ResponseOrganizationsInnerStatusEnum = exports.ListOrders200ResponseOrdersInnerPaymentChannelEnum = exports.ListOrders200ResponseOrdersInnerStatusEnum = exports.ListMembers200ResponseMembersInnerStatusEnum = exports.ListMembers200ResponseMembersInnerRoleEnum = exports.ListInvoices200ResponseInvoicesInnerStatusEnum = exports.ListFundingSources200ResponseFundingSourcesInnerMetaNetworkEnum = exports.ListFundingSources200ResponseFundingSourcesInnerMetaAccountTypeEnum = exports.ListFundingSources200ResponseFundingSourcesInnerTypeEnum = exports.ListFundingSources200ResponseFundingSourcesInnerMethodEnum = exports.InvoiceStatusEnum = exports.GetMember200ResponseMemberEventsInnerTypeEnum = exports.GetMember200ResponseMemberStatusEnum = exports.GetMember200ResponseMemberRoleEnum = exports.FundingSourceTypeEnum = exports.FundingSourceMethodEnum = exports.DeliveryStatus = exports.DeliveryMethod = exports.DeliveryDetailsWithLinkStatusEnum = exports.DeliveryDetailsWithLinkMethodEnum = exports.DeliveryDetailsStatusEnum = exports.DeliveryDetailsMethodEnum = exports.CurrencyCodes = exports.CreateOrganization200ResponseOrganizationStatusEnum = exports.CreateOrderRequestRewardDeliveryMethodEnum = exports.CreateOrder200ResponseOrderRewardsInnerDeliveryStatusEnum = exports.CreateOrder200ResponseOrderRewardsInnerDeliveryMethodEnum = exports.CreateOrder200ResponseOrderStatusEnum = exports.CreateMemberRequestRoleEnum = exports.CreateMemberRoleEnum = void 0;
 exports.WebhooksApiAxiosParamCreator = exports.RewardsApi = exports.RewardsApiFactory = exports.RewardsApiFp = exports.RewardsApiAxiosParamCreator = exports.ProductsApi = exports.ProductsApiFactory = exports.ProductsApiFp = exports.ProductsApiAxiosParamCreator = exports.OrganizationsApi = exports.OrganizationsApiFactory = exports.OrganizationsApiFp = exports.OrganizationsApiAxiosParamCreator = exports.OrdersApi = exports.OrdersApiFactory = exports.OrdersApiFp = exports.OrdersApiAxiosParamCreator = exports.MembersApi = exports.MembersApiFactory = exports.MembersApiFp = exports.MembersApiAxiosParamCreator = exports.InvoicesApi = exports.InvoicesApiFactory = exports.InvoicesApiFp = exports.InvoicesApiAxiosParamCreator = exports.FundingSourcesApi = exports.FundingSourcesApiFactory = exports.FundingSourcesApiFp = exports.FundingSourcesApiAxiosParamCreator = exports.FieldsApi = exports.FieldsApiFactory = exports.FieldsApiFp = exports.FieldsApiAxiosParamCreator = exports.CampaignsApi = exports.CampaignsApiFactory = exports.CampaignsApiFp = exports.CampaignsApiAxiosParamCreator = exports.BalanceTransactionsApi = exports.BalanceTransactionsApiFactory = exports.BalanceTransactionsApiFp = exports.BalanceTransactionsApiAxiosParamCreator = exports.RewardWithoutLinkDeliveryStatusEnum = exports.RewardWithoutLinkDeliveryMethodEnum = exports.RewardWithLinkDeliveryStatusEnum = exports.RewardWithLinkDeliveryMethodEnum = exports.RewardValueCurrencyCodeEnum = exports.ProductCurrencyCodesEnum = exports.ProductCategoryEnum = exports.PaymentDetailsChannelEnum = exports.OrganizationStatusEnum = void 0;
 exports.WebhooksApi = exports.WebhooksApiFactory = exports.WebhooksApiFp = void 0;
 const axios_1 = require("axios");
@@ -44,7 +44,8 @@ exports.CreateOrder200ResponseOrderStatusEnum = {
     Cart: 'CART',
     Executed: 'EXECUTED',
     Failed: 'FAILED',
-    PendingApproval: 'PENDING APPROVAL'
+    PendingApproval: 'PENDING APPROVAL',
+    PendingInternalPaymentApproval: 'PENDING INTERNAL PAYMENT APPROVAL'
 };
 exports.CreateOrder200ResponseOrderRewardsInnerDeliveryMethodEnum = {
     Email: 'EMAIL',
@@ -310,7 +311,8 @@ exports.ListOrders200ResponseOrdersInnerStatusEnum = {
     Cart: 'CART',
     Executed: 'EXECUTED',
     Failed: 'FAILED',
-    PendingApproval: 'PENDING APPROVAL'
+    PendingApproval: 'PENDING APPROVAL',
+    PendingInternalPaymentApproval: 'PENDING INTERNAL PAYMENT APPROVAL'
 };
 exports.ListOrders200ResponseOrdersInnerPaymentChannelEnum = {
     Ui: 'UI',
@@ -326,7 +328,7 @@ exports.ListOrganizations200ResponseOrganizationsInnerStatusEnum = {
     Approved: 'APPROVED',
     Rejected: 'REJECTED'
 };
-exports.ListProducts200ResponseProductsInnerCategoryEnum = {
+exports.ListProductsResponseProductsInnerCategoryEnum = {
     Ach: 'ach',
     Charity: 'charity',
     MerchantCard: 'merchant_card',
@@ -334,7 +336,7 @@ exports.ListProducts200ResponseProductsInnerCategoryEnum = {
     Venmo: 'venmo',
     VisaCard: 'visa_card'
 };
-exports.ListProducts200ResponseProductsInnerCurrencyCodesEnum = {
+exports.ListProductsResponseProductsInnerCurrencyCodesEnum = {
     Usd: 'USD',
     Cad: 'CAD',
     Eur: 'EUR',
@@ -452,7 +454,7 @@ exports.ListProducts200ResponseProductsInnerCurrencyCodesEnum = {
     Zar: 'ZAR',
     Zmk: 'ZMK'
 };
-exports.ListProducts200ResponseProductsInnerImagesInnerTypeEnum = {
+exports.ListProductsResponseProductsInnerImagesInnerTypeEnum = {
     Card: 'card',
     Logo: 'logo'
 };
@@ -626,14 +628,16 @@ exports.OrderStatusEnum = {
     Cart: 'CART',
     Executed: 'EXECUTED',
     Failed: 'FAILED',
-    PendingApproval: 'PENDING APPROVAL'
+    PendingApproval: 'PENDING APPROVAL',
+    PendingInternalPaymentApproval: 'PENDING INTERNAL PAYMENT APPROVAL'
 };
 exports.OrderBaseStatusEnum = {
     Canceled: 'CANCELED',
     Cart: 'CART',
     Executed: 'EXECUTED',
     Failed: 'FAILED',
-    PendingApproval: 'PENDING APPROVAL'
+    PendingApproval: 'PENDING APPROVAL',
+    PendingInternalPaymentApproval: 'PENDING INTERNAL PAYMENT APPROVAL'
 };
 exports.OrderBasePaymentChannelEnum = {
     Ui: 'UI',
@@ -645,7 +649,7 @@ exports.OrderBasePaymentChannelEnum = {
     SurveyMonkey: 'SURVEY MONKEY'
 };
 /**
- * Execution status of a given order  <table>   <thead>     <tr>       <th>         Status       </th>       <th>         Description       </th>     </tr>   </thead>   <tbody>     <tr>       <td>         <code>           CANCELED         </code>       </td>       <td>         The order and all of its rewards were canceled.       </td>     </tr>     <tr>       <td>         <code>           CART         </code>       </td>       <td>         The order has been created, but hasn\'t yet been processed.       </td>     </tr>     <tr>       <td>         <code>           EXECUTED         </code>       </td>       <td>         The order has been executed. Payment has been handled and rewards are being delivered (if applicable).       </td>     </tr>     <tr>       <td>         <code>           FAILED         </code>       </td>       <td>         The order could not be processed due to an error. E.g. due to insufficient funds in the account.       </td>     </tr>     <tr>       <td>         <code>           PENDING APPROVAL         </code>       </td>       <td>         The order has been created but needs approval to be executed.       </td>     </tr>   </tbody> </table>
+ * Execution status of a given order  <table>   <thead>     <tr>       <th>         Status       </th>       <th>         Description       </th>     </tr>   </thead>   <tbody>     <tr>       <td>         <code>           CANCELED         </code>       </td>       <td>         The order and all of its rewards were canceled.       </td>     </tr>     <tr>       <td>         <code>           CART         </code>       </td>       <td>         The order has been created, but hasn\'t yet been processed.       </td>     </tr>     <tr>       <td>         <code>           EXECUTED         </code>       </td>       <td>         The order has been executed. Payment has been handled and rewards are being delivered (if applicable).       </td>     </tr>     <tr>       <td>         <code>           FAILED         </code>       </td>       <td>         The order could not be processed due to an error. E.g. due to insufficient funds in the account.       </td>     </tr>     <tr>       <td>         <code>           PENDING APPROVAL         </code>       </td>       <td>         The order has been created but needs approval to be executed.       </td>     </tr>     <tr>       <td>         <code>           PENDING INTERNAL PAYMENT APPROVAL         </code>       </td>       <td>         The order has been created but it is under review and requires approval from our team.       </td>     </tr>    </tbody> </table>
  * @export
  * @enum {string}
  */
@@ -654,21 +658,24 @@ exports.OrderStatus = {
     Cart: 'CART',
     Executed: 'EXECUTED',
     Failed: 'FAILED',
-    PendingApproval: 'PENDING APPROVAL'
+    PendingApproval: 'PENDING APPROVAL',
+    PendingInternalPaymentApproval: 'PENDING INTERNAL PAYMENT APPROVAL'
 };
 exports.OrderWithLinkStatusEnum = {
     Canceled: 'CANCELED',
     Cart: 'CART',
     Executed: 'EXECUTED',
     Failed: 'FAILED',
-    PendingApproval: 'PENDING APPROVAL'
+    PendingApproval: 'PENDING APPROVAL',
+    PendingInternalPaymentApproval: 'PENDING INTERNAL PAYMENT APPROVAL'
 };
 exports.OrderWithoutLinkStatusEnum = {
     Canceled: 'CANCELED',
     Cart: 'CART',
     Executed: 'EXECUTED',
     Failed: 'FAILED',
-    PendingApproval: 'PENDING APPROVAL'
+    PendingApproval: 'PENDING APPROVAL',
+    PendingInternalPaymentApproval: 'PENDING INTERNAL PAYMENT APPROVAL'
 };
 exports.OrganizationStatusEnum = {
     Pending: 'PENDING',
@@ -966,7 +973,7 @@ const BalanceTransactionsApiAxiosParamCreator = function (configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listBalanceTransactions: (offset, limit, createdAtGte, createdAtLte, options = {}) => __awaiter(this, void 0, void 0, function* () {
+        listBalanceTransactions: (offset_1, limit_1, createdAtGte_1, createdAtLte_1, ...args_1) => __awaiter(this, [offset_1, limit_1, createdAtGte_1, createdAtLte_1, ...args_1], void 0, function* (offset, limit, createdAtGte, createdAtLte, options = {}) {
             const localVarPath = `/balance_transactions`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
@@ -1021,12 +1028,12 @@ const BalanceTransactionsApiFp = function (configuration) {
          * @throws {RequiredError}
          */
         listBalanceTransactions(offset, limit, createdAtGte, createdAtLte, options) {
-            var _a, _b, _c;
             return __awaiter(this, void 0, void 0, function* () {
+                var _a, _b, _c;
                 const localVarAxiosArgs = yield localVarAxiosParamCreator.listBalanceTransactions(offset, limit, createdAtGte, createdAtLte, options);
-                const index = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
-                const operationBasePath = (_c = (_b = base_1.operationServerMap['BalanceTransactionsApi.listBalanceTransactions']) === null || _b === void 0 ? void 0 : _b[index]) === null || _c === void 0 ? void 0 : _c.url;
-                return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, operationBasePath || basePath);
+                const localVarOperationServerIndex = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
+                const localVarOperationServerBasePath = (_c = (_b = base_1.operationServerMap['BalanceTransactionsApi.listBalanceTransactions']) === null || _b === void 0 ? void 0 : _b[localVarOperationServerIndex]) === null || _c === void 0 ? void 0 : _c.url;
+                return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
             });
         },
     };
@@ -1091,7 +1098,7 @@ const CampaignsApiAxiosParamCreator = function (configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getCampaign: (id, options = {}) => __awaiter(this, void 0, void 0, function* () {
+        getCampaign: (id_1, ...args_1) => __awaiter(this, [id_1, ...args_1], void 0, function* (id, options = {}) {
             // verify required parameter 'id' is not null or undefined
             (0, common_1.assertParamExists)('getCampaign', 'id', id);
             const localVarPath = `/campaigns/{id}`
@@ -1122,7 +1129,7 @@ const CampaignsApiAxiosParamCreator = function (configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listCampaigns: (options = {}) => __awaiter(this, void 0, void 0, function* () {
+        listCampaigns: (...args_2) => __awaiter(this, [...args_2], void 0, function* (options = {}) {
             const localVarPath = `/campaigns`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
@@ -1162,12 +1169,12 @@ const CampaignsApiFp = function (configuration) {
          * @throws {RequiredError}
          */
         getCampaign(id, options) {
-            var _a, _b, _c;
             return __awaiter(this, void 0, void 0, function* () {
+                var _a, _b, _c;
                 const localVarAxiosArgs = yield localVarAxiosParamCreator.getCampaign(id, options);
-                const index = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
-                const operationBasePath = (_c = (_b = base_1.operationServerMap['CampaignsApi.getCampaign']) === null || _b === void 0 ? void 0 : _b[index]) === null || _c === void 0 ? void 0 : _c.url;
-                return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, operationBasePath || basePath);
+                const localVarOperationServerIndex = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
+                const localVarOperationServerBasePath = (_c = (_b = base_1.operationServerMap['CampaignsApi.getCampaign']) === null || _b === void 0 ? void 0 : _b[localVarOperationServerIndex]) === null || _c === void 0 ? void 0 : _c.url;
+                return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
             });
         },
         /**
@@ -1177,12 +1184,12 @@ const CampaignsApiFp = function (configuration) {
          * @throws {RequiredError}
          */
         listCampaigns(options) {
-            var _a, _b, _c;
             return __awaiter(this, void 0, void 0, function* () {
+                var _a, _b, _c;
                 const localVarAxiosArgs = yield localVarAxiosParamCreator.listCampaigns(options);
-                const index = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
-                const operationBasePath = (_c = (_b = base_1.operationServerMap['CampaignsApi.listCampaigns']) === null || _b === void 0 ? void 0 : _b[index]) === null || _c === void 0 ? void 0 : _c.url;
-                return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, operationBasePath || basePath);
+                const localVarOperationServerIndex = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
+                const localVarOperationServerBasePath = (_c = (_b = base_1.operationServerMap['CampaignsApi.listCampaigns']) === null || _b === void 0 ? void 0 : _b[localVarOperationServerIndex]) === null || _c === void 0 ? void 0 : _c.url;
+                return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
             });
         },
     };
@@ -1259,7 +1266,7 @@ const FieldsApiAxiosParamCreator = function (configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listFields: (options = {}) => __awaiter(this, void 0, void 0, function* () {
+        listFields: (...args_1) => __awaiter(this, [...args_1], void 0, function* (options = {}) {
             const localVarPath = `/fields`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
@@ -1298,12 +1305,12 @@ const FieldsApiFp = function (configuration) {
          * @throws {RequiredError}
          */
         listFields(options) {
-            var _a, _b, _c;
             return __awaiter(this, void 0, void 0, function* () {
+                var _a, _b, _c;
                 const localVarAxiosArgs = yield localVarAxiosParamCreator.listFields(options);
-                const index = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
-                const operationBasePath = (_c = (_b = base_1.operationServerMap['FieldsApi.listFields']) === null || _b === void 0 ? void 0 : _b[index]) === null || _c === void 0 ? void 0 : _c.url;
-                return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, operationBasePath || basePath);
+                const localVarOperationServerIndex = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
+                const localVarOperationServerBasePath = (_c = (_b = base_1.operationServerMap['FieldsApi.listFields']) === null || _b === void 0 ? void 0 : _b[localVarOperationServerIndex]) === null || _c === void 0 ? void 0 : _c.url;
+                return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
             });
         },
     };
@@ -1360,7 +1367,7 @@ const FundingSourcesApiAxiosParamCreator = function (configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getFundingSource: (id, options = {}) => __awaiter(this, void 0, void 0, function* () {
+        getFundingSource: (id_1, ...args_1) => __awaiter(this, [id_1, ...args_1], void 0, function* (id, options = {}) {
             // verify required parameter 'id' is not null or undefined
             (0, common_1.assertParamExists)('getFundingSource', 'id', id);
             const localVarPath = `/funding_sources/{id}`
@@ -1391,7 +1398,7 @@ const FundingSourcesApiAxiosParamCreator = function (configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listFundingSources: (options = {}) => __awaiter(this, void 0, void 0, function* () {
+        listFundingSources: (...args_2) => __awaiter(this, [...args_2], void 0, function* (options = {}) {
             const localVarPath = `/funding_sources`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
@@ -1431,12 +1438,12 @@ const FundingSourcesApiFp = function (configuration) {
          * @throws {RequiredError}
          */
         getFundingSource(id, options) {
-            var _a, _b, _c;
             return __awaiter(this, void 0, void 0, function* () {
+                var _a, _b, _c;
                 const localVarAxiosArgs = yield localVarAxiosParamCreator.getFundingSource(id, options);
-                const index = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
-                const operationBasePath = (_c = (_b = base_1.operationServerMap['FundingSourcesApi.getFundingSource']) === null || _b === void 0 ? void 0 : _b[index]) === null || _c === void 0 ? void 0 : _c.url;
-                return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, operationBasePath || basePath);
+                const localVarOperationServerIndex = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
+                const localVarOperationServerBasePath = (_c = (_b = base_1.operationServerMap['FundingSourcesApi.getFundingSource']) === null || _b === void 0 ? void 0 : _b[localVarOperationServerIndex]) === null || _c === void 0 ? void 0 : _c.url;
+                return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
             });
         },
         /**
@@ -1446,12 +1453,12 @@ const FundingSourcesApiFp = function (configuration) {
          * @throws {RequiredError}
          */
         listFundingSources(options) {
-            var _a, _b, _c;
             return __awaiter(this, void 0, void 0, function* () {
+                var _a, _b, _c;
                 const localVarAxiosArgs = yield localVarAxiosParamCreator.listFundingSources(options);
-                const index = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
-                const operationBasePath = (_c = (_b = base_1.operationServerMap['FundingSourcesApi.listFundingSources']) === null || _b === void 0 ? void 0 : _b[index]) === null || _c === void 0 ? void 0 : _c.url;
-                return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, operationBasePath || basePath);
+                const localVarOperationServerIndex = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
+                const localVarOperationServerBasePath = (_c = (_b = base_1.operationServerMap['FundingSourcesApi.listFundingSources']) === null || _b === void 0 ? void 0 : _b[localVarOperationServerIndex]) === null || _c === void 0 ? void 0 : _c.url;
+                return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
             });
         },
     };
@@ -1529,7 +1536,7 @@ const InvoicesApiAxiosParamCreator = function (configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        createInvoice: (createInvoiceRequest, options = {}) => __awaiter(this, void 0, void 0, function* () {
+        createInvoice: (createInvoiceRequest_1, ...args_1) => __awaiter(this, [createInvoiceRequest_1, ...args_1], void 0, function* (createInvoiceRequest, options = {}) {
             // verify required parameter 'createInvoiceRequest' is not null or undefined
             (0, common_1.assertParamExists)('createInvoice', 'createInvoiceRequest', createInvoiceRequest);
             const localVarPath = `/invoices`;
@@ -1562,7 +1569,7 @@ const InvoicesApiAxiosParamCreator = function (configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deleteInvoices: (id, options = {}) => __awaiter(this, void 0, void 0, function* () {
+        deleteInvoices: (id_1, ...args_2) => __awaiter(this, [id_1, ...args_2], void 0, function* (id, options = {}) {
             // verify required parameter 'id' is not null or undefined
             (0, common_1.assertParamExists)('deleteInvoices', 'id', id);
             const localVarPath = `/invoices/{id}`
@@ -1594,7 +1601,7 @@ const InvoicesApiAxiosParamCreator = function (configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        downloadInvoiceCsv: (id, options = {}) => __awaiter(this, void 0, void 0, function* () {
+        downloadInvoiceCsv: (id_2, ...args_3) => __awaiter(this, [id_2, ...args_3], void 0, function* (id, options = {}) {
             // verify required parameter 'id' is not null or undefined
             (0, common_1.assertParamExists)('downloadInvoiceCsv', 'id', id);
             const localVarPath = `/invoices/{id}/csv`
@@ -1626,7 +1633,7 @@ const InvoicesApiAxiosParamCreator = function (configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        downloadInvoicePdf: (id, options = {}) => __awaiter(this, void 0, void 0, function* () {
+        downloadInvoicePdf: (id_3, ...args_4) => __awaiter(this, [id_3, ...args_4], void 0, function* (id, options = {}) {
             // verify required parameter 'id' is not null or undefined
             (0, common_1.assertParamExists)('downloadInvoicePdf', 'id', id);
             const localVarPath = `/invoices/{id}/pdf`
@@ -1658,7 +1665,7 @@ const InvoicesApiAxiosParamCreator = function (configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getInvoice: (id, options = {}) => __awaiter(this, void 0, void 0, function* () {
+        getInvoice: (id_4, ...args_5) => __awaiter(this, [id_4, ...args_5], void 0, function* (id, options = {}) {
             // verify required parameter 'id' is not null or undefined
             (0, common_1.assertParamExists)('getInvoice', 'id', id);
             const localVarPath = `/invoices/{id}`
@@ -1691,7 +1698,7 @@ const InvoicesApiAxiosParamCreator = function (configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listInvoices: (offset, limit, options = {}) => __awaiter(this, void 0, void 0, function* () {
+        listInvoices: (offset_1, limit_1, ...args_6) => __awaiter(this, [offset_1, limit_1, ...args_6], void 0, function* (offset, limit, options = {}) {
             const localVarPath = `/invoices`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
@@ -1737,12 +1744,12 @@ const InvoicesApiFp = function (configuration) {
          * @throws {RequiredError}
          */
         createInvoice(createInvoiceRequest, options) {
-            var _a, _b, _c;
             return __awaiter(this, void 0, void 0, function* () {
+                var _a, _b, _c;
                 const localVarAxiosArgs = yield localVarAxiosParamCreator.createInvoice(createInvoiceRequest, options);
-                const index = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
-                const operationBasePath = (_c = (_b = base_1.operationServerMap['InvoicesApi.createInvoice']) === null || _b === void 0 ? void 0 : _b[index]) === null || _c === void 0 ? void 0 : _c.url;
-                return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, operationBasePath || basePath);
+                const localVarOperationServerIndex = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
+                const localVarOperationServerBasePath = (_c = (_b = base_1.operationServerMap['InvoicesApi.createInvoice']) === null || _b === void 0 ? void 0 : _b[localVarOperationServerIndex]) === null || _c === void 0 ? void 0 : _c.url;
+                return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
             });
         },
         /**
@@ -1753,12 +1760,12 @@ const InvoicesApiFp = function (configuration) {
          * @throws {RequiredError}
          */
         deleteInvoices(id, options) {
-            var _a, _b, _c;
             return __awaiter(this, void 0, void 0, function* () {
+                var _a, _b, _c;
                 const localVarAxiosArgs = yield localVarAxiosParamCreator.deleteInvoices(id, options);
-                const index = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
-                const operationBasePath = (_c = (_b = base_1.operationServerMap['InvoicesApi.deleteInvoices']) === null || _b === void 0 ? void 0 : _b[index]) === null || _c === void 0 ? void 0 : _c.url;
-                return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, operationBasePath || basePath);
+                const localVarOperationServerIndex = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
+                const localVarOperationServerBasePath = (_c = (_b = base_1.operationServerMap['InvoicesApi.deleteInvoices']) === null || _b === void 0 ? void 0 : _b[localVarOperationServerIndex]) === null || _c === void 0 ? void 0 : _c.url;
+                return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
             });
         },
         /**
@@ -1769,12 +1776,12 @@ const InvoicesApiFp = function (configuration) {
          * @throws {RequiredError}
          */
         downloadInvoiceCsv(id, options) {
-            var _a, _b, _c;
             return __awaiter(this, void 0, void 0, function* () {
+                var _a, _b, _c;
                 const localVarAxiosArgs = yield localVarAxiosParamCreator.downloadInvoiceCsv(id, options);
-                const index = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
-                const operationBasePath = (_c = (_b = base_1.operationServerMap['InvoicesApi.downloadInvoiceCsv']) === null || _b === void 0 ? void 0 : _b[index]) === null || _c === void 0 ? void 0 : _c.url;
-                return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, operationBasePath || basePath);
+                const localVarOperationServerIndex = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
+                const localVarOperationServerBasePath = (_c = (_b = base_1.operationServerMap['InvoicesApi.downloadInvoiceCsv']) === null || _b === void 0 ? void 0 : _b[localVarOperationServerIndex]) === null || _c === void 0 ? void 0 : _c.url;
+                return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
             });
         },
         /**
@@ -1785,12 +1792,12 @@ const InvoicesApiFp = function (configuration) {
          * @throws {RequiredError}
          */
         downloadInvoicePdf(id, options) {
-            var _a, _b, _c;
             return __awaiter(this, void 0, void 0, function* () {
+                var _a, _b, _c;
                 const localVarAxiosArgs = yield localVarAxiosParamCreator.downloadInvoicePdf(id, options);
-                const index = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
-                const operationBasePath = (_c = (_b = base_1.operationServerMap['InvoicesApi.downloadInvoicePdf']) === null || _b === void 0 ? void 0 : _b[index]) === null || _c === void 0 ? void 0 : _c.url;
-                return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, operationBasePath || basePath);
+                const localVarOperationServerIndex = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
+                const localVarOperationServerBasePath = (_c = (_b = base_1.operationServerMap['InvoicesApi.downloadInvoicePdf']) === null || _b === void 0 ? void 0 : _b[localVarOperationServerIndex]) === null || _c === void 0 ? void 0 : _c.url;
+                return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
             });
         },
         /**
@@ -1801,12 +1808,12 @@ const InvoicesApiFp = function (configuration) {
          * @throws {RequiredError}
          */
         getInvoice(id, options) {
-            var _a, _b, _c;
             return __awaiter(this, void 0, void 0, function* () {
+                var _a, _b, _c;
                 const localVarAxiosArgs = yield localVarAxiosParamCreator.getInvoice(id, options);
-                const index = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
-                const operationBasePath = (_c = (_b = base_1.operationServerMap['InvoicesApi.getInvoice']) === null || _b === void 0 ? void 0 : _b[index]) === null || _c === void 0 ? void 0 : _c.url;
-                return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, operationBasePath || basePath);
+                const localVarOperationServerIndex = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
+                const localVarOperationServerBasePath = (_c = (_b = base_1.operationServerMap['InvoicesApi.getInvoice']) === null || _b === void 0 ? void 0 : _b[localVarOperationServerIndex]) === null || _c === void 0 ? void 0 : _c.url;
+                return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
             });
         },
         /**
@@ -1818,12 +1825,12 @@ const InvoicesApiFp = function (configuration) {
          * @throws {RequiredError}
          */
         listInvoices(offset, limit, options) {
-            var _a, _b, _c;
             return __awaiter(this, void 0, void 0, function* () {
+                var _a, _b, _c;
                 const localVarAxiosArgs = yield localVarAxiosParamCreator.listInvoices(offset, limit, options);
-                const index = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
-                const operationBasePath = (_c = (_b = base_1.operationServerMap['InvoicesApi.listInvoices']) === null || _b === void 0 ? void 0 : _b[index]) === null || _c === void 0 ? void 0 : _c.url;
-                return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, operationBasePath || basePath);
+                const localVarOperationServerIndex = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
+                const localVarOperationServerBasePath = (_c = (_b = base_1.operationServerMap['InvoicesApi.listInvoices']) === null || _b === void 0 ? void 0 : _b[localVarOperationServerIndex]) === null || _c === void 0 ? void 0 : _c.url;
+                return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
             });
         },
     };
@@ -1989,7 +1996,7 @@ const MembersApiAxiosParamCreator = function (configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        createMember: (createMemberRequest, options = {}) => __awaiter(this, void 0, void 0, function* () {
+        createMember: (createMemberRequest_1, ...args_1) => __awaiter(this, [createMemberRequest_1, ...args_1], void 0, function* (createMemberRequest, options = {}) {
             // verify required parameter 'createMemberRequest' is not null or undefined
             (0, common_1.assertParamExists)('createMember', 'createMemberRequest', createMemberRequest);
             const localVarPath = `/members`;
@@ -2022,7 +2029,7 @@ const MembersApiAxiosParamCreator = function (configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getMember: (id, options = {}) => __awaiter(this, void 0, void 0, function* () {
+        getMember: (id_1, ...args_2) => __awaiter(this, [id_1, ...args_2], void 0, function* (id, options = {}) {
             // verify required parameter 'id' is not null or undefined
             (0, common_1.assertParamExists)('getMember', 'id', id);
             const localVarPath = `/members/{id}`
@@ -2053,7 +2060,7 @@ const MembersApiAxiosParamCreator = function (configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listMembers: (options = {}) => __awaiter(this, void 0, void 0, function* () {
+        listMembers: (...args_3) => __awaiter(this, [...args_3], void 0, function* (options = {}) {
             const localVarPath = `/members`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
@@ -2093,12 +2100,12 @@ const MembersApiFp = function (configuration) {
          * @throws {RequiredError}
          */
         createMember(createMemberRequest, options) {
-            var _a, _b, _c;
             return __awaiter(this, void 0, void 0, function* () {
+                var _a, _b, _c;
                 const localVarAxiosArgs = yield localVarAxiosParamCreator.createMember(createMemberRequest, options);
-                const index = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
-                const operationBasePath = (_c = (_b = base_1.operationServerMap['MembersApi.createMember']) === null || _b === void 0 ? void 0 : _b[index]) === null || _c === void 0 ? void 0 : _c.url;
-                return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, operationBasePath || basePath);
+                const localVarOperationServerIndex = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
+                const localVarOperationServerBasePath = (_c = (_b = base_1.operationServerMap['MembersApi.createMember']) === null || _b === void 0 ? void 0 : _b[localVarOperationServerIndex]) === null || _c === void 0 ? void 0 : _c.url;
+                return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
             });
         },
         /**
@@ -2109,12 +2116,12 @@ const MembersApiFp = function (configuration) {
          * @throws {RequiredError}
          */
         getMember(id, options) {
-            var _a, _b, _c;
             return __awaiter(this, void 0, void 0, function* () {
+                var _a, _b, _c;
                 const localVarAxiosArgs = yield localVarAxiosParamCreator.getMember(id, options);
-                const index = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
-                const operationBasePath = (_c = (_b = base_1.operationServerMap['MembersApi.getMember']) === null || _b === void 0 ? void 0 : _b[index]) === null || _c === void 0 ? void 0 : _c.url;
-                return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, operationBasePath || basePath);
+                const localVarOperationServerIndex = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
+                const localVarOperationServerBasePath = (_c = (_b = base_1.operationServerMap['MembersApi.getMember']) === null || _b === void 0 ? void 0 : _b[localVarOperationServerIndex]) === null || _c === void 0 ? void 0 : _c.url;
+                return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
             });
         },
         /**
@@ -2124,12 +2131,12 @@ const MembersApiFp = function (configuration) {
          * @throws {RequiredError}
          */
         listMembers(options) {
-            var _a, _b, _c;
             return __awaiter(this, void 0, void 0, function* () {
+                var _a, _b, _c;
                 const localVarAxiosArgs = yield localVarAxiosParamCreator.listMembers(options);
-                const index = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
-                const operationBasePath = (_c = (_b = base_1.operationServerMap['MembersApi.listMembers']) === null || _b === void 0 ? void 0 : _b[index]) === null || _c === void 0 ? void 0 : _c.url;
-                return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, operationBasePath || basePath);
+                const localVarOperationServerIndex = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
+                const localVarOperationServerBasePath = (_c = (_b = base_1.operationServerMap['MembersApi.listMembers']) === null || _b === void 0 ? void 0 : _b[localVarOperationServerIndex]) === null || _c === void 0 ? void 0 : _c.url;
+                return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
             });
         },
     };
@@ -2228,7 +2235,7 @@ const OrdersApiAxiosParamCreator = function (configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        approveOrder: (id, options = {}) => __awaiter(this, void 0, void 0, function* () {
+        approveOrder: (id_1, ...args_1) => __awaiter(this, [id_1, ...args_1], void 0, function* (id, options = {}) {
             // verify required parameter 'id' is not null or undefined
             (0, common_1.assertParamExists)('approveOrder', 'id', id);
             const localVarPath = `/order_approvals/{id}/approve`
@@ -2260,7 +2267,7 @@ const OrdersApiAxiosParamCreator = function (configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        createOrder: (createOrderRequest, options = {}) => __awaiter(this, void 0, void 0, function* () {
+        createOrder: (createOrderRequest_1, ...args_2) => __awaiter(this, [createOrderRequest_1, ...args_2], void 0, function* (createOrderRequest, options = {}) {
             // verify required parameter 'createOrderRequest' is not null or undefined
             (0, common_1.assertParamExists)('createOrder', 'createOrderRequest', createOrderRequest);
             const localVarPath = `/orders`;
@@ -2293,7 +2300,7 @@ const OrdersApiAxiosParamCreator = function (configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getOrder: (id, options = {}) => __awaiter(this, void 0, void 0, function* () {
+        getOrder: (id_2, ...args_3) => __awaiter(this, [id_2, ...args_3], void 0, function* (id, options = {}) {
             // verify required parameter 'id' is not null or undefined
             (0, common_1.assertParamExists)('getOrder', 'id', id);
             const localVarPath = `/orders/{id}`
@@ -2330,7 +2337,7 @@ const OrdersApiAxiosParamCreator = function (configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listOrders: (offset, campaignId, externalId, createdAtGte, createdAtLte, limit, options = {}) => __awaiter(this, void 0, void 0, function* () {
+        listOrders: (offset_1, campaignId_1, externalId_1, createdAtGte_1, createdAtLte_1, limit_1, ...args_4) => __awaiter(this, [offset_1, campaignId_1, externalId_1, createdAtGte_1, createdAtLte_1, limit_1, ...args_4], void 0, function* (offset, campaignId, externalId, createdAtGte, createdAtLte, limit, options = {}) {
             const localVarPath = `/orders`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
@@ -2377,7 +2384,7 @@ const OrdersApiAxiosParamCreator = function (configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        rejectOrder: (id, options = {}) => __awaiter(this, void 0, void 0, function* () {
+        rejectOrder: (id_3, ...args_5) => __awaiter(this, [id_3, ...args_5], void 0, function* (id, options = {}) {
             // verify required parameter 'id' is not null or undefined
             (0, common_1.assertParamExists)('rejectOrder', 'id', id);
             const localVarPath = `/order_approvals/{id}/reject`
@@ -2420,12 +2427,12 @@ const OrdersApiFp = function (configuration) {
          * @throws {RequiredError}
          */
         approveOrder(id, options) {
-            var _a, _b, _c;
             return __awaiter(this, void 0, void 0, function* () {
+                var _a, _b, _c;
                 const localVarAxiosArgs = yield localVarAxiosParamCreator.approveOrder(id, options);
-                const index = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
-                const operationBasePath = (_c = (_b = base_1.operationServerMap['OrdersApi.approveOrder']) === null || _b === void 0 ? void 0 : _b[index]) === null || _c === void 0 ? void 0 : _c.url;
-                return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, operationBasePath || basePath);
+                const localVarOperationServerIndex = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
+                const localVarOperationServerBasePath = (_c = (_b = base_1.operationServerMap['OrdersApi.approveOrder']) === null || _b === void 0 ? void 0 : _b[localVarOperationServerIndex]) === null || _c === void 0 ? void 0 : _c.url;
+                return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
             });
         },
         /**
@@ -2436,12 +2443,12 @@ const OrdersApiFp = function (configuration) {
          * @throws {RequiredError}
          */
         createOrder(createOrderRequest, options) {
-            var _a, _b, _c;
             return __awaiter(this, void 0, void 0, function* () {
+                var _a, _b, _c;
                 const localVarAxiosArgs = yield localVarAxiosParamCreator.createOrder(createOrderRequest, options);
-                const index = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
-                const operationBasePath = (_c = (_b = base_1.operationServerMap['OrdersApi.createOrder']) === null || _b === void 0 ? void 0 : _b[index]) === null || _c === void 0 ? void 0 : _c.url;
-                return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, operationBasePath || basePath);
+                const localVarOperationServerIndex = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
+                const localVarOperationServerBasePath = (_c = (_b = base_1.operationServerMap['OrdersApi.createOrder']) === null || _b === void 0 ? void 0 : _b[localVarOperationServerIndex]) === null || _c === void 0 ? void 0 : _c.url;
+                return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
             });
         },
         /**
@@ -2452,12 +2459,12 @@ const OrdersApiFp = function (configuration) {
          * @throws {RequiredError}
          */
         getOrder(id, options) {
-            var _a, _b, _c;
             return __awaiter(this, void 0, void 0, function* () {
+                var _a, _b, _c;
                 const localVarAxiosArgs = yield localVarAxiosParamCreator.getOrder(id, options);
-                const index = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
-                const operationBasePath = (_c = (_b = base_1.operationServerMap['OrdersApi.getOrder']) === null || _b === void 0 ? void 0 : _b[index]) === null || _c === void 0 ? void 0 : _c.url;
-                return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, operationBasePath || basePath);
+                const localVarOperationServerIndex = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
+                const localVarOperationServerBasePath = (_c = (_b = base_1.operationServerMap['OrdersApi.getOrder']) === null || _b === void 0 ? void 0 : _b[localVarOperationServerIndex]) === null || _c === void 0 ? void 0 : _c.url;
+                return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
             });
         },
         /**
@@ -2473,12 +2480,12 @@ const OrdersApiFp = function (configuration) {
          * @throws {RequiredError}
          */
         listOrders(offset, campaignId, externalId, createdAtGte, createdAtLte, limit, options) {
-            var _a, _b, _c;
             return __awaiter(this, void 0, void 0, function* () {
+                var _a, _b, _c;
                 const localVarAxiosArgs = yield localVarAxiosParamCreator.listOrders(offset, campaignId, externalId, createdAtGte, createdAtLte, limit, options);
-                const index = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
-                const operationBasePath = (_c = (_b = base_1.operationServerMap['OrdersApi.listOrders']) === null || _b === void 0 ? void 0 : _b[index]) === null || _c === void 0 ? void 0 : _c.url;
-                return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, operationBasePath || basePath);
+                const localVarOperationServerIndex = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
+                const localVarOperationServerBasePath = (_c = (_b = base_1.operationServerMap['OrdersApi.listOrders']) === null || _b === void 0 ? void 0 : _b[localVarOperationServerIndex]) === null || _c === void 0 ? void 0 : _c.url;
+                return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
             });
         },
         /**
@@ -2489,12 +2496,12 @@ const OrdersApiFp = function (configuration) {
          * @throws {RequiredError}
          */
         rejectOrder(id, options) {
-            var _a, _b, _c;
             return __awaiter(this, void 0, void 0, function* () {
+                var _a, _b, _c;
                 const localVarAxiosArgs = yield localVarAxiosParamCreator.rejectOrder(id, options);
-                const index = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
-                const operationBasePath = (_c = (_b = base_1.operationServerMap['OrdersApi.rejectOrder']) === null || _b === void 0 ? void 0 : _b[index]) === null || _c === void 0 ? void 0 : _c.url;
-                return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, operationBasePath || basePath);
+                const localVarOperationServerIndex = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
+                const localVarOperationServerBasePath = (_c = (_b = base_1.operationServerMap['OrdersApi.rejectOrder']) === null || _b === void 0 ? void 0 : _b[localVarOperationServerIndex]) === null || _c === void 0 ? void 0 : _c.url;
+                return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
             });
         },
     };
@@ -2646,7 +2653,7 @@ const OrganizationsApiAxiosParamCreator = function (configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        createApiKey: (options = {}) => __awaiter(this, void 0, void 0, function* () {
+        createApiKey: (...args_1) => __awaiter(this, [...args_1], void 0, function* (options = {}) {
             const localVarPath = `/organizations/create_api_key`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
@@ -2675,7 +2682,7 @@ const OrganizationsApiAxiosParamCreator = function (configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        createOrganization: (createOrganizationRequest, options = {}) => __awaiter(this, void 0, void 0, function* () {
+        createOrganization: (createOrganizationRequest_1, ...args_2) => __awaiter(this, [createOrganizationRequest_1, ...args_2], void 0, function* (createOrganizationRequest, options = {}) {
             // verify required parameter 'createOrganizationRequest' is not null or undefined
             (0, common_1.assertParamExists)('createOrganization', 'createOrganizationRequest', createOrganizationRequest);
             const localVarPath = `/organizations`;
@@ -2708,7 +2715,7 @@ const OrganizationsApiAxiosParamCreator = function (configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getOrganization: (id, options = {}) => __awaiter(this, void 0, void 0, function* () {
+        getOrganization: (id_1, ...args_3) => __awaiter(this, [id_1, ...args_3], void 0, function* (id, options = {}) {
             // verify required parameter 'id' is not null or undefined
             (0, common_1.assertParamExists)('getOrganization', 'id', id);
             const localVarPath = `/organizations/{id}`
@@ -2739,7 +2746,7 @@ const OrganizationsApiAxiosParamCreator = function (configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listOrganizations: (options = {}) => __awaiter(this, void 0, void 0, function* () {
+        listOrganizations: (...args_4) => __awaiter(this, [...args_4], void 0, function* (options = {}) {
             const localVarPath = `/organizations`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
@@ -2778,12 +2785,12 @@ const OrganizationsApiFp = function (configuration) {
          * @throws {RequiredError}
          */
         createApiKey(options) {
-            var _a, _b, _c;
             return __awaiter(this, void 0, void 0, function* () {
+                var _a, _b, _c;
                 const localVarAxiosArgs = yield localVarAxiosParamCreator.createApiKey(options);
-                const index = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
-                const operationBasePath = (_c = (_b = base_1.operationServerMap['OrganizationsApi.createApiKey']) === null || _b === void 0 ? void 0 : _b[index]) === null || _c === void 0 ? void 0 : _c.url;
-                return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, operationBasePath || basePath);
+                const localVarOperationServerIndex = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
+                const localVarOperationServerBasePath = (_c = (_b = base_1.operationServerMap['OrganizationsApi.createApiKey']) === null || _b === void 0 ? void 0 : _b[localVarOperationServerIndex]) === null || _c === void 0 ? void 0 : _c.url;
+                return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
             });
         },
         /**
@@ -2794,12 +2801,12 @@ const OrganizationsApiFp = function (configuration) {
          * @throws {RequiredError}
          */
         createOrganization(createOrganizationRequest, options) {
-            var _a, _b, _c;
             return __awaiter(this, void 0, void 0, function* () {
+                var _a, _b, _c;
                 const localVarAxiosArgs = yield localVarAxiosParamCreator.createOrganization(createOrganizationRequest, options);
-                const index = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
-                const operationBasePath = (_c = (_b = base_1.operationServerMap['OrganizationsApi.createOrganization']) === null || _b === void 0 ? void 0 : _b[index]) === null || _c === void 0 ? void 0 : _c.url;
-                return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, operationBasePath || basePath);
+                const localVarOperationServerIndex = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
+                const localVarOperationServerBasePath = (_c = (_b = base_1.operationServerMap['OrganizationsApi.createOrganization']) === null || _b === void 0 ? void 0 : _b[localVarOperationServerIndex]) === null || _c === void 0 ? void 0 : _c.url;
+                return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
             });
         },
         /**
@@ -2810,12 +2817,12 @@ const OrganizationsApiFp = function (configuration) {
          * @throws {RequiredError}
          */
         getOrganization(id, options) {
-            var _a, _b, _c;
             return __awaiter(this, void 0, void 0, function* () {
+                var _a, _b, _c;
                 const localVarAxiosArgs = yield localVarAxiosParamCreator.getOrganization(id, options);
-                const index = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
-                const operationBasePath = (_c = (_b = base_1.operationServerMap['OrganizationsApi.getOrganization']) === null || _b === void 0 ? void 0 : _b[index]) === null || _c === void 0 ? void 0 : _c.url;
-                return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, operationBasePath || basePath);
+                const localVarOperationServerIndex = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
+                const localVarOperationServerBasePath = (_c = (_b = base_1.operationServerMap['OrganizationsApi.getOrganization']) === null || _b === void 0 ? void 0 : _b[localVarOperationServerIndex]) === null || _c === void 0 ? void 0 : _c.url;
+                return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
             });
         },
         /**
@@ -2825,12 +2832,12 @@ const OrganizationsApiFp = function (configuration) {
          * @throws {RequiredError}
          */
         listOrganizations(options) {
-            var _a, _b, _c;
             return __awaiter(this, void 0, void 0, function* () {
+                var _a, _b, _c;
                 const localVarAxiosArgs = yield localVarAxiosParamCreator.listOrganizations(options);
-                const index = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
-                const operationBasePath = (_c = (_b = base_1.operationServerMap['OrganizationsApi.listOrganizations']) === null || _b === void 0 ? void 0 : _b[index]) === null || _c === void 0 ? void 0 : _c.url;
-                return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, operationBasePath || basePath);
+                const localVarOperationServerIndex = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
+                const localVarOperationServerBasePath = (_c = (_b = base_1.operationServerMap['OrganizationsApi.listOrganizations']) === null || _b === void 0 ? void 0 : _b[localVarOperationServerIndex]) === null || _c === void 0 ? void 0 : _c.url;
+                return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
             });
         },
     };
@@ -2948,7 +2955,7 @@ const ProductsApiAxiosParamCreator = function (configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getProduct: (id, options = {}) => __awaiter(this, void 0, void 0, function* () {
+        getProduct: (id_1, ...args_1) => __awaiter(this, [id_1, ...args_1], void 0, function* (id, options = {}) {
             // verify required parameter 'id' is not null or undefined
             (0, common_1.assertParamExists)('getProduct', 'id', id);
             const localVarPath = `/products/{id}`
@@ -2981,7 +2988,7 @@ const ProductsApiAxiosParamCreator = function (configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listProducts: (country, currency, options = {}) => __awaiter(this, void 0, void 0, function* () {
+        listProducts: (country_1, currency_1, ...args_2) => __awaiter(this, [country_1, currency_1, ...args_2], void 0, function* (country, currency, options = {}) {
             const localVarPath = `/products`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
@@ -3027,12 +3034,12 @@ const ProductsApiFp = function (configuration) {
          * @throws {RequiredError}
          */
         getProduct(id, options) {
-            var _a, _b, _c;
             return __awaiter(this, void 0, void 0, function* () {
+                var _a, _b, _c;
                 const localVarAxiosArgs = yield localVarAxiosParamCreator.getProduct(id, options);
-                const index = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
-                const operationBasePath = (_c = (_b = base_1.operationServerMap['ProductsApi.getProduct']) === null || _b === void 0 ? void 0 : _b[index]) === null || _c === void 0 ? void 0 : _c.url;
-                return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, operationBasePath || basePath);
+                const localVarOperationServerIndex = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
+                const localVarOperationServerBasePath = (_c = (_b = base_1.operationServerMap['ProductsApi.getProduct']) === null || _b === void 0 ? void 0 : _b[localVarOperationServerIndex]) === null || _c === void 0 ? void 0 : _c.url;
+                return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
             });
         },
         /**
@@ -3044,12 +3051,12 @@ const ProductsApiFp = function (configuration) {
          * @throws {RequiredError}
          */
         listProducts(country, currency, options) {
-            var _a, _b, _c;
             return __awaiter(this, void 0, void 0, function* () {
+                var _a, _b, _c;
                 const localVarAxiosArgs = yield localVarAxiosParamCreator.listProducts(country, currency, options);
-                const index = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
-                const operationBasePath = (_c = (_b = base_1.operationServerMap['ProductsApi.listProducts']) === null || _b === void 0 ? void 0 : _b[index]) === null || _c === void 0 ? void 0 : _c.url;
-                return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, operationBasePath || basePath);
+                const localVarOperationServerIndex = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
+                const localVarOperationServerBasePath = (_c = (_b = base_1.operationServerMap['ProductsApi.listProducts']) === null || _b === void 0 ? void 0 : _b[localVarOperationServerIndex]) === null || _c === void 0 ? void 0 : _c.url;
+                return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
             });
         },
     };
@@ -3131,7 +3138,7 @@ const RewardsApiAxiosParamCreator = function (configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        generateRewardLink: (id, options = {}) => __awaiter(this, void 0, void 0, function* () {
+        generateRewardLink: (id_1, ...args_1) => __awaiter(this, [id_1, ...args_1], void 0, function* (id, options = {}) {
             // verify required parameter 'id' is not null or undefined
             (0, common_1.assertParamExists)('generateRewardLink', 'id', id);
             const localVarPath = `/rewards/{id}/generate_link`
@@ -3163,7 +3170,7 @@ const RewardsApiAxiosParamCreator = function (configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        generateRewardToken: (id, options = {}) => __awaiter(this, void 0, void 0, function* () {
+        generateRewardToken: (id_2, ...args_2) => __awaiter(this, [id_2, ...args_2], void 0, function* (id, options = {}) {
             // verify required parameter 'id' is not null or undefined
             (0, common_1.assertParamExists)('generateRewardToken', 'id', id);
             const localVarPath = `/rewards/{id}/generate_embed_token`
@@ -3195,7 +3202,7 @@ const RewardsApiAxiosParamCreator = function (configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getReward: (id, options = {}) => __awaiter(this, void 0, void 0, function* () {
+        getReward: (id_3, ...args_3) => __awaiter(this, [id_3, ...args_3], void 0, function* (id, options = {}) {
             // verify required parameter 'id' is not null or undefined
             (0, common_1.assertParamExists)('getReward', 'id', id);
             const localVarPath = `/rewards/{id}`
@@ -3227,7 +3234,7 @@ const RewardsApiAxiosParamCreator = function (configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listRewards: (offset, options = {}) => __awaiter(this, void 0, void 0, function* () {
+        listRewards: (offset_1, ...args_4) => __awaiter(this, [offset_1, ...args_4], void 0, function* (offset, options = {}) {
             const localVarPath = `/rewards`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
@@ -3259,7 +3266,7 @@ const RewardsApiAxiosParamCreator = function (configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        resendReward: (id, options = {}) => __awaiter(this, void 0, void 0, function* () {
+        resendReward: (id_4, ...args_5) => __awaiter(this, [id_4, ...args_5], void 0, function* (id, options = {}) {
             // verify required parameter 'id' is not null or undefined
             (0, common_1.assertParamExists)('resendReward', 'id', id);
             const localVarPath = `/rewards/{id}/resend`
@@ -3302,12 +3309,12 @@ const RewardsApiFp = function (configuration) {
          * @throws {RequiredError}
          */
         generateRewardLink(id, options) {
-            var _a, _b, _c;
             return __awaiter(this, void 0, void 0, function* () {
+                var _a, _b, _c;
                 const localVarAxiosArgs = yield localVarAxiosParamCreator.generateRewardLink(id, options);
-                const index = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
-                const operationBasePath = (_c = (_b = base_1.operationServerMap['RewardsApi.generateRewardLink']) === null || _b === void 0 ? void 0 : _b[index]) === null || _c === void 0 ? void 0 : _c.url;
-                return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, operationBasePath || basePath);
+                const localVarOperationServerIndex = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
+                const localVarOperationServerBasePath = (_c = (_b = base_1.operationServerMap['RewardsApi.generateRewardLink']) === null || _b === void 0 ? void 0 : _b[localVarOperationServerIndex]) === null || _c === void 0 ? void 0 : _c.url;
+                return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
             });
         },
         /**
@@ -3318,12 +3325,12 @@ const RewardsApiFp = function (configuration) {
          * @throws {RequiredError}
          */
         generateRewardToken(id, options) {
-            var _a, _b, _c;
             return __awaiter(this, void 0, void 0, function* () {
+                var _a, _b, _c;
                 const localVarAxiosArgs = yield localVarAxiosParamCreator.generateRewardToken(id, options);
-                const index = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
-                const operationBasePath = (_c = (_b = base_1.operationServerMap['RewardsApi.generateRewardToken']) === null || _b === void 0 ? void 0 : _b[index]) === null || _c === void 0 ? void 0 : _c.url;
-                return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, operationBasePath || basePath);
+                const localVarOperationServerIndex = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
+                const localVarOperationServerBasePath = (_c = (_b = base_1.operationServerMap['RewardsApi.generateRewardToken']) === null || _b === void 0 ? void 0 : _b[localVarOperationServerIndex]) === null || _c === void 0 ? void 0 : _c.url;
+                return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
             });
         },
         /**
@@ -3334,12 +3341,12 @@ const RewardsApiFp = function (configuration) {
          * @throws {RequiredError}
          */
         getReward(id, options) {
-            var _a, _b, _c;
             return __awaiter(this, void 0, void 0, function* () {
+                var _a, _b, _c;
                 const localVarAxiosArgs = yield localVarAxiosParamCreator.getReward(id, options);
-                const index = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
-                const operationBasePath = (_c = (_b = base_1.operationServerMap['RewardsApi.getReward']) === null || _b === void 0 ? void 0 : _b[index]) === null || _c === void 0 ? void 0 : _c.url;
-                return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, operationBasePath || basePath);
+                const localVarOperationServerIndex = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
+                const localVarOperationServerBasePath = (_c = (_b = base_1.operationServerMap['RewardsApi.getReward']) === null || _b === void 0 ? void 0 : _b[localVarOperationServerIndex]) === null || _c === void 0 ? void 0 : _c.url;
+                return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
             });
         },
         /**
@@ -3350,12 +3357,12 @@ const RewardsApiFp = function (configuration) {
          * @throws {RequiredError}
          */
         listRewards(offset, options) {
-            var _a, _b, _c;
             return __awaiter(this, void 0, void 0, function* () {
+                var _a, _b, _c;
                 const localVarAxiosArgs = yield localVarAxiosParamCreator.listRewards(offset, options);
-                const index = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
-                const operationBasePath = (_c = (_b = base_1.operationServerMap['RewardsApi.listRewards']) === null || _b === void 0 ? void 0 : _b[index]) === null || _c === void 0 ? void 0 : _c.url;
-                return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, operationBasePath || basePath);
+                const localVarOperationServerIndex = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
+                const localVarOperationServerBasePath = (_c = (_b = base_1.operationServerMap['RewardsApi.listRewards']) === null || _b === void 0 ? void 0 : _b[localVarOperationServerIndex]) === null || _c === void 0 ? void 0 : _c.url;
+                return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
             });
         },
         /**
@@ -3366,12 +3373,12 @@ const RewardsApiFp = function (configuration) {
          * @throws {RequiredError}
          */
         resendReward(id, options) {
-            var _a, _b, _c;
             return __awaiter(this, void 0, void 0, function* () {
+                var _a, _b, _c;
                 const localVarAxiosArgs = yield localVarAxiosParamCreator.resendReward(id, options);
-                const index = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
-                const operationBasePath = (_c = (_b = base_1.operationServerMap['RewardsApi.resendReward']) === null || _b === void 0 ? void 0 : _b[index]) === null || _c === void 0 ? void 0 : _c.url;
-                return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, operationBasePath || basePath);
+                const localVarOperationServerIndex = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
+                const localVarOperationServerBasePath = (_c = (_b = base_1.operationServerMap['RewardsApi.resendReward']) === null || _b === void 0 ? void 0 : _b[localVarOperationServerIndex]) === null || _c === void 0 ? void 0 : _c.url;
+                return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
             });
         },
     };
@@ -3514,7 +3521,7 @@ const WebhooksApiAxiosParamCreator = function (configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        createWebhook: (createWebhookRequest, options = {}) => __awaiter(this, void 0, void 0, function* () {
+        createWebhook: (createWebhookRequest_1, ...args_1) => __awaiter(this, [createWebhookRequest_1, ...args_1], void 0, function* (createWebhookRequest, options = {}) {
             // verify required parameter 'createWebhookRequest' is not null or undefined
             (0, common_1.assertParamExists)('createWebhook', 'createWebhookRequest', createWebhookRequest);
             const localVarPath = `/webhooks`;
@@ -3547,7 +3554,7 @@ const WebhooksApiAxiosParamCreator = function (configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getWebhook: (id, options = {}) => __awaiter(this, void 0, void 0, function* () {
+        getWebhook: (id_1, ...args_2) => __awaiter(this, [id_1, ...args_2], void 0, function* (id, options = {}) {
             // verify required parameter 'id' is not null or undefined
             (0, common_1.assertParamExists)('getWebhook', 'id', id);
             const localVarPath = `/webhooks/{id}`
@@ -3579,7 +3586,7 @@ const WebhooksApiAxiosParamCreator = function (configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listWebhookEvents: (id, options = {}) => __awaiter(this, void 0, void 0, function* () {
+        listWebhookEvents: (id_2, ...args_3) => __awaiter(this, [id_2, ...args_3], void 0, function* (id, options = {}) {
             // verify required parameter 'id' is not null or undefined
             (0, common_1.assertParamExists)('listWebhookEvents', 'id', id);
             const localVarPath = `/webhooks/{id}/events`
@@ -3610,7 +3617,7 @@ const WebhooksApiAxiosParamCreator = function (configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listWebhooks: (options = {}) => __awaiter(this, void 0, void 0, function* () {
+        listWebhooks: (...args_4) => __awaiter(this, [...args_4], void 0, function* (options = {}) {
             const localVarPath = `/webhooks`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
@@ -3640,7 +3647,7 @@ const WebhooksApiAxiosParamCreator = function (configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        simulateWebhook: (id, simulateWebhookRequest, options = {}) => __awaiter(this, void 0, void 0, function* () {
+        simulateWebhook: (id_3, simulateWebhookRequest_1, ...args_5) => __awaiter(this, [id_3, simulateWebhookRequest_1, ...args_5], void 0, function* (id, simulateWebhookRequest, options = {}) {
             // verify required parameter 'id' is not null or undefined
             (0, common_1.assertParamExists)('simulateWebhook', 'id', id);
             // verify required parameter 'simulateWebhookRequest' is not null or undefined
@@ -3687,12 +3694,12 @@ const WebhooksApiFp = function (configuration) {
          * @throws {RequiredError}
          */
         createWebhook(createWebhookRequest, options) {
-            var _a, _b, _c;
             return __awaiter(this, void 0, void 0, function* () {
+                var _a, _b, _c;
                 const localVarAxiosArgs = yield localVarAxiosParamCreator.createWebhook(createWebhookRequest, options);
-                const index = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
-                const operationBasePath = (_c = (_b = base_1.operationServerMap['WebhooksApi.createWebhook']) === null || _b === void 0 ? void 0 : _b[index]) === null || _c === void 0 ? void 0 : _c.url;
-                return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, operationBasePath || basePath);
+                const localVarOperationServerIndex = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
+                const localVarOperationServerBasePath = (_c = (_b = base_1.operationServerMap['WebhooksApi.createWebhook']) === null || _b === void 0 ? void 0 : _b[localVarOperationServerIndex]) === null || _c === void 0 ? void 0 : _c.url;
+                return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
             });
         },
         /**
@@ -3703,12 +3710,12 @@ const WebhooksApiFp = function (configuration) {
          * @throws {RequiredError}
          */
         getWebhook(id, options) {
-            var _a, _b, _c;
             return __awaiter(this, void 0, void 0, function* () {
+                var _a, _b, _c;
                 const localVarAxiosArgs = yield localVarAxiosParamCreator.getWebhook(id, options);
-                const index = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
-                const operationBasePath = (_c = (_b = base_1.operationServerMap['WebhooksApi.getWebhook']) === null || _b === void 0 ? void 0 : _b[index]) === null || _c === void 0 ? void 0 : _c.url;
-                return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, operationBasePath || basePath);
+                const localVarOperationServerIndex = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
+                const localVarOperationServerBasePath = (_c = (_b = base_1.operationServerMap['WebhooksApi.getWebhook']) === null || _b === void 0 ? void 0 : _b[localVarOperationServerIndex]) === null || _c === void 0 ? void 0 : _c.url;
+                return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
             });
         },
         /**
@@ -3719,12 +3726,12 @@ const WebhooksApiFp = function (configuration) {
          * @throws {RequiredError}
          */
         listWebhookEvents(id, options) {
-            var _a, _b, _c;
             return __awaiter(this, void 0, void 0, function* () {
+                var _a, _b, _c;
                 const localVarAxiosArgs = yield localVarAxiosParamCreator.listWebhookEvents(id, options);
-                const index = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
-                const operationBasePath = (_c = (_b = base_1.operationServerMap['WebhooksApi.listWebhookEvents']) === null || _b === void 0 ? void 0 : _b[index]) === null || _c === void 0 ? void 0 : _c.url;
-                return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, operationBasePath || basePath);
+                const localVarOperationServerIndex = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
+                const localVarOperationServerBasePath = (_c = (_b = base_1.operationServerMap['WebhooksApi.listWebhookEvents']) === null || _b === void 0 ? void 0 : _b[localVarOperationServerIndex]) === null || _c === void 0 ? void 0 : _c.url;
+                return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
             });
         },
         /**
@@ -3734,12 +3741,12 @@ const WebhooksApiFp = function (configuration) {
          * @throws {RequiredError}
          */
         listWebhooks(options) {
-            var _a, _b, _c;
             return __awaiter(this, void 0, void 0, function* () {
+                var _a, _b, _c;
                 const localVarAxiosArgs = yield localVarAxiosParamCreator.listWebhooks(options);
-                const index = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
-                const operationBasePath = (_c = (_b = base_1.operationServerMap['WebhooksApi.listWebhooks']) === null || _b === void 0 ? void 0 : _b[index]) === null || _c === void 0 ? void 0 : _c.url;
-                return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, operationBasePath || basePath);
+                const localVarOperationServerIndex = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
+                const localVarOperationServerBasePath = (_c = (_b = base_1.operationServerMap['WebhooksApi.listWebhooks']) === null || _b === void 0 ? void 0 : _b[localVarOperationServerIndex]) === null || _c === void 0 ? void 0 : _c.url;
+                return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
             });
         },
         /**
@@ -3751,12 +3758,12 @@ const WebhooksApiFp = function (configuration) {
          * @throws {RequiredError}
          */
         simulateWebhook(id, simulateWebhookRequest, options) {
-            var _a, _b, _c;
             return __awaiter(this, void 0, void 0, function* () {
+                var _a, _b, _c;
                 const localVarAxiosArgs = yield localVarAxiosParamCreator.simulateWebhook(id, simulateWebhookRequest, options);
-                const index = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
-                const operationBasePath = (_c = (_b = base_1.operationServerMap['WebhooksApi.simulateWebhook']) === null || _b === void 0 ? void 0 : _b[index]) === null || _c === void 0 ? void 0 : _c.url;
-                return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, operationBasePath || basePath);
+                const localVarOperationServerIndex = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
+                const localVarOperationServerBasePath = (_c = (_b = base_1.operationServerMap['WebhooksApi.simulateWebhook']) === null || _b === void 0 ? void 0 : _b[localVarOperationServerIndex]) === null || _c === void 0 ? void 0 : _c.url;
+                return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
             });
         },
     };
