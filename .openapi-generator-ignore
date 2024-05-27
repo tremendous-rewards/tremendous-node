@@ -28,3 +28,5 @@ README.md
 package.json
 package-lock.json
 tsconfig.json
+git_push.sh
+tsconfig.esm.json
