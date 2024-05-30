@@ -104,6 +104,49 @@ export interface Campaign {
     'email_style'?: ListCampaigns200ResponseCampaignsInnerEmailStyle;
 }
 /**
+ * With a campaign you can define the look & feel of how rewards are sent out. It also lets you set the available products (different gift cards, charity, etc.) recipients can choose from. 
+ * @export
+ * @interface CampaignBase
+ */
+export interface CampaignBase {
+    /**
+     * 
+     * @type {string}
+     * @memberof CampaignBase
+     */
+    'id'?: string;
+    /**
+     * Name of the campaign
+     * @type {string}
+     * @memberof CampaignBase
+     */
+    'name'?: string;
+    /**
+     * Description of the campaign
+     * @type {string}
+     * @memberof CampaignBase
+     */
+    'description'?: string | null;
+    /**
+     * List of IDs of products (different gift cards, charity, etc.) that are available in this campaign. 
+     * @type {Array<string>}
+     * @memberof CampaignBase
+     */
+    'products'?: Array<string>;
+    /**
+     * 
+     * @type {ListCampaigns200ResponseCampaignsInnerWebpageStyle}
+     * @memberof CampaignBase
+     */
+    'webpage_style'?: ListCampaigns200ResponseCampaignsInnerWebpageStyle;
+    /**
+     * 
+     * @type {ListCampaigns200ResponseCampaignsInnerEmailStyle}
+     * @memberof CampaignBase
+     */
+    'email_style'?: ListCampaigns200ResponseCampaignsInnerEmailStyle;
+}
+/**
  * 
  * @export
  * @interface CreateApiKey200Response
@@ -1750,6 +1793,19 @@ export interface ListFields200ResponseFieldsInner {
      * @memberof ListFields200ResponseFieldsInner
      */
     'scope'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface ListForexResponse
+ */
+export interface ListForexResponse {
+    /**
+     * 
+     * @type {{ [key: string]: number; }}
+     * @memberof ListForexResponse
+     */
+    'forex': { [key: string]: number; };
 }
 /**
  * 
@@ -4759,6 +4815,86 @@ export interface SimulateWebhookRequest {
     'event': string;
 }
 /**
+ * With a campaign you can define the look & feel of how rewards are sent out. It also lets you set the available products (different gift cards, charity, etc.) recipients can choose from. 
+ * @export
+ * @interface UpdateCampaign
+ */
+export interface UpdateCampaign {
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdateCampaign
+     */
+    'id'?: string;
+    /**
+     * Name of the campaign
+     * @type {string}
+     * @memberof UpdateCampaign
+     */
+    'name'?: string;
+    /**
+     * Description of the campaign
+     * @type {string}
+     * @memberof UpdateCampaign
+     */
+    'description'?: string | null;
+    /**
+     * List of IDs of products (different gift cards, charity, etc.) that are available in this campaign. 
+     * @type {Array<string>}
+     * @memberof UpdateCampaign
+     */
+    'products'?: Array<string>;
+    /**
+     * 
+     * @type {ListCampaigns200ResponseCampaignsInnerWebpageStyle}
+     * @memberof UpdateCampaign
+     */
+    'webpage_style'?: ListCampaigns200ResponseCampaignsInnerWebpageStyle;
+    /**
+     * 
+     * @type {ListCampaigns200ResponseCampaignsInnerEmailStyle}
+     * @memberof UpdateCampaign
+     */
+    'email_style'?: ListCampaigns200ResponseCampaignsInnerEmailStyle;
+}
+/**
+ * With a campaign you can define the look & feel of how rewards are sent out. It also lets you set the available products (different gift cards, charity, etc.) recipients can choose from. 
+ * @export
+ * @interface UpdateCampaignRequest
+ */
+export interface UpdateCampaignRequest {
+    /**
+     * Name of the campaign
+     * @type {string}
+     * @memberof UpdateCampaignRequest
+     */
+    'name'?: string;
+    /**
+     * Description of the campaign
+     * @type {string}
+     * @memberof UpdateCampaignRequest
+     */
+    'description'?: string | null;
+    /**
+     * List of IDs of products (different gift cards, charity, etc.) that are available in this campaign. 
+     * @type {Array<string>}
+     * @memberof UpdateCampaignRequest
+     */
+    'products'?: Array<string>;
+    /**
+     * 
+     * @type {ListCampaigns200ResponseCampaignsInnerWebpageStyle}
+     * @memberof UpdateCampaignRequest
+     */
+    'webpage_style'?: ListCampaigns200ResponseCampaignsInnerWebpageStyle;
+    /**
+     * 
+     * @type {ListCampaigns200ResponseCampaignsInnerEmailStyle}
+     * @memberof UpdateCampaignRequest
+     */
+    'email_style'?: ListCampaigns200ResponseCampaignsInnerEmailStyle;
+}
+/**
  * 
  * @export
  * @interface Webhook
@@ -5056,15 +5192,15 @@ export const CampaignsApiAxiosParamCreator = function (configuration?: Configura
          * 
          * @summary Update campaign
          * @param {string} id ID of the campaign that should be updated
-         * @param {CreateCampaignRequest} createCampaignRequest Campaign details
+         * @param {UpdateCampaignRequest} updateCampaignRequest Campaign details
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateCampaign: async (id: string, createCampaignRequest: CreateCampaignRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        updateCampaign: async (id: string, updateCampaignRequest: UpdateCampaignRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('updateCampaign', 'id', id)
-            // verify required parameter 'createCampaignRequest' is not null or undefined
-            assertParamExists('updateCampaign', 'createCampaignRequest', createCampaignRequest)
+            // verify required parameter 'updateCampaignRequest' is not null or undefined
+            assertParamExists('updateCampaign', 'updateCampaignRequest', updateCampaignRequest)
             const localVarPath = `/campaigns/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -5089,7 +5225,7 @@ export const CampaignsApiAxiosParamCreator = function (configuration?: Configura
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(createCampaignRequest, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(updateCampaignRequest, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -5148,12 +5284,12 @@ export const CampaignsApiFp = function(configuration?: Configuration) {
          * 
          * @summary Update campaign
          * @param {string} id ID of the campaign that should be updated
-         * @param {CreateCampaignRequest} createCampaignRequest Campaign details
+         * @param {UpdateCampaignRequest} updateCampaignRequest Campaign details
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async updateCampaign(id: string, createCampaignRequest: CreateCampaignRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CreateCampaign201Response>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.updateCampaign(id, createCampaignRequest, options);
+        async updateCampaign(id: string, updateCampaignRequest: UpdateCampaignRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CreateCampaign201Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.updateCampaign(id, updateCampaignRequest, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['CampaignsApi.updateCampaign']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -5201,12 +5337,12 @@ export const CampaignsApiFactory = function (configuration?: Configuration, base
          * 
          * @summary Update campaign
          * @param {string} id ID of the campaign that should be updated
-         * @param {CreateCampaignRequest} createCampaignRequest Campaign details
+         * @param {UpdateCampaignRequest} updateCampaignRequest Campaign details
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateCampaign(id: string, createCampaignRequest: CreateCampaignRequest, options?: any): AxiosPromise<CreateCampaign201Response> {
-            return localVarFp.updateCampaign(id, createCampaignRequest, options).then((request) => request(axios, basePath));
+        updateCampaign(id: string, updateCampaignRequest: UpdateCampaignRequest, options?: any): AxiosPromise<CreateCampaign201Response> {
+            return localVarFp.updateCampaign(id, updateCampaignRequest, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -5257,13 +5393,13 @@ export class CampaignsApi extends BaseAPI {
      * 
      * @summary Update campaign
      * @param {string} id ID of the campaign that should be updated
-     * @param {CreateCampaignRequest} createCampaignRequest Campaign details
+     * @param {UpdateCampaignRequest} updateCampaignRequest Campaign details
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof CampaignsApi
      */
-    public updateCampaign(id: string, createCampaignRequest: CreateCampaignRequest, options?: RawAxiosRequestConfig) {
-        return CampaignsApiFp(this.configuration).updateCampaign(id, createCampaignRequest, options).then((request) => request(this.axios, this.basePath));
+    public updateCampaign(id: string, updateCampaignRequest: UpdateCampaignRequest, options?: RawAxiosRequestConfig) {
+        return CampaignsApiFp(this.configuration).updateCampaign(id, updateCampaignRequest, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
@@ -5369,6 +5505,119 @@ export class FieldsApi extends BaseAPI {
      */
     public listFields(options?: RawAxiosRequestConfig) {
         return FieldsApiFp(this.configuration).listFields(options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+
+/**
+ * ForexApi - axios parameter creator
+ * @export
+ */
+export const ForexApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * Retrieve a list of exchange rates 
+         * @summary List exchange rates
+         * @param {string} [base] Base currency code, default is USD.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listForex: async (base?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/forex`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication BearerApiKey required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (base !== undefined) {
+                localVarQueryParameter['base'] = base;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * ForexApi - functional programming interface
+ * @export
+ */
+export const ForexApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = ForexApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * Retrieve a list of exchange rates 
+         * @summary List exchange rates
+         * @param {string} [base] Base currency code, default is USD.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async listForex(base?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListForexResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.listForex(base, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ForexApi.listForex']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+    }
+};
+
+/**
+ * ForexApi - factory interface
+ * @export
+ */
+export const ForexApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = ForexApiFp(configuration)
+    return {
+        /**
+         * Retrieve a list of exchange rates 
+         * @summary List exchange rates
+         * @param {string} [base] Base currency code, default is USD.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listForex(base?: string, options?: any): AxiosPromise<ListForexResponse> {
+            return localVarFp.listForex(base, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * ForexApi - object-oriented interface
+ * @export
+ * @class ForexApi
+ * @extends {BaseAPI}
+ */
+export class ForexApi extends BaseAPI {
+    /**
+     * Retrieve a list of exchange rates 
+     * @summary List exchange rates
+     * @param {string} [base] Base currency code, default is USD.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ForexApi
+     */
+    public listForex(base?: string, options?: RawAxiosRequestConfig) {
+        return ForexApiFp(this.configuration).listForex(base, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

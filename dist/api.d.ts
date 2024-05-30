@@ -94,6 +94,49 @@ export interface Campaign {
     'email_style'?: ListCampaigns200ResponseCampaignsInnerEmailStyle;
 }
 /**
+ * With a campaign you can define the look & feel of how rewards are sent out. It also lets you set the available products (different gift cards, charity, etc.) recipients can choose from.
+ * @export
+ * @interface CampaignBase
+ */
+export interface CampaignBase {
+    /**
+     *
+     * @type {string}
+     * @memberof CampaignBase
+     */
+    'id'?: string;
+    /**
+     * Name of the campaign
+     * @type {string}
+     * @memberof CampaignBase
+     */
+    'name'?: string;
+    /**
+     * Description of the campaign
+     * @type {string}
+     * @memberof CampaignBase
+     */
+    'description'?: string | null;
+    /**
+     * List of IDs of products (different gift cards, charity, etc.) that are available in this campaign.
+     * @type {Array<string>}
+     * @memberof CampaignBase
+     */
+    'products'?: Array<string>;
+    /**
+     *
+     * @type {ListCampaigns200ResponseCampaignsInnerWebpageStyle}
+     * @memberof CampaignBase
+     */
+    'webpage_style'?: ListCampaigns200ResponseCampaignsInnerWebpageStyle;
+    /**
+     *
+     * @type {ListCampaigns200ResponseCampaignsInnerEmailStyle}
+     * @memberof CampaignBase
+     */
+    'email_style'?: ListCampaigns200ResponseCampaignsInnerEmailStyle;
+}
+/**
  *
  * @export
  * @interface CreateApiKey200Response
@@ -1691,6 +1734,21 @@ export interface ListFields200ResponseFieldsInner {
      * @memberof ListFields200ResponseFieldsInner
      */
     'scope'?: string;
+}
+/**
+ *
+ * @export
+ * @interface ListForexResponse
+ */
+export interface ListForexResponse {
+    /**
+     *
+     * @type {{ [key: string]: number; }}
+     * @memberof ListForexResponse
+     */
+    'forex': {
+        [key: string]: number;
+    };
 }
 /**
  *
@@ -4606,6 +4664,86 @@ export interface SimulateWebhookRequest {
     'event': string;
 }
 /**
+ * With a campaign you can define the look & feel of how rewards are sent out. It also lets you set the available products (different gift cards, charity, etc.) recipients can choose from.
+ * @export
+ * @interface UpdateCampaign
+ */
+export interface UpdateCampaign {
+    /**
+     *
+     * @type {string}
+     * @memberof UpdateCampaign
+     */
+    'id'?: string;
+    /**
+     * Name of the campaign
+     * @type {string}
+     * @memberof UpdateCampaign
+     */
+    'name'?: string;
+    /**
+     * Description of the campaign
+     * @type {string}
+     * @memberof UpdateCampaign
+     */
+    'description'?: string | null;
+    /**
+     * List of IDs of products (different gift cards, charity, etc.) that are available in this campaign.
+     * @type {Array<string>}
+     * @memberof UpdateCampaign
+     */
+    'products'?: Array<string>;
+    /**
+     *
+     * @type {ListCampaigns200ResponseCampaignsInnerWebpageStyle}
+     * @memberof UpdateCampaign
+     */
+    'webpage_style'?: ListCampaigns200ResponseCampaignsInnerWebpageStyle;
+    /**
+     *
+     * @type {ListCampaigns200ResponseCampaignsInnerEmailStyle}
+     * @memberof UpdateCampaign
+     */
+    'email_style'?: ListCampaigns200ResponseCampaignsInnerEmailStyle;
+}
+/**
+ * With a campaign you can define the look & feel of how rewards are sent out. It also lets you set the available products (different gift cards, charity, etc.) recipients can choose from.
+ * @export
+ * @interface UpdateCampaignRequest
+ */
+export interface UpdateCampaignRequest {
+    /**
+     * Name of the campaign
+     * @type {string}
+     * @memberof UpdateCampaignRequest
+     */
+    'name'?: string;
+    /**
+     * Description of the campaign
+     * @type {string}
+     * @memberof UpdateCampaignRequest
+     */
+    'description'?: string | null;
+    /**
+     * List of IDs of products (different gift cards, charity, etc.) that are available in this campaign.
+     * @type {Array<string>}
+     * @memberof UpdateCampaignRequest
+     */
+    'products'?: Array<string>;
+    /**
+     *
+     * @type {ListCampaigns200ResponseCampaignsInnerWebpageStyle}
+     * @memberof UpdateCampaignRequest
+     */
+    'webpage_style'?: ListCampaigns200ResponseCampaignsInnerWebpageStyle;
+    /**
+     *
+     * @type {ListCampaigns200ResponseCampaignsInnerEmailStyle}
+     * @memberof UpdateCampaignRequest
+     */
+    'email_style'?: ListCampaigns200ResponseCampaignsInnerEmailStyle;
+}
+/**
  *
  * @export
  * @interface Webhook
@@ -4746,11 +4884,11 @@ export declare const CampaignsApiAxiosParamCreator: (configuration?: Configurati
      *
      * @summary Update campaign
      * @param {string} id ID of the campaign that should be updated
-     * @param {CreateCampaignRequest} createCampaignRequest Campaign details
+     * @param {UpdateCampaignRequest} updateCampaignRequest Campaign details
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    updateCampaign: (id: string, createCampaignRequest: CreateCampaignRequest, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    updateCampaign: (id: string, updateCampaignRequest: UpdateCampaignRequest, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
 };
 /**
  * CampaignsApi - functional programming interface
@@ -4784,11 +4922,11 @@ export declare const CampaignsApiFp: (configuration?: Configuration) => {
      *
      * @summary Update campaign
      * @param {string} id ID of the campaign that should be updated
-     * @param {CreateCampaignRequest} createCampaignRequest Campaign details
+     * @param {UpdateCampaignRequest} updateCampaignRequest Campaign details
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    updateCampaign(id: string, createCampaignRequest: CreateCampaignRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CreateCampaign201Response>>;
+    updateCampaign(id: string, updateCampaignRequest: UpdateCampaignRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CreateCampaign201Response>>;
 };
 /**
  * CampaignsApi - factory interface
@@ -4822,11 +4960,11 @@ export declare const CampaignsApiFactory: (configuration?: Configuration, basePa
      *
      * @summary Update campaign
      * @param {string} id ID of the campaign that should be updated
-     * @param {CreateCampaignRequest} createCampaignRequest Campaign details
+     * @param {UpdateCampaignRequest} updateCampaignRequest Campaign details
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    updateCampaign(id: string, createCampaignRequest: CreateCampaignRequest, options?: any): AxiosPromise<CreateCampaign201Response>;
+    updateCampaign(id: string, updateCampaignRequest: UpdateCampaignRequest, options?: any): AxiosPromise<CreateCampaign201Response>;
 };
 /**
  * CampaignsApi - object-oriented interface
@@ -4865,12 +5003,12 @@ export declare class CampaignsApi extends BaseAPI {
      *
      * @summary Update campaign
      * @param {string} id ID of the campaign that should be updated
-     * @param {CreateCampaignRequest} createCampaignRequest Campaign details
+     * @param {UpdateCampaignRequest} updateCampaignRequest Campaign details
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof CampaignsApi
      */
-    updateCampaign(id: string, createCampaignRequest: CreateCampaignRequest, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<CreateCampaign201Response, any>>;
+    updateCampaign(id: string, updateCampaignRequest: UpdateCampaignRequest, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<CreateCampaign201Response, any>>;
 }
 /**
  * FieldsApi - axios parameter creator
@@ -4926,6 +5064,65 @@ export declare class FieldsApi extends BaseAPI {
      * @memberof FieldsApi
      */
     listFields(options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<ListFields200Response, any>>;
+}
+/**
+ * ForexApi - axios parameter creator
+ * @export
+ */
+export declare const ForexApiAxiosParamCreator: (configuration?: Configuration) => {
+    /**
+     * Retrieve a list of exchange rates
+     * @summary List exchange rates
+     * @param {string} [base] Base currency code, default is USD.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    listForex: (base?: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+};
+/**
+ * ForexApi - functional programming interface
+ * @export
+ */
+export declare const ForexApiFp: (configuration?: Configuration) => {
+    /**
+     * Retrieve a list of exchange rates
+     * @summary List exchange rates
+     * @param {string} [base] Base currency code, default is USD.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    listForex(base?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListForexResponse>>;
+};
+/**
+ * ForexApi - factory interface
+ * @export
+ */
+export declare const ForexApiFactory: (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) => {
+    /**
+     * Retrieve a list of exchange rates
+     * @summary List exchange rates
+     * @param {string} [base] Base currency code, default is USD.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    listForex(base?: string, options?: any): AxiosPromise<ListForexResponse>;
+};
+/**
+ * ForexApi - object-oriented interface
+ * @export
+ * @class ForexApi
+ * @extends {BaseAPI}
+ */
+export declare class ForexApi extends BaseAPI {
+    /**
+     * Retrieve a list of exchange rates
+     * @summary List exchange rates
+     * @param {string} [base] Base currency code, default is USD.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ForexApi
+     */
+    listForex(base?: string, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<ListForexResponse, any>>;
 }
 /**
  * FundingSourcesApi - axios parameter creator
