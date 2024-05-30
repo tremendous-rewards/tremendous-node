@@ -23,8 +23,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.OrderWithoutLinkStatusEnum = exports.OrderWithLinkStatusEnum = exports.OrderStatus = exports.OrderBasePaymentChannelEnum = exports.OrderBaseStatusEnum = exports.OrderStatusEnum = exports.MemberWithoutEventsStatusEnum = exports.MemberWithoutEventsRoleEnum = exports.MemberWithEventsStatusEnum = exports.MemberWithEventsRoleEnum = exports.MemberBaseStatusEnum = exports.MemberBaseRoleEnum = exports.MemberStatusEnum = exports.MemberRoleEnum = exports.ListRewards200ResponseRewardsInnerValueCurrencyCodeEnum = exports.ListRewards200ResponseRewardsInnerDeliveryStatusEnum = exports.ListRewards200ResponseRewardsInnerDeliveryMethodEnum = exports.ListProductsResponseProductsInnerImagesInnerTypeEnum = exports.ListProductsResponseProductsInnerCurrencyCodesEnum = exports.ListProductsResponseProductsInnerCategoryEnum = exports.ListOrganizations200ResponseOrganizationsInnerStatusEnum = exports.ListOrders200ResponseOrdersInnerPaymentChannelEnum = exports.ListOrders200ResponseOrdersInnerStatusEnum = exports.ListMembers200ResponseMembersInnerStatusEnum = exports.ListMembers200ResponseMembersInnerRoleEnum = exports.ListInvoices200ResponseInvoicesInnerStatusEnum = exports.ListFundingSources200ResponseFundingSourcesInnerMetaNetworkEnum = exports.ListFundingSources200ResponseFundingSourcesInnerMetaAccountTypeEnum = exports.ListFundingSources200ResponseFundingSourcesInnerTypeEnum = exports.ListFundingSources200ResponseFundingSourcesInnerMethodEnum = exports.InvoiceStatusEnum = exports.GetMember200ResponseMemberEventsInnerTypeEnum = exports.GetMember200ResponseMemberStatusEnum = exports.GetMember200ResponseMemberRoleEnum = exports.FundingSourceTypeEnum = exports.FundingSourceMethodEnum = exports.DeliveryStatus = exports.DeliveryMethod = exports.DeliveryDetailsWithLinkStatusEnum = exports.DeliveryDetailsWithLinkMethodEnum = exports.DeliveryDetailsStatusEnum = exports.DeliveryDetailsMethodEnum = exports.CurrencyCodes = exports.CreateOrganization200ResponseOrganizationStatusEnum = exports.CreateOrderRequestRewardDeliveryMethodEnum = exports.CreateOrder200ResponseOrderRewardsInnerDeliveryStatusEnum = exports.CreateOrder200ResponseOrderRewardsInnerDeliveryMethodEnum = exports.CreateOrder200ResponseOrderStatusEnum = exports.CreateMemberRequestRoleEnum = exports.CreateMemberRoleEnum = void 0;
-exports.WebhooksApiAxiosParamCreator = exports.RewardsApi = exports.RewardsApiFactory = exports.RewardsApiFp = exports.RewardsApiAxiosParamCreator = exports.ProductsApi = exports.ProductsApiFactory = exports.ProductsApiFp = exports.ProductsApiAxiosParamCreator = exports.OrganizationsApi = exports.OrganizationsApiFactory = exports.OrganizationsApiFp = exports.OrganizationsApiAxiosParamCreator = exports.OrdersApi = exports.OrdersApiFactory = exports.OrdersApiFp = exports.OrdersApiAxiosParamCreator = exports.MembersApi = exports.MembersApiFactory = exports.MembersApiFp = exports.MembersApiAxiosParamCreator = exports.InvoicesApi = exports.InvoicesApiFactory = exports.InvoicesApiFp = exports.InvoicesApiAxiosParamCreator = exports.FundingSourcesApi = exports.FundingSourcesApiFactory = exports.FundingSourcesApiFp = exports.FundingSourcesApiAxiosParamCreator = exports.FieldsApi = exports.FieldsApiFactory = exports.FieldsApiFp = exports.FieldsApiAxiosParamCreator = exports.CampaignsApi = exports.CampaignsApiFactory = exports.CampaignsApiFp = exports.CampaignsApiAxiosParamCreator = exports.BalanceTransactionsApi = exports.BalanceTransactionsApiFactory = exports.BalanceTransactionsApiFp = exports.BalanceTransactionsApiAxiosParamCreator = exports.RewardWithoutLinkDeliveryStatusEnum = exports.RewardWithoutLinkDeliveryMethodEnum = exports.RewardWithLinkDeliveryStatusEnum = exports.RewardWithLinkDeliveryMethodEnum = exports.RewardValueCurrencyCodeEnum = exports.ProductCurrencyCodesEnum = exports.ProductCategoryEnum = exports.PaymentDetailsChannelEnum = exports.OrganizationStatusEnum = void 0;
-exports.WebhooksApi = exports.WebhooksApiFactory = exports.WebhooksApiFp = void 0;
+exports.RewardsApiAxiosParamCreator = exports.ProductsApi = exports.ProductsApiFactory = exports.ProductsApiFp = exports.ProductsApiAxiosParamCreator = exports.OrganizationsApi = exports.OrganizationsApiFactory = exports.OrganizationsApiFp = exports.OrganizationsApiAxiosParamCreator = exports.OrdersApi = exports.OrdersApiFactory = exports.OrdersApiFp = exports.OrdersApiAxiosParamCreator = exports.MembersApi = exports.MembersApiFactory = exports.MembersApiFp = exports.MembersApiAxiosParamCreator = exports.InvoicesApi = exports.InvoicesApiFactory = exports.InvoicesApiFp = exports.InvoicesApiAxiosParamCreator = exports.FundingSourcesApi = exports.FundingSourcesApiFactory = exports.FundingSourcesApiFp = exports.FundingSourcesApiAxiosParamCreator = exports.ForexApi = exports.ForexApiFactory = exports.ForexApiFp = exports.ForexApiAxiosParamCreator = exports.FieldsApi = exports.FieldsApiFactory = exports.FieldsApiFp = exports.FieldsApiAxiosParamCreator = exports.CampaignsApi = exports.CampaignsApiFactory = exports.CampaignsApiFp = exports.CampaignsApiAxiosParamCreator = exports.BalanceTransactionsApi = exports.BalanceTransactionsApiFactory = exports.BalanceTransactionsApiFp = exports.BalanceTransactionsApiAxiosParamCreator = exports.RewardWithoutLinkDeliveryStatusEnum = exports.RewardWithoutLinkDeliveryMethodEnum = exports.RewardWithLinkDeliveryStatusEnum = exports.RewardWithLinkDeliveryMethodEnum = exports.RewardValueCurrencyCodeEnum = exports.ProductCurrencyCodesEnum = exports.ProductCategoryEnum = exports.PaymentDetailsChannelEnum = exports.OrganizationStatusEnum = void 0;
+exports.WebhooksApi = exports.WebhooksApiFactory = exports.WebhooksApiFp = exports.WebhooksApiAxiosParamCreator = exports.RewardsApi = exports.RewardsApiFactory = exports.RewardsApiFp = void 0;
 const axios_1 = require("axios");
 // Some imports not used depending on template conditions
 // @ts-ignore
@@ -1182,15 +1182,15 @@ const CampaignsApiAxiosParamCreator = function (configuration) {
          *
          * @summary Update campaign
          * @param {string} id ID of the campaign that should be updated
-         * @param {CreateCampaignRequest} createCampaignRequest Campaign details
+         * @param {UpdateCampaignRequest} updateCampaignRequest Campaign details
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateCampaign: (id_2, createCampaignRequest_2, ...args_4) => __awaiter(this, [id_2, createCampaignRequest_2, ...args_4], void 0, function* (id, createCampaignRequest, options = {}) {
+        updateCampaign: (id_2, updateCampaignRequest_1, ...args_4) => __awaiter(this, [id_2, updateCampaignRequest_1, ...args_4], void 0, function* (id, updateCampaignRequest, options = {}) {
             // verify required parameter 'id' is not null or undefined
             (0, common_1.assertParamExists)('updateCampaign', 'id', id);
-            // verify required parameter 'createCampaignRequest' is not null or undefined
-            (0, common_1.assertParamExists)('updateCampaign', 'createCampaignRequest', createCampaignRequest);
+            // verify required parameter 'updateCampaignRequest' is not null or undefined
+            (0, common_1.assertParamExists)('updateCampaign', 'updateCampaignRequest', updateCampaignRequest);
             const localVarPath = `/campaigns/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -1209,7 +1209,7 @@ const CampaignsApiAxiosParamCreator = function (configuration) {
             (0, common_1.setSearchParams)(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = Object.assign(Object.assign(Object.assign({}, localVarHeaderParameter), headersFromBaseOptions), options.headers);
-            localVarRequestOptions.data = (0, common_1.serializeDataIfNeeded)(createCampaignRequest, localVarRequestOptions, configuration);
+            localVarRequestOptions.data = (0, common_1.serializeDataIfNeeded)(updateCampaignRequest, localVarRequestOptions, configuration);
             return {
                 url: (0, common_1.toPathString)(localVarUrlObj),
                 options: localVarRequestOptions,
@@ -1276,14 +1276,14 @@ const CampaignsApiFp = function (configuration) {
          *
          * @summary Update campaign
          * @param {string} id ID of the campaign that should be updated
-         * @param {CreateCampaignRequest} createCampaignRequest Campaign details
+         * @param {UpdateCampaignRequest} updateCampaignRequest Campaign details
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateCampaign(id, createCampaignRequest, options) {
+        updateCampaign(id, updateCampaignRequest, options) {
             return __awaiter(this, void 0, void 0, function* () {
                 var _a, _b, _c;
-                const localVarAxiosArgs = yield localVarAxiosParamCreator.updateCampaign(id, createCampaignRequest, options);
+                const localVarAxiosArgs = yield localVarAxiosParamCreator.updateCampaign(id, updateCampaignRequest, options);
                 const localVarOperationServerIndex = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
                 const localVarOperationServerBasePath = (_c = (_b = base_1.operationServerMap['CampaignsApi.updateCampaign']) === null || _b === void 0 ? void 0 : _b[localVarOperationServerIndex]) === null || _c === void 0 ? void 0 : _c.url;
                 return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -1332,12 +1332,12 @@ const CampaignsApiFactory = function (configuration, basePath, axios) {
          *
          * @summary Update campaign
          * @param {string} id ID of the campaign that should be updated
-         * @param {CreateCampaignRequest} createCampaignRequest Campaign details
+         * @param {UpdateCampaignRequest} updateCampaignRequest Campaign details
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateCampaign(id, createCampaignRequest, options) {
-            return localVarFp.updateCampaign(id, createCampaignRequest, options).then((request) => request(axios, basePath));
+        updateCampaign(id, updateCampaignRequest, options) {
+            return localVarFp.updateCampaign(id, updateCampaignRequest, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -1385,13 +1385,13 @@ class CampaignsApi extends base_1.BaseAPI {
      *
      * @summary Update campaign
      * @param {string} id ID of the campaign that should be updated
-     * @param {CreateCampaignRequest} createCampaignRequest Campaign details
+     * @param {UpdateCampaignRequest} updateCampaignRequest Campaign details
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof CampaignsApi
      */
-    updateCampaign(id, createCampaignRequest, options) {
-        return (0, exports.CampaignsApiFp)(this.configuration).updateCampaign(id, createCampaignRequest, options).then((request) => request(this.axios, this.basePath));
+    updateCampaign(id, updateCampaignRequest, options) {
+        return (0, exports.CampaignsApiFp)(this.configuration).updateCampaign(id, updateCampaignRequest, options).then((request) => request(this.axios, this.basePath));
     }
 }
 exports.CampaignsApi = CampaignsApi;
@@ -1495,6 +1495,113 @@ class FieldsApi extends base_1.BaseAPI {
     }
 }
 exports.FieldsApi = FieldsApi;
+/**
+ * ForexApi - axios parameter creator
+ * @export
+ */
+const ForexApiAxiosParamCreator = function (configuration) {
+    return {
+        /**
+         * Retrieve a list of exchange rates
+         * @summary List exchange rates
+         * @param {string} [base] Base currency code, default is USD.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listForex: (base_2, ...args_1) => __awaiter(this, [base_2, ...args_1], void 0, function* (base, options = {}) {
+            const localVarPath = `/forex`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = Object.assign(Object.assign({ method: 'GET' }, baseOptions), options);
+            const localVarHeaderParameter = {};
+            const localVarQueryParameter = {};
+            // authentication BearerApiKey required
+            // http bearer authentication required
+            yield (0, common_1.setBearerAuthToObject)(localVarHeaderParameter, configuration);
+            if (base !== undefined) {
+                localVarQueryParameter['base'] = base;
+            }
+            (0, common_1.setSearchParams)(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = Object.assign(Object.assign(Object.assign({}, localVarHeaderParameter), headersFromBaseOptions), options.headers);
+            return {
+                url: (0, common_1.toPathString)(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        }),
+    };
+};
+exports.ForexApiAxiosParamCreator = ForexApiAxiosParamCreator;
+/**
+ * ForexApi - functional programming interface
+ * @export
+ */
+const ForexApiFp = function (configuration) {
+    const localVarAxiosParamCreator = (0, exports.ForexApiAxiosParamCreator)(configuration);
+    return {
+        /**
+         * Retrieve a list of exchange rates
+         * @summary List exchange rates
+         * @param {string} [base] Base currency code, default is USD.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listForex(base, options) {
+            return __awaiter(this, void 0, void 0, function* () {
+                var _a, _b, _c;
+                const localVarAxiosArgs = yield localVarAxiosParamCreator.listForex(base, options);
+                const localVarOperationServerIndex = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
+                const localVarOperationServerBasePath = (_c = (_b = base_1.operationServerMap['ForexApi.listForex']) === null || _b === void 0 ? void 0 : _b[localVarOperationServerIndex]) === null || _c === void 0 ? void 0 : _c.url;
+                return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+            });
+        },
+    };
+};
+exports.ForexApiFp = ForexApiFp;
+/**
+ * ForexApi - factory interface
+ * @export
+ */
+const ForexApiFactory = function (configuration, basePath, axios) {
+    const localVarFp = (0, exports.ForexApiFp)(configuration);
+    return {
+        /**
+         * Retrieve a list of exchange rates
+         * @summary List exchange rates
+         * @param {string} [base] Base currency code, default is USD.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listForex(base, options) {
+            return localVarFp.listForex(base, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+exports.ForexApiFactory = ForexApiFactory;
+/**
+ * ForexApi - object-oriented interface
+ * @export
+ * @class ForexApi
+ * @extends {BaseAPI}
+ */
+class ForexApi extends base_1.BaseAPI {
+    /**
+     * Retrieve a list of exchange rates
+     * @summary List exchange rates
+     * @param {string} [base] Base currency code, default is USD.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ForexApi
+     */
+    listForex(base, options) {
+        return (0, exports.ForexApiFp)(this.configuration).listForex(base, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+exports.ForexApi = ForexApi;
 /**
  * FundingSourcesApi - axios parameter creator
  * @export
