@@ -285,20 +285,12 @@ export interface CreateMember {
      */
     'email': string;
     /**
-     * Role of the member within the organization.  <table>   <thead>     <tr>       <th>Role</th>       <th>Description</th>     </tr>   </thead>     <tr>       <td><code>MEMBER</code></td>       <td>Limited permissions. Can view their own reward and order histories only.</td>     </tr>     <tr>       <td><code>ADMIN</code></td>       <td>Update organization settings, invite other members to the organization, and view all member order and reward histories within their organization.</td>     </tr>   <tbody> </table> 
+     * The role ID of the member within the organization. 
      * @type {string}
      * @memberof CreateMember
      */
-    'role': CreateMemberRoleEnum;
+    'role': string;
 }
-
-export const CreateMemberRoleEnum = {
-    Member: 'MEMBER',
-    Admin: 'ADMIN'
-} as const;
-
-export type CreateMemberRoleEnum = typeof CreateMemberRoleEnum[keyof typeof CreateMemberRoleEnum];
-
 /**
  * 
  * @export
@@ -325,20 +317,12 @@ export interface CreateMemberRequest {
      */
     'email': string;
     /**
-     * Role of the member within the organization.  <table>   <thead>     <tr>       <th>Role</th>       <th>Description</th>     </tr>   </thead>     <tr>       <td><code>MEMBER</code></td>       <td>Limited permissions. Can view their own reward and order histories only.</td>     </tr>     <tr>       <td><code>ADMIN</code></td>       <td>Update organization settings, invite other members to the organization, and view all member order and reward histories within their organization.</td>     </tr>   <tbody> </table> 
+     * The role ID of the member within the organization. 
      * @type {string}
      * @memberof CreateMemberRequest
      */
-    'role': CreateMemberRequestRoleEnum;
+    'role': string;
 }
-
-export const CreateMemberRequestRoleEnum = {
-    Member: 'MEMBER',
-    Admin: 'ADMIN'
-} as const;
-
-export type CreateMemberRequestRoleEnum = typeof CreateMemberRequestRoleEnum[keyof typeof CreateMemberRequestRoleEnum];
-
 /**
  * 
  * @export
@@ -839,17 +823,62 @@ export interface CreateOrganizationRequestCopySettings {
      */
     'security_settings'?: boolean;
     /**
-     * Copy over the users from the current organization to the new organization. Defaults to `false`.
+     * Copy over the users and custom roles from the current organization to the new organization. Defaults to `false`.
      * @type {boolean}
      * @memberof CreateOrganizationRequestCopySettings
      */
     'users'?: boolean;
+    /**
+     * Copy over the custom roles from the current organization to the new organization. Custom roles are always copied if `users` is `true`. Defaults to `false`.
+     * @type {boolean}
+     * @memberof CreateOrganizationRequestCopySettings
+     */
+    'custom_roles'?: boolean;
     /**
      * Copy over the fraud prevention settings and rules from the current organization to the new organization. Defaults to `false`.
      * @type {boolean}
      * @memberof CreateOrganizationRequestCopySettings
      */
     'fraud_prevention'?: boolean;
+}
+/**
+ * 
+ * @export
+ * @interface CreatePublicKey
+ */
+export interface CreatePublicKey {
+    /**
+     * Base64 encoded (public) PEM file
+     * @type {string}
+     * @memberof CreatePublicKey
+     */
+    'public_key': string;
+}
+/**
+ * 
+ * @export
+ * @interface CreatePublicKey200Response
+ */
+export interface CreatePublicKey200Response {
+    /**
+     * 
+     * @type {PublicKeysResponsePublicKeysInner}
+     * @memberof CreatePublicKey200Response
+     */
+    'public_key': PublicKeysResponsePublicKeysInner;
+}
+/**
+ * 
+ * @export
+ * @interface CreatePublicKeyRequest
+ */
+export interface CreatePublicKeyRequest {
+    /**
+     * Base64 encoded (public) PEM file
+     * @type {string}
+     * @memberof CreatePublicKeyRequest
+     */
+    'public_key': string;
 }
 /**
  * 
@@ -1383,11 +1412,11 @@ export interface GetMember200ResponseMember {
      */
     'active'?: boolean;
     /**
-     * Role of the member within the organization.  <table>   <thead>     <tr>       <th>Role</th>       <th>Description</th>     </tr>   </thead>     <tr>       <td><code>MEMBER</code></td>       <td>Limited permissions. Can view their own reward and order histories only.</td>     </tr>     <tr>       <td><code>ADMIN</code></td>       <td>Update organization settings, invite other members to the organization, and view all member order and reward histories within their organization.</td>     </tr>   <tbody>   </tbody> </table> 
+     * The role ID associated with the member within the organization. 
      * @type {string}
      * @memberof GetMember200ResponseMember
      */
-    'role': GetMember200ResponseMemberRoleEnum;
+    'role'?: string | null;
     /**
      * Current status of the member\'s account.  When creating a member it starts out in the status `INVITED`. As soon as that member open the invitation link and registers an account, the status switches to `REGISTERED`. 
      * @type {string}
@@ -1402,12 +1431,6 @@ export interface GetMember200ResponseMember {
     'events'?: Array<GetMember200ResponseMemberEventsInner>;
 }
 
-export const GetMember200ResponseMemberRoleEnum = {
-    Member: 'MEMBER',
-    Admin: 'ADMIN'
-} as const;
-
-export type GetMember200ResponseMemberRoleEnum = typeof GetMember200ResponseMemberRoleEnum[keyof typeof GetMember200ResponseMemberRoleEnum];
 export const GetMember200ResponseMemberStatusEnum = {
     Registered: 'REGISTERED',
     Invited: 'INVITED'
@@ -2097,11 +2120,11 @@ export interface ListMembers200ResponseMembersInner {
      */
     'active'?: boolean;
     /**
-     * Role of the member within the organization.  <table>   <thead>     <tr>       <th>Role</th>       <th>Description</th>     </tr>   </thead>     <tr>       <td><code>MEMBER</code></td>       <td>Limited permissions. Can view their own reward and order histories only.</td>     </tr>     <tr>       <td><code>ADMIN</code></td>       <td>Update organization settings, invite other members to the organization, and view all member order and reward histories within their organization.</td>     </tr>   <tbody>   </tbody> </table> 
+     * The role ID associated with the member within the organization. 
      * @type {string}
      * @memberof ListMembers200ResponseMembersInner
      */
-    'role': ListMembers200ResponseMembersInnerRoleEnum;
+    'role'?: string | null;
     /**
      * Current status of the member\'s account.  When creating a member it starts out in the status `INVITED`. As soon as that member open the invitation link and registers an account, the status switches to `REGISTERED`. 
      * @type {string}
@@ -2122,12 +2145,6 @@ export interface ListMembers200ResponseMembersInner {
     'last_login_at'?: string | null;
 }
 
-export const ListMembers200ResponseMembersInnerRoleEnum = {
-    Member: 'MEMBER',
-    Admin: 'ADMIN'
-} as const;
-
-export type ListMembers200ResponseMembersInnerRoleEnum = typeof ListMembers200ResponseMembersInnerRoleEnum[keyof typeof ListMembers200ResponseMembersInnerRoleEnum];
 export const ListMembers200ResponseMembersInnerStatusEnum = {
     Registered: 'REGISTERED',
     Invited: 'INVITED'
@@ -2957,6 +2974,44 @@ export interface ListRewards429Response {
 /**
  * 
  * @export
+ * @interface ListRoles200Response
+ */
+export interface ListRoles200Response {
+    /**
+     * 
+     * @type {Array<ListRoles200ResponseRolesInner>}
+     * @memberof ListRoles200Response
+     */
+    'roles': Array<ListRoles200ResponseRolesInner>;
+}
+/**
+ * Each organization member is assigned a role that defines the permissions they have within the organization. 
+ * @export
+ * @interface ListRoles200ResponseRolesInner
+ */
+export interface ListRoles200ResponseRolesInner {
+    /**
+     * 
+     * @type {string}
+     * @memberof ListRoles200ResponseRolesInner
+     */
+    'id': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ListRoles200ResponseRolesInner
+     */
+    'title': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ListRoles200ResponseRolesInner
+     */
+    'description': string;
+}
+/**
+ * 
+ * @export
  * @interface ListWebhookEvents200Response
  */
 export interface ListWebhookEvents200Response {
@@ -3036,11 +3091,11 @@ export interface Member {
      */
     'active'?: boolean;
     /**
-     * Role of the member within the organization.  <table>   <thead>     <tr>       <th>Role</th>       <th>Description</th>     </tr>   </thead>     <tr>       <td><code>MEMBER</code></td>       <td>Limited permissions. Can view their own reward and order histories only.</td>     </tr>     <tr>       <td><code>ADMIN</code></td>       <td>Update organization settings, invite other members to the organization, and view all member order and reward histories within their organization.</td>     </tr>   <tbody>   </tbody> </table> 
+     * The role ID associated with the member within the organization. 
      * @type {string}
      * @memberof Member
      */
-    'role': MemberRoleEnum;
+    'role'?: string | null;
     /**
      * Current status of the member\'s account.  When creating a member it starts out in the status `INVITED`. As soon as that member open the invitation link and registers an account, the status switches to `REGISTERED`. 
      * @type {string}
@@ -3061,12 +3116,6 @@ export interface Member {
     'last_login_at'?: string | null;
 }
 
-export const MemberRoleEnum = {
-    Member: 'MEMBER',
-    Admin: 'ADMIN'
-} as const;
-
-export type MemberRoleEnum = typeof MemberRoleEnum[keyof typeof MemberRoleEnum];
 export const MemberStatusEnum = {
     Registered: 'REGISTERED',
     Invited: 'INVITED'
@@ -3105,11 +3154,11 @@ export interface MemberBase {
      */
     'active'?: boolean;
     /**
-     * Role of the member within the organization.  <table>   <thead>     <tr>       <th>Role</th>       <th>Description</th>     </tr>   </thead>     <tr>       <td><code>MEMBER</code></td>       <td>Limited permissions. Can view their own reward and order histories only.</td>     </tr>     <tr>       <td><code>ADMIN</code></td>       <td>Update organization settings, invite other members to the organization, and view all member order and reward histories within their organization.</td>     </tr>   <tbody>   </tbody> </table> 
+     * The role ID associated with the member within the organization. 
      * @type {string}
      * @memberof MemberBase
      */
-    'role': MemberBaseRoleEnum;
+    'role'?: string | null;
     /**
      * Current status of the member\'s account.  When creating a member it starts out in the status `INVITED`. As soon as that member open the invitation link and registers an account, the status switches to `REGISTERED`. 
      * @type {string}
@@ -3118,12 +3167,6 @@ export interface MemberBase {
     'status': MemberBaseStatusEnum;
 }
 
-export const MemberBaseRoleEnum = {
-    Member: 'MEMBER',
-    Admin: 'ADMIN'
-} as const;
-
-export type MemberBaseRoleEnum = typeof MemberBaseRoleEnum[keyof typeof MemberBaseRoleEnum];
 export const MemberBaseStatusEnum = {
     Registered: 'REGISTERED',
     Invited: 'INVITED'
@@ -3162,11 +3205,11 @@ export interface MemberWithEvents {
      */
     'active'?: boolean;
     /**
-     * Role of the member within the organization.  <table>   <thead>     <tr>       <th>Role</th>       <th>Description</th>     </tr>   </thead>     <tr>       <td><code>MEMBER</code></td>       <td>Limited permissions. Can view their own reward and order histories only.</td>     </tr>     <tr>       <td><code>ADMIN</code></td>       <td>Update organization settings, invite other members to the organization, and view all member order and reward histories within their organization.</td>     </tr>   <tbody>   </tbody> </table> 
+     * The role ID associated with the member within the organization. 
      * @type {string}
      * @memberof MemberWithEvents
      */
-    'role': MemberWithEventsRoleEnum;
+    'role'?: string | null;
     /**
      * Current status of the member\'s account.  When creating a member it starts out in the status `INVITED`. As soon as that member open the invitation link and registers an account, the status switches to `REGISTERED`. 
      * @type {string}
@@ -3181,12 +3224,6 @@ export interface MemberWithEvents {
     'events'?: Array<GetMember200ResponseMemberEventsInner>;
 }
 
-export const MemberWithEventsRoleEnum = {
-    Member: 'MEMBER',
-    Admin: 'ADMIN'
-} as const;
-
-export type MemberWithEventsRoleEnum = typeof MemberWithEventsRoleEnum[keyof typeof MemberWithEventsRoleEnum];
 export const MemberWithEventsStatusEnum = {
     Registered: 'REGISTERED',
     Invited: 'INVITED'
@@ -3225,11 +3262,11 @@ export interface MemberWithoutEvents {
      */
     'active'?: boolean;
     /**
-     * Role of the member within the organization.  <table>   <thead>     <tr>       <th>Role</th>       <th>Description</th>     </tr>   </thead>     <tr>       <td><code>MEMBER</code></td>       <td>Limited permissions. Can view their own reward and order histories only.</td>     </tr>     <tr>       <td><code>ADMIN</code></td>       <td>Update organization settings, invite other members to the organization, and view all member order and reward histories within their organization.</td>     </tr>   <tbody>   </tbody> </table> 
+     * The role ID associated with the member within the organization. 
      * @type {string}
      * @memberof MemberWithoutEvents
      */
-    'role': MemberWithoutEventsRoleEnum;
+    'role'?: string | null;
     /**
      * Current status of the member\'s account.  When creating a member it starts out in the status `INVITED`. As soon as that member open the invitation link and registers an account, the status switches to `REGISTERED`. 
      * @type {string}
@@ -3250,12 +3287,6 @@ export interface MemberWithoutEvents {
     'last_login_at'?: string | null;
 }
 
-export const MemberWithoutEventsRoleEnum = {
-    Member: 'MEMBER',
-    Admin: 'ADMIN'
-} as const;
-
-export type MemberWithoutEventsRoleEnum = typeof MemberWithoutEventsRoleEnum[keyof typeof MemberWithoutEventsRoleEnum];
 export const MemberWithoutEventsStatusEnum = {
     Registered: 'REGISTERED',
     Invited: 'INVITED'
@@ -4128,6 +4159,69 @@ export const ProductCurrencyCodesEnum = {
 export type ProductCurrencyCodesEnum = typeof ProductCurrencyCodesEnum[keyof typeof ProductCurrencyCodesEnum];
 
 /**
+ * To authenticate your requests using asymmetric key pairs (e.g., for signing  embed requests), you need to share your public key with us. The public key  resource allows you to manage your active public keys and track their last  usage. 
+ * @export
+ * @interface PublicKey
+ */
+export interface PublicKey {
+    /**
+     * 
+     * @type {string}
+     * @memberof PublicKey
+     */
+    'id'?: string;
+    /**
+     * Your public key, PEM encoded
+     * @type {string}
+     * @memberof PublicKey
+     */
+    'pem'?: string;
+    /**
+     * The last time your public key was used to sign a request
+     * @type {string}
+     * @memberof PublicKey
+     */
+    'last_used_at'?: string | null;
+}
+/**
+ * 
+ * @export
+ * @interface PublicKeysResponse
+ */
+export interface PublicKeysResponse {
+    /**
+     * 
+     * @type {Array<PublicKeysResponsePublicKeysInner>}
+     * @memberof PublicKeysResponse
+     */
+    'public_keys': Array<PublicKeysResponsePublicKeysInner>;
+}
+/**
+ * To authenticate your requests using asymmetric key pairs (e.g., for signing  embed requests), you need to share your public key with us. The public key  resource allows you to manage your active public keys and track their last  usage. 
+ * @export
+ * @interface PublicKeysResponsePublicKeysInner
+ */
+export interface PublicKeysResponsePublicKeysInner {
+    /**
+     * 
+     * @type {string}
+     * @memberof PublicKeysResponsePublicKeysInner
+     */
+    'id'?: string;
+    /**
+     * Your public key, PEM encoded
+     * @type {string}
+     * @memberof PublicKeysResponsePublicKeysInner
+     */
+    'pem'?: string;
+    /**
+     * The last time your public key was used to sign a request
+     * @type {string}
+     * @memberof PublicKeysResponsePublicKeysInner
+     */
+    'last_used_at'?: string | null;
+}
+/**
  * Details of the recipient of the reward
  * @export
  * @interface Recipient
@@ -4802,6 +4896,31 @@ export const RewardWithoutLinkDeliveryStatusEnum = {
 export type RewardWithoutLinkDeliveryStatusEnum = typeof RewardWithoutLinkDeliveryStatusEnum[keyof typeof RewardWithoutLinkDeliveryStatusEnum];
 
 /**
+ * Each organization member is assigned a role that defines the permissions they have within the organization. 
+ * @export
+ * @interface Role
+ */
+export interface Role {
+    /**
+     * 
+     * @type {string}
+     * @memberof Role
+     */
+    'id': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Role
+     */
+    'title': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Role
+     */
+    'description': string;
+}
+/**
  * 
  * @export
  * @interface SimulateWebhookRequest
@@ -4813,6 +4932,32 @@ export interface SimulateWebhookRequest {
      * @memberof SimulateWebhookRequest
      */
     'event': string;
+}
+/**
+ * 
+ * @export
+ * @interface TestPublicKey
+ */
+export interface TestPublicKey {
+    /**
+     * A JWT token encoded with RS256, signed using the RSA private key corresponding to your public key.
+     * @type {string}
+     * @memberof TestPublicKey
+     */
+    'jwt': string;
+}
+/**
+ * 
+ * @export
+ * @interface TestPublicKeyRequest
+ */
+export interface TestPublicKeyRequest {
+    /**
+     * A JWT token encoded with RS256, signed using the RSA private key corresponding to your public key.
+     * @type {string}
+     * @memberof TestPublicKeyRequest
+     */
+    'jwt': string;
 }
 /**
  * With a campaign you can define the look & feel of how rewards are sent out. It also lets you set the available products (different gift cards, charity, etc.) recipients can choose from. 
@@ -5850,7 +5995,7 @@ export const InvoicesApiAxiosParamCreator = function (configuration?: Configurat
         /**
          * Removes an invoice. This has no further consequences but is a rather cosmetic operation. 
          * @summary Delete invoice
-         * @param {string} id ID of the invoice that should be retrieved
+         * @param {string} id ID of the invoice that should be removed
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -6069,7 +6214,7 @@ export const InvoicesApiFp = function(configuration?: Configuration) {
         /**
          * Removes an invoice. This has no further consequences but is a rather cosmetic operation. 
          * @summary Delete invoice
-         * @param {string} id ID of the invoice that should be retrieved
+         * @param {string} id ID of the invoice that should be removed
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -6155,7 +6300,7 @@ export const InvoicesApiFactory = function (configuration?: Configuration, baseP
         /**
          * Removes an invoice. This has no further consequences but is a rather cosmetic operation. 
          * @summary Delete invoice
-         * @param {string} id ID of the invoice that should be retrieved
+         * @param {string} id ID of the invoice that should be removed
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -6228,7 +6373,7 @@ export class InvoicesApi extends BaseAPI {
     /**
      * Removes an invoice. This has no further consequences but is a rather cosmetic operation. 
      * @summary Delete invoice
-     * @param {string} id ID of the invoice that should be retrieved
+     * @param {string} id ID of the invoice that should be removed
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof InvoicesApi
@@ -6296,7 +6441,7 @@ export class InvoicesApi extends BaseAPI {
 export const MembersApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
-         * Each organization has one or more users that can access and manage that organization. These users are called members.  Members can take actions via the Tremendous web dashboard directly. These actions include adding funding sources to the organization, creating Campaigns, and more.  ### Permissions  Members can have one of two roles that determine their permissions within the organization:  1. `MEMBER`: Limited permissions. Can view their own reward and order histories only. 2. `ADMIN`: Update organization settings, invite other members to the organization, and view all member order and reward histories within their organization.  To create members of a sub-organizations [create an API key for that organization](/reference/post_organizations-id-create-api-key) first, then use the new API key in the create member request.  ### Inviting new members  After creating a member, an automatic invite is sent to the email address. If the user is not registered yet, that person will then need to sign up for a Tremendous account.  > ❗️ Automatic invitations are not available in the sandbox > > You must manually use the returned `invite_url` field in the payload instead. 
+         * Each organization has one or more users that can access and manage that organization. These users are called members.  Members can take actions via the Tremendous web dashboard directly. These actions include adding funding sources to the organization, creating Campaigns, and more.  ### Permissions  Members can have a role that determine their permissions within the organization. Check the Roles API for the available roles.  To create members of a sub-organizations [create an API key for that organization](/reference/post_organizations-id-create-api-key) first, then use the new API key in the create member request.  ### Inviting new members  After creating a member, an automatic invite is sent to the email address. If the user is not registered yet, that person will then need to sign up for a Tremendous account.  > ❗️ Automatic invitations are not available in the sandbox > > You must manually use the returned `invite_url` field in the payload instead. 
          * @summary Create member
          * @param {CreateMemberRequest} createMemberRequest Member details
          * @param {*} [options] Override http request option.
@@ -6418,7 +6563,7 @@ export const MembersApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = MembersApiAxiosParamCreator(configuration)
     return {
         /**
-         * Each organization has one or more users that can access and manage that organization. These users are called members.  Members can take actions via the Tremendous web dashboard directly. These actions include adding funding sources to the organization, creating Campaigns, and more.  ### Permissions  Members can have one of two roles that determine their permissions within the organization:  1. `MEMBER`: Limited permissions. Can view their own reward and order histories only. 2. `ADMIN`: Update organization settings, invite other members to the organization, and view all member order and reward histories within their organization.  To create members of a sub-organizations [create an API key for that organization](/reference/post_organizations-id-create-api-key) first, then use the new API key in the create member request.  ### Inviting new members  After creating a member, an automatic invite is sent to the email address. If the user is not registered yet, that person will then need to sign up for a Tremendous account.  > ❗️ Automatic invitations are not available in the sandbox > > You must manually use the returned `invite_url` field in the payload instead. 
+         * Each organization has one or more users that can access and manage that organization. These users are called members.  Members can take actions via the Tremendous web dashboard directly. These actions include adding funding sources to the organization, creating Campaigns, and more.  ### Permissions  Members can have a role that determine their permissions within the organization. Check the Roles API for the available roles.  To create members of a sub-organizations [create an API key for that organization](/reference/post_organizations-id-create-api-key) first, then use the new API key in the create member request.  ### Inviting new members  After creating a member, an automatic invite is sent to the email address. If the user is not registered yet, that person will then need to sign up for a Tremendous account.  > ❗️ Automatic invitations are not available in the sandbox > > You must manually use the returned `invite_url` field in the payload instead. 
          * @summary Create member
          * @param {CreateMemberRequest} createMemberRequest Member details
          * @param {*} [options] Override http request option.
@@ -6466,7 +6611,7 @@ export const MembersApiFactory = function (configuration?: Configuration, basePa
     const localVarFp = MembersApiFp(configuration)
     return {
         /**
-         * Each organization has one or more users that can access and manage that organization. These users are called members.  Members can take actions via the Tremendous web dashboard directly. These actions include adding funding sources to the organization, creating Campaigns, and more.  ### Permissions  Members can have one of two roles that determine their permissions within the organization:  1. `MEMBER`: Limited permissions. Can view their own reward and order histories only. 2. `ADMIN`: Update organization settings, invite other members to the organization, and view all member order and reward histories within their organization.  To create members of a sub-organizations [create an API key for that organization](/reference/post_organizations-id-create-api-key) first, then use the new API key in the create member request.  ### Inviting new members  After creating a member, an automatic invite is sent to the email address. If the user is not registered yet, that person will then need to sign up for a Tremendous account.  > ❗️ Automatic invitations are not available in the sandbox > > You must manually use the returned `invite_url` field in the payload instead. 
+         * Each organization has one or more users that can access and manage that organization. These users are called members.  Members can take actions via the Tremendous web dashboard directly. These actions include adding funding sources to the organization, creating Campaigns, and more.  ### Permissions  Members can have a role that determine their permissions within the organization. Check the Roles API for the available roles.  To create members of a sub-organizations [create an API key for that organization](/reference/post_organizations-id-create-api-key) first, then use the new API key in the create member request.  ### Inviting new members  After creating a member, an automatic invite is sent to the email address. If the user is not registered yet, that person will then need to sign up for a Tremendous account.  > ❗️ Automatic invitations are not available in the sandbox > > You must manually use the returned `invite_url` field in the payload instead. 
          * @summary Create member
          * @param {CreateMemberRequest} createMemberRequest Member details
          * @param {*} [options] Override http request option.
@@ -6505,7 +6650,7 @@ export const MembersApiFactory = function (configuration?: Configuration, basePa
  */
 export class MembersApi extends BaseAPI {
     /**
-     * Each organization has one or more users that can access and manage that organization. These users are called members.  Members can take actions via the Tremendous web dashboard directly. These actions include adding funding sources to the organization, creating Campaigns, and more.  ### Permissions  Members can have one of two roles that determine their permissions within the organization:  1. `MEMBER`: Limited permissions. Can view their own reward and order histories only. 2. `ADMIN`: Update organization settings, invite other members to the organization, and view all member order and reward histories within their organization.  To create members of a sub-organizations [create an API key for that organization](/reference/post_organizations-id-create-api-key) first, then use the new API key in the create member request.  ### Inviting new members  After creating a member, an automatic invite is sent to the email address. If the user is not registered yet, that person will then need to sign up for a Tremendous account.  > ❗️ Automatic invitations are not available in the sandbox > > You must manually use the returned `invite_url` field in the payload instead. 
+     * Each organization has one or more users that can access and manage that organization. These users are called members.  Members can take actions via the Tremendous web dashboard directly. These actions include adding funding sources to the organization, creating Campaigns, and more.  ### Permissions  Members can have a role that determine their permissions within the organization. Check the Roles API for the available roles.  To create members of a sub-organizations [create an API key for that organization](/reference/post_organizations-id-create-api-key) first, then use the new API key in the create member request.  ### Inviting new members  After creating a member, an automatic invite is sent to the email address. If the user is not registered yet, that person will then need to sign up for a Tremendous account.  > ❗️ Automatic invitations are not available in the sandbox > > You must manually use the returned `invite_url` field in the payload instead. 
      * @summary Create member
      * @param {CreateMemberRequest} createMemberRequest Member details
      * @param {*} [options] Override http request option.
@@ -7503,6 +7648,414 @@ export class ProductsApi extends BaseAPI {
 
 
 /**
+ * PublicKeysApi - axios parameter creator
+ * @export
+ */
+export const PublicKeysApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * Creating a public key is the way for your organization to share it with Tremendous.  > 🔒 Generating asymmetric keys >  > **We recommend using [OpenSSL](https://www.openssl.org/).** >  > 1. Generate a private key and a public key in PEM: > `openssl genrsa -out tremendous_key.pem 4096` >  > 2. Extract the public key in PEM format: > `openssl rsa -in tremendous_key.pem -outform PEM -pubout -out tremendous_key.pem.pub` >  > 3. And, before making your request, encode it as a `base64` string: > `base64 -i tremendous_key.pem.pub`  <div class=\"object-schema-request-schema\">   <table>   <thead>     <tr>       <th>Property</th>       <th>Type</th>       <th>Description</th>     </tr>   </thead>   <tbody class=\"object-schema-table-body\">     <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">public_key</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>Base64 encoded (public) PEM file</p> </td></tr>   </tbody> </table>  </div>  
+         * @summary Create public key
+         * @param {CreatePublicKeyRequest} createPublicKeyRequest Public key details
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        createPublicKey: async (createPublicKeyRequest: CreatePublicKeyRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'createPublicKeyRequest' is not null or undefined
+            assertParamExists('createPublicKey', 'createPublicKeyRequest', createPublicKeyRequest)
+            const localVarPath = `/public_keys`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication BearerApiKey required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(createPublicKeyRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Deactivates a public key. Any further attempt to verify a request signature with this key will fail. 
+         * @summary Delete public key
+         * @param {string} id ID of the public key that should be deactivated
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deletePublicKey: async (id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('deletePublicKey', 'id', id)
+            const localVarPath = `/public_keys/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication BearerApiKey required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Retrieve an active public key, identified by the given `id` in the URL. 
+         * @summary Retrieve public key
+         * @param {string} id ID of the public key that should be retrieved
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getPublicKey: async (id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('getPublicKey', 'id', id)
+            const localVarPath = `/public_keys/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication BearerApiKey required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Fetch a list of active public keys on your account.  > 🚧 Inactive public keys are omitted > > The response does not include inactive public keys. 
+         * @summary List public keys
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listPublicKeys: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/public_keys`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication BearerApiKey required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Making a request to this endpoint with a JWT signed with your private key will return a 200 response if the public key is active and the signature  is valid.  > 💡 Testing your integration >  > **You can use [JWT.io](https://jwt.io/) to generate a signed token:** >  > > 1. Select “RS256” in their algorithm dropdown; > 3. Define a JSON payload such as `{ \"foo\": \"bar\" }`; > 4. Fill the “Verify signature” fields with your public and private keys and copy the “Encoded” token. 
+         * @summary Test public key
+         * @param {string} id ID of the public key to test
+         * @param {TestPublicKeyRequest} testPublicKeyRequest 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        testPublicKey: async (id: string, testPublicKeyRequest: TestPublicKeyRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('testPublicKey', 'id', id)
+            // verify required parameter 'testPublicKeyRequest' is not null or undefined
+            assertParamExists('testPublicKey', 'testPublicKeyRequest', testPublicKeyRequest)
+            const localVarPath = `/public_keys/{id}/decode_jwt`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication BearerApiKey required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(testPublicKeyRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * PublicKeysApi - functional programming interface
+ * @export
+ */
+export const PublicKeysApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = PublicKeysApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * Creating a public key is the way for your organization to share it with Tremendous.  > 🔒 Generating asymmetric keys >  > **We recommend using [OpenSSL](https://www.openssl.org/).** >  > 1. Generate a private key and a public key in PEM: > `openssl genrsa -out tremendous_key.pem 4096` >  > 2. Extract the public key in PEM format: > `openssl rsa -in tremendous_key.pem -outform PEM -pubout -out tremendous_key.pem.pub` >  > 3. And, before making your request, encode it as a `base64` string: > `base64 -i tremendous_key.pem.pub`  <div class=\"object-schema-request-schema\">   <table>   <thead>     <tr>       <th>Property</th>       <th>Type</th>       <th>Description</th>     </tr>   </thead>   <tbody class=\"object-schema-table-body\">     <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">public_key</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>Base64 encoded (public) PEM file</p> </td></tr>   </tbody> </table>  </div>  
+         * @summary Create public key
+         * @param {CreatePublicKeyRequest} createPublicKeyRequest Public key details
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async createPublicKey(createPublicKeyRequest: CreatePublicKeyRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CreatePublicKey200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.createPublicKey(createPublicKeyRequest, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['PublicKeysApi.createPublicKey']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Deactivates a public key. Any further attempt to verify a request signature with this key will fail. 
+         * @summary Delete public key
+         * @param {string} id ID of the public key that should be deactivated
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async deletePublicKey(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.deletePublicKey(id, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['PublicKeysApi.deletePublicKey']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Retrieve an active public key, identified by the given `id` in the URL. 
+         * @summary Retrieve public key
+         * @param {string} id ID of the public key that should be retrieved
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getPublicKey(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CreatePublicKey200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getPublicKey(id, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['PublicKeysApi.getPublicKey']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Fetch a list of active public keys on your account.  > 🚧 Inactive public keys are omitted > > The response does not include inactive public keys. 
+         * @summary List public keys
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async listPublicKeys(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PublicKeysResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.listPublicKeys(options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['PublicKeysApi.listPublicKeys']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Making a request to this endpoint with a JWT signed with your private key will return a 200 response if the public key is active and the signature  is valid.  > 💡 Testing your integration >  > **You can use [JWT.io](https://jwt.io/) to generate a signed token:** >  > > 1. Select “RS256” in their algorithm dropdown; > 3. Define a JSON payload such as `{ \"foo\": \"bar\" }`; > 4. Fill the “Verify signature” fields with your public and private keys and copy the “Encoded” token. 
+         * @summary Test public key
+         * @param {string} id ID of the public key to test
+         * @param {TestPublicKeyRequest} testPublicKeyRequest 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async testPublicKey(id: string, testPublicKeyRequest: TestPublicKeyRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.testPublicKey(id, testPublicKeyRequest, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['PublicKeysApi.testPublicKey']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+    }
+};
+
+/**
+ * PublicKeysApi - factory interface
+ * @export
+ */
+export const PublicKeysApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = PublicKeysApiFp(configuration)
+    return {
+        /**
+         * Creating a public key is the way for your organization to share it with Tremendous.  > 🔒 Generating asymmetric keys >  > **We recommend using [OpenSSL](https://www.openssl.org/).** >  > 1. Generate a private key and a public key in PEM: > `openssl genrsa -out tremendous_key.pem 4096` >  > 2. Extract the public key in PEM format: > `openssl rsa -in tremendous_key.pem -outform PEM -pubout -out tremendous_key.pem.pub` >  > 3. And, before making your request, encode it as a `base64` string: > `base64 -i tremendous_key.pem.pub`  <div class=\"object-schema-request-schema\">   <table>   <thead>     <tr>       <th>Property</th>       <th>Type</th>       <th>Description</th>     </tr>   </thead>   <tbody class=\"object-schema-table-body\">     <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">public_key</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>Base64 encoded (public) PEM file</p> </td></tr>   </tbody> </table>  </div>  
+         * @summary Create public key
+         * @param {CreatePublicKeyRequest} createPublicKeyRequest Public key details
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        createPublicKey(createPublicKeyRequest: CreatePublicKeyRequest, options?: any): AxiosPromise<CreatePublicKey200Response> {
+            return localVarFp.createPublicKey(createPublicKeyRequest, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Deactivates a public key. Any further attempt to verify a request signature with this key will fail. 
+         * @summary Delete public key
+         * @param {string} id ID of the public key that should be deactivated
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deletePublicKey(id: string, options?: any): AxiosPromise<void> {
+            return localVarFp.deletePublicKey(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Retrieve an active public key, identified by the given `id` in the URL. 
+         * @summary Retrieve public key
+         * @param {string} id ID of the public key that should be retrieved
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getPublicKey(id: string, options?: any): AxiosPromise<CreatePublicKey200Response> {
+            return localVarFp.getPublicKey(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Fetch a list of active public keys on your account.  > 🚧 Inactive public keys are omitted > > The response does not include inactive public keys. 
+         * @summary List public keys
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listPublicKeys(options?: any): AxiosPromise<PublicKeysResponse> {
+            return localVarFp.listPublicKeys(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Making a request to this endpoint with a JWT signed with your private key will return a 200 response if the public key is active and the signature  is valid.  > 💡 Testing your integration >  > **You can use [JWT.io](https://jwt.io/) to generate a signed token:** >  > > 1. Select “RS256” in their algorithm dropdown; > 3. Define a JSON payload such as `{ \"foo\": \"bar\" }`; > 4. Fill the “Verify signature” fields with your public and private keys and copy the “Encoded” token. 
+         * @summary Test public key
+         * @param {string} id ID of the public key to test
+         * @param {TestPublicKeyRequest} testPublicKeyRequest 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        testPublicKey(id: string, testPublicKeyRequest: TestPublicKeyRequest, options?: any): AxiosPromise<void> {
+            return localVarFp.testPublicKey(id, testPublicKeyRequest, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * PublicKeysApi - object-oriented interface
+ * @export
+ * @class PublicKeysApi
+ * @extends {BaseAPI}
+ */
+export class PublicKeysApi extends BaseAPI {
+    /**
+     * Creating a public key is the way for your organization to share it with Tremendous.  > 🔒 Generating asymmetric keys >  > **We recommend using [OpenSSL](https://www.openssl.org/).** >  > 1. Generate a private key and a public key in PEM: > `openssl genrsa -out tremendous_key.pem 4096` >  > 2. Extract the public key in PEM format: > `openssl rsa -in tremendous_key.pem -outform PEM -pubout -out tremendous_key.pem.pub` >  > 3. And, before making your request, encode it as a `base64` string: > `base64 -i tremendous_key.pem.pub`  <div class=\"object-schema-request-schema\">   <table>   <thead>     <tr>       <th>Property</th>       <th>Type</th>       <th>Description</th>     </tr>   </thead>   <tbody class=\"object-schema-table-body\">     <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">public_key</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>Base64 encoded (public) PEM file</p> </td></tr>   </tbody> </table>  </div>  
+     * @summary Create public key
+     * @param {CreatePublicKeyRequest} createPublicKeyRequest Public key details
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PublicKeysApi
+     */
+    public createPublicKey(createPublicKeyRequest: CreatePublicKeyRequest, options?: RawAxiosRequestConfig) {
+        return PublicKeysApiFp(this.configuration).createPublicKey(createPublicKeyRequest, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Deactivates a public key. Any further attempt to verify a request signature with this key will fail. 
+     * @summary Delete public key
+     * @param {string} id ID of the public key that should be deactivated
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PublicKeysApi
+     */
+    public deletePublicKey(id: string, options?: RawAxiosRequestConfig) {
+        return PublicKeysApiFp(this.configuration).deletePublicKey(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Retrieve an active public key, identified by the given `id` in the URL. 
+     * @summary Retrieve public key
+     * @param {string} id ID of the public key that should be retrieved
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PublicKeysApi
+     */
+    public getPublicKey(id: string, options?: RawAxiosRequestConfig) {
+        return PublicKeysApiFp(this.configuration).getPublicKey(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Fetch a list of active public keys on your account.  > 🚧 Inactive public keys are omitted > > The response does not include inactive public keys. 
+     * @summary List public keys
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PublicKeysApi
+     */
+    public listPublicKeys(options?: RawAxiosRequestConfig) {
+        return PublicKeysApiFp(this.configuration).listPublicKeys(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Making a request to this endpoint with a JWT signed with your private key will return a 200 response if the public key is active and the signature  is valid.  > 💡 Testing your integration >  > **You can use [JWT.io](https://jwt.io/) to generate a signed token:** >  > > 1. Select “RS256” in their algorithm dropdown; > 3. Define a JSON payload such as `{ \"foo\": \"bar\" }`; > 4. Fill the “Verify signature” fields with your public and private keys and copy the “Encoded” token. 
+     * @summary Test public key
+     * @param {string} id ID of the public key to test
+     * @param {TestPublicKeyRequest} testPublicKeyRequest 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PublicKeysApi
+     */
+    public testPublicKey(id: string, testPublicKeyRequest: TestPublicKeyRequest, options?: RawAxiosRequestConfig) {
+        return PublicKeysApiFp(this.configuration).testPublicKey(id, testPublicKeyRequest, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+
+/**
  * RewardsApi - axios parameter creator
  * @export
  */
@@ -7908,6 +8461,111 @@ export class RewardsApi extends BaseAPI {
 
 
 /**
+ * RolesApi - axios parameter creator
+ * @export
+ */
+export const RolesApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * List all available roles in the organization.
+         * @summary List roles
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listRoles: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/roles`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication BearerApiKey required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * RolesApi - functional programming interface
+ * @export
+ */
+export const RolesApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = RolesApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * List all available roles in the organization.
+         * @summary List roles
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async listRoles(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListRoles200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.listRoles(options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['RolesApi.listRoles']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+    }
+};
+
+/**
+ * RolesApi - factory interface
+ * @export
+ */
+export const RolesApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = RolesApiFp(configuration)
+    return {
+        /**
+         * List all available roles in the organization.
+         * @summary List roles
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listRoles(options?: any): AxiosPromise<ListRoles200Response> {
+            return localVarFp.listRoles(options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * RolesApi - object-oriented interface
+ * @export
+ * @class RolesApi
+ * @extends {BaseAPI}
+ */
+export class RolesApi extends BaseAPI {
+    /**
+     * List all available roles in the organization.
+     * @summary List roles
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RolesApi
+     */
+    public listRoles(options?: RawAxiosRequestConfig) {
+        return RolesApiFp(this.configuration).listRoles(options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+
+/**
  * WebhooksApi - axios parameter creator
  * @export
  */
@@ -7947,6 +8605,44 @@ export const WebhooksApiAxiosParamCreator = function (configuration?: Configurat
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(createWebhookRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * > 📘 Learn more about Webhooks > > Our guide explains everything you need to know about the Tremendous webhooks: > [Read it here](/docs/webhooks-1) 
+         * @summary Delete webhook
+         * @param {string} id ID of the webhook to delete
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deleteWebhook: async (id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('deleteWebhook', 'id', id)
+            const localVarPath = `/webhooks/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication BearerApiKey required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -8132,6 +8828,19 @@ export const WebhooksApiFp = function(configuration?: Configuration) {
         },
         /**
          * > 📘 Learn more about Webhooks > > Our guide explains everything you need to know about the Tremendous webhooks: > [Read it here](/docs/webhooks-1) 
+         * @summary Delete webhook
+         * @param {string} id ID of the webhook to delete
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async deleteWebhook(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.deleteWebhook(id, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['WebhooksApi.deleteWebhook']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * > 📘 Learn more about Webhooks > > Our guide explains everything you need to know about the Tremendous webhooks: > [Read it here](/docs/webhooks-1) 
          * @summary Retrieve webhook
          * @param {string} id ID of the webhook to retrieve
          * @param {*} [options] Override http request option.
@@ -8204,6 +8913,16 @@ export const WebhooksApiFactory = function (configuration?: Configuration, baseP
         },
         /**
          * > 📘 Learn more about Webhooks > > Our guide explains everything you need to know about the Tremendous webhooks: > [Read it here](/docs/webhooks-1) 
+         * @summary Delete webhook
+         * @param {string} id ID of the webhook to delete
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deleteWebhook(id: string, options?: any): AxiosPromise<void> {
+            return localVarFp.deleteWebhook(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * > 📘 Learn more about Webhooks > > Our guide explains everything you need to know about the Tremendous webhooks: > [Read it here](/docs/webhooks-1) 
          * @summary Retrieve webhook
          * @param {string} id ID of the webhook to retrieve
          * @param {*} [options] Override http request option.
@@ -8262,6 +8981,18 @@ export class WebhooksApi extends BaseAPI {
      */
     public createWebhook(createWebhookRequest: CreateWebhookRequest, options?: RawAxiosRequestConfig) {
         return WebhooksApiFp(this.configuration).createWebhook(createWebhookRequest, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * > 📘 Learn more about Webhooks > > Our guide explains everything you need to know about the Tremendous webhooks: > [Read it here](/docs/webhooks-1) 
+     * @summary Delete webhook
+     * @param {string} id ID of the webhook to delete
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof WebhooksApi
+     */
+    public deleteWebhook(id: string, options?: RawAxiosRequestConfig) {
+        return WebhooksApiFp(this.configuration).deleteWebhook(id, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

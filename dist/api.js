@@ -22,23 +22,15 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.OrderWithoutLinkStatusEnum = exports.OrderWithLinkStatusEnum = exports.OrderStatus = exports.OrderBasePaymentChannelEnum = exports.OrderBaseStatusEnum = exports.OrderStatusEnum = exports.MemberWithoutEventsStatusEnum = exports.MemberWithoutEventsRoleEnum = exports.MemberWithEventsStatusEnum = exports.MemberWithEventsRoleEnum = exports.MemberBaseStatusEnum = exports.MemberBaseRoleEnum = exports.MemberStatusEnum = exports.MemberRoleEnum = exports.ListRewards200ResponseRewardsInnerValueCurrencyCodeEnum = exports.ListRewards200ResponseRewardsInnerDeliveryStatusEnum = exports.ListRewards200ResponseRewardsInnerDeliveryMethodEnum = exports.ListProductsResponseProductsInnerImagesInnerTypeEnum = exports.ListProductsResponseProductsInnerCurrencyCodesEnum = exports.ListProductsResponseProductsInnerCategoryEnum = exports.ListOrganizations200ResponseOrganizationsInnerStatusEnum = exports.ListOrders200ResponseOrdersInnerPaymentChannelEnum = exports.ListOrders200ResponseOrdersInnerStatusEnum = exports.ListMembers200ResponseMembersInnerStatusEnum = exports.ListMembers200ResponseMembersInnerRoleEnum = exports.ListInvoices200ResponseInvoicesInnerStatusEnum = exports.ListFundingSources200ResponseFundingSourcesInnerMetaNetworkEnum = exports.ListFundingSources200ResponseFundingSourcesInnerMetaAccountTypeEnum = exports.ListFundingSources200ResponseFundingSourcesInnerTypeEnum = exports.ListFundingSources200ResponseFundingSourcesInnerMethodEnum = exports.InvoiceStatusEnum = exports.GetMember200ResponseMemberEventsInnerTypeEnum = exports.GetMember200ResponseMemberStatusEnum = exports.GetMember200ResponseMemberRoleEnum = exports.FundingSourceTypeEnum = exports.FundingSourceMethodEnum = exports.DeliveryStatus = exports.DeliveryMethod = exports.DeliveryDetailsWithLinkStatusEnum = exports.DeliveryDetailsWithLinkMethodEnum = exports.DeliveryDetailsStatusEnum = exports.DeliveryDetailsMethodEnum = exports.CurrencyCodes = exports.CreateOrganization200ResponseOrganizationStatusEnum = exports.CreateOrderRequestRewardDeliveryMethodEnum = exports.CreateOrder200ResponseOrderRewardsInnerDeliveryStatusEnum = exports.CreateOrder200ResponseOrderRewardsInnerDeliveryMethodEnum = exports.CreateOrder200ResponseOrderStatusEnum = exports.CreateMemberRequestRoleEnum = exports.CreateMemberRoleEnum = void 0;
-exports.RewardsApiAxiosParamCreator = exports.ProductsApi = exports.ProductsApiFactory = exports.ProductsApiFp = exports.ProductsApiAxiosParamCreator = exports.OrganizationsApi = exports.OrganizationsApiFactory = exports.OrganizationsApiFp = exports.OrganizationsApiAxiosParamCreator = exports.OrdersApi = exports.OrdersApiFactory = exports.OrdersApiFp = exports.OrdersApiAxiosParamCreator = exports.MembersApi = exports.MembersApiFactory = exports.MembersApiFp = exports.MembersApiAxiosParamCreator = exports.InvoicesApi = exports.InvoicesApiFactory = exports.InvoicesApiFp = exports.InvoicesApiAxiosParamCreator = exports.FundingSourcesApi = exports.FundingSourcesApiFactory = exports.FundingSourcesApiFp = exports.FundingSourcesApiAxiosParamCreator = exports.ForexApi = exports.ForexApiFactory = exports.ForexApiFp = exports.ForexApiAxiosParamCreator = exports.FieldsApi = exports.FieldsApiFactory = exports.FieldsApiFp = exports.FieldsApiAxiosParamCreator = exports.CampaignsApi = exports.CampaignsApiFactory = exports.CampaignsApiFp = exports.CampaignsApiAxiosParamCreator = exports.BalanceTransactionsApi = exports.BalanceTransactionsApiFactory = exports.BalanceTransactionsApiFp = exports.BalanceTransactionsApiAxiosParamCreator = exports.RewardWithoutLinkDeliveryStatusEnum = exports.RewardWithoutLinkDeliveryMethodEnum = exports.RewardWithLinkDeliveryStatusEnum = exports.RewardWithLinkDeliveryMethodEnum = exports.RewardValueCurrencyCodeEnum = exports.ProductCurrencyCodesEnum = exports.ProductCategoryEnum = exports.PaymentDetailsChannelEnum = exports.OrganizationStatusEnum = void 0;
-exports.WebhooksApi = exports.WebhooksApiFactory = exports.WebhooksApiFp = exports.WebhooksApiAxiosParamCreator = exports.RewardsApi = exports.RewardsApiFactory = exports.RewardsApiFp = void 0;
+exports.RewardWithoutLinkDeliveryMethodEnum = exports.RewardWithLinkDeliveryStatusEnum = exports.RewardWithLinkDeliveryMethodEnum = exports.RewardValueCurrencyCodeEnum = exports.ProductCurrencyCodesEnum = exports.ProductCategoryEnum = exports.PaymentDetailsChannelEnum = exports.OrganizationStatusEnum = exports.OrderWithoutLinkStatusEnum = exports.OrderWithLinkStatusEnum = exports.OrderStatus = exports.OrderBasePaymentChannelEnum = exports.OrderBaseStatusEnum = exports.OrderStatusEnum = exports.MemberWithoutEventsStatusEnum = exports.MemberWithEventsStatusEnum = exports.MemberBaseStatusEnum = exports.MemberStatusEnum = exports.ListRewards200ResponseRewardsInnerValueCurrencyCodeEnum = exports.ListRewards200ResponseRewardsInnerDeliveryStatusEnum = exports.ListRewards200ResponseRewardsInnerDeliveryMethodEnum = exports.ListProductsResponseProductsInnerImagesInnerTypeEnum = exports.ListProductsResponseProductsInnerCurrencyCodesEnum = exports.ListProductsResponseProductsInnerCategoryEnum = exports.ListOrganizations200ResponseOrganizationsInnerStatusEnum = exports.ListOrders200ResponseOrdersInnerPaymentChannelEnum = exports.ListOrders200ResponseOrdersInnerStatusEnum = exports.ListMembers200ResponseMembersInnerStatusEnum = exports.ListInvoices200ResponseInvoicesInnerStatusEnum = exports.ListFundingSources200ResponseFundingSourcesInnerMetaNetworkEnum = exports.ListFundingSources200ResponseFundingSourcesInnerMetaAccountTypeEnum = exports.ListFundingSources200ResponseFundingSourcesInnerTypeEnum = exports.ListFundingSources200ResponseFundingSourcesInnerMethodEnum = exports.InvoiceStatusEnum = exports.GetMember200ResponseMemberEventsInnerTypeEnum = exports.GetMember200ResponseMemberStatusEnum = exports.FundingSourceTypeEnum = exports.FundingSourceMethodEnum = exports.DeliveryStatus = exports.DeliveryMethod = exports.DeliveryDetailsWithLinkStatusEnum = exports.DeliveryDetailsWithLinkMethodEnum = exports.DeliveryDetailsStatusEnum = exports.DeliveryDetailsMethodEnum = exports.CurrencyCodes = exports.CreateOrganization200ResponseOrganizationStatusEnum = exports.CreateOrderRequestRewardDeliveryMethodEnum = exports.CreateOrder200ResponseOrderRewardsInnerDeliveryStatusEnum = exports.CreateOrder200ResponseOrderRewardsInnerDeliveryMethodEnum = exports.CreateOrder200ResponseOrderStatusEnum = void 0;
+exports.RolesApiAxiosParamCreator = exports.RewardsApi = exports.RewardsApiFactory = exports.RewardsApiFp = exports.RewardsApiAxiosParamCreator = exports.PublicKeysApi = exports.PublicKeysApiFactory = exports.PublicKeysApiFp = exports.PublicKeysApiAxiosParamCreator = exports.ProductsApi = exports.ProductsApiFactory = exports.ProductsApiFp = exports.ProductsApiAxiosParamCreator = exports.OrganizationsApi = exports.OrganizationsApiFactory = exports.OrganizationsApiFp = exports.OrganizationsApiAxiosParamCreator = exports.OrdersApi = exports.OrdersApiFactory = exports.OrdersApiFp = exports.OrdersApiAxiosParamCreator = exports.MembersApi = exports.MembersApiFactory = exports.MembersApiFp = exports.MembersApiAxiosParamCreator = exports.InvoicesApi = exports.InvoicesApiFactory = exports.InvoicesApiFp = exports.InvoicesApiAxiosParamCreator = exports.FundingSourcesApi = exports.FundingSourcesApiFactory = exports.FundingSourcesApiFp = exports.FundingSourcesApiAxiosParamCreator = exports.ForexApi = exports.ForexApiFactory = exports.ForexApiFp = exports.ForexApiAxiosParamCreator = exports.FieldsApi = exports.FieldsApiFactory = exports.FieldsApiFp = exports.FieldsApiAxiosParamCreator = exports.CampaignsApi = exports.CampaignsApiFactory = exports.CampaignsApiFp = exports.CampaignsApiAxiosParamCreator = exports.BalanceTransactionsApi = exports.BalanceTransactionsApiFactory = exports.BalanceTransactionsApiFp = exports.BalanceTransactionsApiAxiosParamCreator = exports.RewardWithoutLinkDeliveryStatusEnum = void 0;
+exports.WebhooksApi = exports.WebhooksApiFactory = exports.WebhooksApiFp = exports.WebhooksApiAxiosParamCreator = exports.RolesApi = exports.RolesApiFactory = exports.RolesApiFp = void 0;
 const axios_1 = require("axios");
 // Some imports not used depending on template conditions
 // @ts-ignore
 const common_1 = require("./common");
 // @ts-ignore
 const base_1 = require("./base");
-exports.CreateMemberRoleEnum = {
-    Member: 'MEMBER',
-    Admin: 'ADMIN'
-};
-exports.CreateMemberRequestRoleEnum = {
-    Member: 'MEMBER',
-    Admin: 'ADMIN'
-};
 exports.CreateOrder200ResponseOrderStatusEnum = {
     Canceled: 'CANCELED',
     Cart: 'CART',
@@ -245,10 +237,6 @@ exports.FundingSourceTypeEnum = {
     ProForma: 'PRO_FORMA',
     PrefundingOnly: 'PREFUNDING_ONLY'
 };
-exports.GetMember200ResponseMemberRoleEnum = {
-    Member: 'MEMBER',
-    Admin: 'ADMIN'
-};
 exports.GetMember200ResponseMemberStatusEnum = {
     Registered: 'REGISTERED',
     Invited: 'INVITED'
@@ -295,10 +283,6 @@ exports.ListInvoices200ResponseInvoicesInnerStatusEnum = {
     Paid: 'PAID',
     Open: 'OPEN',
     MarkedAsPaid: 'MARKED_AS_PAID'
-};
-exports.ListMembers200ResponseMembersInnerRoleEnum = {
-    Member: 'MEMBER',
-    Admin: 'ADMIN'
 };
 exports.ListMembers200ResponseMembersInnerStatusEnum = {
     Registered: 'REGISTERED',
@@ -585,33 +569,17 @@ exports.ListRewards200ResponseRewardsInnerValueCurrencyCodeEnum = {
     Zar: 'ZAR',
     Zmk: 'ZMK'
 };
-exports.MemberRoleEnum = {
-    Member: 'MEMBER',
-    Admin: 'ADMIN'
-};
 exports.MemberStatusEnum = {
     Registered: 'REGISTERED',
     Invited: 'INVITED'
-};
-exports.MemberBaseRoleEnum = {
-    Member: 'MEMBER',
-    Admin: 'ADMIN'
 };
 exports.MemberBaseStatusEnum = {
     Registered: 'REGISTERED',
     Invited: 'INVITED'
 };
-exports.MemberWithEventsRoleEnum = {
-    Member: 'MEMBER',
-    Admin: 'ADMIN'
-};
 exports.MemberWithEventsStatusEnum = {
     Registered: 'REGISTERED',
     Invited: 'INVITED'
-};
-exports.MemberWithoutEventsRoleEnum = {
-    Member: 'MEMBER',
-    Admin: 'ADMIN'
 };
 exports.MemberWithoutEventsStatusEnum = {
     Registered: 'REGISTERED',
@@ -1125,7 +1093,7 @@ const CampaignsApiAxiosParamCreator = function (configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getCampaign: (id_1, ...args_2) => __awaiter(this, [id_1, ...args_2], void 0, function* (id, options = {}) {
+        getCampaign: (id_1, ...args_1) => __awaiter(this, [id_1, ...args_1], void 0, function* (id, options = {}) {
             // verify required parameter 'id' is not null or undefined
             (0, common_1.assertParamExists)('getCampaign', 'id', id);
             const localVarPath = `/campaigns/{id}`
@@ -1156,7 +1124,7 @@ const CampaignsApiAxiosParamCreator = function (configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listCampaigns: (...args_3) => __awaiter(this, [...args_3], void 0, function* (options = {}) {
+        listCampaigns: (...args_1) => __awaiter(this, [...args_1], void 0, function* (options = {}) {
             const localVarPath = `/campaigns`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
@@ -1186,7 +1154,7 @@ const CampaignsApiAxiosParamCreator = function (configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateCampaign: (id_2, updateCampaignRequest_1, ...args_4) => __awaiter(this, [id_2, updateCampaignRequest_1, ...args_4], void 0, function* (id, updateCampaignRequest, options = {}) {
+        updateCampaign: (id_1, updateCampaignRequest_1, ...args_1) => __awaiter(this, [id_1, updateCampaignRequest_1, ...args_1], void 0, function* (id, updateCampaignRequest, options = {}) {
             // verify required parameter 'id' is not null or undefined
             (0, common_1.assertParamExists)('updateCampaign', 'id', id);
             // verify required parameter 'updateCampaignRequest' is not null or undefined
@@ -1646,7 +1614,7 @@ const FundingSourcesApiAxiosParamCreator = function (configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listFundingSources: (...args_2) => __awaiter(this, [...args_2], void 0, function* (options = {}) {
+        listFundingSources: (...args_1) => __awaiter(this, [...args_1], void 0, function* (options = {}) {
             const localVarPath = `/funding_sources`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
@@ -1813,11 +1781,11 @@ const InvoicesApiAxiosParamCreator = function (configuration) {
         /**
          * Removes an invoice. This has no further consequences but is a rather cosmetic operation.
          * @summary Delete invoice
-         * @param {string} id ID of the invoice that should be retrieved
+         * @param {string} id ID of the invoice that should be removed
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deleteInvoices: (id_1, ...args_2) => __awaiter(this, [id_1, ...args_2], void 0, function* (id, options = {}) {
+        deleteInvoices: (id_1, ...args_1) => __awaiter(this, [id_1, ...args_1], void 0, function* (id, options = {}) {
             // verify required parameter 'id' is not null or undefined
             (0, common_1.assertParamExists)('deleteInvoices', 'id', id);
             const localVarPath = `/invoices/{id}`
@@ -1849,7 +1817,7 @@ const InvoicesApiAxiosParamCreator = function (configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        downloadInvoiceCsv: (id_2, ...args_3) => __awaiter(this, [id_2, ...args_3], void 0, function* (id, options = {}) {
+        downloadInvoiceCsv: (id_1, ...args_1) => __awaiter(this, [id_1, ...args_1], void 0, function* (id, options = {}) {
             // verify required parameter 'id' is not null or undefined
             (0, common_1.assertParamExists)('downloadInvoiceCsv', 'id', id);
             const localVarPath = `/invoices/{id}/csv`
@@ -1881,7 +1849,7 @@ const InvoicesApiAxiosParamCreator = function (configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        downloadInvoicePdf: (id_3, ...args_4) => __awaiter(this, [id_3, ...args_4], void 0, function* (id, options = {}) {
+        downloadInvoicePdf: (id_1, ...args_1) => __awaiter(this, [id_1, ...args_1], void 0, function* (id, options = {}) {
             // verify required parameter 'id' is not null or undefined
             (0, common_1.assertParamExists)('downloadInvoicePdf', 'id', id);
             const localVarPath = `/invoices/{id}/pdf`
@@ -1913,7 +1881,7 @@ const InvoicesApiAxiosParamCreator = function (configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getInvoice: (id_4, ...args_5) => __awaiter(this, [id_4, ...args_5], void 0, function* (id, options = {}) {
+        getInvoice: (id_1, ...args_1) => __awaiter(this, [id_1, ...args_1], void 0, function* (id, options = {}) {
             // verify required parameter 'id' is not null or undefined
             (0, common_1.assertParamExists)('getInvoice', 'id', id);
             const localVarPath = `/invoices/{id}`
@@ -1946,7 +1914,7 @@ const InvoicesApiAxiosParamCreator = function (configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listInvoices: (offset_1, limit_1, ...args_6) => __awaiter(this, [offset_1, limit_1, ...args_6], void 0, function* (offset, limit, options = {}) {
+        listInvoices: (offset_1, limit_1, ...args_1) => __awaiter(this, [offset_1, limit_1, ...args_1], void 0, function* (offset, limit, options = {}) {
             const localVarPath = `/invoices`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
@@ -2003,7 +1971,7 @@ const InvoicesApiFp = function (configuration) {
         /**
          * Removes an invoice. This has no further consequences but is a rather cosmetic operation.
          * @summary Delete invoice
-         * @param {string} id ID of the invoice that should be retrieved
+         * @param {string} id ID of the invoice that should be removed
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -2104,7 +2072,7 @@ const InvoicesApiFactory = function (configuration, basePath, axios) {
         /**
          * Removes an invoice. This has no further consequences but is a rather cosmetic operation.
          * @summary Delete invoice
-         * @param {string} id ID of the invoice that should be retrieved
+         * @param {string} id ID of the invoice that should be removed
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -2176,7 +2144,7 @@ class InvoicesApi extends base_1.BaseAPI {
     /**
      * Removes an invoice. This has no further consequences but is a rather cosmetic operation.
      * @summary Delete invoice
-     * @param {string} id ID of the invoice that should be retrieved
+     * @param {string} id ID of the invoice that should be removed
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof InvoicesApi
@@ -2238,7 +2206,7 @@ exports.InvoicesApi = InvoicesApi;
 const MembersApiAxiosParamCreator = function (configuration) {
     return {
         /**
-         * Each organization has one or more users that can access and manage that organization. These users are called members.  Members can take actions via the Tremendous web dashboard directly. These actions include adding funding sources to the organization, creating Campaigns, and more.  ### Permissions  Members can have one of two roles that determine their permissions within the organization:  1. `MEMBER`: Limited permissions. Can view their own reward and order histories only. 2. `ADMIN`: Update organization settings, invite other members to the organization, and view all member order and reward histories within their organization.  To create members of a sub-organizations [create an API key for that organization](/reference/post_organizations-id-create-api-key) first, then use the new API key in the create member request.  ### Inviting new members  After creating a member, an automatic invite is sent to the email address. If the user is not registered yet, that person will then need to sign up for a Tremendous account.  > ❗️ Automatic invitations are not available in the sandbox > > You must manually use the returned `invite_url` field in the payload instead.
+         * Each organization has one or more users that can access and manage that organization. These users are called members.  Members can take actions via the Tremendous web dashboard directly. These actions include adding funding sources to the organization, creating Campaigns, and more.  ### Permissions  Members can have a role that determine their permissions within the organization. Check the Roles API for the available roles.  To create members of a sub-organizations [create an API key for that organization](/reference/post_organizations-id-create-api-key) first, then use the new API key in the create member request.  ### Inviting new members  After creating a member, an automatic invite is sent to the email address. If the user is not registered yet, that person will then need to sign up for a Tremendous account.  > ❗️ Automatic invitations are not available in the sandbox > > You must manually use the returned `invite_url` field in the payload instead.
          * @summary Create member
          * @param {CreateMemberRequest} createMemberRequest Member details
          * @param {*} [options] Override http request option.
@@ -2277,7 +2245,7 @@ const MembersApiAxiosParamCreator = function (configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getMember: (id_1, ...args_2) => __awaiter(this, [id_1, ...args_2], void 0, function* (id, options = {}) {
+        getMember: (id_1, ...args_1) => __awaiter(this, [id_1, ...args_1], void 0, function* (id, options = {}) {
             // verify required parameter 'id' is not null or undefined
             (0, common_1.assertParamExists)('getMember', 'id', id);
             const localVarPath = `/members/{id}`
@@ -2308,7 +2276,7 @@ const MembersApiAxiosParamCreator = function (configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listMembers: (...args_3) => __awaiter(this, [...args_3], void 0, function* (options = {}) {
+        listMembers: (...args_1) => __awaiter(this, [...args_1], void 0, function* (options = {}) {
             const localVarPath = `/members`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
@@ -2341,7 +2309,7 @@ const MembersApiFp = function (configuration) {
     const localVarAxiosParamCreator = (0, exports.MembersApiAxiosParamCreator)(configuration);
     return {
         /**
-         * Each organization has one or more users that can access and manage that organization. These users are called members.  Members can take actions via the Tremendous web dashboard directly. These actions include adding funding sources to the organization, creating Campaigns, and more.  ### Permissions  Members can have one of two roles that determine their permissions within the organization:  1. `MEMBER`: Limited permissions. Can view their own reward and order histories only. 2. `ADMIN`: Update organization settings, invite other members to the organization, and view all member order and reward histories within their organization.  To create members of a sub-organizations [create an API key for that organization](/reference/post_organizations-id-create-api-key) first, then use the new API key in the create member request.  ### Inviting new members  After creating a member, an automatic invite is sent to the email address. If the user is not registered yet, that person will then need to sign up for a Tremendous account.  > ❗️ Automatic invitations are not available in the sandbox > > You must manually use the returned `invite_url` field in the payload instead.
+         * Each organization has one or more users that can access and manage that organization. These users are called members.  Members can take actions via the Tremendous web dashboard directly. These actions include adding funding sources to the organization, creating Campaigns, and more.  ### Permissions  Members can have a role that determine their permissions within the organization. Check the Roles API for the available roles.  To create members of a sub-organizations [create an API key for that organization](/reference/post_organizations-id-create-api-key) first, then use the new API key in the create member request.  ### Inviting new members  After creating a member, an automatic invite is sent to the email address. If the user is not registered yet, that person will then need to sign up for a Tremendous account.  > ❗️ Automatic invitations are not available in the sandbox > > You must manually use the returned `invite_url` field in the payload instead.
          * @summary Create member
          * @param {CreateMemberRequest} createMemberRequest Member details
          * @param {*} [options] Override http request option.
@@ -2398,7 +2366,7 @@ const MembersApiFactory = function (configuration, basePath, axios) {
     const localVarFp = (0, exports.MembersApiFp)(configuration);
     return {
         /**
-         * Each organization has one or more users that can access and manage that organization. These users are called members.  Members can take actions via the Tremendous web dashboard directly. These actions include adding funding sources to the organization, creating Campaigns, and more.  ### Permissions  Members can have one of two roles that determine their permissions within the organization:  1. `MEMBER`: Limited permissions. Can view their own reward and order histories only. 2. `ADMIN`: Update organization settings, invite other members to the organization, and view all member order and reward histories within their organization.  To create members of a sub-organizations [create an API key for that organization](/reference/post_organizations-id-create-api-key) first, then use the new API key in the create member request.  ### Inviting new members  After creating a member, an automatic invite is sent to the email address. If the user is not registered yet, that person will then need to sign up for a Tremendous account.  > ❗️ Automatic invitations are not available in the sandbox > > You must manually use the returned `invite_url` field in the payload instead.
+         * Each organization has one or more users that can access and manage that organization. These users are called members.  Members can take actions via the Tremendous web dashboard directly. These actions include adding funding sources to the organization, creating Campaigns, and more.  ### Permissions  Members can have a role that determine their permissions within the organization. Check the Roles API for the available roles.  To create members of a sub-organizations [create an API key for that organization](/reference/post_organizations-id-create-api-key) first, then use the new API key in the create member request.  ### Inviting new members  After creating a member, an automatic invite is sent to the email address. If the user is not registered yet, that person will then need to sign up for a Tremendous account.  > ❗️ Automatic invitations are not available in the sandbox > > You must manually use the returned `invite_url` field in the payload instead.
          * @summary Create member
          * @param {CreateMemberRequest} createMemberRequest Member details
          * @param {*} [options] Override http request option.
@@ -2437,7 +2405,7 @@ exports.MembersApiFactory = MembersApiFactory;
  */
 class MembersApi extends base_1.BaseAPI {
     /**
-     * Each organization has one or more users that can access and manage that organization. These users are called members.  Members can take actions via the Tremendous web dashboard directly. These actions include adding funding sources to the organization, creating Campaigns, and more.  ### Permissions  Members can have one of two roles that determine their permissions within the organization:  1. `MEMBER`: Limited permissions. Can view their own reward and order histories only. 2. `ADMIN`: Update organization settings, invite other members to the organization, and view all member order and reward histories within their organization.  To create members of a sub-organizations [create an API key for that organization](/reference/post_organizations-id-create-api-key) first, then use the new API key in the create member request.  ### Inviting new members  After creating a member, an automatic invite is sent to the email address. If the user is not registered yet, that person will then need to sign up for a Tremendous account.  > ❗️ Automatic invitations are not available in the sandbox > > You must manually use the returned `invite_url` field in the payload instead.
+     * Each organization has one or more users that can access and manage that organization. These users are called members.  Members can take actions via the Tremendous web dashboard directly. These actions include adding funding sources to the organization, creating Campaigns, and more.  ### Permissions  Members can have a role that determine their permissions within the organization. Check the Roles API for the available roles.  To create members of a sub-organizations [create an API key for that organization](/reference/post_organizations-id-create-api-key) first, then use the new API key in the create member request.  ### Inviting new members  After creating a member, an automatic invite is sent to the email address. If the user is not registered yet, that person will then need to sign up for a Tremendous account.  > ❗️ Automatic invitations are not available in the sandbox > > You must manually use the returned `invite_url` field in the payload instead.
      * @summary Create member
      * @param {CreateMemberRequest} createMemberRequest Member details
      * @param {*} [options] Override http request option.
@@ -2515,7 +2483,7 @@ const OrdersApiAxiosParamCreator = function (configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        createOrder: (createOrderRequest_1, ...args_2) => __awaiter(this, [createOrderRequest_1, ...args_2], void 0, function* (createOrderRequest, options = {}) {
+        createOrder: (createOrderRequest_1, ...args_1) => __awaiter(this, [createOrderRequest_1, ...args_1], void 0, function* (createOrderRequest, options = {}) {
             // verify required parameter 'createOrderRequest' is not null or undefined
             (0, common_1.assertParamExists)('createOrder', 'createOrderRequest', createOrderRequest);
             const localVarPath = `/orders`;
@@ -2548,7 +2516,7 @@ const OrdersApiAxiosParamCreator = function (configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getOrder: (id_2, ...args_3) => __awaiter(this, [id_2, ...args_3], void 0, function* (id, options = {}) {
+        getOrder: (id_1, ...args_1) => __awaiter(this, [id_1, ...args_1], void 0, function* (id, options = {}) {
             // verify required parameter 'id' is not null or undefined
             (0, common_1.assertParamExists)('getOrder', 'id', id);
             const localVarPath = `/orders/{id}`
@@ -2585,7 +2553,7 @@ const OrdersApiAxiosParamCreator = function (configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listOrders: (offset_1, campaignId_1, externalId_1, createdAtGte_1, createdAtLte_1, limit_1, ...args_4) => __awaiter(this, [offset_1, campaignId_1, externalId_1, createdAtGte_1, createdAtLte_1, limit_1, ...args_4], void 0, function* (offset, campaignId, externalId, createdAtGte, createdAtLte, limit, options = {}) {
+        listOrders: (offset_1, campaignId_1, externalId_1, createdAtGte_1, createdAtLte_1, limit_1, ...args_1) => __awaiter(this, [offset_1, campaignId_1, externalId_1, createdAtGte_1, createdAtLte_1, limit_1, ...args_1], void 0, function* (offset, campaignId, externalId, createdAtGte, createdAtLte, limit, options = {}) {
             const localVarPath = `/orders`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
@@ -2632,7 +2600,7 @@ const OrdersApiAxiosParamCreator = function (configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        rejectOrder: (id_3, ...args_5) => __awaiter(this, [id_3, ...args_5], void 0, function* (id, options = {}) {
+        rejectOrder: (id_1, ...args_1) => __awaiter(this, [id_1, ...args_1], void 0, function* (id, options = {}) {
             // verify required parameter 'id' is not null or undefined
             (0, common_1.assertParamExists)('rejectOrder', 'id', id);
             const localVarPath = `/order_approvals/{id}/reject`
@@ -2930,7 +2898,7 @@ const OrganizationsApiAxiosParamCreator = function (configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        createOrganization: (createOrganizationRequest_1, ...args_2) => __awaiter(this, [createOrganizationRequest_1, ...args_2], void 0, function* (createOrganizationRequest, options = {}) {
+        createOrganization: (createOrganizationRequest_1, ...args_1) => __awaiter(this, [createOrganizationRequest_1, ...args_1], void 0, function* (createOrganizationRequest, options = {}) {
             // verify required parameter 'createOrganizationRequest' is not null or undefined
             (0, common_1.assertParamExists)('createOrganization', 'createOrganizationRequest', createOrganizationRequest);
             const localVarPath = `/organizations`;
@@ -2963,7 +2931,7 @@ const OrganizationsApiAxiosParamCreator = function (configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getOrganization: (id_1, ...args_3) => __awaiter(this, [id_1, ...args_3], void 0, function* (id, options = {}) {
+        getOrganization: (id_1, ...args_1) => __awaiter(this, [id_1, ...args_1], void 0, function* (id, options = {}) {
             // verify required parameter 'id' is not null or undefined
             (0, common_1.assertParamExists)('getOrganization', 'id', id);
             const localVarPath = `/organizations/{id}`
@@ -2994,7 +2962,7 @@ const OrganizationsApiAxiosParamCreator = function (configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listOrganizations: (...args_4) => __awaiter(this, [...args_4], void 0, function* (options = {}) {
+        listOrganizations: (...args_1) => __awaiter(this, [...args_1], void 0, function* (options = {}) {
             const localVarPath = `/organizations`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
@@ -3236,7 +3204,7 @@ const ProductsApiAxiosParamCreator = function (configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listProducts: (country_1, currency_1, ...args_2) => __awaiter(this, [country_1, currency_1, ...args_2], void 0, function* (country, currency, options = {}) {
+        listProducts: (country_1, currency_1, ...args_1) => __awaiter(this, [country_1, currency_1, ...args_1], void 0, function* (country, currency, options = {}) {
             const localVarPath = `/products`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
@@ -3374,6 +3342,391 @@ class ProductsApi extends base_1.BaseAPI {
 }
 exports.ProductsApi = ProductsApi;
 /**
+ * PublicKeysApi - axios parameter creator
+ * @export
+ */
+const PublicKeysApiAxiosParamCreator = function (configuration) {
+    return {
+        /**
+         * Creating a public key is the way for your organization to share it with Tremendous.  > 🔒 Generating asymmetric keys >  > **We recommend using [OpenSSL](https://www.openssl.org/).** >  > 1. Generate a private key and a public key in PEM: > `openssl genrsa -out tremendous_key.pem 4096` >  > 2. Extract the public key in PEM format: > `openssl rsa -in tremendous_key.pem -outform PEM -pubout -out tremendous_key.pem.pub` >  > 3. And, before making your request, encode it as a `base64` string: > `base64 -i tremendous_key.pem.pub`  <div class=\"object-schema-request-schema\">   <table>   <thead>     <tr>       <th>Property</th>       <th>Type</th>       <th>Description</th>     </tr>   </thead>   <tbody class=\"object-schema-table-body\">     <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">public_key</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>Base64 encoded (public) PEM file</p> </td></tr>   </tbody> </table>  </div>
+         * @summary Create public key
+         * @param {CreatePublicKeyRequest} createPublicKeyRequest Public key details
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        createPublicKey: (createPublicKeyRequest_1, ...args_1) => __awaiter(this, [createPublicKeyRequest_1, ...args_1], void 0, function* (createPublicKeyRequest, options = {}) {
+            // verify required parameter 'createPublicKeyRequest' is not null or undefined
+            (0, common_1.assertParamExists)('createPublicKey', 'createPublicKeyRequest', createPublicKeyRequest);
+            const localVarPath = `/public_keys`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = Object.assign(Object.assign({ method: 'POST' }, baseOptions), options);
+            const localVarHeaderParameter = {};
+            const localVarQueryParameter = {};
+            // authentication BearerApiKey required
+            // http bearer authentication required
+            yield (0, common_1.setBearerAuthToObject)(localVarHeaderParameter, configuration);
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+            (0, common_1.setSearchParams)(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = Object.assign(Object.assign(Object.assign({}, localVarHeaderParameter), headersFromBaseOptions), options.headers);
+            localVarRequestOptions.data = (0, common_1.serializeDataIfNeeded)(createPublicKeyRequest, localVarRequestOptions, configuration);
+            return {
+                url: (0, common_1.toPathString)(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        }),
+        /**
+         * Deactivates a public key. Any further attempt to verify a request signature with this key will fail.
+         * @summary Delete public key
+         * @param {string} id ID of the public key that should be deactivated
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deletePublicKey: (id_1, ...args_1) => __awaiter(this, [id_1, ...args_1], void 0, function* (id, options = {}) {
+            // verify required parameter 'id' is not null or undefined
+            (0, common_1.assertParamExists)('deletePublicKey', 'id', id);
+            const localVarPath = `/public_keys/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = Object.assign(Object.assign({ method: 'DELETE' }, baseOptions), options);
+            const localVarHeaderParameter = {};
+            const localVarQueryParameter = {};
+            // authentication BearerApiKey required
+            // http bearer authentication required
+            yield (0, common_1.setBearerAuthToObject)(localVarHeaderParameter, configuration);
+            (0, common_1.setSearchParams)(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = Object.assign(Object.assign(Object.assign({}, localVarHeaderParameter), headersFromBaseOptions), options.headers);
+            return {
+                url: (0, common_1.toPathString)(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        }),
+        /**
+         * Retrieve an active public key, identified by the given `id` in the URL.
+         * @summary Retrieve public key
+         * @param {string} id ID of the public key that should be retrieved
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getPublicKey: (id_1, ...args_1) => __awaiter(this, [id_1, ...args_1], void 0, function* (id, options = {}) {
+            // verify required parameter 'id' is not null or undefined
+            (0, common_1.assertParamExists)('getPublicKey', 'id', id);
+            const localVarPath = `/public_keys/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = Object.assign(Object.assign({ method: 'GET' }, baseOptions), options);
+            const localVarHeaderParameter = {};
+            const localVarQueryParameter = {};
+            // authentication BearerApiKey required
+            // http bearer authentication required
+            yield (0, common_1.setBearerAuthToObject)(localVarHeaderParameter, configuration);
+            (0, common_1.setSearchParams)(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = Object.assign(Object.assign(Object.assign({}, localVarHeaderParameter), headersFromBaseOptions), options.headers);
+            return {
+                url: (0, common_1.toPathString)(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        }),
+        /**
+         * Fetch a list of active public keys on your account.  > 🚧 Inactive public keys are omitted > > The response does not include inactive public keys.
+         * @summary List public keys
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listPublicKeys: (...args_1) => __awaiter(this, [...args_1], void 0, function* (options = {}) {
+            const localVarPath = `/public_keys`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = Object.assign(Object.assign({ method: 'GET' }, baseOptions), options);
+            const localVarHeaderParameter = {};
+            const localVarQueryParameter = {};
+            // authentication BearerApiKey required
+            // http bearer authentication required
+            yield (0, common_1.setBearerAuthToObject)(localVarHeaderParameter, configuration);
+            (0, common_1.setSearchParams)(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = Object.assign(Object.assign(Object.assign({}, localVarHeaderParameter), headersFromBaseOptions), options.headers);
+            return {
+                url: (0, common_1.toPathString)(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        }),
+        /**
+         * Making a request to this endpoint with a JWT signed with your private key will return a 200 response if the public key is active and the signature  is valid.  > 💡 Testing your integration >  > **You can use [JWT.io](https://jwt.io/) to generate a signed token:** >  > > 1. Select “RS256” in their algorithm dropdown; > 3. Define a JSON payload such as `{ \"foo\": \"bar\" }`; > 4. Fill the “Verify signature” fields with your public and private keys and copy the “Encoded” token.
+         * @summary Test public key
+         * @param {string} id ID of the public key to test
+         * @param {TestPublicKeyRequest} testPublicKeyRequest
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        testPublicKey: (id_1, testPublicKeyRequest_1, ...args_1) => __awaiter(this, [id_1, testPublicKeyRequest_1, ...args_1], void 0, function* (id, testPublicKeyRequest, options = {}) {
+            // verify required parameter 'id' is not null or undefined
+            (0, common_1.assertParamExists)('testPublicKey', 'id', id);
+            // verify required parameter 'testPublicKeyRequest' is not null or undefined
+            (0, common_1.assertParamExists)('testPublicKey', 'testPublicKeyRequest', testPublicKeyRequest);
+            const localVarPath = `/public_keys/{id}/decode_jwt`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = Object.assign(Object.assign({ method: 'GET' }, baseOptions), options);
+            const localVarHeaderParameter = {};
+            const localVarQueryParameter = {};
+            // authentication BearerApiKey required
+            // http bearer authentication required
+            yield (0, common_1.setBearerAuthToObject)(localVarHeaderParameter, configuration);
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+            (0, common_1.setSearchParams)(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = Object.assign(Object.assign(Object.assign({}, localVarHeaderParameter), headersFromBaseOptions), options.headers);
+            localVarRequestOptions.data = (0, common_1.serializeDataIfNeeded)(testPublicKeyRequest, localVarRequestOptions, configuration);
+            return {
+                url: (0, common_1.toPathString)(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        }),
+    };
+};
+exports.PublicKeysApiAxiosParamCreator = PublicKeysApiAxiosParamCreator;
+/**
+ * PublicKeysApi - functional programming interface
+ * @export
+ */
+const PublicKeysApiFp = function (configuration) {
+    const localVarAxiosParamCreator = (0, exports.PublicKeysApiAxiosParamCreator)(configuration);
+    return {
+        /**
+         * Creating a public key is the way for your organization to share it with Tremendous.  > 🔒 Generating asymmetric keys >  > **We recommend using [OpenSSL](https://www.openssl.org/).** >  > 1. Generate a private key and a public key in PEM: > `openssl genrsa -out tremendous_key.pem 4096` >  > 2. Extract the public key in PEM format: > `openssl rsa -in tremendous_key.pem -outform PEM -pubout -out tremendous_key.pem.pub` >  > 3. And, before making your request, encode it as a `base64` string: > `base64 -i tremendous_key.pem.pub`  <div class=\"object-schema-request-schema\">   <table>   <thead>     <tr>       <th>Property</th>       <th>Type</th>       <th>Description</th>     </tr>   </thead>   <tbody class=\"object-schema-table-body\">     <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">public_key</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>Base64 encoded (public) PEM file</p> </td></tr>   </tbody> </table>  </div>
+         * @summary Create public key
+         * @param {CreatePublicKeyRequest} createPublicKeyRequest Public key details
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        createPublicKey(createPublicKeyRequest, options) {
+            return __awaiter(this, void 0, void 0, function* () {
+                var _a, _b, _c;
+                const localVarAxiosArgs = yield localVarAxiosParamCreator.createPublicKey(createPublicKeyRequest, options);
+                const localVarOperationServerIndex = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
+                const localVarOperationServerBasePath = (_c = (_b = base_1.operationServerMap['PublicKeysApi.createPublicKey']) === null || _b === void 0 ? void 0 : _b[localVarOperationServerIndex]) === null || _c === void 0 ? void 0 : _c.url;
+                return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+            });
+        },
+        /**
+         * Deactivates a public key. Any further attempt to verify a request signature with this key will fail.
+         * @summary Delete public key
+         * @param {string} id ID of the public key that should be deactivated
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deletePublicKey(id, options) {
+            return __awaiter(this, void 0, void 0, function* () {
+                var _a, _b, _c;
+                const localVarAxiosArgs = yield localVarAxiosParamCreator.deletePublicKey(id, options);
+                const localVarOperationServerIndex = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
+                const localVarOperationServerBasePath = (_c = (_b = base_1.operationServerMap['PublicKeysApi.deletePublicKey']) === null || _b === void 0 ? void 0 : _b[localVarOperationServerIndex]) === null || _c === void 0 ? void 0 : _c.url;
+                return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+            });
+        },
+        /**
+         * Retrieve an active public key, identified by the given `id` in the URL.
+         * @summary Retrieve public key
+         * @param {string} id ID of the public key that should be retrieved
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getPublicKey(id, options) {
+            return __awaiter(this, void 0, void 0, function* () {
+                var _a, _b, _c;
+                const localVarAxiosArgs = yield localVarAxiosParamCreator.getPublicKey(id, options);
+                const localVarOperationServerIndex = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
+                const localVarOperationServerBasePath = (_c = (_b = base_1.operationServerMap['PublicKeysApi.getPublicKey']) === null || _b === void 0 ? void 0 : _b[localVarOperationServerIndex]) === null || _c === void 0 ? void 0 : _c.url;
+                return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+            });
+        },
+        /**
+         * Fetch a list of active public keys on your account.  > 🚧 Inactive public keys are omitted > > The response does not include inactive public keys.
+         * @summary List public keys
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listPublicKeys(options) {
+            return __awaiter(this, void 0, void 0, function* () {
+                var _a, _b, _c;
+                const localVarAxiosArgs = yield localVarAxiosParamCreator.listPublicKeys(options);
+                const localVarOperationServerIndex = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
+                const localVarOperationServerBasePath = (_c = (_b = base_1.operationServerMap['PublicKeysApi.listPublicKeys']) === null || _b === void 0 ? void 0 : _b[localVarOperationServerIndex]) === null || _c === void 0 ? void 0 : _c.url;
+                return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+            });
+        },
+        /**
+         * Making a request to this endpoint with a JWT signed with your private key will return a 200 response if the public key is active and the signature  is valid.  > 💡 Testing your integration >  > **You can use [JWT.io](https://jwt.io/) to generate a signed token:** >  > > 1. Select “RS256” in their algorithm dropdown; > 3. Define a JSON payload such as `{ \"foo\": \"bar\" }`; > 4. Fill the “Verify signature” fields with your public and private keys and copy the “Encoded” token.
+         * @summary Test public key
+         * @param {string} id ID of the public key to test
+         * @param {TestPublicKeyRequest} testPublicKeyRequest
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        testPublicKey(id, testPublicKeyRequest, options) {
+            return __awaiter(this, void 0, void 0, function* () {
+                var _a, _b, _c;
+                const localVarAxiosArgs = yield localVarAxiosParamCreator.testPublicKey(id, testPublicKeyRequest, options);
+                const localVarOperationServerIndex = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
+                const localVarOperationServerBasePath = (_c = (_b = base_1.operationServerMap['PublicKeysApi.testPublicKey']) === null || _b === void 0 ? void 0 : _b[localVarOperationServerIndex]) === null || _c === void 0 ? void 0 : _c.url;
+                return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+            });
+        },
+    };
+};
+exports.PublicKeysApiFp = PublicKeysApiFp;
+/**
+ * PublicKeysApi - factory interface
+ * @export
+ */
+const PublicKeysApiFactory = function (configuration, basePath, axios) {
+    const localVarFp = (0, exports.PublicKeysApiFp)(configuration);
+    return {
+        /**
+         * Creating a public key is the way for your organization to share it with Tremendous.  > 🔒 Generating asymmetric keys >  > **We recommend using [OpenSSL](https://www.openssl.org/).** >  > 1. Generate a private key and a public key in PEM: > `openssl genrsa -out tremendous_key.pem 4096` >  > 2. Extract the public key in PEM format: > `openssl rsa -in tremendous_key.pem -outform PEM -pubout -out tremendous_key.pem.pub` >  > 3. And, before making your request, encode it as a `base64` string: > `base64 -i tremendous_key.pem.pub`  <div class=\"object-schema-request-schema\">   <table>   <thead>     <tr>       <th>Property</th>       <th>Type</th>       <th>Description</th>     </tr>   </thead>   <tbody class=\"object-schema-table-body\">     <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">public_key</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>Base64 encoded (public) PEM file</p> </td></tr>   </tbody> </table>  </div>
+         * @summary Create public key
+         * @param {CreatePublicKeyRequest} createPublicKeyRequest Public key details
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        createPublicKey(createPublicKeyRequest, options) {
+            return localVarFp.createPublicKey(createPublicKeyRequest, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Deactivates a public key. Any further attempt to verify a request signature with this key will fail.
+         * @summary Delete public key
+         * @param {string} id ID of the public key that should be deactivated
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deletePublicKey(id, options) {
+            return localVarFp.deletePublicKey(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Retrieve an active public key, identified by the given `id` in the URL.
+         * @summary Retrieve public key
+         * @param {string} id ID of the public key that should be retrieved
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getPublicKey(id, options) {
+            return localVarFp.getPublicKey(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Fetch a list of active public keys on your account.  > 🚧 Inactive public keys are omitted > > The response does not include inactive public keys.
+         * @summary List public keys
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listPublicKeys(options) {
+            return localVarFp.listPublicKeys(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Making a request to this endpoint with a JWT signed with your private key will return a 200 response if the public key is active and the signature  is valid.  > 💡 Testing your integration >  > **You can use [JWT.io](https://jwt.io/) to generate a signed token:** >  > > 1. Select “RS256” in their algorithm dropdown; > 3. Define a JSON payload such as `{ \"foo\": \"bar\" }`; > 4. Fill the “Verify signature” fields with your public and private keys and copy the “Encoded” token.
+         * @summary Test public key
+         * @param {string} id ID of the public key to test
+         * @param {TestPublicKeyRequest} testPublicKeyRequest
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        testPublicKey(id, testPublicKeyRequest, options) {
+            return localVarFp.testPublicKey(id, testPublicKeyRequest, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+exports.PublicKeysApiFactory = PublicKeysApiFactory;
+/**
+ * PublicKeysApi - object-oriented interface
+ * @export
+ * @class PublicKeysApi
+ * @extends {BaseAPI}
+ */
+class PublicKeysApi extends base_1.BaseAPI {
+    /**
+     * Creating a public key is the way for your organization to share it with Tremendous.  > 🔒 Generating asymmetric keys >  > **We recommend using [OpenSSL](https://www.openssl.org/).** >  > 1. Generate a private key and a public key in PEM: > `openssl genrsa -out tremendous_key.pem 4096` >  > 2. Extract the public key in PEM format: > `openssl rsa -in tremendous_key.pem -outform PEM -pubout -out tremendous_key.pem.pub` >  > 3. And, before making your request, encode it as a `base64` string: > `base64 -i tremendous_key.pem.pub`  <div class=\"object-schema-request-schema\">   <table>   <thead>     <tr>       <th>Property</th>       <th>Type</th>       <th>Description</th>     </tr>   </thead>   <tbody class=\"object-schema-table-body\">     <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">public_key</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>Base64 encoded (public) PEM file</p> </td></tr>   </tbody> </table>  </div>
+     * @summary Create public key
+     * @param {CreatePublicKeyRequest} createPublicKeyRequest Public key details
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PublicKeysApi
+     */
+    createPublicKey(createPublicKeyRequest, options) {
+        return (0, exports.PublicKeysApiFp)(this.configuration).createPublicKey(createPublicKeyRequest, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * Deactivates a public key. Any further attempt to verify a request signature with this key will fail.
+     * @summary Delete public key
+     * @param {string} id ID of the public key that should be deactivated
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PublicKeysApi
+     */
+    deletePublicKey(id, options) {
+        return (0, exports.PublicKeysApiFp)(this.configuration).deletePublicKey(id, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * Retrieve an active public key, identified by the given `id` in the URL.
+     * @summary Retrieve public key
+     * @param {string} id ID of the public key that should be retrieved
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PublicKeysApi
+     */
+    getPublicKey(id, options) {
+        return (0, exports.PublicKeysApiFp)(this.configuration).getPublicKey(id, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * Fetch a list of active public keys on your account.  > 🚧 Inactive public keys are omitted > > The response does not include inactive public keys.
+     * @summary List public keys
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PublicKeysApi
+     */
+    listPublicKeys(options) {
+        return (0, exports.PublicKeysApiFp)(this.configuration).listPublicKeys(options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * Making a request to this endpoint with a JWT signed with your private key will return a 200 response if the public key is active and the signature  is valid.  > 💡 Testing your integration >  > **You can use [JWT.io](https://jwt.io/) to generate a signed token:** >  > > 1. Select “RS256” in their algorithm dropdown; > 3. Define a JSON payload such as `{ \"foo\": \"bar\" }`; > 4. Fill the “Verify signature” fields with your public and private keys and copy the “Encoded” token.
+     * @summary Test public key
+     * @param {string} id ID of the public key to test
+     * @param {TestPublicKeyRequest} testPublicKeyRequest
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PublicKeysApi
+     */
+    testPublicKey(id, testPublicKeyRequest, options) {
+        return (0, exports.PublicKeysApiFp)(this.configuration).testPublicKey(id, testPublicKeyRequest, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+exports.PublicKeysApi = PublicKeysApi;
+/**
  * RewardsApi - axios parameter creator
  * @export
  */
@@ -3418,7 +3771,7 @@ const RewardsApiAxiosParamCreator = function (configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        generateRewardToken: (id_2, ...args_2) => __awaiter(this, [id_2, ...args_2], void 0, function* (id, options = {}) {
+        generateRewardToken: (id_1, ...args_1) => __awaiter(this, [id_1, ...args_1], void 0, function* (id, options = {}) {
             // verify required parameter 'id' is not null or undefined
             (0, common_1.assertParamExists)('generateRewardToken', 'id', id);
             const localVarPath = `/rewards/{id}/generate_embed_token`
@@ -3450,7 +3803,7 @@ const RewardsApiAxiosParamCreator = function (configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getReward: (id_3, ...args_3) => __awaiter(this, [id_3, ...args_3], void 0, function* (id, options = {}) {
+        getReward: (id_1, ...args_1) => __awaiter(this, [id_1, ...args_1], void 0, function* (id, options = {}) {
             // verify required parameter 'id' is not null or undefined
             (0, common_1.assertParamExists)('getReward', 'id', id);
             const localVarPath = `/rewards/{id}`
@@ -3482,7 +3835,7 @@ const RewardsApiAxiosParamCreator = function (configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listRewards: (offset_1, ...args_4) => __awaiter(this, [offset_1, ...args_4], void 0, function* (offset, options = {}) {
+        listRewards: (offset_1, ...args_1) => __awaiter(this, [offset_1, ...args_1], void 0, function* (offset, options = {}) {
             const localVarPath = `/rewards`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
@@ -3514,7 +3867,7 @@ const RewardsApiAxiosParamCreator = function (configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        resendReward: (id_4, ...args_5) => __awaiter(this, [id_4, ...args_5], void 0, function* (id, options = {}) {
+        resendReward: (id_1, ...args_1) => __awaiter(this, [id_1, ...args_1], void 0, function* (id, options = {}) {
             // verify required parameter 'id' is not null or undefined
             (0, common_1.assertParamExists)('resendReward', 'id', id);
             const localVarPath = `/rewards/{id}/resend`
@@ -3757,6 +4110,106 @@ class RewardsApi extends base_1.BaseAPI {
 }
 exports.RewardsApi = RewardsApi;
 /**
+ * RolesApi - axios parameter creator
+ * @export
+ */
+const RolesApiAxiosParamCreator = function (configuration) {
+    return {
+        /**
+         * List all available roles in the organization.
+         * @summary List roles
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listRoles: (...args_1) => __awaiter(this, [...args_1], void 0, function* (options = {}) {
+            const localVarPath = `/roles`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = Object.assign(Object.assign({ method: 'GET' }, baseOptions), options);
+            const localVarHeaderParameter = {};
+            const localVarQueryParameter = {};
+            // authentication BearerApiKey required
+            // http bearer authentication required
+            yield (0, common_1.setBearerAuthToObject)(localVarHeaderParameter, configuration);
+            (0, common_1.setSearchParams)(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = Object.assign(Object.assign(Object.assign({}, localVarHeaderParameter), headersFromBaseOptions), options.headers);
+            return {
+                url: (0, common_1.toPathString)(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        }),
+    };
+};
+exports.RolesApiAxiosParamCreator = RolesApiAxiosParamCreator;
+/**
+ * RolesApi - functional programming interface
+ * @export
+ */
+const RolesApiFp = function (configuration) {
+    const localVarAxiosParamCreator = (0, exports.RolesApiAxiosParamCreator)(configuration);
+    return {
+        /**
+         * List all available roles in the organization.
+         * @summary List roles
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listRoles(options) {
+            return __awaiter(this, void 0, void 0, function* () {
+                var _a, _b, _c;
+                const localVarAxiosArgs = yield localVarAxiosParamCreator.listRoles(options);
+                const localVarOperationServerIndex = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
+                const localVarOperationServerBasePath = (_c = (_b = base_1.operationServerMap['RolesApi.listRoles']) === null || _b === void 0 ? void 0 : _b[localVarOperationServerIndex]) === null || _c === void 0 ? void 0 : _c.url;
+                return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+            });
+        },
+    };
+};
+exports.RolesApiFp = RolesApiFp;
+/**
+ * RolesApi - factory interface
+ * @export
+ */
+const RolesApiFactory = function (configuration, basePath, axios) {
+    const localVarFp = (0, exports.RolesApiFp)(configuration);
+    return {
+        /**
+         * List all available roles in the organization.
+         * @summary List roles
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listRoles(options) {
+            return localVarFp.listRoles(options).then((request) => request(axios, basePath));
+        },
+    };
+};
+exports.RolesApiFactory = RolesApiFactory;
+/**
+ * RolesApi - object-oriented interface
+ * @export
+ * @class RolesApi
+ * @extends {BaseAPI}
+ */
+class RolesApi extends base_1.BaseAPI {
+    /**
+     * List all available roles in the organization.
+     * @summary List roles
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RolesApi
+     */
+    listRoles(options) {
+        return (0, exports.RolesApiFp)(this.configuration).listRoles(options).then((request) => request(this.axios, this.basePath));
+    }
+}
+exports.RolesApi = RolesApi;
+/**
  * WebhooksApi - axios parameter creator
  * @export
  */
@@ -3797,12 +4250,44 @@ const WebhooksApiAxiosParamCreator = function (configuration) {
         }),
         /**
          * > 📘 Learn more about Webhooks > > Our guide explains everything you need to know about the Tremendous webhooks: > [Read it here](/docs/webhooks-1)
+         * @summary Delete webhook
+         * @param {string} id ID of the webhook to delete
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deleteWebhook: (id_1, ...args_1) => __awaiter(this, [id_1, ...args_1], void 0, function* (id, options = {}) {
+            // verify required parameter 'id' is not null or undefined
+            (0, common_1.assertParamExists)('deleteWebhook', 'id', id);
+            const localVarPath = `/webhooks/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = Object.assign(Object.assign({ method: 'DELETE' }, baseOptions), options);
+            const localVarHeaderParameter = {};
+            const localVarQueryParameter = {};
+            // authentication BearerApiKey required
+            // http bearer authentication required
+            yield (0, common_1.setBearerAuthToObject)(localVarHeaderParameter, configuration);
+            (0, common_1.setSearchParams)(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = Object.assign(Object.assign(Object.assign({}, localVarHeaderParameter), headersFromBaseOptions), options.headers);
+            return {
+                url: (0, common_1.toPathString)(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        }),
+        /**
+         * > 📘 Learn more about Webhooks > > Our guide explains everything you need to know about the Tremendous webhooks: > [Read it here](/docs/webhooks-1)
          * @summary Retrieve webhook
          * @param {string} id ID of the webhook to retrieve
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getWebhook: (id_1, ...args_2) => __awaiter(this, [id_1, ...args_2], void 0, function* (id, options = {}) {
+        getWebhook: (id_1, ...args_1) => __awaiter(this, [id_1, ...args_1], void 0, function* (id, options = {}) {
             // verify required parameter 'id' is not null or undefined
             (0, common_1.assertParamExists)('getWebhook', 'id', id);
             const localVarPath = `/webhooks/{id}`
@@ -3834,7 +4319,7 @@ const WebhooksApiAxiosParamCreator = function (configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listWebhookEvents: (id_2, ...args_3) => __awaiter(this, [id_2, ...args_3], void 0, function* (id, options = {}) {
+        listWebhookEvents: (id_1, ...args_1) => __awaiter(this, [id_1, ...args_1], void 0, function* (id, options = {}) {
             // verify required parameter 'id' is not null or undefined
             (0, common_1.assertParamExists)('listWebhookEvents', 'id', id);
             const localVarPath = `/webhooks/{id}/events`
@@ -3865,7 +4350,7 @@ const WebhooksApiAxiosParamCreator = function (configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listWebhooks: (...args_4) => __awaiter(this, [...args_4], void 0, function* (options = {}) {
+        listWebhooks: (...args_1) => __awaiter(this, [...args_1], void 0, function* (options = {}) {
             const localVarPath = `/webhooks`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
@@ -3895,7 +4380,7 @@ const WebhooksApiAxiosParamCreator = function (configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        simulateWebhook: (id_3, simulateWebhookRequest_1, ...args_5) => __awaiter(this, [id_3, simulateWebhookRequest_1, ...args_5], void 0, function* (id, simulateWebhookRequest, options = {}) {
+        simulateWebhook: (id_1, simulateWebhookRequest_1, ...args_1) => __awaiter(this, [id_1, simulateWebhookRequest_1, ...args_1], void 0, function* (id, simulateWebhookRequest, options = {}) {
             // verify required parameter 'id' is not null or undefined
             (0, common_1.assertParamExists)('simulateWebhook', 'id', id);
             // verify required parameter 'simulateWebhookRequest' is not null or undefined
@@ -3947,6 +4432,22 @@ const WebhooksApiFp = function (configuration) {
                 const localVarAxiosArgs = yield localVarAxiosParamCreator.createWebhook(createWebhookRequest, options);
                 const localVarOperationServerIndex = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
                 const localVarOperationServerBasePath = (_c = (_b = base_1.operationServerMap['WebhooksApi.createWebhook']) === null || _b === void 0 ? void 0 : _b[localVarOperationServerIndex]) === null || _c === void 0 ? void 0 : _c.url;
+                return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+            });
+        },
+        /**
+         * > 📘 Learn more about Webhooks > > Our guide explains everything you need to know about the Tremendous webhooks: > [Read it here](/docs/webhooks-1)
+         * @summary Delete webhook
+         * @param {string} id ID of the webhook to delete
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deleteWebhook(id, options) {
+            return __awaiter(this, void 0, void 0, function* () {
+                var _a, _b, _c;
+                const localVarAxiosArgs = yield localVarAxiosParamCreator.deleteWebhook(id, options);
+                const localVarOperationServerIndex = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
+                const localVarOperationServerBasePath = (_c = (_b = base_1.operationServerMap['WebhooksApi.deleteWebhook']) === null || _b === void 0 ? void 0 : _b[localVarOperationServerIndex]) === null || _c === void 0 ? void 0 : _c.url;
                 return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
             });
         },
@@ -4036,6 +4537,16 @@ const WebhooksApiFactory = function (configuration, basePath, axios) {
         },
         /**
          * > 📘 Learn more about Webhooks > > Our guide explains everything you need to know about the Tremendous webhooks: > [Read it here](/docs/webhooks-1)
+         * @summary Delete webhook
+         * @param {string} id ID of the webhook to delete
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deleteWebhook(id, options) {
+            return localVarFp.deleteWebhook(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * > 📘 Learn more about Webhooks > > Our guide explains everything you need to know about the Tremendous webhooks: > [Read it here](/docs/webhooks-1)
          * @summary Retrieve webhook
          * @param {string} id ID of the webhook to retrieve
          * @param {*} [options] Override http request option.
@@ -4094,6 +4605,17 @@ class WebhooksApi extends base_1.BaseAPI {
      */
     createWebhook(createWebhookRequest, options) {
         return (0, exports.WebhooksApiFp)(this.configuration).createWebhook(createWebhookRequest, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * > 📘 Learn more about Webhooks > > Our guide explains everything you need to know about the Tremendous webhooks: > [Read it here](/docs/webhooks-1)
+     * @summary Delete webhook
+     * @param {string} id ID of the webhook to delete
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof WebhooksApi
+     */
+    deleteWebhook(id, options) {
+        return (0, exports.WebhooksApiFp)(this.configuration).deleteWebhook(id, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * > 📘 Learn more about Webhooks > > Our guide explains everything you need to know about the Tremendous webhooks: > [Read it here](/docs/webhooks-1)
