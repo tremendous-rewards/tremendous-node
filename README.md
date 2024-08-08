@@ -100,9 +100,9 @@ data.products.forEach(product => { /* */ });
 Listing funding sources:
 
 ```typescript
-import { FundingSourcesAPI } from "tremendous";
+import { FundingSourcesApi } from "tremendous";
 
-const client = new FundingSourcesAPI(configuration);
+const client = new FundingSourcesApi(configuration);
 
 const { data } = await client.listFundingSources();
 
