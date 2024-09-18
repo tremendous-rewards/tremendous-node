@@ -24,6 +24,58 @@ import type { RequestArgs } from './base';
 import { BASE_PATH, COLLECTION_FORMATS, BaseAPI, RequiredError, operationServerMap } from './base';
 
 /**
+ * Ignore flagging rules for rewards redeemed by an email or domain matching this list.
+ * @export
+ * @interface AllowEmail
+ */
+export interface AllowEmail {
+    /**
+     * The list of emails.
+     * @type {Array<string>}
+     * @memberof AllowEmail
+     */
+    'emails': Array<string>;
+}
+/**
+ * The list of emails and domains where a matching redemption will ignore other flagging rules and automatically go through.
+ * @export
+ * @interface AllowEmail1
+ */
+export interface AllowEmail1 {
+    /**
+     * The list of emails.
+     * @type {Array<string>}
+     * @memberof AllowEmail1
+     */
+    'emails': Array<string>;
+}
+/**
+ * Ignore flagging rules for rewards redeemed by an IP matching this list.
+ * @export
+ * @interface AllowIp
+ */
+export interface AllowIp {
+    /**
+     * The list of IP addresses to flag or allow. Accepts both IPv4 and IPv6 addresses using CIDR notation. 
+     * @type {Array<string>}
+     * @memberof AllowIp
+     */
+    'ips': Array<string>;
+}
+/**
+ * The list of IP addresses and/or IP ranges where a matching redemption will ignore other flagging rules and automatically go through.
+ * @export
+ * @interface AllowIp1
+ */
+export interface AllowIp1 {
+    /**
+     * The list of IP addresses to flag or allow. Accepts both IPv4 and IPv6 addresses using CIDR notation. 
+     * @type {Array<string>}
+     * @memberof AllowIp1
+     */
+    'ips': Array<string>;
+}
+/**
  * A balance transaction represents a specific movement or change in an account\'s balance. 
  * @export
  * @interface BalanceTransaction
@@ -59,6 +111,25 @@ export interface BalanceTransaction {
      * @memberof BalanceTransaction
      */
     'description'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface BaseOrderForCreate
+ */
+export interface BaseOrderForCreate {
+    /**
+     * Reference for this order, supplied by the customer.  When set, `external_id` makes order idempotent. All requests that use the same `external_id` after the initial order creation, will result in a response that returns the data of the initially created order. The response will have a `201` response code. These responses **fail** to create any further orders.  It also allows for retrieving by `external_id` instead of `id` only. 
+     * @type {string}
+     * @memberof BaseOrderForCreate
+     */
+    'external_id'?: string | null;
+    /**
+     * 
+     * @type {SingleRewardOrder1Payment}
+     * @memberof BaseOrderForCreate
+     */
+    'payment': SingleRewardOrder1Payment;
 }
 /**
  * With a campaign you can define the look & feel of how rewards are sent out. It also lets you set the available products (different gift cards, charity, etc.) recipients can choose from. 
@@ -331,321 +402,16 @@ export interface CreateMemberRequest {
 export interface CreateOrder200Response {
     /**
      * 
-     * @type {CreateOrder200ResponseOrder}
-     * @memberof CreateOrder200Response
-     */
-    'order': CreateOrder200ResponseOrder;
-}
-/**
- * An order wraps around the fulfilment of one or more rewards.
- * @export
- * @interface CreateOrder200ResponseOrder
- */
-export interface CreateOrder200ResponseOrder {
-    /**
-     * Tremendous ID of the order
-     * @type {string}
-     * @memberof CreateOrder200ResponseOrder
-     */
-    'id': string;
-    /**
-     * Reference for this order, supplied by the customer.  When set, `external_id` makes order idempotent. All requests that use the same `external_id` after the initial order creation, will result in a response that returns the data of the initially created order. The response will have a `201` response code. These responses **fail** to create any further orders.  It also allows for retrieving by `external_id` instead of `id` only. 
-     * @type {string}
-     * @memberof CreateOrder200ResponseOrder
-     */
-    'external_id'?: string | null;
-    /**
-     * ID of the campaign in your account, that defines the available products (different gift cards, charity, etc.) that the recipient can choose from. 
-     * @type {string}
-     * @memberof CreateOrder200ResponseOrder
-     */
-    'campaign_id'?: string | null;
-    /**
-     * Date the order has been created
-     * @type {string}
-     * @memberof CreateOrder200ResponseOrder
-     */
-    'created_at': string;
-    /**
-     * Execution status of a given order  <table>   <thead>     <tr>       <th>         Status       </th>       <th>         Description       </th>     </tr>   </thead>   <tbody>     <tr>       <td>         <code>           CANCELED         </code>       </td>       <td>         The order and all of its rewards were canceled.       </td>     </tr>     <tr>       <td>         <code>           CART         </code>       </td>       <td>         The order has been created, but hasn\'t yet been processed.       </td>     </tr>     <tr>       <td>         <code>           EXECUTED         </code>       </td>       <td>         The order has been executed. Payment has been handled and rewards are being delivered (if applicable).       </td>     </tr>     <tr>       <td>         <code>           FAILED         </code>       </td>       <td>         The order could not be processed due to an error. E.g. due to insufficient funds in the account.       </td>     </tr>     <tr>       <td>         <code>           PENDING APPROVAL         </code>       </td>       <td>         The order has been created but needs approval to be executed.       </td>     </tr>     <tr>       <td>         <code>           PENDING INTERNAL PAYMENT APPROVAL         </code>       </td>       <td>         The order has been created but it is under review and requires approval from our team.       </td>     </tr>    </tbody> </table> 
-     * @type {string}
-     * @memberof CreateOrder200ResponseOrder
-     */
-    'status': CreateOrder200ResponseOrderStatusEnum;
-    /**
-     * 
-     * @type {ListOrders200ResponseOrdersInnerPayment}
-     * @memberof CreateOrder200ResponseOrder
-     */
-    'payment'?: ListOrders200ResponseOrdersInnerPayment;
-    /**
-     * The ID for the invoice associated with this order
-     * @type {string}
-     * @memberof CreateOrder200ResponseOrder
-     */
-    'invoice_id'?: string;
-    /**
-     * 
-     * @type {Array<CreateOrder200ResponseOrderRewardsInner>}
-     * @memberof CreateOrder200ResponseOrder
-     */
-    'rewards'?: Array<CreateOrder200ResponseOrderRewardsInner>;
-}
-
-export const CreateOrder200ResponseOrderStatusEnum = {
-    Canceled: 'CANCELED',
-    Cart: 'CART',
-    Executed: 'EXECUTED',
-    Failed: 'FAILED',
-    PendingApproval: 'PENDING APPROVAL',
-    PendingInternalPaymentApproval: 'PENDING INTERNAL PAYMENT APPROVAL'
-} as const;
-
-export type CreateOrder200ResponseOrderStatusEnum = typeof CreateOrder200ResponseOrderStatusEnum[keyof typeof CreateOrder200ResponseOrderStatusEnum];
-
-/**
- * A single reward, sent to a recipient. A reward is always part of an order.  Either `products` or `campaign_id` must be specified. 
- * @export
- * @interface CreateOrder200ResponseOrderRewardsInner
- */
-export interface CreateOrder200ResponseOrderRewardsInner {
-    /**
-     * Tremendous ID of the reward
-     * @type {string}
-     * @memberof CreateOrder200ResponseOrderRewardsInner
-     */
-    'id'?: string;
-    /**
-     * Tremendous ID of the order this reward is part of.
-     * @type {string}
-     * @memberof CreateOrder200ResponseOrderRewardsInner
-     */
-    'order_id'?: string;
-    /**
-     * Date the reward was created
-     * @type {string}
-     * @memberof CreateOrder200ResponseOrderRewardsInner
-     */
-    'created_at'?: string;
-    /**
-     * 
-     * @type {ListRewards200ResponseRewardsInnerValue}
-     * @memberof CreateOrder200ResponseOrderRewardsInner
-     */
-    'value'?: ListRewards200ResponseRewardsInnerValue;
-    /**
-     * 
-     * @type {ListRewards200ResponseRewardsInnerRecipient}
-     * @memberof CreateOrder200ResponseOrderRewardsInner
-     */
-    'recipient'?: ListRewards200ResponseRewardsInnerRecipient;
-    /**
-     * Timestamp of reward delivery within the next year. Note that if date-time is provided, the time values will be ignored.
-     * @type {string}
-     * @memberof CreateOrder200ResponseOrderRewardsInner
-     */
-    'deliver_at'?: string;
-    /**
-     * 
-     * @type {Array<ListRewards200ResponseRewardsInnerCustomFieldsInner>}
-     * @memberof CreateOrder200ResponseOrderRewardsInner
-     */
-    'custom_fields'?: Array<ListRewards200ResponseRewardsInnerCustomFieldsInner>;
-    /**
-     * 
-     * @type {CreateOrder200ResponseOrderRewardsInnerDelivery}
-     * @memberof CreateOrder200ResponseOrderRewardsInner
-     */
-    'delivery'?: CreateOrder200ResponseOrderRewardsInnerDelivery;
-}
-/**
- * Details on how the reward is delivered to the recipient. 
- * @export
- * @interface CreateOrder200ResponseOrderRewardsInnerDelivery
- */
-export interface CreateOrder200ResponseOrderRewardsInnerDelivery {
-    /**
-     * How to deliver the reward to the recipient.  <table>   <thead>     <tr>       <th>Delivery Method</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td><code>EMAIL</code></td>       <td>Deliver the reward to the recipient by email</td>     </tr>     <tr>       <td><code>LINK</code></td>       <td>         <p>Deliver the reward to the recipient via a link.</p>         <p>The link can be retrieved on a successfully ordered reward via the <code>/rewards</code> or <code>/rewards/{id}</code> endpoint. That link must then be  delivered to the recipient out-of-band.</p>       </td>     </tr>     <tr>       <td><code>PHONE</code></td>       <td>Deliver the reward to the recipient by SMS</td>     </tr>   </tbody> </table> 
-     * @type {string}
-     * @memberof CreateOrder200ResponseOrderRewardsInnerDelivery
-     */
-    'method': CreateOrder200ResponseOrderRewardsInnerDeliveryMethodEnum;
-    /**
-     * Current status of the delivery of the reward:  * `SCHEDULED` - Reward is scheduled for delivery and will be delivered soon. * `FAILED` - Delivery of reward failed (e.g. email bounced). * `SUCCEEDED` - Reward was successfully delivered (email or text message delivered or reward link opened). * `PENDING` - Delivery is pending but not yet scheduled. 
-     * @type {string}
-     * @memberof CreateOrder200ResponseOrderRewardsInnerDelivery
-     */
-    'status': CreateOrder200ResponseOrderRewardsInnerDeliveryStatusEnum;
-    /**
-     * Link to redeem the reward at. You need to deliver this link to the recipient.  Only available for rewards for which the `method` for delivery is set to `LINK`. 
-     * @type {string}
-     * @memberof CreateOrder200ResponseOrderRewardsInnerDelivery
-     */
-    'link'?: string;
-}
-
-export const CreateOrder200ResponseOrderRewardsInnerDeliveryMethodEnum = {
-    Email: 'EMAIL',
-    Link: 'LINK',
-    Phone: 'PHONE'
-} as const;
-
-export type CreateOrder200ResponseOrderRewardsInnerDeliveryMethodEnum = typeof CreateOrder200ResponseOrderRewardsInnerDeliveryMethodEnum[keyof typeof CreateOrder200ResponseOrderRewardsInnerDeliveryMethodEnum];
-export const CreateOrder200ResponseOrderRewardsInnerDeliveryStatusEnum = {
-    Scheduled: 'SCHEDULED',
-    Failed: 'FAILED',
-    Succeeded: 'SUCCEEDED',
-    Pending: 'PENDING'
-} as const;
-
-export type CreateOrder200ResponseOrderRewardsInnerDeliveryStatusEnum = typeof CreateOrder200ResponseOrderRewardsInnerDeliveryStatusEnum[keyof typeof CreateOrder200ResponseOrderRewardsInnerDeliveryStatusEnum];
-
-/**
- * 
- * @export
- * @interface CreateOrder201Response
- */
-export interface CreateOrder201Response {
-    /**
-     * 
      * @type {ListOrders200ResponseOrdersInner}
-     * @memberof CreateOrder201Response
+     * @memberof CreateOrder200Response
      */
     'order': ListOrders200ResponseOrdersInner;
 }
 /**
- * 
+ * @type CreateOrderRequest
  * @export
- * @interface CreateOrderRequest
  */
-export interface CreateOrderRequest {
-    /**
-     * Reference for this order, supplied by the customer.  When set, `external_id` makes order idempotent. All requests that use the same `external_id` after the initial order creation, will result in a response that returns the data of the initially created order. The response will have a `201` response code. These responses **fail** to create any further orders.  It also allows for retrieving by `external_id` instead of `id` only. 
-     * @type {string}
-     * @memberof CreateOrderRequest
-     */
-    'external_id'?: string | null;
-    /**
-     * 
-     * @type {CreateOrderRequestPayment}
-     * @memberof CreateOrderRequest
-     */
-    'payment': CreateOrderRequestPayment;
-    /**
-     * 
-     * @type {CreateOrderRequestReward}
-     * @memberof CreateOrderRequest
-     */
-    'reward': CreateOrderRequestReward;
-}
-/**
- * 
- * @export
- * @interface CreateOrderRequestPayment
- */
-export interface CreateOrderRequestPayment {
-    /**
-     * Tremendous ID of the funding source that will be used to pay for the order. Use `balance` to use your Tremendous\'s balance.
-     * @type {string}
-     * @memberof CreateOrderRequestPayment
-     */
-    'funding_source_id': string;
-}
-/**
- * A single reward, sent to a recipient. A reward is always part of an order.  Either `products` or `campaign_id` must be specified. 
- * @export
- * @interface CreateOrderRequestReward
- */
-export interface CreateOrderRequestReward {
-    /**
-     * ID of the campaign in your account, that defines the available products (different gift cards, charity, etc.) that the recipient can choose from. 
-     * @type {string}
-     * @memberof CreateOrderRequestReward
-     */
-    'campaign_id'?: string | null;
-    /**
-     * List of IDs of product (different gift cards, charity, etc.) that will be available to the recipient to choose from.  Providing a `products` array will override the products made available by the campaign specified using the `campaign_id` property unless the `products` array is empty. It will _not_ override other campaign attributes, like the message and customization of the look and feel. 
-     * @type {Array<string>}
-     * @memberof CreateOrderRequestReward
-     */
-    'products'?: Array<string>;
-    /**
-     * 
-     * @type {ListRewards200ResponseRewardsInnerValue}
-     * @memberof CreateOrderRequestReward
-     */
-    'value'?: ListRewards200ResponseRewardsInnerValue;
-    /**
-     * 
-     * @type {ListRewards200ResponseRewardsInnerRecipient}
-     * @memberof CreateOrderRequestReward
-     */
-    'recipient'?: ListRewards200ResponseRewardsInnerRecipient;
-    /**
-     * Timestamp of reward delivery within the next year. Note that if date-time is provided, the time values will be ignored.
-     * @type {string}
-     * @memberof CreateOrderRequestReward
-     */
-    'deliver_at'?: string;
-    /**
-     * 
-     * @type {Array<CreateOrderRequestRewardCustomFieldsInner>}
-     * @memberof CreateOrderRequestReward
-     */
-    'custom_fields'?: Array<CreateOrderRequestRewardCustomFieldsInner>;
-    /**
-     * Set this to translate the redemption experience for this reward. Pass a 2-letter [ISO-639-1 code](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) for the desired language. Defaults to `en`. 
-     * @type {string}
-     * @memberof CreateOrderRequestReward
-     */
-    'language'?: string;
-    /**
-     * 
-     * @type {CreateOrderRequestRewardDelivery}
-     * @memberof CreateOrderRequestReward
-     */
-    'delivery'?: CreateOrderRequestRewardDelivery;
-}
-/**
- * Reward custom data for searching, tracking or copy (see [Adding custom fields to orders](https://developers.tremendous.com/reference/using-custom-fields-to-add-custom-data-to-rewards).)
- * @export
- * @interface CreateOrderRequestRewardCustomFieldsInner
- */
-export interface CreateOrderRequestRewardCustomFieldsInner {
-    /**
-     * Tremendous ID of the custom field
-     * @type {string}
-     * @memberof CreateOrderRequestRewardCustomFieldsInner
-     */
-    'id'?: string;
-    /**
-     * Value of the custom field
-     * @type {string}
-     * @memberof CreateOrderRequestRewardCustomFieldsInner
-     */
-    'value'?: string | null;
-}
-/**
- * Details on how the reward is delivered to the recipient. 
- * @export
- * @interface CreateOrderRequestRewardDelivery
- */
-export interface CreateOrderRequestRewardDelivery {
-    /**
-     * How to deliver the reward to the recipient.  <table>   <thead>     <tr>       <th>Delivery Method</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td><code>EMAIL</code></td>       <td>Deliver the reward to the recipient by email</td>     </tr>     <tr>       <td><code>LINK</code></td>       <td>         <p>Deliver the reward to the recipient via a link.</p>         <p>The link can be retrieved on a successfully ordered reward via the <code>/rewards</code> or <code>/rewards/{id}</code> endpoint. That link must then be  delivered to the recipient out-of-band.</p>       </td>     </tr>     <tr>       <td><code>PHONE</code></td>       <td>Deliver the reward to the recipient by SMS</td>     </tr>   </tbody> </table> 
-     * @type {string}
-     * @memberof CreateOrderRequestRewardDelivery
-     */
-    'method'?: CreateOrderRequestRewardDeliveryMethodEnum;
-}
-
-export const CreateOrderRequestRewardDeliveryMethodEnum = {
-    Email: 'EMAIL',
-    Link: 'LINK',
-    Phone: 'PHONE'
-} as const;
-
-export type CreateOrderRequestRewardDeliveryMethodEnum = typeof CreateOrderRequestRewardDeliveryMethodEnum[keyof typeof CreateOrderRequestRewardDeliveryMethodEnum];
+export type CreateOrderRequest = SingleRewardOrder1;
 
 /**
  * 
@@ -1060,6 +826,19 @@ export interface CustomField {
     'label'?: string;
 }
 /**
+ * 
+ * @export
+ * @interface DeleteFraudRule200Response
+ */
+export interface DeleteFraudRule200Response {
+    /**
+     * A description of the result
+     * @type {string}
+     * @memberof DeleteFraudRule200Response
+     */
+    'message': string;
+}
+/**
  * Details on how the reward is delivered to the recipient. 
  * @export
  * @interface DeliveryDetails
@@ -1094,48 +873,6 @@ export const DeliveryDetailsStatusEnum = {
 } as const;
 
 export type DeliveryDetailsStatusEnum = typeof DeliveryDetailsStatusEnum[keyof typeof DeliveryDetailsStatusEnum];
-
-/**
- * Details on how the reward is delivered to the recipient. 
- * @export
- * @interface DeliveryDetailsWithLink
- */
-export interface DeliveryDetailsWithLink {
-    /**
-     * How to deliver the reward to the recipient.  <table>   <thead>     <tr>       <th>Delivery Method</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td><code>EMAIL</code></td>       <td>Deliver the reward to the recipient by email</td>     </tr>     <tr>       <td><code>LINK</code></td>       <td>         <p>Deliver the reward to the recipient via a link.</p>         <p>The link can be retrieved on a successfully ordered reward via the <code>/rewards</code> or <code>/rewards/{id}</code> endpoint. That link must then be  delivered to the recipient out-of-band.</p>       </td>     </tr>     <tr>       <td><code>PHONE</code></td>       <td>Deliver the reward to the recipient by SMS</td>     </tr>   </tbody> </table> 
-     * @type {string}
-     * @memberof DeliveryDetailsWithLink
-     */
-    'method': DeliveryDetailsWithLinkMethodEnum;
-    /**
-     * Current status of the delivery of the reward:  * `SCHEDULED` - Reward is scheduled for delivery and will be delivered soon. * `FAILED` - Delivery of reward failed (e.g. email bounced). * `SUCCEEDED` - Reward was successfully delivered (email or text message delivered or reward link opened). * `PENDING` - Delivery is pending but not yet scheduled. 
-     * @type {string}
-     * @memberof DeliveryDetailsWithLink
-     */
-    'status': DeliveryDetailsWithLinkStatusEnum;
-    /**
-     * Link to redeem the reward at. You need to deliver this link to the recipient.  Only available for rewards for which the `method` for delivery is set to `LINK`. 
-     * @type {string}
-     * @memberof DeliveryDetailsWithLink
-     */
-    'link'?: string;
-}
-
-export const DeliveryDetailsWithLinkMethodEnum = {
-    Email: 'EMAIL',
-    Link: 'LINK',
-    Phone: 'PHONE'
-} as const;
-
-export type DeliveryDetailsWithLinkMethodEnum = typeof DeliveryDetailsWithLinkMethodEnum[keyof typeof DeliveryDetailsWithLinkMethodEnum];
-export const DeliveryDetailsWithLinkStatusEnum = {
-    Scheduled: 'SCHEDULED',
-    Failed: 'FAILED',
-    Succeeded: 'SUCCEEDED',
-    Pending: 'PENDING'
-} as const;
-
-export type DeliveryDetailsWithLinkStatusEnum = typeof DeliveryDetailsWithLinkStatusEnum[keyof typeof DeliveryDetailsWithLinkStatusEnum];
 
 /**
  * How to deliver the reward to the recipient.  <table>   <thead>     <tr>       <th>Delivery Method</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td><code>EMAIL</code></td>       <td>Deliver the reward to the recipient by email</td>     </tr>     <tr>       <td><code>LINK</code></td>       <td>         <p>Deliver the reward to the recipient via a link.</p>         <p>The link can be retrieved on a successfully ordered reward via the <code>/rewards</code> or <code>/rewards/{id}</code> endpoint. That link must then be  delivered to the recipient out-of-band.</p>       </td>     </tr>     <tr>       <td><code>PHONE</code></td>       <td>Deliver the reward to the recipient by SMS</td>     </tr>   </tbody> </table> 
@@ -1224,6 +961,633 @@ export interface Field {
      */
     'scope'?: string;
 }
+/**
+ * 
+ * @export
+ * @interface FraudConfigAllowEmail
+ */
+export interface FraudConfigAllowEmail {
+    /**
+     * The list of emails.
+     * @type {Array<string>}
+     * @memberof FraudConfigAllowEmail
+     */
+    'emails': Array<string>;
+}
+/**
+ * 
+ * @export
+ * @interface FraudConfigCountry
+ */
+export interface FraudConfigCountry {
+    /**
+     * When type is `whitelist`, it flags any countries that *are not* present in the list. When type is `blacklist`, it flags any countries that *are* present in the list. 
+     * @type {string}
+     * @memberof FraudConfigCountry
+     */
+    'type': FraudConfigCountryTypeEnum;
+    /**
+     * An array of country codes (ISO-3166 alpha-2 character code)
+     * @type {Array<string>}
+     * @memberof FraudConfigCountry
+     */
+    'countries': Array<string>;
+}
+
+export const FraudConfigCountryTypeEnum = {
+    Whitelist: 'whitelist',
+    Blacklist: 'blacklist'
+} as const;
+
+export type FraudConfigCountryTypeEnum = typeof FraudConfigCountryTypeEnum[keyof typeof FraudConfigCountryTypeEnum];
+
+/**
+ * 
+ * @export
+ * @interface FraudConfigCountryUpdateList
+ */
+export interface FraudConfigCountryUpdateList {
+    /**
+     * An array of country codes (ISO-3166 alpha-2 character code)
+     * @type {Array<string>}
+     * @memberof FraudConfigCountryUpdateList
+     */
+    'countries': Array<string>;
+}
+/**
+ * 
+ * @export
+ * @interface FraudConfigIP
+ */
+export interface FraudConfigIP {
+    /**
+     * The list of IP addresses to flag or allow. Accepts both IPv4 and IPv6 addresses using CIDR notation. 
+     * @type {Array<string>}
+     * @memberof FraudConfigIP
+     */
+    'ips': Array<string>;
+}
+/**
+ * 
+ * @export
+ * @interface FraudConfigRedeemedRewardsAmount
+ */
+export interface FraudConfigRedeemedRewardsAmount {
+    /**
+     * The total amount in USD of redeemed rewards to use as a threshold.
+     * @type {number}
+     * @memberof FraudConfigRedeemedRewardsAmount
+     */
+    'amount': number;
+    /**
+     * The period, in days, to consider for the count. Use `all_time` to consider any redeemed rewards.
+     * @type {string}
+     * @memberof FraudConfigRedeemedRewardsAmount
+     */
+    'period': FraudConfigRedeemedRewardsAmountPeriodEnum;
+}
+
+export const FraudConfigRedeemedRewardsAmountPeriodEnum = {
+    _7: '7',
+    _30: '30',
+    _90: '90',
+    _120: '120',
+    _365: '365',
+    AllTime: 'all_time'
+} as const;
+
+export type FraudConfigRedeemedRewardsAmountPeriodEnum = typeof FraudConfigRedeemedRewardsAmountPeriodEnum[keyof typeof FraudConfigRedeemedRewardsAmountPeriodEnum];
+
+/**
+ * 
+ * @export
+ * @interface FraudConfigRedeemedRewardsCount
+ */
+export interface FraudConfigRedeemedRewardsCount {
+    /**
+     * The number of redeemed rewards to use as a threshold.
+     * @type {number}
+     * @memberof FraudConfigRedeemedRewardsCount
+     */
+    'amount': number;
+    /**
+     * The period, in days, to consider for the count. Use `all_time` to consider any redeemed rewards.
+     * @type {string}
+     * @memberof FraudConfigRedeemedRewardsCount
+     */
+    'period': FraudConfigRedeemedRewardsCountPeriodEnum;
+}
+
+export const FraudConfigRedeemedRewardsCountPeriodEnum = {
+    _7: '7',
+    _30: '30',
+    _90: '90',
+    _120: '120',
+    _365: '365',
+    AllTime: 'all_time'
+} as const;
+
+export type FraudConfigRedeemedRewardsCountPeriodEnum = typeof FraudConfigRedeemedRewardsCountPeriodEnum[keyof typeof FraudConfigRedeemedRewardsCountPeriodEnum];
+
+/**
+ * 
+ * @export
+ * @interface FraudConfigReviewEmail
+ */
+export interface FraudConfigReviewEmail {
+    /**
+     * The list of emails.
+     * @type {Array<string>}
+     * @memberof FraudConfigReviewEmail
+     */
+    'emails'?: Array<string>;
+    /**
+     * The list of domains. Any subdomains will also be matched against each entry in the list.
+     * @type {Array<string>}
+     * @memberof FraudConfigReviewEmail
+     */
+    'domains'?: Array<string>;
+}
+/**
+ * 
+ * @export
+ * @interface FraudGenericResponse
+ */
+export interface FraudGenericResponse {
+    /**
+     * A description of the result
+     * @type {string}
+     * @memberof FraudGenericResponse
+     */
+    'message': string;
+}
+/**
+ * The fraud review associated with a reward.
+ * @export
+ * @interface FraudReview
+ */
+export interface FraudReview {
+    /**
+     * The current status of the fraud review:  * `flagged` - The reward has been flagged for and waiting manual review. * `blocked` - The reward was reviewed and blocked. * `released` - The reward was reviewed and released. 
+     * @type {string}
+     * @memberof FraudReview
+     */
+    'status'?: FraudReviewStatusEnum;
+    /**
+     * The array may contain multiple reasons, depending on which rule(s) flagged the reward for review. Reasons can be any of the following:  * `Disallowed IP` * `Disallowed email` * `Disallowed country` * `Over reward dollar limit` * `Over reward count limit` * `VPN detected` * `Device related to multiple emails` * `Device or account related to multiple emails` * `IP on a Tremendous fraud list` * `Bank account on a Tremendous fraud list` * `Fingerprint on a Tremendous fraud list` * `Email on a Tremendous fraud list` * `Phone on a Tremendous fraud list` * `IP related to a blocked reward` * `Bank account related to a blocked reward` * `Fingerprint related to a blocked reward` * `Email related to a blocked reward` * `Phone related to a blocked reward` * `Allowed IP` * `Allowed email` 
+     * @type {Array<string>}
+     * @memberof FraudReview
+     */
+    'reasons'?: Array<FraudReviewReasonsEnum>;
+    /**
+     * The name of the person who reviewed the reward, or `Automatic Review` if the reward was blocked automatically. Rewards can be automatically blocked if they remain in the flagged fraud queue for more than 30 days.  This field is only present if the status is not `flagged`. 
+     * @type {string}
+     * @memberof FraudReview
+     */
+    'reviewed_by'?: string;
+    /**
+     * When the reward was blocked or released following fraud review.  This field is only present if the status is not `flagged`. 
+     * @type {string}
+     * @memberof FraudReview
+     */
+    'reviewed_at'?: string;
+    /**
+     * 
+     * @type {GetFraudReview200ResponseFraudReviewRelatedRewards}
+     * @memberof FraudReview
+     */
+    'related_rewards'?: GetFraudReview200ResponseFraudReviewRelatedRewards;
+    /**
+     * The device fingerprint, if known.
+     * @type {string}
+     * @memberof FraudReview
+     */
+    'device_id'?: string;
+    /**
+     * The product selected to claim the reward
+     * @type {string}
+     * @memberof FraudReview
+     */
+    'redemption_method'?: FraudReviewRedemptionMethodEnum;
+    /**
+     * Date the reward was redeemed
+     * @type {string}
+     * @memberof FraudReview
+     */
+    'redeemed_at'?: string;
+    /**
+     * 
+     * @type {GetFraudReview200ResponseFraudReviewGeo}
+     * @memberof FraudReview
+     */
+    'geo'?: GetFraudReview200ResponseFraudReviewGeo;
+    /**
+     * 
+     * @type {OrderWithoutLinkReward}
+     * @memberof FraudReview
+     */
+    'reward'?: OrderWithoutLinkReward;
+}
+
+export const FraudReviewStatusEnum = {
+    Flagged: 'flagged',
+    Blocked: 'blocked',
+    Released: 'released'
+} as const;
+
+export type FraudReviewStatusEnum = typeof FraudReviewStatusEnum[keyof typeof FraudReviewStatusEnum];
+export const FraudReviewReasonsEnum = {
+    DisallowedIp: 'Disallowed IP',
+    DisallowedEmail: 'Disallowed email',
+    DisallowedCountry: 'Disallowed country',
+    OverRewardDollarLimit: 'Over reward dollar limit',
+    OverRewardCountLimit: 'Over reward count limit',
+    VpnDetected: 'VPN detected',
+    DeviceRelatedToMultipleEmails: 'Device related to multiple emails',
+    DeviceOrAccountRelatedToMultipleEmails: 'Device or account related to multiple emails',
+    IpOnATremendousFraudList: 'IP on a Tremendous fraud list',
+    BankAccountOnATremendousFraudList: 'Bank account on a Tremendous fraud list',
+    FingerprintOnATremendousFraudList: 'Fingerprint on a Tremendous fraud list',
+    EmailOnATremendousFraudList: 'Email on a Tremendous fraud list',
+    PhoneOnATremendousFraudList: 'Phone on a Tremendous fraud list',
+    IpRelatedToABlockedReward: 'IP related to a blocked reward',
+    BankAccountRelatedToABlockedReward: 'Bank account related to a blocked reward',
+    FingerprintRelatedToABlockedReward: 'Fingerprint related to a blocked reward',
+    EmailRelatedToABlockedReward: 'Email related to a blocked reward',
+    PhoneRelatedToABlockedReward: 'Phone related to a blocked reward',
+    AllowedIp: 'Allowed IP',
+    AllowedEmail: 'Allowed email'
+} as const;
+
+export type FraudReviewReasonsEnum = typeof FraudReviewReasonsEnum[keyof typeof FraudReviewReasonsEnum];
+export const FraudReviewRedemptionMethodEnum = {
+    Paypal: 'paypal',
+    Bank: 'bank',
+    MerchantCard: 'merchant card',
+    VisaCard: 'visa card',
+    Charity: 'charity',
+    Venmo: 'venmo'
+} as const;
+
+export type FraudReviewRedemptionMethodEnum = typeof FraudReviewRedemptionMethodEnum[keyof typeof FraudReviewRedemptionMethodEnum];
+
+/**
+ * 
+ * @export
+ * @interface FraudReviewGeo
+ */
+export interface FraudReviewGeo {
+    /**
+     * The recipient\'s IP.
+     * @type {string}
+     * @memberof FraudReviewGeo
+     */
+    'ip'?: string;
+    /**
+     * The country code (ISO-3166 alpha-2 character code) linked to the recipient\'s IP.
+     * @type {string}
+     * @memberof FraudReviewGeo
+     */
+    'country'?: string;
+    /**
+     * The city associated with the recipient\'s IP.
+     * @type {string}
+     * @memberof FraudReviewGeo
+     */
+    'city'?: string;
+}
+/**
+ * The fraud review associated with a reward.
+ * @export
+ * @interface FraudReviewListItem
+ */
+export interface FraudReviewListItem {
+    /**
+     * The current status of the fraud review:  * `flagged` - The reward has been flagged for and waiting manual review. * `blocked` - The reward was reviewed and blocked. * `released` - The reward was reviewed and released. 
+     * @type {string}
+     * @memberof FraudReviewListItem
+     */
+    'status'?: FraudReviewListItemStatusEnum;
+    /**
+     * The array may contain multiple reasons, depending on which rule(s) flagged the reward for review. Reasons can be any of the following:  * `Disallowed IP` * `Disallowed email` * `Disallowed country` * `Over reward dollar limit` * `Over reward count limit` * `VPN detected` * `Device related to multiple emails` * `Device or account related to multiple emails` * `IP on a Tremendous fraud list` * `Bank account on a Tremendous fraud list` * `Fingerprint on a Tremendous fraud list` * `Email on a Tremendous fraud list` * `Phone on a Tremendous fraud list` * `IP related to a blocked reward` * `Bank account related to a blocked reward` * `Fingerprint related to a blocked reward` * `Email related to a blocked reward` * `Phone related to a blocked reward` * `Allowed IP` * `Allowed email` 
+     * @type {Array<string>}
+     * @memberof FraudReviewListItem
+     */
+    'reasons'?: Array<FraudReviewListItemReasonsEnum>;
+    /**
+     * 
+     * @type {OrderWithoutLinkReward}
+     * @memberof FraudReviewListItem
+     */
+    'reward'?: OrderWithoutLinkReward;
+}
+
+export const FraudReviewListItemStatusEnum = {
+    Flagged: 'flagged',
+    Blocked: 'blocked',
+    Released: 'released'
+} as const;
+
+export type FraudReviewListItemStatusEnum = typeof FraudReviewListItemStatusEnum[keyof typeof FraudReviewListItemStatusEnum];
+export const FraudReviewListItemReasonsEnum = {
+    DisallowedIp: 'Disallowed IP',
+    DisallowedEmail: 'Disallowed email',
+    DisallowedCountry: 'Disallowed country',
+    OverRewardDollarLimit: 'Over reward dollar limit',
+    OverRewardCountLimit: 'Over reward count limit',
+    VpnDetected: 'VPN detected',
+    DeviceRelatedToMultipleEmails: 'Device related to multiple emails',
+    DeviceOrAccountRelatedToMultipleEmails: 'Device or account related to multiple emails',
+    IpOnATremendousFraudList: 'IP on a Tremendous fraud list',
+    BankAccountOnATremendousFraudList: 'Bank account on a Tremendous fraud list',
+    FingerprintOnATremendousFraudList: 'Fingerprint on a Tremendous fraud list',
+    EmailOnATremendousFraudList: 'Email on a Tremendous fraud list',
+    PhoneOnATremendousFraudList: 'Phone on a Tremendous fraud list',
+    IpRelatedToABlockedReward: 'IP related to a blocked reward',
+    BankAccountRelatedToABlockedReward: 'Bank account related to a blocked reward',
+    FingerprintRelatedToABlockedReward: 'Fingerprint related to a blocked reward',
+    EmailRelatedToABlockedReward: 'Email related to a blocked reward',
+    PhoneRelatedToABlockedReward: 'Phone related to a blocked reward',
+    AllowedIp: 'Allowed IP',
+    AllowedEmail: 'Allowed email'
+} as const;
+
+export type FraudReviewListItemReasonsEnum = typeof FraudReviewListItemReasonsEnum[keyof typeof FraudReviewListItemReasonsEnum];
+
+/**
+ * 
+ * @export
+ * @enum {string}
+ */
+
+export const FraudReviewReason = {
+    DisallowedIp: 'Disallowed IP',
+    DisallowedEmail: 'Disallowed email',
+    DisallowedCountry: 'Disallowed country',
+    OverRewardDollarLimit: 'Over reward dollar limit',
+    OverRewardCountLimit: 'Over reward count limit',
+    VpnDetected: 'VPN detected',
+    DeviceRelatedToMultipleEmails: 'Device related to multiple emails',
+    DeviceOrAccountRelatedToMultipleEmails: 'Device or account related to multiple emails',
+    IpOnATremendousFraudList: 'IP on a Tremendous fraud list',
+    BankAccountOnATremendousFraudList: 'Bank account on a Tremendous fraud list',
+    FingerprintOnATremendousFraudList: 'Fingerprint on a Tremendous fraud list',
+    EmailOnATremendousFraudList: 'Email on a Tremendous fraud list',
+    PhoneOnATremendousFraudList: 'Phone on a Tremendous fraud list',
+    IpRelatedToABlockedReward: 'IP related to a blocked reward',
+    BankAccountRelatedToABlockedReward: 'Bank account related to a blocked reward',
+    FingerprintRelatedToABlockedReward: 'Fingerprint related to a blocked reward',
+    EmailRelatedToABlockedReward: 'Email related to a blocked reward',
+    PhoneRelatedToABlockedReward: 'Phone related to a blocked reward',
+    AllowedIp: 'Allowed IP',
+    AllowedEmail: 'Allowed email'
+} as const;
+
+export type FraudReviewReason = typeof FraudReviewReason[keyof typeof FraudReviewReason];
+
+
+/**
+ * 
+ * @export
+ * @enum {string}
+ */
+
+export const FraudReviewRedemptionMethod = {
+    Paypal: 'paypal',
+    Bank: 'bank',
+    MerchantCard: 'merchant card',
+    VisaCard: 'visa card',
+    Charity: 'charity',
+    Venmo: 'venmo'
+} as const;
+
+export type FraudReviewRedemptionMethod = typeof FraudReviewRedemptionMethod[keyof typeof FraudReviewRedemptionMethod];
+
+
+/**
+ * 
+ * @export
+ * @interface FraudReviewRelatedRewards
+ */
+export interface FraudReviewRelatedRewards {
+    /**
+     * The IDs of rewards that have similar attributes to the fraud reward. A maximum of 100 IDs is returned. 
+     * @type {Array<string>}
+     * @memberof FraudReviewRelatedRewards
+     */
+    'ids'?: Array<string>;
+    /**
+     * How many related rewards were found in total.
+     * @type {number}
+     * @memberof FraudReviewRelatedRewards
+     */
+    'count'?: number;
+    /**
+     * How many related rewards have been blocked.
+     * @type {number}
+     * @memberof FraudReviewRelatedRewards
+     */
+    'blocked_count'?: number;
+    /**
+     * Total amount claimed by the related rewards (in USD).
+     * @type {number}
+     * @memberof FraudReviewRelatedRewards
+     */
+    'aggregated_value'?: number;
+}
+/**
+ * The current status of the fraud review:  * `flagged` - The reward has been flagged for and waiting manual review. * `blocked` - The reward was reviewed and blocked. * `released` - The reward was reviewed and released. 
+ * @export
+ * @enum {string}
+ */
+
+export const FraudReviewStatus = {
+    Flagged: 'flagged',
+    Blocked: 'blocked',
+    Released: 'released'
+} as const;
+
+export type FraudReviewStatus = typeof FraudReviewStatus[keyof typeof FraudReviewStatus];
+
+
+/**
+ * 
+ * @export
+ * @interface FraudRule200Response
+ */
+export interface FraudRule200Response {
+    /**
+     * A description of the result
+     * @type {string}
+     * @memberof FraudRule200Response
+     */
+    'message': string;
+}
+/**
+ * 
+ * @export
+ * @interface FraudRule400Response
+ */
+export interface FraudRule400Response {
+    /**
+     * 
+     * @type {ListRewards401ResponseErrors}
+     * @memberof FraudRule400Response
+     */
+    'errors': ListRewards401ResponseErrors;
+}
+/**
+ * 
+ * @export
+ * @interface FraudRule422Response
+ */
+export interface FraudRule422Response {
+    /**
+     * 
+     * @type {ListRewards401ResponseErrors}
+     * @memberof FraudRule422Response
+     */
+    'errors': ListRewards401ResponseErrors;
+}
+/**
+ * 
+ * @export
+ * @interface FraudRuleRequest
+ */
+export interface FraudRuleRequest {
+    /**
+     * 
+     * @type {FraudRuleRequestConfig}
+     * @memberof FraudRuleRequest
+     */
+    'config'?: FraudRuleRequestConfig;
+}
+/**
+ * The configuration associated with the rule. The properties allowed depend on the type of rule.
+ * @export
+ * @interface FraudRuleRequestConfig
+ */
+export interface FraudRuleRequestConfig {
+    /**
+     * When type is `whitelist`, it flags any countries that *are not* present in the list. When type is `blacklist`, it flags any countries that *are* present in the list. 
+     * @type {string}
+     * @memberof FraudRuleRequestConfig
+     */
+    'type': FraudRuleRequestConfigTypeEnum;
+    /**
+     * An array of country codes (ISO-3166 alpha-2 character code)
+     * @type {Array<string>}
+     * @memberof FraudRuleRequestConfig
+     */
+    'countries': Array<string>;
+    /**
+     * The list of IP addresses to flag or allow. Accepts both IPv4 and IPv6 addresses using CIDR notation. 
+     * @type {Array<string>}
+     * @memberof FraudRuleRequestConfig
+     */
+    'ips': Array<string>;
+    /**
+     * The list of emails.
+     * @type {Array<string>}
+     * @memberof FraudRuleRequestConfig
+     */
+    'emails': Array<string>;
+    /**
+     * The list of domains. Any subdomains will also be matched against each entry in the list.
+     * @type {Array<string>}
+     * @memberof FraudRuleRequestConfig
+     */
+    'domains'?: Array<string>;
+    /**
+     * The total amount in USD of redeemed rewards to use as a threshold.
+     * @type {number}
+     * @memberof FraudRuleRequestConfig
+     */
+    'amount': number;
+    /**
+     * The period, in days, to consider for the count. Use `all_time` to consider any redeemed rewards.
+     * @type {string}
+     * @memberof FraudRuleRequestConfig
+     */
+    'period': FraudRuleRequestConfigPeriodEnum;
+}
+
+export const FraudRuleRequestConfigTypeEnum = {
+    Whitelist: 'whitelist',
+    Blacklist: 'blacklist'
+} as const;
+
+export type FraudRuleRequestConfigTypeEnum = typeof FraudRuleRequestConfigTypeEnum[keyof typeof FraudRuleRequestConfigTypeEnum];
+export const FraudRuleRequestConfigPeriodEnum = {
+    _7: '7',
+    _30: '30',
+    _90: '90',
+    _120: '120',
+    _365: '365',
+    AllTime: 'all_time'
+} as const;
+
+export type FraudRuleRequestConfigPeriodEnum = typeof FraudRuleRequestConfigPeriodEnum[keyof typeof FraudRuleRequestConfigPeriodEnum];
+
+/**
+ * * `review_country` - Flags when the recipient\'s IP country matches the criteria in the rule * `review_ip` - Flags when recipient\'s IP matches one in the list * `review_email` - Flags when the recipient\'s email matches one in the list * `review_redeemed_rewards_count` - Flags when the recipient redeemed more than the number of rewards specified in the config * `review_redeemed_rewards_amount` - Flags when the recipient redeemed more than the total amount specified in the config * `review_multiple_emails` - Flags when recipient\'s device or account has multiple emails associated * `review_vpn` - Flags when VPN is suspected * `review_tremendous_flag_list` - Flags rewards when redemption attributes match at least one criteria defined by the Tremendous flag list * `review_previously_blocked_recipients` - Flags rewards when the recipient has been blocked before * `allow_ip` - Releases a reward when a recipient\'s IP matches one in the list * `allow_email` - Releases a reward when the recipient\'s email matches one in the list 
+ * @export
+ * @enum {string}
+ */
+
+export const FraudRuleType = {
+    ReviewCountry: 'review_country',
+    ReviewIp: 'review_ip',
+    ReviewEmail: 'review_email',
+    ReviewRedeemedRewardsCount: 'review_redeemed_rewards_count',
+    ReviewRedeemedRewardsAmount: 'review_redeemed_rewards_amount',
+    ReviewMultipleEmails: 'review_multiple_emails',
+    ReviewVpn: 'review_vpn',
+    ReviewTremendousFlagList: 'review_tremendous_flag_list',
+    ReviewPreviouslyBlockedRecipients: 'review_previously_blocked_recipients',
+    AllowIp: 'allow_ip',
+    AllowEmail: 'allow_email'
+} as const;
+
+export type FraudRuleType = typeof FraudRuleType[keyof typeof FraudRuleType];
+
+
+/**
+ * An active fraud rule
+ * @export
+ * @interface FraudRulesListItem
+ */
+export interface FraudRulesListItem {
+    /**
+     * * `review_country` - Flags when the recipient\'s IP country matches the criteria in the rule * `review_ip` - Flags when recipient\'s IP matches one in the list * `review_email` - Flags when the recipient\'s email matches one in the list * `review_redeemed_rewards_count` - Flags when the recipient redeemed more than the number of rewards specified in the config * `review_redeemed_rewards_amount` - Flags when the recipient redeemed more than the total amount specified in the config * `review_multiple_emails` - Flags when recipient\'s device or account has multiple emails associated * `review_vpn` - Flags when VPN is suspected * `review_tremendous_flag_list` - Flags rewards when redemption attributes match at least one criteria defined by the Tremendous flag list * `review_previously_blocked_recipients` - Flags rewards when the recipient has been blocked before * `allow_ip` - Releases a reward when a recipient\'s IP matches one in the list * `allow_email` - Releases a reward when the recipient\'s email matches one in the list 
+     * @type {string}
+     * @memberof FraudRulesListItem
+     */
+    'rule_type'?: FraudRulesListItemRuleTypeEnum;
+    /**
+     * The configuration associated with the rule. The properties allowed depend on the type of rule. This property is only present for rules that require configuration. 
+     * @type {object}
+     * @memberof FraudRulesListItem
+     */
+    'config'?: object | null;
+}
+
+export const FraudRulesListItemRuleTypeEnum = {
+    ReviewCountry: 'review_country',
+    ReviewIp: 'review_ip',
+    ReviewEmail: 'review_email',
+    ReviewRedeemedRewardsCount: 'review_redeemed_rewards_count',
+    ReviewRedeemedRewardsAmount: 'review_redeemed_rewards_amount',
+    ReviewMultipleEmails: 'review_multiple_emails',
+    ReviewVpn: 'review_vpn',
+    ReviewTremendousFlagList: 'review_tremendous_flag_list',
+    ReviewPreviouslyBlockedRecipients: 'review_previously_blocked_recipients',
+    AllowIp: 'allow_ip',
+    AllowEmail: 'allow_email'
+} as const;
+
+export type FraudRulesListItemRuleTypeEnum = typeof FraudRulesListItemRuleTypeEnum[keyof typeof FraudRulesListItemRuleTypeEnum];
+
 /**
  * 
  * @export
@@ -1354,6 +1718,185 @@ export interface GenerateRewardToken200ResponseReward {
      * @memberof GenerateRewardToken200ResponseReward
      */
     'expires_at'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface GetFraudReview200Response
+ */
+export interface GetFraudReview200Response {
+    /**
+     * 
+     * @type {GetFraudReview200ResponseFraudReview}
+     * @memberof GetFraudReview200Response
+     */
+    'fraud_review': GetFraudReview200ResponseFraudReview;
+}
+/**
+ * The fraud review associated with a reward.
+ * @export
+ * @interface GetFraudReview200ResponseFraudReview
+ */
+export interface GetFraudReview200ResponseFraudReview {
+    /**
+     * The current status of the fraud review:  * `flagged` - The reward has been flagged for and waiting manual review. * `blocked` - The reward was reviewed and blocked. * `released` - The reward was reviewed and released. 
+     * @type {string}
+     * @memberof GetFraudReview200ResponseFraudReview
+     */
+    'status'?: GetFraudReview200ResponseFraudReviewStatusEnum;
+    /**
+     * The array may contain multiple reasons, depending on which rule(s) flagged the reward for review. Reasons can be any of the following:  * `Disallowed IP` * `Disallowed email` * `Disallowed country` * `Over reward dollar limit` * `Over reward count limit` * `VPN detected` * `Device related to multiple emails` * `Device or account related to multiple emails` * `IP on a Tremendous fraud list` * `Bank account on a Tremendous fraud list` * `Fingerprint on a Tremendous fraud list` * `Email on a Tremendous fraud list` * `Phone on a Tremendous fraud list` * `IP related to a blocked reward` * `Bank account related to a blocked reward` * `Fingerprint related to a blocked reward` * `Email related to a blocked reward` * `Phone related to a blocked reward` * `Allowed IP` * `Allowed email` 
+     * @type {Array<string>}
+     * @memberof GetFraudReview200ResponseFraudReview
+     */
+    'reasons'?: Array<GetFraudReview200ResponseFraudReviewReasonsEnum>;
+    /**
+     * The name of the person who reviewed the reward, or `Automatic Review` if the reward was blocked automatically. Rewards can be automatically blocked if they remain in the flagged fraud queue for more than 30 days.  This field is only present if the status is not `flagged`. 
+     * @type {string}
+     * @memberof GetFraudReview200ResponseFraudReview
+     */
+    'reviewed_by'?: string;
+    /**
+     * When the reward was blocked or released following fraud review.  This field is only present if the status is not `flagged`. 
+     * @type {string}
+     * @memberof GetFraudReview200ResponseFraudReview
+     */
+    'reviewed_at'?: string;
+    /**
+     * 
+     * @type {GetFraudReview200ResponseFraudReviewRelatedRewards}
+     * @memberof GetFraudReview200ResponseFraudReview
+     */
+    'related_rewards'?: GetFraudReview200ResponseFraudReviewRelatedRewards;
+    /**
+     * The device fingerprint, if known.
+     * @type {string}
+     * @memberof GetFraudReview200ResponseFraudReview
+     */
+    'device_id'?: string;
+    /**
+     * The product selected to claim the reward
+     * @type {string}
+     * @memberof GetFraudReview200ResponseFraudReview
+     */
+    'redemption_method'?: GetFraudReview200ResponseFraudReviewRedemptionMethodEnum;
+    /**
+     * Date the reward was redeemed
+     * @type {string}
+     * @memberof GetFraudReview200ResponseFraudReview
+     */
+    'redeemed_at'?: string;
+    /**
+     * 
+     * @type {GetFraudReview200ResponseFraudReviewGeo}
+     * @memberof GetFraudReview200ResponseFraudReview
+     */
+    'geo'?: GetFraudReview200ResponseFraudReviewGeo;
+    /**
+     * 
+     * @type {ListRewards200ResponseRewardsInner}
+     * @memberof GetFraudReview200ResponseFraudReview
+     */
+    'reward'?: ListRewards200ResponseRewardsInner;
+}
+
+export const GetFraudReview200ResponseFraudReviewStatusEnum = {
+    Flagged: 'flagged',
+    Blocked: 'blocked',
+    Released: 'released'
+} as const;
+
+export type GetFraudReview200ResponseFraudReviewStatusEnum = typeof GetFraudReview200ResponseFraudReviewStatusEnum[keyof typeof GetFraudReview200ResponseFraudReviewStatusEnum];
+export const GetFraudReview200ResponseFraudReviewReasonsEnum = {
+    DisallowedIp: 'Disallowed IP',
+    DisallowedEmail: 'Disallowed email',
+    DisallowedCountry: 'Disallowed country',
+    OverRewardDollarLimit: 'Over reward dollar limit',
+    OverRewardCountLimit: 'Over reward count limit',
+    VpnDetected: 'VPN detected',
+    DeviceRelatedToMultipleEmails: 'Device related to multiple emails',
+    DeviceOrAccountRelatedToMultipleEmails: 'Device or account related to multiple emails',
+    IpOnATremendousFraudList: 'IP on a Tremendous fraud list',
+    BankAccountOnATremendousFraudList: 'Bank account on a Tremendous fraud list',
+    FingerprintOnATremendousFraudList: 'Fingerprint on a Tremendous fraud list',
+    EmailOnATremendousFraudList: 'Email on a Tremendous fraud list',
+    PhoneOnATremendousFraudList: 'Phone on a Tremendous fraud list',
+    IpRelatedToABlockedReward: 'IP related to a blocked reward',
+    BankAccountRelatedToABlockedReward: 'Bank account related to a blocked reward',
+    FingerprintRelatedToABlockedReward: 'Fingerprint related to a blocked reward',
+    EmailRelatedToABlockedReward: 'Email related to a blocked reward',
+    PhoneRelatedToABlockedReward: 'Phone related to a blocked reward',
+    AllowedIp: 'Allowed IP',
+    AllowedEmail: 'Allowed email'
+} as const;
+
+export type GetFraudReview200ResponseFraudReviewReasonsEnum = typeof GetFraudReview200ResponseFraudReviewReasonsEnum[keyof typeof GetFraudReview200ResponseFraudReviewReasonsEnum];
+export const GetFraudReview200ResponseFraudReviewRedemptionMethodEnum = {
+    Paypal: 'paypal',
+    Bank: 'bank',
+    MerchantCard: 'merchant card',
+    VisaCard: 'visa card',
+    Charity: 'charity',
+    Venmo: 'venmo'
+} as const;
+
+export type GetFraudReview200ResponseFraudReviewRedemptionMethodEnum = typeof GetFraudReview200ResponseFraudReviewRedemptionMethodEnum[keyof typeof GetFraudReview200ResponseFraudReviewRedemptionMethodEnum];
+
+/**
+ * The Geo location, based on the recipient\'s IP.
+ * @export
+ * @interface GetFraudReview200ResponseFraudReviewGeo
+ */
+export interface GetFraudReview200ResponseFraudReviewGeo {
+    /**
+     * The recipient\'s IP.
+     * @type {string}
+     * @memberof GetFraudReview200ResponseFraudReviewGeo
+     */
+    'ip'?: string;
+    /**
+     * The country code (ISO-3166 alpha-2 character code) linked to the recipient\'s IP.
+     * @type {string}
+     * @memberof GetFraudReview200ResponseFraudReviewGeo
+     */
+    'country'?: string;
+    /**
+     * The city associated with the recipient\'s IP.
+     * @type {string}
+     * @memberof GetFraudReview200ResponseFraudReviewGeo
+     */
+    'city'?: string;
+}
+/**
+ * The related rewards associated with the fraud review.
+ * @export
+ * @interface GetFraudReview200ResponseFraudReviewRelatedRewards
+ */
+export interface GetFraudReview200ResponseFraudReviewRelatedRewards {
+    /**
+     * The IDs of rewards that have similar attributes to the fraud reward. A maximum of 100 IDs is returned. 
+     * @type {Array<string>}
+     * @memberof GetFraudReview200ResponseFraudReviewRelatedRewards
+     */
+    'ids'?: Array<string>;
+    /**
+     * How many related rewards were found in total.
+     * @type {number}
+     * @memberof GetFraudReview200ResponseFraudReviewRelatedRewards
+     */
+    'count'?: number;
+    /**
+     * How many related rewards have been blocked.
+     * @type {number}
+     * @memberof GetFraudReview200ResponseFraudReviewRelatedRewards
+     */
+    'blocked_count'?: number;
+    /**
+     * Total amount claimed by the related rewards (in USD).
+     * @type {number}
+     * @memberof GetFraudReview200ResponseFraudReviewRelatedRewards
+     */
+    'aggregated_value'?: number;
 }
 /**
  * 
@@ -1686,13 +2229,13 @@ export interface ListCampaigns200ResponseCampaignsInnerEmailStyle {
      * @type {string}
      * @memberof ListCampaigns200ResponseCampaignsInnerEmailStyle
      */
-    'sender_name'?: string;
+    'sender_name'?: string | null;
     /**
      * Email subject line
      * @type {string}
      * @memberof ListCampaigns200ResponseCampaignsInnerEmailStyle
      */
-    'subject_line'?: string;
+    'subject_line'?: string | null;
     /**
      * URL of a publicly-accessible image (png, jpeg, jpg, gif, or svg). This image will be copied to our storage location.
      * @type {string}
@@ -1729,7 +2272,7 @@ export interface ListCampaigns200ResponseCampaignsInnerWebpageStyle {
      * @type {string}
      * @memberof ListCampaigns200ResponseCampaignsInnerWebpageStyle
      */
-    'headline'?: string;
+    'headline'?: string | null;
     /**
      * Message for the reward page
      * @type {string}
@@ -1830,6 +2373,126 @@ export interface ListForexResponse {
      */
     'forex': { [key: string]: number; };
 }
+/**
+ * 
+ * @export
+ * @interface ListFraudReviews200Response
+ */
+export interface ListFraudReviews200Response {
+    /**
+     * 
+     * @type {Array<ListFraudReviews200ResponseFraudReviewsInner>}
+     * @memberof ListFraudReviews200Response
+     */
+    'fraud_reviews': Array<ListFraudReviews200ResponseFraudReviewsInner>;
+}
+/**
+ * The fraud review associated with a reward.
+ * @export
+ * @interface ListFraudReviews200ResponseFraudReviewsInner
+ */
+export interface ListFraudReviews200ResponseFraudReviewsInner {
+    /**
+     * The current status of the fraud review:  * `flagged` - The reward has been flagged for and waiting manual review. * `blocked` - The reward was reviewed and blocked. * `released` - The reward was reviewed and released. 
+     * @type {string}
+     * @memberof ListFraudReviews200ResponseFraudReviewsInner
+     */
+    'status'?: ListFraudReviews200ResponseFraudReviewsInnerStatusEnum;
+    /**
+     * The array may contain multiple reasons, depending on which rule(s) flagged the reward for review. Reasons can be any of the following:  * `Disallowed IP` * `Disallowed email` * `Disallowed country` * `Over reward dollar limit` * `Over reward count limit` * `VPN detected` * `Device related to multiple emails` * `Device or account related to multiple emails` * `IP on a Tremendous fraud list` * `Bank account on a Tremendous fraud list` * `Fingerprint on a Tremendous fraud list` * `Email on a Tremendous fraud list` * `Phone on a Tremendous fraud list` * `IP related to a blocked reward` * `Bank account related to a blocked reward` * `Fingerprint related to a blocked reward` * `Email related to a blocked reward` * `Phone related to a blocked reward` * `Allowed IP` * `Allowed email` 
+     * @type {Array<string>}
+     * @memberof ListFraudReviews200ResponseFraudReviewsInner
+     */
+    'reasons'?: Array<ListFraudReviews200ResponseFraudReviewsInnerReasonsEnum>;
+    /**
+     * 
+     * @type {ListRewards200ResponseRewardsInner}
+     * @memberof ListFraudReviews200ResponseFraudReviewsInner
+     */
+    'reward'?: ListRewards200ResponseRewardsInner;
+}
+
+export const ListFraudReviews200ResponseFraudReviewsInnerStatusEnum = {
+    Flagged: 'flagged',
+    Blocked: 'blocked',
+    Released: 'released'
+} as const;
+
+export type ListFraudReviews200ResponseFraudReviewsInnerStatusEnum = typeof ListFraudReviews200ResponseFraudReviewsInnerStatusEnum[keyof typeof ListFraudReviews200ResponseFraudReviewsInnerStatusEnum];
+export const ListFraudReviews200ResponseFraudReviewsInnerReasonsEnum = {
+    DisallowedIp: 'Disallowed IP',
+    DisallowedEmail: 'Disallowed email',
+    DisallowedCountry: 'Disallowed country',
+    OverRewardDollarLimit: 'Over reward dollar limit',
+    OverRewardCountLimit: 'Over reward count limit',
+    VpnDetected: 'VPN detected',
+    DeviceRelatedToMultipleEmails: 'Device related to multiple emails',
+    DeviceOrAccountRelatedToMultipleEmails: 'Device or account related to multiple emails',
+    IpOnATremendousFraudList: 'IP on a Tremendous fraud list',
+    BankAccountOnATremendousFraudList: 'Bank account on a Tremendous fraud list',
+    FingerprintOnATremendousFraudList: 'Fingerprint on a Tremendous fraud list',
+    EmailOnATremendousFraudList: 'Email on a Tremendous fraud list',
+    PhoneOnATremendousFraudList: 'Phone on a Tremendous fraud list',
+    IpRelatedToABlockedReward: 'IP related to a blocked reward',
+    BankAccountRelatedToABlockedReward: 'Bank account related to a blocked reward',
+    FingerprintRelatedToABlockedReward: 'Fingerprint related to a blocked reward',
+    EmailRelatedToABlockedReward: 'Email related to a blocked reward',
+    PhoneRelatedToABlockedReward: 'Phone related to a blocked reward',
+    AllowedIp: 'Allowed IP',
+    AllowedEmail: 'Allowed email'
+} as const;
+
+export type ListFraudReviews200ResponseFraudReviewsInnerReasonsEnum = typeof ListFraudReviews200ResponseFraudReviewsInnerReasonsEnum[keyof typeof ListFraudReviews200ResponseFraudReviewsInnerReasonsEnum];
+
+/**
+ * 
+ * @export
+ * @interface ListFraudRules200Response
+ */
+export interface ListFraudRules200Response {
+    /**
+     * 
+     * @type {Array<ListFraudRules200ResponseFraudRulesInner>}
+     * @memberof ListFraudRules200Response
+     */
+    'fraud_rules': Array<ListFraudRules200ResponseFraudRulesInner>;
+}
+/**
+ * An active fraud rule
+ * @export
+ * @interface ListFraudRules200ResponseFraudRulesInner
+ */
+export interface ListFraudRules200ResponseFraudRulesInner {
+    /**
+     * * `review_country` - Flags when the recipient\'s IP country matches the criteria in the rule * `review_ip` - Flags when recipient\'s IP matches one in the list * `review_email` - Flags when the recipient\'s email matches one in the list * `review_redeemed_rewards_count` - Flags when the recipient redeemed more than the number of rewards specified in the config * `review_redeemed_rewards_amount` - Flags when the recipient redeemed more than the total amount specified in the config * `review_multiple_emails` - Flags when recipient\'s device or account has multiple emails associated * `review_vpn` - Flags when VPN is suspected * `review_tremendous_flag_list` - Flags rewards when redemption attributes match at least one criteria defined by the Tremendous flag list * `review_previously_blocked_recipients` - Flags rewards when the recipient has been blocked before * `allow_ip` - Releases a reward when a recipient\'s IP matches one in the list * `allow_email` - Releases a reward when the recipient\'s email matches one in the list 
+     * @type {string}
+     * @memberof ListFraudRules200ResponseFraudRulesInner
+     */
+    'rule_type'?: ListFraudRules200ResponseFraudRulesInnerRuleTypeEnum;
+    /**
+     * The configuration associated with the rule. The properties allowed depend on the type of rule. This property is only present for rules that require configuration. 
+     * @type {object}
+     * @memberof ListFraudRules200ResponseFraudRulesInner
+     */
+    'config'?: object | null;
+}
+
+export const ListFraudRules200ResponseFraudRulesInnerRuleTypeEnum = {
+    ReviewCountry: 'review_country',
+    ReviewIp: 'review_ip',
+    ReviewEmail: 'review_email',
+    ReviewRedeemedRewardsCount: 'review_redeemed_rewards_count',
+    ReviewRedeemedRewardsAmount: 'review_redeemed_rewards_amount',
+    ReviewMultipleEmails: 'review_multiple_emails',
+    ReviewVpn: 'review_vpn',
+    ReviewTremendousFlagList: 'review_tremendous_flag_list',
+    ReviewPreviouslyBlockedRecipients: 'review_previously_blocked_recipients',
+    AllowIp: 'allow_ip',
+    AllowEmail: 'allow_email'
+} as const;
+
+export type ListFraudRules200ResponseFraudRulesInnerRuleTypeEnum = typeof ListFraudRules200ResponseFraudRulesInnerRuleTypeEnum[keyof typeof ListFraudRules200ResponseFraudRulesInnerRuleTypeEnum];
+
 /**
  * 
  * @export
@@ -2802,7 +3465,7 @@ export interface ListRewards200ResponseRewardsInnerValue {
      * @type {string}
      * @memberof ListRewards200ResponseRewardsInnerValue
      */
-    'currency_code': ListRewards200ResponseRewardsInnerValueCurrencyCodeEnum;
+    'currency_code'?: ListRewards200ResponseRewardsInnerValueCurrencyCodeEnum;
 }
 
 export const ListRewards200ResponseRewardsInnerValueCurrencyCodeEnum = {
@@ -3473,104 +4136,6 @@ export const OrderBasePaymentChannelEnum = {
 export type OrderBasePaymentChannelEnum = typeof OrderBasePaymentChannelEnum[keyof typeof OrderBasePaymentChannelEnum];
 
 /**
- * 
- * @export
- * @interface OrderForCreate
- */
-export interface OrderForCreate {
-    /**
-     * Reference for this order, supplied by the customer.  When set, `external_id` makes order idempotent. All requests that use the same `external_id` after the initial order creation, will result in a response that returns the data of the initially created order. The response will have a `201` response code. These responses **fail** to create any further orders.  It also allows for retrieving by `external_id` instead of `id` only. 
-     * @type {string}
-     * @memberof OrderForCreate
-     */
-    'external_id'?: string | null;
-    /**
-     * 
-     * @type {CreateOrderRequestPayment}
-     * @memberof OrderForCreate
-     */
-    'payment': CreateOrderRequestPayment;
-    /**
-     * 
-     * @type {OrderForCreateReward}
-     * @memberof OrderForCreate
-     */
-    'reward': OrderForCreateReward;
-}
-/**
- * A single reward, sent to a recipient. A reward is always part of an order.  Either `products` or `campaign_id` must be specified. 
- * @export
- * @interface OrderForCreateReward
- */
-export interface OrderForCreateReward {
-    /**
-     * Tremendous ID of the reward
-     * @type {string}
-     * @memberof OrderForCreateReward
-     */
-    'id'?: string;
-    /**
-     * Tremendous ID of the order this reward is part of.
-     * @type {string}
-     * @memberof OrderForCreateReward
-     */
-    'order_id'?: string;
-    /**
-     * Date the reward was created
-     * @type {string}
-     * @memberof OrderForCreateReward
-     */
-    'created_at'?: string;
-    /**
-     * ID of the campaign in your account, that defines the available products (different gift cards, charity, etc.) that the recipient can choose from. 
-     * @type {string}
-     * @memberof OrderForCreateReward
-     */
-    'campaign_id'?: string | null;
-    /**
-     * List of IDs of product (different gift cards, charity, etc.) that will be available to the recipient to choose from.  Providing a `products` array will override the products made available by the campaign specified using the `campaign_id` property unless the `products` array is empty. It will _not_ override other campaign attributes, like the message and customization of the look and feel. 
-     * @type {Array<string>}
-     * @memberof OrderForCreateReward
-     */
-    'products'?: Array<string>;
-    /**
-     * 
-     * @type {ListRewards200ResponseRewardsInnerValue}
-     * @memberof OrderForCreateReward
-     */
-    'value'?: ListRewards200ResponseRewardsInnerValue;
-    /**
-     * 
-     * @type {ListRewards200ResponseRewardsInnerRecipient}
-     * @memberof OrderForCreateReward
-     */
-    'recipient'?: ListRewards200ResponseRewardsInnerRecipient;
-    /**
-     * Timestamp of reward delivery within the next year. Note that if date-time is provided, the time values will be ignored.
-     * @type {string}
-     * @memberof OrderForCreateReward
-     */
-    'deliver_at'?: string;
-    /**
-     * 
-     * @type {Array<RewardBaseCustomFieldsInner>}
-     * @memberof OrderForCreateReward
-     */
-    'custom_fields'?: Array<RewardBaseCustomFieldsInner>;
-    /**
-     * Set this to translate the redemption experience for this reward. Pass a 2-letter [ISO-639-1 code](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) for the desired language. Defaults to `en`. 
-     * @type {string}
-     * @memberof OrderForCreateReward
-     */
-    'language'?: string;
-    /**
-     * 
-     * @type {CreateOrderRequestRewardDelivery}
-     * @memberof OrderForCreateReward
-     */
-    'delivery'?: CreateOrderRequestRewardDelivery;
-}
-/**
  * Execution status of a given order  <table>   <thead>     <tr>       <th>         Status       </th>       <th>         Description       </th>     </tr>   </thead>   <tbody>     <tr>       <td>         <code>           CANCELED         </code>       </td>       <td>         The order and all of its rewards were canceled.       </td>     </tr>     <tr>       <td>         <code>           CART         </code>       </td>       <td>         The order has been created, but hasn\'t yet been processed.       </td>     </tr>     <tr>       <td>         <code>           EXECUTED         </code>       </td>       <td>         The order has been executed. Payment has been handled and rewards are being delivered (if applicable).       </td>     </tr>     <tr>       <td>         <code>           FAILED         </code>       </td>       <td>         The order could not be processed due to an error. E.g. due to insufficient funds in the account.       </td>     </tr>     <tr>       <td>         <code>           PENDING APPROVAL         </code>       </td>       <td>         The order has been created but needs approval to be executed.       </td>     </tr>     <tr>       <td>         <code>           PENDING INTERNAL PAYMENT APPROVAL         </code>       </td>       <td>         The order has been created but it is under review and requires approval from our team.       </td>     </tr>    </tbody> </table> 
  * @export
  * @enum {string}
@@ -3588,140 +4153,6 @@ export const OrderStatus = {
 export type OrderStatus = typeof OrderStatus[keyof typeof OrderStatus];
 
 
-/**
- * An order wraps around the fulfilment of one or more rewards.
- * @export
- * @interface OrderWithLink
- */
-export interface OrderWithLink {
-    /**
-     * Tremendous ID of the order
-     * @type {string}
-     * @memberof OrderWithLink
-     */
-    'id': string;
-    /**
-     * Reference for this order, supplied by the customer.  When set, `external_id` makes order idempotent. All requests that use the same `external_id` after the initial order creation, will result in a response that returns the data of the initially created order. The response will have a `201` response code. These responses **fail** to create any further orders.  It also allows for retrieving by `external_id` instead of `id` only. 
-     * @type {string}
-     * @memberof OrderWithLink
-     */
-    'external_id'?: string | null;
-    /**
-     * ID of the campaign in your account, that defines the available products (different gift cards, charity, etc.) that the recipient can choose from. 
-     * @type {string}
-     * @memberof OrderWithLink
-     */
-    'campaign_id'?: string | null;
-    /**
-     * Date the order has been created
-     * @type {string}
-     * @memberof OrderWithLink
-     */
-    'created_at': string;
-    /**
-     * Execution status of a given order  <table>   <thead>     <tr>       <th>         Status       </th>       <th>         Description       </th>     </tr>   </thead>   <tbody>     <tr>       <td>         <code>           CANCELED         </code>       </td>       <td>         The order and all of its rewards were canceled.       </td>     </tr>     <tr>       <td>         <code>           CART         </code>       </td>       <td>         The order has been created, but hasn\'t yet been processed.       </td>     </tr>     <tr>       <td>         <code>           EXECUTED         </code>       </td>       <td>         The order has been executed. Payment has been handled and rewards are being delivered (if applicable).       </td>     </tr>     <tr>       <td>         <code>           FAILED         </code>       </td>       <td>         The order could not be processed due to an error. E.g. due to insufficient funds in the account.       </td>     </tr>     <tr>       <td>         <code>           PENDING APPROVAL         </code>       </td>       <td>         The order has been created but needs approval to be executed.       </td>     </tr>     <tr>       <td>         <code>           PENDING INTERNAL PAYMENT APPROVAL         </code>       </td>       <td>         The order has been created but it is under review and requires approval from our team.       </td>     </tr>    </tbody> </table> 
-     * @type {string}
-     * @memberof OrderWithLink
-     */
-    'status': OrderWithLinkStatusEnum;
-    /**
-     * 
-     * @type {OrderBasePayment}
-     * @memberof OrderWithLink
-     */
-    'payment'?: OrderBasePayment;
-    /**
-     * The ID for the invoice associated with this order
-     * @type {string}
-     * @memberof OrderWithLink
-     */
-    'invoice_id'?: string;
-    /**
-     * 
-     * @type {Array<OrderWithLinkRewardsInner>}
-     * @memberof OrderWithLink
-     */
-    'rewards'?: Array<OrderWithLinkRewardsInner>;
-}
-
-export const OrderWithLinkStatusEnum = {
-    Canceled: 'CANCELED',
-    Cart: 'CART',
-    Executed: 'EXECUTED',
-    Failed: 'FAILED',
-    PendingApproval: 'PENDING APPROVAL',
-    PendingInternalPaymentApproval: 'PENDING INTERNAL PAYMENT APPROVAL'
-} as const;
-
-export type OrderWithLinkStatusEnum = typeof OrderWithLinkStatusEnum[keyof typeof OrderWithLinkStatusEnum];
-
-/**
- * A single reward, sent to a recipient. A reward is always part of an order.  Either `products` or `campaign_id` must be specified. 
- * @export
- * @interface OrderWithLinkRewardsInner
- */
-export interface OrderWithLinkRewardsInner {
-    /**
-     * Tremendous ID of the reward
-     * @type {string}
-     * @memberof OrderWithLinkRewardsInner
-     */
-    'id'?: string;
-    /**
-     * Tremendous ID of the order this reward is part of.
-     * @type {string}
-     * @memberof OrderWithLinkRewardsInner
-     */
-    'order_id'?: string;
-    /**
-     * Date the reward was created
-     * @type {string}
-     * @memberof OrderWithLinkRewardsInner
-     */
-    'created_at'?: string;
-    /**
-     * ID of the campaign in your account, that defines the available products (different gift cards, charity, etc.) that the recipient can choose from. 
-     * @type {string}
-     * @memberof OrderWithLinkRewardsInner
-     */
-    'campaign_id'?: string | null;
-    /**
-     * List of IDs of product (different gift cards, charity, etc.) that will be available to the recipient to choose from.  Providing a `products` array will override the products made available by the campaign specified using the `campaign_id` property unless the `products` array is empty. It will _not_ override other campaign attributes, like the message and customization of the look and feel. 
-     * @type {Array<string>}
-     * @memberof OrderWithLinkRewardsInner
-     */
-    'products'?: Array<string>;
-    /**
-     * 
-     * @type {ListRewards200ResponseRewardsInnerValue}
-     * @memberof OrderWithLinkRewardsInner
-     */
-    'value'?: ListRewards200ResponseRewardsInnerValue;
-    /**
-     * 
-     * @type {ListRewards200ResponseRewardsInnerRecipient}
-     * @memberof OrderWithLinkRewardsInner
-     */
-    'recipient'?: ListRewards200ResponseRewardsInnerRecipient;
-    /**
-     * Timestamp of reward delivery within the next year. Note that if date-time is provided, the time values will be ignored.
-     * @type {string}
-     * @memberof OrderWithLinkRewardsInner
-     */
-    'deliver_at'?: string;
-    /**
-     * 
-     * @type {Array<RewardBaseCustomFieldsInner>}
-     * @memberof OrderWithLinkRewardsInner
-     */
-    'custom_fields'?: Array<RewardBaseCustomFieldsInner>;
-    /**
-     * 
-     * @type {RewardWithLinkDelivery}
-     * @memberof OrderWithLinkRewardsInner
-     */
-    'delivery'?: RewardWithLinkDelivery;
-}
 /**
  * An order wraps around the fulfilment of one or more rewards.
  * @export
@@ -4159,7 +4590,7 @@ export const ProductCurrencyCodesEnum = {
 export type ProductCurrencyCodesEnum = typeof ProductCurrencyCodesEnum[keyof typeof ProductCurrencyCodesEnum];
 
 /**
- * To authenticate your requests using asymmetric key pairs (e.g., for signing  embed requests), you need to share your public key with us. The public key  resource allows you to manage your active public keys and track their last  usage. 
+ * To authenticate your requests using asymmetric key pairs (e.g., for signing embed requests), you need to share your public key with us. The public key resource allows you to manage your active public keys and track their last usage. 
  * @export
  * @interface PublicKey
  */
@@ -4197,7 +4628,7 @@ export interface PublicKeysResponse {
     'public_keys': Array<PublicKeysResponsePublicKeysInner>;
 }
 /**
- * To authenticate your requests using asymmetric key pairs (e.g., for signing  embed requests), you need to share your public key with us. The public key  resource allows you to manage your active public keys and track their last  usage. 
+ * To authenticate your requests using asymmetric key pairs (e.g., for signing embed requests), you need to share your public key with us. The public key resource allows you to manage your active public keys and track their last usage. 
  * @export
  * @interface PublicKeysResponsePublicKeysInner
  */
@@ -4272,6 +4703,172 @@ export interface ResendReward422Response {
      */
     'errors': ListRewards401ResponseErrors;
 }
+/**
+ * Flag rewards redeemed in these countries.
+ * @export
+ * @interface ReviewCountry
+ */
+export interface ReviewCountry {
+    /**
+     * When type is `whitelist`, it flags any countries that *are not* present in the list. When type is `blacklist`, it flags any countries that *are* present in the list. 
+     * @type {string}
+     * @memberof ReviewCountry
+     */
+    'type': ReviewCountryTypeEnum;
+    /**
+     * An array of country codes (ISO-3166 alpha-2 character code)
+     * @type {Array<string>}
+     * @memberof ReviewCountry
+     */
+    'countries': Array<string>;
+}
+
+export const ReviewCountryTypeEnum = {
+    Whitelist: 'whitelist',
+    Blacklist: 'blacklist'
+} as const;
+
+export type ReviewCountryTypeEnum = typeof ReviewCountryTypeEnum[keyof typeof ReviewCountryTypeEnum];
+
+/**
+ * List of countries where a matching redemption will trigger a review.
+ * @export
+ * @interface ReviewCountry1
+ */
+export interface ReviewCountry1 {
+    /**
+     * An array of country codes (ISO-3166 alpha-2 character code)
+     * @type {Array<string>}
+     * @memberof ReviewCountry1
+     */
+    'countries': Array<string>;
+}
+/**
+ * Flag rewards with an email or domain matching this list.
+ * @export
+ * @interface ReviewEmail
+ */
+export interface ReviewEmail {
+    /**
+     * The list of emails.
+     * @type {Array<string>}
+     * @memberof ReviewEmail
+     */
+    'emails'?: Array<string>;
+    /**
+     * The list of domains. Any subdomains will also be matched against each entry in the list.
+     * @type {Array<string>}
+     * @memberof ReviewEmail
+     */
+    'domains'?: Array<string>;
+}
+/**
+ * The list of emails and/or domains where a matching redemption will trigger a review. At least one email or domain is required.
+ * @export
+ * @interface ReviewEmail1
+ */
+export interface ReviewEmail1 {
+    /**
+     * The list of emails.
+     * @type {Array<string>}
+     * @memberof ReviewEmail1
+     */
+    'emails'?: Array<string>;
+    /**
+     * The list of domains. Any subdomains will also be matched against each entry in the list.
+     * @type {Array<string>}
+     * @memberof ReviewEmail1
+     */
+    'domains'?: Array<string>;
+}
+/**
+ * Flag rewards redeemed by an IP matching this list.
+ * @export
+ * @interface ReviewIp
+ */
+export interface ReviewIp {
+    /**
+     * The list of IP addresses to flag or allow. Accepts both IPv4 and IPv6 addresses using CIDR notation. 
+     * @type {Array<string>}
+     * @memberof ReviewIp
+     */
+    'ips': Array<string>;
+}
+/**
+ * List of IP addresses and/or IP ranges where a matching redemption will trigger a review.
+ * @export
+ * @interface ReviewIp1
+ */
+export interface ReviewIp1 {
+    /**
+     * The list of IP addresses to flag or allow. Accepts both IPv4 and IPv6 addresses using CIDR notation. 
+     * @type {Array<string>}
+     * @memberof ReviewIp1
+     */
+    'ips': Array<string>;
+}
+/**
+ * If a recipient, device, or IP redeems more than this dollar value of rewards, flag for review.
+ * @export
+ * @interface ReviewRedeemedRewardsAmount
+ */
+export interface ReviewRedeemedRewardsAmount {
+    /**
+     * The total amount in USD of redeemed rewards to use as a threshold.
+     * @type {number}
+     * @memberof ReviewRedeemedRewardsAmount
+     */
+    'amount': number;
+    /**
+     * The period, in days, to consider for the count. Use `all_time` to consider any redeemed rewards.
+     * @type {string}
+     * @memberof ReviewRedeemedRewardsAmount
+     */
+    'period': ReviewRedeemedRewardsAmountPeriodEnum;
+}
+
+export const ReviewRedeemedRewardsAmountPeriodEnum = {
+    _7: '7',
+    _30: '30',
+    _90: '90',
+    _120: '120',
+    _365: '365',
+    AllTime: 'all_time'
+} as const;
+
+export type ReviewRedeemedRewardsAmountPeriodEnum = typeof ReviewRedeemedRewardsAmountPeriodEnum[keyof typeof ReviewRedeemedRewardsAmountPeriodEnum];
+
+/**
+ * If a recipient, device, or IP redeems more than this number of rewards, flag for review.
+ * @export
+ * @interface ReviewRedeemedRewardsCount
+ */
+export interface ReviewRedeemedRewardsCount {
+    /**
+     * The number of redeemed rewards to use as a threshold.
+     * @type {number}
+     * @memberof ReviewRedeemedRewardsCount
+     */
+    'amount': number;
+    /**
+     * The period, in days, to consider for the count. Use `all_time` to consider any redeemed rewards.
+     * @type {string}
+     * @memberof ReviewRedeemedRewardsCount
+     */
+    'period': ReviewRedeemedRewardsCountPeriodEnum;
+}
+
+export const ReviewRedeemedRewardsCountPeriodEnum = {
+    _7: '7',
+    _30: '30',
+    _90: '90',
+    _120: '120',
+    _365: '365',
+    AllTime: 'all_time'
+} as const;
+
+export type ReviewRedeemedRewardsCountPeriodEnum = typeof ReviewRedeemedRewardsCountPeriodEnum[keyof typeof ReviewRedeemedRewardsCountPeriodEnum];
+
 /**
  * A single reward, sent to a recipient. A reward is always part of an order.  Either `products` or `campaign_id` must be specified. 
  * @export
@@ -4493,10 +5090,10 @@ export interface RewardForOrderCreate {
     'language'?: string;
     /**
      * 
-     * @type {CreateOrderRequestRewardDelivery}
+     * @type {SingleRewardOrder1RewardDelivery}
      * @memberof RewardForOrderCreate
      */
-    'delivery'?: CreateOrderRequestRewardDelivery;
+    'delivery'?: SingleRewardOrder1RewardDelivery;
 }
 /**
  * The redemption link for a reward.
@@ -4559,7 +5156,7 @@ export interface RewardValue {
      * @type {string}
      * @memberof RewardValue
      */
-    'currency_code': RewardValueCurrencyCodeEnum;
+    'currency_code'?: RewardValueCurrencyCodeEnum;
 }
 
 export const RewardValueCurrencyCodeEnum = {
@@ -4682,115 +5279,6 @@ export const RewardValueCurrencyCodeEnum = {
 } as const;
 
 export type RewardValueCurrencyCodeEnum = typeof RewardValueCurrencyCodeEnum[keyof typeof RewardValueCurrencyCodeEnum];
-
-/**
- * A single reward, sent to a recipient. A reward is always part of an order.  Either `products` or `campaign_id` must be specified. 
- * @export
- * @interface RewardWithLink
- */
-export interface RewardWithLink {
-    /**
-     * Tremendous ID of the reward
-     * @type {string}
-     * @memberof RewardWithLink
-     */
-    'id'?: string;
-    /**
-     * Tremendous ID of the order this reward is part of.
-     * @type {string}
-     * @memberof RewardWithLink
-     */
-    'order_id'?: string;
-    /**
-     * Date the reward was created
-     * @type {string}
-     * @memberof RewardWithLink
-     */
-    'created_at'?: string;
-    /**
-     * ID of the campaign in your account, that defines the available products (different gift cards, charity, etc.) that the recipient can choose from. 
-     * @type {string}
-     * @memberof RewardWithLink
-     */
-    'campaign_id'?: string | null;
-    /**
-     * List of IDs of product (different gift cards, charity, etc.) that will be available to the recipient to choose from.  Providing a `products` array will override the products made available by the campaign specified using the `campaign_id` property unless the `products` array is empty. It will _not_ override other campaign attributes, like the message and customization of the look and feel. 
-     * @type {Array<string>}
-     * @memberof RewardWithLink
-     */
-    'products'?: Array<string>;
-    /**
-     * 
-     * @type {ListRewards200ResponseRewardsInnerValue}
-     * @memberof RewardWithLink
-     */
-    'value'?: ListRewards200ResponseRewardsInnerValue;
-    /**
-     * 
-     * @type {ListRewards200ResponseRewardsInnerRecipient}
-     * @memberof RewardWithLink
-     */
-    'recipient'?: ListRewards200ResponseRewardsInnerRecipient;
-    /**
-     * Timestamp of reward delivery within the next year. Note that if date-time is provided, the time values will be ignored.
-     * @type {string}
-     * @memberof RewardWithLink
-     */
-    'deliver_at'?: string;
-    /**
-     * 
-     * @type {Array<RewardBaseCustomFieldsInner>}
-     * @memberof RewardWithLink
-     */
-    'custom_fields'?: Array<RewardBaseCustomFieldsInner>;
-    /**
-     * 
-     * @type {RewardWithLinkDelivery}
-     * @memberof RewardWithLink
-     */
-    'delivery'?: RewardWithLinkDelivery;
-}
-/**
- * Details on how the reward is delivered to the recipient. 
- * @export
- * @interface RewardWithLinkDelivery
- */
-export interface RewardWithLinkDelivery {
-    /**
-     * How to deliver the reward to the recipient.  <table>   <thead>     <tr>       <th>Delivery Method</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td><code>EMAIL</code></td>       <td>Deliver the reward to the recipient by email</td>     </tr>     <tr>       <td><code>LINK</code></td>       <td>         <p>Deliver the reward to the recipient via a link.</p>         <p>The link can be retrieved on a successfully ordered reward via the <code>/rewards</code> or <code>/rewards/{id}</code> endpoint. That link must then be  delivered to the recipient out-of-band.</p>       </td>     </tr>     <tr>       <td><code>PHONE</code></td>       <td>Deliver the reward to the recipient by SMS</td>     </tr>   </tbody> </table> 
-     * @type {string}
-     * @memberof RewardWithLinkDelivery
-     */
-    'method': RewardWithLinkDeliveryMethodEnum;
-    /**
-     * Current status of the delivery of the reward:  * `SCHEDULED` - Reward is scheduled for delivery and will be delivered soon. * `FAILED` - Delivery of reward failed (e.g. email bounced). * `SUCCEEDED` - Reward was successfully delivered (email or text message delivered or reward link opened). * `PENDING` - Delivery is pending but not yet scheduled. 
-     * @type {string}
-     * @memberof RewardWithLinkDelivery
-     */
-    'status': RewardWithLinkDeliveryStatusEnum;
-    /**
-     * Link to redeem the reward at. You need to deliver this link to the recipient.  Only available for rewards for which the `method` for delivery is set to `LINK`. 
-     * @type {string}
-     * @memberof RewardWithLinkDelivery
-     */
-    'link'?: string;
-}
-
-export const RewardWithLinkDeliveryMethodEnum = {
-    Email: 'EMAIL',
-    Link: 'LINK',
-    Phone: 'PHONE'
-} as const;
-
-export type RewardWithLinkDeliveryMethodEnum = typeof RewardWithLinkDeliveryMethodEnum[keyof typeof RewardWithLinkDeliveryMethodEnum];
-export const RewardWithLinkDeliveryStatusEnum = {
-    Scheduled: 'SCHEDULED',
-    Failed: 'FAILED',
-    Succeeded: 'SUCCEEDED',
-    Pending: 'PENDING'
-} as const;
-
-export type RewardWithLinkDeliveryStatusEnum = typeof RewardWithLinkDeliveryStatusEnum[keyof typeof RewardWithLinkDeliveryStatusEnum];
 
 /**
  * A single reward, sent to a recipient. A reward is always part of an order.  Either `products` or `campaign_id` must be specified. 
@@ -4934,6 +5422,318 @@ export interface SimulateWebhookRequest {
     'event': string;
 }
 /**
+ * An order that contains a single reward. The reward is sent to a single recipient. 
+ * @export
+ * @interface SingleRewardOrder
+ */
+export interface SingleRewardOrder {
+    /**
+     * Reference for this order, supplied by the customer.  When set, `external_id` makes order idempotent. All requests that use the same `external_id` after the initial order creation, will result in a response that returns the data of the initially created order. The response will have a `201` response code. These responses **fail** to create any further orders.  It also allows for retrieving by `external_id` instead of `id` only. 
+     * @type {string}
+     * @memberof SingleRewardOrder
+     */
+    'external_id'?: string | null;
+    /**
+     * 
+     * @type {SingleRewardOrder1Payment}
+     * @memberof SingleRewardOrder
+     */
+    'payment'?: SingleRewardOrder1Payment;
+    /**
+     * 
+     * @type {SingleRewardOrderReward}
+     * @memberof SingleRewardOrder
+     */
+    'reward': SingleRewardOrderReward;
+}
+/**
+ * An order that contains a single reward. The reward is sent to a single recipient. 
+ * @export
+ * @interface SingleRewardOrder1
+ */
+export interface SingleRewardOrder1 {
+    /**
+     * Reference for this order, supplied by the customer.  When set, `external_id` makes order idempotent. All requests that use the same `external_id` after the initial order creation, will result in a response that returns the data of the initially created order. The response will have a `201` response code. These responses **fail** to create any further orders.  It also allows for retrieving by `external_id` instead of `id` only. 
+     * @type {string}
+     * @memberof SingleRewardOrder1
+     */
+    'external_id'?: string | null;
+    /**
+     * 
+     * @type {SingleRewardOrder1Payment}
+     * @memberof SingleRewardOrder1
+     */
+    'payment'?: SingleRewardOrder1Payment;
+    /**
+     * 
+     * @type {SingleRewardOrder1Reward}
+     * @memberof SingleRewardOrder1
+     */
+    'reward': SingleRewardOrder1Reward;
+}
+/**
+ * 
+ * @export
+ * @interface SingleRewardOrder1Payment
+ */
+export interface SingleRewardOrder1Payment {
+    /**
+     * Tremendous ID of the funding source that will be used to pay for the order. Use `balance` to use your Tremendous\'s balance.
+     * @type {string}
+     * @memberof SingleRewardOrder1Payment
+     */
+    'funding_source_id': string;
+}
+/**
+ * A single reward, sent to a recipient. A reward is always part of an order.  Either `products` or `campaign_id` must be specified. 
+ * @export
+ * @interface SingleRewardOrder1Reward
+ */
+export interface SingleRewardOrder1Reward {
+    /**
+     * ID of the campaign in your account, that defines the available products (different gift cards, charity, etc.) that the recipient can choose from. 
+     * @type {string}
+     * @memberof SingleRewardOrder1Reward
+     */
+    'campaign_id'?: string | null;
+    /**
+     * List of IDs of product (different gift cards, charity, etc.) that will be available to the recipient to choose from.  Providing a `products` array will override the products made available by the campaign specified using the `campaign_id` property unless the `products` array is empty. It will _not_ override other campaign attributes, like the message and customization of the look and feel. 
+     * @type {Array<string>}
+     * @memberof SingleRewardOrder1Reward
+     */
+    'products'?: Array<string>;
+    /**
+     * 
+     * @type {ListRewards200ResponseRewardsInnerValue}
+     * @memberof SingleRewardOrder1Reward
+     */
+    'value'?: ListRewards200ResponseRewardsInnerValue;
+    /**
+     * 
+     * @type {ListRewards200ResponseRewardsInnerRecipient}
+     * @memberof SingleRewardOrder1Reward
+     */
+    'recipient'?: ListRewards200ResponseRewardsInnerRecipient;
+    /**
+     * Timestamp of reward delivery within the next year. Note that if date-time is provided, the time values will be ignored.
+     * @type {string}
+     * @memberof SingleRewardOrder1Reward
+     */
+    'deliver_at'?: string;
+    /**
+     * 
+     * @type {Array<SingleRewardOrder1RewardCustomFieldsInner>}
+     * @memberof SingleRewardOrder1Reward
+     */
+    'custom_fields'?: Array<SingleRewardOrder1RewardCustomFieldsInner>;
+    /**
+     * Set this to translate the redemption experience for this reward. Pass a 2-letter [ISO-639-1 code](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) for the desired language. Defaults to `en`. 
+     * @type {string}
+     * @memberof SingleRewardOrder1Reward
+     */
+    'language'?: string;
+    /**
+     * 
+     * @type {SingleRewardOrder1RewardDelivery}
+     * @memberof SingleRewardOrder1Reward
+     */
+    'delivery'?: SingleRewardOrder1RewardDelivery;
+}
+/**
+ * Reward custom data for searching, tracking or copy (see [Adding custom fields to orders](https://developers.tremendous.com/reference/using-custom-fields-to-add-custom-data-to-rewards).)
+ * @export
+ * @interface SingleRewardOrder1RewardCustomFieldsInner
+ */
+export interface SingleRewardOrder1RewardCustomFieldsInner {
+    /**
+     * Tremendous ID of the custom field
+     * @type {string}
+     * @memberof SingleRewardOrder1RewardCustomFieldsInner
+     */
+    'id'?: string;
+    /**
+     * Value of the custom field
+     * @type {string}
+     * @memberof SingleRewardOrder1RewardCustomFieldsInner
+     */
+    'value'?: string | null;
+}
+/**
+ * Details on how the reward is delivered to the recipient. 
+ * @export
+ * @interface SingleRewardOrder1RewardDelivery
+ */
+export interface SingleRewardOrder1RewardDelivery {
+    /**
+     * How to deliver the reward to the recipient.  <table>   <thead>     <tr>       <th>Delivery Method</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td><code>EMAIL</code></td>       <td>Deliver the reward to the recipient by email</td>     </tr>     <tr>       <td><code>LINK</code></td>       <td>         <p>Deliver the reward to the recipient via a link.</p>         <p>The link can be retrieved on a successfully ordered reward via the <code>/rewards</code> or <code>/rewards/{id}</code> endpoint. That link must then be  delivered to the recipient out-of-band.</p>       </td>     </tr>     <tr>       <td><code>PHONE</code></td>       <td>Deliver the reward to the recipient by SMS</td>     </tr>   </tbody> </table> 
+     * @type {string}
+     * @memberof SingleRewardOrder1RewardDelivery
+     */
+    'method'?: SingleRewardOrder1RewardDeliveryMethodEnum;
+}
+
+export const SingleRewardOrder1RewardDeliveryMethodEnum = {
+    Email: 'EMAIL',
+    Link: 'LINK',
+    Phone: 'PHONE'
+} as const;
+
+export type SingleRewardOrder1RewardDeliveryMethodEnum = typeof SingleRewardOrder1RewardDeliveryMethodEnum[keyof typeof SingleRewardOrder1RewardDeliveryMethodEnum];
+
+/**
+ * A single reward, sent to a recipient. A reward is always part of an order.  Either `products` or `campaign_id` must be specified. 
+ * @export
+ * @interface SingleRewardOrderReward
+ */
+export interface SingleRewardOrderReward {
+    /**
+     * Tremendous ID of the reward
+     * @type {string}
+     * @memberof SingleRewardOrderReward
+     */
+    'id'?: string;
+    /**
+     * Tremendous ID of the order this reward is part of.
+     * @type {string}
+     * @memberof SingleRewardOrderReward
+     */
+    'order_id'?: string;
+    /**
+     * Date the reward was created
+     * @type {string}
+     * @memberof SingleRewardOrderReward
+     */
+    'created_at'?: string;
+    /**
+     * ID of the campaign in your account, that defines the available products (different gift cards, charity, etc.) that the recipient can choose from. 
+     * @type {string}
+     * @memberof SingleRewardOrderReward
+     */
+    'campaign_id'?: string | null;
+    /**
+     * List of IDs of product (different gift cards, charity, etc.) that will be available to the recipient to choose from.  Providing a `products` array will override the products made available by the campaign specified using the `campaign_id` property unless the `products` array is empty. It will _not_ override other campaign attributes, like the message and customization of the look and feel. 
+     * @type {Array<string>}
+     * @memberof SingleRewardOrderReward
+     */
+    'products'?: Array<string>;
+    /**
+     * 
+     * @type {ListRewards200ResponseRewardsInnerValue}
+     * @memberof SingleRewardOrderReward
+     */
+    'value'?: ListRewards200ResponseRewardsInnerValue;
+    /**
+     * 
+     * @type {ListRewards200ResponseRewardsInnerRecipient}
+     * @memberof SingleRewardOrderReward
+     */
+    'recipient'?: ListRewards200ResponseRewardsInnerRecipient;
+    /**
+     * Timestamp of reward delivery within the next year. Note that if date-time is provided, the time values will be ignored.
+     * @type {string}
+     * @memberof SingleRewardOrderReward
+     */
+    'deliver_at'?: string;
+    /**
+     * 
+     * @type {Array<RewardBaseCustomFieldsInner>}
+     * @memberof SingleRewardOrderReward
+     */
+    'custom_fields'?: Array<RewardBaseCustomFieldsInner>;
+    /**
+     * Set this to translate the redemption experience for this reward. Pass a 2-letter [ISO-639-1 code](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) for the desired language. Defaults to `en`. 
+     * @type {string}
+     * @memberof SingleRewardOrderReward
+     */
+    'language'?: string;
+    /**
+     * 
+     * @type {SingleRewardOrder1RewardDelivery}
+     * @memberof SingleRewardOrderReward
+     */
+    'delivery'?: SingleRewardOrder1RewardDelivery;
+}
+/**
+ * 
+ * @export
+ * @interface SingleRewardOrderWithoutLink
+ */
+export interface SingleRewardOrderWithoutLink {
+    /**
+     * 
+     * @type {SingleRewardOrderWithoutLinkOrder}
+     * @memberof SingleRewardOrderWithoutLink
+     */
+    'order': SingleRewardOrderWithoutLinkOrder;
+}
+/**
+ * An order wraps around the fulfilment of one or more rewards.
+ * @export
+ * @interface SingleRewardOrderWithoutLinkOrder
+ */
+export interface SingleRewardOrderWithoutLinkOrder {
+    /**
+     * Tremendous ID of the order
+     * @type {string}
+     * @memberof SingleRewardOrderWithoutLinkOrder
+     */
+    'id': string;
+    /**
+     * Reference for this order, supplied by the customer.  When set, `external_id` makes order idempotent. All requests that use the same `external_id` after the initial order creation, will result in a response that returns the data of the initially created order. The response will have a `201` response code. These responses **fail** to create any further orders.  It also allows for retrieving by `external_id` instead of `id` only. 
+     * @type {string}
+     * @memberof SingleRewardOrderWithoutLinkOrder
+     */
+    'external_id'?: string | null;
+    /**
+     * ID of the campaign in your account, that defines the available products (different gift cards, charity, etc.) that the recipient can choose from. 
+     * @type {string}
+     * @memberof SingleRewardOrderWithoutLinkOrder
+     */
+    'campaign_id'?: string | null;
+    /**
+     * Date the order has been created
+     * @type {string}
+     * @memberof SingleRewardOrderWithoutLinkOrder
+     */
+    'created_at': string;
+    /**
+     * Execution status of a given order  <table>   <thead>     <tr>       <th>         Status       </th>       <th>         Description       </th>     </tr>   </thead>   <tbody>     <tr>       <td>         <code>           CANCELED         </code>       </td>       <td>         The order and all of its rewards were canceled.       </td>     </tr>     <tr>       <td>         <code>           CART         </code>       </td>       <td>         The order has been created, but hasn\'t yet been processed.       </td>     </tr>     <tr>       <td>         <code>           EXECUTED         </code>       </td>       <td>         The order has been executed. Payment has been handled and rewards are being delivered (if applicable).       </td>     </tr>     <tr>       <td>         <code>           FAILED         </code>       </td>       <td>         The order could not be processed due to an error. E.g. due to insufficient funds in the account.       </td>     </tr>     <tr>       <td>         <code>           PENDING APPROVAL         </code>       </td>       <td>         The order has been created but needs approval to be executed.       </td>     </tr>     <tr>       <td>         <code>           PENDING INTERNAL PAYMENT APPROVAL         </code>       </td>       <td>         The order has been created but it is under review and requires approval from our team.       </td>     </tr>    </tbody> </table> 
+     * @type {string}
+     * @memberof SingleRewardOrderWithoutLinkOrder
+     */
+    'status': SingleRewardOrderWithoutLinkOrderStatusEnum;
+    /**
+     * 
+     * @type {OrderBasePayment}
+     * @memberof SingleRewardOrderWithoutLinkOrder
+     */
+    'payment'?: OrderBasePayment;
+    /**
+     * The ID for the invoice associated with this order
+     * @type {string}
+     * @memberof SingleRewardOrderWithoutLinkOrder
+     */
+    'invoice_id'?: string;
+    /**
+     * 
+     * @type {OrderWithoutLinkReward}
+     * @memberof SingleRewardOrderWithoutLinkOrder
+     */
+    'reward'?: OrderWithoutLinkReward;
+}
+
+export const SingleRewardOrderWithoutLinkOrderStatusEnum = {
+    Canceled: 'CANCELED',
+    Cart: 'CART',
+    Executed: 'EXECUTED',
+    Failed: 'FAILED',
+    PendingApproval: 'PENDING APPROVAL',
+    PendingInternalPaymentApproval: 'PENDING INTERNAL PAYMENT APPROVAL'
+} as const;
+
+export type SingleRewardOrderWithoutLinkOrderStatusEnum = typeof SingleRewardOrderWithoutLinkOrderStatusEnum[keyof typeof SingleRewardOrderWithoutLinkOrderStatusEnum];
+
+/**
  * 
  * @export
  * @interface TestPublicKey
@@ -5038,6 +5838,77 @@ export interface UpdateCampaignRequest {
      * @memberof UpdateCampaignRequest
      */
     'email_style'?: ListCampaigns200ResponseCampaignsInnerEmailStyle;
+}
+/**
+ * 
+ * @export
+ * @interface UpdateFraudRuleList200Response
+ */
+export interface UpdateFraudRuleList200Response {
+    /**
+     * A description of the result
+     * @type {string}
+     * @memberof UpdateFraudRuleList200Response
+     */
+    'message': string;
+}
+/**
+ * 
+ * @export
+ * @interface UpdateFraudRuleListRequest
+ */
+export interface UpdateFraudRuleListRequest {
+    /**
+     * * `add` - append the list to the same key of the current configuration * `remove` - remove the entries in the list from the same key of the current configuration 
+     * @type {string}
+     * @memberof UpdateFraudRuleListRequest
+     */
+    'operation': UpdateFraudRuleListRequestOperationEnum;
+    /**
+     * 
+     * @type {UpdateFraudRuleListRequestConfig}
+     * @memberof UpdateFraudRuleListRequest
+     */
+    'config': UpdateFraudRuleListRequestConfig;
+}
+
+export const UpdateFraudRuleListRequestOperationEnum = {
+    Add: 'add',
+    Remove: 'remove'
+} as const;
+
+export type UpdateFraudRuleListRequestOperationEnum = typeof UpdateFraudRuleListRequestOperationEnum[keyof typeof UpdateFraudRuleListRequestOperationEnum];
+
+/**
+ * The configuration associated with the rule. The properties allowed depend on the type of rule.
+ * @export
+ * @interface UpdateFraudRuleListRequestConfig
+ */
+export interface UpdateFraudRuleListRequestConfig {
+    /**
+     * An array of country codes (ISO-3166 alpha-2 character code)
+     * @type {Array<string>}
+     * @memberof UpdateFraudRuleListRequestConfig
+     */
+    'countries': Array<string>;
+    /**
+     * The list of IP addresses to flag or allow. Accepts both IPv4 and IPv6 addresses using CIDR notation. 
+     * @type {Array<string>}
+     * @memberof UpdateFraudRuleListRequestConfig
+     */
+    'ips': Array<string>;
+    /**
+     * The list of emails.
+     * @type {Array<string>}
+     * @memberof UpdateFraudRuleListRequestConfig
+     */
+    'emails': Array<string>;
+    /**
+     * The list of domains. Any subdomains will also be matched against each entry in the list.
+     * @type {Array<string>}
+     * @memberof UpdateFraudRuleListRequestConfig
+     */
+    'domains'?: Array<string>;
 }
 /**
  * 
@@ -5766,6 +6637,780 @@ export class ForexApi extends BaseAPI {
     }
 }
 
+
+
+/**
+ * FraudReviewsApi - axios parameter creator
+ * @export
+ */
+export const FraudReviewsApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * Completes the fraud review identified by the given `id` in the URL, and blocks the reward. The reward is canceled and the amount refunded. 
+         * @summary Block fraud review
+         * @param {string} id The ID of the reward that should be blocked.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        blockFraudReview: async (id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('blockFraudReview', 'id', id)
+            const localVarPath = `/fraud_reviews/{id}/block`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication BearerApiKey required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Retrieve the details of a fraud review, identified by the given `id` in the URL. Returns additional details regarding the fraud review beyond what\'s provided in the List fraud reviews endpoint, including reward details, recipient geolocation, etc. 
+         * @summary Retrieve single fraud review
+         * @param {string} id The ID of the reward that should be retrieved.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getFraudReview: async (id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('getFraudReview', 'id', id)
+            const localVarPath = `/fraud_reviews/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication BearerApiKey required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Retrieve a paginated list of all fraud reviews. List can be filtered by status, created or redeemed at dates. 
+         * @summary List fraud reviews
+         * @param {number} [offset] Offsets the returned list by the given number of records. The returned fraud reviews are ordered (and offsetted) by their redemption date (DESC).
+         * @param {number} [limit] Limits the number of fraud reviews listed. The default value is 10.
+         * @param {ListFraudReviewsStatusEnum} [status] Filters fraud reviews by status. Can be &#x60;flagged&#x60;, &#x60;blocked&#x60; or &#x60;released&#x60;.
+         * @param {string} [createdAtGte] Return results where the created_at field is &gt;&#x3D; to the supplied value. Expects an ISO 8601 datetime.
+         * @param {string} [createdAtLte] Return results where the created_at field is &lt;&#x3D; to the supplied value. Expects an ISO 8601 datetime.
+         * @param {string} [redeemedAtGte] Return results where the redeemed_at field is &gt;&#x3D; the supplied value. Expects an ISO 8601 datetime.
+         * @param {string} [redeemedAtLte] Return results where the redeemed_at field is &lt;&#x3D; the supplied value. Expects an ISO 8601 datetime.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listFraudReviews: async (offset?: number, limit?: number, status?: ListFraudReviewsStatusEnum, createdAtGte?: string, createdAtLte?: string, redeemedAtGte?: string, redeemedAtLte?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/fraud_reviews`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication BearerApiKey required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (offset !== undefined) {
+                localVarQueryParameter['offset'] = offset;
+            }
+
+            if (limit !== undefined) {
+                localVarQueryParameter['limit'] = limit;
+            }
+
+            if (status !== undefined) {
+                localVarQueryParameter['status'] = status;
+            }
+
+            if (createdAtGte !== undefined) {
+                localVarQueryParameter['created_at[gte]'] = createdAtGte;
+            }
+
+            if (createdAtLte !== undefined) {
+                localVarQueryParameter['created_at[lte]'] = createdAtLte;
+            }
+
+            if (redeemedAtGte !== undefined) {
+                localVarQueryParameter['redeemed_at[gte]'] = redeemedAtGte;
+            }
+
+            if (redeemedAtLte !== undefined) {
+                localVarQueryParameter['redeemed_at[lte]'] = redeemedAtLte;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Completes the fraud review identified by the given `id` in the URL, and releases the associated reward to the recipient. 
+         * @summary Release fraud review
+         * @param {string} id The ID of the reward that should be released.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        releaseFraudReview: async (id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('releaseFraudReview', 'id', id)
+            const localVarPath = `/fraud_reviews/{id}/release`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication BearerApiKey required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * FraudReviewsApi - functional programming interface
+ * @export
+ */
+export const FraudReviewsApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = FraudReviewsApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * Completes the fraud review identified by the given `id` in the URL, and blocks the reward. The reward is canceled and the amount refunded. 
+         * @summary Block fraud review
+         * @param {string} id The ID of the reward that should be blocked.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async blockFraudReview(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GetFraudReview200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.blockFraudReview(id, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['FraudReviewsApi.blockFraudReview']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Retrieve the details of a fraud review, identified by the given `id` in the URL. Returns additional details regarding the fraud review beyond what\'s provided in the List fraud reviews endpoint, including reward details, recipient geolocation, etc. 
+         * @summary Retrieve single fraud review
+         * @param {string} id The ID of the reward that should be retrieved.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getFraudReview(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GetFraudReview200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getFraudReview(id, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['FraudReviewsApi.getFraudReview']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Retrieve a paginated list of all fraud reviews. List can be filtered by status, created or redeemed at dates. 
+         * @summary List fraud reviews
+         * @param {number} [offset] Offsets the returned list by the given number of records. The returned fraud reviews are ordered (and offsetted) by their redemption date (DESC).
+         * @param {number} [limit] Limits the number of fraud reviews listed. The default value is 10.
+         * @param {ListFraudReviewsStatusEnum} [status] Filters fraud reviews by status. Can be &#x60;flagged&#x60;, &#x60;blocked&#x60; or &#x60;released&#x60;.
+         * @param {string} [createdAtGte] Return results where the created_at field is &gt;&#x3D; to the supplied value. Expects an ISO 8601 datetime.
+         * @param {string} [createdAtLte] Return results where the created_at field is &lt;&#x3D; to the supplied value. Expects an ISO 8601 datetime.
+         * @param {string} [redeemedAtGte] Return results where the redeemed_at field is &gt;&#x3D; the supplied value. Expects an ISO 8601 datetime.
+         * @param {string} [redeemedAtLte] Return results where the redeemed_at field is &lt;&#x3D; the supplied value. Expects an ISO 8601 datetime.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async listFraudReviews(offset?: number, limit?: number, status?: ListFraudReviewsStatusEnum, createdAtGte?: string, createdAtLte?: string, redeemedAtGte?: string, redeemedAtLte?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListFraudReviews200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.listFraudReviews(offset, limit, status, createdAtGte, createdAtLte, redeemedAtGte, redeemedAtLte, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['FraudReviewsApi.listFraudReviews']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Completes the fraud review identified by the given `id` in the URL, and releases the associated reward to the recipient. 
+         * @summary Release fraud review
+         * @param {string} id The ID of the reward that should be released.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async releaseFraudReview(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GetFraudReview200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.releaseFraudReview(id, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['FraudReviewsApi.releaseFraudReview']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+    }
+};
+
+/**
+ * FraudReviewsApi - factory interface
+ * @export
+ */
+export const FraudReviewsApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = FraudReviewsApiFp(configuration)
+    return {
+        /**
+         * Completes the fraud review identified by the given `id` in the URL, and blocks the reward. The reward is canceled and the amount refunded. 
+         * @summary Block fraud review
+         * @param {string} id The ID of the reward that should be blocked.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        blockFraudReview(id: string, options?: any): AxiosPromise<GetFraudReview200Response> {
+            return localVarFp.blockFraudReview(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Retrieve the details of a fraud review, identified by the given `id` in the URL. Returns additional details regarding the fraud review beyond what\'s provided in the List fraud reviews endpoint, including reward details, recipient geolocation, etc. 
+         * @summary Retrieve single fraud review
+         * @param {string} id The ID of the reward that should be retrieved.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getFraudReview(id: string, options?: any): AxiosPromise<GetFraudReview200Response> {
+            return localVarFp.getFraudReview(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Retrieve a paginated list of all fraud reviews. List can be filtered by status, created or redeemed at dates. 
+         * @summary List fraud reviews
+         * @param {number} [offset] Offsets the returned list by the given number of records. The returned fraud reviews are ordered (and offsetted) by their redemption date (DESC).
+         * @param {number} [limit] Limits the number of fraud reviews listed. The default value is 10.
+         * @param {ListFraudReviewsStatusEnum} [status] Filters fraud reviews by status. Can be &#x60;flagged&#x60;, &#x60;blocked&#x60; or &#x60;released&#x60;.
+         * @param {string} [createdAtGte] Return results where the created_at field is &gt;&#x3D; to the supplied value. Expects an ISO 8601 datetime.
+         * @param {string} [createdAtLte] Return results where the created_at field is &lt;&#x3D; to the supplied value. Expects an ISO 8601 datetime.
+         * @param {string} [redeemedAtGte] Return results where the redeemed_at field is &gt;&#x3D; the supplied value. Expects an ISO 8601 datetime.
+         * @param {string} [redeemedAtLte] Return results where the redeemed_at field is &lt;&#x3D; the supplied value. Expects an ISO 8601 datetime.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listFraudReviews(offset?: number, limit?: number, status?: ListFraudReviewsStatusEnum, createdAtGte?: string, createdAtLte?: string, redeemedAtGte?: string, redeemedAtLte?: string, options?: any): AxiosPromise<ListFraudReviews200Response> {
+            return localVarFp.listFraudReviews(offset, limit, status, createdAtGte, createdAtLte, redeemedAtGte, redeemedAtLte, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Completes the fraud review identified by the given `id` in the URL, and releases the associated reward to the recipient. 
+         * @summary Release fraud review
+         * @param {string} id The ID of the reward that should be released.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        releaseFraudReview(id: string, options?: any): AxiosPromise<GetFraudReview200Response> {
+            return localVarFp.releaseFraudReview(id, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * FraudReviewsApi - object-oriented interface
+ * @export
+ * @class FraudReviewsApi
+ * @extends {BaseAPI}
+ */
+export class FraudReviewsApi extends BaseAPI {
+    /**
+     * Completes the fraud review identified by the given `id` in the URL, and blocks the reward. The reward is canceled and the amount refunded. 
+     * @summary Block fraud review
+     * @param {string} id The ID of the reward that should be blocked.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof FraudReviewsApi
+     */
+    public blockFraudReview(id: string, options?: RawAxiosRequestConfig) {
+        return FraudReviewsApiFp(this.configuration).blockFraudReview(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Retrieve the details of a fraud review, identified by the given `id` in the URL. Returns additional details regarding the fraud review beyond what\'s provided in the List fraud reviews endpoint, including reward details, recipient geolocation, etc. 
+     * @summary Retrieve single fraud review
+     * @param {string} id The ID of the reward that should be retrieved.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof FraudReviewsApi
+     */
+    public getFraudReview(id: string, options?: RawAxiosRequestConfig) {
+        return FraudReviewsApiFp(this.configuration).getFraudReview(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Retrieve a paginated list of all fraud reviews. List can be filtered by status, created or redeemed at dates. 
+     * @summary List fraud reviews
+     * @param {number} [offset] Offsets the returned list by the given number of records. The returned fraud reviews are ordered (and offsetted) by their redemption date (DESC).
+     * @param {number} [limit] Limits the number of fraud reviews listed. The default value is 10.
+     * @param {ListFraudReviewsStatusEnum} [status] Filters fraud reviews by status. Can be &#x60;flagged&#x60;, &#x60;blocked&#x60; or &#x60;released&#x60;.
+     * @param {string} [createdAtGte] Return results where the created_at field is &gt;&#x3D; to the supplied value. Expects an ISO 8601 datetime.
+     * @param {string} [createdAtLte] Return results where the created_at field is &lt;&#x3D; to the supplied value. Expects an ISO 8601 datetime.
+     * @param {string} [redeemedAtGte] Return results where the redeemed_at field is &gt;&#x3D; the supplied value. Expects an ISO 8601 datetime.
+     * @param {string} [redeemedAtLte] Return results where the redeemed_at field is &lt;&#x3D; the supplied value. Expects an ISO 8601 datetime.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof FraudReviewsApi
+     */
+    public listFraudReviews(offset?: number, limit?: number, status?: ListFraudReviewsStatusEnum, createdAtGte?: string, createdAtLte?: string, redeemedAtGte?: string, redeemedAtLte?: string, options?: RawAxiosRequestConfig) {
+        return FraudReviewsApiFp(this.configuration).listFraudReviews(offset, limit, status, createdAtGte, createdAtLte, redeemedAtGte, redeemedAtLte, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Completes the fraud review identified by the given `id` in the URL, and releases the associated reward to the recipient. 
+     * @summary Release fraud review
+     * @param {string} id The ID of the reward that should be released.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof FraudReviewsApi
+     */
+    public releaseFraudReview(id: string, options?: RawAxiosRequestConfig) {
+        return FraudReviewsApiFp(this.configuration).releaseFraudReview(id, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+/**
+ * @export
+ */
+export const ListFraudReviewsStatusEnum = {
+    Flagged: 'flagged',
+    Blocked: 'blocked',
+    Released: 'released'
+} as const;
+export type ListFraudReviewsStatusEnum = typeof ListFraudReviewsStatusEnum[keyof typeof ListFraudReviewsStatusEnum];
+
+
+/**
+ * FraudRulesApi - axios parameter creator
+ * @export
+ */
+export const FraudRulesApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * Deletes the rule of the type passed in the URL. 
+         * @summary Delete fraud rule
+         * @param {DeleteFraudRuleRuleTypeEnum} ruleType The rule type to create or update.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deleteFraudRule: async (ruleType: DeleteFraudRuleRuleTypeEnum, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'ruleType' is not null or undefined
+            assertParamExists('deleteFraudRule', 'ruleType', ruleType)
+            const localVarPath = `/fraud_rules/{rule_type}`
+                .replace(`{${"rule_type"}}`, encodeURIComponent(String(ruleType)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication BearerApiKey required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Configure a fraud rule of the type passed in the URL. If a rule of the same type already exists, it will be overwritten. 
+         * @summary Configure fraud rule
+         * @param {FraudRuleRuleTypeEnum} ruleType The rule type to create or update.
+         * @param {FraudRuleRequest} [fraudRuleRequest] Rules &#x60;review_multiple_emails&#x60;, &#x60;review_vpn&#x60;, &#x60;review_tremendous_flaglist&#x60;, and &#x60;review_previously_blocked_recipients&#x60; require no body.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        fraudRule: async (ruleType: FraudRuleRuleTypeEnum, fraudRuleRequest?: FraudRuleRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'ruleType' is not null or undefined
+            assertParamExists('fraudRule', 'ruleType', ruleType)
+            const localVarPath = `/fraud_rules/{rule_type}`
+                .replace(`{${"rule_type"}}`, encodeURIComponent(String(ruleType)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication BearerApiKey required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(fraudRuleRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * List active fraud rules associated with the organization tied to your API key. 
+         * @summary List fraud rules
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listFraudRules: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/fraud_rules`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication BearerApiKey required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Use this endpoint to modify a list associated with an already-configured rule. Add and remove operations supported.  For example, to append new IPs to the `review_ip` rule, a valid JSON body would be: ```json   {     \"operation\": \"add\",     \"config\": {       \"ips\": [\"123.123.123.123\"]     }   } ``` 
+         * @summary Update fraud rule list
+         * @param {UpdateFraudRuleListRuleTypeEnum} ruleType The rule type to create or update.
+         * @param {UpdateFraudRuleListRequest} updateFraudRuleListRequest The lists to add or remove from the current configuration
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateFraudRuleList: async (ruleType: UpdateFraudRuleListRuleTypeEnum, updateFraudRuleListRequest: UpdateFraudRuleListRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'ruleType' is not null or undefined
+            assertParamExists('updateFraudRuleList', 'ruleType', ruleType)
+            // verify required parameter 'updateFraudRuleListRequest' is not null or undefined
+            assertParamExists('updateFraudRuleList', 'updateFraudRuleListRequest', updateFraudRuleListRequest)
+            const localVarPath = `/fraud_rules/{rule_type}/update_list`
+                .replace(`{${"rule_type"}}`, encodeURIComponent(String(ruleType)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication BearerApiKey required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(updateFraudRuleListRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * FraudRulesApi - functional programming interface
+ * @export
+ */
+export const FraudRulesApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = FraudRulesApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * Deletes the rule of the type passed in the URL. 
+         * @summary Delete fraud rule
+         * @param {DeleteFraudRuleRuleTypeEnum} ruleType The rule type to create or update.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async deleteFraudRule(ruleType: DeleteFraudRuleRuleTypeEnum, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DeleteFraudRule200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.deleteFraudRule(ruleType, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['FraudRulesApi.deleteFraudRule']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Configure a fraud rule of the type passed in the URL. If a rule of the same type already exists, it will be overwritten. 
+         * @summary Configure fraud rule
+         * @param {FraudRuleRuleTypeEnum} ruleType The rule type to create or update.
+         * @param {FraudRuleRequest} [fraudRuleRequest] Rules &#x60;review_multiple_emails&#x60;, &#x60;review_vpn&#x60;, &#x60;review_tremendous_flaglist&#x60;, and &#x60;review_previously_blocked_recipients&#x60; require no body.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async fraudRule(ruleType: FraudRuleRuleTypeEnum, fraudRuleRequest?: FraudRuleRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FraudRule200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.fraudRule(ruleType, fraudRuleRequest, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['FraudRulesApi.fraudRule']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * List active fraud rules associated with the organization tied to your API key. 
+         * @summary List fraud rules
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async listFraudRules(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListFraudRules200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.listFraudRules(options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['FraudRulesApi.listFraudRules']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Use this endpoint to modify a list associated with an already-configured rule. Add and remove operations supported.  For example, to append new IPs to the `review_ip` rule, a valid JSON body would be: ```json   {     \"operation\": \"add\",     \"config\": {       \"ips\": [\"123.123.123.123\"]     }   } ``` 
+         * @summary Update fraud rule list
+         * @param {UpdateFraudRuleListRuleTypeEnum} ruleType The rule type to create or update.
+         * @param {UpdateFraudRuleListRequest} updateFraudRuleListRequest The lists to add or remove from the current configuration
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async updateFraudRuleList(ruleType: UpdateFraudRuleListRuleTypeEnum, updateFraudRuleListRequest: UpdateFraudRuleListRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UpdateFraudRuleList200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.updateFraudRuleList(ruleType, updateFraudRuleListRequest, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['FraudRulesApi.updateFraudRuleList']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+    }
+};
+
+/**
+ * FraudRulesApi - factory interface
+ * @export
+ */
+export const FraudRulesApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = FraudRulesApiFp(configuration)
+    return {
+        /**
+         * Deletes the rule of the type passed in the URL. 
+         * @summary Delete fraud rule
+         * @param {DeleteFraudRuleRuleTypeEnum} ruleType The rule type to create or update.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deleteFraudRule(ruleType: DeleteFraudRuleRuleTypeEnum, options?: any): AxiosPromise<DeleteFraudRule200Response> {
+            return localVarFp.deleteFraudRule(ruleType, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Configure a fraud rule of the type passed in the URL. If a rule of the same type already exists, it will be overwritten. 
+         * @summary Configure fraud rule
+         * @param {FraudRuleRuleTypeEnum} ruleType The rule type to create or update.
+         * @param {FraudRuleRequest} [fraudRuleRequest] Rules &#x60;review_multiple_emails&#x60;, &#x60;review_vpn&#x60;, &#x60;review_tremendous_flaglist&#x60;, and &#x60;review_previously_blocked_recipients&#x60; require no body.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        fraudRule(ruleType: FraudRuleRuleTypeEnum, fraudRuleRequest?: FraudRuleRequest, options?: any): AxiosPromise<FraudRule200Response> {
+            return localVarFp.fraudRule(ruleType, fraudRuleRequest, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * List active fraud rules associated with the organization tied to your API key. 
+         * @summary List fraud rules
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listFraudRules(options?: any): AxiosPromise<ListFraudRules200Response> {
+            return localVarFp.listFraudRules(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Use this endpoint to modify a list associated with an already-configured rule. Add and remove operations supported.  For example, to append new IPs to the `review_ip` rule, a valid JSON body would be: ```json   {     \"operation\": \"add\",     \"config\": {       \"ips\": [\"123.123.123.123\"]     }   } ``` 
+         * @summary Update fraud rule list
+         * @param {UpdateFraudRuleListRuleTypeEnum} ruleType The rule type to create or update.
+         * @param {UpdateFraudRuleListRequest} updateFraudRuleListRequest The lists to add or remove from the current configuration
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateFraudRuleList(ruleType: UpdateFraudRuleListRuleTypeEnum, updateFraudRuleListRequest: UpdateFraudRuleListRequest, options?: any): AxiosPromise<UpdateFraudRuleList200Response> {
+            return localVarFp.updateFraudRuleList(ruleType, updateFraudRuleListRequest, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * FraudRulesApi - object-oriented interface
+ * @export
+ * @class FraudRulesApi
+ * @extends {BaseAPI}
+ */
+export class FraudRulesApi extends BaseAPI {
+    /**
+     * Deletes the rule of the type passed in the URL. 
+     * @summary Delete fraud rule
+     * @param {DeleteFraudRuleRuleTypeEnum} ruleType The rule type to create or update.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof FraudRulesApi
+     */
+    public deleteFraudRule(ruleType: DeleteFraudRuleRuleTypeEnum, options?: RawAxiosRequestConfig) {
+        return FraudRulesApiFp(this.configuration).deleteFraudRule(ruleType, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Configure a fraud rule of the type passed in the URL. If a rule of the same type already exists, it will be overwritten. 
+     * @summary Configure fraud rule
+     * @param {FraudRuleRuleTypeEnum} ruleType The rule type to create or update.
+     * @param {FraudRuleRequest} [fraudRuleRequest] Rules &#x60;review_multiple_emails&#x60;, &#x60;review_vpn&#x60;, &#x60;review_tremendous_flaglist&#x60;, and &#x60;review_previously_blocked_recipients&#x60; require no body.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof FraudRulesApi
+     */
+    public fraudRule(ruleType: FraudRuleRuleTypeEnum, fraudRuleRequest?: FraudRuleRequest, options?: RawAxiosRequestConfig) {
+        return FraudRulesApiFp(this.configuration).fraudRule(ruleType, fraudRuleRequest, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * List active fraud rules associated with the organization tied to your API key. 
+     * @summary List fraud rules
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof FraudRulesApi
+     */
+    public listFraudRules(options?: RawAxiosRequestConfig) {
+        return FraudRulesApiFp(this.configuration).listFraudRules(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Use this endpoint to modify a list associated with an already-configured rule. Add and remove operations supported.  For example, to append new IPs to the `review_ip` rule, a valid JSON body would be: ```json   {     \"operation\": \"add\",     \"config\": {       \"ips\": [\"123.123.123.123\"]     }   } ``` 
+     * @summary Update fraud rule list
+     * @param {UpdateFraudRuleListRuleTypeEnum} ruleType The rule type to create or update.
+     * @param {UpdateFraudRuleListRequest} updateFraudRuleListRequest The lists to add or remove from the current configuration
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof FraudRulesApi
+     */
+    public updateFraudRuleList(ruleType: UpdateFraudRuleListRuleTypeEnum, updateFraudRuleListRequest: UpdateFraudRuleListRequest, options?: RawAxiosRequestConfig) {
+        return FraudRulesApiFp(this.configuration).updateFraudRuleList(ruleType, updateFraudRuleListRequest, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+/**
+ * @export
+ */
+export const DeleteFraudRuleRuleTypeEnum = {
+    ReviewCountry: 'review_country',
+    ReviewIp: 'review_ip',
+    ReviewEmail: 'review_email',
+    ReviewRedeemedRewardsCount: 'review_redeemed_rewards_count',
+    ReviewRedeemedRewardsAmount: 'review_redeemed_rewards_amount',
+    ReviewMultipleEmails: 'review_multiple_emails',
+    ReviewVpn: 'review_vpn',
+    ReviewTremendousFlagList: 'review_tremendous_flag_list',
+    ReviewPreviouslyBlockedRecipients: 'review_previously_blocked_recipients',
+    AllowIp: 'allow_ip',
+    AllowEmail: 'allow_email'
+} as const;
+export type DeleteFraudRuleRuleTypeEnum = typeof DeleteFraudRuleRuleTypeEnum[keyof typeof DeleteFraudRuleRuleTypeEnum];
+/**
+ * @export
+ */
+export const FraudRuleRuleTypeEnum = {
+    ReviewCountry: 'review_country',
+    ReviewIp: 'review_ip',
+    ReviewEmail: 'review_email',
+    ReviewRedeemedRewardsCount: 'review_redeemed_rewards_count',
+    ReviewRedeemedRewardsAmount: 'review_redeemed_rewards_amount',
+    ReviewMultipleEmails: 'review_multiple_emails',
+    ReviewVpn: 'review_vpn',
+    ReviewTremendousFlagList: 'review_tremendous_flag_list',
+    ReviewPreviouslyBlockedRecipients: 'review_previously_blocked_recipients',
+    AllowIp: 'allow_ip',
+    AllowEmail: 'allow_email'
+} as const;
+export type FraudRuleRuleTypeEnum = typeof FraudRuleRuleTypeEnum[keyof typeof FraudRuleRuleTypeEnum];
+/**
+ * @export
+ */
+export const UpdateFraudRuleListRuleTypeEnum = {
+    ReviewCountry: 'review_country',
+    ReviewIp: 'review_ip',
+    ReviewEmail: 'review_email',
+    AllowIp: 'allow_ip',
+    AllowEmail: 'allow_email'
+} as const;
+export type UpdateFraudRuleListRuleTypeEnum = typeof UpdateFraudRuleListRuleTypeEnum[keyof typeof UpdateFraudRuleListRuleTypeEnum];
 
 
 /**
@@ -6928,7 +8573,7 @@ export const OrdersApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async approveOrder(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CreateOrder201Response>> {
+        async approveOrder(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CreateOrder200Response>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.approveOrder(id, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['OrdersApi.approveOrder']?.[localVarOperationServerIndex]?.url;
@@ -6954,7 +8599,7 @@ export const OrdersApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getOrder(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CreateOrder201Response>> {
+        async getOrder(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CreateOrder200Response>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getOrder(id, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['OrdersApi.getOrder']?.[localVarOperationServerIndex]?.url;
@@ -6985,7 +8630,7 @@ export const OrdersApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async rejectOrder(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CreateOrder201Response>> {
+        async rejectOrder(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CreateOrder200Response>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.rejectOrder(id, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['OrdersApi.rejectOrder']?.[localVarOperationServerIndex]?.url;
@@ -7008,7 +8653,7 @@ export const OrdersApiFactory = function (configuration?: Configuration, basePat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        approveOrder(id: string, options?: any): AxiosPromise<CreateOrder201Response> {
+        approveOrder(id: string, options?: any): AxiosPromise<CreateOrder200Response> {
             return localVarFp.approveOrder(id, options).then((request) => request(axios, basePath));
         },
         /**
@@ -7028,7 +8673,7 @@ export const OrdersApiFactory = function (configuration?: Configuration, basePat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getOrder(id: string, options?: any): AxiosPromise<CreateOrder201Response> {
+        getOrder(id: string, options?: any): AxiosPromise<CreateOrder200Response> {
             return localVarFp.getOrder(id, options).then((request) => request(axios, basePath));
         },
         /**
@@ -7053,7 +8698,7 @@ export const OrdersApiFactory = function (configuration?: Configuration, basePat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        rejectOrder(id: string, options?: any): AxiosPromise<CreateOrder201Response> {
+        rejectOrder(id: string, options?: any): AxiosPromise<CreateOrder200Response> {
             return localVarFp.rejectOrder(id, options).then((request) => request(axios, basePath));
         },
     };
