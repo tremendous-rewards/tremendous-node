@@ -22,39 +22,15 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.RewardWithoutLinkDeliveryMethodEnum = exports.RewardWithLinkDeliveryStatusEnum = exports.RewardWithLinkDeliveryMethodEnum = exports.RewardValueCurrencyCodeEnum = exports.ProductCurrencyCodesEnum = exports.ProductCategoryEnum = exports.PaymentDetailsChannelEnum = exports.OrganizationStatusEnum = exports.OrderWithoutLinkStatusEnum = exports.OrderWithLinkStatusEnum = exports.OrderStatus = exports.OrderBasePaymentChannelEnum = exports.OrderBaseStatusEnum = exports.OrderStatusEnum = exports.MemberWithoutEventsStatusEnum = exports.MemberWithEventsStatusEnum = exports.MemberBaseStatusEnum = exports.MemberStatusEnum = exports.ListRewards200ResponseRewardsInnerValueCurrencyCodeEnum = exports.ListRewards200ResponseRewardsInnerDeliveryStatusEnum = exports.ListRewards200ResponseRewardsInnerDeliveryMethodEnum = exports.ListProductsResponseProductsInnerImagesInnerTypeEnum = exports.ListProductsResponseProductsInnerCurrencyCodesEnum = exports.ListProductsResponseProductsInnerCategoryEnum = exports.ListOrganizations200ResponseOrganizationsInnerStatusEnum = exports.ListOrders200ResponseOrdersInnerPaymentChannelEnum = exports.ListOrders200ResponseOrdersInnerStatusEnum = exports.ListMembers200ResponseMembersInnerStatusEnum = exports.ListInvoices200ResponseInvoicesInnerStatusEnum = exports.ListFundingSources200ResponseFundingSourcesInnerMetaNetworkEnum = exports.ListFundingSources200ResponseFundingSourcesInnerMetaAccountTypeEnum = exports.ListFundingSources200ResponseFundingSourcesInnerTypeEnum = exports.ListFundingSources200ResponseFundingSourcesInnerMethodEnum = exports.InvoiceStatusEnum = exports.GetMember200ResponseMemberEventsInnerTypeEnum = exports.GetMember200ResponseMemberStatusEnum = exports.FundingSourceTypeEnum = exports.FundingSourceMethodEnum = exports.DeliveryStatus = exports.DeliveryMethod = exports.DeliveryDetailsWithLinkStatusEnum = exports.DeliveryDetailsWithLinkMethodEnum = exports.DeliveryDetailsStatusEnum = exports.DeliveryDetailsMethodEnum = exports.CurrencyCodes = exports.CreateOrganization200ResponseOrganizationStatusEnum = exports.CreateOrderRequestRewardDeliveryMethodEnum = exports.CreateOrder200ResponseOrderRewardsInnerDeliveryStatusEnum = exports.CreateOrder200ResponseOrderRewardsInnerDeliveryMethodEnum = exports.CreateOrder200ResponseOrderStatusEnum = void 0;
-exports.RolesApiAxiosParamCreator = exports.RewardsApi = exports.RewardsApiFactory = exports.RewardsApiFp = exports.RewardsApiAxiosParamCreator = exports.PublicKeysApi = exports.PublicKeysApiFactory = exports.PublicKeysApiFp = exports.PublicKeysApiAxiosParamCreator = exports.ProductsApi = exports.ProductsApiFactory = exports.ProductsApiFp = exports.ProductsApiAxiosParamCreator = exports.OrganizationsApi = exports.OrganizationsApiFactory = exports.OrganizationsApiFp = exports.OrganizationsApiAxiosParamCreator = exports.OrdersApi = exports.OrdersApiFactory = exports.OrdersApiFp = exports.OrdersApiAxiosParamCreator = exports.MembersApi = exports.MembersApiFactory = exports.MembersApiFp = exports.MembersApiAxiosParamCreator = exports.InvoicesApi = exports.InvoicesApiFactory = exports.InvoicesApiFp = exports.InvoicesApiAxiosParamCreator = exports.FundingSourcesApi = exports.FundingSourcesApiFactory = exports.FundingSourcesApiFp = exports.FundingSourcesApiAxiosParamCreator = exports.ForexApi = exports.ForexApiFactory = exports.ForexApiFp = exports.ForexApiAxiosParamCreator = exports.FieldsApi = exports.FieldsApiFactory = exports.FieldsApiFp = exports.FieldsApiAxiosParamCreator = exports.CampaignsApi = exports.CampaignsApiFactory = exports.CampaignsApiFp = exports.CampaignsApiAxiosParamCreator = exports.BalanceTransactionsApi = exports.BalanceTransactionsApiFactory = exports.BalanceTransactionsApiFp = exports.BalanceTransactionsApiAxiosParamCreator = exports.RewardWithoutLinkDeliveryStatusEnum = void 0;
-exports.WebhooksApi = exports.WebhooksApiFactory = exports.WebhooksApiFp = exports.WebhooksApiAxiosParamCreator = exports.RolesApi = exports.RolesApiFactory = exports.RolesApiFp = void 0;
+exports.MemberWithEventsStatusEnum = exports.MemberBaseStatusEnum = exports.MemberStatusEnum = exports.ListRewards200ResponseRewardsInnerValueCurrencyCodeEnum = exports.ListRewards200ResponseRewardsInnerDeliveryStatusEnum = exports.ListRewards200ResponseRewardsInnerDeliveryMethodEnum = exports.ListProductsResponseProductsInnerImagesInnerTypeEnum = exports.ListProductsResponseProductsInnerCurrencyCodesEnum = exports.ListProductsResponseProductsInnerCategoryEnum = exports.ListOrganizations200ResponseOrganizationsInnerStatusEnum = exports.ListOrders200ResponseOrdersInnerPaymentChannelEnum = exports.ListOrders200ResponseOrdersInnerStatusEnum = exports.ListMembers200ResponseMembersInnerStatusEnum = exports.ListInvoices200ResponseInvoicesInnerStatusEnum = exports.ListFundingSources200ResponseFundingSourcesInnerMetaNetworkEnum = exports.ListFundingSources200ResponseFundingSourcesInnerMetaAccountTypeEnum = exports.ListFundingSources200ResponseFundingSourcesInnerTypeEnum = exports.ListFundingSources200ResponseFundingSourcesInnerMethodEnum = exports.ListFraudRules200ResponseFraudRulesInnerRuleTypeEnum = exports.ListFraudReviews200ResponseFraudReviewsInnerReasonsEnum = exports.ListFraudReviews200ResponseFraudReviewsInnerStatusEnum = exports.InvoiceStatusEnum = exports.GetMember200ResponseMemberEventsInnerTypeEnum = exports.GetMember200ResponseMemberStatusEnum = exports.GetFraudReview200ResponseFraudReviewRedemptionMethodEnum = exports.GetFraudReview200ResponseFraudReviewReasonsEnum = exports.GetFraudReview200ResponseFraudReviewStatusEnum = exports.FundingSourceTypeEnum = exports.FundingSourceMethodEnum = exports.FraudRulesListItemRuleTypeEnum = exports.FraudRuleType = exports.FraudRuleRequestConfigPeriodEnum = exports.FraudRuleRequestConfigTypeEnum = exports.FraudReviewStatus = exports.FraudReviewRedemptionMethod = exports.FraudReviewReason = exports.FraudReviewListItemReasonsEnum = exports.FraudReviewListItemStatusEnum = exports.FraudReviewRedemptionMethodEnum = exports.FraudReviewReasonsEnum = exports.FraudReviewStatusEnum = exports.FraudConfigRedeemedRewardsCountPeriodEnum = exports.FraudConfigRedeemedRewardsAmountPeriodEnum = exports.FraudConfigCountryTypeEnum = exports.DeliveryStatus = exports.DeliveryMethod = exports.DeliveryDetailsStatusEnum = exports.DeliveryDetailsMethodEnum = exports.CurrencyCodes = exports.CreateOrganization200ResponseOrganizationStatusEnum = void 0;
+exports.FundingSourcesApiFactory = exports.FundingSourcesApiFp = exports.FundingSourcesApiAxiosParamCreator = exports.UpdateFraudRuleListRuleTypeEnum = exports.FraudRuleRuleTypeEnum = exports.DeleteFraudRuleRuleTypeEnum = exports.FraudRulesApi = exports.FraudRulesApiFactory = exports.FraudRulesApiFp = exports.FraudRulesApiAxiosParamCreator = exports.ListFraudReviewsStatusEnum = exports.FraudReviewsApi = exports.FraudReviewsApiFactory = exports.FraudReviewsApiFp = exports.FraudReviewsApiAxiosParamCreator = exports.ForexApi = exports.ForexApiFactory = exports.ForexApiFp = exports.ForexApiAxiosParamCreator = exports.FieldsApi = exports.FieldsApiFactory = exports.FieldsApiFp = exports.FieldsApiAxiosParamCreator = exports.CampaignsApi = exports.CampaignsApiFactory = exports.CampaignsApiFp = exports.CampaignsApiAxiosParamCreator = exports.BalanceTransactionsApi = exports.BalanceTransactionsApiFactory = exports.BalanceTransactionsApiFp = exports.BalanceTransactionsApiAxiosParamCreator = exports.UpdateFraudRuleListRequestOperationEnum = exports.SingleRewardOrderWithoutLinkOrderStatusEnum = exports.SingleRewardOrder1RewardDeliveryMethodEnum = exports.RewardWithoutLinkDeliveryStatusEnum = exports.RewardWithoutLinkDeliveryMethodEnum = exports.RewardValueCurrencyCodeEnum = exports.ReviewRedeemedRewardsCountPeriodEnum = exports.ReviewRedeemedRewardsAmountPeriodEnum = exports.ReviewCountryTypeEnum = exports.ProductCurrencyCodesEnum = exports.ProductCategoryEnum = exports.PaymentDetailsChannelEnum = exports.OrganizationStatusEnum = exports.OrderWithoutLinkStatusEnum = exports.OrderStatus = exports.OrderBasePaymentChannelEnum = exports.OrderBaseStatusEnum = exports.OrderStatusEnum = exports.MemberWithoutEventsStatusEnum = void 0;
+exports.WebhooksApi = exports.WebhooksApiFactory = exports.WebhooksApiFp = exports.WebhooksApiAxiosParamCreator = exports.RolesApi = exports.RolesApiFactory = exports.RolesApiFp = exports.RolesApiAxiosParamCreator = exports.RewardsApi = exports.RewardsApiFactory = exports.RewardsApiFp = exports.RewardsApiAxiosParamCreator = exports.PublicKeysApi = exports.PublicKeysApiFactory = exports.PublicKeysApiFp = exports.PublicKeysApiAxiosParamCreator = exports.ProductsApi = exports.ProductsApiFactory = exports.ProductsApiFp = exports.ProductsApiAxiosParamCreator = exports.OrganizationsApi = exports.OrganizationsApiFactory = exports.OrganizationsApiFp = exports.OrganizationsApiAxiosParamCreator = exports.OrdersApi = exports.OrdersApiFactory = exports.OrdersApiFp = exports.OrdersApiAxiosParamCreator = exports.MembersApi = exports.MembersApiFactory = exports.MembersApiFp = exports.MembersApiAxiosParamCreator = exports.InvoicesApi = exports.InvoicesApiFactory = exports.InvoicesApiFp = exports.InvoicesApiAxiosParamCreator = exports.FundingSourcesApi = void 0;
 const axios_1 = require("axios");
 // Some imports not used depending on template conditions
 // @ts-ignore
 const common_1 = require("./common");
 // @ts-ignore
 const base_1 = require("./base");
-exports.CreateOrder200ResponseOrderStatusEnum = {
-    Canceled: 'CANCELED',
-    Cart: 'CART',
-    Executed: 'EXECUTED',
-    Failed: 'FAILED',
-    PendingApproval: 'PENDING APPROVAL',
-    PendingInternalPaymentApproval: 'PENDING INTERNAL PAYMENT APPROVAL'
-};
-exports.CreateOrder200ResponseOrderRewardsInnerDeliveryMethodEnum = {
-    Email: 'EMAIL',
-    Link: 'LINK',
-    Phone: 'PHONE'
-};
-exports.CreateOrder200ResponseOrderRewardsInnerDeliveryStatusEnum = {
-    Scheduled: 'SCHEDULED',
-    Failed: 'FAILED',
-    Succeeded: 'SUCCEEDED',
-    Pending: 'PENDING'
-};
-exports.CreateOrderRequestRewardDeliveryMethodEnum = {
-    Email: 'EMAIL',
-    Link: 'LINK',
-    Phone: 'PHONE'
-};
 exports.CreateOrganization200ResponseOrganizationStatusEnum = {
     Pending: 'PENDING',
     Approved: 'APPROVED',
@@ -194,17 +170,6 @@ exports.DeliveryDetailsStatusEnum = {
     Succeeded: 'SUCCEEDED',
     Pending: 'PENDING'
 };
-exports.DeliveryDetailsWithLinkMethodEnum = {
-    Email: 'EMAIL',
-    Link: 'LINK',
-    Phone: 'PHONE'
-};
-exports.DeliveryDetailsWithLinkStatusEnum = {
-    Scheduled: 'SCHEDULED',
-    Failed: 'FAILED',
-    Succeeded: 'SUCCEEDED',
-    Pending: 'PENDING'
-};
 /**
  * How to deliver the reward to the recipient.  <table>   <thead>     <tr>       <th>Delivery Method</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td><code>EMAIL</code></td>       <td>Deliver the reward to the recipient by email</td>     </tr>     <tr>       <td><code>LINK</code></td>       <td>         <p>Deliver the reward to the recipient via a link.</p>         <p>The link can be retrieved on a successfully ordered reward via the <code>/rewards</code> or <code>/rewards/{id}</code> endpoint. That link must then be  delivered to the recipient out-of-band.</p>       </td>     </tr>     <tr>       <td><code>PHONE</code></td>       <td>Deliver the reward to the recipient by SMS</td>     </tr>   </tbody> </table>
  * @export
@@ -226,6 +191,181 @@ exports.DeliveryStatus = {
     Succeeded: 'SUCCEEDED',
     Pending: 'PENDING'
 };
+exports.FraudConfigCountryTypeEnum = {
+    Whitelist: 'whitelist',
+    Blacklist: 'blacklist'
+};
+exports.FraudConfigRedeemedRewardsAmountPeriodEnum = {
+    _7: '7',
+    _30: '30',
+    _90: '90',
+    _120: '120',
+    _365: '365',
+    AllTime: 'all_time'
+};
+exports.FraudConfigRedeemedRewardsCountPeriodEnum = {
+    _7: '7',
+    _30: '30',
+    _90: '90',
+    _120: '120',
+    _365: '365',
+    AllTime: 'all_time'
+};
+exports.FraudReviewStatusEnum = {
+    Flagged: 'flagged',
+    Blocked: 'blocked',
+    Released: 'released'
+};
+exports.FraudReviewReasonsEnum = {
+    DisallowedIp: 'Disallowed IP',
+    DisallowedEmail: 'Disallowed email',
+    DisallowedCountry: 'Disallowed country',
+    OverRewardDollarLimit: 'Over reward dollar limit',
+    OverRewardCountLimit: 'Over reward count limit',
+    VpnDetected: 'VPN detected',
+    DeviceRelatedToMultipleEmails: 'Device related to multiple emails',
+    DeviceOrAccountRelatedToMultipleEmails: 'Device or account related to multiple emails',
+    IpOnATremendousFraudList: 'IP on a Tremendous fraud list',
+    BankAccountOnATremendousFraudList: 'Bank account on a Tremendous fraud list',
+    FingerprintOnATremendousFraudList: 'Fingerprint on a Tremendous fraud list',
+    EmailOnATremendousFraudList: 'Email on a Tremendous fraud list',
+    PhoneOnATremendousFraudList: 'Phone on a Tremendous fraud list',
+    IpRelatedToABlockedReward: 'IP related to a blocked reward',
+    BankAccountRelatedToABlockedReward: 'Bank account related to a blocked reward',
+    FingerprintRelatedToABlockedReward: 'Fingerprint related to a blocked reward',
+    EmailRelatedToABlockedReward: 'Email related to a blocked reward',
+    PhoneRelatedToABlockedReward: 'Phone related to a blocked reward',
+    AllowedIp: 'Allowed IP',
+    AllowedEmail: 'Allowed email'
+};
+exports.FraudReviewRedemptionMethodEnum = {
+    Paypal: 'paypal',
+    Bank: 'bank',
+    MerchantCard: 'merchant card',
+    VisaCard: 'visa card',
+    Charity: 'charity',
+    Venmo: 'venmo'
+};
+exports.FraudReviewListItemStatusEnum = {
+    Flagged: 'flagged',
+    Blocked: 'blocked',
+    Released: 'released'
+};
+exports.FraudReviewListItemReasonsEnum = {
+    DisallowedIp: 'Disallowed IP',
+    DisallowedEmail: 'Disallowed email',
+    DisallowedCountry: 'Disallowed country',
+    OverRewardDollarLimit: 'Over reward dollar limit',
+    OverRewardCountLimit: 'Over reward count limit',
+    VpnDetected: 'VPN detected',
+    DeviceRelatedToMultipleEmails: 'Device related to multiple emails',
+    DeviceOrAccountRelatedToMultipleEmails: 'Device or account related to multiple emails',
+    IpOnATremendousFraudList: 'IP on a Tremendous fraud list',
+    BankAccountOnATremendousFraudList: 'Bank account on a Tremendous fraud list',
+    FingerprintOnATremendousFraudList: 'Fingerprint on a Tremendous fraud list',
+    EmailOnATremendousFraudList: 'Email on a Tremendous fraud list',
+    PhoneOnATremendousFraudList: 'Phone on a Tremendous fraud list',
+    IpRelatedToABlockedReward: 'IP related to a blocked reward',
+    BankAccountRelatedToABlockedReward: 'Bank account related to a blocked reward',
+    FingerprintRelatedToABlockedReward: 'Fingerprint related to a blocked reward',
+    EmailRelatedToABlockedReward: 'Email related to a blocked reward',
+    PhoneRelatedToABlockedReward: 'Phone related to a blocked reward',
+    AllowedIp: 'Allowed IP',
+    AllowedEmail: 'Allowed email'
+};
+/**
+ *
+ * @export
+ * @enum {string}
+ */
+exports.FraudReviewReason = {
+    DisallowedIp: 'Disallowed IP',
+    DisallowedEmail: 'Disallowed email',
+    DisallowedCountry: 'Disallowed country',
+    OverRewardDollarLimit: 'Over reward dollar limit',
+    OverRewardCountLimit: 'Over reward count limit',
+    VpnDetected: 'VPN detected',
+    DeviceRelatedToMultipleEmails: 'Device related to multiple emails',
+    DeviceOrAccountRelatedToMultipleEmails: 'Device or account related to multiple emails',
+    IpOnATremendousFraudList: 'IP on a Tremendous fraud list',
+    BankAccountOnATremendousFraudList: 'Bank account on a Tremendous fraud list',
+    FingerprintOnATremendousFraudList: 'Fingerprint on a Tremendous fraud list',
+    EmailOnATremendousFraudList: 'Email on a Tremendous fraud list',
+    PhoneOnATremendousFraudList: 'Phone on a Tremendous fraud list',
+    IpRelatedToABlockedReward: 'IP related to a blocked reward',
+    BankAccountRelatedToABlockedReward: 'Bank account related to a blocked reward',
+    FingerprintRelatedToABlockedReward: 'Fingerprint related to a blocked reward',
+    EmailRelatedToABlockedReward: 'Email related to a blocked reward',
+    PhoneRelatedToABlockedReward: 'Phone related to a blocked reward',
+    AllowedIp: 'Allowed IP',
+    AllowedEmail: 'Allowed email'
+};
+/**
+ *
+ * @export
+ * @enum {string}
+ */
+exports.FraudReviewRedemptionMethod = {
+    Paypal: 'paypal',
+    Bank: 'bank',
+    MerchantCard: 'merchant card',
+    VisaCard: 'visa card',
+    Charity: 'charity',
+    Venmo: 'venmo'
+};
+/**
+ * The current status of the fraud review:  * `flagged` - The reward has been flagged for and waiting manual review. * `blocked` - The reward was reviewed and blocked. * `released` - The reward was reviewed and released.
+ * @export
+ * @enum {string}
+ */
+exports.FraudReviewStatus = {
+    Flagged: 'flagged',
+    Blocked: 'blocked',
+    Released: 'released'
+};
+exports.FraudRuleRequestConfigTypeEnum = {
+    Whitelist: 'whitelist',
+    Blacklist: 'blacklist'
+};
+exports.FraudRuleRequestConfigPeriodEnum = {
+    _7: '7',
+    _30: '30',
+    _90: '90',
+    _120: '120',
+    _365: '365',
+    AllTime: 'all_time'
+};
+/**
+ * * `review_country` - Flags when the recipient\'s IP country matches the criteria in the rule * `review_ip` - Flags when recipient\'s IP matches one in the list * `review_email` - Flags when the recipient\'s email matches one in the list * `review_redeemed_rewards_count` - Flags when the recipient redeemed more than the number of rewards specified in the config * `review_redeemed_rewards_amount` - Flags when the recipient redeemed more than the total amount specified in the config * `review_multiple_emails` - Flags when recipient\'s device or account has multiple emails associated * `review_vpn` - Flags when VPN is suspected * `review_tremendous_flag_list` - Flags rewards when redemption attributes match at least one criteria defined by the Tremendous flag list * `review_previously_blocked_recipients` - Flags rewards when the recipient has been blocked before * `allow_ip` - Releases a reward when a recipient\'s IP matches one in the list * `allow_email` - Releases a reward when the recipient\'s email matches one in the list
+ * @export
+ * @enum {string}
+ */
+exports.FraudRuleType = {
+    ReviewCountry: 'review_country',
+    ReviewIp: 'review_ip',
+    ReviewEmail: 'review_email',
+    ReviewRedeemedRewardsCount: 'review_redeemed_rewards_count',
+    ReviewRedeemedRewardsAmount: 'review_redeemed_rewards_amount',
+    ReviewMultipleEmails: 'review_multiple_emails',
+    ReviewVpn: 'review_vpn',
+    ReviewTremendousFlagList: 'review_tremendous_flag_list',
+    ReviewPreviouslyBlockedRecipients: 'review_previously_blocked_recipients',
+    AllowIp: 'allow_ip',
+    AllowEmail: 'allow_email'
+};
+exports.FraudRulesListItemRuleTypeEnum = {
+    ReviewCountry: 'review_country',
+    ReviewIp: 'review_ip',
+    ReviewEmail: 'review_email',
+    ReviewRedeemedRewardsCount: 'review_redeemed_rewards_count',
+    ReviewRedeemedRewardsAmount: 'review_redeemed_rewards_amount',
+    ReviewMultipleEmails: 'review_multiple_emails',
+    ReviewVpn: 'review_vpn',
+    ReviewTremendousFlagList: 'review_tremendous_flag_list',
+    ReviewPreviouslyBlockedRecipients: 'review_previously_blocked_recipients',
+    AllowIp: 'allow_ip',
+    AllowEmail: 'allow_email'
+};
 exports.FundingSourceMethodEnum = {
     Balance: 'balance',
     BankAccount: 'bank_account',
@@ -236,6 +376,41 @@ exports.FundingSourceTypeEnum = {
     Commercial: 'COMMERCIAL',
     ProForma: 'PRO_FORMA',
     PrefundingOnly: 'PREFUNDING_ONLY'
+};
+exports.GetFraudReview200ResponseFraudReviewStatusEnum = {
+    Flagged: 'flagged',
+    Blocked: 'blocked',
+    Released: 'released'
+};
+exports.GetFraudReview200ResponseFraudReviewReasonsEnum = {
+    DisallowedIp: 'Disallowed IP',
+    DisallowedEmail: 'Disallowed email',
+    DisallowedCountry: 'Disallowed country',
+    OverRewardDollarLimit: 'Over reward dollar limit',
+    OverRewardCountLimit: 'Over reward count limit',
+    VpnDetected: 'VPN detected',
+    DeviceRelatedToMultipleEmails: 'Device related to multiple emails',
+    DeviceOrAccountRelatedToMultipleEmails: 'Device or account related to multiple emails',
+    IpOnATremendousFraudList: 'IP on a Tremendous fraud list',
+    BankAccountOnATremendousFraudList: 'Bank account on a Tremendous fraud list',
+    FingerprintOnATremendousFraudList: 'Fingerprint on a Tremendous fraud list',
+    EmailOnATremendousFraudList: 'Email on a Tremendous fraud list',
+    PhoneOnATremendousFraudList: 'Phone on a Tremendous fraud list',
+    IpRelatedToABlockedReward: 'IP related to a blocked reward',
+    BankAccountRelatedToABlockedReward: 'Bank account related to a blocked reward',
+    FingerprintRelatedToABlockedReward: 'Fingerprint related to a blocked reward',
+    EmailRelatedToABlockedReward: 'Email related to a blocked reward',
+    PhoneRelatedToABlockedReward: 'Phone related to a blocked reward',
+    AllowedIp: 'Allowed IP',
+    AllowedEmail: 'Allowed email'
+};
+exports.GetFraudReview200ResponseFraudReviewRedemptionMethodEnum = {
+    Paypal: 'paypal',
+    Bank: 'bank',
+    MerchantCard: 'merchant card',
+    VisaCard: 'visa card',
+    Charity: 'charity',
+    Venmo: 'venmo'
 };
 exports.GetMember200ResponseMemberStatusEnum = {
     Registered: 'REGISTERED',
@@ -250,6 +425,46 @@ exports.InvoiceStatusEnum = {
     Paid: 'PAID',
     Open: 'OPEN',
     MarkedAsPaid: 'MARKED_AS_PAID'
+};
+exports.ListFraudReviews200ResponseFraudReviewsInnerStatusEnum = {
+    Flagged: 'flagged',
+    Blocked: 'blocked',
+    Released: 'released'
+};
+exports.ListFraudReviews200ResponseFraudReviewsInnerReasonsEnum = {
+    DisallowedIp: 'Disallowed IP',
+    DisallowedEmail: 'Disallowed email',
+    DisallowedCountry: 'Disallowed country',
+    OverRewardDollarLimit: 'Over reward dollar limit',
+    OverRewardCountLimit: 'Over reward count limit',
+    VpnDetected: 'VPN detected',
+    DeviceRelatedToMultipleEmails: 'Device related to multiple emails',
+    DeviceOrAccountRelatedToMultipleEmails: 'Device or account related to multiple emails',
+    IpOnATremendousFraudList: 'IP on a Tremendous fraud list',
+    BankAccountOnATremendousFraudList: 'Bank account on a Tremendous fraud list',
+    FingerprintOnATremendousFraudList: 'Fingerprint on a Tremendous fraud list',
+    EmailOnATremendousFraudList: 'Email on a Tremendous fraud list',
+    PhoneOnATremendousFraudList: 'Phone on a Tremendous fraud list',
+    IpRelatedToABlockedReward: 'IP related to a blocked reward',
+    BankAccountRelatedToABlockedReward: 'Bank account related to a blocked reward',
+    FingerprintRelatedToABlockedReward: 'Fingerprint related to a blocked reward',
+    EmailRelatedToABlockedReward: 'Email related to a blocked reward',
+    PhoneRelatedToABlockedReward: 'Phone related to a blocked reward',
+    AllowedIp: 'Allowed IP',
+    AllowedEmail: 'Allowed email'
+};
+exports.ListFraudRules200ResponseFraudRulesInnerRuleTypeEnum = {
+    ReviewCountry: 'review_country',
+    ReviewIp: 'review_ip',
+    ReviewEmail: 'review_email',
+    ReviewRedeemedRewardsCount: 'review_redeemed_rewards_count',
+    ReviewRedeemedRewardsAmount: 'review_redeemed_rewards_amount',
+    ReviewMultipleEmails: 'review_multiple_emails',
+    ReviewVpn: 'review_vpn',
+    ReviewTremendousFlagList: 'review_tremendous_flag_list',
+    ReviewPreviouslyBlockedRecipients: 'review_previously_blocked_recipients',
+    AllowIp: 'allow_ip',
+    AllowEmail: 'allow_email'
 };
 exports.ListFundingSources200ResponseFundingSourcesInnerMethodEnum = {
     Balance: 'balance',
@@ -623,14 +838,6 @@ exports.OrderStatus = {
     PendingApproval: 'PENDING APPROVAL',
     PendingInternalPaymentApproval: 'PENDING INTERNAL PAYMENT APPROVAL'
 };
-exports.OrderWithLinkStatusEnum = {
-    Canceled: 'CANCELED',
-    Cart: 'CART',
-    Executed: 'EXECUTED',
-    Failed: 'FAILED',
-    PendingApproval: 'PENDING APPROVAL',
-    PendingInternalPaymentApproval: 'PENDING INTERNAL PAYMENT APPROVAL'
-};
 exports.OrderWithoutLinkStatusEnum = {
     Canceled: 'CANCELED',
     Cart: 'CART',
@@ -779,6 +986,26 @@ exports.ProductCurrencyCodesEnum = {
     Zar: 'ZAR',
     Zmk: 'ZMK'
 };
+exports.ReviewCountryTypeEnum = {
+    Whitelist: 'whitelist',
+    Blacklist: 'blacklist'
+};
+exports.ReviewRedeemedRewardsAmountPeriodEnum = {
+    _7: '7',
+    _30: '30',
+    _90: '90',
+    _120: '120',
+    _365: '365',
+    AllTime: 'all_time'
+};
+exports.ReviewRedeemedRewardsCountPeriodEnum = {
+    _7: '7',
+    _30: '30',
+    _90: '90',
+    _120: '120',
+    _365: '365',
+    AllTime: 'all_time'
+};
 exports.RewardValueCurrencyCodeEnum = {
     Usd: 'USD',
     Cad: 'CAD',
@@ -897,17 +1124,6 @@ exports.RewardValueCurrencyCodeEnum = {
     Zar: 'ZAR',
     Zmk: 'ZMK'
 };
-exports.RewardWithLinkDeliveryMethodEnum = {
-    Email: 'EMAIL',
-    Link: 'LINK',
-    Phone: 'PHONE'
-};
-exports.RewardWithLinkDeliveryStatusEnum = {
-    Scheduled: 'SCHEDULED',
-    Failed: 'FAILED',
-    Succeeded: 'SUCCEEDED',
-    Pending: 'PENDING'
-};
 exports.RewardWithoutLinkDeliveryMethodEnum = {
     Email: 'EMAIL',
     Link: 'LINK',
@@ -918,6 +1134,23 @@ exports.RewardWithoutLinkDeliveryStatusEnum = {
     Failed: 'FAILED',
     Succeeded: 'SUCCEEDED',
     Pending: 'PENDING'
+};
+exports.SingleRewardOrder1RewardDeliveryMethodEnum = {
+    Email: 'EMAIL',
+    Link: 'LINK',
+    Phone: 'PHONE'
+};
+exports.SingleRewardOrderWithoutLinkOrderStatusEnum = {
+    Canceled: 'CANCELED',
+    Cart: 'CART',
+    Executed: 'EXECUTED',
+    Failed: 'FAILED',
+    PendingApproval: 'PENDING APPROVAL',
+    PendingInternalPaymentApproval: 'PENDING INTERNAL PAYMENT APPROVAL'
+};
+exports.UpdateFraudRuleListRequestOperationEnum = {
+    Add: 'add',
+    Remove: 'remove'
 };
 /**
  * BalanceTransactionsApi - axios parameter creator
@@ -1570,6 +1803,733 @@ class ForexApi extends base_1.BaseAPI {
     }
 }
 exports.ForexApi = ForexApi;
+/**
+ * FraudReviewsApi - axios parameter creator
+ * @export
+ */
+const FraudReviewsApiAxiosParamCreator = function (configuration) {
+    return {
+        /**
+         * Completes the fraud review identified by the given `id` in the URL, and blocks the reward. The reward is canceled and the amount refunded.
+         * @summary Block fraud review
+         * @param {string} id The ID of the reward that should be blocked.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        blockFraudReview: (id_1, ...args_1) => __awaiter(this, [id_1, ...args_1], void 0, function* (id, options = {}) {
+            // verify required parameter 'id' is not null or undefined
+            (0, common_1.assertParamExists)('blockFraudReview', 'id', id);
+            const localVarPath = `/fraud_reviews/{id}/block`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = Object.assign(Object.assign({ method: 'PUT' }, baseOptions), options);
+            const localVarHeaderParameter = {};
+            const localVarQueryParameter = {};
+            // authentication BearerApiKey required
+            // http bearer authentication required
+            yield (0, common_1.setBearerAuthToObject)(localVarHeaderParameter, configuration);
+            (0, common_1.setSearchParams)(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = Object.assign(Object.assign(Object.assign({}, localVarHeaderParameter), headersFromBaseOptions), options.headers);
+            return {
+                url: (0, common_1.toPathString)(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        }),
+        /**
+         * Retrieve the details of a fraud review, identified by the given `id` in the URL. Returns additional details regarding the fraud review beyond what\'s provided in the List fraud reviews endpoint, including reward details, recipient geolocation, etc.
+         * @summary Retrieve single fraud review
+         * @param {string} id The ID of the reward that should be retrieved.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getFraudReview: (id_1, ...args_1) => __awaiter(this, [id_1, ...args_1], void 0, function* (id, options = {}) {
+            // verify required parameter 'id' is not null or undefined
+            (0, common_1.assertParamExists)('getFraudReview', 'id', id);
+            const localVarPath = `/fraud_reviews/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = Object.assign(Object.assign({ method: 'GET' }, baseOptions), options);
+            const localVarHeaderParameter = {};
+            const localVarQueryParameter = {};
+            // authentication BearerApiKey required
+            // http bearer authentication required
+            yield (0, common_1.setBearerAuthToObject)(localVarHeaderParameter, configuration);
+            (0, common_1.setSearchParams)(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = Object.assign(Object.assign(Object.assign({}, localVarHeaderParameter), headersFromBaseOptions), options.headers);
+            return {
+                url: (0, common_1.toPathString)(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        }),
+        /**
+         * Retrieve a paginated list of all fraud reviews. List can be filtered by status, created or redeemed at dates.
+         * @summary List fraud reviews
+         * @param {number} [offset] Offsets the returned list by the given number of records. The returned fraud reviews are ordered (and offsetted) by their redemption date (DESC).
+         * @param {number} [limit] Limits the number of fraud reviews listed. The default value is 10.
+         * @param {ListFraudReviewsStatusEnum} [status] Filters fraud reviews by status. Can be &#x60;flagged&#x60;, &#x60;blocked&#x60; or &#x60;released&#x60;.
+         * @param {string} [createdAtGte] Return results where the created_at field is &gt;&#x3D; to the supplied value. Expects an ISO 8601 datetime.
+         * @param {string} [createdAtLte] Return results where the created_at field is &lt;&#x3D; to the supplied value. Expects an ISO 8601 datetime.
+         * @param {string} [redeemedAtGte] Return results where the redeemed_at field is &gt;&#x3D; the supplied value. Expects an ISO 8601 datetime.
+         * @param {string} [redeemedAtLte] Return results where the redeemed_at field is &lt;&#x3D; the supplied value. Expects an ISO 8601 datetime.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listFraudReviews: (offset_1, limit_1, status_1, createdAtGte_1, createdAtLte_1, redeemedAtGte_1, redeemedAtLte_1, ...args_1) => __awaiter(this, [offset_1, limit_1, status_1, createdAtGte_1, createdAtLte_1, redeemedAtGte_1, redeemedAtLte_1, ...args_1], void 0, function* (offset, limit, status, createdAtGte, createdAtLte, redeemedAtGte, redeemedAtLte, options = {}) {
+            const localVarPath = `/fraud_reviews`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = Object.assign(Object.assign({ method: 'GET' }, baseOptions), options);
+            const localVarHeaderParameter = {};
+            const localVarQueryParameter = {};
+            // authentication BearerApiKey required
+            // http bearer authentication required
+            yield (0, common_1.setBearerAuthToObject)(localVarHeaderParameter, configuration);
+            if (offset !== undefined) {
+                localVarQueryParameter['offset'] = offset;
+            }
+            if (limit !== undefined) {
+                localVarQueryParameter['limit'] = limit;
+            }
+            if (status !== undefined) {
+                localVarQueryParameter['status'] = status;
+            }
+            if (createdAtGte !== undefined) {
+                localVarQueryParameter['created_at[gte]'] = createdAtGte;
+            }
+            if (createdAtLte !== undefined) {
+                localVarQueryParameter['created_at[lte]'] = createdAtLte;
+            }
+            if (redeemedAtGte !== undefined) {
+                localVarQueryParameter['redeemed_at[gte]'] = redeemedAtGte;
+            }
+            if (redeemedAtLte !== undefined) {
+                localVarQueryParameter['redeemed_at[lte]'] = redeemedAtLte;
+            }
+            (0, common_1.setSearchParams)(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = Object.assign(Object.assign(Object.assign({}, localVarHeaderParameter), headersFromBaseOptions), options.headers);
+            return {
+                url: (0, common_1.toPathString)(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        }),
+        /**
+         * Completes the fraud review identified by the given `id` in the URL, and releases the associated reward to the recipient.
+         * @summary Release fraud review
+         * @param {string} id The ID of the reward that should be released.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        releaseFraudReview: (id_1, ...args_1) => __awaiter(this, [id_1, ...args_1], void 0, function* (id, options = {}) {
+            // verify required parameter 'id' is not null or undefined
+            (0, common_1.assertParamExists)('releaseFraudReview', 'id', id);
+            const localVarPath = `/fraud_reviews/{id}/release`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = Object.assign(Object.assign({ method: 'PUT' }, baseOptions), options);
+            const localVarHeaderParameter = {};
+            const localVarQueryParameter = {};
+            // authentication BearerApiKey required
+            // http bearer authentication required
+            yield (0, common_1.setBearerAuthToObject)(localVarHeaderParameter, configuration);
+            (0, common_1.setSearchParams)(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = Object.assign(Object.assign(Object.assign({}, localVarHeaderParameter), headersFromBaseOptions), options.headers);
+            return {
+                url: (0, common_1.toPathString)(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        }),
+    };
+};
+exports.FraudReviewsApiAxiosParamCreator = FraudReviewsApiAxiosParamCreator;
+/**
+ * FraudReviewsApi - functional programming interface
+ * @export
+ */
+const FraudReviewsApiFp = function (configuration) {
+    const localVarAxiosParamCreator = (0, exports.FraudReviewsApiAxiosParamCreator)(configuration);
+    return {
+        /**
+         * Completes the fraud review identified by the given `id` in the URL, and blocks the reward. The reward is canceled and the amount refunded.
+         * @summary Block fraud review
+         * @param {string} id The ID of the reward that should be blocked.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        blockFraudReview(id, options) {
+            return __awaiter(this, void 0, void 0, function* () {
+                var _a, _b, _c;
+                const localVarAxiosArgs = yield localVarAxiosParamCreator.blockFraudReview(id, options);
+                const localVarOperationServerIndex = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
+                const localVarOperationServerBasePath = (_c = (_b = base_1.operationServerMap['FraudReviewsApi.blockFraudReview']) === null || _b === void 0 ? void 0 : _b[localVarOperationServerIndex]) === null || _c === void 0 ? void 0 : _c.url;
+                return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+            });
+        },
+        /**
+         * Retrieve the details of a fraud review, identified by the given `id` in the URL. Returns additional details regarding the fraud review beyond what\'s provided in the List fraud reviews endpoint, including reward details, recipient geolocation, etc.
+         * @summary Retrieve single fraud review
+         * @param {string} id The ID of the reward that should be retrieved.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getFraudReview(id, options) {
+            return __awaiter(this, void 0, void 0, function* () {
+                var _a, _b, _c;
+                const localVarAxiosArgs = yield localVarAxiosParamCreator.getFraudReview(id, options);
+                const localVarOperationServerIndex = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
+                const localVarOperationServerBasePath = (_c = (_b = base_1.operationServerMap['FraudReviewsApi.getFraudReview']) === null || _b === void 0 ? void 0 : _b[localVarOperationServerIndex]) === null || _c === void 0 ? void 0 : _c.url;
+                return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+            });
+        },
+        /**
+         * Retrieve a paginated list of all fraud reviews. List can be filtered by status, created or redeemed at dates.
+         * @summary List fraud reviews
+         * @param {number} [offset] Offsets the returned list by the given number of records. The returned fraud reviews are ordered (and offsetted) by their redemption date (DESC).
+         * @param {number} [limit] Limits the number of fraud reviews listed. The default value is 10.
+         * @param {ListFraudReviewsStatusEnum} [status] Filters fraud reviews by status. Can be &#x60;flagged&#x60;, &#x60;blocked&#x60; or &#x60;released&#x60;.
+         * @param {string} [createdAtGte] Return results where the created_at field is &gt;&#x3D; to the supplied value. Expects an ISO 8601 datetime.
+         * @param {string} [createdAtLte] Return results where the created_at field is &lt;&#x3D; to the supplied value. Expects an ISO 8601 datetime.
+         * @param {string} [redeemedAtGte] Return results where the redeemed_at field is &gt;&#x3D; the supplied value. Expects an ISO 8601 datetime.
+         * @param {string} [redeemedAtLte] Return results where the redeemed_at field is &lt;&#x3D; the supplied value. Expects an ISO 8601 datetime.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listFraudReviews(offset, limit, status, createdAtGte, createdAtLte, redeemedAtGte, redeemedAtLte, options) {
+            return __awaiter(this, void 0, void 0, function* () {
+                var _a, _b, _c;
+                const localVarAxiosArgs = yield localVarAxiosParamCreator.listFraudReviews(offset, limit, status, createdAtGte, createdAtLte, redeemedAtGte, redeemedAtLte, options);
+                const localVarOperationServerIndex = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
+                const localVarOperationServerBasePath = (_c = (_b = base_1.operationServerMap['FraudReviewsApi.listFraudReviews']) === null || _b === void 0 ? void 0 : _b[localVarOperationServerIndex]) === null || _c === void 0 ? void 0 : _c.url;
+                return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+            });
+        },
+        /**
+         * Completes the fraud review identified by the given `id` in the URL, and releases the associated reward to the recipient.
+         * @summary Release fraud review
+         * @param {string} id The ID of the reward that should be released.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        releaseFraudReview(id, options) {
+            return __awaiter(this, void 0, void 0, function* () {
+                var _a, _b, _c;
+                const localVarAxiosArgs = yield localVarAxiosParamCreator.releaseFraudReview(id, options);
+                const localVarOperationServerIndex = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
+                const localVarOperationServerBasePath = (_c = (_b = base_1.operationServerMap['FraudReviewsApi.releaseFraudReview']) === null || _b === void 0 ? void 0 : _b[localVarOperationServerIndex]) === null || _c === void 0 ? void 0 : _c.url;
+                return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+            });
+        },
+    };
+};
+exports.FraudReviewsApiFp = FraudReviewsApiFp;
+/**
+ * FraudReviewsApi - factory interface
+ * @export
+ */
+const FraudReviewsApiFactory = function (configuration, basePath, axios) {
+    const localVarFp = (0, exports.FraudReviewsApiFp)(configuration);
+    return {
+        /**
+         * Completes the fraud review identified by the given `id` in the URL, and blocks the reward. The reward is canceled and the amount refunded.
+         * @summary Block fraud review
+         * @param {string} id The ID of the reward that should be blocked.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        blockFraudReview(id, options) {
+            return localVarFp.blockFraudReview(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Retrieve the details of a fraud review, identified by the given `id` in the URL. Returns additional details regarding the fraud review beyond what\'s provided in the List fraud reviews endpoint, including reward details, recipient geolocation, etc.
+         * @summary Retrieve single fraud review
+         * @param {string} id The ID of the reward that should be retrieved.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getFraudReview(id, options) {
+            return localVarFp.getFraudReview(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Retrieve a paginated list of all fraud reviews. List can be filtered by status, created or redeemed at dates.
+         * @summary List fraud reviews
+         * @param {number} [offset] Offsets the returned list by the given number of records. The returned fraud reviews are ordered (and offsetted) by their redemption date (DESC).
+         * @param {number} [limit] Limits the number of fraud reviews listed. The default value is 10.
+         * @param {ListFraudReviewsStatusEnum} [status] Filters fraud reviews by status. Can be &#x60;flagged&#x60;, &#x60;blocked&#x60; or &#x60;released&#x60;.
+         * @param {string} [createdAtGte] Return results where the created_at field is &gt;&#x3D; to the supplied value. Expects an ISO 8601 datetime.
+         * @param {string} [createdAtLte] Return results where the created_at field is &lt;&#x3D; to the supplied value. Expects an ISO 8601 datetime.
+         * @param {string} [redeemedAtGte] Return results where the redeemed_at field is &gt;&#x3D; the supplied value. Expects an ISO 8601 datetime.
+         * @param {string} [redeemedAtLte] Return results where the redeemed_at field is &lt;&#x3D; the supplied value. Expects an ISO 8601 datetime.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listFraudReviews(offset, limit, status, createdAtGte, createdAtLte, redeemedAtGte, redeemedAtLte, options) {
+            return localVarFp.listFraudReviews(offset, limit, status, createdAtGte, createdAtLte, redeemedAtGte, redeemedAtLte, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Completes the fraud review identified by the given `id` in the URL, and releases the associated reward to the recipient.
+         * @summary Release fraud review
+         * @param {string} id The ID of the reward that should be released.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        releaseFraudReview(id, options) {
+            return localVarFp.releaseFraudReview(id, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+exports.FraudReviewsApiFactory = FraudReviewsApiFactory;
+/**
+ * FraudReviewsApi - object-oriented interface
+ * @export
+ * @class FraudReviewsApi
+ * @extends {BaseAPI}
+ */
+class FraudReviewsApi extends base_1.BaseAPI {
+    /**
+     * Completes the fraud review identified by the given `id` in the URL, and blocks the reward. The reward is canceled and the amount refunded.
+     * @summary Block fraud review
+     * @param {string} id The ID of the reward that should be blocked.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof FraudReviewsApi
+     */
+    blockFraudReview(id, options) {
+        return (0, exports.FraudReviewsApiFp)(this.configuration).blockFraudReview(id, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * Retrieve the details of a fraud review, identified by the given `id` in the URL. Returns additional details regarding the fraud review beyond what\'s provided in the List fraud reviews endpoint, including reward details, recipient geolocation, etc.
+     * @summary Retrieve single fraud review
+     * @param {string} id The ID of the reward that should be retrieved.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof FraudReviewsApi
+     */
+    getFraudReview(id, options) {
+        return (0, exports.FraudReviewsApiFp)(this.configuration).getFraudReview(id, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * Retrieve a paginated list of all fraud reviews. List can be filtered by status, created or redeemed at dates.
+     * @summary List fraud reviews
+     * @param {number} [offset] Offsets the returned list by the given number of records. The returned fraud reviews are ordered (and offsetted) by their redemption date (DESC).
+     * @param {number} [limit] Limits the number of fraud reviews listed. The default value is 10.
+     * @param {ListFraudReviewsStatusEnum} [status] Filters fraud reviews by status. Can be &#x60;flagged&#x60;, &#x60;blocked&#x60; or &#x60;released&#x60;.
+     * @param {string} [createdAtGte] Return results where the created_at field is &gt;&#x3D; to the supplied value. Expects an ISO 8601 datetime.
+     * @param {string} [createdAtLte] Return results where the created_at field is &lt;&#x3D; to the supplied value. Expects an ISO 8601 datetime.
+     * @param {string} [redeemedAtGte] Return results where the redeemed_at field is &gt;&#x3D; the supplied value. Expects an ISO 8601 datetime.
+     * @param {string} [redeemedAtLte] Return results where the redeemed_at field is &lt;&#x3D; the supplied value. Expects an ISO 8601 datetime.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof FraudReviewsApi
+     */
+    listFraudReviews(offset, limit, status, createdAtGte, createdAtLte, redeemedAtGte, redeemedAtLte, options) {
+        return (0, exports.FraudReviewsApiFp)(this.configuration).listFraudReviews(offset, limit, status, createdAtGte, createdAtLte, redeemedAtGte, redeemedAtLte, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * Completes the fraud review identified by the given `id` in the URL, and releases the associated reward to the recipient.
+     * @summary Release fraud review
+     * @param {string} id The ID of the reward that should be released.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof FraudReviewsApi
+     */
+    releaseFraudReview(id, options) {
+        return (0, exports.FraudReviewsApiFp)(this.configuration).releaseFraudReview(id, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+exports.FraudReviewsApi = FraudReviewsApi;
+/**
+ * @export
+ */
+exports.ListFraudReviewsStatusEnum = {
+    Flagged: 'flagged',
+    Blocked: 'blocked',
+    Released: 'released'
+};
+/**
+ * FraudRulesApi - axios parameter creator
+ * @export
+ */
+const FraudRulesApiAxiosParamCreator = function (configuration) {
+    return {
+        /**
+         * Deletes the rule of the type passed in the URL.
+         * @summary Delete fraud rule
+         * @param {DeleteFraudRuleRuleTypeEnum} ruleType The rule type to create or update.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deleteFraudRule: (ruleType_1, ...args_1) => __awaiter(this, [ruleType_1, ...args_1], void 0, function* (ruleType, options = {}) {
+            // verify required parameter 'ruleType' is not null or undefined
+            (0, common_1.assertParamExists)('deleteFraudRule', 'ruleType', ruleType);
+            const localVarPath = `/fraud_rules/{rule_type}`
+                .replace(`{${"rule_type"}}`, encodeURIComponent(String(ruleType)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = Object.assign(Object.assign({ method: 'DELETE' }, baseOptions), options);
+            const localVarHeaderParameter = {};
+            const localVarQueryParameter = {};
+            // authentication BearerApiKey required
+            // http bearer authentication required
+            yield (0, common_1.setBearerAuthToObject)(localVarHeaderParameter, configuration);
+            (0, common_1.setSearchParams)(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = Object.assign(Object.assign(Object.assign({}, localVarHeaderParameter), headersFromBaseOptions), options.headers);
+            return {
+                url: (0, common_1.toPathString)(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        }),
+        /**
+         * Configure a fraud rule of the type passed in the URL. If a rule of the same type already exists, it will be overwritten.
+         * @summary Configure fraud rule
+         * @param {FraudRuleRuleTypeEnum} ruleType The rule type to create or update.
+         * @param {FraudRuleRequest} [fraudRuleRequest] Rules &#x60;review_multiple_emails&#x60;, &#x60;review_vpn&#x60;, &#x60;review_tremendous_flaglist&#x60;, and &#x60;review_previously_blocked_recipients&#x60; require no body.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        fraudRule: (ruleType_1, fraudRuleRequest_1, ...args_1) => __awaiter(this, [ruleType_1, fraudRuleRequest_1, ...args_1], void 0, function* (ruleType, fraudRuleRequest, options = {}) {
+            // verify required parameter 'ruleType' is not null or undefined
+            (0, common_1.assertParamExists)('fraudRule', 'ruleType', ruleType);
+            const localVarPath = `/fraud_rules/{rule_type}`
+                .replace(`{${"rule_type"}}`, encodeURIComponent(String(ruleType)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = Object.assign(Object.assign({ method: 'POST' }, baseOptions), options);
+            const localVarHeaderParameter = {};
+            const localVarQueryParameter = {};
+            // authentication BearerApiKey required
+            // http bearer authentication required
+            yield (0, common_1.setBearerAuthToObject)(localVarHeaderParameter, configuration);
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+            (0, common_1.setSearchParams)(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = Object.assign(Object.assign(Object.assign({}, localVarHeaderParameter), headersFromBaseOptions), options.headers);
+            localVarRequestOptions.data = (0, common_1.serializeDataIfNeeded)(fraudRuleRequest, localVarRequestOptions, configuration);
+            return {
+                url: (0, common_1.toPathString)(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        }),
+        /**
+         * List active fraud rules associated with the organization tied to your API key.
+         * @summary List fraud rules
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listFraudRules: (...args_1) => __awaiter(this, [...args_1], void 0, function* (options = {}) {
+            const localVarPath = `/fraud_rules`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = Object.assign(Object.assign({ method: 'GET' }, baseOptions), options);
+            const localVarHeaderParameter = {};
+            const localVarQueryParameter = {};
+            // authentication BearerApiKey required
+            // http bearer authentication required
+            yield (0, common_1.setBearerAuthToObject)(localVarHeaderParameter, configuration);
+            (0, common_1.setSearchParams)(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = Object.assign(Object.assign(Object.assign({}, localVarHeaderParameter), headersFromBaseOptions), options.headers);
+            return {
+                url: (0, common_1.toPathString)(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        }),
+        /**
+         * Use this endpoint to modify a list associated with an already-configured rule. Add and remove operations supported.  For example, to append new IPs to the `review_ip` rule, a valid JSON body would be: ```json   {     \"operation\": \"add\",     \"config\": {       \"ips\": [\"123.123.123.123\"]     }   } ```
+         * @summary Update fraud rule list
+         * @param {UpdateFraudRuleListRuleTypeEnum} ruleType The rule type to create or update.
+         * @param {UpdateFraudRuleListRequest} updateFraudRuleListRequest The lists to add or remove from the current configuration
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateFraudRuleList: (ruleType_1, updateFraudRuleListRequest_1, ...args_1) => __awaiter(this, [ruleType_1, updateFraudRuleListRequest_1, ...args_1], void 0, function* (ruleType, updateFraudRuleListRequest, options = {}) {
+            // verify required parameter 'ruleType' is not null or undefined
+            (0, common_1.assertParamExists)('updateFraudRuleList', 'ruleType', ruleType);
+            // verify required parameter 'updateFraudRuleListRequest' is not null or undefined
+            (0, common_1.assertParamExists)('updateFraudRuleList', 'updateFraudRuleListRequest', updateFraudRuleListRequest);
+            const localVarPath = `/fraud_rules/{rule_type}/update_list`
+                .replace(`{${"rule_type"}}`, encodeURIComponent(String(ruleType)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = Object.assign(Object.assign({ method: 'POST' }, baseOptions), options);
+            const localVarHeaderParameter = {};
+            const localVarQueryParameter = {};
+            // authentication BearerApiKey required
+            // http bearer authentication required
+            yield (0, common_1.setBearerAuthToObject)(localVarHeaderParameter, configuration);
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+            (0, common_1.setSearchParams)(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = Object.assign(Object.assign(Object.assign({}, localVarHeaderParameter), headersFromBaseOptions), options.headers);
+            localVarRequestOptions.data = (0, common_1.serializeDataIfNeeded)(updateFraudRuleListRequest, localVarRequestOptions, configuration);
+            return {
+                url: (0, common_1.toPathString)(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        }),
+    };
+};
+exports.FraudRulesApiAxiosParamCreator = FraudRulesApiAxiosParamCreator;
+/**
+ * FraudRulesApi - functional programming interface
+ * @export
+ */
+const FraudRulesApiFp = function (configuration) {
+    const localVarAxiosParamCreator = (0, exports.FraudRulesApiAxiosParamCreator)(configuration);
+    return {
+        /**
+         * Deletes the rule of the type passed in the URL.
+         * @summary Delete fraud rule
+         * @param {DeleteFraudRuleRuleTypeEnum} ruleType The rule type to create or update.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deleteFraudRule(ruleType, options) {
+            return __awaiter(this, void 0, void 0, function* () {
+                var _a, _b, _c;
+                const localVarAxiosArgs = yield localVarAxiosParamCreator.deleteFraudRule(ruleType, options);
+                const localVarOperationServerIndex = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
+                const localVarOperationServerBasePath = (_c = (_b = base_1.operationServerMap['FraudRulesApi.deleteFraudRule']) === null || _b === void 0 ? void 0 : _b[localVarOperationServerIndex]) === null || _c === void 0 ? void 0 : _c.url;
+                return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+            });
+        },
+        /**
+         * Configure a fraud rule of the type passed in the URL. If a rule of the same type already exists, it will be overwritten.
+         * @summary Configure fraud rule
+         * @param {FraudRuleRuleTypeEnum} ruleType The rule type to create or update.
+         * @param {FraudRuleRequest} [fraudRuleRequest] Rules &#x60;review_multiple_emails&#x60;, &#x60;review_vpn&#x60;, &#x60;review_tremendous_flaglist&#x60;, and &#x60;review_previously_blocked_recipients&#x60; require no body.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        fraudRule(ruleType, fraudRuleRequest, options) {
+            return __awaiter(this, void 0, void 0, function* () {
+                var _a, _b, _c;
+                const localVarAxiosArgs = yield localVarAxiosParamCreator.fraudRule(ruleType, fraudRuleRequest, options);
+                const localVarOperationServerIndex = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
+                const localVarOperationServerBasePath = (_c = (_b = base_1.operationServerMap['FraudRulesApi.fraudRule']) === null || _b === void 0 ? void 0 : _b[localVarOperationServerIndex]) === null || _c === void 0 ? void 0 : _c.url;
+                return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+            });
+        },
+        /**
+         * List active fraud rules associated with the organization tied to your API key.
+         * @summary List fraud rules
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listFraudRules(options) {
+            return __awaiter(this, void 0, void 0, function* () {
+                var _a, _b, _c;
+                const localVarAxiosArgs = yield localVarAxiosParamCreator.listFraudRules(options);
+                const localVarOperationServerIndex = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
+                const localVarOperationServerBasePath = (_c = (_b = base_1.operationServerMap['FraudRulesApi.listFraudRules']) === null || _b === void 0 ? void 0 : _b[localVarOperationServerIndex]) === null || _c === void 0 ? void 0 : _c.url;
+                return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+            });
+        },
+        /**
+         * Use this endpoint to modify a list associated with an already-configured rule. Add and remove operations supported.  For example, to append new IPs to the `review_ip` rule, a valid JSON body would be: ```json   {     \"operation\": \"add\",     \"config\": {       \"ips\": [\"123.123.123.123\"]     }   } ```
+         * @summary Update fraud rule list
+         * @param {UpdateFraudRuleListRuleTypeEnum} ruleType The rule type to create or update.
+         * @param {UpdateFraudRuleListRequest} updateFraudRuleListRequest The lists to add or remove from the current configuration
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateFraudRuleList(ruleType, updateFraudRuleListRequest, options) {
+            return __awaiter(this, void 0, void 0, function* () {
+                var _a, _b, _c;
+                const localVarAxiosArgs = yield localVarAxiosParamCreator.updateFraudRuleList(ruleType, updateFraudRuleListRequest, options);
+                const localVarOperationServerIndex = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
+                const localVarOperationServerBasePath = (_c = (_b = base_1.operationServerMap['FraudRulesApi.updateFraudRuleList']) === null || _b === void 0 ? void 0 : _b[localVarOperationServerIndex]) === null || _c === void 0 ? void 0 : _c.url;
+                return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+            });
+        },
+    };
+};
+exports.FraudRulesApiFp = FraudRulesApiFp;
+/**
+ * FraudRulesApi - factory interface
+ * @export
+ */
+const FraudRulesApiFactory = function (configuration, basePath, axios) {
+    const localVarFp = (0, exports.FraudRulesApiFp)(configuration);
+    return {
+        /**
+         * Deletes the rule of the type passed in the URL.
+         * @summary Delete fraud rule
+         * @param {DeleteFraudRuleRuleTypeEnum} ruleType The rule type to create or update.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deleteFraudRule(ruleType, options) {
+            return localVarFp.deleteFraudRule(ruleType, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Configure a fraud rule of the type passed in the URL. If a rule of the same type already exists, it will be overwritten.
+         * @summary Configure fraud rule
+         * @param {FraudRuleRuleTypeEnum} ruleType The rule type to create or update.
+         * @param {FraudRuleRequest} [fraudRuleRequest] Rules &#x60;review_multiple_emails&#x60;, &#x60;review_vpn&#x60;, &#x60;review_tremendous_flaglist&#x60;, and &#x60;review_previously_blocked_recipients&#x60; require no body.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        fraudRule(ruleType, fraudRuleRequest, options) {
+            return localVarFp.fraudRule(ruleType, fraudRuleRequest, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * List active fraud rules associated with the organization tied to your API key.
+         * @summary List fraud rules
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listFraudRules(options) {
+            return localVarFp.listFraudRules(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Use this endpoint to modify a list associated with an already-configured rule. Add and remove operations supported.  For example, to append new IPs to the `review_ip` rule, a valid JSON body would be: ```json   {     \"operation\": \"add\",     \"config\": {       \"ips\": [\"123.123.123.123\"]     }   } ```
+         * @summary Update fraud rule list
+         * @param {UpdateFraudRuleListRuleTypeEnum} ruleType The rule type to create or update.
+         * @param {UpdateFraudRuleListRequest} updateFraudRuleListRequest The lists to add or remove from the current configuration
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateFraudRuleList(ruleType, updateFraudRuleListRequest, options) {
+            return localVarFp.updateFraudRuleList(ruleType, updateFraudRuleListRequest, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+exports.FraudRulesApiFactory = FraudRulesApiFactory;
+/**
+ * FraudRulesApi - object-oriented interface
+ * @export
+ * @class FraudRulesApi
+ * @extends {BaseAPI}
+ */
+class FraudRulesApi extends base_1.BaseAPI {
+    /**
+     * Deletes the rule of the type passed in the URL.
+     * @summary Delete fraud rule
+     * @param {DeleteFraudRuleRuleTypeEnum} ruleType The rule type to create or update.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof FraudRulesApi
+     */
+    deleteFraudRule(ruleType, options) {
+        return (0, exports.FraudRulesApiFp)(this.configuration).deleteFraudRule(ruleType, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * Configure a fraud rule of the type passed in the URL. If a rule of the same type already exists, it will be overwritten.
+     * @summary Configure fraud rule
+     * @param {FraudRuleRuleTypeEnum} ruleType The rule type to create or update.
+     * @param {FraudRuleRequest} [fraudRuleRequest] Rules &#x60;review_multiple_emails&#x60;, &#x60;review_vpn&#x60;, &#x60;review_tremendous_flaglist&#x60;, and &#x60;review_previously_blocked_recipients&#x60; require no body.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof FraudRulesApi
+     */
+    fraudRule(ruleType, fraudRuleRequest, options) {
+        return (0, exports.FraudRulesApiFp)(this.configuration).fraudRule(ruleType, fraudRuleRequest, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * List active fraud rules associated with the organization tied to your API key.
+     * @summary List fraud rules
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof FraudRulesApi
+     */
+    listFraudRules(options) {
+        return (0, exports.FraudRulesApiFp)(this.configuration).listFraudRules(options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * Use this endpoint to modify a list associated with an already-configured rule. Add and remove operations supported.  For example, to append new IPs to the `review_ip` rule, a valid JSON body would be: ```json   {     \"operation\": \"add\",     \"config\": {       \"ips\": [\"123.123.123.123\"]     }   } ```
+     * @summary Update fraud rule list
+     * @param {UpdateFraudRuleListRuleTypeEnum} ruleType The rule type to create or update.
+     * @param {UpdateFraudRuleListRequest} updateFraudRuleListRequest The lists to add or remove from the current configuration
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof FraudRulesApi
+     */
+    updateFraudRuleList(ruleType, updateFraudRuleListRequest, options) {
+        return (0, exports.FraudRulesApiFp)(this.configuration).updateFraudRuleList(ruleType, updateFraudRuleListRequest, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+exports.FraudRulesApi = FraudRulesApi;
+/**
+ * @export
+ */
+exports.DeleteFraudRuleRuleTypeEnum = {
+    ReviewCountry: 'review_country',
+    ReviewIp: 'review_ip',
+    ReviewEmail: 'review_email',
+    ReviewRedeemedRewardsCount: 'review_redeemed_rewards_count',
+    ReviewRedeemedRewardsAmount: 'review_redeemed_rewards_amount',
+    ReviewMultipleEmails: 'review_multiple_emails',
+    ReviewVpn: 'review_vpn',
+    ReviewTremendousFlagList: 'review_tremendous_flag_list',
+    ReviewPreviouslyBlockedRecipients: 'review_previously_blocked_recipients',
+    AllowIp: 'allow_ip',
+    AllowEmail: 'allow_email'
+};
+/**
+ * @export
+ */
+exports.FraudRuleRuleTypeEnum = {
+    ReviewCountry: 'review_country',
+    ReviewIp: 'review_ip',
+    ReviewEmail: 'review_email',
+    ReviewRedeemedRewardsCount: 'review_redeemed_rewards_count',
+    ReviewRedeemedRewardsAmount: 'review_redeemed_rewards_amount',
+    ReviewMultipleEmails: 'review_multiple_emails',
+    ReviewVpn: 'review_vpn',
+    ReviewTremendousFlagList: 'review_tremendous_flag_list',
+    ReviewPreviouslyBlockedRecipients: 'review_previously_blocked_recipients',
+    AllowIp: 'allow_ip',
+    AllowEmail: 'allow_email'
+};
+/**
+ * @export
+ */
+exports.UpdateFraudRuleListRuleTypeEnum = {
+    ReviewCountry: 'review_country',
+    ReviewIp: 'review_ip',
+    ReviewEmail: 'review_email',
+    AllowIp: 'allow_ip',
+    AllowEmail: 'allow_email'
+};
 /**
  * FundingSourcesApi - axios parameter creator
  * @export
