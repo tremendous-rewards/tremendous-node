@@ -48,6 +48,15 @@ test("submit an order with a campaign", async () => {
   const { data } = await api.createOrder(params);
   expect(data.order).toHaveProperty("id");
   expect(data.order.campaign_id).toEqual(CAMPAIGN_ID);
+
+  const { order } = (await api.getOrder(data.order.id)).data;
+
+  expect(order.id).toEqual(data.order.id);
+  expect(order.campaign_id).toEqual(data.order.campaign_id);
+  expect(order.status).toEqual("EXECUTED");
+
+  expect(order.rewards!.length).toEqual(1);
+  expect(order.rewards![0].recipient?.email).toEqual(RECIPIENT_EMAIL);
 });
 
 

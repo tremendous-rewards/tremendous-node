@@ -22,15 +22,29 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.MemberWithEventsStatusEnum = exports.MemberBaseStatusEnum = exports.MemberStatusEnum = exports.ListRewards200ResponseRewardsInnerValueCurrencyCodeEnum = exports.ListRewards200ResponseRewardsInnerDeliveryStatusEnum = exports.ListRewards200ResponseRewardsInnerDeliveryMethodEnum = exports.ListProductsResponseProductsInnerImagesInnerTypeEnum = exports.ListProductsResponseProductsInnerCurrencyCodesEnum = exports.ListProductsResponseProductsInnerCategoryEnum = exports.ListOrganizations200ResponseOrganizationsInnerStatusEnum = exports.ListOrders200ResponseOrdersInnerPaymentChannelEnum = exports.ListOrders200ResponseOrdersInnerStatusEnum = exports.ListMembers200ResponseMembersInnerStatusEnum = exports.ListInvoices200ResponseInvoicesInnerStatusEnum = exports.ListFundingSources200ResponseFundingSourcesInnerMetaNetworkEnum = exports.ListFundingSources200ResponseFundingSourcesInnerMetaAccountTypeEnum = exports.ListFundingSources200ResponseFundingSourcesInnerTypeEnum = exports.ListFundingSources200ResponseFundingSourcesInnerMethodEnum = exports.ListFraudRules200ResponseFraudRulesInnerRuleTypeEnum = exports.ListFraudReviews200ResponseFraudReviewsInnerReasonsEnum = exports.ListFraudReviews200ResponseFraudReviewsInnerStatusEnum = exports.InvoiceStatusEnum = exports.GetMember200ResponseMemberEventsInnerTypeEnum = exports.GetMember200ResponseMemberStatusEnum = exports.GetFraudReview200ResponseFraudReviewRedemptionMethodEnum = exports.GetFraudReview200ResponseFraudReviewReasonsEnum = exports.GetFraudReview200ResponseFraudReviewStatusEnum = exports.FundingSourceTypeEnum = exports.FundingSourceMethodEnum = exports.FraudRulesListItemRuleTypeEnum = exports.FraudRuleType = exports.FraudRuleRequestConfigPeriodEnum = exports.FraudRuleRequestConfigTypeEnum = exports.FraudReviewStatus = exports.FraudReviewRedemptionMethod = exports.FraudReviewReason = exports.FraudReviewListItemReasonsEnum = exports.FraudReviewListItemStatusEnum = exports.FraudReviewRedemptionMethodEnum = exports.FraudReviewReasonsEnum = exports.FraudReviewStatusEnum = exports.FraudConfigRedeemedRewardsCountPeriodEnum = exports.FraudConfigRedeemedRewardsAmountPeriodEnum = exports.FraudConfigCountryTypeEnum = exports.DeliveryStatus = exports.DeliveryMethod = exports.DeliveryDetailsStatusEnum = exports.DeliveryDetailsMethodEnum = exports.CurrencyCodes = exports.CreateOrganization200ResponseOrganizationStatusEnum = void 0;
-exports.FundingSourcesApiFactory = exports.FundingSourcesApiFp = exports.FundingSourcesApiAxiosParamCreator = exports.UpdateFraudRuleListRuleTypeEnum = exports.FraudRuleRuleTypeEnum = exports.DeleteFraudRuleRuleTypeEnum = exports.FraudRulesApi = exports.FraudRulesApiFactory = exports.FraudRulesApiFp = exports.FraudRulesApiAxiosParamCreator = exports.ListFraudReviewsStatusEnum = exports.FraudReviewsApi = exports.FraudReviewsApiFactory = exports.FraudReviewsApiFp = exports.FraudReviewsApiAxiosParamCreator = exports.ForexApi = exports.ForexApiFactory = exports.ForexApiFp = exports.ForexApiAxiosParamCreator = exports.FieldsApi = exports.FieldsApiFactory = exports.FieldsApiFp = exports.FieldsApiAxiosParamCreator = exports.CampaignsApi = exports.CampaignsApiFactory = exports.CampaignsApiFp = exports.CampaignsApiAxiosParamCreator = exports.BalanceTransactionsApi = exports.BalanceTransactionsApiFactory = exports.BalanceTransactionsApiFp = exports.BalanceTransactionsApiAxiosParamCreator = exports.UpdateFraudRuleListRequestOperationEnum = exports.SingleRewardOrderWithoutLinkOrderStatusEnum = exports.SingleRewardOrder1RewardDeliveryMethodEnum = exports.RewardWithoutLinkDeliveryStatusEnum = exports.RewardWithoutLinkDeliveryMethodEnum = exports.RewardValueCurrencyCodeEnum = exports.ReviewRedeemedRewardsCountPeriodEnum = exports.ReviewRedeemedRewardsAmountPeriodEnum = exports.ReviewCountryTypeEnum = exports.ProductCurrencyCodesEnum = exports.ProductCategoryEnum = exports.PaymentDetailsChannelEnum = exports.OrganizationStatusEnum = exports.OrderWithoutLinkStatusEnum = exports.OrderStatus = exports.OrderBasePaymentChannelEnum = exports.OrderBaseStatusEnum = exports.OrderStatusEnum = exports.MemberWithoutEventsStatusEnum = void 0;
-exports.WebhooksApi = exports.WebhooksApiFactory = exports.WebhooksApiFp = exports.WebhooksApiAxiosParamCreator = exports.RolesApi = exports.RolesApiFactory = exports.RolesApiFp = exports.RolesApiAxiosParamCreator = exports.RewardsApi = exports.RewardsApiFactory = exports.RewardsApiFp = exports.RewardsApiAxiosParamCreator = exports.PublicKeysApi = exports.PublicKeysApiFactory = exports.PublicKeysApiFp = exports.PublicKeysApiAxiosParamCreator = exports.ProductsApi = exports.ProductsApiFactory = exports.ProductsApiFp = exports.ProductsApiAxiosParamCreator = exports.OrganizationsApi = exports.OrganizationsApiFactory = exports.OrganizationsApiFp = exports.OrganizationsApiAxiosParamCreator = exports.OrdersApi = exports.OrdersApiFactory = exports.OrdersApiFp = exports.OrdersApiAxiosParamCreator = exports.MembersApi = exports.MembersApiFactory = exports.MembersApiFp = exports.MembersApiAxiosParamCreator = exports.InvoicesApi = exports.InvoicesApiFactory = exports.InvoicesApiFp = exports.InvoicesApiAxiosParamCreator = exports.FundingSourcesApi = void 0;
+exports.MemberStatusEnum = exports.ListRewards200ResponseRewardsInnerValueCurrencyCodeEnum = exports.ListRewards200ResponseRewardsInnerDeliveryStatusEnum = exports.ListRewards200ResponseRewardsInnerDeliveryMethodEnum = exports.ListProductsResponseProductsInnerImagesInnerTypeEnum = exports.ListProductsResponseProductsInnerCurrencyCodesEnum = exports.ListProductsResponseProductsInnerCategoryEnum = exports.ListOrganizations200ResponseOrganizationsInnerStatusEnum = exports.ListOrders200ResponseOrdersInnerPaymentChannelEnum = exports.ListOrders200ResponseOrdersInnerChannelEnum = exports.ListOrders200ResponseOrdersInnerStatusEnum = exports.ListMembers200ResponseMembersInnerStatusEnum = exports.ListInvoices200ResponseInvoicesInnerStatusEnum = exports.ListFundingSources200ResponseFundingSourcesInnerMetaNetworkEnum = exports.ListFundingSources200ResponseFundingSourcesInnerMetaAccountTypeEnum = exports.ListFundingSources200ResponseFundingSourcesInnerTypeEnum = exports.ListFundingSources200ResponseFundingSourcesInnerMethodEnum = exports.ListFraudRules200ResponseFraudRulesInnerRuleTypeEnum = exports.ListFraudReviews200ResponseFraudReviewsInnerReasonsEnum = exports.ListFraudReviews200ResponseFraudReviewsInnerStatusEnum = exports.InvoiceStatusEnum = exports.GetMember200ResponseMemberEventsInnerTypeEnum = exports.GetMember200ResponseMemberStatusEnum = exports.GetFraudReview200ResponseFraudReviewRedemptionMethodEnum = exports.GetFraudReview200ResponseFraudReviewReasonsEnum = exports.GetFraudReview200ResponseFraudReviewStatusEnum = exports.FundingSourceTypeEnum = exports.FundingSourceMethodEnum = exports.FraudRulesListItemRuleTypeEnum = exports.FraudRuleType = exports.FraudRuleRequestConfigPeriodEnum = exports.FraudRuleRequestConfigTypeEnum = exports.FraudReviewStatus = exports.FraudReviewRedemptionMethod = exports.FraudReviewReason = exports.FraudReviewListItemReasonsEnum = exports.FraudReviewListItemStatusEnum = exports.FraudReviewRedemptionMethodEnum = exports.FraudReviewReasonsEnum = exports.FraudReviewStatusEnum = exports.FraudConfigRedeemedRewardsCountPeriodEnum = exports.FraudConfigRedeemedRewardsAmountPeriodEnum = exports.FraudConfigCountryTypeEnum = exports.DeliveryStatus = exports.DeliveryMethod = exports.DeliveryDetailsStatusEnum = exports.DeliveryDetailsMethodEnum = exports.CurrencyCodes = exports.CreateOrganization200ResponseOrganizationStatusEnum = exports.Channel = void 0;
+exports.FraudRulesApi = exports.FraudRulesApiFactory = exports.FraudRulesApiFp = exports.FraudRulesApiAxiosParamCreator = exports.ListFraudReviewsStatusEnum = exports.FraudReviewsApi = exports.FraudReviewsApiFactory = exports.FraudReviewsApiFp = exports.FraudReviewsApiAxiosParamCreator = exports.ForexApi = exports.ForexApiFactory = exports.ForexApiFp = exports.ForexApiAxiosParamCreator = exports.FieldsApi = exports.FieldsApiFactory = exports.FieldsApiFp = exports.FieldsApiAxiosParamCreator = exports.CampaignsApi = exports.CampaignsApiFactory = exports.CampaignsApiFp = exports.CampaignsApiAxiosParamCreator = exports.BalanceTransactionsApi = exports.BalanceTransactionsApiFactory = exports.BalanceTransactionsApiFp = exports.BalanceTransactionsApiAxiosParamCreator = exports.UpdateFraudRuleListRequestOperationEnum = exports.SingleRewardOrderWithoutLinkOrderChannelEnum = exports.SingleRewardOrderWithoutLinkOrderStatusEnum = exports.SingleRewardOrder1RewardDeliveryMethodEnum = exports.RewardWithoutLinkDeliveryStatusEnum = exports.RewardWithoutLinkDeliveryMethodEnum = exports.RewardValueCurrencyCodeEnum = exports.ReviewRedeemedRewardsCountPeriodEnum = exports.ReviewRedeemedRewardsAmountPeriodEnum = exports.ReviewCountryTypeEnum = exports.ProductCurrencyCodesEnum = exports.ProductCategoryEnum = exports.PaymentDetailsChannelEnum = exports.OrganizationStatusEnum = exports.OrderWithoutLinkChannelEnum = exports.OrderWithoutLinkStatusEnum = exports.OrderStatus = exports.OrderBasePaymentChannelEnum = exports.OrderBaseChannelEnum = exports.OrderBaseStatusEnum = exports.OrderChannelEnum = exports.OrderStatusEnum = exports.MemberWithoutEventsStatusEnum = exports.MemberWithEventsStatusEnum = exports.MemberBaseStatusEnum = void 0;
+exports.WebhooksApi = exports.WebhooksApiFactory = exports.WebhooksApiFp = exports.WebhooksApiAxiosParamCreator = exports.RolesApi = exports.RolesApiFactory = exports.RolesApiFp = exports.RolesApiAxiosParamCreator = exports.RewardsApi = exports.RewardsApiFactory = exports.RewardsApiFp = exports.RewardsApiAxiosParamCreator = exports.PublicKeysApi = exports.PublicKeysApiFactory = exports.PublicKeysApiFp = exports.PublicKeysApiAxiosParamCreator = exports.ProductsApi = exports.ProductsApiFactory = exports.ProductsApiFp = exports.ProductsApiAxiosParamCreator = exports.OrganizationsApi = exports.OrganizationsApiFactory = exports.OrganizationsApiFp = exports.OrganizationsApiAxiosParamCreator = exports.OrdersApi = exports.OrdersApiFactory = exports.OrdersApiFp = exports.OrdersApiAxiosParamCreator = exports.MembersApi = exports.MembersApiFactory = exports.MembersApiFp = exports.MembersApiAxiosParamCreator = exports.InvoicesApi = exports.InvoicesApiFactory = exports.InvoicesApiFp = exports.InvoicesApiAxiosParamCreator = exports.FundingSourcesApi = exports.FundingSourcesApiFactory = exports.FundingSourcesApiFp = exports.FundingSourcesApiAxiosParamCreator = exports.UpdateFraudRuleListRuleTypeEnum = exports.FraudRuleRuleTypeEnum = exports.DeleteFraudRuleRuleTypeEnum = void 0;
 const axios_1 = require("axios");
 // Some imports not used depending on template conditions
 // @ts-ignore
 const common_1 = require("./common");
 // @ts-ignore
 const base_1 = require("./base");
+/**
+ * Name of the channel in which the order was created
+ * @export
+ * @enum {string}
+ */
+exports.Channel = {
+    Ui: 'UI',
+    Api: 'API',
+    Embed: 'EMBED',
+    Decipher: 'DECIPHER',
+    Qualtrics: 'QUALTRICS',
+    Typeform: 'TYPEFORM',
+    SurveyMonkey: 'SURVEY MONKEY'
+};
 exports.CreateOrganization200ResponseOrganizationStatusEnum = {
     Pending: 'PENDING',
     Approved: 'APPROVED',
@@ -511,6 +525,15 @@ exports.ListOrders200ResponseOrdersInnerStatusEnum = {
     PendingApproval: 'PENDING APPROVAL',
     PendingInternalPaymentApproval: 'PENDING INTERNAL PAYMENT APPROVAL'
 };
+exports.ListOrders200ResponseOrdersInnerChannelEnum = {
+    Ui: 'UI',
+    Api: 'API',
+    Embed: 'EMBED',
+    Decipher: 'DECIPHER',
+    Qualtrics: 'QUALTRICS',
+    Typeform: 'TYPEFORM',
+    SurveyMonkey: 'SURVEY MONKEY'
+};
 exports.ListOrders200ResponseOrdersInnerPaymentChannelEnum = {
     Ui: 'UI',
     Api: 'API',
@@ -808,6 +831,15 @@ exports.OrderStatusEnum = {
     PendingApproval: 'PENDING APPROVAL',
     PendingInternalPaymentApproval: 'PENDING INTERNAL PAYMENT APPROVAL'
 };
+exports.OrderChannelEnum = {
+    Ui: 'UI',
+    Api: 'API',
+    Embed: 'EMBED',
+    Decipher: 'DECIPHER',
+    Qualtrics: 'QUALTRICS',
+    Typeform: 'TYPEFORM',
+    SurveyMonkey: 'SURVEY MONKEY'
+};
 exports.OrderBaseStatusEnum = {
     Canceled: 'CANCELED',
     Cart: 'CART',
@@ -815,6 +847,15 @@ exports.OrderBaseStatusEnum = {
     Failed: 'FAILED',
     PendingApproval: 'PENDING APPROVAL',
     PendingInternalPaymentApproval: 'PENDING INTERNAL PAYMENT APPROVAL'
+};
+exports.OrderBaseChannelEnum = {
+    Ui: 'UI',
+    Api: 'API',
+    Embed: 'EMBED',
+    Decipher: 'DECIPHER',
+    Qualtrics: 'QUALTRICS',
+    Typeform: 'TYPEFORM',
+    SurveyMonkey: 'SURVEY MONKEY'
 };
 exports.OrderBasePaymentChannelEnum = {
     Ui: 'UI',
@@ -845,6 +886,15 @@ exports.OrderWithoutLinkStatusEnum = {
     Failed: 'FAILED',
     PendingApproval: 'PENDING APPROVAL',
     PendingInternalPaymentApproval: 'PENDING INTERNAL PAYMENT APPROVAL'
+};
+exports.OrderWithoutLinkChannelEnum = {
+    Ui: 'UI',
+    Api: 'API',
+    Embed: 'EMBED',
+    Decipher: 'DECIPHER',
+    Qualtrics: 'QUALTRICS',
+    Typeform: 'TYPEFORM',
+    SurveyMonkey: 'SURVEY MONKEY'
 };
 exports.OrganizationStatusEnum = {
     Pending: 'PENDING',
@@ -1147,6 +1197,15 @@ exports.SingleRewardOrderWithoutLinkOrderStatusEnum = {
     Failed: 'FAILED',
     PendingApproval: 'PENDING APPROVAL',
     PendingInternalPaymentApproval: 'PENDING INTERNAL PAYMENT APPROVAL'
+};
+exports.SingleRewardOrderWithoutLinkOrderChannelEnum = {
+    Ui: 'UI',
+    Api: 'API',
+    Embed: 'EMBED',
+    Decipher: 'DECIPHER',
+    Qualtrics: 'QUALTRICS',
+    Typeform: 'TYPEFORM',
+    SurveyMonkey: 'SURVEY MONKEY'
 };
 exports.UpdateFraudRuleListRequestOperationEnum = {
     Add: 'add',

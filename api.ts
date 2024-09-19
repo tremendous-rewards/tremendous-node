@@ -86,31 +86,31 @@ export interface BalanceTransaction {
      * @type {string}
      * @memberof BalanceTransaction
      */
-    'created_at'?: string;
+    'created_at': string;
     /**
      * Amount of the transaction in USD
      * @type {number}
      * @memberof BalanceTransaction
      */
-    'amount'?: number;
+    'amount': number;
     /**
      * The updated total after the transaction. Note that this running balance may be delayed and contain `null`.
      * @type {number}
      * @memberof BalanceTransaction
      */
-    'balance'?: number;
+    'balance': number;
     /**
      * The action that was performed
      * @type {string}
      * @memberof BalanceTransaction
      */
-    'action'?: string;
+    'action': string;
     /**
      * A brief description of the transaction
      * @type {string}
      * @memberof BalanceTransaction
      */
-    'description'?: string;
+    'description': string;
 }
 /**
  * 
@@ -217,6 +217,25 @@ export interface CampaignBase {
      */
     'email_style'?: ListCampaigns200ResponseCampaignsInnerEmailStyle;
 }
+/**
+ * Name of the channel in which the order was created
+ * @export
+ * @enum {string}
+ */
+
+export const Channel = {
+    Ui: 'UI',
+    Api: 'API',
+    Embed: 'EMBED',
+    Decipher: 'DECIPHER',
+    Qualtrics: 'QUALTRICS',
+    Typeform: 'TYPEFORM',
+    SurveyMonkey: 'SURVEY MONKEY'
+} as const;
+
+export type Channel = typeof Channel[keyof typeof Channel];
+
+
 /**
  * 
  * @export
@@ -1183,10 +1202,10 @@ export interface FraudReview {
     'geo'?: GetFraudReview200ResponseFraudReviewGeo;
     /**
      * 
-     * @type {OrderWithoutLinkReward}
+     * @type {OrderWithoutLinkRewardsInner}
      * @memberof FraudReview
      */
-    'reward'?: OrderWithoutLinkReward;
+    'reward'?: OrderWithoutLinkRewardsInner;
 }
 
 export const FraudReviewStatusEnum = {
@@ -1276,10 +1295,10 @@ export interface FraudReviewListItem {
     'reasons'?: Array<FraudReviewListItemReasonsEnum>;
     /**
      * 
-     * @type {OrderWithoutLinkReward}
+     * @type {OrderWithoutLinkRewardsInner}
      * @memberof FraudReviewListItem
      */
-    'reward'?: OrderWithoutLinkReward;
+    'reward'?: OrderWithoutLinkRewardsInner;
 }
 
 export const FraudReviewListItemStatusEnum = {
@@ -2120,47 +2139,47 @@ export type InvoiceStatusEnum = typeof InvoiceStatusEnum[keyof typeof InvoiceSta
 export interface ListBalanceTransactions200Response {
     /**
      * 
-     * @type {Array<ListBalanceTransactions200ResponseInvoicesInner>}
+     * @type {Array<ListBalanceTransactions200ResponseTransactionsInner>}
      * @memberof ListBalanceTransactions200Response
      */
-    'invoices'?: Array<ListBalanceTransactions200ResponseInvoicesInner>;
+    'transactions': Array<ListBalanceTransactions200ResponseTransactionsInner>;
 }
 /**
  * A balance transaction represents a specific movement or change in an account\'s balance. 
  * @export
- * @interface ListBalanceTransactions200ResponseInvoicesInner
+ * @interface ListBalanceTransactions200ResponseTransactionsInner
  */
-export interface ListBalanceTransactions200ResponseInvoicesInner {
+export interface ListBalanceTransactions200ResponseTransactionsInner {
     /**
      * Date that the transaction was created
      * @type {string}
-     * @memberof ListBalanceTransactions200ResponseInvoicesInner
+     * @memberof ListBalanceTransactions200ResponseTransactionsInner
      */
-    'created_at'?: string;
+    'created_at': string;
     /**
      * Amount of the transaction in USD
      * @type {number}
-     * @memberof ListBalanceTransactions200ResponseInvoicesInner
+     * @memberof ListBalanceTransactions200ResponseTransactionsInner
      */
-    'amount'?: number;
+    'amount': number;
     /**
      * The updated total after the transaction. Note that this running balance may be delayed and contain `null`.
      * @type {number}
-     * @memberof ListBalanceTransactions200ResponseInvoicesInner
+     * @memberof ListBalanceTransactions200ResponseTransactionsInner
      */
-    'balance'?: number;
+    'balance': number;
     /**
      * The action that was performed
      * @type {string}
-     * @memberof ListBalanceTransactions200ResponseInvoicesInner
+     * @memberof ListBalanceTransactions200ResponseTransactionsInner
      */
-    'action'?: string;
+    'action': string;
     /**
      * A brief description of the transaction
      * @type {string}
-     * @memberof ListBalanceTransactions200ResponseInvoicesInner
+     * @memberof ListBalanceTransactions200ResponseTransactionsInner
      */
-    'description'?: string;
+    'description': string;
 }
 /**
  * 
@@ -2871,6 +2890,12 @@ export interface ListOrders200ResponseOrdersInner {
      */
     'status': ListOrders200ResponseOrdersInnerStatusEnum;
     /**
+     * Name of the channel in which the order was created
+     * @type {string}
+     * @memberof ListOrders200ResponseOrdersInner
+     */
+    'channel'?: ListOrders200ResponseOrdersInnerChannelEnum;
+    /**
      * 
      * @type {ListOrders200ResponseOrdersInnerPayment}
      * @memberof ListOrders200ResponseOrdersInner
@@ -2884,10 +2909,10 @@ export interface ListOrders200ResponseOrdersInner {
     'invoice_id'?: string;
     /**
      * 
-     * @type {ListRewards200ResponseRewardsInner}
+     * @type {Array<ListRewards200ResponseRewardsInner>}
      * @memberof ListOrders200ResponseOrdersInner
      */
-    'reward'?: ListRewards200ResponseRewardsInner;
+    'rewards'?: Array<ListRewards200ResponseRewardsInner>;
 }
 
 export const ListOrders200ResponseOrdersInnerStatusEnum = {
@@ -2900,6 +2925,17 @@ export const ListOrders200ResponseOrdersInnerStatusEnum = {
 } as const;
 
 export type ListOrders200ResponseOrdersInnerStatusEnum = typeof ListOrders200ResponseOrdersInnerStatusEnum[keyof typeof ListOrders200ResponseOrdersInnerStatusEnum];
+export const ListOrders200ResponseOrdersInnerChannelEnum = {
+    Ui: 'UI',
+    Api: 'API',
+    Embed: 'EMBED',
+    Decipher: 'DECIPHER',
+    Qualtrics: 'QUALTRICS',
+    Typeform: 'TYPEFORM',
+    SurveyMonkey: 'SURVEY MONKEY'
+} as const;
+
+export type ListOrders200ResponseOrdersInnerChannelEnum = typeof ListOrders200ResponseOrdersInnerChannelEnum[keyof typeof ListOrders200ResponseOrdersInnerChannelEnum];
 
 /**
  * Cost breakdown of the order (cost of rewards + fees). Cost and fees are always denominated in USD, independent from the currency of the ordered rewards. Note that this property will only appear for processed orders (`status` is `EXECUTED`).
@@ -3994,6 +4030,12 @@ export interface Order {
      */
     'status': OrderStatusEnum;
     /**
+     * Name of the channel in which the order was created
+     * @type {string}
+     * @memberof Order
+     */
+    'channel'?: OrderChannelEnum;
+    /**
      * 
      * @type {OrderBasePayment}
      * @memberof Order
@@ -4007,10 +4049,10 @@ export interface Order {
     'invoice_id'?: string;
     /**
      * 
-     * @type {OrderWithoutLinkReward}
+     * @type {Array<OrderWithoutLinkRewardsInner>}
      * @memberof Order
      */
-    'reward'?: OrderWithoutLinkReward;
+    'rewards'?: Array<OrderWithoutLinkRewardsInner>;
 }
 
 export const OrderStatusEnum = {
@@ -4023,6 +4065,17 @@ export const OrderStatusEnum = {
 } as const;
 
 export type OrderStatusEnum = typeof OrderStatusEnum[keyof typeof OrderStatusEnum];
+export const OrderChannelEnum = {
+    Ui: 'UI',
+    Api: 'API',
+    Embed: 'EMBED',
+    Decipher: 'DECIPHER',
+    Qualtrics: 'QUALTRICS',
+    Typeform: 'TYPEFORM',
+    SurveyMonkey: 'SURVEY MONKEY'
+} as const;
+
+export type OrderChannelEnum = typeof OrderChannelEnum[keyof typeof OrderChannelEnum];
 
 /**
  * An order wraps around the fulfilment of one or more rewards.
@@ -4061,6 +4114,12 @@ export interface OrderBase {
      */
     'status': OrderBaseStatusEnum;
     /**
+     * Name of the channel in which the order was created
+     * @type {string}
+     * @memberof OrderBase
+     */
+    'channel'?: OrderBaseChannelEnum;
+    /**
      * 
      * @type {OrderBasePayment}
      * @memberof OrderBase
@@ -4084,6 +4143,17 @@ export const OrderBaseStatusEnum = {
 } as const;
 
 export type OrderBaseStatusEnum = typeof OrderBaseStatusEnum[keyof typeof OrderBaseStatusEnum];
+export const OrderBaseChannelEnum = {
+    Ui: 'UI',
+    Api: 'API',
+    Embed: 'EMBED',
+    Decipher: 'DECIPHER',
+    Qualtrics: 'QUALTRICS',
+    Typeform: 'TYPEFORM',
+    SurveyMonkey: 'SURVEY MONKEY'
+} as const;
+
+export type OrderBaseChannelEnum = typeof OrderBaseChannelEnum[keyof typeof OrderBaseChannelEnum];
 
 /**
  * Cost breakdown of the order (cost of rewards + fees). Cost and fees are always denominated in USD, independent from the currency of the ordered rewards. Note that this property will only appear for processed orders (`status` is `EXECUTED`).
@@ -4190,6 +4260,12 @@ export interface OrderWithoutLink {
      */
     'status': OrderWithoutLinkStatusEnum;
     /**
+     * Name of the channel in which the order was created
+     * @type {string}
+     * @memberof OrderWithoutLink
+     */
+    'channel'?: OrderWithoutLinkChannelEnum;
+    /**
      * 
      * @type {OrderBasePayment}
      * @memberof OrderWithoutLink
@@ -4203,10 +4279,10 @@ export interface OrderWithoutLink {
     'invoice_id'?: string;
     /**
      * 
-     * @type {OrderWithoutLinkReward}
+     * @type {Array<OrderWithoutLinkRewardsInner>}
      * @memberof OrderWithoutLink
      */
-    'reward'?: OrderWithoutLinkReward;
+    'rewards'?: Array<OrderWithoutLinkRewardsInner>;
 }
 
 export const OrderWithoutLinkStatusEnum = {
@@ -4219,71 +4295,82 @@ export const OrderWithoutLinkStatusEnum = {
 } as const;
 
 export type OrderWithoutLinkStatusEnum = typeof OrderWithoutLinkStatusEnum[keyof typeof OrderWithoutLinkStatusEnum];
+export const OrderWithoutLinkChannelEnum = {
+    Ui: 'UI',
+    Api: 'API',
+    Embed: 'EMBED',
+    Decipher: 'DECIPHER',
+    Qualtrics: 'QUALTRICS',
+    Typeform: 'TYPEFORM',
+    SurveyMonkey: 'SURVEY MONKEY'
+} as const;
+
+export type OrderWithoutLinkChannelEnum = typeof OrderWithoutLinkChannelEnum[keyof typeof OrderWithoutLinkChannelEnum];
 
 /**
  * A single reward, sent to a recipient. A reward is always part of an order.  Either `products` or `campaign_id` must be specified. 
  * @export
- * @interface OrderWithoutLinkReward
+ * @interface OrderWithoutLinkRewardsInner
  */
-export interface OrderWithoutLinkReward {
+export interface OrderWithoutLinkRewardsInner {
     /**
      * Tremendous ID of the reward
      * @type {string}
-     * @memberof OrderWithoutLinkReward
+     * @memberof OrderWithoutLinkRewardsInner
      */
     'id'?: string;
     /**
      * Tremendous ID of the order this reward is part of.
      * @type {string}
-     * @memberof OrderWithoutLinkReward
+     * @memberof OrderWithoutLinkRewardsInner
      */
     'order_id'?: string;
     /**
      * Date the reward was created
      * @type {string}
-     * @memberof OrderWithoutLinkReward
+     * @memberof OrderWithoutLinkRewardsInner
      */
     'created_at'?: string;
     /**
      * ID of the campaign in your account, that defines the available products (different gift cards, charity, etc.) that the recipient can choose from. 
      * @type {string}
-     * @memberof OrderWithoutLinkReward
+     * @memberof OrderWithoutLinkRewardsInner
      */
     'campaign_id'?: string | null;
     /**
      * List of IDs of product (different gift cards, charity, etc.) that will be available to the recipient to choose from.  Providing a `products` array will override the products made available by the campaign specified using the `campaign_id` property unless the `products` array is empty. It will _not_ override other campaign attributes, like the message and customization of the look and feel. 
      * @type {Array<string>}
-     * @memberof OrderWithoutLinkReward
+     * @memberof OrderWithoutLinkRewardsInner
      */
     'products'?: Array<string>;
     /**
      * 
      * @type {ListRewards200ResponseRewardsInnerValue}
-     * @memberof OrderWithoutLinkReward
+     * @memberof OrderWithoutLinkRewardsInner
      */
     'value'?: ListRewards200ResponseRewardsInnerValue;
     /**
      * 
      * @type {ListRewards200ResponseRewardsInnerRecipient}
-     * @memberof OrderWithoutLinkReward
+     * @memberof OrderWithoutLinkRewardsInner
      */
     'recipient'?: ListRewards200ResponseRewardsInnerRecipient;
     /**
      * Timestamp of reward delivery within the next year. Note that if date-time is provided, the time values will be ignored.
      * @type {string}
-     * @memberof OrderWithoutLinkReward
+     * @memberof OrderWithoutLinkRewardsInner
      */
     'deliver_at'?: string;
     /**
      * 
      * @type {Array<RewardBaseCustomFieldsInner>}
-     * @memberof OrderWithoutLinkReward
+     * @memberof OrderWithoutLinkRewardsInner
      */
     'custom_fields'?: Array<RewardBaseCustomFieldsInner>;
     /**
      * 
      * @type {RewardWithoutLinkDelivery}
-     * @memberof OrderWithoutLinkReward
+     * @memberof OrderWithoutLinkRewardsInner
      */
     'delivery'?: RewardWithoutLinkDelivery;
 }
@@ -5703,6 +5790,12 @@ export interface SingleRewardOrderWithoutLinkOrder {
      */
     'status': SingleRewardOrderWithoutLinkOrderStatusEnum;
     /**
+     * Name of the channel in which the order was created
+     * @type {string}
+     * @memberof SingleRewardOrderWithoutLinkOrder
+     */
+    'channel'?: SingleRewardOrderWithoutLinkOrderChannelEnum;
+    /**
      * 
      * @type {OrderBasePayment}
      * @memberof SingleRewardOrderWithoutLinkOrder
@@ -5716,10 +5809,10 @@ export interface SingleRewardOrderWithoutLinkOrder {
     'invoice_id'?: string;
     /**
      * 
-     * @type {OrderWithoutLinkReward}
+     * @type {Array<OrderWithoutLinkRewardsInner>}
      * @memberof SingleRewardOrderWithoutLinkOrder
      */
-    'reward'?: OrderWithoutLinkReward;
+    'rewards'?: Array<OrderWithoutLinkRewardsInner>;
 }
 
 export const SingleRewardOrderWithoutLinkOrderStatusEnum = {
@@ -5732,6 +5825,17 @@ export const SingleRewardOrderWithoutLinkOrderStatusEnum = {
 } as const;
 
 export type SingleRewardOrderWithoutLinkOrderStatusEnum = typeof SingleRewardOrderWithoutLinkOrderStatusEnum[keyof typeof SingleRewardOrderWithoutLinkOrderStatusEnum];
+export const SingleRewardOrderWithoutLinkOrderChannelEnum = {
+    Ui: 'UI',
+    Api: 'API',
+    Embed: 'EMBED',
+    Decipher: 'DECIPHER',
+    Qualtrics: 'QUALTRICS',
+    Typeform: 'TYPEFORM',
+    SurveyMonkey: 'SURVEY MONKEY'
+} as const;
+
+export type SingleRewardOrderWithoutLinkOrderChannelEnum = typeof SingleRewardOrderWithoutLinkOrderChannelEnum[keyof typeof SingleRewardOrderWithoutLinkOrderChannelEnum];
 
 /**
  * 

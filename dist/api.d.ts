@@ -76,31 +76,31 @@ export interface BalanceTransaction {
      * @type {string}
      * @memberof BalanceTransaction
      */
-    'created_at'?: string;
+    'created_at': string;
     /**
      * Amount of the transaction in USD
      * @type {number}
      * @memberof BalanceTransaction
      */
-    'amount'?: number;
+    'amount': number;
     /**
      * The updated total after the transaction. Note that this running balance may be delayed and contain `null`.
      * @type {number}
      * @memberof BalanceTransaction
      */
-    'balance'?: number;
+    'balance': number;
     /**
      * The action that was performed
      * @type {string}
      * @memberof BalanceTransaction
      */
-    'action'?: string;
+    'action': string;
     /**
      * A brief description of the transaction
      * @type {string}
      * @memberof BalanceTransaction
      */
-    'description'?: string;
+    'description': string;
 }
 /**
  *
@@ -207,6 +207,21 @@ export interface CampaignBase {
      */
     'email_style'?: ListCampaigns200ResponseCampaignsInnerEmailStyle;
 }
+/**
+ * Name of the channel in which the order was created
+ * @export
+ * @enum {string}
+ */
+export declare const Channel: {
+    readonly Ui: "UI";
+    readonly Api: "API";
+    readonly Embed: "EMBED";
+    readonly Decipher: "DECIPHER";
+    readonly Qualtrics: "QUALTRICS";
+    readonly Typeform: "TYPEFORM";
+    readonly SurveyMonkey: "SURVEY MONKEY";
+};
+export type Channel = typeof Channel[keyof typeof Channel];
 /**
  *
  * @export
@@ -1146,10 +1161,10 @@ export interface FraudReview {
     'geo'?: GetFraudReview200ResponseFraudReviewGeo;
     /**
      *
-     * @type {OrderWithoutLinkReward}
+     * @type {OrderWithoutLinkRewardsInner}
      * @memberof FraudReview
      */
-    'reward'?: OrderWithoutLinkReward;
+    'reward'?: OrderWithoutLinkRewardsInner;
 }
 export declare const FraudReviewStatusEnum: {
     readonly Flagged: "flagged";
@@ -1234,10 +1249,10 @@ export interface FraudReviewListItem {
     'reasons'?: Array<FraudReviewListItemReasonsEnum>;
     /**
      *
-     * @type {OrderWithoutLinkReward}
+     * @type {OrderWithoutLinkRewardsInner}
      * @memberof FraudReviewListItem
      */
-    'reward'?: OrderWithoutLinkReward;
+    'reward'?: OrderWithoutLinkRewardsInner;
 }
 export declare const FraudReviewListItemStatusEnum: {
     readonly Flagged: "flagged";
@@ -2033,47 +2048,47 @@ export type InvoiceStatusEnum = typeof InvoiceStatusEnum[keyof typeof InvoiceSta
 export interface ListBalanceTransactions200Response {
     /**
      *
-     * @type {Array<ListBalanceTransactions200ResponseInvoicesInner>}
+     * @type {Array<ListBalanceTransactions200ResponseTransactionsInner>}
      * @memberof ListBalanceTransactions200Response
      */
-    'invoices'?: Array<ListBalanceTransactions200ResponseInvoicesInner>;
+    'transactions': Array<ListBalanceTransactions200ResponseTransactionsInner>;
 }
 /**
  * A balance transaction represents a specific movement or change in an account\'s balance.
  * @export
- * @interface ListBalanceTransactions200ResponseInvoicesInner
+ * @interface ListBalanceTransactions200ResponseTransactionsInner
  */
-export interface ListBalanceTransactions200ResponseInvoicesInner {
+export interface ListBalanceTransactions200ResponseTransactionsInner {
     /**
      * Date that the transaction was created
      * @type {string}
-     * @memberof ListBalanceTransactions200ResponseInvoicesInner
+     * @memberof ListBalanceTransactions200ResponseTransactionsInner
      */
-    'created_at'?: string;
+    'created_at': string;
     /**
      * Amount of the transaction in USD
      * @type {number}
-     * @memberof ListBalanceTransactions200ResponseInvoicesInner
+     * @memberof ListBalanceTransactions200ResponseTransactionsInner
      */
-    'amount'?: number;
+    'amount': number;
     /**
      * The updated total after the transaction. Note that this running balance may be delayed and contain `null`.
      * @type {number}
-     * @memberof ListBalanceTransactions200ResponseInvoicesInner
+     * @memberof ListBalanceTransactions200ResponseTransactionsInner
      */
-    'balance'?: number;
+    'balance': number;
     /**
      * The action that was performed
      * @type {string}
-     * @memberof ListBalanceTransactions200ResponseInvoicesInner
+     * @memberof ListBalanceTransactions200ResponseTransactionsInner
      */
-    'action'?: string;
+    'action': string;
     /**
      * A brief description of the transaction
      * @type {string}
-     * @memberof ListBalanceTransactions200ResponseInvoicesInner
+     * @memberof ListBalanceTransactions200ResponseTransactionsInner
      */
-    'description'?: string;
+    'description': string;
 }
 /**
  *
@@ -2767,6 +2782,12 @@ export interface ListOrders200ResponseOrdersInner {
      */
     'status': ListOrders200ResponseOrdersInnerStatusEnum;
     /**
+     * Name of the channel in which the order was created
+     * @type {string}
+     * @memberof ListOrders200ResponseOrdersInner
+     */
+    'channel'?: ListOrders200ResponseOrdersInnerChannelEnum;
+    /**
      *
      * @type {ListOrders200ResponseOrdersInnerPayment}
      * @memberof ListOrders200ResponseOrdersInner
@@ -2780,10 +2801,10 @@ export interface ListOrders200ResponseOrdersInner {
     'invoice_id'?: string;
     /**
      *
-     * @type {ListRewards200ResponseRewardsInner}
+     * @type {Array<ListRewards200ResponseRewardsInner>}
      * @memberof ListOrders200ResponseOrdersInner
      */
-    'reward'?: ListRewards200ResponseRewardsInner;
+    'rewards'?: Array<ListRewards200ResponseRewardsInner>;
 }
 export declare const ListOrders200ResponseOrdersInnerStatusEnum: {
     readonly Canceled: "CANCELED";
@@ -2794,6 +2815,16 @@ export declare const ListOrders200ResponseOrdersInnerStatusEnum: {
     readonly PendingInternalPaymentApproval: "PENDING INTERNAL PAYMENT APPROVAL";
 };
 export type ListOrders200ResponseOrdersInnerStatusEnum = typeof ListOrders200ResponseOrdersInnerStatusEnum[keyof typeof ListOrders200ResponseOrdersInnerStatusEnum];
+export declare const ListOrders200ResponseOrdersInnerChannelEnum: {
+    readonly Ui: "UI";
+    readonly Api: "API";
+    readonly Embed: "EMBED";
+    readonly Decipher: "DECIPHER";
+    readonly Qualtrics: "QUALTRICS";
+    readonly Typeform: "TYPEFORM";
+    readonly SurveyMonkey: "SURVEY MONKEY";
+};
+export type ListOrders200ResponseOrdersInnerChannelEnum = typeof ListOrders200ResponseOrdersInnerChannelEnum[keyof typeof ListOrders200ResponseOrdersInnerChannelEnum];
 /**
  * Cost breakdown of the order (cost of rewards + fees). Cost and fees are always denominated in USD, independent from the currency of the ordered rewards. Note that this property will only appear for processed orders (`status` is `EXECUTED`).
  * @export
@@ -3855,6 +3886,12 @@ export interface Order {
      */
     'status': OrderStatusEnum;
     /**
+     * Name of the channel in which the order was created
+     * @type {string}
+     * @memberof Order
+     */
+    'channel'?: OrderChannelEnum;
+    /**
      *
      * @type {OrderBasePayment}
      * @memberof Order
@@ -3868,10 +3905,10 @@ export interface Order {
     'invoice_id'?: string;
     /**
      *
-     * @type {OrderWithoutLinkReward}
+     * @type {Array<OrderWithoutLinkRewardsInner>}
      * @memberof Order
      */
-    'reward'?: OrderWithoutLinkReward;
+    'rewards'?: Array<OrderWithoutLinkRewardsInner>;
 }
 export declare const OrderStatusEnum: {
     readonly Canceled: "CANCELED";
@@ -3882,6 +3919,16 @@ export declare const OrderStatusEnum: {
     readonly PendingInternalPaymentApproval: "PENDING INTERNAL PAYMENT APPROVAL";
 };
 export type OrderStatusEnum = typeof OrderStatusEnum[keyof typeof OrderStatusEnum];
+export declare const OrderChannelEnum: {
+    readonly Ui: "UI";
+    readonly Api: "API";
+    readonly Embed: "EMBED";
+    readonly Decipher: "DECIPHER";
+    readonly Qualtrics: "QUALTRICS";
+    readonly Typeform: "TYPEFORM";
+    readonly SurveyMonkey: "SURVEY MONKEY";
+};
+export type OrderChannelEnum = typeof OrderChannelEnum[keyof typeof OrderChannelEnum];
 /**
  * An order wraps around the fulfilment of one or more rewards.
  * @export
@@ -3919,6 +3966,12 @@ export interface OrderBase {
      */
     'status': OrderBaseStatusEnum;
     /**
+     * Name of the channel in which the order was created
+     * @type {string}
+     * @memberof OrderBase
+     */
+    'channel'?: OrderBaseChannelEnum;
+    /**
      *
      * @type {OrderBasePayment}
      * @memberof OrderBase
@@ -3940,6 +3993,16 @@ export declare const OrderBaseStatusEnum: {
     readonly PendingInternalPaymentApproval: "PENDING INTERNAL PAYMENT APPROVAL";
 };
 export type OrderBaseStatusEnum = typeof OrderBaseStatusEnum[keyof typeof OrderBaseStatusEnum];
+export declare const OrderBaseChannelEnum: {
+    readonly Ui: "UI";
+    readonly Api: "API";
+    readonly Embed: "EMBED";
+    readonly Decipher: "DECIPHER";
+    readonly Qualtrics: "QUALTRICS";
+    readonly Typeform: "TYPEFORM";
+    readonly SurveyMonkey: "SURVEY MONKEY";
+};
+export type OrderBaseChannelEnum = typeof OrderBaseChannelEnum[keyof typeof OrderBaseChannelEnum];
 /**
  * Cost breakdown of the order (cost of rewards + fees). Cost and fees are always denominated in USD, independent from the currency of the ordered rewards. Note that this property will only appear for processed orders (`status` is `EXECUTED`).
  * @export
@@ -4038,6 +4101,12 @@ export interface OrderWithoutLink {
      */
     'status': OrderWithoutLinkStatusEnum;
     /**
+     * Name of the channel in which the order was created
+     * @type {string}
+     * @memberof OrderWithoutLink
+     */
+    'channel'?: OrderWithoutLinkChannelEnum;
+    /**
      *
      * @type {OrderBasePayment}
      * @memberof OrderWithoutLink
@@ -4051,10 +4120,10 @@ export interface OrderWithoutLink {
     'invoice_id'?: string;
     /**
      *
-     * @type {OrderWithoutLinkReward}
+     * @type {Array<OrderWithoutLinkRewardsInner>}
      * @memberof OrderWithoutLink
      */
-    'reward'?: OrderWithoutLinkReward;
+    'rewards'?: Array<OrderWithoutLinkRewardsInner>;
 }
 export declare const OrderWithoutLinkStatusEnum: {
     readonly Canceled: "CANCELED";
@@ -4065,70 +4134,80 @@ export declare const OrderWithoutLinkStatusEnum: {
     readonly PendingInternalPaymentApproval: "PENDING INTERNAL PAYMENT APPROVAL";
 };
 export type OrderWithoutLinkStatusEnum = typeof OrderWithoutLinkStatusEnum[keyof typeof OrderWithoutLinkStatusEnum];
+export declare const OrderWithoutLinkChannelEnum: {
+    readonly Ui: "UI";
+    readonly Api: "API";
+    readonly Embed: "EMBED";
+    readonly Decipher: "DECIPHER";
+    readonly Qualtrics: "QUALTRICS";
+    readonly Typeform: "TYPEFORM";
+    readonly SurveyMonkey: "SURVEY MONKEY";
+};
+export type OrderWithoutLinkChannelEnum = typeof OrderWithoutLinkChannelEnum[keyof typeof OrderWithoutLinkChannelEnum];
 /**
  * A single reward, sent to a recipient. A reward is always part of an order.  Either `products` or `campaign_id` must be specified.
  * @export
- * @interface OrderWithoutLinkReward
+ * @interface OrderWithoutLinkRewardsInner
  */
-export interface OrderWithoutLinkReward {
+export interface OrderWithoutLinkRewardsInner {
     /**
      * Tremendous ID of the reward
      * @type {string}
-     * @memberof OrderWithoutLinkReward
+     * @memberof OrderWithoutLinkRewardsInner
      */
     'id'?: string;
     /**
      * Tremendous ID of the order this reward is part of.
      * @type {string}
-     * @memberof OrderWithoutLinkReward
+     * @memberof OrderWithoutLinkRewardsInner
      */
     'order_id'?: string;
     /**
      * Date the reward was created
      * @type {string}
-     * @memberof OrderWithoutLinkReward
+     * @memberof OrderWithoutLinkRewardsInner
      */
     'created_at'?: string;
     /**
      * ID of the campaign in your account, that defines the available products (different gift cards, charity, etc.) that the recipient can choose from.
      * @type {string}
-     * @memberof OrderWithoutLinkReward
+     * @memberof OrderWithoutLinkRewardsInner
      */
     'campaign_id'?: string | null;
     /**
      * List of IDs of product (different gift cards, charity, etc.) that will be available to the recipient to choose from.  Providing a `products` array will override the products made available by the campaign specified using the `campaign_id` property unless the `products` array is empty. It will _not_ override other campaign attributes, like the message and customization of the look and feel.
      * @type {Array<string>}
-     * @memberof OrderWithoutLinkReward
+     * @memberof OrderWithoutLinkRewardsInner
      */
     'products'?: Array<string>;
     /**
      *
      * @type {ListRewards200ResponseRewardsInnerValue}
-     * @memberof OrderWithoutLinkReward
+     * @memberof OrderWithoutLinkRewardsInner
      */
     'value'?: ListRewards200ResponseRewardsInnerValue;
     /**
      *
      * @type {ListRewards200ResponseRewardsInnerRecipient}
-     * @memberof OrderWithoutLinkReward
+     * @memberof OrderWithoutLinkRewardsInner
      */
     'recipient'?: ListRewards200ResponseRewardsInnerRecipient;
     /**
      * Timestamp of reward delivery within the next year. Note that if date-time is provided, the time values will be ignored.
      * @type {string}
-     * @memberof OrderWithoutLinkReward
+     * @memberof OrderWithoutLinkRewardsInner
      */
     'deliver_at'?: string;
     /**
      *
      * @type {Array<RewardBaseCustomFieldsInner>}
-     * @memberof OrderWithoutLinkReward
+     * @memberof OrderWithoutLinkRewardsInner
      */
     'custom_fields'?: Array<RewardBaseCustomFieldsInner>;
     /**
      *
      * @type {RewardWithoutLinkDelivery}
-     * @memberof OrderWithoutLinkReward
+     * @memberof OrderWithoutLinkRewardsInner
      */
     'delivery'?: RewardWithoutLinkDelivery;
 }
@@ -5519,6 +5598,12 @@ export interface SingleRewardOrderWithoutLinkOrder {
      */
     'status': SingleRewardOrderWithoutLinkOrderStatusEnum;
     /**
+     * Name of the channel in which the order was created
+     * @type {string}
+     * @memberof SingleRewardOrderWithoutLinkOrder
+     */
+    'channel'?: SingleRewardOrderWithoutLinkOrderChannelEnum;
+    /**
      *
      * @type {OrderBasePayment}
      * @memberof SingleRewardOrderWithoutLinkOrder
@@ -5532,10 +5617,10 @@ export interface SingleRewardOrderWithoutLinkOrder {
     'invoice_id'?: string;
     /**
      *
-     * @type {OrderWithoutLinkReward}
+     * @type {Array<OrderWithoutLinkRewardsInner>}
      * @memberof SingleRewardOrderWithoutLinkOrder
      */
-    'reward'?: OrderWithoutLinkReward;
+    'rewards'?: Array<OrderWithoutLinkRewardsInner>;
 }
 export declare const SingleRewardOrderWithoutLinkOrderStatusEnum: {
     readonly Canceled: "CANCELED";
@@ -5546,6 +5631,16 @@ export declare const SingleRewardOrderWithoutLinkOrderStatusEnum: {
     readonly PendingInternalPaymentApproval: "PENDING INTERNAL PAYMENT APPROVAL";
 };
 export type SingleRewardOrderWithoutLinkOrderStatusEnum = typeof SingleRewardOrderWithoutLinkOrderStatusEnum[keyof typeof SingleRewardOrderWithoutLinkOrderStatusEnum];
+export declare const SingleRewardOrderWithoutLinkOrderChannelEnum: {
+    readonly Ui: "UI";
+    readonly Api: "API";
+    readonly Embed: "EMBED";
+    readonly Decipher: "DECIPHER";
+    readonly Qualtrics: "QUALTRICS";
+    readonly Typeform: "TYPEFORM";
+    readonly SurveyMonkey: "SURVEY MONKEY";
+};
+export type SingleRewardOrderWithoutLinkOrderChannelEnum = typeof SingleRewardOrderWithoutLinkOrderChannelEnum[keyof typeof SingleRewardOrderWithoutLinkOrderChannelEnum];
 /**
  *
  * @export
