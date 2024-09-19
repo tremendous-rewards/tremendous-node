@@ -6159,7 +6159,7 @@ export const BalanceTransactionsApiFactory = function (configuration?: Configura
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listBalanceTransactions(offset?: number, limit?: number, createdAtGte?: string, createdAtLte?: string, options?: any): AxiosPromise<ListBalanceTransactions200Response> {
+        listBalanceTransactions(offset?: number, limit?: number, createdAtGte?: string, createdAtLte?: string, options?: RawAxiosRequestConfig): AxiosPromise<ListBalanceTransactions200Response> {
             return localVarFp.listBalanceTransactions(offset, limit, createdAtGte, createdAtLte, options).then((request) => request(axios, basePath));
         },
     };
@@ -6431,7 +6431,7 @@ export const CampaignsApiFactory = function (configuration?: Configuration, base
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        createCampaign(createCampaignRequest: CreateCampaignRequest, options?: any): AxiosPromise<CreateCampaign201Response> {
+        createCampaign(createCampaignRequest: CreateCampaignRequest, options?: RawAxiosRequestConfig): AxiosPromise<CreateCampaign201Response> {
             return localVarFp.createCampaign(createCampaignRequest, options).then((request) => request(axios, basePath));
         },
         /**
@@ -6441,7 +6441,7 @@ export const CampaignsApiFactory = function (configuration?: Configuration, base
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getCampaign(id: string, options?: any): AxiosPromise<CreateCampaign201Response> {
+        getCampaign(id: string, options?: RawAxiosRequestConfig): AxiosPromise<CreateCampaign201Response> {
             return localVarFp.getCampaign(id, options).then((request) => request(axios, basePath));
         },
         /**
@@ -6450,7 +6450,7 @@ export const CampaignsApiFactory = function (configuration?: Configuration, base
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listCampaigns(options?: any): AxiosPromise<ListCampaigns200Response> {
+        listCampaigns(options?: RawAxiosRequestConfig): AxiosPromise<ListCampaigns200Response> {
             return localVarFp.listCampaigns(options).then((request) => request(axios, basePath));
         },
         /**
@@ -6461,7 +6461,7 @@ export const CampaignsApiFactory = function (configuration?: Configuration, base
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateCampaign(id: string, updateCampaignRequest: UpdateCampaignRequest, options?: any): AxiosPromise<CreateCampaign201Response> {
+        updateCampaign(id: string, updateCampaignRequest: UpdateCampaignRequest, options?: RawAxiosRequestConfig): AxiosPromise<CreateCampaign201Response> {
             return localVarFp.updateCampaign(id, updateCampaignRequest, options).then((request) => request(axios, basePath));
         },
     };
@@ -6603,7 +6603,7 @@ export const FieldsApiFactory = function (configuration?: Configuration, basePat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listFields(options?: any): AxiosPromise<ListFields200Response> {
+        listFields(options?: RawAxiosRequestConfig): AxiosPromise<ListFields200Response> {
             return localVarFp.listFields(options).then((request) => request(axios, basePath));
         },
     };
@@ -6715,7 +6715,7 @@ export const ForexApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listForex(base?: string, options?: any): AxiosPromise<ListForexResponse> {
+        listForex(base?: string, options?: RawAxiosRequestConfig): AxiosPromise<ListForexResponse> {
             return localVarFp.listForex(base, options).then((request) => request(axios, basePath));
         },
     };
@@ -7017,7 +7017,7 @@ export const FraudReviewsApiFactory = function (configuration?: Configuration, b
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        blockFraudReview(id: string, options?: any): AxiosPromise<GetFraudReview200Response> {
+        blockFraudReview(id: string, options?: RawAxiosRequestConfig): AxiosPromise<GetFraudReview200Response> {
             return localVarFp.blockFraudReview(id, options).then((request) => request(axios, basePath));
         },
         /**
@@ -7027,7 +7027,7 @@ export const FraudReviewsApiFactory = function (configuration?: Configuration, b
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getFraudReview(id: string, options?: any): AxiosPromise<GetFraudReview200Response> {
+        getFraudReview(id: string, options?: RawAxiosRequestConfig): AxiosPromise<GetFraudReview200Response> {
             return localVarFp.getFraudReview(id, options).then((request) => request(axios, basePath));
         },
         /**
@@ -7043,7 +7043,7 @@ export const FraudReviewsApiFactory = function (configuration?: Configuration, b
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listFraudReviews(offset?: number, limit?: number, status?: ListFraudReviewsStatusEnum, createdAtGte?: string, createdAtLte?: string, redeemedAtGte?: string, redeemedAtLte?: string, options?: any): AxiosPromise<ListFraudReviews200Response> {
+        listFraudReviews(offset?: number, limit?: number, status?: ListFraudReviewsStatusEnum, createdAtGte?: string, createdAtLte?: string, redeemedAtGte?: string, redeemedAtLte?: string, options?: RawAxiosRequestConfig): AxiosPromise<ListFraudReviews200Response> {
             return localVarFp.listFraudReviews(offset, limit, status, createdAtGte, createdAtLte, redeemedAtGte, redeemedAtLte, options).then((request) => request(axios, basePath));
         },
         /**
@@ -7053,7 +7053,7 @@ export const FraudReviewsApiFactory = function (configuration?: Configuration, b
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        releaseFraudReview(id: string, options?: any): AxiosPromise<GetFraudReview200Response> {
+        releaseFraudReview(id: string, options?: RawAxiosRequestConfig): AxiosPromise<GetFraudReview200Response> {
             return localVarFp.releaseFraudReview(id, options).then((request) => request(axios, basePath));
         },
     };
@@ -7376,7 +7376,7 @@ export const FraudRulesApiFactory = function (configuration?: Configuration, bas
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deleteFraudRule(ruleType: DeleteFraudRuleRuleTypeEnum, options?: any): AxiosPromise<DeleteFraudRule200Response> {
+        deleteFraudRule(ruleType: DeleteFraudRuleRuleTypeEnum, options?: RawAxiosRequestConfig): AxiosPromise<DeleteFraudRule200Response> {
             return localVarFp.deleteFraudRule(ruleType, options).then((request) => request(axios, basePath));
         },
         /**
@@ -7387,7 +7387,7 @@ export const FraudRulesApiFactory = function (configuration?: Configuration, bas
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        fraudRule(ruleType: FraudRuleRuleTypeEnum, fraudRuleRequest?: FraudRuleRequest, options?: any): AxiosPromise<FraudRule200Response> {
+        fraudRule(ruleType: FraudRuleRuleTypeEnum, fraudRuleRequest?: FraudRuleRequest, options?: RawAxiosRequestConfig): AxiosPromise<FraudRule200Response> {
             return localVarFp.fraudRule(ruleType, fraudRuleRequest, options).then((request) => request(axios, basePath));
         },
         /**
@@ -7396,7 +7396,7 @@ export const FraudRulesApiFactory = function (configuration?: Configuration, bas
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listFraudRules(options?: any): AxiosPromise<ListFraudRules200Response> {
+        listFraudRules(options?: RawAxiosRequestConfig): AxiosPromise<ListFraudRules200Response> {
             return localVarFp.listFraudRules(options).then((request) => request(axios, basePath));
         },
         /**
@@ -7407,7 +7407,7 @@ export const FraudRulesApiFactory = function (configuration?: Configuration, bas
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateFraudRuleList(ruleType: UpdateFraudRuleListRuleTypeEnum, updateFraudRuleListRequest: UpdateFraudRuleListRequest, options?: any): AxiosPromise<UpdateFraudRuleList200Response> {
+        updateFraudRuleList(ruleType: UpdateFraudRuleListRuleTypeEnum, updateFraudRuleListRequest: UpdateFraudRuleListRequest, options?: RawAxiosRequestConfig): AxiosPromise<UpdateFraudRuleList200Response> {
             return localVarFp.updateFraudRuleList(ruleType, updateFraudRuleListRequest, options).then((request) => request(axios, basePath));
         },
     };
@@ -7647,7 +7647,7 @@ export const FundingSourcesApiFactory = function (configuration?: Configuration,
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getFundingSource(id: string, options?: any): AxiosPromise<GetFundingSource200Response> {
+        getFundingSource(id: string, options?: RawAxiosRequestConfig): AxiosPromise<GetFundingSource200Response> {
             return localVarFp.getFundingSource(id, options).then((request) => request(axios, basePath));
         },
         /**
@@ -7656,7 +7656,7 @@ export const FundingSourcesApiFactory = function (configuration?: Configuration,
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listFundingSources(options?: any): AxiosPromise<ListFundingSources200Response> {
+        listFundingSources(options?: RawAxiosRequestConfig): AxiosPromise<ListFundingSources200Response> {
             return localVarFp.listFundingSources(options).then((request) => request(axios, basePath));
         },
     };
@@ -8043,7 +8043,7 @@ export const InvoicesApiFactory = function (configuration?: Configuration, baseP
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        createInvoice(createInvoiceRequest: CreateInvoiceRequest, options?: any): AxiosPromise<CreateInvoice200Response> {
+        createInvoice(createInvoiceRequest: CreateInvoiceRequest, options?: RawAxiosRequestConfig): AxiosPromise<CreateInvoice200Response> {
             return localVarFp.createInvoice(createInvoiceRequest, options).then((request) => request(axios, basePath));
         },
         /**
@@ -8053,7 +8053,7 @@ export const InvoicesApiFactory = function (configuration?: Configuration, baseP
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deleteInvoices(id: string, options?: any): AxiosPromise<CreateInvoice200Response> {
+        deleteInvoices(id: string, options?: RawAxiosRequestConfig): AxiosPromise<CreateInvoice200Response> {
             return localVarFp.deleteInvoices(id, options).then((request) => request(axios, basePath));
         },
         /**
@@ -8063,7 +8063,7 @@ export const InvoicesApiFactory = function (configuration?: Configuration, baseP
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        downloadInvoiceCsv(id: string, options?: any): AxiosPromise<string> {
+        downloadInvoiceCsv(id: string, options?: RawAxiosRequestConfig): AxiosPromise<string> {
             return localVarFp.downloadInvoiceCsv(id, options).then((request) => request(axios, basePath));
         },
         /**
@@ -8073,7 +8073,7 @@ export const InvoicesApiFactory = function (configuration?: Configuration, baseP
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        downloadInvoicePdf(id: string, options?: any): AxiosPromise<File> {
+        downloadInvoicePdf(id: string, options?: RawAxiosRequestConfig): AxiosPromise<File> {
             return localVarFp.downloadInvoicePdf(id, options).then((request) => request(axios, basePath));
         },
         /**
@@ -8083,7 +8083,7 @@ export const InvoicesApiFactory = function (configuration?: Configuration, baseP
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getInvoice(id: string, options?: any): AxiosPromise<CreateInvoice200Response> {
+        getInvoice(id: string, options?: RawAxiosRequestConfig): AxiosPromise<CreateInvoice200Response> {
             return localVarFp.getInvoice(id, options).then((request) => request(axios, basePath));
         },
         /**
@@ -8094,7 +8094,7 @@ export const InvoicesApiFactory = function (configuration?: Configuration, baseP
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listInvoices(offset?: number, limit?: number, options?: any): AxiosPromise<ListInvoices200Response> {
+        listInvoices(offset?: number, limit?: number, options?: RawAxiosRequestConfig): AxiosPromise<ListInvoices200Response> {
             return localVarFp.listInvoices(offset, limit, options).then((request) => request(axios, basePath));
         },
     };
@@ -8366,7 +8366,7 @@ export const MembersApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        createMember(createMemberRequest: CreateMemberRequest, options?: any): AxiosPromise<CreateMember200Response> {
+        createMember(createMemberRequest: CreateMemberRequest, options?: RawAxiosRequestConfig): AxiosPromise<CreateMember200Response> {
             return localVarFp.createMember(createMemberRequest, options).then((request) => request(axios, basePath));
         },
         /**
@@ -8376,7 +8376,7 @@ export const MembersApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getMember(id: string, options?: any): AxiosPromise<GetMember200Response> {
+        getMember(id: string, options?: RawAxiosRequestConfig): AxiosPromise<GetMember200Response> {
             return localVarFp.getMember(id, options).then((request) => request(axios, basePath));
         },
         /**
@@ -8385,7 +8385,7 @@ export const MembersApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listMembers(options?: any): AxiosPromise<ListMembers200Response> {
+        listMembers(options?: RawAxiosRequestConfig): AxiosPromise<ListMembers200Response> {
             return localVarFp.listMembers(options).then((request) => request(axios, basePath));
         },
     };
@@ -8757,7 +8757,7 @@ export const OrdersApiFactory = function (configuration?: Configuration, basePat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        approveOrder(id: string, options?: any): AxiosPromise<CreateOrder200Response> {
+        approveOrder(id: string, options?: RawAxiosRequestConfig): AxiosPromise<CreateOrder200Response> {
             return localVarFp.approveOrder(id, options).then((request) => request(axios, basePath));
         },
         /**
@@ -8767,7 +8767,7 @@ export const OrdersApiFactory = function (configuration?: Configuration, basePat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        createOrder(createOrderRequest: CreateOrderRequest, options?: any): AxiosPromise<CreateOrder200Response> {
+        createOrder(createOrderRequest: CreateOrderRequest, options?: RawAxiosRequestConfig): AxiosPromise<CreateOrder200Response> {
             return localVarFp.createOrder(createOrderRequest, options).then((request) => request(axios, basePath));
         },
         /**
@@ -8777,7 +8777,7 @@ export const OrdersApiFactory = function (configuration?: Configuration, basePat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getOrder(id: string, options?: any): AxiosPromise<CreateOrder200Response> {
+        getOrder(id: string, options?: RawAxiosRequestConfig): AxiosPromise<CreateOrder200Response> {
             return localVarFp.getOrder(id, options).then((request) => request(axios, basePath));
         },
         /**
@@ -8792,7 +8792,7 @@ export const OrdersApiFactory = function (configuration?: Configuration, basePat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listOrders(offset?: number, campaignId?: string, externalId?: string, createdAtGte?: string, createdAtLte?: string, limit?: number, options?: any): AxiosPromise<ListOrders200Response> {
+        listOrders(offset?: number, campaignId?: string, externalId?: string, createdAtGte?: string, createdAtLte?: string, limit?: number, options?: RawAxiosRequestConfig): AxiosPromise<ListOrders200Response> {
             return localVarFp.listOrders(offset, campaignId, externalId, createdAtGte, createdAtLte, limit, options).then((request) => request(axios, basePath));
         },
         /**
@@ -8802,7 +8802,7 @@ export const OrdersApiFactory = function (configuration?: Configuration, basePat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        rejectOrder(id: string, options?: any): AxiosPromise<CreateOrder200Response> {
+        rejectOrder(id: string, options?: RawAxiosRequestConfig): AxiosPromise<CreateOrder200Response> {
             return localVarFp.rejectOrder(id, options).then((request) => request(axios, basePath));
         },
     };
@@ -9111,7 +9111,7 @@ export const OrganizationsApiFactory = function (configuration?: Configuration, 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        createApiKey(options?: any): AxiosPromise<CreateApiKey200Response> {
+        createApiKey(options?: RawAxiosRequestConfig): AxiosPromise<CreateApiKey200Response> {
             return localVarFp.createApiKey(options).then((request) => request(axios, basePath));
         },
         /**
@@ -9121,7 +9121,7 @@ export const OrganizationsApiFactory = function (configuration?: Configuration, 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        createOrganization(createOrganizationRequest: CreateOrganizationRequest, options?: any): AxiosPromise<CreateOrganization200Response> {
+        createOrganization(createOrganizationRequest: CreateOrganizationRequest, options?: RawAxiosRequestConfig): AxiosPromise<CreateOrganization200Response> {
             return localVarFp.createOrganization(createOrganizationRequest, options).then((request) => request(axios, basePath));
         },
         /**
@@ -9131,7 +9131,7 @@ export const OrganizationsApiFactory = function (configuration?: Configuration, 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getOrganization(id: string, options?: any): AxiosPromise<GetOrganization200Response> {
+        getOrganization(id: string, options?: RawAxiosRequestConfig): AxiosPromise<GetOrganization200Response> {
             return localVarFp.getOrganization(id, options).then((request) => request(axios, basePath));
         },
         /**
@@ -9140,7 +9140,7 @@ export const OrganizationsApiFactory = function (configuration?: Configuration, 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listOrganizations(options?: any): AxiosPromise<ListOrganizations200Response> {
+        listOrganizations(options?: RawAxiosRequestConfig): AxiosPromise<ListOrganizations200Response> {
             return localVarFp.listOrganizations(options).then((request) => request(axios, basePath));
         },
     };
@@ -9344,7 +9344,7 @@ export const ProductsApiFactory = function (configuration?: Configuration, baseP
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getProduct(id: string, options?: any): AxiosPromise<GetProductResponse> {
+        getProduct(id: string, options?: RawAxiosRequestConfig): AxiosPromise<GetProductResponse> {
             return localVarFp.getProduct(id, options).then((request) => request(axios, basePath));
         },
         /**
@@ -9355,7 +9355,7 @@ export const ProductsApiFactory = function (configuration?: Configuration, baseP
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listProducts(country?: string, currency?: string, options?: any): AxiosPromise<ListProductsResponse> {
+        listProducts(country?: string, currency?: string, options?: RawAxiosRequestConfig): AxiosPromise<ListProductsResponse> {
             return localVarFp.listProducts(country, currency, options).then((request) => request(axios, basePath));
         },
     };
@@ -9688,7 +9688,7 @@ export const PublicKeysApiFactory = function (configuration?: Configuration, bas
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        createPublicKey(createPublicKeyRequest: CreatePublicKeyRequest, options?: any): AxiosPromise<CreatePublicKey200Response> {
+        createPublicKey(createPublicKeyRequest: CreatePublicKeyRequest, options?: RawAxiosRequestConfig): AxiosPromise<CreatePublicKey200Response> {
             return localVarFp.createPublicKey(createPublicKeyRequest, options).then((request) => request(axios, basePath));
         },
         /**
@@ -9698,7 +9698,7 @@ export const PublicKeysApiFactory = function (configuration?: Configuration, bas
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deletePublicKey(id: string, options?: any): AxiosPromise<void> {
+        deletePublicKey(id: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
             return localVarFp.deletePublicKey(id, options).then((request) => request(axios, basePath));
         },
         /**
@@ -9708,7 +9708,7 @@ export const PublicKeysApiFactory = function (configuration?: Configuration, bas
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getPublicKey(id: string, options?: any): AxiosPromise<CreatePublicKey200Response> {
+        getPublicKey(id: string, options?: RawAxiosRequestConfig): AxiosPromise<CreatePublicKey200Response> {
             return localVarFp.getPublicKey(id, options).then((request) => request(axios, basePath));
         },
         /**
@@ -9717,7 +9717,7 @@ export const PublicKeysApiFactory = function (configuration?: Configuration, bas
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listPublicKeys(options?: any): AxiosPromise<PublicKeysResponse> {
+        listPublicKeys(options?: RawAxiosRequestConfig): AxiosPromise<PublicKeysResponse> {
             return localVarFp.listPublicKeys(options).then((request) => request(axios, basePath));
         },
         /**
@@ -9728,7 +9728,7 @@ export const PublicKeysApiFactory = function (configuration?: Configuration, bas
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        testPublicKey(id: string, testPublicKeyRequest: TestPublicKeyRequest, options?: any): AxiosPromise<void> {
+        testPublicKey(id: string, testPublicKeyRequest: TestPublicKeyRequest, options?: RawAxiosRequestConfig): AxiosPromise<void> {
             return localVarFp.testPublicKey(id, testPublicKeyRequest, options).then((request) => request(axios, basePath));
         },
     };
@@ -10093,7 +10093,7 @@ export const RewardsApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        generateRewardLink(id: string, options?: any): AxiosPromise<GenerateRewardLink200Response> {
+        generateRewardLink(id: string, options?: RawAxiosRequestConfig): AxiosPromise<GenerateRewardLink200Response> {
             return localVarFp.generateRewardLink(id, options).then((request) => request(axios, basePath));
         },
         /**
@@ -10103,7 +10103,7 @@ export const RewardsApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        generateRewardToken(id: string, options?: any): AxiosPromise<GenerateRewardToken200Response> {
+        generateRewardToken(id: string, options?: RawAxiosRequestConfig): AxiosPromise<GenerateRewardToken200Response> {
             return localVarFp.generateRewardToken(id, options).then((request) => request(axios, basePath));
         },
         /**
@@ -10113,7 +10113,7 @@ export const RewardsApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getReward(id: string, options?: any): AxiosPromise<GetReward200Response> {
+        getReward(id: string, options?: RawAxiosRequestConfig): AxiosPromise<GetReward200Response> {
             return localVarFp.getReward(id, options).then((request) => request(axios, basePath));
         },
         /**
@@ -10123,7 +10123,7 @@ export const RewardsApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listRewards(offset?: number, options?: any): AxiosPromise<ListRewards200Response> {
+        listRewards(offset?: number, options?: RawAxiosRequestConfig): AxiosPromise<ListRewards200Response> {
             return localVarFp.listRewards(offset, options).then((request) => request(axios, basePath));
         },
         /**
@@ -10133,7 +10133,7 @@ export const RewardsApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        resendReward(id: string, options?: any): AxiosPromise<object> {
+        resendReward(id: string, options?: RawAxiosRequestConfig): AxiosPromise<object> {
             return localVarFp.resendReward(id, options).then((request) => request(axios, basePath));
         },
     };
@@ -10287,7 +10287,7 @@ export const RolesApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listRoles(options?: any): AxiosPromise<ListRoles200Response> {
+        listRoles(options?: RawAxiosRequestConfig): AxiosPromise<ListRoles200Response> {
             return localVarFp.listRoles(options).then((request) => request(axios, basePath));
         },
     };
@@ -10657,7 +10657,7 @@ export const WebhooksApiFactory = function (configuration?: Configuration, baseP
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        createWebhook(createWebhookRequest: CreateWebhookRequest, options?: any): AxiosPromise<CreateWebhook200Response> {
+        createWebhook(createWebhookRequest: CreateWebhookRequest, options?: RawAxiosRequestConfig): AxiosPromise<CreateWebhook200Response> {
             return localVarFp.createWebhook(createWebhookRequest, options).then((request) => request(axios, basePath));
         },
         /**
@@ -10667,7 +10667,7 @@ export const WebhooksApiFactory = function (configuration?: Configuration, baseP
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deleteWebhook(id: string, options?: any): AxiosPromise<void> {
+        deleteWebhook(id: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
             return localVarFp.deleteWebhook(id, options).then((request) => request(axios, basePath));
         },
         /**
@@ -10677,7 +10677,7 @@ export const WebhooksApiFactory = function (configuration?: Configuration, baseP
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getWebhook(id: string, options?: any): AxiosPromise<CreateWebhook200Response> {
+        getWebhook(id: string, options?: RawAxiosRequestConfig): AxiosPromise<CreateWebhook200Response> {
             return localVarFp.getWebhook(id, options).then((request) => request(axios, basePath));
         },
         /**
@@ -10687,7 +10687,7 @@ export const WebhooksApiFactory = function (configuration?: Configuration, baseP
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listWebhookEvents(id: string, options?: any): AxiosPromise<ListWebhookEvents200Response> {
+        listWebhookEvents(id: string, options?: RawAxiosRequestConfig): AxiosPromise<ListWebhookEvents200Response> {
             return localVarFp.listWebhookEvents(id, options).then((request) => request(axios, basePath));
         },
         /**
@@ -10696,7 +10696,7 @@ export const WebhooksApiFactory = function (configuration?: Configuration, baseP
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listWebhooks(options?: any): AxiosPromise<ListWebhooks200Response> {
+        listWebhooks(options?: RawAxiosRequestConfig): AxiosPromise<ListWebhooks200Response> {
             return localVarFp.listWebhooks(options).then((request) => request(axios, basePath));
         },
         /**
@@ -10707,7 +10707,7 @@ export const WebhooksApiFactory = function (configuration?: Configuration, baseP
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        simulateWebhook(id: string, simulateWebhookRequest: SimulateWebhookRequest, options?: any): AxiosPromise<string> {
+        simulateWebhook(id: string, simulateWebhookRequest: SimulateWebhookRequest, options?: RawAxiosRequestConfig): AxiosPromise<string> {
             return localVarFp.simulateWebhook(id, simulateWebhookRequest, options).then((request) => request(axios, basePath));
         },
     };

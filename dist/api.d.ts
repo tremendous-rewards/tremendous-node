@@ -5902,7 +5902,7 @@ export declare const BalanceTransactionsApiFactory: (configuration?: Configurati
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    listBalanceTransactions(offset?: number, limit?: number, createdAtGte?: string, createdAtLte?: string, options?: any): AxiosPromise<ListBalanceTransactions200Response>;
+    listBalanceTransactions(offset?: number, limit?: number, createdAtGte?: string, createdAtLte?: string, options?: RawAxiosRequestConfig): AxiosPromise<ListBalanceTransactions200Response>;
 };
 /**
  * BalanceTransactionsApi - object-oriented interface
@@ -6012,7 +6012,7 @@ export declare const CampaignsApiFactory: (configuration?: Configuration, basePa
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    createCampaign(createCampaignRequest: CreateCampaignRequest, options?: any): AxiosPromise<CreateCampaign201Response>;
+    createCampaign(createCampaignRequest: CreateCampaignRequest, options?: RawAxiosRequestConfig): AxiosPromise<CreateCampaign201Response>;
     /**
      * Retrieve a campaign, identified by the given `id` in the URL
      * @summary Retrieve campaign
@@ -6020,14 +6020,14 @@ export declare const CampaignsApiFactory: (configuration?: Configuration, basePa
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    getCampaign(id: string, options?: any): AxiosPromise<CreateCampaign201Response>;
+    getCampaign(id: string, options?: RawAxiosRequestConfig): AxiosPromise<CreateCampaign201Response>;
     /**
      * Retrieve a list of all campaigns created in your account
      * @summary List campaigns
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    listCampaigns(options?: any): AxiosPromise<ListCampaigns200Response>;
+    listCampaigns(options?: RawAxiosRequestConfig): AxiosPromise<ListCampaigns200Response>;
     /**
      *
      * @summary Update campaign
@@ -6036,7 +6036,7 @@ export declare const CampaignsApiFactory: (configuration?: Configuration, basePa
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    updateCampaign(id: string, updateCampaignRequest: UpdateCampaignRequest, options?: any): AxiosPromise<CreateCampaign201Response>;
+    updateCampaign(id: string, updateCampaignRequest: UpdateCampaignRequest, options?: RawAxiosRequestConfig): AxiosPromise<CreateCampaign201Response>;
 };
 /**
  * CampaignsApi - object-oriented interface
@@ -6119,7 +6119,7 @@ export declare const FieldsApiFactory: (configuration?: Configuration, basePath?
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    listFields(options?: any): AxiosPromise<ListFields200Response>;
+    listFields(options?: RawAxiosRequestConfig): AxiosPromise<ListFields200Response>;
 };
 /**
  * FieldsApi - object-oriented interface
@@ -6177,7 +6177,7 @@ export declare const ForexApiFactory: (configuration?: Configuration, basePath?:
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    listForex(base?: string, options?: any): AxiosPromise<ListForexResponse>;
+    listForex(base?: string, options?: RawAxiosRequestConfig): AxiosPromise<ListForexResponse>;
 };
 /**
  * ForexApi - object-oriented interface
@@ -6296,7 +6296,7 @@ export declare const FraudReviewsApiFactory: (configuration?: Configuration, bas
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    blockFraudReview(id: string, options?: any): AxiosPromise<GetFraudReview200Response>;
+    blockFraudReview(id: string, options?: RawAxiosRequestConfig): AxiosPromise<GetFraudReview200Response>;
     /**
      * Retrieve the details of a fraud review, identified by the given `id` in the URL. Returns additional details regarding the fraud review beyond what\'s provided in the List fraud reviews endpoint, including reward details, recipient geolocation, etc.
      * @summary Retrieve single fraud review
@@ -6304,7 +6304,7 @@ export declare const FraudReviewsApiFactory: (configuration?: Configuration, bas
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    getFraudReview(id: string, options?: any): AxiosPromise<GetFraudReview200Response>;
+    getFraudReview(id: string, options?: RawAxiosRequestConfig): AxiosPromise<GetFraudReview200Response>;
     /**
      * Retrieve a paginated list of all fraud reviews. List can be filtered by status, created or redeemed at dates.
      * @summary List fraud reviews
@@ -6318,7 +6318,7 @@ export declare const FraudReviewsApiFactory: (configuration?: Configuration, bas
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    listFraudReviews(offset?: number, limit?: number, status?: ListFraudReviewsStatusEnum, createdAtGte?: string, createdAtLte?: string, redeemedAtGte?: string, redeemedAtLte?: string, options?: any): AxiosPromise<ListFraudReviews200Response>;
+    listFraudReviews(offset?: number, limit?: number, status?: ListFraudReviewsStatusEnum, createdAtGte?: string, createdAtLte?: string, redeemedAtGte?: string, redeemedAtLte?: string, options?: RawAxiosRequestConfig): AxiosPromise<ListFraudReviews200Response>;
     /**
      * Completes the fraud review identified by the given `id` in the URL, and releases the associated reward to the recipient.
      * @summary Release fraud review
@@ -6326,7 +6326,7 @@ export declare const FraudReviewsApiFactory: (configuration?: Configuration, bas
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    releaseFraudReview(id: string, options?: any): AxiosPromise<GetFraudReview200Response>;
+    releaseFraudReview(id: string, options?: RawAxiosRequestConfig): AxiosPromise<GetFraudReview200Response>;
 };
 /**
  * FraudReviewsApi - object-oriented interface
@@ -6477,7 +6477,7 @@ export declare const FraudRulesApiFactory: (configuration?: Configuration, baseP
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    deleteFraudRule(ruleType: DeleteFraudRuleRuleTypeEnum, options?: any): AxiosPromise<DeleteFraudRule200Response>;
+    deleteFraudRule(ruleType: DeleteFraudRuleRuleTypeEnum, options?: RawAxiosRequestConfig): AxiosPromise<DeleteFraudRule200Response>;
     /**
      * Configure a fraud rule of the type passed in the URL. If a rule of the same type already exists, it will be overwritten.
      * @summary Configure fraud rule
@@ -6486,14 +6486,14 @@ export declare const FraudRulesApiFactory: (configuration?: Configuration, baseP
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    fraudRule(ruleType: FraudRuleRuleTypeEnum, fraudRuleRequest?: FraudRuleRequest, options?: any): AxiosPromise<FraudRule200Response>;
+    fraudRule(ruleType: FraudRuleRuleTypeEnum, fraudRuleRequest?: FraudRuleRequest, options?: RawAxiosRequestConfig): AxiosPromise<FraudRule200Response>;
     /**
      * List active fraud rules associated with the organization tied to your API key.
      * @summary List fraud rules
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    listFraudRules(options?: any): AxiosPromise<ListFraudRules200Response>;
+    listFraudRules(options?: RawAxiosRequestConfig): AxiosPromise<ListFraudRules200Response>;
     /**
      * Use this endpoint to modify a list associated with an already-configured rule. Add and remove operations supported.  For example, to append new IPs to the `review_ip` rule, a valid JSON body would be: ```json   {     \"operation\": \"add\",     \"config\": {       \"ips\": [\"123.123.123.123\"]     }   } ```
      * @summary Update fraud rule list
@@ -6502,7 +6502,7 @@ export declare const FraudRulesApiFactory: (configuration?: Configuration, baseP
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    updateFraudRuleList(ruleType: UpdateFraudRuleListRuleTypeEnum, updateFraudRuleListRequest: UpdateFraudRuleListRequest, options?: any): AxiosPromise<UpdateFraudRuleList200Response>;
+    updateFraudRuleList(ruleType: UpdateFraudRuleListRuleTypeEnum, updateFraudRuleListRequest: UpdateFraudRuleListRequest, options?: RawAxiosRequestConfig): AxiosPromise<UpdateFraudRuleList200Response>;
 };
 /**
  * FraudRulesApi - object-oriented interface
@@ -6648,14 +6648,14 @@ export declare const FundingSourcesApiFactory: (configuration?: Configuration, b
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    getFundingSource(id: string, options?: any): AxiosPromise<GetFundingSource200Response>;
+    getFundingSource(id: string, options?: RawAxiosRequestConfig): AxiosPromise<GetFundingSource200Response>;
     /**
      * Retrieve a list of all funding sources available for ordering through the API in your organization\'s account.
      * @summary List funding sources
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    listFundingSources(options?: any): AxiosPromise<ListFundingSources200Response>;
+    listFundingSources(options?: RawAxiosRequestConfig): AxiosPromise<ListFundingSources200Response>;
 };
 /**
  * FundingSourcesApi - object-oriented interface
@@ -6804,7 +6804,7 @@ export declare const InvoicesApiFactory: (configuration?: Configuration, basePat
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    createInvoice(createInvoiceRequest: CreateInvoiceRequest, options?: any): AxiosPromise<CreateInvoice200Response>;
+    createInvoice(createInvoiceRequest: CreateInvoiceRequest, options?: RawAxiosRequestConfig): AxiosPromise<CreateInvoice200Response>;
     /**
      * Removes an invoice. This has no further consequences but is a rather cosmetic operation.
      * @summary Delete invoice
@@ -6812,7 +6812,7 @@ export declare const InvoicesApiFactory: (configuration?: Configuration, basePat
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    deleteInvoices(id: string, options?: any): AxiosPromise<CreateInvoice200Response>;
+    deleteInvoices(id: string, options?: RawAxiosRequestConfig): AxiosPromise<CreateInvoice200Response>;
     /**
      * Generates a CSV version for an invoice listing the associated rewards and orders
      * @summary Retrieve invoice as CSV
@@ -6820,7 +6820,7 @@ export declare const InvoicesApiFactory: (configuration?: Configuration, basePat
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    downloadInvoiceCsv(id: string, options?: any): AxiosPromise<string>;
+    downloadInvoiceCsv(id: string, options?: RawAxiosRequestConfig): AxiosPromise<string>;
     /**
      * Generates a PDF version for an invoice
      * @summary Retrieve invoice as PDF
@@ -6828,7 +6828,7 @@ export declare const InvoicesApiFactory: (configuration?: Configuration, basePat
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    downloadInvoicePdf(id: string, options?: any): AxiosPromise<File>;
+    downloadInvoicePdf(id: string, options?: RawAxiosRequestConfig): AxiosPromise<File>;
     /**
      * Retrieve an invoice, identified by the given `id` in the URL  > 📘 Deleted Invoices > > This endpoint can be used to retrieve details on deleted invoices > that the list of invoices omits.
      * @summary Retrieve invoice
@@ -6836,7 +6836,7 @@ export declare const InvoicesApiFactory: (configuration?: Configuration, basePat
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    getInvoice(id: string, options?: any): AxiosPromise<CreateInvoice200Response>;
+    getInvoice(id: string, options?: RawAxiosRequestConfig): AxiosPromise<CreateInvoice200Response>;
     /**
      * Fetch a list of all invoices on your account.  > 🚧 Deleted invoices are omitted > > The response does not include any previously deleted invoices.
      * @summary List invoices
@@ -6845,7 +6845,7 @@ export declare const InvoicesApiFactory: (configuration?: Configuration, basePat
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    listInvoices(offset?: number, limit?: number, options?: any): AxiosPromise<ListInvoices200Response>;
+    listInvoices(offset?: number, limit?: number, options?: RawAxiosRequestConfig): AxiosPromise<ListInvoices200Response>;
 };
 /**
  * InvoicesApi - object-oriented interface
@@ -6980,7 +6980,7 @@ export declare const MembersApiFactory: (configuration?: Configuration, basePath
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    createMember(createMemberRequest: CreateMemberRequest, options?: any): AxiosPromise<CreateMember200Response>;
+    createMember(createMemberRequest: CreateMemberRequest, options?: RawAxiosRequestConfig): AxiosPromise<CreateMember200Response>;
     /**
      *
      * @summary Retrieve member
@@ -6988,14 +6988,14 @@ export declare const MembersApiFactory: (configuration?: Configuration, basePath
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    getMember(id: string, options?: any): AxiosPromise<GetMember200Response>;
+    getMember(id: string, options?: RawAxiosRequestConfig): AxiosPromise<GetMember200Response>;
     /**
      * To list members of a sub-organization [create an API key for that organization](/reference/post_organizations-id-create-api-key) first, then use the new API key in the list members request.
      * @summary List members
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    listMembers(options?: any): AxiosPromise<ListMembers200Response>;
+    listMembers(options?: RawAxiosRequestConfig): AxiosPromise<ListMembers200Response>;
 };
 /**
  * MembersApi - object-oriented interface
@@ -7145,7 +7145,7 @@ export declare const OrdersApiFactory: (configuration?: Configuration, basePath?
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    approveOrder(id: string, options?: any): AxiosPromise<CreateOrder200Response>;
+    approveOrder(id: string, options?: RawAxiosRequestConfig): AxiosPromise<CreateOrder200Response>;
     /**
      * Every time you want to send out a reward through Tremendous you need to create an order for it.  > 📘 Getting started with your first order > > Our step-by-step guide walks you through everything you need > to send your first gift card through the Tremendous API: > > <strong><a style=\"display: block; margin-top: 20px;\" href=\"/docs/sending-rewards-intro\">Check it out!</a></strong>  ## Request body  <div class=\"object-schema-request-schema\">   <table>   <thead>     <tr>       <th>Property</th>       <th>Type</th>       <th>Description</th>     </tr>   </thead>   <tbody class=\"object-schema-table-body\">     <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">external_id</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>Reference for this order, supplied by the customer.</p>  <p>When set, <code>external_id</code> makes order idempotent. All requests that use the same <code>external_id</code> after the initial order creation, will result in a response that returns the data of the initially created order. The response will have a <code>201</code> response code. These responses <strong>fail</strong> to create any further orders.</p>  <p>It also allows for retrieving by <code>external_id</code> instead of <code>id</code> only.</p> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">payment</code> </div> </td><td><span class=\"property-type\">object</span></td><td></td></tr>  <tr>     <td colspan=\"3\">       <details>         <summary>Show object properties</summary>         <table>   <thead>     <tr>       <th>Property</th>       <th>Type</th>       <th>Description</th>     </tr>   </thead>   <tbody class=\"object-schema-table-body\">     <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">funding_source_id</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>Tremendous ID of the funding source that will be used to pay for the order. Use <code>balance</code> to use your Tremendous&#39;s balance.</p> </td></tr>   </tbody> </table>  </tr>  <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">reward</code> </div> </td><td><span class=\"property-type\">object</span></td><td><p>A single reward, sent to a recipient. A reward is always part of an order.</p>  <p>Either <code>products</code> or <code>campaign_id</code> must be specified.</p> </td></tr>  <tr>     <td colspan=\"3\">       <details>         <summary>Show object properties</summary>         <table>   <thead>     <tr>       <th>Property</th>       <th>Type</th>       <th>Description</th>     </tr>   </thead>   <tbody class=\"object-schema-table-body\">     <tr class=\"property-conditional-hint-response-only\"><td><div class=\"property-name\">   <code class=\"property-name\">id</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>Tremendous ID of the reward</p> </td></tr> <tr class=\"property-conditional-hint-response-only\"><td><div class=\"property-name\">   <code class=\"property-name\">order_id</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>Tremendous ID of the order this reward is part of.</p> </td></tr> <tr class=\"property-conditional-hint-response-only\"><td><div class=\"property-name\">   <code class=\"property-name\">created_at</code> </div> </td><td><span class=\"property-type\">string</span> <span class=\"property-format\">date-time</span></td><td><p>Date the reward was created</p> </td></tr> <tr class=\"property-conditional-hint-request-only\"><td><div class=\"property-name\">   <code class=\"property-name\">campaign_id</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>ID of the campaign in your account, that defines the available products (different gift cards, charity, etc.) that the recipient can choose from.</p> </td></tr> <tr class=\"property-conditional-hint-request-only\"><td><div class=\"property-name\">   <code class=\"property-name\">products</code> </div> </td><td><span class=\"property-type\">array</span> <span class=\"property-format\">string</span></td><td><p>List of IDs of product (different gift cards, charity, etc.) that will be available to the recipient to choose from.</p>  <p>Providing a <code>products</code> array will override the products made available by the campaign specified using the <code>campaign_id</code> property unless the <code>products</code> array is empty. It will <em>not</em> override other campaign attributes, like the message and customization of the look and feel.</p> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">value</code> </div> </td><td><span class=\"property-type\">object</span></td><td></td></tr>  <tr>     <td colspan=\"3\">       <details>         <summary>Show object properties</summary>         <table>   <thead>     <tr>       <th>Property</th>       <th>Type</th>       <th>Description</th>     </tr>   </thead>   <tbody class=\"object-schema-table-body\">     <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">denomination</code> </div> </td><td><span class=\"property-type\">number</span> <span class=\"property-format\">double</span></td><td><p>Amount of the reward</p> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">currency_code</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>Currency of the reward</p> </td></tr>   </tbody> </table>  </tr>  <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">recipient</code> </div> </td><td><span class=\"property-type\">object</span></td><td><p>Details of the recipient of the reward</p> </td></tr>  <tr>     <td colspan=\"3\">       <details>         <summary>Show object properties</summary>         <table>   <thead>     <tr>       <th>Property</th>       <th>Type</th>       <th>Description</th>     </tr>   </thead>   <tbody class=\"object-schema-table-body\">     <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">name</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>Name of the recipient</p> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">email</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>Email address of the recipient</p> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">phone</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>Phone number of the recipient. For non-US phone numbers, specify the country code (prefixed with +).</p> </td></tr>   </tbody> </table>  </tr>  <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">deliver_at</code> </div> </td><td><span class=\"property-type\">string</span> <span class=\"property-format\">date</span></td><td><p>Timestamp of reward delivery within the next year. Note that if date-time is provided, the time values will be ignored.</p> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">custom_fields</code> </div> </td><td><span class=\"property-type\">array</span></td><td></td></tr>  <tr>     <td colspan=\"3\">       <details>         <summary>Show array item type</summary>         <table>   <thead>     <tr>       <th>Property</th>       <th>Type</th>       <th>Description</th>     </tr>   </thead>   <tbody class=\"object-schema-table-body\">     <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">id</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>Tremendous ID of the custom field</p> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">value</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>Value of the custom field</p> </td></tr> <tr class=\"property-conditional-hint-response-only\"><td><div class=\"property-name\">   <code class=\"property-name\">label</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>Label of the custom field</p> </td></tr>   </tbody> </table>  </tr>  <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">language</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>Set this to translate the redemption experience for this reward. Pass a 2-letter <a href=\"https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes\">ISO-639-1 code</a> for the desired language. Defaults to <code>en</code>.</p> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">delivery</code> </div> </td><td><span class=\"property-type\">object</span></td><td><p>Details on how the reward is delivered to the recipient.</p> </td></tr>  <tr>     <td colspan=\"3\">       <details>         <summary>Show object properties</summary>         <table>   <thead>     <tr>       <th>Property</th>       <th>Type</th>       <th>Description</th>     </tr>   </thead>   <tbody class=\"object-schema-table-body\">     <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">method</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>How to deliver the reward to the recipient.</p>  <table>   <thead>     <tr>       <th>Delivery Method</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td><code>EMAIL</code></td>       <td>Deliver the reward to the recipient by email</td>     </tr>     <tr>       <td><code>LINK</code></td>       <td>         <p>Deliver the reward to the recipient via a link.</p>         <p>The link can be retrieved on a successfully ordered reward via the <code>/rewards</code> or <code>/rewards/{id}</code> endpoint. That link must then be  delivered to the recipient out-of-band.</p>       </td>     </tr>     <tr>       <td><code>PHONE</code></td>       <td>Deliver the reward to the recipient by SMS</td>     </tr>   </tbody> </table> </td></tr>   </tbody> </table>  </tr>    </tbody> </table>  </tr>    </tbody> </table>  </div>   ### Funding sources  There are different ways to pay for gift cards and rewards on Tremendous. Every payment mechanism is called a \"funding source\".  You can retrieve a list of all available funding sources by using the [Funding sources API endpoint](https://tremendous.readme.io/reference/core-funding-source-index).  The Tremendous API sandbox environment comes with a single funding source that allows you to spend up to $5,000 in *fake money* to test the API. [Learn more about the sandbox environment](https://tremendous.readme.io/reference/sandbox).  The HTTP status code `200` on the response will be used to indicate success.  After processing successfully the reward gets queued to be delivered to it\'s recipient (for delivery method `EMAIL` and `PHONE`). Delivery will happen asynchronously, after the response has been sent.  ### Idempotence  Requests issued with the same external_id are idempotent.  Submitting an order with an already existing `external_id`, will result in a `201` response code. In this case the response will return a representation of the already existing order in the response body.
      * @summary Create order
@@ -7153,7 +7153,7 @@ export declare const OrdersApiFactory: (configuration?: Configuration, basePath?
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    createOrder(createOrderRequest: CreateOrderRequest, options?: any): AxiosPromise<CreateOrder200Response>;
+    createOrder(createOrderRequest: CreateOrderRequest, options?: RawAxiosRequestConfig): AxiosPromise<CreateOrder200Response>;
     /**
      * Retrieve the order, identified by the given `id` in the URL
      * @summary Retrieve order
@@ -7161,7 +7161,7 @@ export declare const OrdersApiFactory: (configuration?: Configuration, basePath?
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    getOrder(id: string, options?: any): AxiosPromise<CreateOrder200Response>;
+    getOrder(id: string, options?: RawAxiosRequestConfig): AxiosPromise<CreateOrder200Response>;
     /**
      * Retrieve a list of orders
      * @summary List orders
@@ -7174,7 +7174,7 @@ export declare const OrdersApiFactory: (configuration?: Configuration, basePath?
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    listOrders(offset?: number, campaignId?: string, externalId?: string, createdAtGte?: string, createdAtLte?: string, limit?: number, options?: any): AxiosPromise<ListOrders200Response>;
+    listOrders(offset?: number, campaignId?: string, externalId?: string, createdAtGte?: string, createdAtLte?: string, limit?: number, options?: RawAxiosRequestConfig): AxiosPromise<ListOrders200Response>;
     /**
      * Rejects an order that is pending review, identified by the given `id` in the URL.  Approvals is a feature that requires orders to be approved by an organization admin before they are sent out. To enable approvals for your organization, please enable \'Allow approvals via API\' via the organization\'\'s \'Order Approvals\' settings from the Tremendous dashboard.
      * @summary Reject order
@@ -7182,7 +7182,7 @@ export declare const OrdersApiFactory: (configuration?: Configuration, basePath?
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    rejectOrder(id: string, options?: any): AxiosPromise<CreateOrder200Response>;
+    rejectOrder(id: string, options?: RawAxiosRequestConfig): AxiosPromise<CreateOrder200Response>;
 };
 /**
  * OrdersApi - object-oriented interface
@@ -7325,7 +7325,7 @@ export declare const OrganizationsApiFactory: (configuration?: Configuration, ba
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    createApiKey(options?: any): AxiosPromise<CreateApiKey200Response>;
+    createApiKey(options?: RawAxiosRequestConfig): AxiosPromise<CreateApiKey200Response>;
     /**
      * Organizations are a way to separate different parts of your business within the same Tremendous account.  You can assign users in your Tremendous team as members to any organization. Users can be members of multiple organizations at once.  API keys belong to a single organization. The API key used in a request determines on behalf of which organization the request is carried out.  **Important note:** When creating an organization, you are required to either pass `with_api_key` or `copy_settings[user]` in the request body as `true`. This ensures that your new Organization can either be accessed via the API or the Dashboard.
      * @summary Create organization
@@ -7333,7 +7333,7 @@ export declare const OrganizationsApiFactory: (configuration?: Configuration, ba
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    createOrganization(createOrganizationRequest: CreateOrganizationRequest, options?: any): AxiosPromise<CreateOrganization200Response>;
+    createOrganization(createOrganizationRequest: CreateOrganizationRequest, options?: RawAxiosRequestConfig): AxiosPromise<CreateOrganization200Response>;
     /**
      *
      * @summary Retrieve organization
@@ -7341,14 +7341,14 @@ export declare const OrganizationsApiFactory: (configuration?: Configuration, ba
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    getOrganization(id: string, options?: any): AxiosPromise<GetOrganization200Response>;
+    getOrganization(id: string, options?: RawAxiosRequestConfig): AxiosPromise<GetOrganization200Response>;
     /**
      * The returned list only includes the organization to which the API key belongs to, that is used for the request.
      * @summary List organizations
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    listOrganizations(options?: any): AxiosPromise<ListOrganizations200Response>;
+    listOrganizations(options?: RawAxiosRequestConfig): AxiosPromise<ListOrganizations200Response>;
 };
 /**
  * OrganizationsApi - object-oriented interface
@@ -7450,7 +7450,7 @@ export declare const ProductsApiFactory: (configuration?: Configuration, basePat
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    getProduct(id: string, options?: any): AxiosPromise<GetProductResponse>;
+    getProduct(id: string, options?: RawAxiosRequestConfig): AxiosPromise<GetProductResponse>;
     /**
      * Retrieve a list of available products
      * @summary List products
@@ -7459,7 +7459,7 @@ export declare const ProductsApiFactory: (configuration?: Configuration, basePat
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    listProducts(country?: string, currency?: string, options?: any): AxiosPromise<ListProductsResponse>;
+    listProducts(country?: string, currency?: string, options?: RawAxiosRequestConfig): AxiosPromise<ListProductsResponse>;
 };
 /**
  * ProductsApi - object-oriented interface
@@ -7592,7 +7592,7 @@ export declare const PublicKeysApiFactory: (configuration?: Configuration, baseP
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    createPublicKey(createPublicKeyRequest: CreatePublicKeyRequest, options?: any): AxiosPromise<CreatePublicKey200Response>;
+    createPublicKey(createPublicKeyRequest: CreatePublicKeyRequest, options?: RawAxiosRequestConfig): AxiosPromise<CreatePublicKey200Response>;
     /**
      * Deactivates a public key. Any further attempt to verify a request signature with this key will fail.
      * @summary Delete public key
@@ -7600,7 +7600,7 @@ export declare const PublicKeysApiFactory: (configuration?: Configuration, baseP
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    deletePublicKey(id: string, options?: any): AxiosPromise<void>;
+    deletePublicKey(id: string, options?: RawAxiosRequestConfig): AxiosPromise<void>;
     /**
      * Retrieve an active public key, identified by the given `id` in the URL.
      * @summary Retrieve public key
@@ -7608,14 +7608,14 @@ export declare const PublicKeysApiFactory: (configuration?: Configuration, baseP
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    getPublicKey(id: string, options?: any): AxiosPromise<CreatePublicKey200Response>;
+    getPublicKey(id: string, options?: RawAxiosRequestConfig): AxiosPromise<CreatePublicKey200Response>;
     /**
      * Fetch a list of active public keys on your account.  > 🚧 Inactive public keys are omitted > > The response does not include inactive public keys.
      * @summary List public keys
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    listPublicKeys(options?: any): AxiosPromise<PublicKeysResponse>;
+    listPublicKeys(options?: RawAxiosRequestConfig): AxiosPromise<PublicKeysResponse>;
     /**
      * Making a request to this endpoint with a JWT signed with your private key will return a 200 response if the public key is active and the signature  is valid.  > 💡 Testing your integration >  > **You can use [JWT.io](https://jwt.io/) to generate a signed token:** >  > > 1. Select “RS256” in their algorithm dropdown; > 3. Define a JSON payload such as `{ \"foo\": \"bar\" }`; > 4. Fill the “Verify signature” fields with your public and private keys and copy the “Encoded” token.
      * @summary Test public key
@@ -7624,7 +7624,7 @@ export declare const PublicKeysApiFactory: (configuration?: Configuration, baseP
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    testPublicKey(id: string, testPublicKeyRequest: TestPublicKeyRequest, options?: any): AxiosPromise<void>;
+    testPublicKey(id: string, testPublicKeyRequest: TestPublicKeyRequest, options?: RawAxiosRequestConfig): AxiosPromise<void>;
 };
 /**
  * PublicKeysApi - object-oriented interface
@@ -7783,7 +7783,7 @@ export declare const RewardsApiFactory: (configuration?: Configuration, basePath
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    generateRewardLink(id: string, options?: any): AxiosPromise<GenerateRewardLink200Response>;
+    generateRewardLink(id: string, options?: RawAxiosRequestConfig): AxiosPromise<GenerateRewardLink200Response>;
     /**
      * Generate a temporary reward token identified by the `id` in the URL. These tokens are needed to render a reward when using [Tremendous Embed](https://github.com/tremendous-rewards/embed/blob/master/docs/documentation.md). The token is valid for 24 hours.
      * @summary Generate a reward token
@@ -7791,7 +7791,7 @@ export declare const RewardsApiFactory: (configuration?: Configuration, basePath
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    generateRewardToken(id: string, options?: any): AxiosPromise<GenerateRewardToken200Response>;
+    generateRewardToken(id: string, options?: RawAxiosRequestConfig): AxiosPromise<GenerateRewardToken200Response>;
     /**
      * Retrieve the reward, identified by the given `id` in the URL
      * @summary Retrieve single reward
@@ -7799,7 +7799,7 @@ export declare const RewardsApiFactory: (configuration?: Configuration, basePath
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    getReward(id: string, options?: any): AxiosPromise<GetReward200Response>;
+    getReward(id: string, options?: RawAxiosRequestConfig): AxiosPromise<GetReward200Response>;
     /**
      * Retrieve a list of all created rewards
      * @summary List rewards
@@ -7807,7 +7807,7 @@ export declare const RewardsApiFactory: (configuration?: Configuration, basePath
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    listRewards(offset?: number, options?: any): AxiosPromise<ListRewards200Response>;
+    listRewards(offset?: number, options?: RawAxiosRequestConfig): AxiosPromise<ListRewards200Response>;
     /**
      * Resends a reward, identified by the given `id` in the URL, to its recipient.
      * @summary Resend reward
@@ -7815,7 +7815,7 @@ export declare const RewardsApiFactory: (configuration?: Configuration, basePath
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    resendReward(id: string, options?: any): AxiosPromise<object>;
+    resendReward(id: string, options?: RawAxiosRequestConfig): AxiosPromise<object>;
 };
 /**
  * RewardsApi - object-oriented interface
@@ -7907,7 +7907,7 @@ export declare const RolesApiFactory: (configuration?: Configuration, basePath?:
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    listRoles(options?: any): AxiosPromise<ListRoles200Response>;
+    listRoles(options?: RawAxiosRequestConfig): AxiosPromise<ListRoles200Response>;
 };
 /**
  * RolesApi - object-oriented interface
@@ -8045,7 +8045,7 @@ export declare const WebhooksApiFactory: (configuration?: Configuration, basePat
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    createWebhook(createWebhookRequest: CreateWebhookRequest, options?: any): AxiosPromise<CreateWebhook200Response>;
+    createWebhook(createWebhookRequest: CreateWebhookRequest, options?: RawAxiosRequestConfig): AxiosPromise<CreateWebhook200Response>;
     /**
      * > 📘 Learn more about Webhooks > > Our guide explains everything you need to know about the Tremendous webhooks: > [Read it here](/docs/webhooks-1)
      * @summary Delete webhook
@@ -8053,7 +8053,7 @@ export declare const WebhooksApiFactory: (configuration?: Configuration, basePat
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    deleteWebhook(id: string, options?: any): AxiosPromise<void>;
+    deleteWebhook(id: string, options?: RawAxiosRequestConfig): AxiosPromise<void>;
     /**
      * > 📘 Learn more about Webhooks > > Our guide explains everything you need to know about the Tremendous webhooks: > [Read it here](/docs/webhooks-1)
      * @summary Retrieve webhook
@@ -8061,7 +8061,7 @@ export declare const WebhooksApiFactory: (configuration?: Configuration, basePat
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    getWebhook(id: string, options?: any): AxiosPromise<CreateWebhook200Response>;
+    getWebhook(id: string, options?: RawAxiosRequestConfig): AxiosPromise<CreateWebhook200Response>;
     /**
      * Lists all event types that can be sent to the configured webhook endpoint.  > 📘 Learn more about Webhooks > > Our guide explains everything you need to know about the Tremendous webhooks: > [Read it here](/docs/webhooks-1)
      * @summary List events
@@ -8069,14 +8069,14 @@ export declare const WebhooksApiFactory: (configuration?: Configuration, basePat
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    listWebhookEvents(id: string, options?: any): AxiosPromise<ListWebhookEvents200Response>;
+    listWebhookEvents(id: string, options?: RawAxiosRequestConfig): AxiosPromise<ListWebhookEvents200Response>;
     /**
      * Every organization can only have one webhook. This endpoint shows the details about that webhook.  > 📘 Learn more about Webhooks > > Our guide explains everything you need to know about the Tremendous webhooks: > [Read it here](/docs/webhooks-1)
      * @summary List webhooks
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    listWebhooks(options?: any): AxiosPromise<ListWebhooks200Response>;
+    listWebhooks(options?: RawAxiosRequestConfig): AxiosPromise<ListWebhooks200Response>;
     /**
      * Making a request to this endpoint will cause our system to trigger a webhook for the specified event. This can be very useful when testing the setup that processes webhooks on your end.  > 📘 Learn more about Webhooks > > Our guide explains everything you need to know about the Tremendous webhooks: > [Read it here](/docs/webhooks-1)
      * @summary Test webhook
@@ -8085,7 +8085,7 @@ export declare const WebhooksApiFactory: (configuration?: Configuration, basePat
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    simulateWebhook(id: string, simulateWebhookRequest: SimulateWebhookRequest, options?: any): AxiosPromise<string>;
+    simulateWebhook(id: string, simulateWebhookRequest: SimulateWebhookRequest, options?: RawAxiosRequestConfig): AxiosPromise<string>;
 };
 /**
  * WebhooksApi - object-oriented interface
