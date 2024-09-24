@@ -126,10 +126,10 @@ export interface BaseOrderForCreate {
     'external_id'?: string | null;
     /**
      * 
-     * @type {SingleRewardOrder1Payment}
+     * @type {SingleRewardOrderPayment}
      * @memberof BaseOrderForCreate
      */
-    'payment': SingleRewardOrder1Payment;
+    'payment': SingleRewardOrderPayment;
 }
 /**
  * With a campaign you can define the look & feel of how rewards are sent out. It also lets you set the available products (different gift cards, charity, etc.) recipients can choose from. 
@@ -302,31 +302,6 @@ export interface CreateCampaignRequest {
 /**
  * 
  * @export
- * @interface CreateInvoice
- */
-export interface CreateInvoice {
-    /**
-     * Reference to the purchase order number within your organization
-     * @type {string}
-     * @memberof CreateInvoice
-     */
-    'po_number'?: string | null;
-    /**
-     * Amount of the invoice in USD
-     * @type {number}
-     * @memberof CreateInvoice
-     */
-    'amount': number;
-    /**
-     * A note to be included in the invoice. This is for your internal use and will not be visible to the recipient. 
-     * @type {string}
-     * @memberof CreateInvoice
-     */
-    'memo'?: string | null;
-}
-/**
- * 
- * @export
  * @interface CreateInvoice200Response
  */
 export interface CreateInvoice200Response {
@@ -430,7 +405,7 @@ export interface CreateOrder200Response {
  * @type CreateOrderRequest
  * @export
  */
-export type CreateOrderRequest = SingleRewardOrder1;
+export type CreateOrderRequest = SingleRewardOrder;
 
 /**
  * 
@@ -625,19 +600,6 @@ export interface CreateOrganizationRequestCopySettings {
      * @memberof CreateOrganizationRequestCopySettings
      */
     'fraud_prevention'?: boolean;
-}
-/**
- * 
- * @export
- * @interface CreatePublicKey
- */
-export interface CreatePublicKey {
-    /**
-     * Base64 encoded (public) PEM file
-     * @type {string}
-     * @memberof CreatePublicKey
-     */
-    'public_key': string;
 }
 /**
  * 
@@ -1559,10 +1521,10 @@ export interface FraudRulesListItem {
     'rule_type'?: FraudRulesListItemRuleTypeEnum;
     /**
      * The configuration associated with the rule. The properties allowed depend on the type of rule. This property is only present for rules that require configuration. 
-     * @type {object}
+     * @type {{ [key: string]: any; }}
      * @memberof FraudRulesListItem
      */
-    'config'?: object | null;
+    'config'?: { [key: string]: any; } | null;
 }
 
 export const FraudRulesListItemRuleTypeEnum = {
@@ -2065,6 +2027,12 @@ export interface Invoice {
      */
     'amount': number;
     /**
+     * 
+     * @type {boolean}
+     * @memberof Invoice
+     */
+    'international'?: boolean;
+    /**
      * Status of this invoice  <table>   <thead>     <tr>       <th>Status</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td><code>DELETED</code></td>       <td>Invoice has been deleted by your organization</td>     </tr>     <tr>       <td><code>PAID</code></td>       <td>Invoice has been paid by your organization</td>     </tr>     <tr>       <td><code>OPEN</code></td>       <td>Invoice has been created by your organization but has not been paid, yet</td>     </tr>   </tbody> </table> 
      * @type {string}
      * @memberof Invoice
@@ -2378,6 +2346,12 @@ export interface ListFraudReviews200Response {
      * @memberof ListFraudReviews200Response
      */
     'fraud_reviews': Array<ListFraudReviews200ResponseFraudReviewsInner>;
+    /**
+     * The total number of fraud reviews
+     * @type {number}
+     * @memberof ListFraudReviews200Response
+     */
+    'total_count': number;
 }
 /**
  * The fraud review associated with a reward.
@@ -2464,10 +2438,10 @@ export interface ListFraudRules200ResponseFraudRulesInner {
     'rule_type'?: ListFraudRules200ResponseFraudRulesInnerRuleTypeEnum;
     /**
      * The configuration associated with the rule. The properties allowed depend on the type of rule. This property is only present for rules that require configuration. 
-     * @type {object}
+     * @type {{ [key: string]: any; }}
      * @memberof ListFraudRules200ResponseFraudRulesInner
      */
-    'config'?: object | null;
+    'config'?: { [key: string]: any; } | null;
 }
 
 export const ListFraudRules200ResponseFraudRulesInnerRuleTypeEnum = {
@@ -2691,6 +2665,12 @@ export interface ListInvoices200ResponseInvoicesInner {
      * @memberof ListInvoices200ResponseInvoicesInner
      */
     'amount': number;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof ListInvoices200ResponseInvoicesInner
+     */
+    'international'?: boolean;
     /**
      * Status of this invoice  <table>   <thead>     <tr>       <th>Status</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td><code>DELETED</code></td>       <td>Invoice has been deleted by your organization</td>     </tr>     <tr>       <td><code>PAID</code></td>       <td>Invoice has been paid by your organization</td>     </tr>     <tr>       <td><code>OPEN</code></td>       <td>Invoice has been created by your organization but has not been paid, yet</td>     </tr>   </tbody> </table> 
      * @type {string}
@@ -2941,26 +2921,7 @@ export interface ListOrders200ResponseOrdersInnerPayment {
      * @memberof ListOrders200ResponseOrdersInnerPayment
      */
     'refund'?: ListOrders200ResponseOrdersInnerPaymentRefund;
-    /**
-     * Name of the channel in which the order was created
-     * @type {string}
-     * @memberof ListOrders200ResponseOrdersInnerPayment
-     */
-    'channel'?: ListOrders200ResponseOrdersInnerPaymentChannelEnum;
 }
-
-export const ListOrders200ResponseOrdersInnerPaymentChannelEnum = {
-    Ui: 'UI',
-    Api: 'API',
-    Embed: 'EMBED',
-    Decipher: 'DECIPHER',
-    Qualtrics: 'QUALTRICS',
-    Typeform: 'TYPEFORM',
-    SurveyMonkey: 'SURVEY MONKEY'
-} as const;
-
-export type ListOrders200ResponseOrdersInnerPaymentChannelEnum = typeof ListOrders200ResponseOrdersInnerPaymentChannelEnum[keyof typeof ListOrders200ResponseOrdersInnerPaymentChannelEnum];
-
 /**
  * Breakdown of the order refunds (total amount in USD, independent from the currency of the ordered rewards). Note that this property will only appear for canceled orders or orders with canceled rewards. 
  * @export
@@ -3626,10 +3587,10 @@ export interface ListRewards401ResponseErrors {
     'message'?: string;
     /**
      * Mirrors the request parameters structure, filled only with the (nested) properties that caused an error.
-     * @type {object}
+     * @type {{ [key: string]: any; }}
      * @memberof ListRewards401ResponseErrors
      */
-    'payload'?: object;
+    'payload'?: { [key: string]: any; };
 }
 /**
  * 
@@ -4159,26 +4120,7 @@ export interface OrderBasePayment {
      * @memberof OrderBasePayment
      */
     'refund'?: PaymentDetailsRefund;
-    /**
-     * Name of the channel in which the order was created
-     * @type {string}
-     * @memberof OrderBasePayment
-     */
-    'channel'?: OrderBasePaymentChannelEnum;
 }
-
-export const OrderBasePaymentChannelEnum = {
-    Ui: 'UI',
-    Api: 'API',
-    Embed: 'EMBED',
-    Decipher: 'DECIPHER',
-    Qualtrics: 'QUALTRICS',
-    Typeform: 'TYPEFORM',
-    SurveyMonkey: 'SURVEY MONKEY'
-} as const;
-
-export type OrderBasePaymentChannelEnum = typeof OrderBasePaymentChannelEnum[keyof typeof OrderBasePaymentChannelEnum];
-
 /**
  * Execution status of a given order  <table>   <thead>     <tr>       <th>         Status       </th>       <th>         Description       </th>     </tr>   </thead>   <tbody>     <tr>       <td>         <code>           CANCELED         </code>       </td>       <td>         The order and all of its rewards were canceled.       </td>     </tr>     <tr>       <td>         <code>           CART         </code>       </td>       <td>         The order has been created, but hasn\'t yet been processed.       </td>     </tr>     <tr>       <td>         <code>           EXECUTED         </code>       </td>       <td>         The order has been executed. Payment has been handled and rewards are being delivered (if applicable).       </td>     </tr>     <tr>       <td>         <code>           FAILED         </code>       </td>       <td>         The order could not be processed due to an error. E.g. due to insufficient funds in the account.       </td>     </tr>     <tr>       <td>         <code>           PENDING APPROVAL         </code>       </td>       <td>         The order has been created but needs approval to be executed.       </td>     </tr>     <tr>       <td>         <code>           PENDING INTERNAL PAYMENT APPROVAL         </code>       </td>       <td>         The order has been created but it is under review and requires approval from our team.       </td>     </tr>    </tbody> </table> 
  * @export
@@ -4424,26 +4366,7 @@ export interface PaymentDetails {
      * @memberof PaymentDetails
      */
     'refund'?: PaymentDetailsRefund;
-    /**
-     * Name of the channel in which the order was created
-     * @type {string}
-     * @memberof PaymentDetails
-     */
-    'channel'?: PaymentDetailsChannelEnum;
 }
-
-export const PaymentDetailsChannelEnum = {
-    Ui: 'UI',
-    Api: 'API',
-    Embed: 'EMBED',
-    Decipher: 'DECIPHER',
-    Qualtrics: 'QUALTRICS',
-    Typeform: 'TYPEFORM',
-    SurveyMonkey: 'SURVEY MONKEY'
-} as const;
-
-export type PaymentDetailsChannelEnum = typeof PaymentDetailsChannelEnum[keyof typeof PaymentDetailsChannelEnum];
-
 /**
  * Breakdown of the order refunds (total amount in USD, independent from the currency of the ordered rewards). Note that this property will only appear for canceled orders or orders with canceled rewards. 
  * @export
@@ -4650,31 +4573,6 @@ export const ProductCurrencyCodesEnum = {
 
 export type ProductCurrencyCodesEnum = typeof ProductCurrencyCodesEnum[keyof typeof ProductCurrencyCodesEnum];
 
-/**
- * To authenticate your requests using asymmetric key pairs (e.g., for signing embed requests), you need to share your public key with us. The public key resource allows you to manage your active public keys and track their last usage. 
- * @export
- * @interface PublicKey
- */
-export interface PublicKey {
-    /**
-     * 
-     * @type {string}
-     * @memberof PublicKey
-     */
-    'id'?: string;
-    /**
-     * Your public key, PEM encoded
-     * @type {string}
-     * @memberof PublicKey
-     */
-    'pem'?: string;
-    /**
-     * The last time your public key was used to sign a request
-     * @type {string}
-     * @memberof PublicKey
-     */
-    'last_used_at'?: string | null;
-}
 /**
  * Details of the recipient of the reward
  * @export
@@ -5113,10 +5011,10 @@ export interface RewardForOrderCreate {
     'language'?: string;
     /**
      * 
-     * @type {SingleRewardOrder1RewardDelivery}
+     * @type {SingleRewardOrderRewardDelivery}
      * @memberof RewardForOrderCreate
      */
-    'delivery'?: SingleRewardOrder1RewardDelivery;
+    'delivery'?: SingleRewardOrderRewardDelivery;
 }
 /**
  * The redemption link for a reward.
@@ -5458,10 +5356,10 @@ export interface SingleRewardOrder {
     'external_id'?: string | null;
     /**
      * 
-     * @type {SingleRewardOrder1Payment}
+     * @type {SingleRewardOrderPayment}
      * @memberof SingleRewardOrder
      */
-    'payment'?: SingleRewardOrder1Payment;
+    'payment'?: SingleRewardOrderPayment;
     /**
      * 
      * @type {SingleRewardOrderReward}
@@ -5470,139 +5368,18 @@ export interface SingleRewardOrder {
     'reward': SingleRewardOrderReward;
 }
 /**
- * An order that contains a single reward. The reward is sent to a single recipient. 
- * @export
- * @interface SingleRewardOrder1
- */
-export interface SingleRewardOrder1 {
-    /**
-     * Reference for this order, supplied by the customer.  When set, `external_id` makes order idempotent. All requests that use the same `external_id` after the initial order creation, will result in a response that returns the data of the initially created order. The response will have a `201` response code. These responses **fail** to create any further orders.  It also allows for retrieving by `external_id` instead of `id` only. 
-     * @type {string}
-     * @memberof SingleRewardOrder1
-     */
-    'external_id'?: string | null;
-    /**
-     * 
-     * @type {SingleRewardOrder1Payment}
-     * @memberof SingleRewardOrder1
-     */
-    'payment'?: SingleRewardOrder1Payment;
-    /**
-     * 
-     * @type {SingleRewardOrder1Reward}
-     * @memberof SingleRewardOrder1
-     */
-    'reward': SingleRewardOrder1Reward;
-}
-/**
  * 
  * @export
- * @interface SingleRewardOrder1Payment
+ * @interface SingleRewardOrderPayment
  */
-export interface SingleRewardOrder1Payment {
+export interface SingleRewardOrderPayment {
     /**
      * Tremendous ID of the funding source that will be used to pay for the order. Use `balance` to use your Tremendous\'s balance.
      * @type {string}
-     * @memberof SingleRewardOrder1Payment
+     * @memberof SingleRewardOrderPayment
      */
     'funding_source_id': string;
 }
-/**
- * A single reward, sent to a recipient. A reward is always part of an order.  Either `products` or `campaign_id` must be specified. 
- * @export
- * @interface SingleRewardOrder1Reward
- */
-export interface SingleRewardOrder1Reward {
-    /**
-     * ID of the campaign in your account, that defines the available products (different gift cards, charity, etc.) that the recipient can choose from. 
-     * @type {string}
-     * @memberof SingleRewardOrder1Reward
-     */
-    'campaign_id'?: string | null;
-    /**
-     * List of IDs of product (different gift cards, charity, etc.) that will be available to the recipient to choose from.  Providing a `products` array will override the products made available by the campaign specified using the `campaign_id` property unless the `products` array is empty. It will _not_ override other campaign attributes, like the message and customization of the look and feel. 
-     * @type {Array<string>}
-     * @memberof SingleRewardOrder1Reward
-     */
-    'products'?: Array<string>;
-    /**
-     * 
-     * @type {ListRewards200ResponseRewardsInnerValue}
-     * @memberof SingleRewardOrder1Reward
-     */
-    'value'?: ListRewards200ResponseRewardsInnerValue;
-    /**
-     * 
-     * @type {ListRewards200ResponseRewardsInnerRecipient}
-     * @memberof SingleRewardOrder1Reward
-     */
-    'recipient'?: ListRewards200ResponseRewardsInnerRecipient;
-    /**
-     * Timestamp of reward delivery within the next year. Note that if date-time is provided, the time values will be ignored.
-     * @type {string}
-     * @memberof SingleRewardOrder1Reward
-     */
-    'deliver_at'?: string;
-    /**
-     * 
-     * @type {Array<SingleRewardOrder1RewardCustomFieldsInner>}
-     * @memberof SingleRewardOrder1Reward
-     */
-    'custom_fields'?: Array<SingleRewardOrder1RewardCustomFieldsInner>;
-    /**
-     * Set this to translate the redemption experience for this reward. Pass a 2-letter [ISO-639-1 code](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) for the desired language. Defaults to `en`. 
-     * @type {string}
-     * @memberof SingleRewardOrder1Reward
-     */
-    'language'?: string;
-    /**
-     * 
-     * @type {SingleRewardOrder1RewardDelivery}
-     * @memberof SingleRewardOrder1Reward
-     */
-    'delivery'?: SingleRewardOrder1RewardDelivery;
-}
-/**
- * Reward custom data for searching, tracking or copy (see [Adding custom fields to orders](https://developers.tremendous.com/reference/using-custom-fields-to-add-custom-data-to-rewards).)
- * @export
- * @interface SingleRewardOrder1RewardCustomFieldsInner
- */
-export interface SingleRewardOrder1RewardCustomFieldsInner {
-    /**
-     * Tremendous ID of the custom field
-     * @type {string}
-     * @memberof SingleRewardOrder1RewardCustomFieldsInner
-     */
-    'id'?: string;
-    /**
-     * Value of the custom field
-     * @type {string}
-     * @memberof SingleRewardOrder1RewardCustomFieldsInner
-     */
-    'value'?: string | null;
-}
-/**
- * Details on how the reward is delivered to the recipient. 
- * @export
- * @interface SingleRewardOrder1RewardDelivery
- */
-export interface SingleRewardOrder1RewardDelivery {
-    /**
-     * How to deliver the reward to the recipient.  <table>   <thead>     <tr>       <th>Delivery Method</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td><code>EMAIL</code></td>       <td>Deliver the reward to the recipient by email</td>     </tr>     <tr>       <td><code>LINK</code></td>       <td>         <p>Deliver the reward to the recipient via a link.</p>         <p>The link can be retrieved on a successfully ordered reward via the <code>/rewards</code> or <code>/rewards/{id}</code> endpoint. That link must then be  delivered to the recipient out-of-band.</p>       </td>     </tr>     <tr>       <td><code>PHONE</code></td>       <td>Deliver the reward to the recipient by SMS</td>     </tr>   </tbody> </table> 
-     * @type {string}
-     * @memberof SingleRewardOrder1RewardDelivery
-     */
-    'method'?: SingleRewardOrder1RewardDeliveryMethodEnum;
-}
-
-export const SingleRewardOrder1RewardDeliveryMethodEnum = {
-    Email: 'EMAIL',
-    Link: 'LINK',
-    Phone: 'PHONE'
-} as const;
-
-export type SingleRewardOrder1RewardDeliveryMethodEnum = typeof SingleRewardOrder1RewardDeliveryMethodEnum[keyof typeof SingleRewardOrder1RewardDeliveryMethodEnum];
-
 /**
  * A single reward, sent to a recipient. A reward is always part of an order.  Either `products` or `campaign_id` must be specified. 
  * @export
@@ -5610,24 +5387,6 @@ export type SingleRewardOrder1RewardDeliveryMethodEnum = typeof SingleRewardOrde
  */
 export interface SingleRewardOrderReward {
     /**
-     * Tremendous ID of the reward
-     * @type {string}
-     * @memberof SingleRewardOrderReward
-     */
-    'id'?: string;
-    /**
-     * Tremendous ID of the order this reward is part of.
-     * @type {string}
-     * @memberof SingleRewardOrderReward
-     */
-    'order_id'?: string;
-    /**
-     * Date the reward was created
-     * @type {string}
-     * @memberof SingleRewardOrderReward
-     */
-    'created_at'?: string;
-    /**
      * ID of the campaign in your account, that defines the available products (different gift cards, charity, etc.) that the recipient can choose from. 
      * @type {string}
      * @memberof SingleRewardOrderReward
@@ -5659,10 +5418,10 @@ export interface SingleRewardOrderReward {
     'deliver_at'?: string;
     /**
      * 
-     * @type {Array<RewardBaseCustomFieldsInner>}
+     * @type {Array<SingleRewardOrderRewardCustomFieldsInner>}
      * @memberof SingleRewardOrderReward
      */
-    'custom_fields'?: Array<RewardBaseCustomFieldsInner>;
+    'custom_fields'?: Array<SingleRewardOrderRewardCustomFieldsInner>;
     /**
      * Set this to translate the redemption experience for this reward. Pass a 2-letter [ISO-639-1 code](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) for the desired language. Defaults to `en`. 
      * @type {string}
@@ -5671,11 +5430,52 @@ export interface SingleRewardOrderReward {
     'language'?: string;
     /**
      * 
-     * @type {SingleRewardOrder1RewardDelivery}
+     * @type {SingleRewardOrderRewardDelivery}
      * @memberof SingleRewardOrderReward
      */
-    'delivery'?: SingleRewardOrder1RewardDelivery;
+    'delivery'?: SingleRewardOrderRewardDelivery;
 }
+/**
+ * Reward custom data for searching, tracking or copy (see [Adding custom fields to orders](https://developers.tremendous.com/reference/using-custom-fields-to-add-custom-data-to-rewards).)
+ * @export
+ * @interface SingleRewardOrderRewardCustomFieldsInner
+ */
+export interface SingleRewardOrderRewardCustomFieldsInner {
+    /**
+     * Tremendous ID of the custom field
+     * @type {string}
+     * @memberof SingleRewardOrderRewardCustomFieldsInner
+     */
+    'id'?: string;
+    /**
+     * Value of the custom field
+     * @type {string}
+     * @memberof SingleRewardOrderRewardCustomFieldsInner
+     */
+    'value'?: string | null;
+}
+/**
+ * Details on how the reward is delivered to the recipient. 
+ * @export
+ * @interface SingleRewardOrderRewardDelivery
+ */
+export interface SingleRewardOrderRewardDelivery {
+    /**
+     * How to deliver the reward to the recipient.  <table>   <thead>     <tr>       <th>Delivery Method</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td><code>EMAIL</code></td>       <td>Deliver the reward to the recipient by email</td>     </tr>     <tr>       <td><code>LINK</code></td>       <td>         <p>Deliver the reward to the recipient via a link.</p>         <p>The link can be retrieved on a successfully ordered reward via the <code>/rewards</code> or <code>/rewards/{id}</code> endpoint. That link must then be  delivered to the recipient out-of-band.</p>       </td>     </tr>     <tr>       <td><code>PHONE</code></td>       <td>Deliver the reward to the recipient by SMS</td>     </tr>   </tbody> </table> 
+     * @type {string}
+     * @memberof SingleRewardOrderRewardDelivery
+     */
+    'method'?: SingleRewardOrderRewardDeliveryMethodEnum;
+}
+
+export const SingleRewardOrderRewardDeliveryMethodEnum = {
+    Email: 'EMAIL',
+    Link: 'LINK',
+    Phone: 'PHONE'
+} as const;
+
+export type SingleRewardOrderRewardDeliveryMethodEnum = typeof SingleRewardOrderRewardDeliveryMethodEnum[keyof typeof SingleRewardOrderRewardDeliveryMethodEnum];
+
 /**
  * 
  * @export
@@ -5773,19 +5573,6 @@ export const SingleRewardOrderWithoutLinkOrderChannelEnum = {
 
 export type SingleRewardOrderWithoutLinkOrderChannelEnum = typeof SingleRewardOrderWithoutLinkOrderChannelEnum[keyof typeof SingleRewardOrderWithoutLinkOrderChannelEnum];
 
-/**
- * 
- * @export
- * @interface TestPublicKey
- */
-export interface TestPublicKey {
-    /**
-     * A JWT token encoded with RS256, signed using the RSA private key corresponding to your public key.
-     * @type {string}
-     * @memberof TestPublicKey
-     */
-    'jwt': string;
-}
 /**
  * With a campaign you can define the look & feel of how rewards are sent out. It also lets you set the available products (different gift cards, charity, etc.) recipients can choose from. 
  * @export
