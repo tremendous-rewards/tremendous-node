@@ -396,8 +396,202 @@ export interface CreateMemberRequest {
 export interface CreateOrder200Response {
     /**
      * 
-     * @type {ListOrders200ResponseOrdersInner}
+     * @type {CreateOrder200ResponseOrder}
      * @memberof CreateOrder200Response
+     */
+    'order': CreateOrder200ResponseOrder;
+}
+/**
+ * An order wraps around the fulfilment of one or more rewards.
+ * @export
+ * @interface CreateOrder200ResponseOrder
+ */
+export interface CreateOrder200ResponseOrder {
+    /**
+     * Tremendous ID of the order
+     * @type {string}
+     * @memberof CreateOrder200ResponseOrder
+     */
+    'id': string;
+    /**
+     * Reference for this order, supplied by the customer.  When set, `external_id` makes order idempotent. All requests that use the same `external_id` after the initial order creation, will result in a response that returns the data of the initially created order. The response will have a `201` response code. These responses **fail** to create any further orders.  It also allows for retrieving by `external_id` instead of `id` only. 
+     * @type {string}
+     * @memberof CreateOrder200ResponseOrder
+     */
+    'external_id'?: string | null;
+    /**
+     * ID of the campaign in your account, that defines the available products (different gift cards, charity, etc.) that the recipient can choose from. 
+     * @type {string}
+     * @memberof CreateOrder200ResponseOrder
+     */
+    'campaign_id'?: string | null;
+    /**
+     * Date the order has been created
+     * @type {string}
+     * @memberof CreateOrder200ResponseOrder
+     */
+    'created_at': string;
+    /**
+     * Execution status of a given order  <table>   <thead>     <tr>       <th>         Status       </th>       <th>         Description       </th>     </tr>   </thead>   <tbody>     <tr>       <td>         <code>           CANCELED         </code>       </td>       <td>         The order and all of its rewards were canceled.       </td>     </tr>     <tr>       <td>         <code>           CART         </code>       </td>       <td>         The order has been created, but hasn\'t yet been processed.       </td>     </tr>     <tr>       <td>         <code>           EXECUTED         </code>       </td>       <td>         The order has been executed. Payment has been handled and rewards are being delivered (if applicable).       </td>     </tr>     <tr>       <td>         <code>           FAILED         </code>       </td>       <td>         The order could not be processed due to an error. E.g. due to insufficient funds in the account.       </td>     </tr>     <tr>       <td>         <code>           PENDING APPROVAL         </code>       </td>       <td>         The order has been created but needs approval to be executed.       </td>     </tr>     <tr>       <td>         <code>           PENDING INTERNAL PAYMENT APPROVAL         </code>       </td>       <td>         The order has been created but it is under review and requires approval from our team.       </td>     </tr>    </tbody> </table> 
+     * @type {string}
+     * @memberof CreateOrder200ResponseOrder
+     */
+    'status': CreateOrder200ResponseOrderStatusEnum;
+    /**
+     * Name of the channel in which the order was created
+     * @type {string}
+     * @memberof CreateOrder200ResponseOrder
+     */
+    'channel'?: CreateOrder200ResponseOrderChannelEnum;
+    /**
+     * 
+     * @type {ListOrders200ResponseOrdersInnerPayment}
+     * @memberof CreateOrder200ResponseOrder
+     */
+    'payment'?: ListOrders200ResponseOrdersInnerPayment;
+    /**
+     * The ID for the invoice associated with this order
+     * @type {string}
+     * @memberof CreateOrder200ResponseOrder
+     */
+    'invoice_id'?: string;
+    /**
+     * 
+     * @type {Array<CreateOrder200ResponseOrderRewardsInner>}
+     * @memberof CreateOrder200ResponseOrder
+     */
+    'rewards'?: Array<CreateOrder200ResponseOrderRewardsInner>;
+}
+
+export const CreateOrder200ResponseOrderStatusEnum = {
+    Canceled: 'CANCELED',
+    Cart: 'CART',
+    Executed: 'EXECUTED',
+    Failed: 'FAILED',
+    PendingApproval: 'PENDING APPROVAL',
+    PendingInternalPaymentApproval: 'PENDING INTERNAL PAYMENT APPROVAL'
+} as const;
+
+export type CreateOrder200ResponseOrderStatusEnum = typeof CreateOrder200ResponseOrderStatusEnum[keyof typeof CreateOrder200ResponseOrderStatusEnum];
+export const CreateOrder200ResponseOrderChannelEnum = {
+    Ui: 'UI',
+    Api: 'API',
+    Embed: 'EMBED',
+    Decipher: 'DECIPHER',
+    Qualtrics: 'QUALTRICS',
+    Typeform: 'TYPEFORM',
+    SurveyMonkey: 'SURVEY MONKEY'
+} as const;
+
+export type CreateOrder200ResponseOrderChannelEnum = typeof CreateOrder200ResponseOrderChannelEnum[keyof typeof CreateOrder200ResponseOrderChannelEnum];
+
+/**
+ * A single reward, sent to a recipient. A reward is always part of an order.  Either `products` or `campaign_id` must be specified. 
+ * @export
+ * @interface CreateOrder200ResponseOrderRewardsInner
+ */
+export interface CreateOrder200ResponseOrderRewardsInner {
+    /**
+     * Tremendous ID of the reward
+     * @type {string}
+     * @memberof CreateOrder200ResponseOrderRewardsInner
+     */
+    'id'?: string;
+    /**
+     * Tremendous ID of the order this reward is part of.
+     * @type {string}
+     * @memberof CreateOrder200ResponseOrderRewardsInner
+     */
+    'order_id'?: string;
+    /**
+     * Date the reward was created
+     * @type {string}
+     * @memberof CreateOrder200ResponseOrderRewardsInner
+     */
+    'created_at'?: string;
+    /**
+     * 
+     * @type {ListRewards200ResponseRewardsInnerValue}
+     * @memberof CreateOrder200ResponseOrderRewardsInner
+     */
+    'value'?: ListRewards200ResponseRewardsInnerValue;
+    /**
+     * 
+     * @type {ListRewards200ResponseRewardsInnerRecipient}
+     * @memberof CreateOrder200ResponseOrderRewardsInner
+     */
+    'recipient'?: ListRewards200ResponseRewardsInnerRecipient;
+    /**
+     * Timestamp of reward delivery within the next year. Note that if date-time is provided, the time values will be ignored.
+     * @type {string}
+     * @memberof CreateOrder200ResponseOrderRewardsInner
+     */
+    'deliver_at'?: string;
+    /**
+     * 
+     * @type {Array<ListRewards200ResponseRewardsInnerCustomFieldsInner>}
+     * @memberof CreateOrder200ResponseOrderRewardsInner
+     */
+    'custom_fields'?: Array<ListRewards200ResponseRewardsInnerCustomFieldsInner>;
+    /**
+     * 
+     * @type {CreateOrder200ResponseOrderRewardsInnerDelivery}
+     * @memberof CreateOrder200ResponseOrderRewardsInner
+     */
+    'delivery'?: CreateOrder200ResponseOrderRewardsInnerDelivery;
+}
+/**
+ * Details on how the reward is delivered to the recipient. 
+ * @export
+ * @interface CreateOrder200ResponseOrderRewardsInnerDelivery
+ */
+export interface CreateOrder200ResponseOrderRewardsInnerDelivery {
+    /**
+     * How to deliver the reward to the recipient.  <table>   <thead>     <tr>       <th>Delivery Method</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td><code>EMAIL</code></td>       <td>Deliver the reward to the recipient by email</td>     </tr>     <tr>       <td><code>LINK</code></td>       <td>         <p>Deliver the reward to the recipient via a link.</p>         <p>The link can be retrieved on a successfully ordered reward via the <code>/rewards</code> or <code>/rewards/{id}</code> endpoint. That link must then be  delivered to the recipient out-of-band.</p>       </td>     </tr>     <tr>       <td><code>PHONE</code></td>       <td>Deliver the reward to the recipient by SMS</td>     </tr>   </tbody> </table> 
+     * @type {string}
+     * @memberof CreateOrder200ResponseOrderRewardsInnerDelivery
+     */
+    'method': CreateOrder200ResponseOrderRewardsInnerDeliveryMethodEnum;
+    /**
+     * Current status of the delivery of the reward:  * `SCHEDULED` - Reward is scheduled for delivery and will be delivered soon. * `FAILED` - Delivery of reward failed (e.g. email bounced). * `SUCCEEDED` - Reward was successfully delivered (email or text message delivered or reward link opened). * `PENDING` - Delivery is pending but not yet scheduled. 
+     * @type {string}
+     * @memberof CreateOrder200ResponseOrderRewardsInnerDelivery
+     */
+    'status': CreateOrder200ResponseOrderRewardsInnerDeliveryStatusEnum;
+    /**
+     * Link to redeem the reward at. You need to deliver this link to the recipient. 
+     * @type {string}
+     * @memberof CreateOrder200ResponseOrderRewardsInnerDelivery
+     */
+    'link'?: string;
+}
+
+export const CreateOrder200ResponseOrderRewardsInnerDeliveryMethodEnum = {
+    Email: 'EMAIL',
+    Link: 'LINK',
+    Phone: 'PHONE'
+} as const;
+
+export type CreateOrder200ResponseOrderRewardsInnerDeliveryMethodEnum = typeof CreateOrder200ResponseOrderRewardsInnerDeliveryMethodEnum[keyof typeof CreateOrder200ResponseOrderRewardsInnerDeliveryMethodEnum];
+export const CreateOrder200ResponseOrderRewardsInnerDeliveryStatusEnum = {
+    Scheduled: 'SCHEDULED',
+    Failed: 'FAILED',
+    Succeeded: 'SUCCEEDED',
+    Pending: 'PENDING'
+} as const;
+
+export type CreateOrder200ResponseOrderRewardsInnerDeliveryStatusEnum = typeof CreateOrder200ResponseOrderRewardsInnerDeliveryStatusEnum[keyof typeof CreateOrder200ResponseOrderRewardsInnerDeliveryStatusEnum];
+
+/**
+ * 
+ * @export
+ * @interface CreateOrder201Response
+ */
+export interface CreateOrder201Response {
+    /**
+     * 
+     * @type {ListOrders200ResponseOrdersInner}
+     * @memberof CreateOrder201Response
      */
     'order': ListOrders200ResponseOrdersInner;
 }
@@ -413,6 +607,12 @@ export type CreateOrderRequest = SingleRewardOrder;
  * @interface CreateOrganization
  */
 export interface CreateOrganization {
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateOrganization
+     */
+    'id'?: string;
     /**
      * Name of the organization
      * @type {string}
@@ -430,7 +630,7 @@ export interface CreateOrganization {
      * @type {boolean}
      * @memberof CreateOrganization
      */
-    'with_api_key'?: boolean;
+    'with_api_key': boolean;
     /**
      * 
      * @type {CreateOrganizationRequestCopySettings}
@@ -443,6 +643,12 @@ export interface CreateOrganization {
      * @memberof CreateOrganization
      */
     'phone'?: string;
+    /**
+     * Timestamp of when the organization has been created. 
+     * @type {string}
+     * @memberof CreateOrganization
+     */
+    'created_at'?: string;
 }
 /**
  * 
@@ -458,7 +664,7 @@ export interface CreateOrganization200Response {
     'organization'?: CreateOrganization200ResponseOrganization;
 }
 /**
- * Organizations are a way to separate different parts of your business within the same Tremendous account. Your root Tremendous account is an organization itself and can have multiple sub-organizations.  You can assign users in your Tremendous team as members to any organization. Users can be members of multiple organizations at once.  Each organizations can have it\'s own API key. 
+ * 
  * @export
  * @interface CreateOrganization200ResponseOrganization
  */
@@ -482,33 +688,128 @@ export interface CreateOrganization200ResponseOrganization {
      */
     'website': string;
     /**
-     * Status of the organization. Organizations need to be approved to be able to use them to send out rewards.
+     * 
+     * @type {CreateOrganizationRequestCopySettings}
+     * @memberof CreateOrganization200ResponseOrganization
+     */
+    'copy_settings'?: CreateOrganizationRequestCopySettings;
+    /**
+     * Phone number of the organization. For non-US phone numbers, specify the country code (prefixed with +).
      * @type {string}
      * @memberof CreateOrganization200ResponseOrganization
      */
-    'status'?: CreateOrganization200ResponseOrganizationStatusEnum;
+    'phone'?: string | null;
     /**
-     * Timestamp of when the organization has been created.  *This field is only returned when creating an organization.* It is not returned anymore when retrieving or listing organizations. 
+     * Timestamp of when the organization has been created. 
      * @type {string}
      * @memberof CreateOrganization200ResponseOrganization
      */
     'created_at'?: string;
     /**
-     * The API key for the created organization. This property is only returned when `with_api_key` is set to `true`. 
+     * The API key for the created organization. This property is only returned when `api_key` is set to `true`. 
      * @type {string}
      * @memberof CreateOrganization200ResponseOrganization
      */
     'api_key'?: string;
 }
-
-export const CreateOrganization200ResponseOrganizationStatusEnum = {
-    Pending: 'PENDING',
-    Approved: 'APPROVED',
-    Rejected: 'REJECTED'
-} as const;
-
-export type CreateOrganization200ResponseOrganizationStatusEnum = typeof CreateOrganization200ResponseOrganizationStatusEnum[keyof typeof CreateOrganization200ResponseOrganizationStatusEnum];
-
+/**
+ * 
+ * @export
+ * @interface CreateOrganizationForResponse
+ */
+export interface CreateOrganizationForResponse {
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateOrganizationForResponse
+     */
+    'id'?: string;
+    /**
+     * Name of the organization
+     * @type {string}
+     * @memberof CreateOrganizationForResponse
+     */
+    'name': string;
+    /**
+     * URL of the website of that organization
+     * @type {string}
+     * @memberof CreateOrganizationForResponse
+     */
+    'website': string;
+    /**
+     * Default value is `false`. Set to true to also generate an API key associated to the new organization.
+     * @type {boolean}
+     * @memberof CreateOrganizationForResponse
+     */
+    'with_api_key'?: boolean;
+    /**
+     * 
+     * @type {CreateOrganizationRequestCopySettings}
+     * @memberof CreateOrganizationForResponse
+     */
+    'copy_settings'?: CreateOrganizationRequestCopySettings;
+    /**
+     * Phone number of the organization. For non-US phone numbers, specify the country code (prefixed with +).
+     * @type {string}
+     * @memberof CreateOrganizationForResponse
+     */
+    'phone'?: string | null;
+    /**
+     * Timestamp of when the organization has been created. 
+     * @type {string}
+     * @memberof CreateOrganizationForResponse
+     */
+    'created_at'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface CreateOrganizationProperties
+ */
+export interface CreateOrganizationProperties {
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateOrganizationProperties
+     */
+    'id'?: string;
+    /**
+     * Name of the organization
+     * @type {string}
+     * @memberof CreateOrganizationProperties
+     */
+    'name'?: string;
+    /**
+     * URL of the website of that organization
+     * @type {string}
+     * @memberof CreateOrganizationProperties
+     */
+    'website'?: string;
+    /**
+     * Default value is `false`. Set to true to also generate an API key associated to the new organization.
+     * @type {boolean}
+     * @memberof CreateOrganizationProperties
+     */
+    'with_api_key'?: boolean;
+    /**
+     * 
+     * @type {CreateOrganizationRequestCopySettings}
+     * @memberof CreateOrganizationProperties
+     */
+    'copy_settings'?: CreateOrganizationRequestCopySettings;
+    /**
+     * Phone number of the organization. For non-US phone numbers, specify the country code (prefixed with +).
+     * @type {string}
+     * @memberof CreateOrganizationProperties
+     */
+    'phone'?: string;
+    /**
+     * Timestamp of when the organization has been created. 
+     * @type {string}
+     * @memberof CreateOrganizationProperties
+     */
+    'created_at'?: string;
+}
 /**
  * 
  * @export
@@ -532,7 +833,7 @@ export interface CreateOrganizationRequest {
      * @type {boolean}
      * @memberof CreateOrganizationRequest
      */
-    'with_api_key'?: boolean;
+    'with_api_key': boolean;
     /**
      * 
      * @type {CreateOrganizationRequestCopySettings}
@@ -804,13 +1105,13 @@ export interface DeliveryDetails {
      * @type {string}
      * @memberof DeliveryDetails
      */
-    'method': DeliveryDetailsMethodEnum;
+    'method'?: DeliveryDetailsMethodEnum;
     /**
      * Current status of the delivery of the reward:  * `SCHEDULED` - Reward is scheduled for delivery and will be delivered soon. * `FAILED` - Delivery of reward failed (e.g. email bounced). * `SUCCEEDED` - Reward was successfully delivered (email or text message delivered or reward link opened). * `PENDING` - Delivery is pending but not yet scheduled. 
      * @type {string}
      * @memberof DeliveryDetails
      */
-    'status': DeliveryDetailsStatusEnum;
+    'status'?: DeliveryDetailsStatusEnum;
 }
 
 export const DeliveryDetailsMethodEnum = {
@@ -828,6 +1129,48 @@ export const DeliveryDetailsStatusEnum = {
 } as const;
 
 export type DeliveryDetailsStatusEnum = typeof DeliveryDetailsStatusEnum[keyof typeof DeliveryDetailsStatusEnum];
+
+/**
+ * Details on how the reward is delivered to the recipient. 
+ * @export
+ * @interface DeliveryDetailsWithLink
+ */
+export interface DeliveryDetailsWithLink {
+    /**
+     * How to deliver the reward to the recipient.  <table>   <thead>     <tr>       <th>Delivery Method</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td><code>EMAIL</code></td>       <td>Deliver the reward to the recipient by email</td>     </tr>     <tr>       <td><code>LINK</code></td>       <td>         <p>Deliver the reward to the recipient via a link.</p>         <p>The link can be retrieved on a successfully ordered reward via the <code>/rewards</code> or <code>/rewards/{id}</code> endpoint. That link must then be  delivered to the recipient out-of-band.</p>       </td>     </tr>     <tr>       <td><code>PHONE</code></td>       <td>Deliver the reward to the recipient by SMS</td>     </tr>   </tbody> </table> 
+     * @type {string}
+     * @memberof DeliveryDetailsWithLink
+     */
+    'method': DeliveryDetailsWithLinkMethodEnum;
+    /**
+     * Current status of the delivery of the reward:  * `SCHEDULED` - Reward is scheduled for delivery and will be delivered soon. * `FAILED` - Delivery of reward failed (e.g. email bounced). * `SUCCEEDED` - Reward was successfully delivered (email or text message delivered or reward link opened). * `PENDING` - Delivery is pending but not yet scheduled. 
+     * @type {string}
+     * @memberof DeliveryDetailsWithLink
+     */
+    'status': DeliveryDetailsWithLinkStatusEnum;
+    /**
+     * Link to redeem the reward at. You need to deliver this link to the recipient. 
+     * @type {string}
+     * @memberof DeliveryDetailsWithLink
+     */
+    'link'?: string;
+}
+
+export const DeliveryDetailsWithLinkMethodEnum = {
+    Email: 'EMAIL',
+    Link: 'LINK',
+    Phone: 'PHONE'
+} as const;
+
+export type DeliveryDetailsWithLinkMethodEnum = typeof DeliveryDetailsWithLinkMethodEnum[keyof typeof DeliveryDetailsWithLinkMethodEnum];
+export const DeliveryDetailsWithLinkStatusEnum = {
+    Scheduled: 'SCHEDULED',
+    Failed: 'FAILED',
+    Succeeded: 'SUCCEEDED',
+    Pending: 'PENDING'
+} as const;
+
+export type DeliveryDetailsWithLinkStatusEnum = typeof DeliveryDetailsWithLinkStatusEnum[keyof typeof DeliveryDetailsWithLinkStatusEnum];
 
 /**
  * How to deliver the reward to the recipient.  <table>   <thead>     <tr>       <th>Delivery Method</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td><code>EMAIL</code></td>       <td>Deliver the reward to the recipient by email</td>     </tr>     <tr>       <td><code>LINK</code></td>       <td>         <p>Deliver the reward to the recipient via a link.</p>         <p>The link can be retrieved on a successfully ordered reward via the <code>/rewards</code> or <code>/rewards/{id}</code> endpoint. That link must then be  delivered to the recipient out-of-band.</p>       </td>     </tr>     <tr>       <td><code>PHONE</code></td>       <td>Deliver the reward to the recipient by SMS</td>     </tr>   </tbody> </table> 
@@ -866,6 +1209,12 @@ export type DeliveryStatus = typeof DeliveryStatus[keyof typeof DeliveryStatus];
  * @interface ErrorModel
  */
 export interface ErrorModel {
+    /**
+     * HTTP status code of the response
+     * @type {number}
+     * @memberof ErrorModel
+     */
+    'status'?: number;
     /**
      * 
      * @type {ListRewards401ResponseErrors}
@@ -1385,6 +1734,12 @@ export interface FraudRule200Response {
  */
 export interface FraudRule400Response {
     /**
+     * HTTP status code of the response
+     * @type {number}
+     * @memberof FraudRule400Response
+     */
+    'status'?: number;
+    /**
      * 
      * @type {ListRewards401ResponseErrors}
      * @memberof FraudRule400Response
@@ -1397,6 +1752,12 @@ export interface FraudRule400Response {
  * @interface FraudRule422Response
  */
 export interface FraudRule422Response {
+    /**
+     * HTTP status code of the response
+     * @type {number}
+     * @memberof FraudRule422Response
+     */
+    'status'?: number;
     /**
      * 
      * @type {ListRewards401ResponseErrors}
@@ -1629,6 +1990,12 @@ export interface GenerateRewardLink200ResponseReward {
  * @interface GenerateRewardLink403Response
  */
 export interface GenerateRewardLink403Response {
+    /**
+     * HTTP status code of the response
+     * @type {number}
+     * @memberof GenerateRewardLink403Response
+     */
+    'status'?: number;
     /**
      * 
      * @type {ListRewards401ResponseErrors}
@@ -3369,13 +3736,13 @@ export interface ListRewards200ResponseRewardsInnerDelivery {
      * @type {string}
      * @memberof ListRewards200ResponseRewardsInnerDelivery
      */
-    'method': ListRewards200ResponseRewardsInnerDeliveryMethodEnum;
+    'method'?: ListRewards200ResponseRewardsInnerDeliveryMethodEnum;
     /**
      * Current status of the delivery of the reward:  * `SCHEDULED` - Reward is scheduled for delivery and will be delivered soon. * `FAILED` - Delivery of reward failed (e.g. email bounced). * `SUCCEEDED` - Reward was successfully delivered (email or text message delivered or reward link opened). * `PENDING` - Delivery is pending but not yet scheduled. 
      * @type {string}
      * @memberof ListRewards200ResponseRewardsInnerDelivery
      */
-    'status': ListRewards200ResponseRewardsInnerDeliveryStatusEnum;
+    'status'?: ListRewards200ResponseRewardsInnerDeliveryStatusEnum;
 }
 
 export const ListRewards200ResponseRewardsInnerDeliveryMethodEnum = {
@@ -3567,6 +3934,12 @@ export type ListRewards200ResponseRewardsInnerValueCurrencyCodeEnum = typeof Lis
  */
 export interface ListRewards401Response {
     /**
+     * HTTP status code of the response
+     * @type {number}
+     * @memberof ListRewards401Response
+     */
+    'status'?: number;
+    /**
      * 
      * @type {ListRewards401ResponseErrors}
      * @memberof ListRewards401Response
@@ -3598,6 +3971,12 @@ export interface ListRewards401ResponseErrors {
  * @interface ListRewards429Response
  */
 export interface ListRewards429Response {
+    /**
+     * HTTP status code of the response
+     * @type {number}
+     * @memberof ListRewards429Response
+     */
+    'status'?: number;
     /**
      * 
      * @type {ListRewards401ResponseErrors}
@@ -4142,6 +4521,157 @@ export type OrderStatus = typeof OrderStatus[keyof typeof OrderStatus];
 /**
  * An order wraps around the fulfilment of one or more rewards.
  * @export
+ * @interface OrderWithLink
+ */
+export interface OrderWithLink {
+    /**
+     * Tremendous ID of the order
+     * @type {string}
+     * @memberof OrderWithLink
+     */
+    'id': string;
+    /**
+     * Reference for this order, supplied by the customer.  When set, `external_id` makes order idempotent. All requests that use the same `external_id` after the initial order creation, will result in a response that returns the data of the initially created order. The response will have a `201` response code. These responses **fail** to create any further orders.  It also allows for retrieving by `external_id` instead of `id` only. 
+     * @type {string}
+     * @memberof OrderWithLink
+     */
+    'external_id'?: string | null;
+    /**
+     * ID of the campaign in your account, that defines the available products (different gift cards, charity, etc.) that the recipient can choose from. 
+     * @type {string}
+     * @memberof OrderWithLink
+     */
+    'campaign_id'?: string | null;
+    /**
+     * Date the order has been created
+     * @type {string}
+     * @memberof OrderWithLink
+     */
+    'created_at': string;
+    /**
+     * Execution status of a given order  <table>   <thead>     <tr>       <th>         Status       </th>       <th>         Description       </th>     </tr>   </thead>   <tbody>     <tr>       <td>         <code>           CANCELED         </code>       </td>       <td>         The order and all of its rewards were canceled.       </td>     </tr>     <tr>       <td>         <code>           CART         </code>       </td>       <td>         The order has been created, but hasn\'t yet been processed.       </td>     </tr>     <tr>       <td>         <code>           EXECUTED         </code>       </td>       <td>         The order has been executed. Payment has been handled and rewards are being delivered (if applicable).       </td>     </tr>     <tr>       <td>         <code>           FAILED         </code>       </td>       <td>         The order could not be processed due to an error. E.g. due to insufficient funds in the account.       </td>     </tr>     <tr>       <td>         <code>           PENDING APPROVAL         </code>       </td>       <td>         The order has been created but needs approval to be executed.       </td>     </tr>     <tr>       <td>         <code>           PENDING INTERNAL PAYMENT APPROVAL         </code>       </td>       <td>         The order has been created but it is under review and requires approval from our team.       </td>     </tr>    </tbody> </table> 
+     * @type {string}
+     * @memberof OrderWithLink
+     */
+    'status': OrderWithLinkStatusEnum;
+    /**
+     * Name of the channel in which the order was created
+     * @type {string}
+     * @memberof OrderWithLink
+     */
+    'channel'?: OrderWithLinkChannelEnum;
+    /**
+     * 
+     * @type {OrderBasePayment}
+     * @memberof OrderWithLink
+     */
+    'payment'?: OrderBasePayment;
+    /**
+     * The ID for the invoice associated with this order
+     * @type {string}
+     * @memberof OrderWithLink
+     */
+    'invoice_id'?: string;
+    /**
+     * 
+     * @type {Array<OrderWithLinkRewardsInner>}
+     * @memberof OrderWithLink
+     */
+    'rewards'?: Array<OrderWithLinkRewardsInner>;
+}
+
+export const OrderWithLinkStatusEnum = {
+    Canceled: 'CANCELED',
+    Cart: 'CART',
+    Executed: 'EXECUTED',
+    Failed: 'FAILED',
+    PendingApproval: 'PENDING APPROVAL',
+    PendingInternalPaymentApproval: 'PENDING INTERNAL PAYMENT APPROVAL'
+} as const;
+
+export type OrderWithLinkStatusEnum = typeof OrderWithLinkStatusEnum[keyof typeof OrderWithLinkStatusEnum];
+export const OrderWithLinkChannelEnum = {
+    Ui: 'UI',
+    Api: 'API',
+    Embed: 'EMBED',
+    Decipher: 'DECIPHER',
+    Qualtrics: 'QUALTRICS',
+    Typeform: 'TYPEFORM',
+    SurveyMonkey: 'SURVEY MONKEY'
+} as const;
+
+export type OrderWithLinkChannelEnum = typeof OrderWithLinkChannelEnum[keyof typeof OrderWithLinkChannelEnum];
+
+/**
+ * A single reward, sent to a recipient. A reward is always part of an order.  Either `products` or `campaign_id` must be specified. 
+ * @export
+ * @interface OrderWithLinkRewardsInner
+ */
+export interface OrderWithLinkRewardsInner {
+    /**
+     * Tremendous ID of the reward
+     * @type {string}
+     * @memberof OrderWithLinkRewardsInner
+     */
+    'id'?: string;
+    /**
+     * Tremendous ID of the order this reward is part of.
+     * @type {string}
+     * @memberof OrderWithLinkRewardsInner
+     */
+    'order_id'?: string;
+    /**
+     * Date the reward was created
+     * @type {string}
+     * @memberof OrderWithLinkRewardsInner
+     */
+    'created_at'?: string;
+    /**
+     * ID of the campaign in your account, that defines the available products (different gift cards, charity, etc.) that the recipient can choose from. 
+     * @type {string}
+     * @memberof OrderWithLinkRewardsInner
+     */
+    'campaign_id'?: string | null;
+    /**
+     * List of IDs of product (different gift cards, charity, etc.) that will be available to the recipient to choose from.  Providing a `products` array will override the products made available by the campaign specified using the `campaign_id` property unless the `products` array is empty. It will _not_ override other campaign attributes, like the message and customization of the look and feel. 
+     * @type {Array<string>}
+     * @memberof OrderWithLinkRewardsInner
+     */
+    'products'?: Array<string>;
+    /**
+     * 
+     * @type {ListRewards200ResponseRewardsInnerValue}
+     * @memberof OrderWithLinkRewardsInner
+     */
+    'value'?: ListRewards200ResponseRewardsInnerValue;
+    /**
+     * 
+     * @type {ListRewards200ResponseRewardsInnerRecipient}
+     * @memberof OrderWithLinkRewardsInner
+     */
+    'recipient'?: ListRewards200ResponseRewardsInnerRecipient;
+    /**
+     * Timestamp of reward delivery within the next year. Note that if date-time is provided, the time values will be ignored.
+     * @type {string}
+     * @memberof OrderWithLinkRewardsInner
+     */
+    'deliver_at'?: string;
+    /**
+     * 
+     * @type {Array<RewardBaseCustomFieldsInner>}
+     * @memberof OrderWithLinkRewardsInner
+     */
+    'custom_fields'?: Array<RewardBaseCustomFieldsInner>;
+    /**
+     * 
+     * @type {RewardWithLinkDelivery}
+     * @memberof OrderWithLinkRewardsInner
+     */
+    'delivery'?: RewardWithLinkDelivery;
+}
+/**
+ * An order wraps around the fulfilment of one or more rewards.
+ * @export
  * @interface OrderWithoutLink
  */
 export interface OrderWithoutLink {
@@ -4381,6 +4911,61 @@ export interface PaymentDetailsRefund {
     'total': number;
 }
 /**
+ * 
+ * @export
+ * @interface Payout
+ */
+export interface Payout {
+    /**
+     * Tremendous ID of the payout
+     * @type {string}
+     * @memberof Payout
+     */
+    'id'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Payout
+     */
+    'status'?: PayoutStatusEnum;
+    /**
+     * Tremendous ID of the paid out product
+     * @type {string}
+     * @memberof Payout
+     */
+    'product_id'?: string;
+    /**
+     * Name of the paid out Product
+     * @type {string}
+     * @memberof Payout
+     */
+    'product_name'?: string;
+    /**
+     * Date the payout was created
+     * @type {string}
+     * @memberof Payout
+     */
+    'created_at'?: string;
+    /**
+     * Date the payout was executed
+     * @type {string}
+     * @memberof Payout
+     */
+    'executed_at'?: string;
+}
+
+export const PayoutStatusEnum = {
+    Unexecuted: 'UNEXECUTED',
+    Completed: 'COMPLETED',
+    Failed: 'FAILED',
+    Canceled: 'CANCELED',
+    OrganizationReview: 'ORGANIZATION_REVIEW',
+    AdminHeld: 'ADMIN_HELD'
+} as const;
+
+export type PayoutStatusEnum = typeof PayoutStatusEnum[keyof typeof PayoutStatusEnum];
+
+/**
  * A product represents one way to payout a reward to it\'s recipient. Think:  * Amazon.com gift card (ID: `OKMHM2X2OHYV`) * Donations to Save the Children (ID: `ESRNAD533W5A`) * Virtual Visa debit card (ID: `Q24BD9EZ332JT`)  each of which is one specific product on Tremendous.  > 📘 All available products > > See this [list](https://www.tremendous.com/catalog)  Products can be limited in their availability to recipients by  * geography (field `countries`) * currency (field `currencies`) * amount of the reward (field `skus`)   * e.g. adidas gift cards accept any amount between 5 and 200 USD.  See the description of each respective parameter for further details. 
  * @export
  * @interface Product
@@ -4617,6 +5202,12 @@ export interface RefundDetails {
  * @interface ResendReward422Response
  */
 export interface ResendReward422Response {
+    /**
+     * HTTP status code of the response
+     * @type {number}
+     * @memberof ResendReward422Response
+     */
+    'status'?: number;
     /**
      * 
      * @type {ListRewards401ResponseErrors}
@@ -5204,6 +5795,115 @@ export type RewardValueCurrencyCodeEnum = typeof RewardValueCurrencyCodeEnum[key
 /**
  * A single reward, sent to a recipient. A reward is always part of an order.  Either `products` or `campaign_id` must be specified. 
  * @export
+ * @interface RewardWithLink
+ */
+export interface RewardWithLink {
+    /**
+     * Tremendous ID of the reward
+     * @type {string}
+     * @memberof RewardWithLink
+     */
+    'id'?: string;
+    /**
+     * Tremendous ID of the order this reward is part of.
+     * @type {string}
+     * @memberof RewardWithLink
+     */
+    'order_id'?: string;
+    /**
+     * Date the reward was created
+     * @type {string}
+     * @memberof RewardWithLink
+     */
+    'created_at'?: string;
+    /**
+     * ID of the campaign in your account, that defines the available products (different gift cards, charity, etc.) that the recipient can choose from. 
+     * @type {string}
+     * @memberof RewardWithLink
+     */
+    'campaign_id'?: string | null;
+    /**
+     * List of IDs of product (different gift cards, charity, etc.) that will be available to the recipient to choose from.  Providing a `products` array will override the products made available by the campaign specified using the `campaign_id` property unless the `products` array is empty. It will _not_ override other campaign attributes, like the message and customization of the look and feel. 
+     * @type {Array<string>}
+     * @memberof RewardWithLink
+     */
+    'products'?: Array<string>;
+    /**
+     * 
+     * @type {ListRewards200ResponseRewardsInnerValue}
+     * @memberof RewardWithLink
+     */
+    'value'?: ListRewards200ResponseRewardsInnerValue;
+    /**
+     * 
+     * @type {ListRewards200ResponseRewardsInnerRecipient}
+     * @memberof RewardWithLink
+     */
+    'recipient'?: ListRewards200ResponseRewardsInnerRecipient;
+    /**
+     * Timestamp of reward delivery within the next year. Note that if date-time is provided, the time values will be ignored.
+     * @type {string}
+     * @memberof RewardWithLink
+     */
+    'deliver_at'?: string;
+    /**
+     * 
+     * @type {Array<RewardBaseCustomFieldsInner>}
+     * @memberof RewardWithLink
+     */
+    'custom_fields'?: Array<RewardBaseCustomFieldsInner>;
+    /**
+     * 
+     * @type {RewardWithLinkDelivery}
+     * @memberof RewardWithLink
+     */
+    'delivery'?: RewardWithLinkDelivery;
+}
+/**
+ * Details on how the reward is delivered to the recipient. 
+ * @export
+ * @interface RewardWithLinkDelivery
+ */
+export interface RewardWithLinkDelivery {
+    /**
+     * How to deliver the reward to the recipient.  <table>   <thead>     <tr>       <th>Delivery Method</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td><code>EMAIL</code></td>       <td>Deliver the reward to the recipient by email</td>     </tr>     <tr>       <td><code>LINK</code></td>       <td>         <p>Deliver the reward to the recipient via a link.</p>         <p>The link can be retrieved on a successfully ordered reward via the <code>/rewards</code> or <code>/rewards/{id}</code> endpoint. That link must then be  delivered to the recipient out-of-band.</p>       </td>     </tr>     <tr>       <td><code>PHONE</code></td>       <td>Deliver the reward to the recipient by SMS</td>     </tr>   </tbody> </table> 
+     * @type {string}
+     * @memberof RewardWithLinkDelivery
+     */
+    'method': RewardWithLinkDeliveryMethodEnum;
+    /**
+     * Current status of the delivery of the reward:  * `SCHEDULED` - Reward is scheduled for delivery and will be delivered soon. * `FAILED` - Delivery of reward failed (e.g. email bounced). * `SUCCEEDED` - Reward was successfully delivered (email or text message delivered or reward link opened). * `PENDING` - Delivery is pending but not yet scheduled. 
+     * @type {string}
+     * @memberof RewardWithLinkDelivery
+     */
+    'status': RewardWithLinkDeliveryStatusEnum;
+    /**
+     * Link to redeem the reward at. You need to deliver this link to the recipient. 
+     * @type {string}
+     * @memberof RewardWithLinkDelivery
+     */
+    'link'?: string;
+}
+
+export const RewardWithLinkDeliveryMethodEnum = {
+    Email: 'EMAIL',
+    Link: 'LINK',
+    Phone: 'PHONE'
+} as const;
+
+export type RewardWithLinkDeliveryMethodEnum = typeof RewardWithLinkDeliveryMethodEnum[keyof typeof RewardWithLinkDeliveryMethodEnum];
+export const RewardWithLinkDeliveryStatusEnum = {
+    Scheduled: 'SCHEDULED',
+    Failed: 'FAILED',
+    Succeeded: 'SUCCEEDED',
+    Pending: 'PENDING'
+} as const;
+
+export type RewardWithLinkDeliveryStatusEnum = typeof RewardWithLinkDeliveryStatusEnum[keyof typeof RewardWithLinkDeliveryStatusEnum];
+
+/**
+ * A single reward, sent to a recipient. A reward is always part of an order.  Either `products` or `campaign_id` must be specified. 
+ * @export
  * @interface RewardWithoutLink
  */
 export interface RewardWithoutLink {
@@ -5279,13 +5979,13 @@ export interface RewardWithoutLinkDelivery {
      * @type {string}
      * @memberof RewardWithoutLinkDelivery
      */
-    'method': RewardWithoutLinkDeliveryMethodEnum;
+    'method'?: RewardWithoutLinkDeliveryMethodEnum;
     /**
      * Current status of the delivery of the reward:  * `SCHEDULED` - Reward is scheduled for delivery and will be delivered soon. * `FAILED` - Delivery of reward failed (e.g. email bounced). * `SUCCEEDED` - Reward was successfully delivered (email or text message delivered or reward link opened). * `PENDING` - Delivery is pending but not yet scheduled. 
      * @type {string}
      * @memberof RewardWithoutLinkDelivery
      */
-    'status': RewardWithoutLinkDeliveryStatusEnum;
+    'status'?: RewardWithoutLinkDeliveryStatusEnum;
 }
 
 export const RewardWithoutLinkDeliveryMethodEnum = {
@@ -5475,6 +6175,103 @@ export const SingleRewardOrderRewardDeliveryMethodEnum = {
 } as const;
 
 export type SingleRewardOrderRewardDeliveryMethodEnum = typeof SingleRewardOrderRewardDeliveryMethodEnum[keyof typeof SingleRewardOrderRewardDeliveryMethodEnum];
+
+/**
+ * 
+ * @export
+ * @interface SingleRewardOrderWithLink
+ */
+export interface SingleRewardOrderWithLink {
+    /**
+     * 
+     * @type {SingleRewardOrderWithLinkOrder}
+     * @memberof SingleRewardOrderWithLink
+     */
+    'order': SingleRewardOrderWithLinkOrder;
+}
+/**
+ * An order wraps around the fulfilment of one or more rewards.
+ * @export
+ * @interface SingleRewardOrderWithLinkOrder
+ */
+export interface SingleRewardOrderWithLinkOrder {
+    /**
+     * Tremendous ID of the order
+     * @type {string}
+     * @memberof SingleRewardOrderWithLinkOrder
+     */
+    'id': string;
+    /**
+     * Reference for this order, supplied by the customer.  When set, `external_id` makes order idempotent. All requests that use the same `external_id` after the initial order creation, will result in a response that returns the data of the initially created order. The response will have a `201` response code. These responses **fail** to create any further orders.  It also allows for retrieving by `external_id` instead of `id` only. 
+     * @type {string}
+     * @memberof SingleRewardOrderWithLinkOrder
+     */
+    'external_id'?: string | null;
+    /**
+     * ID of the campaign in your account, that defines the available products (different gift cards, charity, etc.) that the recipient can choose from. 
+     * @type {string}
+     * @memberof SingleRewardOrderWithLinkOrder
+     */
+    'campaign_id'?: string | null;
+    /**
+     * Date the order has been created
+     * @type {string}
+     * @memberof SingleRewardOrderWithLinkOrder
+     */
+    'created_at': string;
+    /**
+     * Execution status of a given order  <table>   <thead>     <tr>       <th>         Status       </th>       <th>         Description       </th>     </tr>   </thead>   <tbody>     <tr>       <td>         <code>           CANCELED         </code>       </td>       <td>         The order and all of its rewards were canceled.       </td>     </tr>     <tr>       <td>         <code>           CART         </code>       </td>       <td>         The order has been created, but hasn\'t yet been processed.       </td>     </tr>     <tr>       <td>         <code>           EXECUTED         </code>       </td>       <td>         The order has been executed. Payment has been handled and rewards are being delivered (if applicable).       </td>     </tr>     <tr>       <td>         <code>           FAILED         </code>       </td>       <td>         The order could not be processed due to an error. E.g. due to insufficient funds in the account.       </td>     </tr>     <tr>       <td>         <code>           PENDING APPROVAL         </code>       </td>       <td>         The order has been created but needs approval to be executed.       </td>     </tr>     <tr>       <td>         <code>           PENDING INTERNAL PAYMENT APPROVAL         </code>       </td>       <td>         The order has been created but it is under review and requires approval from our team.       </td>     </tr>    </tbody> </table> 
+     * @type {string}
+     * @memberof SingleRewardOrderWithLinkOrder
+     */
+    'status': SingleRewardOrderWithLinkOrderStatusEnum;
+    /**
+     * Name of the channel in which the order was created
+     * @type {string}
+     * @memberof SingleRewardOrderWithLinkOrder
+     */
+    'channel'?: SingleRewardOrderWithLinkOrderChannelEnum;
+    /**
+     * 
+     * @type {OrderBasePayment}
+     * @memberof SingleRewardOrderWithLinkOrder
+     */
+    'payment'?: OrderBasePayment;
+    /**
+     * The ID for the invoice associated with this order
+     * @type {string}
+     * @memberof SingleRewardOrderWithLinkOrder
+     */
+    'invoice_id'?: string;
+    /**
+     * 
+     * @type {Array<OrderWithLinkRewardsInner>}
+     * @memberof SingleRewardOrderWithLinkOrder
+     */
+    'rewards'?: Array<OrderWithLinkRewardsInner>;
+}
+
+export const SingleRewardOrderWithLinkOrderStatusEnum = {
+    Canceled: 'CANCELED',
+    Cart: 'CART',
+    Executed: 'EXECUTED',
+    Failed: 'FAILED',
+    PendingApproval: 'PENDING APPROVAL',
+    PendingInternalPaymentApproval: 'PENDING INTERNAL PAYMENT APPROVAL'
+} as const;
+
+export type SingleRewardOrderWithLinkOrderStatusEnum = typeof SingleRewardOrderWithLinkOrderStatusEnum[keyof typeof SingleRewardOrderWithLinkOrderStatusEnum];
+export const SingleRewardOrderWithLinkOrderChannelEnum = {
+    Ui: 'UI',
+    Api: 'API',
+    Embed: 'EMBED',
+    Decipher: 'DECIPHER',
+    Qualtrics: 'QUALTRICS',
+    Typeform: 'TYPEFORM',
+    SurveyMonkey: 'SURVEY MONKEY'
+} as const;
+
+export type SingleRewardOrderWithLinkOrderChannelEnum = typeof SingleRewardOrderWithLinkOrderChannelEnum[keyof typeof SingleRewardOrderWithLinkOrderChannelEnum];
 
 /**
  * 
@@ -8387,7 +9184,7 @@ export const OrdersApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async approveOrder(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CreateOrder200Response>> {
+        async approveOrder(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CreateOrder201Response>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.approveOrder(id, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['OrdersApi.approveOrder']?.[localVarOperationServerIndex]?.url;
@@ -8413,7 +9210,7 @@ export const OrdersApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getOrder(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CreateOrder200Response>> {
+        async getOrder(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CreateOrder201Response>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getOrder(id, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['OrdersApi.getOrder']?.[localVarOperationServerIndex]?.url;
@@ -8444,7 +9241,7 @@ export const OrdersApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async rejectOrder(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CreateOrder200Response>> {
+        async rejectOrder(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CreateOrder201Response>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.rejectOrder(id, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['OrdersApi.rejectOrder']?.[localVarOperationServerIndex]?.url;
@@ -8467,7 +9264,7 @@ export const OrdersApiFactory = function (configuration?: Configuration, basePat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        approveOrder(id: string, options?: RawAxiosRequestConfig): AxiosPromise<CreateOrder200Response> {
+        approveOrder(id: string, options?: RawAxiosRequestConfig): AxiosPromise<CreateOrder201Response> {
             return localVarFp.approveOrder(id, options).then((request) => request(axios, basePath));
         },
         /**
@@ -8487,7 +9284,7 @@ export const OrdersApiFactory = function (configuration?: Configuration, basePat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getOrder(id: string, options?: RawAxiosRequestConfig): AxiosPromise<CreateOrder200Response> {
+        getOrder(id: string, options?: RawAxiosRequestConfig): AxiosPromise<CreateOrder201Response> {
             return localVarFp.getOrder(id, options).then((request) => request(axios, basePath));
         },
         /**
@@ -8512,7 +9309,7 @@ export const OrdersApiFactory = function (configuration?: Configuration, basePat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        rejectOrder(id: string, options?: RawAxiosRequestConfig): AxiosPromise<CreateOrder200Response> {
+        rejectOrder(id: string, options?: RawAxiosRequestConfig): AxiosPromise<CreateOrder201Response> {
             return localVarFp.rejectOrder(id, options).then((request) => request(axios, basePath));
         },
     };
