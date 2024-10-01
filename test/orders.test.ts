@@ -48,6 +48,7 @@ test("submit an email order with a campaign", async () => {
   const { data } = await api.createOrder(params);
   expect(data.order).toHaveProperty("id");
   expect(data.order.campaign_id).toEqual(CAMPAIGN_ID);
+  expect(data.order.rewards![0].delivery!.link).toBeUndefined();
 
   const { order } = (await api.getOrder(data.order.id)).data;
 
@@ -57,6 +58,7 @@ test("submit an email order with a campaign", async () => {
 
   expect(order.rewards!.length).toEqual(1);
   expect(order.rewards![0].recipient?.email).toEqual(RECIPIENT_EMAIL);
+  expect(order.rewards![0].delivery!).not.toHaveProperty("link");
 });
 
 test("submit a link order with a campaign", async () => {
@@ -83,6 +85,7 @@ test("submit a link order with a campaign", async () => {
   const { data } = await api.createOrder(params);
   expect(data.order).toHaveProperty("id");
   expect(data.order.campaign_id).toEqual(CAMPAIGN_ID);
+  expect(data.order.rewards![0].delivery!.link).toMatch("https://testflight.tremendous.com/rewards/payout/");
 
   const { order } = (await api.getOrder(data.order.id)).data;
 
@@ -92,6 +95,7 @@ test("submit a link order with a campaign", async () => {
 
   expect(order.rewards!.length).toEqual(1);
   expect(order.rewards![0].recipient?.name).toEqual("Recipient Name");
+  expect(order.rewards![0].delivery!).not.toHaveProperty("link");
 });
 
 test("raise validation errors", async () => {
