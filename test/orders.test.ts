@@ -23,7 +23,7 @@ test("list orders", async () => {
   });
 });
 
-test("submit an order with a campaign", async () => {
+test("submit an email order with a campaign", async () => {
   const params: CreateOrderRequest = {
     payment: {
       funding_source_id: "balance",
@@ -59,6 +59,40 @@ test("submit an order with a campaign", async () => {
   expect(order.rewards![0].recipient?.email).toEqual(RECIPIENT_EMAIL);
 });
 
+test("submit a link order with a campaign", async () => {
+  const params: CreateOrderRequest = {
+    payment: {
+      funding_source_id: "balance",
+    },
+    reward:
+      {
+        delivery: {
+          method: "LINK"
+        },
+        recipient: {
+          name: "Recipient Name",
+        },
+        value: {
+          denomination: 5.0,
+          currency_code: "USD",
+        },
+         campaign_id: CAMPAIGN_ID,
+      }
+  };
+
+  const { data } = await api.createOrder(params);
+  expect(data.order).toHaveProperty("id");
+  expect(data.order.campaign_id).toEqual(CAMPAIGN_ID);
+
+  const { order } = (await api.getOrder(data.order.id)).data;
+
+  expect(order.id).toEqual(data.order.id);
+  expect(order.campaign_id).toEqual(data.order.campaign_id);
+  expect(order.status).toEqual("EXECUTED");
+
+  expect(order.rewards!.length).toEqual(1);
+  expect(order.rewards![0].recipient?.name).toEqual("Recipient Name");
+});
 
 test("raise validation errors", async () => {
   try {
