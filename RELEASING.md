@@ -1,16 +1,17 @@
 ## Step 1 - Re-generate the SDK source code
 
-The source code from this repo is generated using [OpenAPI generator][1] and the Open API specification for the Tremendous API. The `.ts` files can be re-generated and compiled with the following commands:
+The source code from this repo is generated using [OpenAPI generator][1] and the Open API specification for the Tremendous API. The `.ts` files can be re-generated and compiled with the following command:
 
 ```console
-bin/generate && npm run build
+bin/generate
 ```
 
 After that, please review the changes to double check that the changes to the API spec were
 generated correctly.
 
 Please open a Pull Request with the file changes and wait for the test pipeline before merging it
-to main. Make sure to use [Conventional Commit messages]([2]) to help automating the process.
+to main. Make sure to use [Conventional Commit messages]([2]) to help automating the process -
+specially `feat:` and `fix:`.
 
 ## Step 2 - Merge the Release Please Pull Request
 
