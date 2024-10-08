@@ -19,8 +19,8 @@ specially `feat:` and `fix:`.
 consolidates updates to `CHANGELOG.md` (based on the git history) and updating the `package.json`
 file.
 
-When ready to publish a release, merge the Release PR and the [release.yml]
-(.github/workflows/release.yml) workflow will publish a new package to NPM and create a release on GitHub.
+When ready to publish a release, merge the Release PR and the [release.yml](.github/workflows/release.yml)
+workflow will publish a new package to NPM and create a release on GitHub.
 
 [1]: https://openapi-generator.tech
 [2]: https://www.conventionalcommits.org/en/v1.0.0/
