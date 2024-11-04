@@ -905,6 +905,242 @@ export interface CreateOrganizationRequestCopySettings {
 /**
  * 
  * @export
+ * @interface CreateReport201Response
+ */
+export interface CreateReport201Response {
+    /**
+     * 
+     * @type {CreateReport201ResponseReport}
+     * @memberof CreateReport201Response
+     */
+    'report': CreateReport201ResponseReport;
+    /**
+     * Report status message
+     * @type {string}
+     * @memberof CreateReport201Response
+     */
+    'message'?: string;
+}
+/**
+ * Reports represent a collection of your Tremendous data that can be filtered and downloaded.  The report object that is returned has a unique ID, a status, and an predicted time of report generation completion. When the report generation is complete, it will also contain an expiring url where you can retrieve your report. 
+ * @export
+ * @interface CreateReport201ResponseReport
+ */
+export interface CreateReport201ResponseReport {
+    /**
+     * Tremendous ID of the report, used to retrieve your report
+     * @type {string}
+     * @memberof CreateReport201ResponseReport
+     */
+    'id'?: string;
+    /**
+     * Status of this report  <table>   <thead>     <tr>       <th>Status</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td><code>CREATED</code></td>       <td>Report has been created</td>     </tr>     <tr>       <td><code>PROCESSING</code></td>       <td>Report is currently being generated</td>     </tr>     <tr>       <td><code>READY_FOR_DOWNLOAD</code></td>       <td>Report generation is complete and ready for download</td>     </tr>     <tr>       <td><code>FAILED</code></td>       <td>Report failed to generate</td>     </tr>   </tbody> </table> 
+     * @type {string}
+     * @memberof CreateReport201ResponseReport
+     */
+    'status'?: CreateReport201ResponseReportStatusEnum;
+    /**
+     * Timestamp of when the report was created 
+     * @type {string}
+     * @memberof CreateReport201ResponseReport
+     */
+    'created_at'?: string;
+    /**
+     * Timestamp of when the report is expected to finish generating. If the report if complete, this will return the time the report completed generating at. 
+     * @type {string}
+     * @memberof CreateReport201ResponseReport
+     */
+    'expected_completion_at'?: string;
+    /**
+     * URL to download the report. Only returned when the report generation is complete and report is ready for download. URL is valid for 7 days from generation completion 
+     * @type {string}
+     * @memberof CreateReport201ResponseReport
+     */
+    'url'?: string | null;
+}
+
+export const CreateReport201ResponseReportStatusEnum = {
+    Created: 'CREATED',
+    Processing: 'PROCESSING',
+    ReadyForDownload: 'READY_FOR_DOWNLOAD',
+    Failed: 'FAILED'
+} as const;
+
+export type CreateReport201ResponseReportStatusEnum = typeof CreateReport201ResponseReportStatusEnum[keyof typeof CreateReport201ResponseReportStatusEnum];
+
+/**
+ * 
+ * @export
+ * @interface CreateReportRequest
+ */
+export interface CreateReportRequest {
+    /**
+     * Type of report for retrieval. <table> <thead> <tr> <th>Report type</th> <th>Description</th> </tr> </thead> <tbody> <tr> <td><code>digital_rewards</code></td> <td>Report for Tremendous digital reward history</td> </tr> </tbody> </table>
+     * @type {string}
+     * @memberof CreateReportRequest
+     */
+    'report_type': CreateReportRequestReportTypeEnum;
+    /**
+     * Format the report will be generated in. <table> <thead> <tr> <th>Format</th> <th>Description</th> </tr> </thead> <tbody> <tr> <td><code>csv</code></td> <td>CSV format for report</td> </tr> </tbody> </table>
+     * @type {string}
+     * @memberof CreateReportRequest
+     */
+    'format': CreateReportRequestFormatEnum;
+    /**
+     * 
+     * @type {CreateReportRequestFilters}
+     * @memberof CreateReportRequest
+     */
+    'filters'?: CreateReportRequestFilters | null;
+}
+
+export const CreateReportRequestReportTypeEnum = {
+    DigitalRewards: 'digital_rewards'
+} as const;
+
+export type CreateReportRequestReportTypeEnum = typeof CreateReportRequestReportTypeEnum[keyof typeof CreateReportRequestReportTypeEnum];
+export const CreateReportRequestFormatEnum = {
+    Csv: 'csv'
+} as const;
+
+export type CreateReportRequestFormatEnum = typeof CreateReportRequestFormatEnum[keyof typeof CreateReportRequestFormatEnum];
+
+/**
+ * Filters to apply to the report. Corresponds to the filters provided in the dashboard 
+ * @export
+ * @interface CreateReportRequestFilters
+ */
+export interface CreateReportRequestFilters {
+    /**
+     * 
+     * @type {CreateReportRequestFiltersDigitalRewards}
+     * @memberof CreateReportRequestFilters
+     */
+    'digital_rewards'?: CreateReportRequestFiltersDigitalRewards | null;
+}
+/**
+ * Filters object for a `report_type: digital_rewards` report 
+ * @export
+ * @interface CreateReportRequestFiltersDigitalRewards
+ */
+export interface CreateReportRequestFiltersDigitalRewards {
+    /**
+     * 
+     * @type {CreateReportRequestFiltersDigitalRewardsAmount}
+     * @memberof CreateReportRequestFiltersDigitalRewards
+     */
+    'amount'?: CreateReportRequestFiltersDigitalRewardsAmount | null;
+    /**
+     * ID of the Tremendous campaign that this report should be limited to 
+     * @type {string}
+     * @memberof CreateReportRequestFiltersDigitalRewards
+     */
+    'campaign_id'?: string | null;
+    /**
+     * 
+     * @type {CreateReportRequestFiltersDigitalRewardsCreatedAt}
+     * @memberof CreateReportRequestFiltersDigitalRewards
+     */
+    'created_at'?: CreateReportRequestFiltersDigitalRewardsCreatedAt | null;
+    /**
+     * Delivery date for gifts that should be returned in the report 
+     * @type {string}
+     * @memberof CreateReportRequestFiltersDigitalRewards
+     */
+    'delivered_at'?: string | null;
+    /**
+     * Delivery method for rewards returned in the report 
+     * @type {string}
+     * @memberof CreateReportRequestFiltersDigitalRewards
+     */
+    'delivery_method'?: CreateReportRequestFiltersDigitalRewardsDeliveryMethodEnum | null;
+    /**
+     * ID of the Tremendous order that this report should be limited to 
+     * @type {string}
+     * @memberof CreateReportRequestFiltersDigitalRewards
+     */
+    'order_id'?: string | null;
+    /**
+     * Order status for rewards returned in the report 
+     * @type {string}
+     * @memberof CreateReportRequestFiltersDigitalRewards
+     */
+    'order_status'?: CreateReportRequestFiltersDigitalRewardsOrderStatusEnum | null;
+    /**
+     * Status for rewards returned in the report 
+     * @type {Array<string>}
+     * @memberof CreateReportRequestFiltersDigitalRewards
+     */
+    'status'?: Array<CreateReportRequestFiltersDigitalRewardsStatusEnum> | null;
+}
+
+export const CreateReportRequestFiltersDigitalRewardsDeliveryMethodEnum = {
+    Phone: 'phone',
+    Email: 'email',
+    Link: 'link',
+    Mail: 'mail',
+    Direct: 'direct'
+} as const;
+
+export type CreateReportRequestFiltersDigitalRewardsDeliveryMethodEnum = typeof CreateReportRequestFiltersDigitalRewardsDeliveryMethodEnum[keyof typeof CreateReportRequestFiltersDigitalRewardsDeliveryMethodEnum];
+export const CreateReportRequestFiltersDigitalRewardsOrderStatusEnum = {
+    Executed: 'executed',
+    Canceled: 'canceled',
+    Failed: 'failed',
+    PendingApproval: 'pending_approval'
+} as const;
+
+export type CreateReportRequestFiltersDigitalRewardsOrderStatusEnum = typeof CreateReportRequestFiltersDigitalRewardsOrderStatusEnum[keyof typeof CreateReportRequestFiltersDigitalRewardsOrderStatusEnum];
+export const CreateReportRequestFiltersDigitalRewardsStatusEnum = {
+    Delivered: 'delivered',
+    Canceled: 'canceled',
+    DeliveryFailed: 'delivery_failed',
+    PendingReview: 'pending_review'
+} as const;
+
+export type CreateReportRequestFiltersDigitalRewardsStatusEnum = typeof CreateReportRequestFiltersDigitalRewardsStatusEnum[keyof typeof CreateReportRequestFiltersDigitalRewardsStatusEnum];
+
+/**
+ * Amount of the rewards returned in the report 
+ * @export
+ * @interface CreateReportRequestFiltersDigitalRewardsAmount
+ */
+export interface CreateReportRequestFiltersDigitalRewardsAmount {
+    /**
+     * Minimum amount of the rewards that should be returned in the report
+     * @type {number}
+     * @memberof CreateReportRequestFiltersDigitalRewardsAmount
+     */
+    'gte'?: number;
+    /**
+     * Maximum amount of the rewards that should be returned in the report
+     * @type {number}
+     * @memberof CreateReportRequestFiltersDigitalRewardsAmount
+     */
+    'lte'?: number;
+}
+/**
+ * Creation dates of rewards returned in the report 
+ * @export
+ * @interface CreateReportRequestFiltersDigitalRewardsCreatedAt
+ */
+export interface CreateReportRequestFiltersDigitalRewardsCreatedAt {
+    /**
+     * Minimum date the reward was created
+     * @type {string}
+     * @memberof CreateReportRequestFiltersDigitalRewardsCreatedAt
+     */
+    'gte'?: string;
+    /**
+     * Maximum date the reward was created
+     * @type {string}
+     * @memberof CreateReportRequestFiltersDigitalRewardsCreatedAt
+     */
+    'lte'?: string;
+}
+/**
+ * 
+ * @export
  * @interface CreateWebhook200Response
  */
 export interface CreateWebhook200Response {
@@ -2961,11 +3197,29 @@ export interface ListFundingSources200ResponseFundingSourcesInnerMeta {
      */
     'expired'?: boolean;
     /**
+     * **Only available when `method` is set to `credit_card`.**  Year part of card\'s expiration date 
+     * @type {string}
+     * @memberof ListFundingSources200ResponseFundingSourcesInnerMeta
+     */
+    'year'?: string;
+    /**
+     * **Only available when `method` is set to `credit_card`.**  Month part of card\'s expiration date 
+     * @type {string}
+     * @memberof ListFundingSources200ResponseFundingSourcesInnerMeta
+     */
+    'month'?: string;
+    /**
      * **Only available when `method` is set to `bank_account` or `credit_card`.**  Point in time when the last order failed using this bank account or credit card as a funding source. 
      * @type {string}
      * @memberof ListFundingSources200ResponseFundingSourcesInnerMeta
      */
     'last_payment_failed_at'?: string | null;
+    /**
+     * 
+     * @type {ListFundingSources200ResponseFundingSourcesInnerMetaFailureDetails}
+     * @memberof ListFundingSources200ResponseFundingSourcesInnerMeta
+     */
+    'failure_details'?: ListFundingSources200ResponseFundingSourcesInnerMetaFailureDetails | null;
 }
 
 export const ListFundingSources200ResponseFundingSourcesInnerMetaAccountTypeEnum = {
@@ -2979,16 +3233,35 @@ export const ListFundingSources200ResponseFundingSourcesInnerMetaNetworkEnum = {
     Amex: 'Amex',
     Jcb: 'JCB',
     DinersClub: 'Diner\'s Club',
-    Visa: 'visa',
-    Discover: 'discover',
-    Laser: 'laser',
-    Elo: 'elo',
-    Maestro: 'maestro',
-    Solo: 'solo'
+    Visa: 'Visa',
+    Discover: 'Discover',
+    Laser: 'Laser',
+    Elo: 'Elo',
+    Maestro: 'Maestro',
+    Solo: 'Solo'
 } as const;
 
 export type ListFundingSources200ResponseFundingSourcesInnerMetaNetworkEnum = typeof ListFundingSources200ResponseFundingSourcesInnerMetaNetworkEnum[keyof typeof ListFundingSources200ResponseFundingSourcesInnerMetaNetworkEnum];
 
+/**
+ * 
+ * @export
+ * @interface ListFundingSources200ResponseFundingSourcesInnerMetaFailureDetails
+ */
+export interface ListFundingSources200ResponseFundingSourcesInnerMetaFailureDetails {
+    /**
+     * Payment error code
+     * @type {string}
+     * @memberof ListFundingSources200ResponseFundingSourcesInnerMetaFailureDetails
+     */
+    'return_code'?: string;
+    /**
+     * Explanation of the payment error
+     * @type {string}
+     * @memberof ListFundingSources200ResponseFundingSourcesInnerMetaFailureDetails
+     */
+    'description'?: string;
+}
 /**
  * 
  * @export
@@ -4951,7 +5224,13 @@ export interface Payout {
      * @type {string}
      * @memberof Payout
      */
-    'executed_at'?: string;
+    'executed_at'?: string | null;
+    /**
+     * Date when a delayed payout will be executed in the future
+     * @type {string}
+     * @memberof Payout
+     */
+    'defer_execution_until'?: string | null;
 }
 
 export const PayoutStatusEnum = {
@@ -5197,6 +5476,53 @@ export interface RefundDetails {
     'total': number;
 }
 /**
+ * Reports represent a collection of your Tremendous data that can be filtered and downloaded.  The report object that is returned has a unique ID, a status, and an predicted time of report generation completion. When the report generation is complete, it will also contain an expiring url where you can retrieve your report. 
+ * @export
+ * @interface Report
+ */
+export interface Report {
+    /**
+     * Tremendous ID of the report, used to retrieve your report
+     * @type {string}
+     * @memberof Report
+     */
+    'id'?: string;
+    /**
+     * Status of this report  <table>   <thead>     <tr>       <th>Status</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td><code>CREATED</code></td>       <td>Report has been created</td>     </tr>     <tr>       <td><code>PROCESSING</code></td>       <td>Report is currently being generated</td>     </tr>     <tr>       <td><code>READY_FOR_DOWNLOAD</code></td>       <td>Report generation is complete and ready for download</td>     </tr>     <tr>       <td><code>FAILED</code></td>       <td>Report failed to generate</td>     </tr>   </tbody> </table> 
+     * @type {string}
+     * @memberof Report
+     */
+    'status'?: ReportStatusEnum;
+    /**
+     * Timestamp of when the report was created 
+     * @type {string}
+     * @memberof Report
+     */
+    'created_at'?: string;
+    /**
+     * Timestamp of when the report is expected to finish generating. If the report if complete, this will return the time the report completed generating at. 
+     * @type {string}
+     * @memberof Report
+     */
+    'expected_completion_at'?: string;
+    /**
+     * URL to download the report. Only returned when the report generation is complete and report is ready for download. URL is valid for 7 days from generation completion 
+     * @type {string}
+     * @memberof Report
+     */
+    'url'?: string | null;
+}
+
+export const ReportStatusEnum = {
+    Created: 'CREATED',
+    Processing: 'PROCESSING',
+    ReadyForDownload: 'READY_FOR_DOWNLOAD',
+    Failed: 'FAILED'
+} as const;
+
+export type ReportStatusEnum = typeof ReportStatusEnum[keyof typeof ReportStatusEnum];
+
+/**
  * 
  * @export
  * @interface ResendReward422Response
@@ -5214,6 +5540,25 @@ export interface ResendReward422Response {
      * @memberof ResendReward422Response
      */
     'errors': ListRewards401ResponseErrors;
+}
+/**
+ * 
+ * @export
+ * @interface ResendRewardRequest
+ */
+export interface ResendRewardRequest {
+    /**
+     * The new email address of the recipient (only for rewards delivered via email)
+     * @type {string}
+     * @memberof ResendRewardRequest
+     */
+    'updated_email'?: string;
+    /**
+     * The new phone number of the recipient (only for rewards delivered via SMS)
+     * @type {string}
+     * @memberof ResendRewardRequest
+     */
+    'updated_phone'?: string;
 }
 /**
  * Flag rewards redeemed in these countries.
@@ -9904,6 +10249,193 @@ export class ProductsApi extends BaseAPI {
 
 
 /**
+ * ReportsApi - axios parameter creator
+ * @export
+ */
+export const ReportsApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * Creating a report allows your organization to programmatically retrieve information that\'s available in our dashboard UI.  This request creates a new report object with a unique ID, and kicks off an async report generation.  To retrieve a completed report, either poll `/api/v2/reports/{id}` or listen for REPORTS webhook event.  ## Request body  <div class=\"object-schema-request-schema\">   <table>   <thead>     <tr>       <th>Property</th>       <th>Type</th>       <th>Description</th>     </tr>   </thead>   <tbody class=\"object-schema-table-body\">     <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">report_type</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>Type of report for retrieval. <table> <thead> <tr> <th>Report type</th> <th>Description</th> </tr> </thead> <tbody> <tr> <td><code>digital_rewards</code></td> <td>Report for Tremendous digital reward history</td> </tr> </tbody> </table></p> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">format</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>Format the report will be generated in. <table> <thead> <tr> <th>Format</th> <th>Description</th> </tr> </thead> <tbody> <tr> <td><code>csv</code></td> <td>CSV format for report</td> </tr> </tbody> </table></p> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">filters</code> </div> </td><td><span class=\"property-type\">object</span></td><td><p>Filters to apply to the report. Corresponds to the filters provided in the dashboard</p> </td></tr>  <tr>     <td colspan=\"3\">       <details>         <summary>Show object properties</summary>         <table>   <thead>     <tr>       <th>Property</th>       <th>Type</th>       <th>Description</th>     </tr>   </thead>   <tbody class=\"object-schema-table-body\">     <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">digital_rewards</code> </div> </td><td><span class=\"property-type\">object</span></td><td><p>Filters object for a <code>report_type: digital_rewards</code> report</p> </td></tr>  <tr>     <td colspan=\"3\">       <details>         <summary>Show object properties</summary>         <table>   <thead>     <tr>       <th>Property</th>       <th>Type</th>       <th>Description</th>     </tr>   </thead>   <tbody class=\"object-schema-table-body\">     <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">amount</code> </div> </td><td><span class=\"property-type\">object</span></td><td><p>Amount of the rewards returned in the report</p> </td></tr>  <tr>     <td colspan=\"3\">       <details>         <summary>Show object properties</summary>         <table>   <thead>     <tr>       <th>Property</th>       <th>Type</th>       <th>Description</th>     </tr>   </thead>   <tbody class=\"object-schema-table-body\">     <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">gte</code> </div> </td><td><span class=\"property-type\">number</span> <span class=\"property-format\">double</span></td><td><p>Minimum amount of the rewards that should be returned in the report</p> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">lte</code> </div> </td><td><span class=\"property-type\">number</span> <span class=\"property-format\">double</span></td><td><p>Maximum amount of the rewards that should be returned in the report</p> </td></tr>   </tbody> </table>  </tr>  <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">campaign_id</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>ID of the Tremendous campaign that this report should be limited to</p> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">created_at</code> </div> </td><td><span class=\"property-type\">object</span></td><td><p>Creation dates of rewards returned in the report</p> </td></tr>  <tr>     <td colspan=\"3\">       <details>         <summary>Show object properties</summary>         <table>   <thead>     <tr>       <th>Property</th>       <th>Type</th>       <th>Description</th>     </tr>   </thead>   <tbody class=\"object-schema-table-body\">     <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">gte</code> </div> </td><td><span class=\"property-type\">string</span> <span class=\"property-format\">date</span></td><td><p>Minimum date the reward was created</p> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">lte</code> </div> </td><td><span class=\"property-type\">string</span> <span class=\"property-format\">date</span></td><td><p>Maximum date the reward was created</p> </td></tr>   </tbody> </table>  </tr>  <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">delivered_at</code> </div> </td><td><span class=\"property-type\">string</span> <span class=\"property-format\">date</span></td><td><p>Delivery date for gifts that should be returned in the report</p> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">delivery_method</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>Delivery method for rewards returned in the report</p> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">order_id</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>ID of the Tremendous order that this report should be limited to</p> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">order_status</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>Order status for rewards returned in the report</p> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">status</code> </div> </td><td><span class=\"property-type\">array</span> <span class=\"property-format\">string</span></td><td><p>Status for rewards returned in the report</p> </td></tr>   </tbody> </table>  </tr>    </tbody> </table>  </tr>    </tbody> </table>  </div>   ## Rate limits  Some reports may take a long time to generate and we limit the number of reports that can be simulataneously generated by an organization at a given time. If you exceed the rate limit, you\'ll receive a `429` response. 
+         * @summary Create report
+         * @param {CreateReportRequest} createReportRequest Report to create
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        createReport: async (createReportRequest: CreateReportRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'createReportRequest' is not null or undefined
+            assertParamExists('createReport', 'createReportRequest', createReportRequest)
+            const localVarPath = `/reports`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication BearerApiKey required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(createReportRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Retrieve the report, identified by the given `id` in the URL  Using the ID that was returned by `POST /api/v2/reports`, retrieves a download link for the report, identified by the given ID in the URL. Returns the report’s current status and, if available, the URL for download. The URL is valid for 7 days. 
+         * @summary Retrieve report
+         * @param {string} id ID of the report that should be retrieved. ID is returned from &#x60;POST&#x60; to /api/v2/reports 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getReport: async (id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('getReport', 'id', id)
+            const localVarPath = `/reports/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication BearerApiKey required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * ReportsApi - functional programming interface
+ * @export
+ */
+export const ReportsApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = ReportsApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * Creating a report allows your organization to programmatically retrieve information that\'s available in our dashboard UI.  This request creates a new report object with a unique ID, and kicks off an async report generation.  To retrieve a completed report, either poll `/api/v2/reports/{id}` or listen for REPORTS webhook event.  ## Request body  <div class=\"object-schema-request-schema\">   <table>   <thead>     <tr>       <th>Property</th>       <th>Type</th>       <th>Description</th>     </tr>   </thead>   <tbody class=\"object-schema-table-body\">     <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">report_type</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>Type of report for retrieval. <table> <thead> <tr> <th>Report type</th> <th>Description</th> </tr> </thead> <tbody> <tr> <td><code>digital_rewards</code></td> <td>Report for Tremendous digital reward history</td> </tr> </tbody> </table></p> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">format</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>Format the report will be generated in. <table> <thead> <tr> <th>Format</th> <th>Description</th> </tr> </thead> <tbody> <tr> <td><code>csv</code></td> <td>CSV format for report</td> </tr> </tbody> </table></p> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">filters</code> </div> </td><td><span class=\"property-type\">object</span></td><td><p>Filters to apply to the report. Corresponds to the filters provided in the dashboard</p> </td></tr>  <tr>     <td colspan=\"3\">       <details>         <summary>Show object properties</summary>         <table>   <thead>     <tr>       <th>Property</th>       <th>Type</th>       <th>Description</th>     </tr>   </thead>   <tbody class=\"object-schema-table-body\">     <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">digital_rewards</code> </div> </td><td><span class=\"property-type\">object</span></td><td><p>Filters object for a <code>report_type: digital_rewards</code> report</p> </td></tr>  <tr>     <td colspan=\"3\">       <details>         <summary>Show object properties</summary>         <table>   <thead>     <tr>       <th>Property</th>       <th>Type</th>       <th>Description</th>     </tr>   </thead>   <tbody class=\"object-schema-table-body\">     <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">amount</code> </div> </td><td><span class=\"property-type\">object</span></td><td><p>Amount of the rewards returned in the report</p> </td></tr>  <tr>     <td colspan=\"3\">       <details>         <summary>Show object properties</summary>         <table>   <thead>     <tr>       <th>Property</th>       <th>Type</th>       <th>Description</th>     </tr>   </thead>   <tbody class=\"object-schema-table-body\">     <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">gte</code> </div> </td><td><span class=\"property-type\">number</span> <span class=\"property-format\">double</span></td><td><p>Minimum amount of the rewards that should be returned in the report</p> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">lte</code> </div> </td><td><span class=\"property-type\">number</span> <span class=\"property-format\">double</span></td><td><p>Maximum amount of the rewards that should be returned in the report</p> </td></tr>   </tbody> </table>  </tr>  <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">campaign_id</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>ID of the Tremendous campaign that this report should be limited to</p> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">created_at</code> </div> </td><td><span class=\"property-type\">object</span></td><td><p>Creation dates of rewards returned in the report</p> </td></tr>  <tr>     <td colspan=\"3\">       <details>         <summary>Show object properties</summary>         <table>   <thead>     <tr>       <th>Property</th>       <th>Type</th>       <th>Description</th>     </tr>   </thead>   <tbody class=\"object-schema-table-body\">     <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">gte</code> </div> </td><td><span class=\"property-type\">string</span> <span class=\"property-format\">date</span></td><td><p>Minimum date the reward was created</p> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">lte</code> </div> </td><td><span class=\"property-type\">string</span> <span class=\"property-format\">date</span></td><td><p>Maximum date the reward was created</p> </td></tr>   </tbody> </table>  </tr>  <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">delivered_at</code> </div> </td><td><span class=\"property-type\">string</span> <span class=\"property-format\">date</span></td><td><p>Delivery date for gifts that should be returned in the report</p> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">delivery_method</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>Delivery method for rewards returned in the report</p> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">order_id</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>ID of the Tremendous order that this report should be limited to</p> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">order_status</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>Order status for rewards returned in the report</p> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">status</code> </div> </td><td><span class=\"property-type\">array</span> <span class=\"property-format\">string</span></td><td><p>Status for rewards returned in the report</p> </td></tr>   </tbody> </table>  </tr>    </tbody> </table>  </tr>    </tbody> </table>  </div>   ## Rate limits  Some reports may take a long time to generate and we limit the number of reports that can be simulataneously generated by an organization at a given time. If you exceed the rate limit, you\'ll receive a `429` response. 
+         * @summary Create report
+         * @param {CreateReportRequest} createReportRequest Report to create
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async createReport(createReportRequest: CreateReportRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CreateReport201Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.createReport(createReportRequest, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ReportsApi.createReport']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Retrieve the report, identified by the given `id` in the URL  Using the ID that was returned by `POST /api/v2/reports`, retrieves a download link for the report, identified by the given ID in the URL. Returns the report’s current status and, if available, the URL for download. The URL is valid for 7 days. 
+         * @summary Retrieve report
+         * @param {string} id ID of the report that should be retrieved. ID is returned from &#x60;POST&#x60; to /api/v2/reports 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getReport(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CreateReport201Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getReport(id, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ReportsApi.getReport']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+    }
+};
+
+/**
+ * ReportsApi - factory interface
+ * @export
+ */
+export const ReportsApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = ReportsApiFp(configuration)
+    return {
+        /**
+         * Creating a report allows your organization to programmatically retrieve information that\'s available in our dashboard UI.  This request creates a new report object with a unique ID, and kicks off an async report generation.  To retrieve a completed report, either poll `/api/v2/reports/{id}` or listen for REPORTS webhook event.  ## Request body  <div class=\"object-schema-request-schema\">   <table>   <thead>     <tr>       <th>Property</th>       <th>Type</th>       <th>Description</th>     </tr>   </thead>   <tbody class=\"object-schema-table-body\">     <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">report_type</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>Type of report for retrieval. <table> <thead> <tr> <th>Report type</th> <th>Description</th> </tr> </thead> <tbody> <tr> <td><code>digital_rewards</code></td> <td>Report for Tremendous digital reward history</td> </tr> </tbody> </table></p> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">format</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>Format the report will be generated in. <table> <thead> <tr> <th>Format</th> <th>Description</th> </tr> </thead> <tbody> <tr> <td><code>csv</code></td> <td>CSV format for report</td> </tr> </tbody> </table></p> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">filters</code> </div> </td><td><span class=\"property-type\">object</span></td><td><p>Filters to apply to the report. Corresponds to the filters provided in the dashboard</p> </td></tr>  <tr>     <td colspan=\"3\">       <details>         <summary>Show object properties</summary>         <table>   <thead>     <tr>       <th>Property</th>       <th>Type</th>       <th>Description</th>     </tr>   </thead>   <tbody class=\"object-schema-table-body\">     <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">digital_rewards</code> </div> </td><td><span class=\"property-type\">object</span></td><td><p>Filters object for a <code>report_type: digital_rewards</code> report</p> </td></tr>  <tr>     <td colspan=\"3\">       <details>         <summary>Show object properties</summary>         <table>   <thead>     <tr>       <th>Property</th>       <th>Type</th>       <th>Description</th>     </tr>   </thead>   <tbody class=\"object-schema-table-body\">     <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">amount</code> </div> </td><td><span class=\"property-type\">object</span></td><td><p>Amount of the rewards returned in the report</p> </td></tr>  <tr>     <td colspan=\"3\">       <details>         <summary>Show object properties</summary>         <table>   <thead>     <tr>       <th>Property</th>       <th>Type</th>       <th>Description</th>     </tr>   </thead>   <tbody class=\"object-schema-table-body\">     <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">gte</code> </div> </td><td><span class=\"property-type\">number</span> <span class=\"property-format\">double</span></td><td><p>Minimum amount of the rewards that should be returned in the report</p> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">lte</code> </div> </td><td><span class=\"property-type\">number</span> <span class=\"property-format\">double</span></td><td><p>Maximum amount of the rewards that should be returned in the report</p> </td></tr>   </tbody> </table>  </tr>  <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">campaign_id</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>ID of the Tremendous campaign that this report should be limited to</p> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">created_at</code> </div> </td><td><span class=\"property-type\">object</span></td><td><p>Creation dates of rewards returned in the report</p> </td></tr>  <tr>     <td colspan=\"3\">       <details>         <summary>Show object properties</summary>         <table>   <thead>     <tr>       <th>Property</th>       <th>Type</th>       <th>Description</th>     </tr>   </thead>   <tbody class=\"object-schema-table-body\">     <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">gte</code> </div> </td><td><span class=\"property-type\">string</span> <span class=\"property-format\">date</span></td><td><p>Minimum date the reward was created</p> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">lte</code> </div> </td><td><span class=\"property-type\">string</span> <span class=\"property-format\">date</span></td><td><p>Maximum date the reward was created</p> </td></tr>   </tbody> </table>  </tr>  <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">delivered_at</code> </div> </td><td><span class=\"property-type\">string</span> <span class=\"property-format\">date</span></td><td><p>Delivery date for gifts that should be returned in the report</p> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">delivery_method</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>Delivery method for rewards returned in the report</p> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">order_id</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>ID of the Tremendous order that this report should be limited to</p> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">order_status</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>Order status for rewards returned in the report</p> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">status</code> </div> </td><td><span class=\"property-type\">array</span> <span class=\"property-format\">string</span></td><td><p>Status for rewards returned in the report</p> </td></tr>   </tbody> </table>  </tr>    </tbody> </table>  </tr>    </tbody> </table>  </div>   ## Rate limits  Some reports may take a long time to generate and we limit the number of reports that can be simulataneously generated by an organization at a given time. If you exceed the rate limit, you\'ll receive a `429` response. 
+         * @summary Create report
+         * @param {CreateReportRequest} createReportRequest Report to create
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        createReport(createReportRequest: CreateReportRequest, options?: RawAxiosRequestConfig): AxiosPromise<CreateReport201Response> {
+            return localVarFp.createReport(createReportRequest, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Retrieve the report, identified by the given `id` in the URL  Using the ID that was returned by `POST /api/v2/reports`, retrieves a download link for the report, identified by the given ID in the URL. Returns the report’s current status and, if available, the URL for download. The URL is valid for 7 days. 
+         * @summary Retrieve report
+         * @param {string} id ID of the report that should be retrieved. ID is returned from &#x60;POST&#x60; to /api/v2/reports 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getReport(id: string, options?: RawAxiosRequestConfig): AxiosPromise<CreateReport201Response> {
+            return localVarFp.getReport(id, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * ReportsApi - object-oriented interface
+ * @export
+ * @class ReportsApi
+ * @extends {BaseAPI}
+ */
+export class ReportsApi extends BaseAPI {
+    /**
+     * Creating a report allows your organization to programmatically retrieve information that\'s available in our dashboard UI.  This request creates a new report object with a unique ID, and kicks off an async report generation.  To retrieve a completed report, either poll `/api/v2/reports/{id}` or listen for REPORTS webhook event.  ## Request body  <div class=\"object-schema-request-schema\">   <table>   <thead>     <tr>       <th>Property</th>       <th>Type</th>       <th>Description</th>     </tr>   </thead>   <tbody class=\"object-schema-table-body\">     <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">report_type</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>Type of report for retrieval. <table> <thead> <tr> <th>Report type</th> <th>Description</th> </tr> </thead> <tbody> <tr> <td><code>digital_rewards</code></td> <td>Report for Tremendous digital reward history</td> </tr> </tbody> </table></p> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">format</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>Format the report will be generated in. <table> <thead> <tr> <th>Format</th> <th>Description</th> </tr> </thead> <tbody> <tr> <td><code>csv</code></td> <td>CSV format for report</td> </tr> </tbody> </table></p> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">filters</code> </div> </td><td><span class=\"property-type\">object</span></td><td><p>Filters to apply to the report. Corresponds to the filters provided in the dashboard</p> </td></tr>  <tr>     <td colspan=\"3\">       <details>         <summary>Show object properties</summary>         <table>   <thead>     <tr>       <th>Property</th>       <th>Type</th>       <th>Description</th>     </tr>   </thead>   <tbody class=\"object-schema-table-body\">     <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">digital_rewards</code> </div> </td><td><span class=\"property-type\">object</span></td><td><p>Filters object for a <code>report_type: digital_rewards</code> report</p> </td></tr>  <tr>     <td colspan=\"3\">       <details>         <summary>Show object properties</summary>         <table>   <thead>     <tr>       <th>Property</th>       <th>Type</th>       <th>Description</th>     </tr>   </thead>   <tbody class=\"object-schema-table-body\">     <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">amount</code> </div> </td><td><span class=\"property-type\">object</span></td><td><p>Amount of the rewards returned in the report</p> </td></tr>  <tr>     <td colspan=\"3\">       <details>         <summary>Show object properties</summary>         <table>   <thead>     <tr>       <th>Property</th>       <th>Type</th>       <th>Description</th>     </tr>   </thead>   <tbody class=\"object-schema-table-body\">     <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">gte</code> </div> </td><td><span class=\"property-type\">number</span> <span class=\"property-format\">double</span></td><td><p>Minimum amount of the rewards that should be returned in the report</p> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">lte</code> </div> </td><td><span class=\"property-type\">number</span> <span class=\"property-format\">double</span></td><td><p>Maximum amount of the rewards that should be returned in the report</p> </td></tr>   </tbody> </table>  </tr>  <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">campaign_id</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>ID of the Tremendous campaign that this report should be limited to</p> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">created_at</code> </div> </td><td><span class=\"property-type\">object</span></td><td><p>Creation dates of rewards returned in the report</p> </td></tr>  <tr>     <td colspan=\"3\">       <details>         <summary>Show object properties</summary>         <table>   <thead>     <tr>       <th>Property</th>       <th>Type</th>       <th>Description</th>     </tr>   </thead>   <tbody class=\"object-schema-table-body\">     <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">gte</code> </div> </td><td><span class=\"property-type\">string</span> <span class=\"property-format\">date</span></td><td><p>Minimum date the reward was created</p> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">lte</code> </div> </td><td><span class=\"property-type\">string</span> <span class=\"property-format\">date</span></td><td><p>Maximum date the reward was created</p> </td></tr>   </tbody> </table>  </tr>  <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">delivered_at</code> </div> </td><td><span class=\"property-type\">string</span> <span class=\"property-format\">date</span></td><td><p>Delivery date for gifts that should be returned in the report</p> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">delivery_method</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>Delivery method for rewards returned in the report</p> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">order_id</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>ID of the Tremendous order that this report should be limited to</p> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">order_status</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>Order status for rewards returned in the report</p> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">status</code> </div> </td><td><span class=\"property-type\">array</span> <span class=\"property-format\">string</span></td><td><p>Status for rewards returned in the report</p> </td></tr>   </tbody> </table>  </tr>    </tbody> </table>  </tr>    </tbody> </table>  </div>   ## Rate limits  Some reports may take a long time to generate and we limit the number of reports that can be simulataneously generated by an organization at a given time. If you exceed the rate limit, you\'ll receive a `429` response. 
+     * @summary Create report
+     * @param {CreateReportRequest} createReportRequest Report to create
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ReportsApi
+     */
+    public createReport(createReportRequest: CreateReportRequest, options?: RawAxiosRequestConfig) {
+        return ReportsApiFp(this.configuration).createReport(createReportRequest, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Retrieve the report, identified by the given `id` in the URL  Using the ID that was returned by `POST /api/v2/reports`, retrieves a download link for the report, identified by the given ID in the URL. Returns the report’s current status and, if available, the URL for download. The URL is valid for 7 days. 
+     * @summary Retrieve report
+     * @param {string} id ID of the report that should be retrieved. ID is returned from &#x60;POST&#x60; to /api/v2/reports 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ReportsApi
+     */
+    public getReport(id: string, options?: RawAxiosRequestConfig) {
+        return ReportsApiFp(this.configuration).getReport(id, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+
+/**
  * RewardsApi - axios parameter creator
  * @export
  */
@@ -10066,10 +10598,11 @@ export const RewardsApiAxiosParamCreator = function (configuration?: Configurati
          * Resends a reward, identified by the given `id` in the URL, to its recipient. 
          * @summary Resend reward
          * @param {string} id ID of the reward that should be resent
+         * @param {ResendRewardRequest} [resendRewardRequest] _Only_ for rewards with a previous delivery failure: You can update the email or phone number used for the resend. You can only provide one of &#x60;updated_email&#x60; or &#x60;updated_phone&#x60;, not both. 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        resendReward: async (id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        resendReward: async (id: string, resendRewardRequest?: ResendRewardRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('resendReward', 'id', id)
             const localVarPath = `/rewards/{id}/resend`
@@ -10091,9 +10624,12 @@ export const RewardsApiAxiosParamCreator = function (configuration?: Configurati
 
 
     
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(resendRewardRequest, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -10166,11 +10702,12 @@ export const RewardsApiFp = function(configuration?: Configuration) {
          * Resends a reward, identified by the given `id` in the URL, to its recipient. 
          * @summary Resend reward
          * @param {string} id ID of the reward that should be resent
+         * @param {ResendRewardRequest} [resendRewardRequest] _Only_ for rewards with a previous delivery failure: You can update the email or phone number used for the resend. You can only provide one of &#x60;updated_email&#x60; or &#x60;updated_phone&#x60;, not both. 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async resendReward(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.resendReward(id, options);
+        async resendReward(id: string, resendRewardRequest?: ResendRewardRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.resendReward(id, resendRewardRequest, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['RewardsApi.resendReward']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -10229,11 +10766,12 @@ export const RewardsApiFactory = function (configuration?: Configuration, basePa
          * Resends a reward, identified by the given `id` in the URL, to its recipient. 
          * @summary Resend reward
          * @param {string} id ID of the reward that should be resent
+         * @param {ResendRewardRequest} [resendRewardRequest] _Only_ for rewards with a previous delivery failure: You can update the email or phone number used for the resend. You can only provide one of &#x60;updated_email&#x60; or &#x60;updated_phone&#x60;, not both. 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        resendReward(id: string, options?: RawAxiosRequestConfig): AxiosPromise<object> {
-            return localVarFp.resendReward(id, options).then((request) => request(axios, basePath));
+        resendReward(id: string, resendRewardRequest?: ResendRewardRequest, options?: RawAxiosRequestConfig): AxiosPromise<object> {
+            return localVarFp.resendReward(id, resendRewardRequest, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -10297,12 +10835,13 @@ export class RewardsApi extends BaseAPI {
      * Resends a reward, identified by the given `id` in the URL, to its recipient. 
      * @summary Resend reward
      * @param {string} id ID of the reward that should be resent
+     * @param {ResendRewardRequest} [resendRewardRequest] _Only_ for rewards with a previous delivery failure: You can update the email or phone number used for the resend. You can only provide one of &#x60;updated_email&#x60; or &#x60;updated_phone&#x60;, not both. 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof RewardsApi
      */
-    public resendReward(id: string, options?: RawAxiosRequestConfig) {
-        return RewardsApiFp(this.configuration).resendReward(id, options).then((request) => request(this.axios, this.basePath));
+    public resendReward(id: string, resendRewardRequest?: ResendRewardRequest, options?: RawAxiosRequestConfig) {
+        return RewardsApiFp(this.configuration).resendReward(id, resendRewardRequest, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
