@@ -111,6 +111,74 @@ export interface BalanceTransaction {
      * @memberof BalanceTransaction
      */
     'description': string;
+    /**
+     * 
+     * @type {BalanceTransactionOrder}
+     * @memberof BalanceTransaction
+     */
+    'order'?: BalanceTransactionOrder;
+}
+/**
+ * Order details
+ * @export
+ * @interface BalanceTransactionOrder
+ */
+export interface BalanceTransactionOrder {
+    /**
+     * 
+     * @type {string}
+     * @memberof BalanceTransactionOrder
+     */
+    'id'?: string;
+    /**
+     * Reference for this order, supplied by the customer.  When set, `external_id` makes order idempotent. All requests that use the same `external_id` after the initial order creation, will result in a response that returns the data of the initially created order. The response will have a `201` response code. These responses **fail** to create any further orders.  It also allows for retrieving by `external_id` instead of `id` only. 
+     * @type {string}
+     * @memberof BalanceTransactionOrder
+     */
+    'external_id'?: string | null;
+    /**
+     * 
+     * @type {BalanceTransactionOrderPayment}
+     * @memberof BalanceTransactionOrder
+     */
+    'payment'?: BalanceTransactionOrderPayment;
+}
+/**
+ * 
+ * @export
+ * @interface BalanceTransactionOrderPayment
+ */
+export interface BalanceTransactionOrderPayment {
+    /**
+     * Total price of the order before fees (in USD)
+     * @type {number}
+     * @memberof BalanceTransactionOrderPayment
+     */
+    'subtotal': number;
+    /**
+     * Total price of the order including fees (in USD)
+     * @type {number}
+     * @memberof BalanceTransactionOrderPayment
+     */
+    'total': number;
+    /**
+     * Fees for the order (in USD)
+     * @type {number}
+     * @memberof BalanceTransactionOrderPayment
+     */
+    'fees': number;
+    /**
+     * Discount for the order (in USD)
+     * @type {number}
+     * @memberof BalanceTransactionOrderPayment
+     */
+    'discount': number;
+    /**
+     * 
+     * @type {PaymentDetailsRefund}
+     * @memberof BalanceTransactionOrderPayment
+     */
+    'refund'?: PaymentDetailsRefund;
 }
 /**
  * 
@@ -1674,6 +1742,12 @@ export interface FraudReview {
      */
     'status'?: FraudReviewStatusEnum;
     /**
+     * The fraud risk associated with the reward.
+     * @type {string}
+     * @memberof FraudReview
+     */
+    'risk'?: FraudReviewRiskEnum;
+    /**
      * The array may contain multiple reasons, depending on which rule(s) flagged the reward for review. Reasons can be any of the following:  * `Disallowed IP` * `Disallowed email` * `Disallowed country` * `Over reward dollar limit` * `Over reward count limit` * `VPN detected` * `Device related to multiple emails` * `Device or account related to multiple emails` * `IP on a Tremendous fraud list` * `Bank account on a Tremendous fraud list` * `Fingerprint on a Tremendous fraud list` * `Email on a Tremendous fraud list` * `Phone on a Tremendous fraud list` * `IP related to a blocked reward` * `Bank account related to a blocked reward` * `Fingerprint related to a blocked reward` * `Email related to a blocked reward` * `Phone related to a blocked reward` * `Allowed IP` * `Allowed email` 
      * @type {Array<string>}
      * @memberof FraudReview
@@ -1736,6 +1810,13 @@ export const FraudReviewStatusEnum = {
 } as const;
 
 export type FraudReviewStatusEnum = typeof FraudReviewStatusEnum[keyof typeof FraudReviewStatusEnum];
+export const FraudReviewRiskEnum = {
+    High: 'high',
+    Medium: 'medium',
+    Low: 'low'
+} as const;
+
+export type FraudReviewRiskEnum = typeof FraudReviewRiskEnum[keyof typeof FraudReviewRiskEnum];
 export const FraudReviewReasonsEnum = {
     DisallowedIp: 'Disallowed IP',
     DisallowedEmail: 'Disallowed email',
@@ -1935,6 +2016,21 @@ export interface FraudReviewRelatedRewards {
      */
     'aggregated_value'?: number;
 }
+/**
+ * The fraud risk associated with the reward.
+ * @export
+ * @enum {string}
+ */
+
+export const FraudReviewRisk = {
+    High: 'high',
+    Medium: 'medium',
+    Low: 'low'
+} as const;
+
+export type FraudReviewRisk = typeof FraudReviewRisk[keyof typeof FraudReviewRisk];
+
+
 /**
  * The current status of the fraud review:  * `flagged` - The reward has been flagged for and waiting manual review. * `blocked` - The reward was reviewed and blocked. * `released` - The reward was reviewed and released. 
  * @export
@@ -2303,6 +2399,12 @@ export interface GetFraudReview200ResponseFraudReview {
      */
     'status'?: GetFraudReview200ResponseFraudReviewStatusEnum;
     /**
+     * The fraud risk associated with the reward.
+     * @type {string}
+     * @memberof GetFraudReview200ResponseFraudReview
+     */
+    'risk'?: GetFraudReview200ResponseFraudReviewRiskEnum;
+    /**
      * The array may contain multiple reasons, depending on which rule(s) flagged the reward for review. Reasons can be any of the following:  * `Disallowed IP` * `Disallowed email` * `Disallowed country` * `Over reward dollar limit` * `Over reward count limit` * `VPN detected` * `Device related to multiple emails` * `Device or account related to multiple emails` * `IP on a Tremendous fraud list` * `Bank account on a Tremendous fraud list` * `Fingerprint on a Tremendous fraud list` * `Email on a Tremendous fraud list` * `Phone on a Tremendous fraud list` * `IP related to a blocked reward` * `Bank account related to a blocked reward` * `Fingerprint related to a blocked reward` * `Email related to a blocked reward` * `Phone related to a blocked reward` * `Allowed IP` * `Allowed email` 
      * @type {Array<string>}
      * @memberof GetFraudReview200ResponseFraudReview
@@ -2365,6 +2467,13 @@ export const GetFraudReview200ResponseFraudReviewStatusEnum = {
 } as const;
 
 export type GetFraudReview200ResponseFraudReviewStatusEnum = typeof GetFraudReview200ResponseFraudReviewStatusEnum[keyof typeof GetFraudReview200ResponseFraudReviewStatusEnum];
+export const GetFraudReview200ResponseFraudReviewRiskEnum = {
+    High: 'high',
+    Medium: 'medium',
+    Low: 'low'
+} as const;
+
+export type GetFraudReview200ResponseFraudReviewRiskEnum = typeof GetFraudReview200ResponseFraudReviewRiskEnum[keyof typeof GetFraudReview200ResponseFraudReviewRiskEnum];
 export const GetFraudReview200ResponseFraudReviewReasonsEnum = {
     DisallowedIp: 'Disallowed IP',
     DisallowedEmail: 'Disallowed email',
@@ -2725,6 +2834,74 @@ export interface ListBalanceTransactions200ResponseTransactionsInner {
      * @memberof ListBalanceTransactions200ResponseTransactionsInner
      */
     'description': string;
+    /**
+     * 
+     * @type {ListBalanceTransactions200ResponseTransactionsInnerOrder}
+     * @memberof ListBalanceTransactions200ResponseTransactionsInner
+     */
+    'order'?: ListBalanceTransactions200ResponseTransactionsInnerOrder;
+}
+/**
+ * Order details
+ * @export
+ * @interface ListBalanceTransactions200ResponseTransactionsInnerOrder
+ */
+export interface ListBalanceTransactions200ResponseTransactionsInnerOrder {
+    /**
+     * 
+     * @type {string}
+     * @memberof ListBalanceTransactions200ResponseTransactionsInnerOrder
+     */
+    'id'?: string;
+    /**
+     * Reference for this order, supplied by the customer.  When set, `external_id` makes order idempotent. All requests that use the same `external_id` after the initial order creation, will result in a response that returns the data of the initially created order. The response will have a `201` response code. These responses **fail** to create any further orders.  It also allows for retrieving by `external_id` instead of `id` only. 
+     * @type {string}
+     * @memberof ListBalanceTransactions200ResponseTransactionsInnerOrder
+     */
+    'external_id'?: string | null;
+    /**
+     * 
+     * @type {ListBalanceTransactions200ResponseTransactionsInnerOrderPayment}
+     * @memberof ListBalanceTransactions200ResponseTransactionsInnerOrder
+     */
+    'payment'?: ListBalanceTransactions200ResponseTransactionsInnerOrderPayment;
+}
+/**
+ * 
+ * @export
+ * @interface ListBalanceTransactions200ResponseTransactionsInnerOrderPayment
+ */
+export interface ListBalanceTransactions200ResponseTransactionsInnerOrderPayment {
+    /**
+     * Total price of the order before fees (in USD)
+     * @type {number}
+     * @memberof ListBalanceTransactions200ResponseTransactionsInnerOrderPayment
+     */
+    'subtotal': number;
+    /**
+     * Total price of the order including fees (in USD)
+     * @type {number}
+     * @memberof ListBalanceTransactions200ResponseTransactionsInnerOrderPayment
+     */
+    'total': number;
+    /**
+     * Fees for the order (in USD)
+     * @type {number}
+     * @memberof ListBalanceTransactions200ResponseTransactionsInnerOrderPayment
+     */
+    'fees': number;
+    /**
+     * Discount for the order (in USD)
+     * @type {number}
+     * @memberof ListBalanceTransactions200ResponseTransactionsInnerOrderPayment
+     */
+    'discount': number;
+    /**
+     * 
+     * @type {ListOrders200ResponseOrdersInnerPaymentRefund}
+     * @memberof ListBalanceTransactions200ResponseTransactionsInnerOrderPayment
+     */
+    'refund'?: ListOrders200ResponseOrdersInnerPaymentRefund;
 }
 /**
  * 
@@ -3542,19 +3719,25 @@ export interface ListOrders200ResponseOrdersInnerPayment {
      * @type {number}
      * @memberof ListOrders200ResponseOrdersInnerPayment
      */
-    'subtotal'?: number;
+    'subtotal': number;
     /**
      * Total price of the order including fees (in USD)
      * @type {number}
      * @memberof ListOrders200ResponseOrdersInnerPayment
      */
-    'total'?: number;
+    'total': number;
     /**
      * Fees for the order (in USD)
      * @type {number}
      * @memberof ListOrders200ResponseOrdersInnerPayment
      */
-    'fees'?: number;
+    'fees': number;
+    /**
+     * Discount for the order (in USD)
+     * @type {number}
+     * @memberof ListOrders200ResponseOrdersInnerPayment
+     */
+    'discount': number;
     /**
      * 
      * @type {ListOrders200ResponseOrdersInnerPaymentRefund}
@@ -4753,19 +4936,25 @@ export interface OrderBasePayment {
      * @type {number}
      * @memberof OrderBasePayment
      */
-    'subtotal'?: number;
+    'subtotal': number;
     /**
      * Total price of the order including fees (in USD)
      * @type {number}
      * @memberof OrderBasePayment
      */
-    'total'?: number;
+    'total': number;
     /**
      * Fees for the order (in USD)
      * @type {number}
      * @memberof OrderBasePayment
      */
-    'fees'?: number;
+    'fees': number;
+    /**
+     * Discount for the order (in USD)
+     * @type {number}
+     * @memberof OrderBasePayment
+     */
+    'discount': number;
     /**
      * 
      * @type {PaymentDetailsRefund}
@@ -5150,19 +5339,25 @@ export interface PaymentDetails {
      * @type {number}
      * @memberof PaymentDetails
      */
-    'subtotal'?: number;
+    'subtotal': number;
     /**
      * Total price of the order including fees (in USD)
      * @type {number}
      * @memberof PaymentDetails
      */
-    'total'?: number;
+    'total': number;
     /**
      * Fees for the order (in USD)
      * @type {number}
      * @memberof PaymentDetails
      */
-    'fees'?: number;
+    'fees': number;
+    /**
+     * Discount for the order (in USD)
+     * @type {number}
+     * @memberof PaymentDetails
+     */
+    'discount': number;
     /**
      * 
      * @type {PaymentDetailsRefund}
