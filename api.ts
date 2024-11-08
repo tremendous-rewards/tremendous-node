@@ -651,19 +651,6 @@ export const CreateOrder200ResponseOrderRewardsInnerDeliveryStatusEnum = {
 export type CreateOrder200ResponseOrderRewardsInnerDeliveryStatusEnum = typeof CreateOrder200ResponseOrderRewardsInnerDeliveryStatusEnum[keyof typeof CreateOrder200ResponseOrderRewardsInnerDeliveryStatusEnum];
 
 /**
- * 
- * @export
- * @interface CreateOrder201Response
- */
-export interface CreateOrder201Response {
-    /**
-     * 
-     * @type {ListOrders200ResponseOrdersInner}
-     * @memberof CreateOrder201Response
-     */
-    'order': ListOrders200ResponseOrdersInner;
-}
-/**
  * @type CreateOrderRequest
  * @export
  */
@@ -2675,6 +2662,19 @@ export const GetMember200ResponseMemberEventsInnerTypeEnum = {
 
 export type GetMember200ResponseMemberEventsInnerTypeEnum = typeof GetMember200ResponseMemberEventsInnerTypeEnum[keyof typeof GetMember200ResponseMemberEventsInnerTypeEnum];
 
+/**
+ * 
+ * @export
+ * @interface GetOrder200Response
+ */
+export interface GetOrder200Response {
+    /**
+     * 
+     * @type {ListOrders200ResponseOrdersInner}
+     * @memberof GetOrder200Response
+     */
+    'order': ListOrders200ResponseOrdersInner;
+}
 /**
  * 
  * @export
@@ -9724,7 +9724,7 @@ export const OrdersApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async approveOrder(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CreateOrder201Response>> {
+        async approveOrder(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GetOrder200Response>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.approveOrder(id, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['OrdersApi.approveOrder']?.[localVarOperationServerIndex]?.url;
@@ -9750,7 +9750,7 @@ export const OrdersApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getOrder(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CreateOrder201Response>> {
+        async getOrder(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GetOrder200Response>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getOrder(id, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['OrdersApi.getOrder']?.[localVarOperationServerIndex]?.url;
@@ -9781,7 +9781,7 @@ export const OrdersApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async rejectOrder(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CreateOrder201Response>> {
+        async rejectOrder(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GetOrder200Response>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.rejectOrder(id, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['OrdersApi.rejectOrder']?.[localVarOperationServerIndex]?.url;
@@ -9804,7 +9804,7 @@ export const OrdersApiFactory = function (configuration?: Configuration, basePat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        approveOrder(id: string, options?: RawAxiosRequestConfig): AxiosPromise<CreateOrder201Response> {
+        approveOrder(id: string, options?: RawAxiosRequestConfig): AxiosPromise<GetOrder200Response> {
             return localVarFp.approveOrder(id, options).then((request) => request(axios, basePath));
         },
         /**
@@ -9824,7 +9824,7 @@ export const OrdersApiFactory = function (configuration?: Configuration, basePat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getOrder(id: string, options?: RawAxiosRequestConfig): AxiosPromise<CreateOrder201Response> {
+        getOrder(id: string, options?: RawAxiosRequestConfig): AxiosPromise<GetOrder200Response> {
             return localVarFp.getOrder(id, options).then((request) => request(axios, basePath));
         },
         /**
@@ -9849,7 +9849,7 @@ export const OrdersApiFactory = function (configuration?: Configuration, basePat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        rejectOrder(id: string, options?: RawAxiosRequestConfig): AxiosPromise<CreateOrder201Response> {
+        rejectOrder(id: string, options?: RawAxiosRequestConfig): AxiosPromise<GetOrder200Response> {
             return localVarFp.rejectOrder(id, options).then((request) => request(axios, basePath));
         },
     };
