@@ -1,5 +1,19 @@
 # Changelog
 
+## [3.7.0](https://github.com/tremendous-rewards/tremendous-node/compare/tremendous-v3.6.0...tremendous-v3.7.0) (2024-11-08)
+
+
+### Features
+
+* add `discount` to `Order` payment details ([c74239d](https://github.com/tremendous-rewards/tremendous-node/commit/c74239df35ddedaae0277766dcd818f960b1429a))
+* add `risk` property to fraud reviews ([c74239d](https://github.com/tremendous-rewards/tremendous-node/commit/c74239df35ddedaae0277766dcd818f960b1429a))
+* include `order` property when possible on balance transactions endpoint ([#114](https://github.com/tremendous-rewards/tremendous-node/issues/114)) ([c74239d](https://github.com/tremendous-rewards/tremendous-node/commit/c74239df35ddedaae0277766dcd818f960b1429a))
+
+
+### Bug Fixes
+
+* fix `POST /orders` "created" response schema ([#117](https://github.com/tremendous-rewards/tremendous-node/issues/117)) ([4cade2d](https://github.com/tremendous-rewards/tremendous-node/commit/4cade2dd9880ea902e21398210f9bcede6ba8092))
+
 ## [3.6.0](https://github.com/tremendous-rewards/tremendous-node/compare/tremendous-v3.5.1...tremendous-v3.6.0) (2024-11-04)
 
 
