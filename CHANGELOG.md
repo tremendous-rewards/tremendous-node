@@ -1,5 +1,18 @@
 # Changelog
 
+## [3.8.0](https://github.com/tremendous-rewards/tremendous-node/compare/tremendous-v3.7.0...tremendous-v3.8.0) (2024-12-03)
+
+
+### Features
+
+* add `DeliveryMetadata` to `POST /orders` ([#126](https://github.com/tremendous-rewards/tremendous-node/issues/126)) ([850e653](https://github.com/tremendous-rewards/tremendous-node/commit/850e6535678f6e00dda17acb07d2f47fe2c637c3)), closes [#120](https://github.com/tremendous-rewards/tremendous-node/issues/120)
+
+
+### Bug Fixes
+
+* add missing `FraudReviewReason` value ([850e653](https://github.com/tremendous-rewards/tremendous-node/commit/850e6535678f6e00dda17acb07d2f47fe2c637c3))
+* fix typos ([850e653](https://github.com/tremendous-rewards/tremendous-node/commit/850e6535678f6e00dda17acb07d2f47fe2c637c3))
+
 ## [3.7.0](https://github.com/tremendous-rewards/tremendous-node/compare/tremendous-v3.6.0...tremendous-v3.7.0) (2024-11-08)
 
 
