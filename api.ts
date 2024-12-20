@@ -621,7 +621,7 @@ export interface CreateOrder200ResponseOrderRewardsInnerDelivery {
      */
     'method': CreateOrder200ResponseOrderRewardsInnerDeliveryMethodEnum;
     /**
-     * Current status of the delivery of the reward:  * `SCHEDULED` - Reward is scheduled for delivery and will be delivered soon. * `FAILED` - Delivery of reward failed (e.g. email bounced). * `SUCCEEDED` - Reward was successfully delivered (email or text message delivered or reward link opened). * `PENDING` - Delivery is pending but not yet scheduled. 
+     * Current status of the delivery of the reward:  * `SCHEDULED` - Reward is scheduled for delivery and will be delivered soon. * `FAILED` - Delivery of reward failed (e.g. email bounced). * `SUCCEEDED` - Reward was successfully delivered (email or text message delivered or reward link active). * `PENDING` - Delivery is pending but not yet scheduled. 
      * @type {string}
      * @memberof CreateOrder200ResponseOrderRewardsInnerDelivery
      */
@@ -1398,7 +1398,7 @@ export interface DeliveryDetails {
      */
     'method'?: DeliveryDetailsMethodEnum;
     /**
-     * Current status of the delivery of the reward:  * `SCHEDULED` - Reward is scheduled for delivery and will be delivered soon. * `FAILED` - Delivery of reward failed (e.g. email bounced). * `SUCCEEDED` - Reward was successfully delivered (email or text message delivered or reward link opened). * `PENDING` - Delivery is pending but not yet scheduled. 
+     * Current status of the delivery of the reward:  * `SCHEDULED` - Reward is scheduled for delivery and will be delivered soon. * `FAILED` - Delivery of reward failed (e.g. email bounced). * `SUCCEEDED` - Reward was successfully delivered (email or text message delivered or reward link active). * `PENDING` - Delivery is pending but not yet scheduled. 
      * @type {string}
      * @memberof DeliveryDetails
      */
@@ -1434,7 +1434,7 @@ export interface DeliveryDetailsWithLink {
      */
     'method': DeliveryDetailsWithLinkMethodEnum;
     /**
-     * Current status of the delivery of the reward:  * `SCHEDULED` - Reward is scheduled for delivery and will be delivered soon. * `FAILED` - Delivery of reward failed (e.g. email bounced). * `SUCCEEDED` - Reward was successfully delivered (email or text message delivered or reward link opened). * `PENDING` - Delivery is pending but not yet scheduled. 
+     * Current status of the delivery of the reward:  * `SCHEDULED` - Reward is scheduled for delivery and will be delivered soon. * `FAILED` - Delivery of reward failed (e.g. email bounced). * `SUCCEEDED` - Reward was successfully delivered (email or text message delivered or reward link active). * `PENDING` - Delivery is pending but not yet scheduled. 
      * @type {string}
      * @memberof DeliveryDetailsWithLink
      */
@@ -1504,7 +1504,7 @@ export type DeliveryMethod = typeof DeliveryMethod[keyof typeof DeliveryMethod];
 
 
 /**
- * Current status of the delivery of the reward:  * `SCHEDULED` - Reward is scheduled for delivery and will be delivered soon. * `FAILED` - Delivery of reward failed (e.g. email bounced). * `SUCCEEDED` - Reward was successfully delivered (email or text message delivered or reward link opened). * `PENDING` - Delivery is pending but not yet scheduled. 
+ * Current status of the delivery of the reward:  * `SCHEDULED` - Reward is scheduled for delivery and will be delivered soon. * `FAILED` - Delivery of reward failed (e.g. email bounced). * `SUCCEEDED` - Reward was successfully delivered (email or text message delivered or reward link active). * `PENDING` - Delivery is pending but not yet scheduled. 
  * @export
  * @enum {string}
  */
@@ -4224,7 +4224,7 @@ export interface ListRewards200ResponseRewardsInnerDelivery {
      */
     'method'?: ListRewards200ResponseRewardsInnerDeliveryMethodEnum;
     /**
-     * Current status of the delivery of the reward:  * `SCHEDULED` - Reward is scheduled for delivery and will be delivered soon. * `FAILED` - Delivery of reward failed (e.g. email bounced). * `SUCCEEDED` - Reward was successfully delivered (email or text message delivered or reward link opened). * `PENDING` - Delivery is pending but not yet scheduled. 
+     * Current status of the delivery of the reward:  * `SCHEDULED` - Reward is scheduled for delivery and will be delivered soon. * `FAILED` - Delivery of reward failed (e.g. email bounced). * `SUCCEEDED` - Reward was successfully delivered (email or text message delivered or reward link active). * `PENDING` - Delivery is pending but not yet scheduled. 
      * @type {string}
      * @memberof ListRewards200ResponseRewardsInnerDelivery
      */
@@ -6442,7 +6442,7 @@ export interface RewardWithLinkDelivery {
      */
     'method': RewardWithLinkDeliveryMethodEnum;
     /**
-     * Current status of the delivery of the reward:  * `SCHEDULED` - Reward is scheduled for delivery and will be delivered soon. * `FAILED` - Delivery of reward failed (e.g. email bounced). * `SUCCEEDED` - Reward was successfully delivered (email or text message delivered or reward link opened). * `PENDING` - Delivery is pending but not yet scheduled. 
+     * Current status of the delivery of the reward:  * `SCHEDULED` - Reward is scheduled for delivery and will be delivered soon. * `FAILED` - Delivery of reward failed (e.g. email bounced). * `SUCCEEDED` - Reward was successfully delivered (email or text message delivered or reward link active). * `PENDING` - Delivery is pending but not yet scheduled. 
      * @type {string}
      * @memberof RewardWithLinkDelivery
      */
@@ -6551,7 +6551,7 @@ export interface RewardWithoutLinkDelivery {
      */
     'method'?: RewardWithoutLinkDeliveryMethodEnum;
     /**
-     * Current status of the delivery of the reward:  * `SCHEDULED` - Reward is scheduled for delivery and will be delivered soon. * `FAILED` - Delivery of reward failed (e.g. email bounced). * `SUCCEEDED` - Reward was successfully delivered (email or text message delivered or reward link opened). * `PENDING` - Delivery is pending but not yet scheduled. 
+     * Current status of the delivery of the reward:  * `SCHEDULED` - Reward is scheduled for delivery and will be delivered soon. * `FAILED` - Delivery of reward failed (e.g. email bounced). * `SUCCEEDED` - Reward was successfully delivered (email or text message delivered or reward link active). * `PENDING` - Delivery is pending but not yet scheduled. 
      * @type {string}
      * @memberof RewardWithoutLinkDelivery
      */
