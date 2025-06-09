@@ -307,6 +307,226 @@ export type Channel = typeof Channel[keyof typeof Channel];
 /**
  * 
  * @export
+ * @interface ConnectedOrganization
+ */
+export interface ConnectedOrganization {
+    /**
+     * Tremendous\' identifier for the connected organization.
+     * @type {string}
+     * @memberof ConnectedOrganization
+     */
+    'id': string;
+    /**
+     * Client ID of the OAuth app that is to be used by the platform once the integration is complete.
+     * @type {string}
+     * @memberof ConnectedOrganization
+     */
+    'client_id': string;
+    /**
+     * Timestamp of when the connected organization was created.
+     * @type {string}
+     * @memberof ConnectedOrganization
+     */
+    'created_at': string;
+    /**
+     * 
+     * @type {ConnectedOrganizationOrganization}
+     * @memberof ConnectedOrganization
+     */
+    'organization'?: ConnectedOrganizationOrganization | null;
+}
+/**
+ * 
+ * @export
+ * @interface ConnectedOrganizationMember
+ */
+export interface ConnectedOrganizationMember {
+    /**
+     * Tremendous\' identifier for the connected organization member.
+     * @type {string}
+     * @memberof ConnectedOrganizationMember
+     */
+    'id': string;
+    /**
+     * The name associated with the user in your systems.
+     * @type {string}
+     * @memberof ConnectedOrganizationMember
+     */
+    'external_name'?: string | null;
+    /**
+     * The email associated with the user in your systems.
+     * @type {string}
+     * @memberof ConnectedOrganizationMember
+     */
+    'external_email'?: string | null;
+    /**
+     * Timestamp of when the connected organization member was created.
+     * @type {string}
+     * @memberof ConnectedOrganizationMember
+     */
+    'created_at': string;
+    /**
+     * Tremendous\' identifier for the connected organization.
+     * @type {string}
+     * @memberof ConnectedOrganizationMember
+     */
+    'connected_organization_id': string;
+    /**
+     * 
+     * @type {ConnectedOrganizationMemberMember}
+     * @memberof ConnectedOrganizationMember
+     */
+    'member'?: ConnectedOrganizationMemberMember | null;
+}
+/**
+ * Associated `member`. `null` until the registration flow for the connected organization has been completed.
+ * @export
+ * @interface ConnectedOrganizationMemberMember
+ */
+export interface ConnectedOrganizationMemberMember {
+    /**
+     * 
+     * @type {string}
+     * @memberof ConnectedOrganizationMemberMember
+     */
+    'id': string;
+    /**
+     * Email address of the member
+     * @type {string}
+     * @memberof ConnectedOrganizationMemberMember
+     */
+    'email': string;
+    /**
+     * Full name of the member
+     * @type {string}
+     * @memberof ConnectedOrganizationMemberMember
+     */
+    'name': string | null;
+    /**
+     * Is this member currently active in the organization. If `false`, the member will not be able to access the organization. 
+     * @type {boolean}
+     * @memberof ConnectedOrganizationMemberMember
+     */
+    'active'?: boolean;
+    /**
+     * The role ID associated with the member within the organization. 
+     * @type {string}
+     * @memberof ConnectedOrganizationMemberMember
+     */
+    'role'?: string | null;
+    /**
+     * Current status of the member\'s account.  When creating a member it starts out in the status `INVITED`. As soon as that member open the invitation link and registers an account, the status switches to `REGISTERED`. 
+     * @type {string}
+     * @memberof ConnectedOrganizationMemberMember
+     */
+    'status': ConnectedOrganizationMemberMemberStatusEnum;
+    /**
+     * Timestamp when this member was created.  The `created_at` timestamp is **NOT** returned when retrieving a member (but is part of the response when listing or creating members). 
+     * @type {string}
+     * @memberof ConnectedOrganizationMemberMember
+     */
+    'created_at'?: string;
+    /**
+     * Timestamp when this member most recently logged into the dashboard of the organization associated with this API key. 
+     * @type {string}
+     * @memberof ConnectedOrganizationMemberMember
+     */
+    'last_login_at'?: string | null;
+}
+
+export const ConnectedOrganizationMemberMemberStatusEnum = {
+    Registered: 'REGISTERED',
+    Invited: 'INVITED'
+} as const;
+
+export type ConnectedOrganizationMemberMemberStatusEnum = typeof ConnectedOrganizationMemberMemberStatusEnum[keyof typeof ConnectedOrganizationMemberMemberStatusEnum];
+
+/**
+ * 
+ * @export
+ * @interface ConnectedOrganizationMemberSession
+ */
+export interface ConnectedOrganizationMemberSession {
+    /**
+     * Tremendous\' identifier for the connected organization member.
+     * @type {string}
+     * @memberof ConnectedOrganizationMemberSession
+     */
+    'connected_organization_member_id': string;
+    /**
+     * The URL to start the \"Tremendous for Platforms\" flow.
+     * @type {string}
+     * @memberof ConnectedOrganizationMemberSession
+     */
+    'url': string;
+    /**
+     * The URL used for links that redirect the user back to your site when they\'ve completed their actions on Tremendous.
+     * @type {string}
+     * @memberof ConnectedOrganizationMemberSession
+     */
+    'return_url': string;
+    /**
+     * Timestamp of when the session will expire.
+     * @type {string}
+     * @memberof ConnectedOrganizationMemberSession
+     */
+    'expires_at': string;
+    /**
+     * Timestamp of when the session was created.
+     * @type {string}
+     * @memberof ConnectedOrganizationMemberSession
+     */
+    'created_at': string;
+}
+/**
+ * Associated `organization` resource. `null` until the registration flow for the connected organization has been completed.
+ * @export
+ * @interface ConnectedOrganizationOrganization
+ */
+export interface ConnectedOrganizationOrganization {
+    /**
+     * 
+     * @type {string}
+     * @memberof ConnectedOrganizationOrganization
+     */
+    'id'?: string;
+    /**
+     * Name of the organization
+     * @type {string}
+     * @memberof ConnectedOrganizationOrganization
+     */
+    'name': string;
+    /**
+     * URL of the website of that organization
+     * @type {string}
+     * @memberof ConnectedOrganizationOrganization
+     */
+    'website': string;
+    /**
+     * Status of the organization. Organizations need to be approved to be able to use them to send out rewards.
+     * @type {string}
+     * @memberof ConnectedOrganizationOrganization
+     */
+    'status'?: ConnectedOrganizationOrganizationStatusEnum;
+    /**
+     * Timestamp of when the organization has been created.  *This field is only returned when creating an organization.* It is not returned anymore when retrieving or listing organizations. 
+     * @type {string}
+     * @memberof ConnectedOrganizationOrganization
+     */
+    'created_at'?: string;
+}
+
+export const ConnectedOrganizationOrganizationStatusEnum = {
+    Pending: 'PENDING',
+    Approved: 'APPROVED',
+    Rejected: 'REJECTED'
+} as const;
+
+export type ConnectedOrganizationOrganizationStatusEnum = typeof ConnectedOrganizationOrganizationStatusEnum[keyof typeof ConnectedOrganizationOrganizationStatusEnum];
+
+/**
+ * 
+ * @export
  * @interface CreateApiKey200Response
  */
 export interface CreateApiKey200Response {
@@ -320,13 +540,13 @@ export interface CreateApiKey200Response {
 /**
  * 
  * @export
- * @interface CreateCampaign201Response
+ * @interface CreateCampaign200Response
  */
-export interface CreateCampaign201Response {
+export interface CreateCampaign200Response {
     /**
      * 
      * @type {ListCampaigns200ResponseCampaignsInner}
-     * @memberof CreateCampaign201Response
+     * @memberof CreateCampaign200Response
      */
     'campaign': ListCampaigns200ResponseCampaignsInner;
 }
@@ -366,6 +586,121 @@ export interface CreateCampaignRequest {
      * @memberof CreateCampaignRequest
      */
     'email_style'?: ListCampaigns200ResponseCampaignsInnerEmailStyle;
+}
+/**
+ * 
+ * @export
+ * @interface CreateConnectedOrganization200Response
+ */
+export interface CreateConnectedOrganization200Response {
+    /**
+     * 
+     * @type {ListConnectedOrganizations200ResponseConnectedOrganizationsInner}
+     * @memberof CreateConnectedOrganization200Response
+     */
+    'connected_organization': ListConnectedOrganizations200ResponseConnectedOrganizationsInner;
+}
+/**
+ * 
+ * @export
+ * @interface CreateConnectedOrganizationMember200Response
+ */
+export interface CreateConnectedOrganizationMember200Response {
+    /**
+     * 
+     * @type {ListConnectedOrganizationMembers200ResponseConnectedOrganizationMembersInner}
+     * @memberof CreateConnectedOrganizationMember200Response
+     */
+    'connected_organization_member': ListConnectedOrganizationMembers200ResponseConnectedOrganizationMembersInner;
+}
+/**
+ * 
+ * @export
+ * @interface CreateConnectedOrganizationMemberRequest
+ */
+export interface CreateConnectedOrganizationMemberRequest {
+    /**
+     * The ID of the connected organization.
+     * @type {string}
+     * @memberof CreateConnectedOrganizationMemberRequest
+     */
+    'connected_organization_id': string;
+}
+/**
+ * 
+ * @export
+ * @interface CreateConnectedOrganizationMemberSession200Response
+ */
+export interface CreateConnectedOrganizationMemberSession200Response {
+    /**
+     * 
+     * @type {CreateConnectedOrganizationMemberSession200ResponseConnectedOrganizationMemberSession}
+     * @memberof CreateConnectedOrganizationMemberSession200Response
+     */
+    'connected_organization_member_session': CreateConnectedOrganizationMemberSession200ResponseConnectedOrganizationMemberSession;
+}
+/**
+ * 
+ * @export
+ * @interface CreateConnectedOrganizationMemberSession200ResponseConnectedOrganizationMemberSession
+ */
+export interface CreateConnectedOrganizationMemberSession200ResponseConnectedOrganizationMemberSession {
+    /**
+     * Tremendous\' identifier for the connected organization member.
+     * @type {string}
+     * @memberof CreateConnectedOrganizationMemberSession200ResponseConnectedOrganizationMemberSession
+     */
+    'connected_organization_member_id': string;
+    /**
+     * The URL to start the \"Tremendous for Platforms\" flow.
+     * @type {string}
+     * @memberof CreateConnectedOrganizationMemberSession200ResponseConnectedOrganizationMemberSession
+     */
+    'url': string;
+    /**
+     * The URL used for links that redirect the user back to your site when they\'ve completed their actions on Tremendous.
+     * @type {string}
+     * @memberof CreateConnectedOrganizationMemberSession200ResponseConnectedOrganizationMemberSession
+     */
+    'return_url': string;
+    /**
+     * Timestamp of when the session will expire.
+     * @type {string}
+     * @memberof CreateConnectedOrganizationMemberSession200ResponseConnectedOrganizationMemberSession
+     */
+    'expires_at': string;
+    /**
+     * Timestamp of when the session was created.
+     * @type {string}
+     * @memberof CreateConnectedOrganizationMemberSession200ResponseConnectedOrganizationMemberSession
+     */
+    'created_at': string;
+}
+/**
+ * 
+ * @export
+ * @interface CreateConnectedOrganizationMemberSessionRequest
+ */
+export interface CreateConnectedOrganizationMemberSessionRequest {
+    /**
+     * The URL used for links that redirect the user back to your site when they\'ve completed their actions on Tremendous.
+     * @type {string}
+     * @memberof CreateConnectedOrganizationMemberSessionRequest
+     */
+    'return_url': string;
+}
+/**
+ * 
+ * @export
+ * @interface CreateConnectedOrganizationRequest
+ */
+export interface CreateConnectedOrganizationRequest {
+    /**
+     * The client ID of the OAuth application.
+     * @type {string}
+     * @memberof CreateConnectedOrganizationRequest
+     */
+    'client_id': string;
 }
 /**
  * 
@@ -956,72 +1291,78 @@ export interface CreateOrganizationRequestCopySettings {
      * @memberof CreateOrganizationRequestCopySettings
      */
     'fraud_prevention'?: boolean;
+    /**
+     * Copy over the tax management settings, including the association with the parent tax entity, from the current organization to the new organization. Defaults to `false`.
+     * @type {boolean}
+     * @memberof CreateOrganizationRequestCopySettings
+     */
+    'tax_management'?: boolean;
 }
 /**
  * 
  * @export
- * @interface CreateReport201Response
+ * @interface CreateReport200Response
  */
-export interface CreateReport201Response {
+export interface CreateReport200Response {
     /**
      * 
-     * @type {CreateReport201ResponseReport}
-     * @memberof CreateReport201Response
+     * @type {CreateReport200ResponseReport}
+     * @memberof CreateReport200Response
      */
-    'report': CreateReport201ResponseReport;
+    'report': CreateReport200ResponseReport;
     /**
      * Report status message
      * @type {string}
-     * @memberof CreateReport201Response
+     * @memberof CreateReport200Response
      */
     'message'?: string;
 }
 /**
  * Reports represent a collection of your Tremendous data that can be filtered and downloaded.  The report object that is returned has a unique ID, a status, and an predicted time of report generation completion. When the report generation is complete, it will also contain an expiring url where you can retrieve your report. 
  * @export
- * @interface CreateReport201ResponseReport
+ * @interface CreateReport200ResponseReport
  */
-export interface CreateReport201ResponseReport {
+export interface CreateReport200ResponseReport {
     /**
      * Tremendous ID of the report, used to retrieve your report
      * @type {string}
-     * @memberof CreateReport201ResponseReport
+     * @memberof CreateReport200ResponseReport
      */
     'id'?: string;
     /**
      * Status of this report  <table>   <thead>     <tr>       <th>Status</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td><code>CREATED</code></td>       <td>Report has been created</td>     </tr>     <tr>       <td><code>PROCESSING</code></td>       <td>Report is currently being generated</td>     </tr>     <tr>       <td><code>READY_FOR_DOWNLOAD</code></td>       <td>Report generation is complete and ready for download</td>     </tr>     <tr>       <td><code>FAILED</code></td>       <td>Report failed to generate</td>     </tr>   </tbody> </table> 
      * @type {string}
-     * @memberof CreateReport201ResponseReport
+     * @memberof CreateReport200ResponseReport
      */
-    'status'?: CreateReport201ResponseReportStatusEnum;
+    'status'?: CreateReport200ResponseReportStatusEnum;
     /**
      * Timestamp of when the report was created 
      * @type {string}
-     * @memberof CreateReport201ResponseReport
+     * @memberof CreateReport200ResponseReport
      */
     'created_at'?: string;
     /**
      * Timestamp of when the report is expected to finish generating. If the report is complete, this will return the time the report completed generating at. 
      * @type {string}
-     * @memberof CreateReport201ResponseReport
+     * @memberof CreateReport200ResponseReport
      */
     'expected_completion_at'?: string;
     /**
      * URL to download the report. Only returned when the report generation is complete and report is ready for download. URL is valid for 7 days from generation completion 
      * @type {string}
-     * @memberof CreateReport201ResponseReport
+     * @memberof CreateReport200ResponseReport
      */
     'url'?: string | null;
 }
 
-export const CreateReport201ResponseReportStatusEnum = {
+export const CreateReport200ResponseReportStatusEnum = {
     Created: 'CREATED',
     Processing: 'PROCESSING',
     ReadyForDownload: 'READY_FOR_DOWNLOAD',
     Failed: 'FAILED'
 } as const;
 
-export type CreateReport201ResponseReportStatusEnum = typeof CreateReport201ResponseReportStatusEnum[keyof typeof CreateReport201ResponseReportStatusEnum];
+export type CreateReport200ResponseReportStatusEnum = typeof CreateReport200ResponseReportStatusEnum[keyof typeof CreateReport200ResponseReportStatusEnum];
 
 /**
  * 
@@ -2270,6 +2611,18 @@ export interface FundingSource {
      */
     'method': FundingSourceMethodEnum;
     /**
+     * Indicates the level of access granted for using this funding source.  Permissions is an array containing the following:   * `api_orders`   * `dashboard_orders`   * `balance_funding` 
+     * @type {Array<string>}
+     * @memberof FundingSource
+     */
+    'usage_permissions'?: Array<FundingSourceUsagePermissionsEnum>;
+    /**
+     * Status of the funding_source 
+     * @type {string}
+     * @memberof FundingSource
+     */
+    'status'?: FundingSourceStatusEnum;
+    /**
      * **Only available when `method` is set to `invoice`.** 
      * @type {string}
      * @memberof FundingSource
@@ -2291,6 +2644,21 @@ export const FundingSourceMethodEnum = {
 } as const;
 
 export type FundingSourceMethodEnum = typeof FundingSourceMethodEnum[keyof typeof FundingSourceMethodEnum];
+export const FundingSourceUsagePermissionsEnum = {
+    ApiOrders: 'api_orders',
+    DashboardOrders: 'dashboard_orders',
+    BalanceFunding: 'balance_funding'
+} as const;
+
+export type FundingSourceUsagePermissionsEnum = typeof FundingSourceUsagePermissionsEnum[keyof typeof FundingSourceUsagePermissionsEnum];
+export const FundingSourceStatusEnum = {
+    Active: 'active',
+    Deleted: 'deleted',
+    PendingConfirmation: 'pending_confirmation',
+    Failed: 'failed'
+} as const;
+
+export type FundingSourceStatusEnum = typeof FundingSourceStatusEnum[keyof typeof FundingSourceStatusEnum];
 export const FundingSourceTypeEnum = {
     Commercial: 'COMMERCIAL',
     ProForma: 'PRO_FORMA',
@@ -2349,44 +2717,6 @@ export interface GenerateRewardLink403Response {
      * @memberof GenerateRewardLink403Response
      */
     'errors': ListRewards401ResponseErrors;
-}
-/**
- * 
- * @export
- * @interface GenerateRewardToken200Response
- */
-export interface GenerateRewardToken200Response {
-    /**
-     * 
-     * @type {GenerateRewardToken200ResponseReward}
-     * @memberof GenerateRewardToken200Response
-     */
-    'reward': GenerateRewardToken200ResponseReward;
-}
-/**
- * The redemption token for a reward.
- * @export
- * @interface GenerateRewardToken200ResponseReward
- */
-export interface GenerateRewardToken200ResponseReward {
-    /**
-     * Tremendous ID of the reward
-     * @type {string}
-     * @memberof GenerateRewardToken200ResponseReward
-     */
-    'id'?: string;
-    /**
-     * The token to redeem the reward. 
-     * @type {string}
-     * @memberof GenerateRewardToken200ResponseReward
-     */
-    'token'?: string;
-    /**
-     * Date the token expires
-     * @type {string}
-     * @memberof GenerateRewardToken200ResponseReward
-     */
-    'expires_at'?: string;
 }
 /**
  * 
@@ -3077,6 +3407,227 @@ export interface ListCampaigns200ResponseCampaignsInnerWebpageStyle {
 /**
  * 
  * @export
+ * @interface ListConnectedOrganizationMembers200Response
+ */
+export interface ListConnectedOrganizationMembers200Response {
+    /**
+     * 
+     * @type {Array<ListConnectedOrganizationMembers200ResponseConnectedOrganizationMembersInner>}
+     * @memberof ListConnectedOrganizationMembers200Response
+     */
+    'connected_organization_members': Array<ListConnectedOrganizationMembers200ResponseConnectedOrganizationMembersInner>;
+    /**
+     * The total number of connected organizations across all pages
+     * @type {number}
+     * @memberof ListConnectedOrganizationMembers200Response
+     */
+    'total_count': number;
+}
+/**
+ * 
+ * @export
+ * @interface ListConnectedOrganizationMembers200ResponseConnectedOrganizationMembersInner
+ */
+export interface ListConnectedOrganizationMembers200ResponseConnectedOrganizationMembersInner {
+    /**
+     * Tremendous\' identifier for the connected organization member.
+     * @type {string}
+     * @memberof ListConnectedOrganizationMembers200ResponseConnectedOrganizationMembersInner
+     */
+    'id': string;
+    /**
+     * The name associated with the user in your systems.
+     * @type {string}
+     * @memberof ListConnectedOrganizationMembers200ResponseConnectedOrganizationMembersInner
+     */
+    'external_name'?: string | null;
+    /**
+     * The email associated with the user in your systems.
+     * @type {string}
+     * @memberof ListConnectedOrganizationMembers200ResponseConnectedOrganizationMembersInner
+     */
+    'external_email'?: string | null;
+    /**
+     * Timestamp of when the connected organization member was created.
+     * @type {string}
+     * @memberof ListConnectedOrganizationMembers200ResponseConnectedOrganizationMembersInner
+     */
+    'created_at': string;
+    /**
+     * Tremendous\' identifier for the connected organization.
+     * @type {string}
+     * @memberof ListConnectedOrganizationMembers200ResponseConnectedOrganizationMembersInner
+     */
+    'connected_organization_id': string;
+    /**
+     * 
+     * @type {ListConnectedOrganizationMembers200ResponseConnectedOrganizationMembersInnerMember}
+     * @memberof ListConnectedOrganizationMembers200ResponseConnectedOrganizationMembersInner
+     */
+    'member'?: ListConnectedOrganizationMembers200ResponseConnectedOrganizationMembersInnerMember | null;
+}
+/**
+ * Associated `member`. `null` until the registration flow for the connected organization has been completed.
+ * @export
+ * @interface ListConnectedOrganizationMembers200ResponseConnectedOrganizationMembersInnerMember
+ */
+export interface ListConnectedOrganizationMembers200ResponseConnectedOrganizationMembersInnerMember {
+    /**
+     * 
+     * @type {string}
+     * @memberof ListConnectedOrganizationMembers200ResponseConnectedOrganizationMembersInnerMember
+     */
+    'id': string;
+    /**
+     * Email address of the member
+     * @type {string}
+     * @memberof ListConnectedOrganizationMembers200ResponseConnectedOrganizationMembersInnerMember
+     */
+    'email': string;
+    /**
+     * Full name of the member
+     * @type {string}
+     * @memberof ListConnectedOrganizationMembers200ResponseConnectedOrganizationMembersInnerMember
+     */
+    'name': string | null;
+    /**
+     * Is this member currently active in the organization. If `false`, the member will not be able to access the organization. 
+     * @type {boolean}
+     * @memberof ListConnectedOrganizationMembers200ResponseConnectedOrganizationMembersInnerMember
+     */
+    'active'?: boolean;
+    /**
+     * The role ID associated with the member within the organization. 
+     * @type {string}
+     * @memberof ListConnectedOrganizationMembers200ResponseConnectedOrganizationMembersInnerMember
+     */
+    'role'?: string | null;
+    /**
+     * Current status of the member\'s account.  When creating a member it starts out in the status `INVITED`. As soon as that member open the invitation link and registers an account, the status switches to `REGISTERED`. 
+     * @type {string}
+     * @memberof ListConnectedOrganizationMembers200ResponseConnectedOrganizationMembersInnerMember
+     */
+    'status': ListConnectedOrganizationMembers200ResponseConnectedOrganizationMembersInnerMemberStatusEnum;
+    /**
+     * Timestamp when this member was created.  The `created_at` timestamp is **NOT** returned when retrieving a member (but is part of the response when listing or creating members). 
+     * @type {string}
+     * @memberof ListConnectedOrganizationMembers200ResponseConnectedOrganizationMembersInnerMember
+     */
+    'created_at'?: string;
+    /**
+     * Timestamp when this member most recently logged into the dashboard of the organization associated with this API key. 
+     * @type {string}
+     * @memberof ListConnectedOrganizationMembers200ResponseConnectedOrganizationMembersInnerMember
+     */
+    'last_login_at'?: string | null;
+}
+
+export const ListConnectedOrganizationMembers200ResponseConnectedOrganizationMembersInnerMemberStatusEnum = {
+    Registered: 'REGISTERED',
+    Invited: 'INVITED'
+} as const;
+
+export type ListConnectedOrganizationMembers200ResponseConnectedOrganizationMembersInnerMemberStatusEnum = typeof ListConnectedOrganizationMembers200ResponseConnectedOrganizationMembersInnerMemberStatusEnum[keyof typeof ListConnectedOrganizationMembers200ResponseConnectedOrganizationMembersInnerMemberStatusEnum];
+
+/**
+ * 
+ * @export
+ * @interface ListConnectedOrganizations200Response
+ */
+export interface ListConnectedOrganizations200Response {
+    /**
+     * 
+     * @type {Array<ListConnectedOrganizations200ResponseConnectedOrganizationsInner>}
+     * @memberof ListConnectedOrganizations200Response
+     */
+    'connected_organizations': Array<ListConnectedOrganizations200ResponseConnectedOrganizationsInner>;
+    /**
+     * The total number of connected organizations across all pages
+     * @type {number}
+     * @memberof ListConnectedOrganizations200Response
+     */
+    'total_count': number;
+}
+/**
+ * 
+ * @export
+ * @interface ListConnectedOrganizations200ResponseConnectedOrganizationsInner
+ */
+export interface ListConnectedOrganizations200ResponseConnectedOrganizationsInner {
+    /**
+     * Tremendous\' identifier for the connected organization.
+     * @type {string}
+     * @memberof ListConnectedOrganizations200ResponseConnectedOrganizationsInner
+     */
+    'id': string;
+    /**
+     * Client ID of the OAuth app that is to be used by the platform once the integration is complete.
+     * @type {string}
+     * @memberof ListConnectedOrganizations200ResponseConnectedOrganizationsInner
+     */
+    'client_id': string;
+    /**
+     * Timestamp of when the connected organization was created.
+     * @type {string}
+     * @memberof ListConnectedOrganizations200ResponseConnectedOrganizationsInner
+     */
+    'created_at': string;
+    /**
+     * 
+     * @type {ListConnectedOrganizations200ResponseConnectedOrganizationsInnerOrganization}
+     * @memberof ListConnectedOrganizations200ResponseConnectedOrganizationsInner
+     */
+    'organization'?: ListConnectedOrganizations200ResponseConnectedOrganizationsInnerOrganization | null;
+}
+/**
+ * Associated `organization` resource. `null` until the registration flow for the connected organization has been completed.
+ * @export
+ * @interface ListConnectedOrganizations200ResponseConnectedOrganizationsInnerOrganization
+ */
+export interface ListConnectedOrganizations200ResponseConnectedOrganizationsInnerOrganization {
+    /**
+     * 
+     * @type {string}
+     * @memberof ListConnectedOrganizations200ResponseConnectedOrganizationsInnerOrganization
+     */
+    'id'?: string;
+    /**
+     * Name of the organization
+     * @type {string}
+     * @memberof ListConnectedOrganizations200ResponseConnectedOrganizationsInnerOrganization
+     */
+    'name': string;
+    /**
+     * URL of the website of that organization
+     * @type {string}
+     * @memberof ListConnectedOrganizations200ResponseConnectedOrganizationsInnerOrganization
+     */
+    'website': string;
+    /**
+     * Status of the organization. Organizations need to be approved to be able to use them to send out rewards.
+     * @type {string}
+     * @memberof ListConnectedOrganizations200ResponseConnectedOrganizationsInnerOrganization
+     */
+    'status'?: ListConnectedOrganizations200ResponseConnectedOrganizationsInnerOrganizationStatusEnum;
+    /**
+     * Timestamp of when the organization has been created.  *This field is only returned when creating an organization.* It is not returned anymore when retrieving or listing organizations. 
+     * @type {string}
+     * @memberof ListConnectedOrganizations200ResponseConnectedOrganizationsInnerOrganization
+     */
+    'created_at'?: string;
+}
+
+export const ListConnectedOrganizations200ResponseConnectedOrganizationsInnerOrganizationStatusEnum = {
+    Pending: 'PENDING',
+    Approved: 'APPROVED',
+    Rejected: 'REJECTED'
+} as const;
+
+export type ListConnectedOrganizations200ResponseConnectedOrganizationsInnerOrganizationStatusEnum = typeof ListConnectedOrganizations200ResponseConnectedOrganizationsInnerOrganizationStatusEnum[keyof typeof ListConnectedOrganizations200ResponseConnectedOrganizationsInnerOrganizationStatusEnum];
+
+/**
+ * 
+ * @export
  * @interface ListFields200Response
  */
 export interface ListFields200Response {
@@ -3302,6 +3853,18 @@ export interface ListFundingSources200ResponseFundingSourcesInner {
      */
     'method': ListFundingSources200ResponseFundingSourcesInnerMethodEnum;
     /**
+     * Indicates the level of access granted for using this funding source.  Permissions is an array containing the following:   * `api_orders`   * `dashboard_orders`   * `balance_funding` 
+     * @type {Array<string>}
+     * @memberof ListFundingSources200ResponseFundingSourcesInner
+     */
+    'usage_permissions'?: Array<ListFundingSources200ResponseFundingSourcesInnerUsagePermissionsEnum>;
+    /**
+     * Status of the funding_source 
+     * @type {string}
+     * @memberof ListFundingSources200ResponseFundingSourcesInner
+     */
+    'status'?: ListFundingSources200ResponseFundingSourcesInnerStatusEnum;
+    /**
      * **Only available when `method` is set to `invoice`.** 
      * @type {string}
      * @memberof ListFundingSources200ResponseFundingSourcesInner
@@ -3323,6 +3886,21 @@ export const ListFundingSources200ResponseFundingSourcesInnerMethodEnum = {
 } as const;
 
 export type ListFundingSources200ResponseFundingSourcesInnerMethodEnum = typeof ListFundingSources200ResponseFundingSourcesInnerMethodEnum[keyof typeof ListFundingSources200ResponseFundingSourcesInnerMethodEnum];
+export const ListFundingSources200ResponseFundingSourcesInnerUsagePermissionsEnum = {
+    ApiOrders: 'api_orders',
+    DashboardOrders: 'dashboard_orders',
+    BalanceFunding: 'balance_funding'
+} as const;
+
+export type ListFundingSources200ResponseFundingSourcesInnerUsagePermissionsEnum = typeof ListFundingSources200ResponseFundingSourcesInnerUsagePermissionsEnum[keyof typeof ListFundingSources200ResponseFundingSourcesInnerUsagePermissionsEnum];
+export const ListFundingSources200ResponseFundingSourcesInnerStatusEnum = {
+    Active: 'active',
+    Deleted: 'deleted',
+    PendingConfirmation: 'pending_confirmation',
+    Failed: 'failed'
+} as const;
+
+export type ListFundingSources200ResponseFundingSourcesInnerStatusEnum = typeof ListFundingSources200ResponseFundingSourcesInnerStatusEnum[keyof typeof ListFundingSources200ResponseFundingSourcesInnerStatusEnum];
 export const ListFundingSources200ResponseFundingSourcesInnerTypeEnum = {
     Commercial: 'COMMERCIAL',
     ProForma: 'PRO_FORMA',
@@ -3885,7 +4463,7 @@ export interface ListProductsResponseProductsInner {
      */
     'description': string;
     /**
-     * The category of this product  <table>   <thead>     <tr>       <th>Category</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td><code>ach</code></td>       <td>Bank transfer to the recipient</td>     </tr>     <tr>       <td><code>charity</code></td>       <td>Donations to a charity</td>     </tr>     <tr>       <td><code>merchant_card</code></td>       <td>A gift card for a certain merchant (e.g. Amazon)</td>     </tr>     <tr>       <td><code>paypal</code></td>       <td>Payout via PayPal</td>     </tr>     <tr>       <td><code>venmo</code></td>       <td>Payout via Venmo</td>     </tr>     <tr>       <td><code>visa_card</code></td>       <td>Payout in form of a Visa debit card</td>     </tr>   </tbody> </table> 
+     * The category of this product  <table>   <thead>     <tr>       <th>Category</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td><code>ach</code></td>       <td>Bank transfer to the recipient</td>     </tr>     <tr>       <td><code>charity</code></td>       <td>Donations to a charity</td>     </tr>     <tr>       <td><code>instant_debit_transfer</code></td>       <td>Instant debit transfer to the recipient</td>     </tr>     <tr>       <td><code>merchant_card</code></td>       <td>A gift card for a certain merchant (e.g. Amazon)</td>     </tr>     <tr>       <td><code>paypal</code></td>       <td>Payout via PayPal</td>     </tr>     <tr>       <td><code>venmo</code></td>       <td>Payout via Venmo</td>     </tr>     <tr>       <td><code>visa_card</code></td>       <td>Payout in form of a Visa debit card</td>     </tr>   </tbody> </table> 
      * @type {string}
      * @memberof ListProductsResponseProductsInner
      */
@@ -3920,11 +4498,24 @@ export interface ListProductsResponseProductsInner {
      * @memberof ListProductsResponseProductsInner
      */
     'images': Array<ListProductsResponseProductsInnerImagesInner>;
+    /**
+     * Instructions for how to use the product, if applicable. Mostly used for products with a `category` of `merchant_card`.
+     * @type {string}
+     * @memberof ListProductsResponseProductsInner
+     */
+    'usage_instructions'?: string;
+    /**
+     * 
+     * @type {ListProductsResponseProductsInnerDocuments}
+     * @memberof ListProductsResponseProductsInner
+     */
+    'documents'?: ListProductsResponseProductsInnerDocuments | null;
 }
 
 export const ListProductsResponseProductsInnerCategoryEnum = {
     Ach: 'ach',
     Charity: 'charity',
+    InstantDebitTransfer: 'instant_debit_transfer',
     MerchantCard: 'merchant_card',
     Paypal: 'paypal',
     Venmo: 'venmo',
@@ -4067,6 +4658,31 @@ export interface ListProductsResponseProductsInnerCountriesInner {
     'abbr': string;
 }
 /**
+ * URLs and files related to product documentation. 
+ * @export
+ * @interface ListProductsResponseProductsInnerDocuments
+ */
+export interface ListProductsResponseProductsInnerDocuments {
+    /**
+     * URL to the cardholder agreement PDF file.
+     * @type {string}
+     * @memberof ListProductsResponseProductsInnerDocuments
+     */
+    'cardholder_agreement_pdf'?: string;
+    /**
+     * URL to the cardholder agreement web page.
+     * @type {string}
+     * @memberof ListProductsResponseProductsInnerDocuments
+     */
+    'cardholder_agreement_url'?: string;
+    /**
+     * URL to the privacy policy web page.
+     * @type {string}
+     * @memberof ListProductsResponseProductsInnerDocuments
+     */
+    'privacy_policy_url'?: string;
+}
+/**
  * 
  * @export
  * @interface ListProductsResponseProductsInnerImagesInner
@@ -4084,6 +4700,12 @@ export interface ListProductsResponseProductsInnerImagesInner {
      * @memberof ListProductsResponseProductsInnerImagesInner
      */
     'type': ListProductsResponseProductsInnerImagesInnerTypeEnum;
+    /**
+     * The MIME content type of this image
+     * @type {string}
+     * @memberof ListProductsResponseProductsInnerImagesInner
+     */
+    'content_type'?: string | null;
 }
 
 export const ListProductsResponseProductsInnerImagesInnerTypeEnum = {
@@ -5494,7 +6116,7 @@ export interface Product {
      */
     'description': string;
     /**
-     * The category of this product  <table>   <thead>     <tr>       <th>Category</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td><code>ach</code></td>       <td>Bank transfer to the recipient</td>     </tr>     <tr>       <td><code>charity</code></td>       <td>Donations to a charity</td>     </tr>     <tr>       <td><code>merchant_card</code></td>       <td>A gift card for a certain merchant (e.g. Amazon)</td>     </tr>     <tr>       <td><code>paypal</code></td>       <td>Payout via PayPal</td>     </tr>     <tr>       <td><code>venmo</code></td>       <td>Payout via Venmo</td>     </tr>     <tr>       <td><code>visa_card</code></td>       <td>Payout in form of a Visa debit card</td>     </tr>   </tbody> </table> 
+     * The category of this product  <table>   <thead>     <tr>       <th>Category</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td><code>ach</code></td>       <td>Bank transfer to the recipient</td>     </tr>     <tr>       <td><code>charity</code></td>       <td>Donations to a charity</td>     </tr>     <tr>       <td><code>instant_debit_transfer</code></td>       <td>Instant debit transfer to the recipient</td>     </tr>     <tr>       <td><code>merchant_card</code></td>       <td>A gift card for a certain merchant (e.g. Amazon)</td>     </tr>     <tr>       <td><code>paypal</code></td>       <td>Payout via PayPal</td>     </tr>     <tr>       <td><code>venmo</code></td>       <td>Payout via Venmo</td>     </tr>     <tr>       <td><code>visa_card</code></td>       <td>Payout in form of a Visa debit card</td>     </tr>   </tbody> </table> 
      * @type {string}
      * @memberof Product
      */
@@ -5529,11 +6151,24 @@ export interface Product {
      * @memberof Product
      */
     'images': Array<ListProductsResponseProductsInnerImagesInner>;
+    /**
+     * Instructions for how to use the product, if applicable. Mostly used for products with a `category` of `merchant_card`.
+     * @type {string}
+     * @memberof Product
+     */
+    'usage_instructions'?: string;
+    /**
+     * 
+     * @type {ListProductsResponseProductsInnerDocuments}
+     * @memberof Product
+     */
+    'documents'?: ListProductsResponseProductsInnerDocuments | null;
 }
 
 export const ProductCategoryEnum = {
     Ach: 'ach',
     Charity: 'charity',
+    InstantDebitTransfer: 'instant_debit_transfer',
     MerchantCard: 'merchant_card',
     Paypal: 'paypal',
     Venmo: 'venmo',
@@ -5662,6 +6297,31 @@ export const ProductCurrencyCodesEnum = {
 
 export type ProductCurrencyCodesEnum = typeof ProductCurrencyCodesEnum[keyof typeof ProductCurrencyCodesEnum];
 
+/**
+ * URLs and files related to product documentation. 
+ * @export
+ * @interface ProductDocuments
+ */
+export interface ProductDocuments {
+    /**
+     * URL to the cardholder agreement PDF file.
+     * @type {string}
+     * @memberof ProductDocuments
+     */
+    'cardholder_agreement_pdf'?: string;
+    /**
+     * URL to the cardholder agreement web page.
+     * @type {string}
+     * @memberof ProductDocuments
+     */
+    'cardholder_agreement_url'?: string;
+    /**
+     * URL to the privacy policy web page.
+     * @type {string}
+     * @memberof ProductDocuments
+     */
+    'privacy_policy_url'?: string;
+}
 /**
  * Details of the recipient of the reward
  * @export
@@ -7477,7 +8137,7 @@ export const CampaignsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async createCampaign(createCampaignRequest: CreateCampaignRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CreateCampaign201Response>> {
+        async createCampaign(createCampaignRequest: CreateCampaignRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CreateCampaign200Response>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.createCampaign(createCampaignRequest, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['CampaignsApi.createCampaign']?.[localVarOperationServerIndex]?.url;
@@ -7490,7 +8150,7 @@ export const CampaignsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getCampaign(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CreateCampaign201Response>> {
+        async getCampaign(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CreateCampaign200Response>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getCampaign(id, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['CampaignsApi.getCampaign']?.[localVarOperationServerIndex]?.url;
@@ -7516,7 +8176,7 @@ export const CampaignsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async updateCampaign(id: string, updateCampaignRequest: UpdateCampaignRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CreateCampaign201Response>> {
+        async updateCampaign(id: string, updateCampaignRequest: UpdateCampaignRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CreateCampaign200Response>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.updateCampaign(id, updateCampaignRequest, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['CampaignsApi.updateCampaign']?.[localVarOperationServerIndex]?.url;
@@ -7539,7 +8199,7 @@ export const CampaignsApiFactory = function (configuration?: Configuration, base
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        createCampaign(createCampaignRequest: CreateCampaignRequest, options?: RawAxiosRequestConfig): AxiosPromise<CreateCampaign201Response> {
+        createCampaign(createCampaignRequest: CreateCampaignRequest, options?: RawAxiosRequestConfig): AxiosPromise<CreateCampaign200Response> {
             return localVarFp.createCampaign(createCampaignRequest, options).then((request) => request(axios, basePath));
         },
         /**
@@ -7549,7 +8209,7 @@ export const CampaignsApiFactory = function (configuration?: Configuration, base
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getCampaign(id: string, options?: RawAxiosRequestConfig): AxiosPromise<CreateCampaign201Response> {
+        getCampaign(id: string, options?: RawAxiosRequestConfig): AxiosPromise<CreateCampaign200Response> {
             return localVarFp.getCampaign(id, options).then((request) => request(axios, basePath));
         },
         /**
@@ -7569,7 +8229,7 @@ export const CampaignsApiFactory = function (configuration?: Configuration, base
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateCampaign(id: string, updateCampaignRequest: UpdateCampaignRequest, options?: RawAxiosRequestConfig): AxiosPromise<CreateCampaign201Response> {
+        updateCampaign(id: string, updateCampaignRequest: UpdateCampaignRequest, options?: RawAxiosRequestConfig): AxiosPromise<CreateCampaign200Response> {
             return localVarFp.updateCampaign(id, updateCampaignRequest, options).then((request) => request(axios, basePath));
         },
     };
@@ -7628,6 +8288,636 @@ export class CampaignsApi extends BaseAPI {
      */
     public updateCampaign(id: string, updateCampaignRequest: UpdateCampaignRequest, options?: RawAxiosRequestConfig) {
         return CampaignsApiFp(this.configuration).updateCampaign(id, updateCampaignRequest, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+
+/**
+ * ConnectedOrganizationMembersApi - axios parameter creator
+ * @export
+ */
+export const ConnectedOrganizationMembersApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * Create a connected organization member. 
+         * @summary Create connected organization member
+         * @param {CreateConnectedOrganizationMemberRequest} createConnectedOrganizationMemberRequest Connected organization member to create
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        createConnectedOrganizationMember: async (createConnectedOrganizationMemberRequest: CreateConnectedOrganizationMemberRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'createConnectedOrganizationMemberRequest' is not null or undefined
+            assertParamExists('createConnectedOrganizationMember', 'createConnectedOrganizationMemberRequest', createConnectedOrganizationMemberRequest)
+            const localVarPath = `/connected_organization_members`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication BearerApiKey required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(createConnectedOrganizationMemberRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Create a connected organization member session. 
+         * @summary Create connected organization member session
+         * @param {string} id ID of the connected organization member. 
+         * @param {CreateConnectedOrganizationMemberSessionRequest} createConnectedOrganizationMemberSessionRequest Connected organization member requiring the session
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        createConnectedOrganizationMemberSession: async (id: string, createConnectedOrganizationMemberSessionRequest: CreateConnectedOrganizationMemberSessionRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('createConnectedOrganizationMemberSession', 'id', id)
+            // verify required parameter 'createConnectedOrganizationMemberSessionRequest' is not null or undefined
+            assertParamExists('createConnectedOrganizationMemberSession', 'createConnectedOrganizationMemberSessionRequest', createConnectedOrganizationMemberSessionRequest)
+            const localVarPath = `/connected_organization_members/{id}/sessions`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication BearerApiKey required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(createConnectedOrganizationMemberSessionRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Retrieve the connected organization member, identified by the given `id` in the URL
+         * @summary Retrieve a connected organization member
+         * @param {string} id ID of the connected organization member that should be retrieved. 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getConnectedOrganizationMember: async (id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('getConnectedOrganizationMember', 'id', id)
+            const localVarPath = `/connected_organization_members/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication BearerApiKey required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Retrieve a list of connected organization members.
+         * @summary List connected organization members
+         * @param {string} connectedOrganizationId ID of the connected organization.
+         * @param {number} [offset] Offsets the returned list by the given number of connected organizations.
+         * @param {number} [limit] Limits the number of connected organizations listed. The maximum value is 100 and the default is 10.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listConnectedOrganizationMembers: async (connectedOrganizationId: string, offset?: number, limit?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'connectedOrganizationId' is not null or undefined
+            assertParamExists('listConnectedOrganizationMembers', 'connectedOrganizationId', connectedOrganizationId)
+            const localVarPath = `/connected_organization_members`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication BearerApiKey required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (connectedOrganizationId !== undefined) {
+                localVarQueryParameter['connected_organization_id'] = connectedOrganizationId;
+            }
+
+            if (offset !== undefined) {
+                localVarQueryParameter['offset'] = offset;
+            }
+
+            if (limit !== undefined) {
+                localVarQueryParameter['limit'] = limit;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * ConnectedOrganizationMembersApi - functional programming interface
+ * @export
+ */
+export const ConnectedOrganizationMembersApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = ConnectedOrganizationMembersApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * Create a connected organization member. 
+         * @summary Create connected organization member
+         * @param {CreateConnectedOrganizationMemberRequest} createConnectedOrganizationMemberRequest Connected organization member to create
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async createConnectedOrganizationMember(createConnectedOrganizationMemberRequest: CreateConnectedOrganizationMemberRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CreateConnectedOrganizationMember200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.createConnectedOrganizationMember(createConnectedOrganizationMemberRequest, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ConnectedOrganizationMembersApi.createConnectedOrganizationMember']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Create a connected organization member session. 
+         * @summary Create connected organization member session
+         * @param {string} id ID of the connected organization member. 
+         * @param {CreateConnectedOrganizationMemberSessionRequest} createConnectedOrganizationMemberSessionRequest Connected organization member requiring the session
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async createConnectedOrganizationMemberSession(id: string, createConnectedOrganizationMemberSessionRequest: CreateConnectedOrganizationMemberSessionRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CreateConnectedOrganizationMemberSession200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.createConnectedOrganizationMemberSession(id, createConnectedOrganizationMemberSessionRequest, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ConnectedOrganizationMembersApi.createConnectedOrganizationMemberSession']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Retrieve the connected organization member, identified by the given `id` in the URL
+         * @summary Retrieve a connected organization member
+         * @param {string} id ID of the connected organization member that should be retrieved. 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getConnectedOrganizationMember(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CreateConnectedOrganizationMember200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getConnectedOrganizationMember(id, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ConnectedOrganizationMembersApi.getConnectedOrganizationMember']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Retrieve a list of connected organization members.
+         * @summary List connected organization members
+         * @param {string} connectedOrganizationId ID of the connected organization.
+         * @param {number} [offset] Offsets the returned list by the given number of connected organizations.
+         * @param {number} [limit] Limits the number of connected organizations listed. The maximum value is 100 and the default is 10.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async listConnectedOrganizationMembers(connectedOrganizationId: string, offset?: number, limit?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListConnectedOrganizationMembers200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.listConnectedOrganizationMembers(connectedOrganizationId, offset, limit, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ConnectedOrganizationMembersApi.listConnectedOrganizationMembers']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+    }
+};
+
+/**
+ * ConnectedOrganizationMembersApi - factory interface
+ * @export
+ */
+export const ConnectedOrganizationMembersApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = ConnectedOrganizationMembersApiFp(configuration)
+    return {
+        /**
+         * Create a connected organization member. 
+         * @summary Create connected organization member
+         * @param {CreateConnectedOrganizationMemberRequest} createConnectedOrganizationMemberRequest Connected organization member to create
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        createConnectedOrganizationMember(createConnectedOrganizationMemberRequest: CreateConnectedOrganizationMemberRequest, options?: RawAxiosRequestConfig): AxiosPromise<CreateConnectedOrganizationMember200Response> {
+            return localVarFp.createConnectedOrganizationMember(createConnectedOrganizationMemberRequest, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Create a connected organization member session. 
+         * @summary Create connected organization member session
+         * @param {string} id ID of the connected organization member. 
+         * @param {CreateConnectedOrganizationMemberSessionRequest} createConnectedOrganizationMemberSessionRequest Connected organization member requiring the session
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        createConnectedOrganizationMemberSession(id: string, createConnectedOrganizationMemberSessionRequest: CreateConnectedOrganizationMemberSessionRequest, options?: RawAxiosRequestConfig): AxiosPromise<CreateConnectedOrganizationMemberSession200Response> {
+            return localVarFp.createConnectedOrganizationMemberSession(id, createConnectedOrganizationMemberSessionRequest, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Retrieve the connected organization member, identified by the given `id` in the URL
+         * @summary Retrieve a connected organization member
+         * @param {string} id ID of the connected organization member that should be retrieved. 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getConnectedOrganizationMember(id: string, options?: RawAxiosRequestConfig): AxiosPromise<CreateConnectedOrganizationMember200Response> {
+            return localVarFp.getConnectedOrganizationMember(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Retrieve a list of connected organization members.
+         * @summary List connected organization members
+         * @param {string} connectedOrganizationId ID of the connected organization.
+         * @param {number} [offset] Offsets the returned list by the given number of connected organizations.
+         * @param {number} [limit] Limits the number of connected organizations listed. The maximum value is 100 and the default is 10.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listConnectedOrganizationMembers(connectedOrganizationId: string, offset?: number, limit?: number, options?: RawAxiosRequestConfig): AxiosPromise<ListConnectedOrganizationMembers200Response> {
+            return localVarFp.listConnectedOrganizationMembers(connectedOrganizationId, offset, limit, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * ConnectedOrganizationMembersApi - object-oriented interface
+ * @export
+ * @class ConnectedOrganizationMembersApi
+ * @extends {BaseAPI}
+ */
+export class ConnectedOrganizationMembersApi extends BaseAPI {
+    /**
+     * Create a connected organization member. 
+     * @summary Create connected organization member
+     * @param {CreateConnectedOrganizationMemberRequest} createConnectedOrganizationMemberRequest Connected organization member to create
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ConnectedOrganizationMembersApi
+     */
+    public createConnectedOrganizationMember(createConnectedOrganizationMemberRequest: CreateConnectedOrganizationMemberRequest, options?: RawAxiosRequestConfig) {
+        return ConnectedOrganizationMembersApiFp(this.configuration).createConnectedOrganizationMember(createConnectedOrganizationMemberRequest, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Create a connected organization member session. 
+     * @summary Create connected organization member session
+     * @param {string} id ID of the connected organization member. 
+     * @param {CreateConnectedOrganizationMemberSessionRequest} createConnectedOrganizationMemberSessionRequest Connected organization member requiring the session
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ConnectedOrganizationMembersApi
+     */
+    public createConnectedOrganizationMemberSession(id: string, createConnectedOrganizationMemberSessionRequest: CreateConnectedOrganizationMemberSessionRequest, options?: RawAxiosRequestConfig) {
+        return ConnectedOrganizationMembersApiFp(this.configuration).createConnectedOrganizationMemberSession(id, createConnectedOrganizationMemberSessionRequest, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Retrieve the connected organization member, identified by the given `id` in the URL
+     * @summary Retrieve a connected organization member
+     * @param {string} id ID of the connected organization member that should be retrieved. 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ConnectedOrganizationMembersApi
+     */
+    public getConnectedOrganizationMember(id: string, options?: RawAxiosRequestConfig) {
+        return ConnectedOrganizationMembersApiFp(this.configuration).getConnectedOrganizationMember(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Retrieve a list of connected organization members.
+     * @summary List connected organization members
+     * @param {string} connectedOrganizationId ID of the connected organization.
+     * @param {number} [offset] Offsets the returned list by the given number of connected organizations.
+     * @param {number} [limit] Limits the number of connected organizations listed. The maximum value is 100 and the default is 10.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ConnectedOrganizationMembersApi
+     */
+    public listConnectedOrganizationMembers(connectedOrganizationId: string, offset?: number, limit?: number, options?: RawAxiosRequestConfig) {
+        return ConnectedOrganizationMembersApiFp(this.configuration).listConnectedOrganizationMembers(connectedOrganizationId, offset, limit, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+
+/**
+ * ConnectedOrganizationsApi - axios parameter creator
+ * @export
+ */
+export const ConnectedOrganizationsApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * Create a connected organization. 
+         * @summary Create connected organization
+         * @param {CreateConnectedOrganizationRequest} createConnectedOrganizationRequest Connected organization to create
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        createConnectedOrganization: async (createConnectedOrganizationRequest: CreateConnectedOrganizationRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'createConnectedOrganizationRequest' is not null or undefined
+            assertParamExists('createConnectedOrganization', 'createConnectedOrganizationRequest', createConnectedOrganizationRequest)
+            const localVarPath = `/connected_organizations`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication BearerApiKey required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(createConnectedOrganizationRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Retrieve the connected organization, identified by the given `id` in the URL
+         * @summary Retrieve a connected organization
+         * @param {string} id ID of the connected organization that should be retrieved. 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getConnectedOrganization: async (id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('getConnectedOrganization', 'id', id)
+            const localVarPath = `/connected_organizations/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication BearerApiKey required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Retrieve a list of connected organizations.
+         * @summary List connected organizations
+         * @param {number} [offset] Offsets the returned list by the given number of connected organizations.
+         * @param {number} [limit] Limits the number of connected organizations listed. The maximum value is 100 and the default is 10.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listConnectedOrganizations: async (offset?: number, limit?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/connected_organizations`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication BearerApiKey required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (offset !== undefined) {
+                localVarQueryParameter['offset'] = offset;
+            }
+
+            if (limit !== undefined) {
+                localVarQueryParameter['limit'] = limit;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * ConnectedOrganizationsApi - functional programming interface
+ * @export
+ */
+export const ConnectedOrganizationsApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = ConnectedOrganizationsApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * Create a connected organization. 
+         * @summary Create connected organization
+         * @param {CreateConnectedOrganizationRequest} createConnectedOrganizationRequest Connected organization to create
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async createConnectedOrganization(createConnectedOrganizationRequest: CreateConnectedOrganizationRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CreateConnectedOrganization200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.createConnectedOrganization(createConnectedOrganizationRequest, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ConnectedOrganizationsApi.createConnectedOrganization']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Retrieve the connected organization, identified by the given `id` in the URL
+         * @summary Retrieve a connected organization
+         * @param {string} id ID of the connected organization that should be retrieved. 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getConnectedOrganization(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CreateConnectedOrganization200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getConnectedOrganization(id, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ConnectedOrganizationsApi.getConnectedOrganization']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Retrieve a list of connected organizations.
+         * @summary List connected organizations
+         * @param {number} [offset] Offsets the returned list by the given number of connected organizations.
+         * @param {number} [limit] Limits the number of connected organizations listed. The maximum value is 100 and the default is 10.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async listConnectedOrganizations(offset?: number, limit?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListConnectedOrganizations200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.listConnectedOrganizations(offset, limit, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ConnectedOrganizationsApi.listConnectedOrganizations']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+    }
+};
+
+/**
+ * ConnectedOrganizationsApi - factory interface
+ * @export
+ */
+export const ConnectedOrganizationsApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = ConnectedOrganizationsApiFp(configuration)
+    return {
+        /**
+         * Create a connected organization. 
+         * @summary Create connected organization
+         * @param {CreateConnectedOrganizationRequest} createConnectedOrganizationRequest Connected organization to create
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        createConnectedOrganization(createConnectedOrganizationRequest: CreateConnectedOrganizationRequest, options?: RawAxiosRequestConfig): AxiosPromise<CreateConnectedOrganization200Response> {
+            return localVarFp.createConnectedOrganization(createConnectedOrganizationRequest, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Retrieve the connected organization, identified by the given `id` in the URL
+         * @summary Retrieve a connected organization
+         * @param {string} id ID of the connected organization that should be retrieved. 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getConnectedOrganization(id: string, options?: RawAxiosRequestConfig): AxiosPromise<CreateConnectedOrganization200Response> {
+            return localVarFp.getConnectedOrganization(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Retrieve a list of connected organizations.
+         * @summary List connected organizations
+         * @param {number} [offset] Offsets the returned list by the given number of connected organizations.
+         * @param {number} [limit] Limits the number of connected organizations listed. The maximum value is 100 and the default is 10.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listConnectedOrganizations(offset?: number, limit?: number, options?: RawAxiosRequestConfig): AxiosPromise<ListConnectedOrganizations200Response> {
+            return localVarFp.listConnectedOrganizations(offset, limit, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * ConnectedOrganizationsApi - object-oriented interface
+ * @export
+ * @class ConnectedOrganizationsApi
+ * @extends {BaseAPI}
+ */
+export class ConnectedOrganizationsApi extends BaseAPI {
+    /**
+     * Create a connected organization. 
+     * @summary Create connected organization
+     * @param {CreateConnectedOrganizationRequest} createConnectedOrganizationRequest Connected organization to create
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ConnectedOrganizationsApi
+     */
+    public createConnectedOrganization(createConnectedOrganizationRequest: CreateConnectedOrganizationRequest, options?: RawAxiosRequestConfig) {
+        return ConnectedOrganizationsApiFp(this.configuration).createConnectedOrganization(createConnectedOrganizationRequest, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Retrieve the connected organization, identified by the given `id` in the URL
+     * @summary Retrieve a connected organization
+     * @param {string} id ID of the connected organization that should be retrieved. 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ConnectedOrganizationsApi
+     */
+    public getConnectedOrganization(id: string, options?: RawAxiosRequestConfig) {
+        return ConnectedOrganizationsApiFp(this.configuration).getConnectedOrganization(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Retrieve a list of connected organizations.
+     * @summary List connected organizations
+     * @param {number} [offset] Offsets the returned list by the given number of connected organizations.
+     * @param {number} [limit] Limits the number of connected organizations listed. The maximum value is 100 and the default is 10.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ConnectedOrganizationsApi
+     */
+    public listConnectedOrganizations(offset?: number, limit?: number, options?: RawAxiosRequestConfig) {
+        return ConnectedOrganizationsApiFp(this.configuration).listConnectedOrganizations(offset, limit, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
@@ -9589,7 +10879,7 @@ export const OrdersApiAxiosParamCreator = function (configuration?: Configuratio
             };
         },
         /**
-         * Every time you want to send out a reward through Tremendous you need to create an order for it.  > 📘 Getting started with your first order > > Our step-by-step guide walks you through everything you need > to send your first gift card through the Tremendous API: > > <strong><a style=\"display: block; margin-top: 20px;\" href=\"/docs/sending-rewards-intro\">Check it out!</a></strong>  ## Request body  <div class=\"object-schema-request-schema\">   <table>   <thead>     <tr>       <th>Property</th>       <th>Type</th>       <th>Description</th>     </tr>   </thead>   <tbody class=\"object-schema-table-body\">     <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">external_id</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>Reference for this order, supplied by the customer.</p>  <p>When set, <code>external_id</code> makes order idempotent. All requests that use the same <code>external_id</code> after the initial order creation, will result in a response that returns the data of the initially created order. The response will have a <code>201</code> response code. These responses <strong>fail</strong> to create any further orders.</p>  <p>It also allows for retrieving by <code>external_id</code> instead of <code>id</code> only.</p> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">payment</code> </div> </td><td><span class=\"property-type\">object</span></td><td></td></tr>  <tr>     <td colspan=\"3\">       <details>         <summary>Show object properties</summary>         <table>   <thead>     <tr>       <th>Property</th>       <th>Type</th>       <th>Description</th>     </tr>   </thead>   <tbody class=\"object-schema-table-body\">     <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">funding_source_id</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>Tremendous ID of the funding source that will be used to pay for the order. Use <code>balance</code> to use your Tremendous&#39;s balance.</p> </td></tr>   </tbody> </table>  </tr>  <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">reward</code> </div> </td><td><span class=\"property-type\">object</span></td><td><p>A single reward, sent to a recipient. A reward is always part of an order.</p>  <p>Either <code>products</code> or <code>campaign_id</code> must be specified.</p> </td></tr>  <tr>     <td colspan=\"3\">       <details>         <summary>Show object properties</summary>         <table>   <thead>     <tr>       <th>Property</th>       <th>Type</th>       <th>Description</th>     </tr>   </thead>   <tbody class=\"object-schema-table-body\">     <tr class=\"property-conditional-hint-response-only\"><td><div class=\"property-name\">   <code class=\"property-name\">id</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>Tremendous ID of the reward</p> </td></tr> <tr class=\"property-conditional-hint-response-only\"><td><div class=\"property-name\">   <code class=\"property-name\">order_id</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>Tremendous ID of the order this reward is part of.</p> </td></tr> <tr class=\"property-conditional-hint-response-only\"><td><div class=\"property-name\">   <code class=\"property-name\">created_at</code> </div> </td><td><span class=\"property-type\">string</span> <span class=\"property-format\">date-time</span></td><td><p>Date the reward was created</p> </td></tr> <tr class=\"property-conditional-hint-request-only\"><td><div class=\"property-name\">   <code class=\"property-name\">campaign_id</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>ID of the campaign in your account, that defines the available products (different gift cards, charity, etc.) that the recipient can choose from.</p> </td></tr> <tr class=\"property-conditional-hint-request-only\"><td><div class=\"property-name\">   <code class=\"property-name\">products</code> </div> </td><td><span class=\"property-type\">array</span> <span class=\"property-format\">string</span></td><td><p>List of IDs of product (different gift cards, charity, etc.) that will be available to the recipient to choose from.</p>  <p>Providing a <code>products</code> array will override the products made available by the campaign specified using the <code>campaign_id</code> property unless the <code>products</code> array is empty. It will <em>not</em> override other campaign attributes, like the message and customization of the look and feel.</p> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">value</code> </div> </td><td><span class=\"property-type\">object</span></td><td></td></tr>  <tr>     <td colspan=\"3\">       <details>         <summary>Show object properties</summary>         <table>   <thead>     <tr>       <th>Property</th>       <th>Type</th>       <th>Description</th>     </tr>   </thead>   <tbody class=\"object-schema-table-body\">     <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">denomination</code> </div> </td><td><span class=\"property-type\">number</span> <span class=\"property-format\">double</span></td><td><p>Amount of the reward</p> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">currency_code</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>Currency of the reward</p> </td></tr>   </tbody> </table>  </tr>  <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">recipient</code> </div> </td><td><span class=\"property-type\">object</span></td><td><p>Details of the recipient of the reward</p> </td></tr>  <tr>     <td colspan=\"3\">       <details>         <summary>Show object properties</summary>         <table>   <thead>     <tr>       <th>Property</th>       <th>Type</th>       <th>Description</th>     </tr>   </thead>   <tbody class=\"object-schema-table-body\">     <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">name</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>Name of the recipient</p> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">email</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>Email address of the recipient</p> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">phone</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>Phone number of the recipient. For non-US phone numbers, specify the country code (prefixed with +).</p> </td></tr>   </tbody> </table>  </tr>  <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">deliver_at</code> </div> </td><td><span class=\"property-type\">string</span> <span class=\"property-format\">date</span></td><td><p>Timestamp of reward delivery within the next year. Note that if date-time is provided, the time values will be ignored.</p> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">custom_fields</code> </div> </td><td><span class=\"property-type\">array</span></td><td></td></tr>  <tr>     <td colspan=\"3\">       <details>         <summary>Show array item type</summary>         <table>   <thead>     <tr>       <th>Property</th>       <th>Type</th>       <th>Description</th>     </tr>   </thead>   <tbody class=\"object-schema-table-body\">     <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">id</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>Tremendous ID of the custom field</p> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">value</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>Value of the custom field</p> </td></tr> <tr class=\"property-conditional-hint-response-only\"><td><div class=\"property-name\">   <code class=\"property-name\">label</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>Label of the custom field</p> </td></tr>   </tbody> </table>  </tr>  <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">language</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>Set this to translate the redemption experience for this reward. Pass a 2-letter <a href=\"https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes\">ISO-639-1 code</a> for the desired language. Defaults to <code>en</code>.</p> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">delivery</code> </div> </td><td><span class=\"property-type\">object</span></td><td><p>Details on how the reward is delivered to the recipient.</p> </td></tr>  <tr>     <td colspan=\"3\">       <details>         <summary>Show object properties</summary>         <table>   <thead>     <tr>       <th>Property</th>       <th>Type</th>       <th>Description</th>     </tr>   </thead>   <tbody class=\"object-schema-table-body\">     <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">method</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>How to deliver the reward to the recipient.</p>  <table>   <thead>     <tr>       <th>Delivery Method</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td><code>EMAIL</code></td>       <td>Deliver the reward to the recipient by email</td>     </tr>     <tr>       <td><code>LINK</code></td>       <td>         <p>Deliver the reward to the recipient via a link.</p>         <p>The link can be retrieved on a successfully ordered reward via the <code>/rewards</code> or <code>/rewards/{id}</code> endpoint. That link must then be  delivered to the recipient out-of-band.</p>       </td>     </tr>     <tr>       <td><code>PHONE</code></td>       <td>Deliver the reward to the recipient by SMS</td>     </tr>   </tbody> </table> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">meta</code> </div> </td><td><span class=\"property-type\">object</span></td><td><p>Customizable reward delivery metadata, taking precedence over the related campaign settings.</p> </td></tr>  <tr>     <td colspan=\"3\">       <details>         <summary>Show object properties</summary>         <table>   <thead>     <tr>       <th>Property</th>       <th>Type</th>       <th>Description</th>     </tr>   </thead>   <tbody class=\"object-schema-table-body\">     <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">sender_name</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>The &quot;sender name&quot; used in the delivery. If it&#39;s an email reward, &quot;via Tremendous&quot; will be appended to the value. Please note that you cannot customize the sender email.</p> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">subject_line</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>The subject line used in the delivery.</p> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">message</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>The content of the message of the reward, shown in the email / SMS and on the landing page.</p> </td></tr>   </tbody> </table>  </tr>    </tbody> </table>  </tr>    </tbody> </table>  </tr>    </tbody> </table>  </div>   ### Funding sources  There are different ways to pay for gift cards and rewards on Tremendous. Every payment mechanism is called a \"funding source\".  You can retrieve a list of all available funding sources by using the [Funding sources API endpoint](https://tremendous.readme.io/reference/core-funding-source-index).  The Tremendous API sandbox environment comes with a single funding source that allows you to spend up to $5,000 in *fake money* to test the API. [Learn more about the sandbox environment](https://tremendous.readme.io/reference/sandbox).  The HTTP status code `200` on the response will be used to indicate success.  After processing successfully the reward gets queued to be delivered to it\'s recipient (for delivery method `EMAIL` and `PHONE`). Delivery will happen asynchronously, after the response has been sent.  ### Idempotence  Requests issued with the same external_id are idempotent.  Submitting an order with an already existing `external_id`, will result in a `201` response code. In this case the response will return a representation of the already existing order in the response body. 
+         * Every time you want to send out a reward through Tremendous you need to create an order for it.  > 📘 Getting started with your first order > > Our step-by-step guide walks you through everything you need > to send your first gift card through the Tremendous API: > > <strong><a style=\"display: block; margin-top: 20px;\" href=\"/docs/sending-rewards-intro\">Check it out!</a></strong>  ## Request body  <div class=\"object-schema-request-schema\">   <table>   <thead>     <tr>       <th>Property</th>       <th>Type</th>       <th>Description</th>     </tr>   </thead>   <tbody class=\"object-schema-table-body\">     <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">external_id</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>Reference for this order, supplied by the customer.</p>  <p>When set, <code>external_id</code> makes order idempotent. All requests that use the same <code>external_id</code> after the initial order creation, will result in a response that returns the data of the initially created order. The response will have a <code>201</code> response code. These responses <strong>fail</strong> to create any further orders.</p>  <p>It also allows for retrieving by <code>external_id</code> instead of <code>id</code> only.</p> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">payment</code> </div> </td><td><span class=\"property-type\">object</span></td><td></td></tr>  <tr>     <td colspan=\"3\">       <details>         <summary>Show object properties</summary>         <table>   <thead>     <tr>       <th>Property</th>       <th>Type</th>       <th>Description</th>     </tr>   </thead>   <tbody class=\"object-schema-table-body\">     <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">funding_source_id</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>Tremendous ID of the funding source that will be used to pay for the order. Use <code>balance</code> to use your Tremendous&#39;s balance.</p> </td></tr>   </tbody> </table>  </tr>  <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">reward</code> </div> </td><td><span class=\"property-type\">object</span></td><td><p>A single reward, sent to a recipient. A reward is always part of an order.</p>  <p>Either <code>products</code> or <code>campaign_id</code> must be specified.</p> </td></tr>  <tr>     <td colspan=\"3\">       <details>         <summary>Show object properties</summary>         <table>   <thead>     <tr>       <th>Property</th>       <th>Type</th>       <th>Description</th>     </tr>   </thead>   <tbody class=\"object-schema-table-body\">     <tr class=\"property-conditional-hint-response-only\"><td><div class=\"property-name\">   <code class=\"property-name\">id</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>Tremendous ID of the reward</p> </td></tr> <tr class=\"property-conditional-hint-response-only\"><td><div class=\"property-name\">   <code class=\"property-name\">order_id</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>Tremendous ID of the order this reward is part of.</p> </td></tr> <tr class=\"property-conditional-hint-response-only\"><td><div class=\"property-name\">   <code class=\"property-name\">created_at</code> </div> </td><td><span class=\"property-type\">string</span> <span class=\"property-format\">date-time</span></td><td><p>Date the reward was created</p> </td></tr> <tr class=\"property-conditional-hint-request-only\"><td><div class=\"property-name\">   <code class=\"property-name\">campaign_id</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>ID of the campaign in your account, that defines the available products (different gift cards, charity, etc.) that the recipient can choose from.</p> </td></tr> <tr class=\"property-conditional-hint-request-only\"><td><div class=\"property-name\">   <code class=\"property-name\">products</code> </div> </td><td><span class=\"property-type\">array</span> <span class=\"property-format\">string</span></td><td><p>List of IDs of product (different gift cards, charity, etc.) that will be available to the recipient to choose from.</p>  <p>Providing a <code>products</code> array will override the products made available by the campaign specified using the <code>campaign_id</code> property unless the <code>products</code> array is empty. It will <em>not</em> override other campaign attributes, like the message and customization of the look and feel.</p> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">value</code> </div> </td><td><span class=\"property-type\">object</span></td><td></td></tr>  <tr>     <td colspan=\"3\">       <details>         <summary>Show object properties</summary>         <table>   <thead>     <tr>       <th>Property</th>       <th>Type</th>       <th>Description</th>     </tr>   </thead>   <tbody class=\"object-schema-table-body\">     <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">denomination</code> </div> </td><td><span class=\"property-type\">number</span> <span class=\"property-format\">double</span></td><td><p>Amount of the reward</p> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">currency_code</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>Currency of the reward</p> </td></tr>   </tbody> </table>  </tr>  <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">recipient</code> </div> </td><td><span class=\"property-type\">object</span></td><td><p>Details of the recipient of the reward</p> </td></tr>  <tr>     <td colspan=\"3\">       <details>         <summary>Show object properties</summary>         <table>   <thead>     <tr>       <th>Property</th>       <th>Type</th>       <th>Description</th>     </tr>   </thead>   <tbody class=\"object-schema-table-body\">     <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">name</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>Name of the recipient</p> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">email</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>Email address of the recipient</p> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">phone</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>Phone number of the recipient. For non-US phone numbers, specify the country code (prefixed with +).</p> </td></tr>   </tbody> </table>  </tr>  <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">deliver_at</code> </div> </td><td><span class=\"property-type\">string</span> <span class=\"property-format\">date</span></td><td><p>Timestamp of reward delivery within the next year. Note that if date-time is provided, the time values will be ignored.</p> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">custom_fields</code> </div> </td><td><span class=\"property-type\">array</span></td><td></td></tr>  <tr>     <td colspan=\"3\">       <details>         <summary>Show array item type</summary>         <table>   <thead>     <tr>       <th>Property</th>       <th>Type</th>       <th>Description</th>     </tr>   </thead>   <tbody class=\"object-schema-table-body\">     <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">id</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>Tremendous ID of the custom field</p> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">value</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>Value of the custom field</p> </td></tr> <tr class=\"property-conditional-hint-response-only\"><td><div class=\"property-name\">   <code class=\"property-name\">label</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>Label of the custom field</p> </td></tr>   </tbody> </table>  </tr>  <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">language</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>Set this to translate the redemption experience for this reward. Pass a 2-letter <a href=\"https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes\">ISO-639-1 code</a> for the desired language. Defaults to <code>en</code>.</p> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">delivery</code> </div> </td><td><span class=\"property-type\">object</span></td><td><p>Details on how the reward is delivered to the recipient.</p> </td></tr>  <tr>     <td colspan=\"3\">       <details>         <summary>Show object properties</summary>         <table>   <thead>     <tr>       <th>Property</th>       <th>Type</th>       <th>Description</th>     </tr>   </thead>   <tbody class=\"object-schema-table-body\">     <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">method</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>How to deliver the reward to the recipient.</p>  <table>   <thead>     <tr>       <th>Delivery Method</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td><code>EMAIL</code></td>       <td>Deliver the reward to the recipient by email</td>     </tr>     <tr>       <td><code>LINK</code></td>       <td>         <p>Deliver the reward to the recipient via a link.</p>         <p>The link can be retrieved on a successfully ordered reward via the <code>/rewards</code> or <code>/rewards/{id}</code> endpoint. That link must then be  delivered to the recipient out-of-band.</p>       </td>     </tr>     <tr>       <td><code>PHONE</code></td>       <td>Deliver the reward to the recipient by SMS</td>     </tr>   </tbody> </table> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">meta</code> </div> </td><td><span class=\"property-type\">object</span></td><td><p>Customizable reward delivery metadata, taking precedence over the related campaign settings.</p> </td></tr>  <tr>     <td colspan=\"3\">       <details>         <summary>Show object properties</summary>         <table>   <thead>     <tr>       <th>Property</th>       <th>Type</th>       <th>Description</th>     </tr>   </thead>   <tbody class=\"object-schema-table-body\">     <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">sender_name</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>The &quot;sender name&quot; used in the delivery. If it&#39;s an email reward, &quot;via Tremendous&quot; will be appended to the value. Please note that you cannot customize the sender email.</p> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">subject_line</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>The subject line used in the delivery.</p> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">message</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>The content of the message of the reward, shown in the email / SMS and on the landing page.</p> </td></tr>   </tbody> </table>  </tr>    </tbody> </table>  </tr>    </tbody> </table>  </tr>    </tbody> </table>  </div>   ### Funding sources  There are different ways to pay for gift cards and rewards on Tremendous. Every payment mechanism is called a \"funding source\".  You can retrieve a list of all available funding sources by using the [Funding sources API endpoint](https://developers.tremendous.com/reference/list-funding-sources).  The Tremendous API sandbox environment comes with a single funding source that allows you to spend up to $5,000 in *fake money* to test the API. [Learn more about the sandbox environment](https://developers.tremendous.com/docs/sandbox-environment).  The HTTP status code `200` on the response will be used to indicate success.  After processing successfully the reward gets queued to be delivered to it\'s recipient (for delivery method `EMAIL` and `PHONE`). Delivery will happen asynchronously, after the response has been sent.  ### Idempotence  Requests issued with the same `external_id` are idempotent.  Submitting an order with an already existing `external_id` will not create a new order.  If the payload is the same as a previously issued order, our API will return a `201` response code, along with a representation of the already-existing order in the response body.  If the `external_id` used is for an order with different parameters (e.g. amount, recipient), our API will return a `409` response code, indicating a conflicting resource. 
          * @summary Create order
          * @param {CreateOrderRequest} createOrderRequest Order to create
          * @param {*} [options] Override http request option.
@@ -9792,7 +11082,7 @@ export const OrdersApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Every time you want to send out a reward through Tremendous you need to create an order for it.  > 📘 Getting started with your first order > > Our step-by-step guide walks you through everything you need > to send your first gift card through the Tremendous API: > > <strong><a style=\"display: block; margin-top: 20px;\" href=\"/docs/sending-rewards-intro\">Check it out!</a></strong>  ## Request body  <div class=\"object-schema-request-schema\">   <table>   <thead>     <tr>       <th>Property</th>       <th>Type</th>       <th>Description</th>     </tr>   </thead>   <tbody class=\"object-schema-table-body\">     <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">external_id</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>Reference for this order, supplied by the customer.</p>  <p>When set, <code>external_id</code> makes order idempotent. All requests that use the same <code>external_id</code> after the initial order creation, will result in a response that returns the data of the initially created order. The response will have a <code>201</code> response code. These responses <strong>fail</strong> to create any further orders.</p>  <p>It also allows for retrieving by <code>external_id</code> instead of <code>id</code> only.</p> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">payment</code> </div> </td><td><span class=\"property-type\">object</span></td><td></td></tr>  <tr>     <td colspan=\"3\">       <details>         <summary>Show object properties</summary>         <table>   <thead>     <tr>       <th>Property</th>       <th>Type</th>       <th>Description</th>     </tr>   </thead>   <tbody class=\"object-schema-table-body\">     <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">funding_source_id</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>Tremendous ID of the funding source that will be used to pay for the order. Use <code>balance</code> to use your Tremendous&#39;s balance.</p> </td></tr>   </tbody> </table>  </tr>  <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">reward</code> </div> </td><td><span class=\"property-type\">object</span></td><td><p>A single reward, sent to a recipient. A reward is always part of an order.</p>  <p>Either <code>products</code> or <code>campaign_id</code> must be specified.</p> </td></tr>  <tr>     <td colspan=\"3\">       <details>         <summary>Show object properties</summary>         <table>   <thead>     <tr>       <th>Property</th>       <th>Type</th>       <th>Description</th>     </tr>   </thead>   <tbody class=\"object-schema-table-body\">     <tr class=\"property-conditional-hint-response-only\"><td><div class=\"property-name\">   <code class=\"property-name\">id</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>Tremendous ID of the reward</p> </td></tr> <tr class=\"property-conditional-hint-response-only\"><td><div class=\"property-name\">   <code class=\"property-name\">order_id</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>Tremendous ID of the order this reward is part of.</p> </td></tr> <tr class=\"property-conditional-hint-response-only\"><td><div class=\"property-name\">   <code class=\"property-name\">created_at</code> </div> </td><td><span class=\"property-type\">string</span> <span class=\"property-format\">date-time</span></td><td><p>Date the reward was created</p> </td></tr> <tr class=\"property-conditional-hint-request-only\"><td><div class=\"property-name\">   <code class=\"property-name\">campaign_id</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>ID of the campaign in your account, that defines the available products (different gift cards, charity, etc.) that the recipient can choose from.</p> </td></tr> <tr class=\"property-conditional-hint-request-only\"><td><div class=\"property-name\">   <code class=\"property-name\">products</code> </div> </td><td><span class=\"property-type\">array</span> <span class=\"property-format\">string</span></td><td><p>List of IDs of product (different gift cards, charity, etc.) that will be available to the recipient to choose from.</p>  <p>Providing a <code>products</code> array will override the products made available by the campaign specified using the <code>campaign_id</code> property unless the <code>products</code> array is empty. It will <em>not</em> override other campaign attributes, like the message and customization of the look and feel.</p> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">value</code> </div> </td><td><span class=\"property-type\">object</span></td><td></td></tr>  <tr>     <td colspan=\"3\">       <details>         <summary>Show object properties</summary>         <table>   <thead>     <tr>       <th>Property</th>       <th>Type</th>       <th>Description</th>     </tr>   </thead>   <tbody class=\"object-schema-table-body\">     <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">denomination</code> </div> </td><td><span class=\"property-type\">number</span> <span class=\"property-format\">double</span></td><td><p>Amount of the reward</p> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">currency_code</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>Currency of the reward</p> </td></tr>   </tbody> </table>  </tr>  <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">recipient</code> </div> </td><td><span class=\"property-type\">object</span></td><td><p>Details of the recipient of the reward</p> </td></tr>  <tr>     <td colspan=\"3\">       <details>         <summary>Show object properties</summary>         <table>   <thead>     <tr>       <th>Property</th>       <th>Type</th>       <th>Description</th>     </tr>   </thead>   <tbody class=\"object-schema-table-body\">     <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">name</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>Name of the recipient</p> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">email</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>Email address of the recipient</p> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">phone</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>Phone number of the recipient. For non-US phone numbers, specify the country code (prefixed with +).</p> </td></tr>   </tbody> </table>  </tr>  <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">deliver_at</code> </div> </td><td><span class=\"property-type\">string</span> <span class=\"property-format\">date</span></td><td><p>Timestamp of reward delivery within the next year. Note that if date-time is provided, the time values will be ignored.</p> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">custom_fields</code> </div> </td><td><span class=\"property-type\">array</span></td><td></td></tr>  <tr>     <td colspan=\"3\">       <details>         <summary>Show array item type</summary>         <table>   <thead>     <tr>       <th>Property</th>       <th>Type</th>       <th>Description</th>     </tr>   </thead>   <tbody class=\"object-schema-table-body\">     <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">id</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>Tremendous ID of the custom field</p> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">value</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>Value of the custom field</p> </td></tr> <tr class=\"property-conditional-hint-response-only\"><td><div class=\"property-name\">   <code class=\"property-name\">label</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>Label of the custom field</p> </td></tr>   </tbody> </table>  </tr>  <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">language</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>Set this to translate the redemption experience for this reward. Pass a 2-letter <a href=\"https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes\">ISO-639-1 code</a> for the desired language. Defaults to <code>en</code>.</p> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">delivery</code> </div> </td><td><span class=\"property-type\">object</span></td><td><p>Details on how the reward is delivered to the recipient.</p> </td></tr>  <tr>     <td colspan=\"3\">       <details>         <summary>Show object properties</summary>         <table>   <thead>     <tr>       <th>Property</th>       <th>Type</th>       <th>Description</th>     </tr>   </thead>   <tbody class=\"object-schema-table-body\">     <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">method</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>How to deliver the reward to the recipient.</p>  <table>   <thead>     <tr>       <th>Delivery Method</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td><code>EMAIL</code></td>       <td>Deliver the reward to the recipient by email</td>     </tr>     <tr>       <td><code>LINK</code></td>       <td>         <p>Deliver the reward to the recipient via a link.</p>         <p>The link can be retrieved on a successfully ordered reward via the <code>/rewards</code> or <code>/rewards/{id}</code> endpoint. That link must then be  delivered to the recipient out-of-band.</p>       </td>     </tr>     <tr>       <td><code>PHONE</code></td>       <td>Deliver the reward to the recipient by SMS</td>     </tr>   </tbody> </table> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">meta</code> </div> </td><td><span class=\"property-type\">object</span></td><td><p>Customizable reward delivery metadata, taking precedence over the related campaign settings.</p> </td></tr>  <tr>     <td colspan=\"3\">       <details>         <summary>Show object properties</summary>         <table>   <thead>     <tr>       <th>Property</th>       <th>Type</th>       <th>Description</th>     </tr>   </thead>   <tbody class=\"object-schema-table-body\">     <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">sender_name</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>The &quot;sender name&quot; used in the delivery. If it&#39;s an email reward, &quot;via Tremendous&quot; will be appended to the value. Please note that you cannot customize the sender email.</p> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">subject_line</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>The subject line used in the delivery.</p> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">message</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>The content of the message of the reward, shown in the email / SMS and on the landing page.</p> </td></tr>   </tbody> </table>  </tr>    </tbody> </table>  </tr>    </tbody> </table>  </tr>    </tbody> </table>  </div>   ### Funding sources  There are different ways to pay for gift cards and rewards on Tremendous. Every payment mechanism is called a \"funding source\".  You can retrieve a list of all available funding sources by using the [Funding sources API endpoint](https://tremendous.readme.io/reference/core-funding-source-index).  The Tremendous API sandbox environment comes with a single funding source that allows you to spend up to $5,000 in *fake money* to test the API. [Learn more about the sandbox environment](https://tremendous.readme.io/reference/sandbox).  The HTTP status code `200` on the response will be used to indicate success.  After processing successfully the reward gets queued to be delivered to it\'s recipient (for delivery method `EMAIL` and `PHONE`). Delivery will happen asynchronously, after the response has been sent.  ### Idempotence  Requests issued with the same external_id are idempotent.  Submitting an order with an already existing `external_id`, will result in a `201` response code. In this case the response will return a representation of the already existing order in the response body. 
+         * Every time you want to send out a reward through Tremendous you need to create an order for it.  > 📘 Getting started with your first order > > Our step-by-step guide walks you through everything you need > to send your first gift card through the Tremendous API: > > <strong><a style=\"display: block; margin-top: 20px;\" href=\"/docs/sending-rewards-intro\">Check it out!</a></strong>  ## Request body  <div class=\"object-schema-request-schema\">   <table>   <thead>     <tr>       <th>Property</th>       <th>Type</th>       <th>Description</th>     </tr>   </thead>   <tbody class=\"object-schema-table-body\">     <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">external_id</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>Reference for this order, supplied by the customer.</p>  <p>When set, <code>external_id</code> makes order idempotent. All requests that use the same <code>external_id</code> after the initial order creation, will result in a response that returns the data of the initially created order. The response will have a <code>201</code> response code. These responses <strong>fail</strong> to create any further orders.</p>  <p>It also allows for retrieving by <code>external_id</code> instead of <code>id</code> only.</p> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">payment</code> </div> </td><td><span class=\"property-type\">object</span></td><td></td></tr>  <tr>     <td colspan=\"3\">       <details>         <summary>Show object properties</summary>         <table>   <thead>     <tr>       <th>Property</th>       <th>Type</th>       <th>Description</th>     </tr>   </thead>   <tbody class=\"object-schema-table-body\">     <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">funding_source_id</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>Tremendous ID of the funding source that will be used to pay for the order. Use <code>balance</code> to use your Tremendous&#39;s balance.</p> </td></tr>   </tbody> </table>  </tr>  <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">reward</code> </div> </td><td><span class=\"property-type\">object</span></td><td><p>A single reward, sent to a recipient. A reward is always part of an order.</p>  <p>Either <code>products</code> or <code>campaign_id</code> must be specified.</p> </td></tr>  <tr>     <td colspan=\"3\">       <details>         <summary>Show object properties</summary>         <table>   <thead>     <tr>       <th>Property</th>       <th>Type</th>       <th>Description</th>     </tr>   </thead>   <tbody class=\"object-schema-table-body\">     <tr class=\"property-conditional-hint-response-only\"><td><div class=\"property-name\">   <code class=\"property-name\">id</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>Tremendous ID of the reward</p> </td></tr> <tr class=\"property-conditional-hint-response-only\"><td><div class=\"property-name\">   <code class=\"property-name\">order_id</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>Tremendous ID of the order this reward is part of.</p> </td></tr> <tr class=\"property-conditional-hint-response-only\"><td><div class=\"property-name\">   <code class=\"property-name\">created_at</code> </div> </td><td><span class=\"property-type\">string</span> <span class=\"property-format\">date-time</span></td><td><p>Date the reward was created</p> </td></tr> <tr class=\"property-conditional-hint-request-only\"><td><div class=\"property-name\">   <code class=\"property-name\">campaign_id</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>ID of the campaign in your account, that defines the available products (different gift cards, charity, etc.) that the recipient can choose from.</p> </td></tr> <tr class=\"property-conditional-hint-request-only\"><td><div class=\"property-name\">   <code class=\"property-name\">products</code> </div> </td><td><span class=\"property-type\">array</span> <span class=\"property-format\">string</span></td><td><p>List of IDs of product (different gift cards, charity, etc.) that will be available to the recipient to choose from.</p>  <p>Providing a <code>products</code> array will override the products made available by the campaign specified using the <code>campaign_id</code> property unless the <code>products</code> array is empty. It will <em>not</em> override other campaign attributes, like the message and customization of the look and feel.</p> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">value</code> </div> </td><td><span class=\"property-type\">object</span></td><td></td></tr>  <tr>     <td colspan=\"3\">       <details>         <summary>Show object properties</summary>         <table>   <thead>     <tr>       <th>Property</th>       <th>Type</th>       <th>Description</th>     </tr>   </thead>   <tbody class=\"object-schema-table-body\">     <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">denomination</code> </div> </td><td><span class=\"property-type\">number</span> <span class=\"property-format\">double</span></td><td><p>Amount of the reward</p> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">currency_code</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>Currency of the reward</p> </td></tr>   </tbody> </table>  </tr>  <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">recipient</code> </div> </td><td><span class=\"property-type\">object</span></td><td><p>Details of the recipient of the reward</p> </td></tr>  <tr>     <td colspan=\"3\">       <details>         <summary>Show object properties</summary>         <table>   <thead>     <tr>       <th>Property</th>       <th>Type</th>       <th>Description</th>     </tr>   </thead>   <tbody class=\"object-schema-table-body\">     <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">name</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>Name of the recipient</p> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">email</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>Email address of the recipient</p> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">phone</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>Phone number of the recipient. For non-US phone numbers, specify the country code (prefixed with +).</p> </td></tr>   </tbody> </table>  </tr>  <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">deliver_at</code> </div> </td><td><span class=\"property-type\">string</span> <span class=\"property-format\">date</span></td><td><p>Timestamp of reward delivery within the next year. Note that if date-time is provided, the time values will be ignored.</p> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">custom_fields</code> </div> </td><td><span class=\"property-type\">array</span></td><td></td></tr>  <tr>     <td colspan=\"3\">       <details>         <summary>Show array item type</summary>         <table>   <thead>     <tr>       <th>Property</th>       <th>Type</th>       <th>Description</th>     </tr>   </thead>   <tbody class=\"object-schema-table-body\">     <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">id</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>Tremendous ID of the custom field</p> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">value</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>Value of the custom field</p> </td></tr> <tr class=\"property-conditional-hint-response-only\"><td><div class=\"property-name\">   <code class=\"property-name\">label</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>Label of the custom field</p> </td></tr>   </tbody> </table>  </tr>  <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">language</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>Set this to translate the redemption experience for this reward. Pass a 2-letter <a href=\"https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes\">ISO-639-1 code</a> for the desired language. Defaults to <code>en</code>.</p> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">delivery</code> </div> </td><td><span class=\"property-type\">object</span></td><td><p>Details on how the reward is delivered to the recipient.</p> </td></tr>  <tr>     <td colspan=\"3\">       <details>         <summary>Show object properties</summary>         <table>   <thead>     <tr>       <th>Property</th>       <th>Type</th>       <th>Description</th>     </tr>   </thead>   <tbody class=\"object-schema-table-body\">     <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">method</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>How to deliver the reward to the recipient.</p>  <table>   <thead>     <tr>       <th>Delivery Method</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td><code>EMAIL</code></td>       <td>Deliver the reward to the recipient by email</td>     </tr>     <tr>       <td><code>LINK</code></td>       <td>         <p>Deliver the reward to the recipient via a link.</p>         <p>The link can be retrieved on a successfully ordered reward via the <code>/rewards</code> or <code>/rewards/{id}</code> endpoint. That link must then be  delivered to the recipient out-of-band.</p>       </td>     </tr>     <tr>       <td><code>PHONE</code></td>       <td>Deliver the reward to the recipient by SMS</td>     </tr>   </tbody> </table> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">meta</code> </div> </td><td><span class=\"property-type\">object</span></td><td><p>Customizable reward delivery metadata, taking precedence over the related campaign settings.</p> </td></tr>  <tr>     <td colspan=\"3\">       <details>         <summary>Show object properties</summary>         <table>   <thead>     <tr>       <th>Property</th>       <th>Type</th>       <th>Description</th>     </tr>   </thead>   <tbody class=\"object-schema-table-body\">     <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">sender_name</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>The &quot;sender name&quot; used in the delivery. If it&#39;s an email reward, &quot;via Tremendous&quot; will be appended to the value. Please note that you cannot customize the sender email.</p> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">subject_line</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>The subject line used in the delivery.</p> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">message</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>The content of the message of the reward, shown in the email / SMS and on the landing page.</p> </td></tr>   </tbody> </table>  </tr>    </tbody> </table>  </tr>    </tbody> </table>  </tr>    </tbody> </table>  </div>   ### Funding sources  There are different ways to pay for gift cards and rewards on Tremendous. Every payment mechanism is called a \"funding source\".  You can retrieve a list of all available funding sources by using the [Funding sources API endpoint](https://developers.tremendous.com/reference/list-funding-sources).  The Tremendous API sandbox environment comes with a single funding source that allows you to spend up to $5,000 in *fake money* to test the API. [Learn more about the sandbox environment](https://developers.tremendous.com/docs/sandbox-environment).  The HTTP status code `200` on the response will be used to indicate success.  After processing successfully the reward gets queued to be delivered to it\'s recipient (for delivery method `EMAIL` and `PHONE`). Delivery will happen asynchronously, after the response has been sent.  ### Idempotence  Requests issued with the same `external_id` are idempotent.  Submitting an order with an already existing `external_id` will not create a new order.  If the payload is the same as a previously issued order, our API will return a `201` response code, along with a representation of the already-existing order in the response body.  If the `external_id` used is for an order with different parameters (e.g. amount, recipient), our API will return a `409` response code, indicating a conflicting resource. 
          * @summary Create order
          * @param {CreateOrderRequest} createOrderRequest Order to create
          * @param {*} [options] Override http request option.
@@ -9869,7 +11159,7 @@ export const OrdersApiFactory = function (configuration?: Configuration, basePat
             return localVarFp.approveOrder(id, options).then((request) => request(axios, basePath));
         },
         /**
-         * Every time you want to send out a reward through Tremendous you need to create an order for it.  > 📘 Getting started with your first order > > Our step-by-step guide walks you through everything you need > to send your first gift card through the Tremendous API: > > <strong><a style=\"display: block; margin-top: 20px;\" href=\"/docs/sending-rewards-intro\">Check it out!</a></strong>  ## Request body  <div class=\"object-schema-request-schema\">   <table>   <thead>     <tr>       <th>Property</th>       <th>Type</th>       <th>Description</th>     </tr>   </thead>   <tbody class=\"object-schema-table-body\">     <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">external_id</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>Reference for this order, supplied by the customer.</p>  <p>When set, <code>external_id</code> makes order idempotent. All requests that use the same <code>external_id</code> after the initial order creation, will result in a response that returns the data of the initially created order. The response will have a <code>201</code> response code. These responses <strong>fail</strong> to create any further orders.</p>  <p>It also allows for retrieving by <code>external_id</code> instead of <code>id</code> only.</p> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">payment</code> </div> </td><td><span class=\"property-type\">object</span></td><td></td></tr>  <tr>     <td colspan=\"3\">       <details>         <summary>Show object properties</summary>         <table>   <thead>     <tr>       <th>Property</th>       <th>Type</th>       <th>Description</th>     </tr>   </thead>   <tbody class=\"object-schema-table-body\">     <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">funding_source_id</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>Tremendous ID of the funding source that will be used to pay for the order. Use <code>balance</code> to use your Tremendous&#39;s balance.</p> </td></tr>   </tbody> </table>  </tr>  <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">reward</code> </div> </td><td><span class=\"property-type\">object</span></td><td><p>A single reward, sent to a recipient. A reward is always part of an order.</p>  <p>Either <code>products</code> or <code>campaign_id</code> must be specified.</p> </td></tr>  <tr>     <td colspan=\"3\">       <details>         <summary>Show object properties</summary>         <table>   <thead>     <tr>       <th>Property</th>       <th>Type</th>       <th>Description</th>     </tr>   </thead>   <tbody class=\"object-schema-table-body\">     <tr class=\"property-conditional-hint-response-only\"><td><div class=\"property-name\">   <code class=\"property-name\">id</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>Tremendous ID of the reward</p> </td></tr> <tr class=\"property-conditional-hint-response-only\"><td><div class=\"property-name\">   <code class=\"property-name\">order_id</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>Tremendous ID of the order this reward is part of.</p> </td></tr> <tr class=\"property-conditional-hint-response-only\"><td><div class=\"property-name\">   <code class=\"property-name\">created_at</code> </div> </td><td><span class=\"property-type\">string</span> <span class=\"property-format\">date-time</span></td><td><p>Date the reward was created</p> </td></tr> <tr class=\"property-conditional-hint-request-only\"><td><div class=\"property-name\">   <code class=\"property-name\">campaign_id</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>ID of the campaign in your account, that defines the available products (different gift cards, charity, etc.) that the recipient can choose from.</p> </td></tr> <tr class=\"property-conditional-hint-request-only\"><td><div class=\"property-name\">   <code class=\"property-name\">products</code> </div> </td><td><span class=\"property-type\">array</span> <span class=\"property-format\">string</span></td><td><p>List of IDs of product (different gift cards, charity, etc.) that will be available to the recipient to choose from.</p>  <p>Providing a <code>products</code> array will override the products made available by the campaign specified using the <code>campaign_id</code> property unless the <code>products</code> array is empty. It will <em>not</em> override other campaign attributes, like the message and customization of the look and feel.</p> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">value</code> </div> </td><td><span class=\"property-type\">object</span></td><td></td></tr>  <tr>     <td colspan=\"3\">       <details>         <summary>Show object properties</summary>         <table>   <thead>     <tr>       <th>Property</th>       <th>Type</th>       <th>Description</th>     </tr>   </thead>   <tbody class=\"object-schema-table-body\">     <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">denomination</code> </div> </td><td><span class=\"property-type\">number</span> <span class=\"property-format\">double</span></td><td><p>Amount of the reward</p> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">currency_code</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>Currency of the reward</p> </td></tr>   </tbody> </table>  </tr>  <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">recipient</code> </div> </td><td><span class=\"property-type\">object</span></td><td><p>Details of the recipient of the reward</p> </td></tr>  <tr>     <td colspan=\"3\">       <details>         <summary>Show object properties</summary>         <table>   <thead>     <tr>       <th>Property</th>       <th>Type</th>       <th>Description</th>     </tr>   </thead>   <tbody class=\"object-schema-table-body\">     <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">name</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>Name of the recipient</p> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">email</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>Email address of the recipient</p> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">phone</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>Phone number of the recipient. For non-US phone numbers, specify the country code (prefixed with +).</p> </td></tr>   </tbody> </table>  </tr>  <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">deliver_at</code> </div> </td><td><span class=\"property-type\">string</span> <span class=\"property-format\">date</span></td><td><p>Timestamp of reward delivery within the next year. Note that if date-time is provided, the time values will be ignored.</p> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">custom_fields</code> </div> </td><td><span class=\"property-type\">array</span></td><td></td></tr>  <tr>     <td colspan=\"3\">       <details>         <summary>Show array item type</summary>         <table>   <thead>     <tr>       <th>Property</th>       <th>Type</th>       <th>Description</th>     </tr>   </thead>   <tbody class=\"object-schema-table-body\">     <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">id</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>Tremendous ID of the custom field</p> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">value</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>Value of the custom field</p> </td></tr> <tr class=\"property-conditional-hint-response-only\"><td><div class=\"property-name\">   <code class=\"property-name\">label</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>Label of the custom field</p> </td></tr>   </tbody> </table>  </tr>  <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">language</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>Set this to translate the redemption experience for this reward. Pass a 2-letter <a href=\"https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes\">ISO-639-1 code</a> for the desired language. Defaults to <code>en</code>.</p> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">delivery</code> </div> </td><td><span class=\"property-type\">object</span></td><td><p>Details on how the reward is delivered to the recipient.</p> </td></tr>  <tr>     <td colspan=\"3\">       <details>         <summary>Show object properties</summary>         <table>   <thead>     <tr>       <th>Property</th>       <th>Type</th>       <th>Description</th>     </tr>   </thead>   <tbody class=\"object-schema-table-body\">     <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">method</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>How to deliver the reward to the recipient.</p>  <table>   <thead>     <tr>       <th>Delivery Method</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td><code>EMAIL</code></td>       <td>Deliver the reward to the recipient by email</td>     </tr>     <tr>       <td><code>LINK</code></td>       <td>         <p>Deliver the reward to the recipient via a link.</p>         <p>The link can be retrieved on a successfully ordered reward via the <code>/rewards</code> or <code>/rewards/{id}</code> endpoint. That link must then be  delivered to the recipient out-of-band.</p>       </td>     </tr>     <tr>       <td><code>PHONE</code></td>       <td>Deliver the reward to the recipient by SMS</td>     </tr>   </tbody> </table> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">meta</code> </div> </td><td><span class=\"property-type\">object</span></td><td><p>Customizable reward delivery metadata, taking precedence over the related campaign settings.</p> </td></tr>  <tr>     <td colspan=\"3\">       <details>         <summary>Show object properties</summary>         <table>   <thead>     <tr>       <th>Property</th>       <th>Type</th>       <th>Description</th>     </tr>   </thead>   <tbody class=\"object-schema-table-body\">     <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">sender_name</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>The &quot;sender name&quot; used in the delivery. If it&#39;s an email reward, &quot;via Tremendous&quot; will be appended to the value. Please note that you cannot customize the sender email.</p> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">subject_line</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>The subject line used in the delivery.</p> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">message</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>The content of the message of the reward, shown in the email / SMS and on the landing page.</p> </td></tr>   </tbody> </table>  </tr>    </tbody> </table>  </tr>    </tbody> </table>  </tr>    </tbody> </table>  </div>   ### Funding sources  There are different ways to pay for gift cards and rewards on Tremendous. Every payment mechanism is called a \"funding source\".  You can retrieve a list of all available funding sources by using the [Funding sources API endpoint](https://tremendous.readme.io/reference/core-funding-source-index).  The Tremendous API sandbox environment comes with a single funding source that allows you to spend up to $5,000 in *fake money* to test the API. [Learn more about the sandbox environment](https://tremendous.readme.io/reference/sandbox).  The HTTP status code `200` on the response will be used to indicate success.  After processing successfully the reward gets queued to be delivered to it\'s recipient (for delivery method `EMAIL` and `PHONE`). Delivery will happen asynchronously, after the response has been sent.  ### Idempotence  Requests issued with the same external_id are idempotent.  Submitting an order with an already existing `external_id`, will result in a `201` response code. In this case the response will return a representation of the already existing order in the response body. 
+         * Every time you want to send out a reward through Tremendous you need to create an order for it.  > 📘 Getting started with your first order > > Our step-by-step guide walks you through everything you need > to send your first gift card through the Tremendous API: > > <strong><a style=\"display: block; margin-top: 20px;\" href=\"/docs/sending-rewards-intro\">Check it out!</a></strong>  ## Request body  <div class=\"object-schema-request-schema\">   <table>   <thead>     <tr>       <th>Property</th>       <th>Type</th>       <th>Description</th>     </tr>   </thead>   <tbody class=\"object-schema-table-body\">     <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">external_id</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>Reference for this order, supplied by the customer.</p>  <p>When set, <code>external_id</code> makes order idempotent. All requests that use the same <code>external_id</code> after the initial order creation, will result in a response that returns the data of the initially created order. The response will have a <code>201</code> response code. These responses <strong>fail</strong> to create any further orders.</p>  <p>It also allows for retrieving by <code>external_id</code> instead of <code>id</code> only.</p> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">payment</code> </div> </td><td><span class=\"property-type\">object</span></td><td></td></tr>  <tr>     <td colspan=\"3\">       <details>         <summary>Show object properties</summary>         <table>   <thead>     <tr>       <th>Property</th>       <th>Type</th>       <th>Description</th>     </tr>   </thead>   <tbody class=\"object-schema-table-body\">     <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">funding_source_id</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>Tremendous ID of the funding source that will be used to pay for the order. Use <code>balance</code> to use your Tremendous&#39;s balance.</p> </td></tr>   </tbody> </table>  </tr>  <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">reward</code> </div> </td><td><span class=\"property-type\">object</span></td><td><p>A single reward, sent to a recipient. A reward is always part of an order.</p>  <p>Either <code>products</code> or <code>campaign_id</code> must be specified.</p> </td></tr>  <tr>     <td colspan=\"3\">       <details>         <summary>Show object properties</summary>         <table>   <thead>     <tr>       <th>Property</th>       <th>Type</th>       <th>Description</th>     </tr>   </thead>   <tbody class=\"object-schema-table-body\">     <tr class=\"property-conditional-hint-response-only\"><td><div class=\"property-name\">   <code class=\"property-name\">id</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>Tremendous ID of the reward</p> </td></tr> <tr class=\"property-conditional-hint-response-only\"><td><div class=\"property-name\">   <code class=\"property-name\">order_id</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>Tremendous ID of the order this reward is part of.</p> </td></tr> <tr class=\"property-conditional-hint-response-only\"><td><div class=\"property-name\">   <code class=\"property-name\">created_at</code> </div> </td><td><span class=\"property-type\">string</span> <span class=\"property-format\">date-time</span></td><td><p>Date the reward was created</p> </td></tr> <tr class=\"property-conditional-hint-request-only\"><td><div class=\"property-name\">   <code class=\"property-name\">campaign_id</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>ID of the campaign in your account, that defines the available products (different gift cards, charity, etc.) that the recipient can choose from.</p> </td></tr> <tr class=\"property-conditional-hint-request-only\"><td><div class=\"property-name\">   <code class=\"property-name\">products</code> </div> </td><td><span class=\"property-type\">array</span> <span class=\"property-format\">string</span></td><td><p>List of IDs of product (different gift cards, charity, etc.) that will be available to the recipient to choose from.</p>  <p>Providing a <code>products</code> array will override the products made available by the campaign specified using the <code>campaign_id</code> property unless the <code>products</code> array is empty. It will <em>not</em> override other campaign attributes, like the message and customization of the look and feel.</p> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">value</code> </div> </td><td><span class=\"property-type\">object</span></td><td></td></tr>  <tr>     <td colspan=\"3\">       <details>         <summary>Show object properties</summary>         <table>   <thead>     <tr>       <th>Property</th>       <th>Type</th>       <th>Description</th>     </tr>   </thead>   <tbody class=\"object-schema-table-body\">     <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">denomination</code> </div> </td><td><span class=\"property-type\">number</span> <span class=\"property-format\">double</span></td><td><p>Amount of the reward</p> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">currency_code</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>Currency of the reward</p> </td></tr>   </tbody> </table>  </tr>  <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">recipient</code> </div> </td><td><span class=\"property-type\">object</span></td><td><p>Details of the recipient of the reward</p> </td></tr>  <tr>     <td colspan=\"3\">       <details>         <summary>Show object properties</summary>         <table>   <thead>     <tr>       <th>Property</th>       <th>Type</th>       <th>Description</th>     </tr>   </thead>   <tbody class=\"object-schema-table-body\">     <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">name</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>Name of the recipient</p> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">email</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>Email address of the recipient</p> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">phone</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>Phone number of the recipient. For non-US phone numbers, specify the country code (prefixed with +).</p> </td></tr>   </tbody> </table>  </tr>  <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">deliver_at</code> </div> </td><td><span class=\"property-type\">string</span> <span class=\"property-format\">date</span></td><td><p>Timestamp of reward delivery within the next year. Note that if date-time is provided, the time values will be ignored.</p> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">custom_fields</code> </div> </td><td><span class=\"property-type\">array</span></td><td></td></tr>  <tr>     <td colspan=\"3\">       <details>         <summary>Show array item type</summary>         <table>   <thead>     <tr>       <th>Property</th>       <th>Type</th>       <th>Description</th>     </tr>   </thead>   <tbody class=\"object-schema-table-body\">     <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">id</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>Tremendous ID of the custom field</p> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">value</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>Value of the custom field</p> </td></tr> <tr class=\"property-conditional-hint-response-only\"><td><div class=\"property-name\">   <code class=\"property-name\">label</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>Label of the custom field</p> </td></tr>   </tbody> </table>  </tr>  <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">language</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>Set this to translate the redemption experience for this reward. Pass a 2-letter <a href=\"https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes\">ISO-639-1 code</a> for the desired language. Defaults to <code>en</code>.</p> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">delivery</code> </div> </td><td><span class=\"property-type\">object</span></td><td><p>Details on how the reward is delivered to the recipient.</p> </td></tr>  <tr>     <td colspan=\"3\">       <details>         <summary>Show object properties</summary>         <table>   <thead>     <tr>       <th>Property</th>       <th>Type</th>       <th>Description</th>     </tr>   </thead>   <tbody class=\"object-schema-table-body\">     <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">method</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>How to deliver the reward to the recipient.</p>  <table>   <thead>     <tr>       <th>Delivery Method</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td><code>EMAIL</code></td>       <td>Deliver the reward to the recipient by email</td>     </tr>     <tr>       <td><code>LINK</code></td>       <td>         <p>Deliver the reward to the recipient via a link.</p>         <p>The link can be retrieved on a successfully ordered reward via the <code>/rewards</code> or <code>/rewards/{id}</code> endpoint. That link must then be  delivered to the recipient out-of-band.</p>       </td>     </tr>     <tr>       <td><code>PHONE</code></td>       <td>Deliver the reward to the recipient by SMS</td>     </tr>   </tbody> </table> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">meta</code> </div> </td><td><span class=\"property-type\">object</span></td><td><p>Customizable reward delivery metadata, taking precedence over the related campaign settings.</p> </td></tr>  <tr>     <td colspan=\"3\">       <details>         <summary>Show object properties</summary>         <table>   <thead>     <tr>       <th>Property</th>       <th>Type</th>       <th>Description</th>     </tr>   </thead>   <tbody class=\"object-schema-table-body\">     <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">sender_name</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>The &quot;sender name&quot; used in the delivery. If it&#39;s an email reward, &quot;via Tremendous&quot; will be appended to the value. Please note that you cannot customize the sender email.</p> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">subject_line</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>The subject line used in the delivery.</p> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">message</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>The content of the message of the reward, shown in the email / SMS and on the landing page.</p> </td></tr>   </tbody> </table>  </tr>    </tbody> </table>  </tr>    </tbody> </table>  </tr>    </tbody> </table>  </div>   ### Funding sources  There are different ways to pay for gift cards and rewards on Tremendous. Every payment mechanism is called a \"funding source\".  You can retrieve a list of all available funding sources by using the [Funding sources API endpoint](https://developers.tremendous.com/reference/list-funding-sources).  The Tremendous API sandbox environment comes with a single funding source that allows you to spend up to $5,000 in *fake money* to test the API. [Learn more about the sandbox environment](https://developers.tremendous.com/docs/sandbox-environment).  The HTTP status code `200` on the response will be used to indicate success.  After processing successfully the reward gets queued to be delivered to it\'s recipient (for delivery method `EMAIL` and `PHONE`). Delivery will happen asynchronously, after the response has been sent.  ### Idempotence  Requests issued with the same `external_id` are idempotent.  Submitting an order with an already existing `external_id` will not create a new order.  If the payload is the same as a previously issued order, our API will return a `201` response code, along with a representation of the already-existing order in the response body.  If the `external_id` used is for an order with different parameters (e.g. amount, recipient), our API will return a `409` response code, indicating a conflicting resource. 
          * @summary Create order
          * @param {CreateOrderRequest} createOrderRequest Order to create
          * @param {*} [options] Override http request option.
@@ -9936,7 +11226,7 @@ export class OrdersApi extends BaseAPI {
     }
 
     /**
-     * Every time you want to send out a reward through Tremendous you need to create an order for it.  > 📘 Getting started with your first order > > Our step-by-step guide walks you through everything you need > to send your first gift card through the Tremendous API: > > <strong><a style=\"display: block; margin-top: 20px;\" href=\"/docs/sending-rewards-intro\">Check it out!</a></strong>  ## Request body  <div class=\"object-schema-request-schema\">   <table>   <thead>     <tr>       <th>Property</th>       <th>Type</th>       <th>Description</th>     </tr>   </thead>   <tbody class=\"object-schema-table-body\">     <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">external_id</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>Reference for this order, supplied by the customer.</p>  <p>When set, <code>external_id</code> makes order idempotent. All requests that use the same <code>external_id</code> after the initial order creation, will result in a response that returns the data of the initially created order. The response will have a <code>201</code> response code. These responses <strong>fail</strong> to create any further orders.</p>  <p>It also allows for retrieving by <code>external_id</code> instead of <code>id</code> only.</p> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">payment</code> </div> </td><td><span class=\"property-type\">object</span></td><td></td></tr>  <tr>     <td colspan=\"3\">       <details>         <summary>Show object properties</summary>         <table>   <thead>     <tr>       <th>Property</th>       <th>Type</th>       <th>Description</th>     </tr>   </thead>   <tbody class=\"object-schema-table-body\">     <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">funding_source_id</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>Tremendous ID of the funding source that will be used to pay for the order. Use <code>balance</code> to use your Tremendous&#39;s balance.</p> </td></tr>   </tbody> </table>  </tr>  <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">reward</code> </div> </td><td><span class=\"property-type\">object</span></td><td><p>A single reward, sent to a recipient. A reward is always part of an order.</p>  <p>Either <code>products</code> or <code>campaign_id</code> must be specified.</p> </td></tr>  <tr>     <td colspan=\"3\">       <details>         <summary>Show object properties</summary>         <table>   <thead>     <tr>       <th>Property</th>       <th>Type</th>       <th>Description</th>     </tr>   </thead>   <tbody class=\"object-schema-table-body\">     <tr class=\"property-conditional-hint-response-only\"><td><div class=\"property-name\">   <code class=\"property-name\">id</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>Tremendous ID of the reward</p> </td></tr> <tr class=\"property-conditional-hint-response-only\"><td><div class=\"property-name\">   <code class=\"property-name\">order_id</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>Tremendous ID of the order this reward is part of.</p> </td></tr> <tr class=\"property-conditional-hint-response-only\"><td><div class=\"property-name\">   <code class=\"property-name\">created_at</code> </div> </td><td><span class=\"property-type\">string</span> <span class=\"property-format\">date-time</span></td><td><p>Date the reward was created</p> </td></tr> <tr class=\"property-conditional-hint-request-only\"><td><div class=\"property-name\">   <code class=\"property-name\">campaign_id</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>ID of the campaign in your account, that defines the available products (different gift cards, charity, etc.) that the recipient can choose from.</p> </td></tr> <tr class=\"property-conditional-hint-request-only\"><td><div class=\"property-name\">   <code class=\"property-name\">products</code> </div> </td><td><span class=\"property-type\">array</span> <span class=\"property-format\">string</span></td><td><p>List of IDs of product (different gift cards, charity, etc.) that will be available to the recipient to choose from.</p>  <p>Providing a <code>products</code> array will override the products made available by the campaign specified using the <code>campaign_id</code> property unless the <code>products</code> array is empty. It will <em>not</em> override other campaign attributes, like the message and customization of the look and feel.</p> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">value</code> </div> </td><td><span class=\"property-type\">object</span></td><td></td></tr>  <tr>     <td colspan=\"3\">       <details>         <summary>Show object properties</summary>         <table>   <thead>     <tr>       <th>Property</th>       <th>Type</th>       <th>Description</th>     </tr>   </thead>   <tbody class=\"object-schema-table-body\">     <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">denomination</code> </div> </td><td><span class=\"property-type\">number</span> <span class=\"property-format\">double</span></td><td><p>Amount of the reward</p> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">currency_code</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>Currency of the reward</p> </td></tr>   </tbody> </table>  </tr>  <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">recipient</code> </div> </td><td><span class=\"property-type\">object</span></td><td><p>Details of the recipient of the reward</p> </td></tr>  <tr>     <td colspan=\"3\">       <details>         <summary>Show object properties</summary>         <table>   <thead>     <tr>       <th>Property</th>       <th>Type</th>       <th>Description</th>     </tr>   </thead>   <tbody class=\"object-schema-table-body\">     <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">name</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>Name of the recipient</p> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">email</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>Email address of the recipient</p> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">phone</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>Phone number of the recipient. For non-US phone numbers, specify the country code (prefixed with +).</p> </td></tr>   </tbody> </table>  </tr>  <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">deliver_at</code> </div> </td><td><span class=\"property-type\">string</span> <span class=\"property-format\">date</span></td><td><p>Timestamp of reward delivery within the next year. Note that if date-time is provided, the time values will be ignored.</p> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">custom_fields</code> </div> </td><td><span class=\"property-type\">array</span></td><td></td></tr>  <tr>     <td colspan=\"3\">       <details>         <summary>Show array item type</summary>         <table>   <thead>     <tr>       <th>Property</th>       <th>Type</th>       <th>Description</th>     </tr>   </thead>   <tbody class=\"object-schema-table-body\">     <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">id</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>Tremendous ID of the custom field</p> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">value</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>Value of the custom field</p> </td></tr> <tr class=\"property-conditional-hint-response-only\"><td><div class=\"property-name\">   <code class=\"property-name\">label</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>Label of the custom field</p> </td></tr>   </tbody> </table>  </tr>  <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">language</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>Set this to translate the redemption experience for this reward. Pass a 2-letter <a href=\"https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes\">ISO-639-1 code</a> for the desired language. Defaults to <code>en</code>.</p> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">delivery</code> </div> </td><td><span class=\"property-type\">object</span></td><td><p>Details on how the reward is delivered to the recipient.</p> </td></tr>  <tr>     <td colspan=\"3\">       <details>         <summary>Show object properties</summary>         <table>   <thead>     <tr>       <th>Property</th>       <th>Type</th>       <th>Description</th>     </tr>   </thead>   <tbody class=\"object-schema-table-body\">     <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">method</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>How to deliver the reward to the recipient.</p>  <table>   <thead>     <tr>       <th>Delivery Method</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td><code>EMAIL</code></td>       <td>Deliver the reward to the recipient by email</td>     </tr>     <tr>       <td><code>LINK</code></td>       <td>         <p>Deliver the reward to the recipient via a link.</p>         <p>The link can be retrieved on a successfully ordered reward via the <code>/rewards</code> or <code>/rewards/{id}</code> endpoint. That link must then be  delivered to the recipient out-of-band.</p>       </td>     </tr>     <tr>       <td><code>PHONE</code></td>       <td>Deliver the reward to the recipient by SMS</td>     </tr>   </tbody> </table> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">meta</code> </div> </td><td><span class=\"property-type\">object</span></td><td><p>Customizable reward delivery metadata, taking precedence over the related campaign settings.</p> </td></tr>  <tr>     <td colspan=\"3\">       <details>         <summary>Show object properties</summary>         <table>   <thead>     <tr>       <th>Property</th>       <th>Type</th>       <th>Description</th>     </tr>   </thead>   <tbody class=\"object-schema-table-body\">     <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">sender_name</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>The &quot;sender name&quot; used in the delivery. If it&#39;s an email reward, &quot;via Tremendous&quot; will be appended to the value. Please note that you cannot customize the sender email.</p> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">subject_line</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>The subject line used in the delivery.</p> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">message</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>The content of the message of the reward, shown in the email / SMS and on the landing page.</p> </td></tr>   </tbody> </table>  </tr>    </tbody> </table>  </tr>    </tbody> </table>  </tr>    </tbody> </table>  </div>   ### Funding sources  There are different ways to pay for gift cards and rewards on Tremendous. Every payment mechanism is called a \"funding source\".  You can retrieve a list of all available funding sources by using the [Funding sources API endpoint](https://tremendous.readme.io/reference/core-funding-source-index).  The Tremendous API sandbox environment comes with a single funding source that allows you to spend up to $5,000 in *fake money* to test the API. [Learn more about the sandbox environment](https://tremendous.readme.io/reference/sandbox).  The HTTP status code `200` on the response will be used to indicate success.  After processing successfully the reward gets queued to be delivered to it\'s recipient (for delivery method `EMAIL` and `PHONE`). Delivery will happen asynchronously, after the response has been sent.  ### Idempotence  Requests issued with the same external_id are idempotent.  Submitting an order with an already existing `external_id`, will result in a `201` response code. In this case the response will return a representation of the already existing order in the response body. 
+     * Every time you want to send out a reward through Tremendous you need to create an order for it.  > 📘 Getting started with your first order > > Our step-by-step guide walks you through everything you need > to send your first gift card through the Tremendous API: > > <strong><a style=\"display: block; margin-top: 20px;\" href=\"/docs/sending-rewards-intro\">Check it out!</a></strong>  ## Request body  <div class=\"object-schema-request-schema\">   <table>   <thead>     <tr>       <th>Property</th>       <th>Type</th>       <th>Description</th>     </tr>   </thead>   <tbody class=\"object-schema-table-body\">     <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">external_id</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>Reference for this order, supplied by the customer.</p>  <p>When set, <code>external_id</code> makes order idempotent. All requests that use the same <code>external_id</code> after the initial order creation, will result in a response that returns the data of the initially created order. The response will have a <code>201</code> response code. These responses <strong>fail</strong> to create any further orders.</p>  <p>It also allows for retrieving by <code>external_id</code> instead of <code>id</code> only.</p> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">payment</code> </div> </td><td><span class=\"property-type\">object</span></td><td></td></tr>  <tr>     <td colspan=\"3\">       <details>         <summary>Show object properties</summary>         <table>   <thead>     <tr>       <th>Property</th>       <th>Type</th>       <th>Description</th>     </tr>   </thead>   <tbody class=\"object-schema-table-body\">     <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">funding_source_id</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>Tremendous ID of the funding source that will be used to pay for the order. Use <code>balance</code> to use your Tremendous&#39;s balance.</p> </td></tr>   </tbody> </table>  </tr>  <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">reward</code> </div> </td><td><span class=\"property-type\">object</span></td><td><p>A single reward, sent to a recipient. A reward is always part of an order.</p>  <p>Either <code>products</code> or <code>campaign_id</code> must be specified.</p> </td></tr>  <tr>     <td colspan=\"3\">       <details>         <summary>Show object properties</summary>         <table>   <thead>     <tr>       <th>Property</th>       <th>Type</th>       <th>Description</th>     </tr>   </thead>   <tbody class=\"object-schema-table-body\">     <tr class=\"property-conditional-hint-response-only\"><td><div class=\"property-name\">   <code class=\"property-name\">id</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>Tremendous ID of the reward</p> </td></tr> <tr class=\"property-conditional-hint-response-only\"><td><div class=\"property-name\">   <code class=\"property-name\">order_id</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>Tremendous ID of the order this reward is part of.</p> </td></tr> <tr class=\"property-conditional-hint-response-only\"><td><div class=\"property-name\">   <code class=\"property-name\">created_at</code> </div> </td><td><span class=\"property-type\">string</span> <span class=\"property-format\">date-time</span></td><td><p>Date the reward was created</p> </td></tr> <tr class=\"property-conditional-hint-request-only\"><td><div class=\"property-name\">   <code class=\"property-name\">campaign_id</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>ID of the campaign in your account, that defines the available products (different gift cards, charity, etc.) that the recipient can choose from.</p> </td></tr> <tr class=\"property-conditional-hint-request-only\"><td><div class=\"property-name\">   <code class=\"property-name\">products</code> </div> </td><td><span class=\"property-type\">array</span> <span class=\"property-format\">string</span></td><td><p>List of IDs of product (different gift cards, charity, etc.) that will be available to the recipient to choose from.</p>  <p>Providing a <code>products</code> array will override the products made available by the campaign specified using the <code>campaign_id</code> property unless the <code>products</code> array is empty. It will <em>not</em> override other campaign attributes, like the message and customization of the look and feel.</p> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">value</code> </div> </td><td><span class=\"property-type\">object</span></td><td></td></tr>  <tr>     <td colspan=\"3\">       <details>         <summary>Show object properties</summary>         <table>   <thead>     <tr>       <th>Property</th>       <th>Type</th>       <th>Description</th>     </tr>   </thead>   <tbody class=\"object-schema-table-body\">     <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">denomination</code> </div> </td><td><span class=\"property-type\">number</span> <span class=\"property-format\">double</span></td><td><p>Amount of the reward</p> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">currency_code</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>Currency of the reward</p> </td></tr>   </tbody> </table>  </tr>  <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">recipient</code> </div> </td><td><span class=\"property-type\">object</span></td><td><p>Details of the recipient of the reward</p> </td></tr>  <tr>     <td colspan=\"3\">       <details>         <summary>Show object properties</summary>         <table>   <thead>     <tr>       <th>Property</th>       <th>Type</th>       <th>Description</th>     </tr>   </thead>   <tbody class=\"object-schema-table-body\">     <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">name</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>Name of the recipient</p> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">email</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>Email address of the recipient</p> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">phone</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>Phone number of the recipient. For non-US phone numbers, specify the country code (prefixed with +).</p> </td></tr>   </tbody> </table>  </tr>  <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">deliver_at</code> </div> </td><td><span class=\"property-type\">string</span> <span class=\"property-format\">date</span></td><td><p>Timestamp of reward delivery within the next year. Note that if date-time is provided, the time values will be ignored.</p> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">custom_fields</code> </div> </td><td><span class=\"property-type\">array</span></td><td></td></tr>  <tr>     <td colspan=\"3\">       <details>         <summary>Show array item type</summary>         <table>   <thead>     <tr>       <th>Property</th>       <th>Type</th>       <th>Description</th>     </tr>   </thead>   <tbody class=\"object-schema-table-body\">     <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">id</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>Tremendous ID of the custom field</p> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">value</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>Value of the custom field</p> </td></tr> <tr class=\"property-conditional-hint-response-only\"><td><div class=\"property-name\">   <code class=\"property-name\">label</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>Label of the custom field</p> </td></tr>   </tbody> </table>  </tr>  <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">language</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>Set this to translate the redemption experience for this reward. Pass a 2-letter <a href=\"https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes\">ISO-639-1 code</a> for the desired language. Defaults to <code>en</code>.</p> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">delivery</code> </div> </td><td><span class=\"property-type\">object</span></td><td><p>Details on how the reward is delivered to the recipient.</p> </td></tr>  <tr>     <td colspan=\"3\">       <details>         <summary>Show object properties</summary>         <table>   <thead>     <tr>       <th>Property</th>       <th>Type</th>       <th>Description</th>     </tr>   </thead>   <tbody class=\"object-schema-table-body\">     <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">method</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>How to deliver the reward to the recipient.</p>  <table>   <thead>     <tr>       <th>Delivery Method</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td><code>EMAIL</code></td>       <td>Deliver the reward to the recipient by email</td>     </tr>     <tr>       <td><code>LINK</code></td>       <td>         <p>Deliver the reward to the recipient via a link.</p>         <p>The link can be retrieved on a successfully ordered reward via the <code>/rewards</code> or <code>/rewards/{id}</code> endpoint. That link must then be  delivered to the recipient out-of-band.</p>       </td>     </tr>     <tr>       <td><code>PHONE</code></td>       <td>Deliver the reward to the recipient by SMS</td>     </tr>   </tbody> </table> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">meta</code> </div> </td><td><span class=\"property-type\">object</span></td><td><p>Customizable reward delivery metadata, taking precedence over the related campaign settings.</p> </td></tr>  <tr>     <td colspan=\"3\">       <details>         <summary>Show object properties</summary>         <table>   <thead>     <tr>       <th>Property</th>       <th>Type</th>       <th>Description</th>     </tr>   </thead>   <tbody class=\"object-schema-table-body\">     <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">sender_name</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>The &quot;sender name&quot; used in the delivery. If it&#39;s an email reward, &quot;via Tremendous&quot; will be appended to the value. Please note that you cannot customize the sender email.</p> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">subject_line</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>The subject line used in the delivery.</p> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">message</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>The content of the message of the reward, shown in the email / SMS and on the landing page.</p> </td></tr>   </tbody> </table>  </tr>    </tbody> </table>  </tr>    </tbody> </table>  </tr>    </tbody> </table>  </div>   ### Funding sources  There are different ways to pay for gift cards and rewards on Tremendous. Every payment mechanism is called a \"funding source\".  You can retrieve a list of all available funding sources by using the [Funding sources API endpoint](https://developers.tremendous.com/reference/list-funding-sources).  The Tremendous API sandbox environment comes with a single funding source that allows you to spend up to $5,000 in *fake money* to test the API. [Learn more about the sandbox environment](https://developers.tremendous.com/docs/sandbox-environment).  The HTTP status code `200` on the response will be used to indicate success.  After processing successfully the reward gets queued to be delivered to it\'s recipient (for delivery method `EMAIL` and `PHONE`). Delivery will happen asynchronously, after the response has been sent.  ### Idempotence  Requests issued with the same `external_id` are idempotent.  Submitting an order with an already existing `external_id` will not create a new order.  If the payload is the same as a previously issued order, our API will return a `201` response code, along with a representation of the already-existing order in the response body.  If the `external_id` used is for an order with different parameters (e.g. amount, recipient), our API will return a `409` response code, indicating a conflicting resource. 
      * @summary Create order
      * @param {CreateOrderRequest} createOrderRequest Order to create
      * @param {*} [options] Override http request option.
@@ -10605,7 +11895,7 @@ export const ReportsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async createReport(createReportRequest: CreateReportRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CreateReport201Response>> {
+        async createReport(createReportRequest: CreateReportRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CreateReport200Response>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.createReport(createReportRequest, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['ReportsApi.createReport']?.[localVarOperationServerIndex]?.url;
@@ -10618,7 +11908,7 @@ export const ReportsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getReport(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CreateReport201Response>> {
+        async getReport(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CreateReport200Response>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getReport(id, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['ReportsApi.getReport']?.[localVarOperationServerIndex]?.url;
@@ -10641,7 +11931,7 @@ export const ReportsApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        createReport(createReportRequest: CreateReportRequest, options?: RawAxiosRequestConfig): AxiosPromise<CreateReport201Response> {
+        createReport(createReportRequest: CreateReportRequest, options?: RawAxiosRequestConfig): AxiosPromise<CreateReport200Response> {
             return localVarFp.createReport(createReportRequest, options).then((request) => request(axios, basePath));
         },
         /**
@@ -10651,7 +11941,7 @@ export const ReportsApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getReport(id: string, options?: RawAxiosRequestConfig): AxiosPromise<CreateReport201Response> {
+        getReport(id: string, options?: RawAxiosRequestConfig): AxiosPromise<CreateReport200Response> {
             return localVarFp.getReport(id, options).then((request) => request(axios, basePath));
         },
     };
@@ -10698,16 +11988,16 @@ export class ReportsApi extends BaseAPI {
 export const RewardsApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
-         * Generate a redemption link for the reward identified by the `id` in the URL 
-         * @summary Generate a reward URL
-         * @param {string} id ID of the reward
+         * Cancels a reward, identified by the given `id` in the URL. Only non-expired rewards with a delivery failure can be canceled. 
+         * @summary Cancel reward
+         * @param {string} id ID of the reward that should be canceled
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        generateRewardLink: async (id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        cancelReward: async (id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
-            assertParamExists('generateRewardLink', 'id', id)
-            const localVarPath = `/rewards/{id}/generate_link`
+            assertParamExists('cancelReward', 'id', id)
+            const localVarPath = `/rewards/{id}/cancel`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -10736,16 +12026,16 @@ export const RewardsApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Generate a temporary reward token identified by the `id` in the URL. These tokens are needed to render a reward when using [Tremendous Embed](https://github.com/tremendous-rewards/embed/blob/master/docs/documentation.md). The token is valid for 24 hours. 
-         * @summary Generate a reward token
+         * Generate a redemption link for the reward identified by the `id` in the URL 
+         * @summary Generate a reward URL
          * @param {string} id ID of the reward
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        generateRewardToken: async (id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        generateRewardLink: async (id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
-            assertParamExists('generateRewardToken', 'id', id)
-            const localVarPath = `/rewards/{id}/generate_embed_token`
+            assertParamExists('generateRewardLink', 'id', id)
+            const localVarPath = `/rewards/{id}/generate_link`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -10903,6 +12193,19 @@ export const RewardsApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = RewardsApiAxiosParamCreator(configuration)
     return {
         /**
+         * Cancels a reward, identified by the given `id` in the URL. Only non-expired rewards with a delivery failure can be canceled. 
+         * @summary Cancel reward
+         * @param {string} id ID of the reward that should be canceled
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async cancelReward(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.cancelReward(id, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['RewardsApi.cancelReward']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
          * Generate a redemption link for the reward identified by the `id` in the URL 
          * @summary Generate a reward URL
          * @param {string} id ID of the reward
@@ -10913,19 +12216,6 @@ export const RewardsApiFp = function(configuration?: Configuration) {
             const localVarAxiosArgs = await localVarAxiosParamCreator.generateRewardLink(id, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['RewardsApi.generateRewardLink']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * Generate a temporary reward token identified by the `id` in the URL. These tokens are needed to render a reward when using [Tremendous Embed](https://github.com/tremendous-rewards/embed/blob/master/docs/documentation.md). The token is valid for 24 hours. 
-         * @summary Generate a reward token
-         * @param {string} id ID of the reward
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async generateRewardToken(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GenerateRewardToken200Response>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.generateRewardToken(id, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['RewardsApi.generateRewardToken']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -10979,6 +12269,16 @@ export const RewardsApiFactory = function (configuration?: Configuration, basePa
     const localVarFp = RewardsApiFp(configuration)
     return {
         /**
+         * Cancels a reward, identified by the given `id` in the URL. Only non-expired rewards with a delivery failure can be canceled. 
+         * @summary Cancel reward
+         * @param {string} id ID of the reward that should be canceled
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        cancelReward(id: string, options?: RawAxiosRequestConfig): AxiosPromise<object> {
+            return localVarFp.cancelReward(id, options).then((request) => request(axios, basePath));
+        },
+        /**
          * Generate a redemption link for the reward identified by the `id` in the URL 
          * @summary Generate a reward URL
          * @param {string} id ID of the reward
@@ -10987,16 +12287,6 @@ export const RewardsApiFactory = function (configuration?: Configuration, basePa
          */
         generateRewardLink(id: string, options?: RawAxiosRequestConfig): AxiosPromise<GenerateRewardLink200Response> {
             return localVarFp.generateRewardLink(id, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Generate a temporary reward token identified by the `id` in the URL. These tokens are needed to render a reward when using [Tremendous Embed](https://github.com/tremendous-rewards/embed/blob/master/docs/documentation.md). The token is valid for 24 hours. 
-         * @summary Generate a reward token
-         * @param {string} id ID of the reward
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        generateRewardToken(id: string, options?: RawAxiosRequestConfig): AxiosPromise<GenerateRewardToken200Response> {
-            return localVarFp.generateRewardToken(id, options).then((request) => request(axios, basePath));
         },
         /**
          * Retrieve the reward, identified by the given `id` in the URL 
@@ -11040,6 +12330,18 @@ export const RewardsApiFactory = function (configuration?: Configuration, basePa
  */
 export class RewardsApi extends BaseAPI {
     /**
+     * Cancels a reward, identified by the given `id` in the URL. Only non-expired rewards with a delivery failure can be canceled. 
+     * @summary Cancel reward
+     * @param {string} id ID of the reward that should be canceled
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RewardsApi
+     */
+    public cancelReward(id: string, options?: RawAxiosRequestConfig) {
+        return RewardsApiFp(this.configuration).cancelReward(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
      * Generate a redemption link for the reward identified by the `id` in the URL 
      * @summary Generate a reward URL
      * @param {string} id ID of the reward
@@ -11049,18 +12351,6 @@ export class RewardsApi extends BaseAPI {
      */
     public generateRewardLink(id: string, options?: RawAxiosRequestConfig) {
         return RewardsApiFp(this.configuration).generateRewardLink(id, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * Generate a temporary reward token identified by the `id` in the URL. These tokens are needed to render a reward when using [Tremendous Embed](https://github.com/tremendous-rewards/embed/blob/master/docs/documentation.md). The token is valid for 24 hours. 
-     * @summary Generate a reward token
-     * @param {string} id ID of the reward
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof RewardsApi
-     */
-    public generateRewardToken(id: string, options?: RawAxiosRequestConfig) {
-        return RewardsApiFp(this.configuration).generateRewardToken(id, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
