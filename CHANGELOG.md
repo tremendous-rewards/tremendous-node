@@ -1,5 +1,21 @@
 # Changelog
 
+## [3.9.0](https://github.com/tremendous-rewards/tremendous-node/compare/tremendous-v3.8.0...tremendous-v3.9.0) (2025-06-09)
+
+
+### Features
+
+* add more fields to the Funding Source resource ([1a316f7](https://github.com/tremendous-rewards/tremendous-node/commit/1a316f78b1bb7eb9b4165c43ea4114c8bb862beb))
+* add support for the Cancel Reward endpoint ([1a316f7](https://github.com/tremendous-rewards/tremendous-node/commit/1a316f78b1bb7eb9b4165c43ea4114c8bb862beb))
+* add support for the Connected Organization and Connected ([1a316f7](https://github.com/tremendous-rewards/tremendous-node/commit/1a316f78b1bb7eb9b4165c43ea4114c8bb862beb))
+* regen SDK code ([#179](https://github.com/tremendous-rewards/tremendous-node/issues/179)) ([1a316f7](https://github.com/tremendous-rewards/tremendous-node/commit/1a316f78b1bb7eb9b4165c43ea4114c8bb862beb))
+* update fields regarding disclosures on the Products resource ([1a316f7](https://github.com/tremendous-rewards/tremendous-node/commit/1a316f78b1bb7eb9b4165c43ea4114c8bb862beb))
+
+
+### Bug Fixes
+
+* expect `200` instead of `201` when creating a Report or a Campaign ([1a316f7](https://github.com/tremendous-rewards/tremendous-node/commit/1a316f78b1bb7eb9b4165c43ea4114c8bb862beb))
+
 ## [3.8.0](https://github.com/tremendous-rewards/tremendous-node/compare/tremendous-v3.7.0...tremendous-v3.8.0) (2024-12-03)
 
 
