@@ -3076,6 +3076,63 @@ export interface GetReward200Response {
     'reward': ListRewards200ResponseRewardsInner;
 }
 /**
+ * 
+ * @export
+ * @interface InlineObject
+ */
+export interface InlineObject {
+    /**
+     * HTTP status code of the response
+     * @type {number}
+     * @memberof InlineObject
+     */
+    'status'?: number;
+    /**
+     * Error message
+     * @type {string}
+     * @memberof InlineObject
+     */
+    'error'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface InlineObject1
+ */
+export interface InlineObject1 {
+    /**
+     * 
+     * @type {InlineObject1Reward}
+     * @memberof InlineObject1
+     */
+    'reward': InlineObject1Reward;
+}
+/**
+ * The redemption token for a reward.
+ * @export
+ * @interface InlineObject1Reward
+ */
+export interface InlineObject1Reward {
+    /**
+     * Tremendous ID of the reward
+     * @type {string}
+     * @memberof InlineObject1Reward
+     */
+    'id'?: string;
+    /**
+     * The token to redeem the reward. 
+     * @type {string}
+     * @memberof InlineObject1Reward
+     */
+    'token'?: string;
+    /**
+     * Date the token expires
+     * @type {string}
+     * @memberof InlineObject1Reward
+     */
+    'expires_at'?: string;
+}
+/**
  * Invoices are instruments to fund your Tremendous account\'s balance.  Invoices can be created by your organization programatically. Once we receive your payment, the invoice is marked as `PAID` and we add the respective funds to your account\'s balance. 
  * @export
  * @interface Invoice
