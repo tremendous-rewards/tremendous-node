@@ -1,5 +1,20 @@
 # Changelog
 
+## [3.10.0](https://github.com/tremendous-rewards/tremendous-node/compare/tremendous-v3.9.0...tremendous-v3.10.0) (2025-07-28)
+
+
+### Features
+
+* add credit_limit_cents to funding source for commercial invoicing ([0b441ef](https://github.com/tremendous-rewards/tremendous-node/commit/0b441efbd075451874fe55e61e686a59d4165b7e))
+* include invoice data in funding sources schema ([0b441ef](https://github.com/tremendous-rewards/tremendous-node/commit/0b441efbd075451874fe55e61e686a59d4165b7e))
+* regenerate SDK ([#194](https://github.com/tremendous-rewards/tremendous-node/issues/194)) ([0b441ef](https://github.com/tremendous-rewards/tremendous-node/commit/0b441efbd075451874fe55e61e686a59d4165b7e))
+* update limit param in List rewards ([0b441ef](https://github.com/tremendous-rewards/tremendous-node/commit/0b441efbd075451874fe55e61e686a59d4165b7e)), closes [#181](https://github.com/tremendous-rewards/tremendous-node/issues/181)
+
+
+### Bug Fixes
+
+* update amount_money to amount in topup api ([0b441ef](https://github.com/tremendous-rewards/tremendous-node/commit/0b441efbd075451874fe55e61e686a59d4165b7e))
+
 ## [3.9.0](https://github.com/tremendous-rewards/tremendous-node/compare/tremendous-v3.8.0...tremendous-v3.9.0) (2025-06-09)
 
 

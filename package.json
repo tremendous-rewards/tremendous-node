@@ -1,6 +1,6 @@
 {
   "name": "tremendous",
-  "version": "3.9.0",
+  "version": "3.10.0",
   "description": "A node.js client for the Tremendous API",
   "keywords": [
     "tremendous",
