@@ -1,11 +1,7 @@
 # Changelog
 
-## [4.0.0](https://github.com/tremendous-rewards/tremendous-node/compare/tremendous-v3.9.0...tremendous-v4.0.0) (2025-07-28)
+## [3.10.0](https://github.com/tremendous-rewards/tremendous-node/compare/tremendous-v3.9.0...tremendous-v3.10.0) (2025-07-28)
 
-
-### ⚠ BREAKING CHANGES
-
-* update amount_money to amount in topup api
 
 ### Features
 
