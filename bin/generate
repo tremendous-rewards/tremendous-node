@@ -2,12 +2,15 @@
 
 set -e
 
+DIR="$(dirname "$(realpath "$0")")"
+
 test -f "$1" && spec="$1" || spec=$(./bin/download-spec)
 
+openapi_generator_version=$(xargs < "${DIR}/../.openapi-generator/VERSION")
 docker run --rm \
   -v ./:/output \
   -v $(realpath $spec):/spec.yml \
-  openapitools/openapi-generator-cli:v7.8.0 generate \
+  "openapitools/openapi-generator-cli:v${openapi_generator_version}" generate \
   -i /spec.yml \
   -g typescript-axios \
   -o /output \

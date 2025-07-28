@@ -298,7 +298,8 @@ export const Channel = {
     Decipher: 'DECIPHER',
     Qualtrics: 'QUALTRICS',
     Typeform: 'TYPEFORM',
-    SurveyMonkey: 'SURVEY MONKEY'
+    SurveyMonkey: 'SURVEY MONKEY',
+    Yotpo: 'YOTPO'
 } as const;
 
 export type Channel = typeof Channel[keyof typeof Channel];
@@ -883,7 +884,8 @@ export const CreateOrder200ResponseOrderChannelEnum = {
     Decipher: 'DECIPHER',
     Qualtrics: 'QUALTRICS',
     Typeform: 'TYPEFORM',
-    SurveyMonkey: 'SURVEY MONKEY'
+    SurveyMonkey: 'SURVEY MONKEY',
+    Yotpo: 'YOTPO'
 } as const;
 
 export type CreateOrder200ResponseOrderChannelEnum = typeof CreateOrder200ResponseOrderChannelEnum[keyof typeof CreateOrder200ResponseOrderChannelEnum];
@@ -2611,13 +2613,13 @@ export interface FundingSource {
      */
     'method': FundingSourceMethodEnum;
     /**
-     * Indicates the level of access granted for using this funding source.  Permissions is an array containing the following:   * `api_orders`   * `dashboard_orders`   * `balance_funding` 
+     * Indicates which actions this funding source can perform.   <table>     <thead>       <tr>         <th>Permission</th>         <th>Description</th>         </tr>     </thead>     <tbody>       <tr>         <td><code>api_orders</code></td>         <td>Usable for orders via API.</td>       </tr>       <tr>         <td><code>dashboard_orders</code></td>         <td>Usable for orders via Tremendous dashboard.</td>       </tr>       <tr>         <td><code>balance_funding</code></td>         <td>Usable to add funds to a balance (via dashboard or API).</td>       </tr>     </tbody>   </table> 
      * @type {Array<string>}
      * @memberof FundingSource
      */
     'usage_permissions'?: Array<FundingSourceUsagePermissionsEnum>;
     /**
-     * Status of the funding_source 
+     * Status of the funding_source    <table>     <thead>       <tr>         <th>Status</th>         <th>Description</th>         </tr>     </thead>     <tbody>       <tr>         <td><code>active</code></td>         <td>Ready for use.</td>       </tr>       <tr>         <td><code>deleted</code></td>         <td>Manually removed, and not usable.</td>       </tr>       <tr>         <td><code>pending_confirmation</code></td>         <td>Awaiting verification of ownership.</td>       </tr>       <tr>         <td><code>failed</code></td>         <td>Last payment attempt failed, and not usable (contact Tremendous support to reinstate).</td>       </tr>     </tbody>   </table> 
      * @type {string}
      * @memberof FundingSource
      */
@@ -3072,6 +3074,63 @@ export interface GetReward200Response {
      * @memberof GetReward200Response
      */
     'reward': ListRewards200ResponseRewardsInner;
+}
+/**
+ * 
+ * @export
+ * @interface InlineObject
+ */
+export interface InlineObject {
+    /**
+     * HTTP status code of the response
+     * @type {number}
+     * @memberof InlineObject
+     */
+    'status'?: number;
+    /**
+     * Error message
+     * @type {string}
+     * @memberof InlineObject
+     */
+    'error'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface InlineObject1
+ */
+export interface InlineObject1 {
+    /**
+     * 
+     * @type {InlineObject1Reward}
+     * @memberof InlineObject1
+     */
+    'reward': InlineObject1Reward;
+}
+/**
+ * The redemption token for a reward.
+ * @export
+ * @interface InlineObject1Reward
+ */
+export interface InlineObject1Reward {
+    /**
+     * Tremendous ID of the reward
+     * @type {string}
+     * @memberof InlineObject1Reward
+     */
+    'id'?: string;
+    /**
+     * The token to redeem the reward. 
+     * @type {string}
+     * @memberof InlineObject1Reward
+     */
+    'token'?: string;
+    /**
+     * Date the token expires
+     * @type {string}
+     * @memberof InlineObject1Reward
+     */
+    'expires_at'?: string;
 }
 /**
  * Invoices are instruments to fund your Tremendous account\'s balance.  Invoices can be created by your organization programatically. Once we receive your payment, the invoice is marked as `PAID` and we add the respective funds to your account\'s balance. 
@@ -3853,13 +3912,13 @@ export interface ListFundingSources200ResponseFundingSourcesInner {
      */
     'method': ListFundingSources200ResponseFundingSourcesInnerMethodEnum;
     /**
-     * Indicates the level of access granted for using this funding source.  Permissions is an array containing the following:   * `api_orders`   * `dashboard_orders`   * `balance_funding` 
+     * Indicates which actions this funding source can perform.   <table>     <thead>       <tr>         <th>Permission</th>         <th>Description</th>         </tr>     </thead>     <tbody>       <tr>         <td><code>api_orders</code></td>         <td>Usable for orders via API.</td>       </tr>       <tr>         <td><code>dashboard_orders</code></td>         <td>Usable for orders via Tremendous dashboard.</td>       </tr>       <tr>         <td><code>balance_funding</code></td>         <td>Usable to add funds to a balance (via dashboard or API).</td>       </tr>     </tbody>   </table> 
      * @type {Array<string>}
      * @memberof ListFundingSources200ResponseFundingSourcesInner
      */
     'usage_permissions'?: Array<ListFundingSources200ResponseFundingSourcesInnerUsagePermissionsEnum>;
     /**
-     * Status of the funding_source 
+     * Status of the funding_source    <table>     <thead>       <tr>         <th>Status</th>         <th>Description</th>         </tr>     </thead>     <tbody>       <tr>         <td><code>active</code></td>         <td>Ready for use.</td>       </tr>       <tr>         <td><code>deleted</code></td>         <td>Manually removed, and not usable.</td>       </tr>       <tr>         <td><code>pending_confirmation</code></td>         <td>Awaiting verification of ownership.</td>       </tr>       <tr>         <td><code>failed</code></td>         <td>Last payment attempt failed, and not usable (contact Tremendous support to reinstate).</td>       </tr>     </tbody>   </table> 
      * @type {string}
      * @memberof ListFundingSources200ResponseFundingSourcesInner
      */
@@ -3916,7 +3975,7 @@ export type ListFundingSources200ResponseFundingSourcesInnerTypeEnum = typeof Li
  */
 export interface ListFundingSources200ResponseFundingSourcesInnerMeta {
     /**
-     * **Only available when `method` is set to `balance`.**  Available amount for this funding source (in Cents USD) 
+     * **Only exists for balance and commercial invoicing.**  For balance: available amount (in cents USD) For commercial invoicing: available credit amount calculated as (credit limit - outstanding balance) (in cents USD) 
      * @type {number}
      * @memberof ListFundingSources200ResponseFundingSourcesInnerMeta
      */
@@ -3927,6 +3986,12 @@ export interface ListFundingSources200ResponseFundingSourcesInnerMeta {
      * @memberof ListFundingSources200ResponseFundingSourcesInnerMeta
      */
     'pending_cents'?: number;
+    /**
+     * **Only exists for commercial invoicing.**  Available credit limit (in cents USD) 
+     * @type {number}
+     * @memberof ListFundingSources200ResponseFundingSourcesInnerMeta
+     */
+    'credit_limit_cents'?: number;
     /**
      * **Only available when `method` is set to `bank_account` or `credit_card`.**  Name of the holder of the bank account or credit_card 
      * @type {string}
@@ -3999,6 +4064,78 @@ export interface ListFundingSources200ResponseFundingSourcesInnerMeta {
      * @memberof ListFundingSources200ResponseFundingSourcesInnerMeta
      */
     'last_payment_failed_at'?: string | null;
+    /**
+     * **Only available when `method` is set to `invoice`.**  Type of invoice account (e.g., commercial, pro_forma, prefunding_only) 
+     * @type {string}
+     * @memberof ListFundingSources200ResponseFundingSourcesInnerMeta
+     */
+    'invoice_type'?: string;
+    /**
+     * **Only available when `method` is set to `invoice` and `invoice_type` is `commercial`.**  Billing interval for commercial invoice generation (e.g., daily, weekly, monthly, twice_monthly). Returns `null` for pro forma invoices. 
+     * @type {string}
+     * @memberof ListFundingSources200ResponseFundingSourcesInnerMeta
+     */
+    'interval'?: string | null;
+    /**
+     * **Only available when `method` is set to `invoice` and `invoice_type` is `commercial`.**  Day of the week when commercial invoices are generated (\"0\"=Sunday, \"1\"=Monday, etc.). Returns `null` for pro forma invoices. 
+     * @type {string}
+     * @memberof ListFundingSources200ResponseFundingSourcesInnerMeta
+     */
+    'day_of_week'?: string | null;
+    /**
+     * **Only available when `method` is set to `invoice`.**  Net payment terms in days (e.g., \"30\" for Net 30) 
+     * @type {string}
+     * @memberof ListFundingSources200ResponseFundingSourcesInnerMeta
+     */
+    'net'?: string;
+    /**
+     * **Only available when `method` is set to `invoice`.**  Company name for invoice billing 
+     * @type {string}
+     * @memberof ListFundingSources200ResponseFundingSourcesInnerMeta
+     */
+    'company_name'?: string;
+    /**
+     * **Only available when `method` is set to `invoice`.**  Primary billing address line 
+     * @type {string}
+     * @memberof ListFundingSources200ResponseFundingSourcesInnerMeta
+     */
+    'address_1'?: string;
+    /**
+     * **Only available when `method` is set to `invoice`.**  Secondary billing address line 
+     * @type {string}
+     * @memberof ListFundingSources200ResponseFundingSourcesInnerMeta
+     */
+    'address_2'?: string;
+    /**
+     * **Only available when `method` is set to `invoice`.**  Billing address city 
+     * @type {string}
+     * @memberof ListFundingSources200ResponseFundingSourcesInnerMeta
+     */
+    'city'?: string;
+    /**
+     * **Only available when `method` is set to `invoice`.**  Billing address state or province 
+     * @type {string}
+     * @memberof ListFundingSources200ResponseFundingSourcesInnerMeta
+     */
+    'state'?: string;
+    /**
+     * **Only available when `method` is set to `invoice`.**  Billing address postal code 
+     * @type {string}
+     * @memberof ListFundingSources200ResponseFundingSourcesInnerMeta
+     */
+    'zip'?: string;
+    /**
+     * **Only available when `method` is set to `invoice`.**  Contact phone number for billing 
+     * @type {string}
+     * @memberof ListFundingSources200ResponseFundingSourcesInnerMeta
+     */
+    'phone'?: string;
+    /**
+     * **Only available when `method` is set to `invoice`.**  Email addresses for invoice delivery (comma-separated) 
+     * @type {string}
+     * @memberof ListFundingSources200ResponseFundingSourcesInnerMeta
+     */
+    'emails'?: string;
     /**
      * 
      * @type {ListFundingSources200ResponseFundingSourcesInnerMetaFailureDetails}
@@ -4311,7 +4448,8 @@ export const ListOrders200ResponseOrdersInnerChannelEnum = {
     Decipher: 'DECIPHER',
     Qualtrics: 'QUALTRICS',
     Typeform: 'TYPEFORM',
-    SurveyMonkey: 'SURVEY MONKEY'
+    SurveyMonkey: 'SURVEY MONKEY',
+    Yotpo: 'YOTPO'
 } as const;
 
 export type ListOrders200ResponseOrdersInnerChannelEnum = typeof ListOrders200ResponseOrdersInnerChannelEnum[keyof typeof ListOrders200ResponseOrdersInnerChannelEnum];
@@ -5494,7 +5632,8 @@ export const OrderChannelEnum = {
     Decipher: 'DECIPHER',
     Qualtrics: 'QUALTRICS',
     Typeform: 'TYPEFORM',
-    SurveyMonkey: 'SURVEY MONKEY'
+    SurveyMonkey: 'SURVEY MONKEY',
+    Yotpo: 'YOTPO'
 } as const;
 
 export type OrderChannelEnum = typeof OrderChannelEnum[keyof typeof OrderChannelEnum];
@@ -5572,7 +5711,8 @@ export const OrderBaseChannelEnum = {
     Decipher: 'DECIPHER',
     Qualtrics: 'QUALTRICS',
     Typeform: 'TYPEFORM',
-    SurveyMonkey: 'SURVEY MONKEY'
+    SurveyMonkey: 'SURVEY MONKEY',
+    Yotpo: 'YOTPO'
 } as const;
 
 export type OrderBaseChannelEnum = typeof OrderBaseChannelEnum[keyof typeof OrderBaseChannelEnum];
@@ -5711,7 +5851,8 @@ export const OrderWithLinkChannelEnum = {
     Decipher: 'DECIPHER',
     Qualtrics: 'QUALTRICS',
     Typeform: 'TYPEFORM',
-    SurveyMonkey: 'SURVEY MONKEY'
+    SurveyMonkey: 'SURVEY MONKEY',
+    Yotpo: 'YOTPO'
 } as const;
 
 export type OrderWithLinkChannelEnum = typeof OrderWithLinkChannelEnum[keyof typeof OrderWithLinkChannelEnum];
@@ -5862,7 +6003,8 @@ export const OrderWithoutLinkChannelEnum = {
     Decipher: 'DECIPHER',
     Qualtrics: 'QUALTRICS',
     Typeform: 'TYPEFORM',
-    SurveyMonkey: 'SURVEY MONKEY'
+    SurveyMonkey: 'SURVEY MONKEY',
+    Yotpo: 'YOTPO'
 } as const;
 
 export type OrderWithoutLinkChannelEnum = typeof OrderWithoutLinkChannelEnum[keyof typeof OrderWithoutLinkChannelEnum];
@@ -7529,7 +7671,8 @@ export const SingleRewardOrderWithLinkOrderChannelEnum = {
     Decipher: 'DECIPHER',
     Qualtrics: 'QUALTRICS',
     Typeform: 'TYPEFORM',
-    SurveyMonkey: 'SURVEY MONKEY'
+    SurveyMonkey: 'SURVEY MONKEY',
+    Yotpo: 'YOTPO'
 } as const;
 
 export type SingleRewardOrderWithLinkOrderChannelEnum = typeof SingleRewardOrderWithLinkOrderChannelEnum[keyof typeof SingleRewardOrderWithLinkOrderChannelEnum];
@@ -7626,7 +7769,8 @@ export const SingleRewardOrderWithoutLinkOrderChannelEnum = {
     Decipher: 'DECIPHER',
     Qualtrics: 'QUALTRICS',
     Typeform: 'TYPEFORM',
-    SurveyMonkey: 'SURVEY MONKEY'
+    SurveyMonkey: 'SURVEY MONKEY',
+    Yotpo: 'YOTPO'
 } as const;
 
 export type SingleRewardOrderWithoutLinkOrderChannelEnum = typeof SingleRewardOrderWithoutLinkOrderChannelEnum[keyof typeof SingleRewardOrderWithoutLinkOrderChannelEnum];
@@ -9960,7 +10104,7 @@ export const FundingSourcesApiAxiosParamCreator = function (configuration?: Conf
             };
         },
         /**
-         * Retrieve a list of all funding sources available for ordering through the API in your organization\'s account. 
+         * Retrieve a list of all funding sources in your organization\'s account. 
          * @summary List funding sources
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -10017,7 +10161,7 @@ export const FundingSourcesApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Retrieve a list of all funding sources available for ordering through the API in your organization\'s account. 
+         * Retrieve a list of all funding sources in your organization\'s account. 
          * @summary List funding sources
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -10049,7 +10193,7 @@ export const FundingSourcesApiFactory = function (configuration?: Configuration,
             return localVarFp.getFundingSource(id, options).then((request) => request(axios, basePath));
         },
         /**
-         * Retrieve a list of all funding sources available for ordering through the API in your organization\'s account. 
+         * Retrieve a list of all funding sources in your organization\'s account. 
          * @summary List funding sources
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -10080,7 +10224,7 @@ export class FundingSourcesApi extends BaseAPI {
     }
 
     /**
-     * Retrieve a list of all funding sources available for ordering through the API in your organization\'s account. 
+     * Retrieve a list of all funding sources in your organization\'s account. 
      * @summary List funding sources
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -10964,7 +11108,7 @@ export const OrdersApiAxiosParamCreator = function (configuration?: Configuratio
          * @param {string} [externalId] Only return results with a matching external_id.
          * @param {string} [createdAtGte] Only return results where the created_at field is greater than or equal to the supplied value. The string needs to be an ISO 8601 datetime.
          * @param {string} [createdAtLte] Only return results where the created_at field is less than or equal to the supplied value. The string needs to be an ISO 8601 datetime.
-         * @param {number} [limit] Limits the number of orders listed. The maximum value is 100 and the default is 10.
+         * @param {number} [limit] Limits the number of orders listed. The maximum value is 500 and the default is 10.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -11115,7 +11259,7 @@ export const OrdersApiFp = function(configuration?: Configuration) {
          * @param {string} [externalId] Only return results with a matching external_id.
          * @param {string} [createdAtGte] Only return results where the created_at field is greater than or equal to the supplied value. The string needs to be an ISO 8601 datetime.
          * @param {string} [createdAtLte] Only return results where the created_at field is less than or equal to the supplied value. The string needs to be an ISO 8601 datetime.
-         * @param {number} [limit] Limits the number of orders listed. The maximum value is 100 and the default is 10.
+         * @param {number} [limit] Limits the number of orders listed. The maximum value is 500 and the default is 10.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -11186,7 +11330,7 @@ export const OrdersApiFactory = function (configuration?: Configuration, basePat
          * @param {string} [externalId] Only return results with a matching external_id.
          * @param {string} [createdAtGte] Only return results where the created_at field is greater than or equal to the supplied value. The string needs to be an ISO 8601 datetime.
          * @param {string} [createdAtLte] Only return results where the created_at field is less than or equal to the supplied value. The string needs to be an ISO 8601 datetime.
-         * @param {number} [limit] Limits the number of orders listed. The maximum value is 100 and the default is 10.
+         * @param {number} [limit] Limits the number of orders listed. The maximum value is 500 and the default is 10.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -11257,7 +11401,7 @@ export class OrdersApi extends BaseAPI {
      * @param {string} [externalId] Only return results with a matching external_id.
      * @param {string} [createdAtGte] Only return results where the created_at field is greater than or equal to the supplied value. The string needs to be an ISO 8601 datetime.
      * @param {string} [createdAtLte] Only return results where the created_at field is less than or equal to the supplied value. The string needs to be an ISO 8601 datetime.
-     * @param {number} [limit] Limits the number of orders listed. The maximum value is 100 and the default is 10.
+     * @param {number} [limit] Limits the number of orders listed. The maximum value is 500 and the default is 10.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof OrdersApi
@@ -12105,10 +12249,11 @@ export const RewardsApiAxiosParamCreator = function (configuration?: Configurati
          * Retrieve a list of all created rewards 
          * @summary List rewards
          * @param {number} [offset] Offsets the returned list by the given number of rewards. The returned rewards are ordered (and offsetted) by their creation date (DESC).
+         * @param {number} [limit] Limits the number of rewards listed. The maximum value is 500 and the default is 100.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listRewards: async (offset?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        listRewards: async (offset?: number, limit?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/rewards`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -12127,6 +12272,10 @@ export const RewardsApiAxiosParamCreator = function (configuration?: Configurati
 
             if (offset !== undefined) {
                 localVarQueryParameter['offset'] = offset;
+            }
+
+            if (limit !== undefined) {
+                localVarQueryParameter['limit'] = limit;
             }
 
 
@@ -12235,11 +12384,12 @@ export const RewardsApiFp = function(configuration?: Configuration) {
          * Retrieve a list of all created rewards 
          * @summary List rewards
          * @param {number} [offset] Offsets the returned list by the given number of rewards. The returned rewards are ordered (and offsetted) by their creation date (DESC).
+         * @param {number} [limit] Limits the number of rewards listed. The maximum value is 500 and the default is 100.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async listRewards(offset?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListRewards200Response>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.listRewards(offset, options);
+        async listRewards(offset?: number, limit?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListRewards200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.listRewards(offset, limit, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['RewardsApi.listRewards']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -12302,11 +12452,12 @@ export const RewardsApiFactory = function (configuration?: Configuration, basePa
          * Retrieve a list of all created rewards 
          * @summary List rewards
          * @param {number} [offset] Offsets the returned list by the given number of rewards. The returned rewards are ordered (and offsetted) by their creation date (DESC).
+         * @param {number} [limit] Limits the number of rewards listed. The maximum value is 500 and the default is 100.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listRewards(offset?: number, options?: RawAxiosRequestConfig): AxiosPromise<ListRewards200Response> {
-            return localVarFp.listRewards(offset, options).then((request) => request(axios, basePath));
+        listRewards(offset?: number, limit?: number, options?: RawAxiosRequestConfig): AxiosPromise<ListRewards200Response> {
+            return localVarFp.listRewards(offset, limit, options).then((request) => request(axios, basePath));
         },
         /**
          * Resends a reward, identified by the given `id` in the URL, to its recipient. 
@@ -12369,12 +12520,13 @@ export class RewardsApi extends BaseAPI {
      * Retrieve a list of all created rewards 
      * @summary List rewards
      * @param {number} [offset] Offsets the returned list by the given number of rewards. The returned rewards are ordered (and offsetted) by their creation date (DESC).
+     * @param {number} [limit] Limits the number of rewards listed. The maximum value is 500 and the default is 100.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof RewardsApi
      */
-    public listRewards(offset?: number, options?: RawAxiosRequestConfig) {
-        return RewardsApiFp(this.configuration).listRewards(offset, options).then((request) => request(this.axios, this.basePath));
+    public listRewards(offset?: number, limit?: number, options?: RawAxiosRequestConfig) {
+        return RewardsApiFp(this.configuration).listRewards(offset, limit, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
