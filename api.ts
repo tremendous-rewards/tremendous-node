@@ -4099,13 +4099,13 @@ export interface ListFundingSources200ResponseFundingSourcesInnerMeta {
      * @type {string}
      * @memberof ListFundingSources200ResponseFundingSourcesInnerMeta
      */
-    'address_1'?: string;
+    'address_1'?: string | null;
     /**
      * **Only available when `method` is set to `invoice`.**  Secondary billing address line 
      * @type {string}
      * @memberof ListFundingSources200ResponseFundingSourcesInnerMeta
      */
-    'address_2'?: string;
+    'address_2'?: string | null;
     /**
      * **Only available when `method` is set to `invoice`.**  Billing address city 
      * @type {string}
@@ -4601,7 +4601,7 @@ export interface ListProductsResponseProductsInner {
      */
     'description': string;
     /**
-     * The category of this product  <table>   <thead>     <tr>       <th>Category</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td><code>ach</code></td>       <td>Bank transfer to the recipient</td>     </tr>     <tr>       <td><code>charity</code></td>       <td>Donations to a charity</td>     </tr>     <tr>       <td><code>instant_debit_transfer</code></td>       <td>Instant debit transfer to the recipient</td>     </tr>     <tr>       <td><code>merchant_card</code></td>       <td>A gift card for a certain merchant (e.g. Amazon)</td>     </tr>     <tr>       <td><code>paypal</code></td>       <td>Payout via PayPal</td>     </tr>     <tr>       <td><code>venmo</code></td>       <td>Payout via Venmo</td>     </tr>     <tr>       <td><code>visa_card</code></td>       <td>Payout in form of a Visa debit card</td>     </tr>   </tbody> </table> 
+     * The category of this product  <table>   <thead>     <tr>       <th>Category</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td><code>ach</code></td>       <td>Bank transfer to the recipient</td>     </tr>     <tr>       <td><code>charity</code></td>       <td>Donations to a charity</td>     </tr>     <tr>       <td><code>instant_debit_transfer</code></td>       <td>Instant debit transfer to the recipient</td>     </tr>     <tr>       <td><code>merchant_card</code></td>       <td>A gift card for a certain merchant (e.g. Amazon)</td>     </tr>     <tr>       <td><code>paypal</code></td>       <td>Payout via PayPal</td>     </tr>     <tr>       <td><code>venmo</code></td>       <td>Payout via Venmo</td>     </tr>     <tr>       <td><code>visa_card</code></td>       <td>Payout in form of a Visa debit card</td>     </tr>     <tr>       <td><code>cash_app</code></td>       <td>Payout via Cash App</td>     </tr>   </tbody> </table> 
      * @type {string}
      * @memberof ListProductsResponseProductsInner
      */
@@ -4657,7 +4657,8 @@ export const ListProductsResponseProductsInnerCategoryEnum = {
     MerchantCard: 'merchant_card',
     Paypal: 'paypal',
     Venmo: 'venmo',
-    VisaCard: 'visa_card'
+    VisaCard: 'visa_card',
+    CashApp: 'cash_app'
 } as const;
 
 export type ListProductsResponseProductsInnerCategoryEnum = typeof ListProductsResponseProductsInnerCategoryEnum[keyof typeof ListProductsResponseProductsInnerCategoryEnum];
@@ -6258,7 +6259,7 @@ export interface Product {
      */
     'description': string;
     /**
-     * The category of this product  <table>   <thead>     <tr>       <th>Category</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td><code>ach</code></td>       <td>Bank transfer to the recipient</td>     </tr>     <tr>       <td><code>charity</code></td>       <td>Donations to a charity</td>     </tr>     <tr>       <td><code>instant_debit_transfer</code></td>       <td>Instant debit transfer to the recipient</td>     </tr>     <tr>       <td><code>merchant_card</code></td>       <td>A gift card for a certain merchant (e.g. Amazon)</td>     </tr>     <tr>       <td><code>paypal</code></td>       <td>Payout via PayPal</td>     </tr>     <tr>       <td><code>venmo</code></td>       <td>Payout via Venmo</td>     </tr>     <tr>       <td><code>visa_card</code></td>       <td>Payout in form of a Visa debit card</td>     </tr>   </tbody> </table> 
+     * The category of this product  <table>   <thead>     <tr>       <th>Category</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td><code>ach</code></td>       <td>Bank transfer to the recipient</td>     </tr>     <tr>       <td><code>charity</code></td>       <td>Donations to a charity</td>     </tr>     <tr>       <td><code>instant_debit_transfer</code></td>       <td>Instant debit transfer to the recipient</td>     </tr>     <tr>       <td><code>merchant_card</code></td>       <td>A gift card for a certain merchant (e.g. Amazon)</td>     </tr>     <tr>       <td><code>paypal</code></td>       <td>Payout via PayPal</td>     </tr>     <tr>       <td><code>venmo</code></td>       <td>Payout via Venmo</td>     </tr>     <tr>       <td><code>visa_card</code></td>       <td>Payout in form of a Visa debit card</td>     </tr>     <tr>       <td><code>cash_app</code></td>       <td>Payout via Cash App</td>     </tr>   </tbody> </table> 
      * @type {string}
      * @memberof Product
      */
@@ -6314,7 +6315,8 @@ export const ProductCategoryEnum = {
     MerchantCard: 'merchant_card',
     Paypal: 'paypal',
     Venmo: 'venmo',
-    VisaCard: 'visa_card'
+    VisaCard: 'visa_card',
+    CashApp: 'cash_app'
 } as const;
 
 export type ProductCategoryEnum = typeof ProductCategoryEnum[keyof typeof ProductCategoryEnum];
@@ -12290,10 +12292,10 @@ export const RewardsApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Resends a reward, identified by the given `id` in the URL, to its recipient. 
+         * Resends a reward, identified by the given `id` in the URL, to its recipient. Only rewards with a previous delivery failure can be resent. 
          * @summary Resend reward
          * @param {string} id ID of the reward that should be resent
-         * @param {ResendRewardRequest} [resendRewardRequest] _Only_ for rewards with a previous delivery failure: You can update the email or phone number used for the resend. You can only provide one of &#x60;updated_email&#x60; or &#x60;updated_phone&#x60;, not both. 
+         * @param {ResendRewardRequest} [resendRewardRequest] You can update the email or phone number used for the resend. You can only provide one of &#x60;updated_email&#x60; or &#x60;updated_phone&#x60;, not both. 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -12395,10 +12397,10 @@ export const RewardsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Resends a reward, identified by the given `id` in the URL, to its recipient. 
+         * Resends a reward, identified by the given `id` in the URL, to its recipient. Only rewards with a previous delivery failure can be resent. 
          * @summary Resend reward
          * @param {string} id ID of the reward that should be resent
-         * @param {ResendRewardRequest} [resendRewardRequest] _Only_ for rewards with a previous delivery failure: You can update the email or phone number used for the resend. You can only provide one of &#x60;updated_email&#x60; or &#x60;updated_phone&#x60;, not both. 
+         * @param {ResendRewardRequest} [resendRewardRequest] You can update the email or phone number used for the resend. You can only provide one of &#x60;updated_email&#x60; or &#x60;updated_phone&#x60;, not both. 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -12460,10 +12462,10 @@ export const RewardsApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.listRewards(offset, limit, options).then((request) => request(axios, basePath));
         },
         /**
-         * Resends a reward, identified by the given `id` in the URL, to its recipient. 
+         * Resends a reward, identified by the given `id` in the URL, to its recipient. Only rewards with a previous delivery failure can be resent. 
          * @summary Resend reward
          * @param {string} id ID of the reward that should be resent
-         * @param {ResendRewardRequest} [resendRewardRequest] _Only_ for rewards with a previous delivery failure: You can update the email or phone number used for the resend. You can only provide one of &#x60;updated_email&#x60; or &#x60;updated_phone&#x60;, not both. 
+         * @param {ResendRewardRequest} [resendRewardRequest] You can update the email or phone number used for the resend. You can only provide one of &#x60;updated_email&#x60; or &#x60;updated_phone&#x60;, not both. 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -12530,10 +12532,10 @@ export class RewardsApi extends BaseAPI {
     }
 
     /**
-     * Resends a reward, identified by the given `id` in the URL, to its recipient. 
+     * Resends a reward, identified by the given `id` in the URL, to its recipient. Only rewards with a previous delivery failure can be resent. 
      * @summary Resend reward
      * @param {string} id ID of the reward that should be resent
-     * @param {ResendRewardRequest} [resendRewardRequest] _Only_ for rewards with a previous delivery failure: You can update the email or phone number used for the resend. You can only provide one of &#x60;updated_email&#x60; or &#x60;updated_phone&#x60;, not both. 
+     * @param {ResendRewardRequest} [resendRewardRequest] You can update the email or phone number used for the resend. You can only provide one of &#x60;updated_email&#x60; or &#x60;updated_phone&#x60;, not both. 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof RewardsApi
