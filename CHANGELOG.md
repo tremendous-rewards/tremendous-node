@@ -1,5 +1,14 @@
 # Changelog
 
+## [3.11.0](https://github.com/tremendous-rewards/tremendous-node/compare/tremendous-v3.10.0...tremendous-v3.11.0) (2025-08-11)
+
+
+### Features
+
+* add Cash App as product category ([410c035](https://github.com/tremendous-rewards/tremendous-node/commit/410c0359cb3de7ae5d9952b4fbb697a24c97c5a8))
+* make funding source's address fields nullable ([410c035](https://github.com/tremendous-rewards/tremendous-node/commit/410c0359cb3de7ae5d9952b4fbb697a24c97c5a8))
+* regenerate SDK ([#200](https://github.com/tremendous-rewards/tremendous-node/issues/200)) ([410c035](https://github.com/tremendous-rewards/tremendous-node/commit/410c0359cb3de7ae5d9952b4fbb697a24c97c5a8))
+
 ## [3.10.0](https://github.com/tremendous-rewards/tremendous-node/compare/tremendous-v3.9.0...tremendous-v3.10.0) (2025-07-28)
 
 
