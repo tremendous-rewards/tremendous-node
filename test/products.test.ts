@@ -11,6 +11,8 @@ const config = new Configuration({
 const api = new ProductsApi(config);
 
 test("list products", async () => {
+  console.log("--- test campaign id", process.env.TEST_CAMPAIGN_ID);
+
   const products = await api.listProducts().then(({ data }) => data.products);
 
   expect(products.length).toBeGreaterThan(0);
