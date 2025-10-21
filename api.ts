@@ -1691,7 +1691,7 @@ export type CurrencyCodes = typeof CurrencyCodes[keyof typeof CurrencyCodes];
 
 
 /**
- * Reward custom data for searching, tracking or copy (see [Adding custom fields to orders](https://developers.tremendous.com/reference/using-custom-fields-to-add-custom-data-to-rewards).)
+ * Reward custom data for searching, tracking or copy (see [Adding custom fields to orders](https://developers.tremendous.com/docs/using-custom-fields-to-add-custom-data-to-rewards).)
  * @export
  * @interface CustomField
  */
@@ -2619,7 +2619,7 @@ export interface FundingSource {
      */
     'usage_permissions'?: Array<FundingSourceUsagePermissionsEnum>;
     /**
-     * Status of the funding_source    <table>     <thead>       <tr>         <th>Status</th>         <th>Description</th>         </tr>     </thead>     <tbody>       <tr>         <td><code>active</code></td>         <td>Ready for use.</td>       </tr>       <tr>         <td><code>deleted</code></td>         <td>Manually removed, and not usable.</td>       </tr>       <tr>         <td><code>pending_confirmation</code></td>         <td>Awaiting verification of ownership.</td>       </tr>       <tr>         <td><code>failed</code></td>         <td>Last payment attempt failed, and not usable (contact Tremendous support to reinstate).</td>       </tr>     </tbody>   </table> 
+     * Status of the funding_source    <table>     <thead>       <tr>         <th>Status</th>         <th>Description</th>         </tr>     </thead>     <tbody>       <tr>         <td><code>active</code></td>         <td>Ready for use.</td>       </tr>       <tr>         <td><code>deleted</code></td>         <td>Manually removed, and not usable.</td>       </tr>       <tr>         <td><code>failed</code></td>         <td>Last payment attempt failed, and not usable (contact Tremendous support to reinstate).</td>       </tr>     </tbody>   </table> 
      * @type {string}
      * @memberof FundingSource
      */
@@ -2656,7 +2656,6 @@ export type FundingSourceUsagePermissionsEnum = typeof FundingSourceUsagePermiss
 export const FundingSourceStatusEnum = {
     Active: 'active',
     Deleted: 'deleted',
-    PendingConfirmation: 'pending_confirmation',
     Failed: 'failed'
 } as const;
 
@@ -3918,7 +3917,7 @@ export interface ListFundingSources200ResponseFundingSourcesInner {
      */
     'usage_permissions'?: Array<ListFundingSources200ResponseFundingSourcesInnerUsagePermissionsEnum>;
     /**
-     * Status of the funding_source    <table>     <thead>       <tr>         <th>Status</th>         <th>Description</th>         </tr>     </thead>     <tbody>       <tr>         <td><code>active</code></td>         <td>Ready for use.</td>       </tr>       <tr>         <td><code>deleted</code></td>         <td>Manually removed, and not usable.</td>       </tr>       <tr>         <td><code>pending_confirmation</code></td>         <td>Awaiting verification of ownership.</td>       </tr>       <tr>         <td><code>failed</code></td>         <td>Last payment attempt failed, and not usable (contact Tremendous support to reinstate).</td>       </tr>     </tbody>   </table> 
+     * Status of the funding_source    <table>     <thead>       <tr>         <th>Status</th>         <th>Description</th>         </tr>     </thead>     <tbody>       <tr>         <td><code>active</code></td>         <td>Ready for use.</td>       </tr>       <tr>         <td><code>deleted</code></td>         <td>Manually removed, and not usable.</td>       </tr>       <tr>         <td><code>failed</code></td>         <td>Last payment attempt failed, and not usable (contact Tremendous support to reinstate).</td>       </tr>     </tbody>   </table> 
      * @type {string}
      * @memberof ListFundingSources200ResponseFundingSourcesInner
      */
@@ -3955,7 +3954,6 @@ export type ListFundingSources200ResponseFundingSourcesInnerUsagePermissionsEnum
 export const ListFundingSources200ResponseFundingSourcesInnerStatusEnum = {
     Active: 'active',
     Deleted: 'deleted',
-    PendingConfirmation: 'pending_confirmation',
     Failed: 'failed'
 } as const;
 
@@ -3975,13 +3973,13 @@ export type ListFundingSources200ResponseFundingSourcesInnerTypeEnum = typeof Li
  */
 export interface ListFundingSources200ResponseFundingSourcesInnerMeta {
     /**
-     * **Only exists for balance and commercial invoicing.**  For balance: available amount (in cents USD) For commercial invoicing: available credit amount calculated as (credit limit - outstanding balance) (in cents USD) 
+     * **Only exists for balance and commercial invoicing.**  For balance: available amount (in cents USD) For commercial invoicing: available credit amount calculated as (credit limit - outstanding balance) (in cents USD)  *Caution: In the \"list funding sources\" endpoint this value is cached and may not be up to date. Use the \"get funding source\" endpoint to get the most up to date value.* 
      * @type {number}
      * @memberof ListFundingSources200ResponseFundingSourcesInnerMeta
      */
     'available_cents'?: number;
     /**
-     * **Only available when `method` is set to `balance`.**  Funds that are already registered on your Tremendous account but which have not yet been deposited in your account (e.g. unpaid invoices) (in Cents USD). 
+     * **Only available when `method` is set to `balance`.**  Funds that are already registered on your Tremendous account but which have not yet been deposited in your account (e.g. payments that need to be manually reviewed by our ops team) (in Cents USD). 
      * @type {number}
      * @memberof ListFundingSources200ResponseFundingSourcesInnerMeta
      */
@@ -4601,11 +4599,17 @@ export interface ListProductsResponseProductsInner {
      */
     'description': string;
     /**
-     * The category of this product  <table>   <thead>     <tr>       <th>Category</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td><code>ach</code></td>       <td>Bank transfer to the recipient</td>     </tr>     <tr>       <td><code>charity</code></td>       <td>Donations to a charity</td>     </tr>     <tr>       <td><code>instant_debit_transfer</code></td>       <td>Instant debit transfer to the recipient</td>     </tr>     <tr>       <td><code>merchant_card</code></td>       <td>A gift card for a certain merchant (e.g. Amazon)</td>     </tr>     <tr>       <td><code>paypal</code></td>       <td>Payout via PayPal</td>     </tr>     <tr>       <td><code>venmo</code></td>       <td>Payout via Venmo</td>     </tr>     <tr>       <td><code>visa_card</code></td>       <td>Payout in form of a Visa debit card</td>     </tr>     <tr>       <td><code>cash_app</code></td>       <td>Payout via Cash App</td>     </tr>   </tbody> </table> 
+     * The category of the product  <table>   <thead>     <tr>       <th>Category</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td><code>ach</code></td>       <td>Bank transfer to the recipient</td>     </tr>     <tr>       <td><code>charity</code></td>       <td>Donations to a charity</td>     </tr>     <tr>       <td><code>instant_debit_transfer</code></td>       <td>Instant debit transfer to the recipient</td>     </tr>     <tr>       <td><code>merchant_card</code></td>       <td>A gift card for a certain merchant (e.g. Amazon)</td>     </tr>     <tr>       <td><code>paypal</code></td>       <td>Payout via PayPal</td>     </tr>     <tr>       <td><code>venmo</code></td>       <td>Payout via Venmo</td>     </tr>     <tr>       <td><code>visa_card</code></td>       <td>Payout in form of a Visa debit card</td>     </tr>     <tr>       <td><code>cash_app</code></td>       <td>Payout via Cash App</td>     </tr>   </tbody> </table> 
      * @type {string}
      * @memberof ListProductsResponseProductsInner
      */
     'category': ListProductsResponseProductsInnerCategoryEnum;
+    /**
+     * Additional classification for the product. Only applicable to products with a `category` of `merchant_card`. Possible subcategories:  * `beauty_and_health` * `digital_financial_services` * `electronics` * `entertainment` * `fashion` * `food_and_drink` * `general_merchandise` * `grocery_and_supermarkets` * `home_and_living` * `mobility_and_fuel` * `sports_and_outdoor_gear` * `travel_and_hospitality` 
+     * @type {string}
+     * @memberof ListProductsResponseProductsInner
+     */
+    'subcategory'?: ListProductsResponseProductsInnerSubcategoryEnum;
     /**
      * Legal disclosures for this product. Can be in HTML format.
      * @type {string}
@@ -4662,6 +4666,22 @@ export const ListProductsResponseProductsInnerCategoryEnum = {
 } as const;
 
 export type ListProductsResponseProductsInnerCategoryEnum = typeof ListProductsResponseProductsInnerCategoryEnum[keyof typeof ListProductsResponseProductsInnerCategoryEnum];
+export const ListProductsResponseProductsInnerSubcategoryEnum = {
+    BeautyAndHealth: 'beauty_and_health',
+    DigitalFinancialServices: 'digital_financial_services',
+    Electronics: 'electronics',
+    Entertainment: 'entertainment',
+    Fashion: 'fashion',
+    FoodAndDrink: 'food_and_drink',
+    GeneralMerchandise: 'general_merchandise',
+    GroceryAndSupermarkets: 'grocery_and_supermarkets',
+    HomeAndLiving: 'home_and_living',
+    MobilityAndFuel: 'mobility_and_fuel',
+    SportsAndOutdoorGear: 'sports_and_outdoor_gear',
+    TravelAndHospitality: 'travel_and_hospitality'
+} as const;
+
+export type ListProductsResponseProductsInnerSubcategoryEnum = typeof ListProductsResponseProductsInnerSubcategoryEnum[keyof typeof ListProductsResponseProductsInnerSubcategoryEnum];
 export const ListProductsResponseProductsInnerCurrencyCodesEnum = {
     Usd: 'USD',
     Cad: 'CAD',
@@ -4948,7 +4968,7 @@ export interface ListRewards200ResponseRewardsInner {
     'delivery'?: ListRewards200ResponseRewardsInnerDelivery;
 }
 /**
- * Reward custom data for searching, tracking or copy (see [Adding custom fields to orders](https://developers.tremendous.com/reference/using-custom-fields-to-add-custom-data-to-rewards).)
+ * Reward custom data for searching, tracking or copy (see [Adding custom fields to orders](https://developers.tremendous.com/docs/using-custom-fields-to-add-custom-data-to-rewards).)
  * @export
  * @interface ListRewards200ResponseRewardsInnerCustomFieldsInner
  */
@@ -6259,11 +6279,17 @@ export interface Product {
      */
     'description': string;
     /**
-     * The category of this product  <table>   <thead>     <tr>       <th>Category</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td><code>ach</code></td>       <td>Bank transfer to the recipient</td>     </tr>     <tr>       <td><code>charity</code></td>       <td>Donations to a charity</td>     </tr>     <tr>       <td><code>instant_debit_transfer</code></td>       <td>Instant debit transfer to the recipient</td>     </tr>     <tr>       <td><code>merchant_card</code></td>       <td>A gift card for a certain merchant (e.g. Amazon)</td>     </tr>     <tr>       <td><code>paypal</code></td>       <td>Payout via PayPal</td>     </tr>     <tr>       <td><code>venmo</code></td>       <td>Payout via Venmo</td>     </tr>     <tr>       <td><code>visa_card</code></td>       <td>Payout in form of a Visa debit card</td>     </tr>     <tr>       <td><code>cash_app</code></td>       <td>Payout via Cash App</td>     </tr>   </tbody> </table> 
+     * The category of the product  <table>   <thead>     <tr>       <th>Category</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td><code>ach</code></td>       <td>Bank transfer to the recipient</td>     </tr>     <tr>       <td><code>charity</code></td>       <td>Donations to a charity</td>     </tr>     <tr>       <td><code>instant_debit_transfer</code></td>       <td>Instant debit transfer to the recipient</td>     </tr>     <tr>       <td><code>merchant_card</code></td>       <td>A gift card for a certain merchant (e.g. Amazon)</td>     </tr>     <tr>       <td><code>paypal</code></td>       <td>Payout via PayPal</td>     </tr>     <tr>       <td><code>venmo</code></td>       <td>Payout via Venmo</td>     </tr>     <tr>       <td><code>visa_card</code></td>       <td>Payout in form of a Visa debit card</td>     </tr>     <tr>       <td><code>cash_app</code></td>       <td>Payout via Cash App</td>     </tr>   </tbody> </table> 
      * @type {string}
      * @memberof Product
      */
     'category': ProductCategoryEnum;
+    /**
+     * Additional classification for the product. Only applicable to products with a `category` of `merchant_card`. Possible subcategories:  * `beauty_and_health` * `digital_financial_services` * `electronics` * `entertainment` * `fashion` * `food_and_drink` * `general_merchandise` * `grocery_and_supermarkets` * `home_and_living` * `mobility_and_fuel` * `sports_and_outdoor_gear` * `travel_and_hospitality` 
+     * @type {string}
+     * @memberof Product
+     */
+    'subcategory'?: ProductSubcategoryEnum;
     /**
      * Legal disclosures for this product. Can be in HTML format.
      * @type {string}
@@ -6320,6 +6346,22 @@ export const ProductCategoryEnum = {
 } as const;
 
 export type ProductCategoryEnum = typeof ProductCategoryEnum[keyof typeof ProductCategoryEnum];
+export const ProductSubcategoryEnum = {
+    BeautyAndHealth: 'beauty_and_health',
+    DigitalFinancialServices: 'digital_financial_services',
+    Electronics: 'electronics',
+    Entertainment: 'entertainment',
+    Fashion: 'fashion',
+    FoodAndDrink: 'food_and_drink',
+    GeneralMerchandise: 'general_merchandise',
+    GroceryAndSupermarkets: 'grocery_and_supermarkets',
+    HomeAndLiving: 'home_and_living',
+    MobilityAndFuel: 'mobility_and_fuel',
+    SportsAndOutdoorGear: 'sports_and_outdoor_gear',
+    TravelAndHospitality: 'travel_and_hospitality'
+} as const;
+
+export type ProductSubcategoryEnum = typeof ProductSubcategoryEnum[keyof typeof ProductSubcategoryEnum];
 export const ProductCurrencyCodesEnum = {
     Usd: 'USD',
     Cad: 'CAD',
@@ -6884,7 +6926,7 @@ export interface RewardBase {
     'custom_fields'?: Array<RewardBaseCustomFieldsInner>;
 }
 /**
- * Reward custom data for searching, tracking or copy (see [Adding custom fields to orders](https://developers.tremendous.com/reference/using-custom-fields-to-add-custom-data-to-rewards).)
+ * Reward custom data for searching, tracking or copy (see [Adding custom fields to orders](https://developers.tremendous.com/docs/using-custom-fields-to-add-custom-data-to-rewards).)
  * @export
  * @interface RewardBaseCustomFieldsInner
  */
@@ -7510,7 +7552,7 @@ export interface SingleRewardOrderReward {
     'delivery'?: SingleRewardOrderRewardDelivery;
 }
 /**
- * Reward custom data for searching, tracking or copy (see [Adding custom fields to orders](https://developers.tremendous.com/reference/using-custom-fields-to-add-custom-data-to-rewards).)
+ * Reward custom data for searching, tracking or copy (see [Adding custom fields to orders](https://developers.tremendous.com/docs/using-custom-fields-to-add-custom-data-to-rewards).)
  * @export
  * @interface SingleRewardOrderRewardCustomFieldsInner
  */
@@ -11795,10 +11837,11 @@ export const ProductsApiAxiosParamCreator = function (configuration?: Configurat
          * @summary List products
          * @param {string} [country] Comma-separated list of [Alpha-2 country codes](https://www.iban.com/country-codes), used to only retrieve products available in the provided countries
          * @param {string} [currency] Comma-separated list of [currency codes](https://www.iban.com/currency-codes), used to only retrieve products available in the provided currencies
+         * @param {string} [subcategory] Comma-separated list of [subcategories](https://developers.tremendous.com/reference/obj-schema-products-1), used to only retrieve products with the provided subcategories
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listProducts: async (country?: string, currency?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        listProducts: async (country?: string, currency?: string, subcategory?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/products`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -11821,6 +11864,10 @@ export const ProductsApiAxiosParamCreator = function (configuration?: Configurat
 
             if (currency !== undefined) {
                 localVarQueryParameter['currency'] = currency;
+            }
+
+            if (subcategory !== undefined) {
+                localVarQueryParameter['subcategory'] = subcategory;
             }
 
 
@@ -11862,11 +11909,12 @@ export const ProductsApiFp = function(configuration?: Configuration) {
          * @summary List products
          * @param {string} [country] Comma-separated list of [Alpha-2 country codes](https://www.iban.com/country-codes), used to only retrieve products available in the provided countries
          * @param {string} [currency] Comma-separated list of [currency codes](https://www.iban.com/currency-codes), used to only retrieve products available in the provided currencies
+         * @param {string} [subcategory] Comma-separated list of [subcategories](https://developers.tremendous.com/reference/obj-schema-products-1), used to only retrieve products with the provided subcategories
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async listProducts(country?: string, currency?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListProductsResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.listProducts(country, currency, options);
+        async listProducts(country?: string, currency?: string, subcategory?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListProductsResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.listProducts(country, currency, subcategory, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['ProductsApi.listProducts']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -11896,11 +11944,12 @@ export const ProductsApiFactory = function (configuration?: Configuration, baseP
          * @summary List products
          * @param {string} [country] Comma-separated list of [Alpha-2 country codes](https://www.iban.com/country-codes), used to only retrieve products available in the provided countries
          * @param {string} [currency] Comma-separated list of [currency codes](https://www.iban.com/currency-codes), used to only retrieve products available in the provided currencies
+         * @param {string} [subcategory] Comma-separated list of [subcategories](https://developers.tremendous.com/reference/obj-schema-products-1), used to only retrieve products with the provided subcategories
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listProducts(country?: string, currency?: string, options?: RawAxiosRequestConfig): AxiosPromise<ListProductsResponse> {
-            return localVarFp.listProducts(country, currency, options).then((request) => request(axios, basePath));
+        listProducts(country?: string, currency?: string, subcategory?: string, options?: RawAxiosRequestConfig): AxiosPromise<ListProductsResponse> {
+            return localVarFp.listProducts(country, currency, subcategory, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -11929,12 +11978,13 @@ export class ProductsApi extends BaseAPI {
      * @summary List products
      * @param {string} [country] Comma-separated list of [Alpha-2 country codes](https://www.iban.com/country-codes), used to only retrieve products available in the provided countries
      * @param {string} [currency] Comma-separated list of [currency codes](https://www.iban.com/currency-codes), used to only retrieve products available in the provided currencies
+     * @param {string} [subcategory] Comma-separated list of [subcategories](https://developers.tremendous.com/reference/obj-schema-products-1), used to only retrieve products with the provided subcategories
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ProductsApi
      */
-    public listProducts(country?: string, currency?: string, options?: RawAxiosRequestConfig) {
-        return ProductsApiFp(this.configuration).listProducts(country, currency, options).then((request) => request(this.axios, this.basePath));
+    public listProducts(country?: string, currency?: string, subcategory?: string, options?: RawAxiosRequestConfig) {
+        return ProductsApiFp(this.configuration).listProducts(country, currency, subcategory, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
@@ -12248,7 +12298,7 @@ export const RewardsApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Retrieve a list of all created rewards 
+         * Retrieve a list of all created rewards. You can query for rewards by custom field attributes using the field label and values as query params. [Learn more](https://developers.tremendous.com/docs/using-custom-fields-to-add-custom-data-to-rewards#querying-by-custom-fields) 
          * @summary List rewards
          * @param {number} [offset] Offsets the returned list by the given number of rewards. The returned rewards are ordered (and offsetted) by their creation date (DESC).
          * @param {number} [limit] Limits the number of rewards listed. The maximum value is 500 and the default is 100.
@@ -12383,7 +12433,7 @@ export const RewardsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Retrieve a list of all created rewards 
+         * Retrieve a list of all created rewards. You can query for rewards by custom field attributes using the field label and values as query params. [Learn more](https://developers.tremendous.com/docs/using-custom-fields-to-add-custom-data-to-rewards#querying-by-custom-fields) 
          * @summary List rewards
          * @param {number} [offset] Offsets the returned list by the given number of rewards. The returned rewards are ordered (and offsetted) by their creation date (DESC).
          * @param {number} [limit] Limits the number of rewards listed. The maximum value is 500 and the default is 100.
@@ -12451,7 +12501,7 @@ export const RewardsApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.getReward(id, options).then((request) => request(axios, basePath));
         },
         /**
-         * Retrieve a list of all created rewards 
+         * Retrieve a list of all created rewards. You can query for rewards by custom field attributes using the field label and values as query params. [Learn more](https://developers.tremendous.com/docs/using-custom-fields-to-add-custom-data-to-rewards#querying-by-custom-fields) 
          * @summary List rewards
          * @param {number} [offset] Offsets the returned list by the given number of rewards. The returned rewards are ordered (and offsetted) by their creation date (DESC).
          * @param {number} [limit] Limits the number of rewards listed. The maximum value is 500 and the default is 100.
@@ -12519,7 +12569,7 @@ export class RewardsApi extends BaseAPI {
     }
 
     /**
-     * Retrieve a list of all created rewards 
+     * Retrieve a list of all created rewards. You can query for rewards by custom field attributes using the field label and values as query params. [Learn more](https://developers.tremendous.com/docs/using-custom-fields-to-add-custom-data-to-rewards#querying-by-custom-fields) 
      * @summary List rewards
      * @param {number} [offset] Offsets the returned list by the given number of rewards. The returned rewards are ordered (and offsetted) by their creation date (DESC).
      * @param {number} [limit] Limits the number of rewards listed. The maximum value is 500 and the default is 100.
