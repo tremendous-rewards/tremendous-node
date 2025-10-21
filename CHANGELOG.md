@@ -1,5 +1,23 @@
 # Changelog
 
+## [4.0.0](https://github.com/tremendous-rewards/tremendous-node/compare/tremendous-v3.11.0...tremendous-v4.0.0) (2025-10-21)
+
+
+### ⚠ BREAKING CHANGES
+
+* require Node 20+ ([#218](https://github.com/tremendous-rewards/tremendous-node/issues/218))
+
+### Features
+
+* add `subcategory` enum to Products ([524c992](https://github.com/tremendous-rewards/tremendous-node/commit/524c9929c8903551b6137a5ae218087b2a321f6e))
+* regenerate SDK ([#219](https://github.com/tremendous-rewards/tremendous-node/issues/219)) ([524c992](https://github.com/tremendous-rewards/tremendous-node/commit/524c9929c8903551b6137a5ae218087b2a321f6e))
+* remove `pending_confirmation` status from Funding Sources ([524c992](https://github.com/tremendous-rewards/tremendous-node/commit/524c9929c8903551b6137a5ae218087b2a321f6e)), closes [#207](https://github.com/tremendous-rewards/tremendous-node/issues/207)
+
+
+### Miscellaneous Chores
+
+* require Node 20+ ([#218](https://github.com/tremendous-rewards/tremendous-node/issues/218)) ([39cac0f](https://github.com/tremendous-rewards/tremendous-node/commit/39cac0f379bd555aac07deb624b384000030b6af))
+
 ## [3.11.0](https://github.com/tremendous-rewards/tremendous-node/compare/tremendous-v3.10.0...tremendous-v3.11.0) (2025-08-11)
 
 
