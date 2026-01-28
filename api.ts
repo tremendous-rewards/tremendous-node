@@ -729,11 +729,17 @@ export interface CreateInvoiceRequest {
      */
     'po_number'?: string | null;
     /**
-     * Amount of the invoice in USD
+     * Amount of the invoice
      * @type {number}
      * @memberof CreateInvoiceRequest
      */
     'amount': number;
+    /**
+     * Currency of the invoice
+     * @type {string}
+     * @memberof CreateInvoiceRequest
+     */
+    'currency'?: CreateInvoiceRequestCurrencyEnum;
     /**
      * A note to be included in the invoice. This is for your internal use and will not be visible to the recipient. 
      * @type {string}
@@ -741,6 +747,15 @@ export interface CreateInvoiceRequest {
      */
     'memo'?: string | null;
 }
+
+export const CreateInvoiceRequestCurrencyEnum = {
+    Usd: 'USD',
+    Eur: 'EUR',
+    Gbp: 'GBP'
+} as const;
+
+export type CreateInvoiceRequestCurrencyEnum = typeof CreateInvoiceRequestCurrencyEnum[keyof typeof CreateInvoiceRequestCurrencyEnum];
+
 /**
  * 
  * @export
@@ -1539,6 +1554,44 @@ export interface CreateReportRequestFiltersDigitalRewardsCreatedAt {
 /**
  * 
  * @export
+ * @interface CreateTopup200Response
+ */
+export interface CreateTopup200Response {
+    /**
+     * 
+     * @type {ListTopups200ResponseTopupsInner}
+     * @memberof CreateTopup200Response
+     */
+    'topup'?: ListTopups200ResponseTopupsInner;
+}
+/**
+ * 
+ * @export
+ * @interface CreateTopupRequest
+ */
+export interface CreateTopupRequest {
+    /**
+     * The ID of the funding source to top up.
+     * @type {string}
+     * @memberof CreateTopupRequest
+     */
+    'funding_source_id': string;
+    /**
+     * Unique key that ensures this request is only processed once. 
+     * @type {string}
+     * @memberof CreateTopupRequest
+     */
+    'idempotency_key': string;
+    /**
+     * Amount in USD intended to be added to your organization’s balance.
+     * @type {number}
+     * @memberof CreateTopupRequest
+     */
+    'amount': number;
+}
+/**
+ * 
+ * @export
  * @interface CreateWebhook200Response
  */
 export interface CreateWebhook200Response {
@@ -2097,35 +2150,11 @@ export interface FraudReview {
      */
     'status'?: FraudReviewStatusEnum;
     /**
-     * The fraud risk associated with the reward.
-     * @type {string}
-     * @memberof FraudReview
-     */
-    'risk'?: FraudReviewRiskEnum;
-    /**
      * The array may contain multiple reasons, depending on which rule(s) flagged the reward for review. Reasons can be any of the following:  * `Disallowed IP` * `Disallowed email` * `Disallowed country` * `Over reward dollar limit` * `Over reward count limit` * `VPN detected` * `Device related to multiple emails` * `Device or account related to multiple emails` * `IP on a Tremendous fraud list` * `Bank account on a Tremendous fraud list` * `Fingerprint on a Tremendous fraud list` * `Email on a Tremendous fraud list` * `Phone on a Tremendous fraud list` * `IP related to a blocked reward` * `Device related to a blocked reward` * `Bank account related to a blocked reward` * `Fingerprint related to a blocked reward` * `Email related to a blocked reward` * `Phone related to a blocked reward` * `Allowed IP` * `Allowed email` 
      * @type {Array<string>}
      * @memberof FraudReview
      */
     'reasons'?: Array<FraudReviewReasonsEnum>;
-    /**
-     * The name of the person who reviewed the reward, or `Automatic Review` if the reward was blocked automatically. Rewards can be automatically blocked if they remain in the flagged fraud queue for more than 30 days.  This field is only present if the status is not `flagged`. 
-     * @type {string}
-     * @memberof FraudReview
-     */
-    'reviewed_by'?: string;
-    /**
-     * When the reward was blocked or released following fraud review.  This field is only present if the status is not `flagged`. 
-     * @type {string}
-     * @memberof FraudReview
-     */
-    'reviewed_at'?: string;
-    /**
-     * 
-     * @type {GetFraudReview200ResponseFraudReviewRelatedRewards}
-     * @memberof FraudReview
-     */
-    'related_rewards'?: GetFraudReview200ResponseFraudReviewRelatedRewards;
     /**
      * The device fingerprint, if known.
      * @type {string}
@@ -2146,16 +2175,46 @@ export interface FraudReview {
     'redeemed_at'?: string;
     /**
      * 
-     * @type {GetFraudReview200ResponseFraudReviewGeo}
+     * @type {ListFraudReviews200ResponseFraudReviewsInnerGeo}
      * @memberof FraudReview
      */
-    'geo'?: GetFraudReview200ResponseFraudReviewGeo;
+    'geo'?: ListFraudReviews200ResponseFraudReviewsInnerGeo;
     /**
      * 
      * @type {OrderWithoutLinkRewardsInner}
      * @memberof FraudReview
      */
     'reward'?: OrderWithoutLinkRewardsInner;
+    /**
+     * The name of the person who reviewed the reward, or `Automatic Review` if the reward was blocked automatically. Rewards can be automatically blocked if they remain in the flagged fraud queue for more than 30 days.  This field is only present if the status is not `flagged`. 
+     * @type {string}
+     * @memberof FraudReview
+     */
+    'reviewed_by'?: string;
+    /**
+     * When the reward was blocked or released following fraud review.  This field is only present if the status is not `flagged`. 
+     * @type {string}
+     * @memberof FraudReview
+     */
+    'reviewed_at'?: string;
+    /**
+     * A hash of the destination account for redemption methods that require providing 3rd party account details (e.g., PayPal, Venmo, ACH/CashApp, international bank transfers, etc.). The hash is globally unique by redemption method + account combination. This field is omitted for redemption methods that don\'t have a destination account (e.g., merchant cards, charities, etc.). 
+     * @type {string}
+     * @memberof FraudReview
+     */
+    'redemption_method_account_hash'?: string;
+    /**
+     * The fraud risk associated with the reward.
+     * @type {string}
+     * @memberof FraudReview
+     */
+    'risk'?: FraudReviewRiskEnum;
+    /**
+     * 
+     * @type {GetFraudReview200ResponseFraudReviewRelatedRewards}
+     * @memberof FraudReview
+     */
+    'related_rewards'?: GetFraudReview200ResponseFraudReviewRelatedRewards;
 }
 
 export const FraudReviewStatusEnum = {
@@ -2165,13 +2224,6 @@ export const FraudReviewStatusEnum = {
 } as const;
 
 export type FraudReviewStatusEnum = typeof FraudReviewStatusEnum[keyof typeof FraudReviewStatusEnum];
-export const FraudReviewRiskEnum = {
-    High: 'high',
-    Medium: 'medium',
-    Low: 'low'
-} as const;
-
-export type FraudReviewRiskEnum = typeof FraudReviewRiskEnum[keyof typeof FraudReviewRiskEnum];
 export const FraudReviewReasonsEnum = {
     DisallowedIp: 'Disallowed IP',
     DisallowedEmail: 'Disallowed email',
@@ -2198,15 +2250,137 @@ export const FraudReviewReasonsEnum = {
 
 export type FraudReviewReasonsEnum = typeof FraudReviewReasonsEnum[keyof typeof FraudReviewReasonsEnum];
 export const FraudReviewRedemptionMethodEnum = {
-    Paypal: 'paypal',
-    Bank: 'bank',
-    MerchantCard: 'merchant card',
-    VisaCard: 'visa card',
+    BankTransfer: 'bank transfer',
     Charity: 'charity',
-    Venmo: 'venmo'
+    InstantDebitTransfer: 'instant debit transfer',
+    InternationalBankTransfer: 'international bank transfer',
+    MerchantCard: 'merchant card',
+    Paypal: 'paypal',
+    Venmo: 'venmo',
+    VisaCard: 'visa card'
 } as const;
 
 export type FraudReviewRedemptionMethodEnum = typeof FraudReviewRedemptionMethodEnum[keyof typeof FraudReviewRedemptionMethodEnum];
+export const FraudReviewRiskEnum = {
+    High: 'high',
+    Medium: 'medium',
+    Low: 'low'
+} as const;
+
+export type FraudReviewRiskEnum = typeof FraudReviewRiskEnum[keyof typeof FraudReviewRiskEnum];
+
+/**
+ * The fraud review associated with a reward.
+ * @export
+ * @interface FraudReviewBase
+ */
+export interface FraudReviewBase {
+    /**
+     * The current status of the fraud review:  * `flagged` - The reward has been flagged for and waiting manual review. * `blocked` - The reward was reviewed and blocked. * `released` - The reward was reviewed and released. 
+     * @type {string}
+     * @memberof FraudReviewBase
+     */
+    'status'?: FraudReviewBaseStatusEnum;
+    /**
+     * The array may contain multiple reasons, depending on which rule(s) flagged the reward for review. Reasons can be any of the following:  * `Disallowed IP` * `Disallowed email` * `Disallowed country` * `Over reward dollar limit` * `Over reward count limit` * `VPN detected` * `Device related to multiple emails` * `Device or account related to multiple emails` * `IP on a Tremendous fraud list` * `Bank account on a Tremendous fraud list` * `Fingerprint on a Tremendous fraud list` * `Email on a Tremendous fraud list` * `Phone on a Tremendous fraud list` * `IP related to a blocked reward` * `Device related to a blocked reward` * `Bank account related to a blocked reward` * `Fingerprint related to a blocked reward` * `Email related to a blocked reward` * `Phone related to a blocked reward` * `Allowed IP` * `Allowed email` 
+     * @type {Array<string>}
+     * @memberof FraudReviewBase
+     */
+    'reasons'?: Array<FraudReviewBaseReasonsEnum>;
+    /**
+     * The device fingerprint, if known.
+     * @type {string}
+     * @memberof FraudReviewBase
+     */
+    'device_id'?: string;
+    /**
+     * The product selected to claim the reward
+     * @type {string}
+     * @memberof FraudReviewBase
+     */
+    'redemption_method'?: FraudReviewBaseRedemptionMethodEnum;
+    /**
+     * Date the reward was redeemed
+     * @type {string}
+     * @memberof FraudReviewBase
+     */
+    'redeemed_at'?: string;
+    /**
+     * 
+     * @type {ListFraudReviews200ResponseFraudReviewsInnerGeo}
+     * @memberof FraudReviewBase
+     */
+    'geo'?: ListFraudReviews200ResponseFraudReviewsInnerGeo;
+    /**
+     * 
+     * @type {OrderWithoutLinkRewardsInner}
+     * @memberof FraudReviewBase
+     */
+    'reward'?: OrderWithoutLinkRewardsInner;
+    /**
+     * The name of the person who reviewed the reward, or `Automatic Review` if the reward was blocked automatically. Rewards can be automatically blocked if they remain in the flagged fraud queue for more than 30 days.  This field is only present if the status is not `flagged`. 
+     * @type {string}
+     * @memberof FraudReviewBase
+     */
+    'reviewed_by'?: string;
+    /**
+     * When the reward was blocked or released following fraud review.  This field is only present if the status is not `flagged`. 
+     * @type {string}
+     * @memberof FraudReviewBase
+     */
+    'reviewed_at'?: string;
+    /**
+     * A hash of the destination account for redemption methods that require providing 3rd party account details (e.g., PayPal, Venmo, ACH/CashApp, international bank transfers, etc.). The hash is globally unique by redemption method + account combination. This field is omitted for redemption methods that don\'t have a destination account (e.g., merchant cards, charities, etc.). 
+     * @type {string}
+     * @memberof FraudReviewBase
+     */
+    'redemption_method_account_hash'?: string;
+}
+
+export const FraudReviewBaseStatusEnum = {
+    Flagged: 'flagged',
+    Blocked: 'blocked',
+    Released: 'released'
+} as const;
+
+export type FraudReviewBaseStatusEnum = typeof FraudReviewBaseStatusEnum[keyof typeof FraudReviewBaseStatusEnum];
+export const FraudReviewBaseReasonsEnum = {
+    DisallowedIp: 'Disallowed IP',
+    DisallowedEmail: 'Disallowed email',
+    DisallowedCountry: 'Disallowed country',
+    OverRewardDollarLimit: 'Over reward dollar limit',
+    OverRewardCountLimit: 'Over reward count limit',
+    VpnDetected: 'VPN detected',
+    DeviceRelatedToMultipleEmails: 'Device related to multiple emails',
+    DeviceOrAccountRelatedToMultipleEmails: 'Device or account related to multiple emails',
+    IpOnATremendousFraudList: 'IP on a Tremendous fraud list',
+    BankAccountOnATremendousFraudList: 'Bank account on a Tremendous fraud list',
+    FingerprintOnATremendousFraudList: 'Fingerprint on a Tremendous fraud list',
+    EmailOnATremendousFraudList: 'Email on a Tremendous fraud list',
+    PhoneOnATremendousFraudList: 'Phone on a Tremendous fraud list',
+    IpRelatedToABlockedReward: 'IP related to a blocked reward',
+    DeviceRelatedToABlockedReward: 'Device related to a blocked reward',
+    BankAccountRelatedToABlockedReward: 'Bank account related to a blocked reward',
+    FingerprintRelatedToABlockedReward: 'Fingerprint related to a blocked reward',
+    EmailRelatedToABlockedReward: 'Email related to a blocked reward',
+    PhoneRelatedToABlockedReward: 'Phone related to a blocked reward',
+    AllowedIp: 'Allowed IP',
+    AllowedEmail: 'Allowed email'
+} as const;
+
+export type FraudReviewBaseReasonsEnum = typeof FraudReviewBaseReasonsEnum[keyof typeof FraudReviewBaseReasonsEnum];
+export const FraudReviewBaseRedemptionMethodEnum = {
+    BankTransfer: 'bank transfer',
+    Charity: 'charity',
+    InstantDebitTransfer: 'instant debit transfer',
+    InternationalBankTransfer: 'international bank transfer',
+    MerchantCard: 'merchant card',
+    Paypal: 'paypal',
+    Venmo: 'venmo',
+    VisaCard: 'visa card'
+} as const;
+
+export type FraudReviewBaseRedemptionMethodEnum = typeof FraudReviewBaseRedemptionMethodEnum[keyof typeof FraudReviewBaseRedemptionMethodEnum];
 
 /**
  * 
@@ -2252,11 +2426,53 @@ export interface FraudReviewListItem {
      */
     'reasons'?: Array<FraudReviewListItemReasonsEnum>;
     /**
+     * The device fingerprint, if known.
+     * @type {string}
+     * @memberof FraudReviewListItem
+     */
+    'device_id'?: string;
+    /**
+     * The product selected to claim the reward
+     * @type {string}
+     * @memberof FraudReviewListItem
+     */
+    'redemption_method'?: FraudReviewListItemRedemptionMethodEnum;
+    /**
+     * Date the reward was redeemed
+     * @type {string}
+     * @memberof FraudReviewListItem
+     */
+    'redeemed_at'?: string;
+    /**
+     * 
+     * @type {ListFraudReviews200ResponseFraudReviewsInnerGeo}
+     * @memberof FraudReviewListItem
+     */
+    'geo'?: ListFraudReviews200ResponseFraudReviewsInnerGeo;
+    /**
      * 
      * @type {OrderWithoutLinkRewardsInner}
      * @memberof FraudReviewListItem
      */
     'reward'?: OrderWithoutLinkRewardsInner;
+    /**
+     * The name of the person who reviewed the reward, or `Automatic Review` if the reward was blocked automatically. Rewards can be automatically blocked if they remain in the flagged fraud queue for more than 30 days.  This field is only present if the status is not `flagged`. 
+     * @type {string}
+     * @memberof FraudReviewListItem
+     */
+    'reviewed_by'?: string;
+    /**
+     * When the reward was blocked or released following fraud review.  This field is only present if the status is not `flagged`. 
+     * @type {string}
+     * @memberof FraudReviewListItem
+     */
+    'reviewed_at'?: string;
+    /**
+     * A hash of the destination account for redemption methods that require providing 3rd party account details (e.g., PayPal, Venmo, ACH/CashApp, international bank transfers, etc.). The hash is globally unique by redemption method + account combination. This field is omitted for redemption methods that don\'t have a destination account (e.g., merchant cards, charities, etc.). 
+     * @type {string}
+     * @memberof FraudReviewListItem
+     */
+    'redemption_method_account_hash'?: string;
 }
 
 export const FraudReviewListItemStatusEnum = {
@@ -2291,6 +2507,18 @@ export const FraudReviewListItemReasonsEnum = {
 } as const;
 
 export type FraudReviewListItemReasonsEnum = typeof FraudReviewListItemReasonsEnum[keyof typeof FraudReviewListItemReasonsEnum];
+export const FraudReviewListItemRedemptionMethodEnum = {
+    BankTransfer: 'bank transfer',
+    Charity: 'charity',
+    InstantDebitTransfer: 'instant debit transfer',
+    InternationalBankTransfer: 'international bank transfer',
+    MerchantCard: 'merchant card',
+    Paypal: 'paypal',
+    Venmo: 'venmo',
+    VisaCard: 'visa card'
+} as const;
+
+export type FraudReviewListItemRedemptionMethodEnum = typeof FraudReviewListItemRedemptionMethodEnum[keyof typeof FraudReviewListItemRedemptionMethodEnum];
 
 /**
  * 
@@ -2332,12 +2560,14 @@ export type FraudReviewReason = typeof FraudReviewReason[keyof typeof FraudRevie
  */
 
 export const FraudReviewRedemptionMethod = {
-    Paypal: 'paypal',
-    Bank: 'bank',
-    MerchantCard: 'merchant card',
-    VisaCard: 'visa card',
+    BankTransfer: 'bank transfer',
     Charity: 'charity',
-    Venmo: 'venmo'
+    InstantDebitTransfer: 'instant debit transfer',
+    InternationalBankTransfer: 'international bank transfer',
+    MerchantCard: 'merchant card',
+    Paypal: 'paypal',
+    Venmo: 'venmo',
+    VisaCard: 'visa card'
 } as const;
 
 export type FraudReviewRedemptionMethod = typeof FraudReviewRedemptionMethod[keyof typeof FraudReviewRedemptionMethod];
@@ -2745,35 +2975,11 @@ export interface GetFraudReview200ResponseFraudReview {
      */
     'status'?: GetFraudReview200ResponseFraudReviewStatusEnum;
     /**
-     * The fraud risk associated with the reward.
-     * @type {string}
-     * @memberof GetFraudReview200ResponseFraudReview
-     */
-    'risk'?: GetFraudReview200ResponseFraudReviewRiskEnum;
-    /**
      * The array may contain multiple reasons, depending on which rule(s) flagged the reward for review. Reasons can be any of the following:  * `Disallowed IP` * `Disallowed email` * `Disallowed country` * `Over reward dollar limit` * `Over reward count limit` * `VPN detected` * `Device related to multiple emails` * `Device or account related to multiple emails` * `IP on a Tremendous fraud list` * `Bank account on a Tremendous fraud list` * `Fingerprint on a Tremendous fraud list` * `Email on a Tremendous fraud list` * `Phone on a Tremendous fraud list` * `IP related to a blocked reward` * `Device related to a blocked reward` * `Bank account related to a blocked reward` * `Fingerprint related to a blocked reward` * `Email related to a blocked reward` * `Phone related to a blocked reward` * `Allowed IP` * `Allowed email` 
      * @type {Array<string>}
      * @memberof GetFraudReview200ResponseFraudReview
      */
     'reasons'?: Array<GetFraudReview200ResponseFraudReviewReasonsEnum>;
-    /**
-     * The name of the person who reviewed the reward, or `Automatic Review` if the reward was blocked automatically. Rewards can be automatically blocked if they remain in the flagged fraud queue for more than 30 days.  This field is only present if the status is not `flagged`. 
-     * @type {string}
-     * @memberof GetFraudReview200ResponseFraudReview
-     */
-    'reviewed_by'?: string;
-    /**
-     * When the reward was blocked or released following fraud review.  This field is only present if the status is not `flagged`. 
-     * @type {string}
-     * @memberof GetFraudReview200ResponseFraudReview
-     */
-    'reviewed_at'?: string;
-    /**
-     * 
-     * @type {GetFraudReview200ResponseFraudReviewRelatedRewards}
-     * @memberof GetFraudReview200ResponseFraudReview
-     */
-    'related_rewards'?: GetFraudReview200ResponseFraudReviewRelatedRewards;
     /**
      * The device fingerprint, if known.
      * @type {string}
@@ -2794,16 +3000,46 @@ export interface GetFraudReview200ResponseFraudReview {
     'redeemed_at'?: string;
     /**
      * 
-     * @type {GetFraudReview200ResponseFraudReviewGeo}
+     * @type {ListFraudReviews200ResponseFraudReviewsInnerGeo}
      * @memberof GetFraudReview200ResponseFraudReview
      */
-    'geo'?: GetFraudReview200ResponseFraudReviewGeo;
+    'geo'?: ListFraudReviews200ResponseFraudReviewsInnerGeo;
     /**
      * 
      * @type {ListRewards200ResponseRewardsInner}
      * @memberof GetFraudReview200ResponseFraudReview
      */
     'reward'?: ListRewards200ResponseRewardsInner;
+    /**
+     * The name of the person who reviewed the reward, or `Automatic Review` if the reward was blocked automatically. Rewards can be automatically blocked if they remain in the flagged fraud queue for more than 30 days.  This field is only present if the status is not `flagged`. 
+     * @type {string}
+     * @memberof GetFraudReview200ResponseFraudReview
+     */
+    'reviewed_by'?: string;
+    /**
+     * When the reward was blocked or released following fraud review.  This field is only present if the status is not `flagged`. 
+     * @type {string}
+     * @memberof GetFraudReview200ResponseFraudReview
+     */
+    'reviewed_at'?: string;
+    /**
+     * A hash of the destination account for redemption methods that require providing 3rd party account details (e.g., PayPal, Venmo, ACH/CashApp, international bank transfers, etc.). The hash is globally unique by redemption method + account combination. This field is omitted for redemption methods that don\'t have a destination account (e.g., merchant cards, charities, etc.). 
+     * @type {string}
+     * @memberof GetFraudReview200ResponseFraudReview
+     */
+    'redemption_method_account_hash'?: string;
+    /**
+     * The fraud risk associated with the reward.
+     * @type {string}
+     * @memberof GetFraudReview200ResponseFraudReview
+     */
+    'risk'?: GetFraudReview200ResponseFraudReviewRiskEnum;
+    /**
+     * 
+     * @type {GetFraudReview200ResponseFraudReviewRelatedRewards}
+     * @memberof GetFraudReview200ResponseFraudReview
+     */
+    'related_rewards'?: GetFraudReview200ResponseFraudReviewRelatedRewards;
 }
 
 export const GetFraudReview200ResponseFraudReviewStatusEnum = {
@@ -2813,13 +3049,6 @@ export const GetFraudReview200ResponseFraudReviewStatusEnum = {
 } as const;
 
 export type GetFraudReview200ResponseFraudReviewStatusEnum = typeof GetFraudReview200ResponseFraudReviewStatusEnum[keyof typeof GetFraudReview200ResponseFraudReviewStatusEnum];
-export const GetFraudReview200ResponseFraudReviewRiskEnum = {
-    High: 'high',
-    Medium: 'medium',
-    Low: 'low'
-} as const;
-
-export type GetFraudReview200ResponseFraudReviewRiskEnum = typeof GetFraudReview200ResponseFraudReviewRiskEnum[keyof typeof GetFraudReview200ResponseFraudReviewRiskEnum];
 export const GetFraudReview200ResponseFraudReviewReasonsEnum = {
     DisallowedIp: 'Disallowed IP',
     DisallowedEmail: 'Disallowed email',
@@ -2846,41 +3075,25 @@ export const GetFraudReview200ResponseFraudReviewReasonsEnum = {
 
 export type GetFraudReview200ResponseFraudReviewReasonsEnum = typeof GetFraudReview200ResponseFraudReviewReasonsEnum[keyof typeof GetFraudReview200ResponseFraudReviewReasonsEnum];
 export const GetFraudReview200ResponseFraudReviewRedemptionMethodEnum = {
-    Paypal: 'paypal',
-    Bank: 'bank',
-    MerchantCard: 'merchant card',
-    VisaCard: 'visa card',
+    BankTransfer: 'bank transfer',
     Charity: 'charity',
-    Venmo: 'venmo'
+    InstantDebitTransfer: 'instant debit transfer',
+    InternationalBankTransfer: 'international bank transfer',
+    MerchantCard: 'merchant card',
+    Paypal: 'paypal',
+    Venmo: 'venmo',
+    VisaCard: 'visa card'
 } as const;
 
 export type GetFraudReview200ResponseFraudReviewRedemptionMethodEnum = typeof GetFraudReview200ResponseFraudReviewRedemptionMethodEnum[keyof typeof GetFraudReview200ResponseFraudReviewRedemptionMethodEnum];
+export const GetFraudReview200ResponseFraudReviewRiskEnum = {
+    High: 'high',
+    Medium: 'medium',
+    Low: 'low'
+} as const;
 
-/**
- * The Geo location, based on the recipient\'s IP.
- * @export
- * @interface GetFraudReview200ResponseFraudReviewGeo
- */
-export interface GetFraudReview200ResponseFraudReviewGeo {
-    /**
-     * The recipient\'s IP.
-     * @type {string}
-     * @memberof GetFraudReview200ResponseFraudReviewGeo
-     */
-    'ip'?: string;
-    /**
-     * The country code (ISO-3166 alpha-2 character code) linked to the recipient\'s IP.
-     * @type {string}
-     * @memberof GetFraudReview200ResponseFraudReviewGeo
-     */
-    'country'?: string;
-    /**
-     * The city associated with the recipient\'s IP.
-     * @type {string}
-     * @memberof GetFraudReview200ResponseFraudReviewGeo
-     */
-    'city'?: string;
-}
+export type GetFraudReview200ResponseFraudReviewRiskEnum = typeof GetFraudReview200ResponseFraudReviewRiskEnum[keyof typeof GetFraudReview200ResponseFraudReviewRiskEnum];
+
 /**
  * The related rewards associated with the fraud review.
  * @export
@@ -3150,11 +3363,17 @@ export interface Invoice {
      */
     'po_number'?: string | null;
     /**
-     * Amount of the invoice in USD
+     * Amount of the invoice
      * @type {number}
      * @memberof Invoice
      */
     'amount': number;
+    /**
+     * Currency of the invoice
+     * @type {string}
+     * @memberof Invoice
+     */
+    'currency'?: InvoiceCurrencyEnum;
     /**
      * 
      * @type {boolean}
@@ -3193,6 +3412,13 @@ export interface Invoice {
     'paid_at': string | null;
 }
 
+export const InvoiceCurrencyEnum = {
+    Usd: 'USD',
+    Eur: 'EUR',
+    Gbp: 'GBP'
+} as const;
+
+export type InvoiceCurrencyEnum = typeof InvoiceCurrencyEnum[keyof typeof InvoiceCurrencyEnum];
 export const InvoiceStatusEnum = {
     Deleted: 'DELETED',
     Paid: 'PAID',
@@ -3790,11 +4016,53 @@ export interface ListFraudReviews200ResponseFraudReviewsInner {
      */
     'reasons'?: Array<ListFraudReviews200ResponseFraudReviewsInnerReasonsEnum>;
     /**
+     * The device fingerprint, if known.
+     * @type {string}
+     * @memberof ListFraudReviews200ResponseFraudReviewsInner
+     */
+    'device_id'?: string;
+    /**
+     * The product selected to claim the reward
+     * @type {string}
+     * @memberof ListFraudReviews200ResponseFraudReviewsInner
+     */
+    'redemption_method'?: ListFraudReviews200ResponseFraudReviewsInnerRedemptionMethodEnum;
+    /**
+     * Date the reward was redeemed
+     * @type {string}
+     * @memberof ListFraudReviews200ResponseFraudReviewsInner
+     */
+    'redeemed_at'?: string;
+    /**
+     * 
+     * @type {ListFraudReviews200ResponseFraudReviewsInnerGeo}
+     * @memberof ListFraudReviews200ResponseFraudReviewsInner
+     */
+    'geo'?: ListFraudReviews200ResponseFraudReviewsInnerGeo;
+    /**
      * 
      * @type {ListRewards200ResponseRewardsInner}
      * @memberof ListFraudReviews200ResponseFraudReviewsInner
      */
     'reward'?: ListRewards200ResponseRewardsInner;
+    /**
+     * The name of the person who reviewed the reward, or `Automatic Review` if the reward was blocked automatically. Rewards can be automatically blocked if they remain in the flagged fraud queue for more than 30 days.  This field is only present if the status is not `flagged`. 
+     * @type {string}
+     * @memberof ListFraudReviews200ResponseFraudReviewsInner
+     */
+    'reviewed_by'?: string;
+    /**
+     * When the reward was blocked or released following fraud review.  This field is only present if the status is not `flagged`. 
+     * @type {string}
+     * @memberof ListFraudReviews200ResponseFraudReviewsInner
+     */
+    'reviewed_at'?: string;
+    /**
+     * A hash of the destination account for redemption methods that require providing 3rd party account details (e.g., PayPal, Venmo, ACH/CashApp, international bank transfers, etc.). The hash is globally unique by redemption method + account combination. This field is omitted for redemption methods that don\'t have a destination account (e.g., merchant cards, charities, etc.). 
+     * @type {string}
+     * @memberof ListFraudReviews200ResponseFraudReviewsInner
+     */
+    'redemption_method_account_hash'?: string;
 }
 
 export const ListFraudReviews200ResponseFraudReviewsInnerStatusEnum = {
@@ -3829,7 +4097,44 @@ export const ListFraudReviews200ResponseFraudReviewsInnerReasonsEnum = {
 } as const;
 
 export type ListFraudReviews200ResponseFraudReviewsInnerReasonsEnum = typeof ListFraudReviews200ResponseFraudReviewsInnerReasonsEnum[keyof typeof ListFraudReviews200ResponseFraudReviewsInnerReasonsEnum];
+export const ListFraudReviews200ResponseFraudReviewsInnerRedemptionMethodEnum = {
+    BankTransfer: 'bank transfer',
+    Charity: 'charity',
+    InstantDebitTransfer: 'instant debit transfer',
+    InternationalBankTransfer: 'international bank transfer',
+    MerchantCard: 'merchant card',
+    Paypal: 'paypal',
+    Venmo: 'venmo',
+    VisaCard: 'visa card'
+} as const;
 
+export type ListFraudReviews200ResponseFraudReviewsInnerRedemptionMethodEnum = typeof ListFraudReviews200ResponseFraudReviewsInnerRedemptionMethodEnum[keyof typeof ListFraudReviews200ResponseFraudReviewsInnerRedemptionMethodEnum];
+
+/**
+ * The Geo location, based on the recipient\'s IP.
+ * @export
+ * @interface ListFraudReviews200ResponseFraudReviewsInnerGeo
+ */
+export interface ListFraudReviews200ResponseFraudReviewsInnerGeo {
+    /**
+     * The recipient\'s IP.
+     * @type {string}
+     * @memberof ListFraudReviews200ResponseFraudReviewsInnerGeo
+     */
+    'ip'?: string;
+    /**
+     * The country code (ISO-3166 alpha-2 character code) linked to the recipient\'s IP.
+     * @type {string}
+     * @memberof ListFraudReviews200ResponseFraudReviewsInnerGeo
+     */
+    'country'?: string;
+    /**
+     * The city associated with the recipient\'s IP.
+     * @type {string}
+     * @memberof ListFraudReviews200ResponseFraudReviewsInnerGeo
+     */
+    'city'?: string;
+}
 /**
  * 
  * @export
@@ -4109,31 +4414,31 @@ export interface ListFundingSources200ResponseFundingSourcesInnerMeta {
      * @type {string}
      * @memberof ListFundingSources200ResponseFundingSourcesInnerMeta
      */
-    'city'?: string;
+    'city'?: string | null;
     /**
      * **Only available when `method` is set to `invoice`.**  Billing address state or province 
      * @type {string}
      * @memberof ListFundingSources200ResponseFundingSourcesInnerMeta
      */
-    'state'?: string;
+    'state'?: string | null;
     /**
      * **Only available when `method` is set to `invoice`.**  Billing address postal code 
      * @type {string}
      * @memberof ListFundingSources200ResponseFundingSourcesInnerMeta
      */
-    'zip'?: string;
+    'zip'?: string | null;
     /**
      * **Only available when `method` is set to `invoice`.**  Contact phone number for billing 
      * @type {string}
      * @memberof ListFundingSources200ResponseFundingSourcesInnerMeta
      */
-    'phone'?: string;
+    'phone'?: string | null;
     /**
      * **Only available when `method` is set to `invoice`.**  Email addresses for invoice delivery (comma-separated) 
      * @type {string}
      * @memberof ListFundingSources200ResponseFundingSourcesInnerMeta
      */
-    'emails'?: string;
+    'emails'?: string | null;
     /**
      * 
      * @type {ListFundingSources200ResponseFundingSourcesInnerMetaFailureDetails}
@@ -4220,11 +4525,17 @@ export interface ListInvoices200ResponseInvoicesInner {
      */
     'po_number'?: string | null;
     /**
-     * Amount of the invoice in USD
+     * Amount of the invoice
      * @type {number}
      * @memberof ListInvoices200ResponseInvoicesInner
      */
     'amount': number;
+    /**
+     * Currency of the invoice
+     * @type {string}
+     * @memberof ListInvoices200ResponseInvoicesInner
+     */
+    'currency'?: ListInvoices200ResponseInvoicesInnerCurrencyEnum;
     /**
      * 
      * @type {boolean}
@@ -4263,6 +4574,13 @@ export interface ListInvoices200ResponseInvoicesInner {
     'paid_at': string | null;
 }
 
+export const ListInvoices200ResponseInvoicesInnerCurrencyEnum = {
+    Usd: 'USD',
+    Eur: 'EUR',
+    Gbp: 'GBP'
+} as const;
+
+export type ListInvoices200ResponseInvoicesInnerCurrencyEnum = typeof ListInvoices200ResponseInvoicesInnerCurrencyEnum[keyof typeof ListInvoices200ResponseInvoicesInnerCurrencyEnum];
 export const ListInvoices200ResponseInvoicesInnerStatusEnum = {
     Deleted: 'DELETED',
     Paid: 'PAID',
@@ -5288,6 +5606,98 @@ export interface ListRoles200ResponseRolesInner {
      * @memberof ListRoles200ResponseRolesInner
      */
     'description': string;
+}
+/**
+ * 
+ * @export
+ * @interface ListTopups200Response
+ */
+export interface ListTopups200Response {
+    /**
+     * 
+     * @type {Array<ListTopups200ResponseTopupsInner>}
+     * @memberof ListTopups200Response
+     */
+    'topups'?: Array<ListTopups200ResponseTopupsInner>;
+    /**
+     * The total number of topups across all pages
+     * @type {number}
+     * @memberof ListTopups200Response
+     */
+    'total_count'?: number;
+}
+/**
+ * 
+ * @export
+ * @interface ListTopups200ResponseTopupsInner
+ */
+export interface ListTopups200ResponseTopupsInner {
+    /**
+     * Unique identifier for the topup request.
+     * @type {string}
+     * @memberof ListTopups200ResponseTopupsInner
+     */
+    'id'?: string;
+    /**
+     * Amount in USD intended to be added to your organization’s balance.
+     * @type {number}
+     * @memberof ListTopups200ResponseTopupsInner
+     */
+    'amount'?: number;
+    /**
+     * Amount of the processing fee for the topup (typically reserved for credit card topups).
+     * @type {number}
+     * @memberof ListTopups200ResponseTopupsInner
+     */
+    'processing_fee'?: number;
+    /**
+     * ID of the funding_source object used for this topup.
+     * @type {string}
+     * @memberof ListTopups200ResponseTopupsInner
+     */
+    'funding_source_id'?: string;
+    /**
+     * Status of the topup <table>   <thead>     <tr>       <th>         Status       </th>       <th>         Description       </th>     </tr>   </thead>   <tbody>     <tr>       <td>         <code>           created         </code>       </td>       <td>         The topup is processing (and may be under review).       </td>     </tr>     <tr>       <td>         <code>           fully_credited         </code>       </td>       <td>         The funds have been added to the balance.       </td>     </tr>     <tr>       <td>         <code>           reversed         </code>       </td>       <td>         The topup was credited, but then reversed due to a chargeback or ACH return.       </td>     </tr>     <tr>       <td>         <code>           rejected         </code>       </td>       <td>         The topup was rejected by an admin.       </td>     </tr>   </tbody> </table> 
+     * @type {string}
+     * @memberof ListTopups200ResponseTopupsInner
+     */
+    'status'?: string;
+    /**
+     * Timestamp indicating when the topup object was created (when the request was made).
+     * @type {string}
+     * @memberof ListTopups200ResponseTopupsInner
+     */
+    'created_at'?: string;
+    /**
+     * Timestamp indicating when the topup amount was fully credited to the balance.
+     * @type {string}
+     * @memberof ListTopups200ResponseTopupsInner
+     */
+    'fully_credited_at'?: string | null;
+    /**
+     * Timestamp indicating when the topup was rejected.
+     * @type {string}
+     * @memberof ListTopups200ResponseTopupsInner
+     */
+    'rejected_at'?: string | null;
+    /**
+     * Timestamp indicating when the topup was reversed.
+     * @type {string}
+     * @memberof ListTopups200ResponseTopupsInner
+     */
+    'reversed_at'?: string | null;
+    /**
+     * A sentence explaining why the topup was reversed.
+     * @type {string}
+     * @memberof ListTopups200ResponseTopupsInner
+     */
+    'reversed_reason'?: string | null;
+    /**
+     * Idempotency key to prevent duplicate requests.
+     * @type {string}
+     * @memberof ListTopups200ResponseTopupsInner
+     */
+    'idempotency_key'?: string | null;
 }
 /**
  * 
@@ -7820,6 +8230,104 @@ export const SingleRewardOrderWithoutLinkOrderChannelEnum = {
 export type SingleRewardOrderWithoutLinkOrderChannelEnum = typeof SingleRewardOrderWithoutLinkOrderChannelEnum[keyof typeof SingleRewardOrderWithoutLinkOrderChannelEnum];
 
 /**
+ * 
+ * @export
+ * @interface Topup
+ */
+export interface Topup {
+    /**
+     * Unique identifier for the topup request.
+     * @type {string}
+     * @memberof Topup
+     */
+    'id'?: string;
+    /**
+     * Amount in USD intended to be added to your organization’s balance.
+     * @type {number}
+     * @memberof Topup
+     */
+    'amount'?: number;
+    /**
+     * Amount of the processing fee for the topup (typically reserved for credit card topups).
+     * @type {number}
+     * @memberof Topup
+     */
+    'processing_fee'?: number;
+    /**
+     * ID of the funding_source object used for this topup.
+     * @type {string}
+     * @memberof Topup
+     */
+    'funding_source_id'?: string;
+    /**
+     * Status of the topup <table>   <thead>     <tr>       <th>         Status       </th>       <th>         Description       </th>     </tr>   </thead>   <tbody>     <tr>       <td>         <code>           created         </code>       </td>       <td>         The topup is processing (and may be under review).       </td>     </tr>     <tr>       <td>         <code>           fully_credited         </code>       </td>       <td>         The funds have been added to the balance.       </td>     </tr>     <tr>       <td>         <code>           reversed         </code>       </td>       <td>         The topup was credited, but then reversed due to a chargeback or ACH return.       </td>     </tr>     <tr>       <td>         <code>           rejected         </code>       </td>       <td>         The topup was rejected by an admin.       </td>     </tr>   </tbody> </table> 
+     * @type {string}
+     * @memberof Topup
+     */
+    'status'?: string;
+    /**
+     * Timestamp indicating when the topup object was created (when the request was made).
+     * @type {string}
+     * @memberof Topup
+     */
+    'created_at'?: string;
+    /**
+     * Timestamp indicating when the topup amount was fully credited to the balance.
+     * @type {string}
+     * @memberof Topup
+     */
+    'fully_credited_at'?: string | null;
+    /**
+     * Timestamp indicating when the topup was rejected.
+     * @type {string}
+     * @memberof Topup
+     */
+    'rejected_at'?: string | null;
+    /**
+     * Timestamp indicating when the topup was reversed.
+     * @type {string}
+     * @memberof Topup
+     */
+    'reversed_at'?: string | null;
+    /**
+     * A sentence explaining why the topup was reversed.
+     * @type {string}
+     * @memberof Topup
+     */
+    'reversed_reason'?: string | null;
+    /**
+     * Idempotency key to prevent duplicate requests.
+     * @type {string}
+     * @memberof Topup
+     */
+    'idempotency_key'?: string | null;
+}
+/**
+ * 
+ * @export
+ * @interface TopupCreateRequest
+ */
+export interface TopupCreateRequest {
+    /**
+     * The ID of the funding source to top up.
+     * @type {string}
+     * @memberof TopupCreateRequest
+     */
+    'funding_source_id': string;
+    /**
+     * Unique key that ensures this request is only processed once. 
+     * @type {string}
+     * @memberof TopupCreateRequest
+     */
+    'idempotency_key': string;
+    /**
+     * Amount in USD intended to be added to your organization’s balance.
+     * @type {number}
+     * @memberof TopupCreateRequest
+     */
+    'amount': number;
+}
+/**
  * With a campaign you can define the look & feel of how rewards are sent out. It also lets you set the available products (different gift cards, charity, etc.) recipients can choose from. 
  * @export
  * @interface UpdateCampaign
@@ -10110,9 +10618,9 @@ export type UpdateFraudRuleListRuleTypeEnum = typeof UpdateFraudRuleListRuleType
 export const FundingSourcesApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
-         * Retrieve a funding source, identified by the given `id` in the URL 
+         * Retrieve a funding source, identified by the given `id` in the URL.  You can also use the special keyword `BALANCE` (case-insensitive) to retrieve the organization\'s balance funding source. 
          * @summary Retrieve funding source
-         * @param {string} id ID of the funding source that should be retrieved
+         * @param {string} id ID of the funding source that should be retrieved. Can also use \&quot;BALANCE\&quot; (case-insensitive) to retrieve the organization\&#39;s balance funding source. 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -10192,9 +10700,9 @@ export const FundingSourcesApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = FundingSourcesApiAxiosParamCreator(configuration)
     return {
         /**
-         * Retrieve a funding source, identified by the given `id` in the URL 
+         * Retrieve a funding source, identified by the given `id` in the URL.  You can also use the special keyword `BALANCE` (case-insensitive) to retrieve the organization\'s balance funding source. 
          * @summary Retrieve funding source
-         * @param {string} id ID of the funding source that should be retrieved
+         * @param {string} id ID of the funding source that should be retrieved. Can also use \&quot;BALANCE\&quot; (case-insensitive) to retrieve the organization\&#39;s balance funding source. 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -10227,9 +10735,9 @@ export const FundingSourcesApiFactory = function (configuration?: Configuration,
     const localVarFp = FundingSourcesApiFp(configuration)
     return {
         /**
-         * Retrieve a funding source, identified by the given `id` in the URL 
+         * Retrieve a funding source, identified by the given `id` in the URL.  You can also use the special keyword `BALANCE` (case-insensitive) to retrieve the organization\'s balance funding source. 
          * @summary Retrieve funding source
-         * @param {string} id ID of the funding source that should be retrieved
+         * @param {string} id ID of the funding source that should be retrieved. Can also use \&quot;BALANCE\&quot; (case-insensitive) to retrieve the organization\&#39;s balance funding source. 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -10256,9 +10764,9 @@ export const FundingSourcesApiFactory = function (configuration?: Configuration,
  */
 export class FundingSourcesApi extends BaseAPI {
     /**
-     * Retrieve a funding source, identified by the given `id` in the URL 
+     * Retrieve a funding source, identified by the given `id` in the URL.  You can also use the special keyword `BALANCE` (case-insensitive) to retrieve the organization\'s balance funding source. 
      * @summary Retrieve funding source
-     * @param {string} id ID of the funding source that should be retrieved
+     * @param {string} id ID of the funding source that should be retrieved. Can also use \&quot;BALANCE\&quot; (case-insensitive) to retrieve the organization\&#39;s balance funding source. 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof FundingSourcesApi
@@ -10288,7 +10796,7 @@ export class FundingSourcesApi extends BaseAPI {
 export const InvoicesApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
-         * Creating an invoice is the way for your organization to fund your account\'s balance.  1. Create an invoice 2. Pay the invoice 3. Funds get added to your account\'s balance  ## Request body  <div class=\"object-schema-request-schema\">   <table>   <thead>     <tr>       <th>Property</th>       <th>Type</th>       <th>Description</th>     </tr>   </thead>   <tbody class=\"object-schema-table-body\">     <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">po_number</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>Reference to the purchase order number within your organization</p> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">amount</code> </div> </td><td><span class=\"property-type\">number</span> <span class=\"property-format\">double</span></td><td><p>Amount of the invoice in USD</p> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">memo</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>A note to be included in the invoice. This is for your internal use and will not be visible to the recipient.</p> </td></tr>   </tbody> </table>  </div>  
+         * Creating an invoice is the way for your organization to fund your account\'s balance.  1. Create an invoice 2. Pay the invoice 3. Funds get added to your account\'s balance  ## Request body  <div class=\"object-schema-request-schema\">   <table>   <thead>     <tr>       <th>Property</th>       <th>Type</th>       <th>Description</th>     </tr>   </thead>   <tbody class=\"object-schema-table-body\">     <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">po_number</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>Reference to the purchase order number within your organization</p> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">amount</code> </div> </td><td><span class=\"property-type\">number</span> <span class=\"property-format\">double</span></td><td><p>Amount of the invoice</p> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">currency</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>Currency of the invoice</p> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">memo</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>A note to be included in the invoice. This is for your internal use and will not be visible to the recipient.</p> </td></tr>   </tbody> </table>  </div>  
          * @summary Create invoice
          * @param {CreateInvoiceRequest} createInvoiceRequest Invoice details
          * @param {*} [options] Override http request option.
@@ -10534,7 +11042,7 @@ export const InvoicesApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = InvoicesApiAxiosParamCreator(configuration)
     return {
         /**
-         * Creating an invoice is the way for your organization to fund your account\'s balance.  1. Create an invoice 2. Pay the invoice 3. Funds get added to your account\'s balance  ## Request body  <div class=\"object-schema-request-schema\">   <table>   <thead>     <tr>       <th>Property</th>       <th>Type</th>       <th>Description</th>     </tr>   </thead>   <tbody class=\"object-schema-table-body\">     <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">po_number</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>Reference to the purchase order number within your organization</p> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">amount</code> </div> </td><td><span class=\"property-type\">number</span> <span class=\"property-format\">double</span></td><td><p>Amount of the invoice in USD</p> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">memo</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>A note to be included in the invoice. This is for your internal use and will not be visible to the recipient.</p> </td></tr>   </tbody> </table>  </div>  
+         * Creating an invoice is the way for your organization to fund your account\'s balance.  1. Create an invoice 2. Pay the invoice 3. Funds get added to your account\'s balance  ## Request body  <div class=\"object-schema-request-schema\">   <table>   <thead>     <tr>       <th>Property</th>       <th>Type</th>       <th>Description</th>     </tr>   </thead>   <tbody class=\"object-schema-table-body\">     <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">po_number</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>Reference to the purchase order number within your organization</p> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">amount</code> </div> </td><td><span class=\"property-type\">number</span> <span class=\"property-format\">double</span></td><td><p>Amount of the invoice</p> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">currency</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>Currency of the invoice</p> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">memo</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>A note to be included in the invoice. This is for your internal use and will not be visible to the recipient.</p> </td></tr>   </tbody> </table>  </div>  
          * @summary Create invoice
          * @param {CreateInvoiceRequest} createInvoiceRequest Invoice details
          * @param {*} [options] Override http request option.
@@ -10623,7 +11131,7 @@ export const InvoicesApiFactory = function (configuration?: Configuration, baseP
     const localVarFp = InvoicesApiFp(configuration)
     return {
         /**
-         * Creating an invoice is the way for your organization to fund your account\'s balance.  1. Create an invoice 2. Pay the invoice 3. Funds get added to your account\'s balance  ## Request body  <div class=\"object-schema-request-schema\">   <table>   <thead>     <tr>       <th>Property</th>       <th>Type</th>       <th>Description</th>     </tr>   </thead>   <tbody class=\"object-schema-table-body\">     <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">po_number</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>Reference to the purchase order number within your organization</p> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">amount</code> </div> </td><td><span class=\"property-type\">number</span> <span class=\"property-format\">double</span></td><td><p>Amount of the invoice in USD</p> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">memo</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>A note to be included in the invoice. This is for your internal use and will not be visible to the recipient.</p> </td></tr>   </tbody> </table>  </div>  
+         * Creating an invoice is the way for your organization to fund your account\'s balance.  1. Create an invoice 2. Pay the invoice 3. Funds get added to your account\'s balance  ## Request body  <div class=\"object-schema-request-schema\">   <table>   <thead>     <tr>       <th>Property</th>       <th>Type</th>       <th>Description</th>     </tr>   </thead>   <tbody class=\"object-schema-table-body\">     <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">po_number</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>Reference to the purchase order number within your organization</p> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">amount</code> </div> </td><td><span class=\"property-type\">number</span> <span class=\"property-format\">double</span></td><td><p>Amount of the invoice</p> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">currency</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>Currency of the invoice</p> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">memo</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>A note to be included in the invoice. This is for your internal use and will not be visible to the recipient.</p> </td></tr>   </tbody> </table>  </div>  
          * @summary Create invoice
          * @param {CreateInvoiceRequest} createInvoiceRequest Invoice details
          * @param {*} [options] Override http request option.
@@ -10694,7 +11202,7 @@ export const InvoicesApiFactory = function (configuration?: Configuration, baseP
  */
 export class InvoicesApi extends BaseAPI {
     /**
-     * Creating an invoice is the way for your organization to fund your account\'s balance.  1. Create an invoice 2. Pay the invoice 3. Funds get added to your account\'s balance  ## Request body  <div class=\"object-schema-request-schema\">   <table>   <thead>     <tr>       <th>Property</th>       <th>Type</th>       <th>Description</th>     </tr>   </thead>   <tbody class=\"object-schema-table-body\">     <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">po_number</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>Reference to the purchase order number within your organization</p> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">amount</code> </div> </td><td><span class=\"property-type\">number</span> <span class=\"property-format\">double</span></td><td><p>Amount of the invoice in USD</p> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">memo</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>A note to be included in the invoice. This is for your internal use and will not be visible to the recipient.</p> </td></tr>   </tbody> </table>  </div>  
+     * Creating an invoice is the way for your organization to fund your account\'s balance.  1. Create an invoice 2. Pay the invoice 3. Funds get added to your account\'s balance  ## Request body  <div class=\"object-schema-request-schema\">   <table>   <thead>     <tr>       <th>Property</th>       <th>Type</th>       <th>Description</th>     </tr>   </thead>   <tbody class=\"object-schema-table-body\">     <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">po_number</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>Reference to the purchase order number within your organization</p> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">amount</code> </div> </td><td><span class=\"property-type\">number</span> <span class=\"property-format\">double</span></td><td><p>Amount of the invoice</p> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">currency</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>Currency of the invoice</p> </td></tr> <tr class=\"\"><td><div class=\"property-name\">   <code class=\"property-name\">memo</code> </div> </td><td><span class=\"property-type\">string</span></td><td><p>A note to be included in the invoice. This is for your internal use and will not be visible to the recipient.</p> </td></tr>   </tbody> </table>  </div>  
      * @summary Create invoice
      * @param {CreateInvoiceRequest} createInvoiceRequest Invoice details
      * @param {*} [options] Override http request option.
@@ -12697,6 +13205,265 @@ export class RolesApi extends BaseAPI {
      */
     public listRoles(options?: RawAxiosRequestConfig) {
         return RolesApiFp(this.configuration).listRoles(options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+
+/**
+ * TopupsApi - axios parameter creator
+ * @export
+ */
+export const TopupsApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @summary Create a topup
+         * @param {CreateTopupRequest} [createTopupRequest] Parameters required to create a new topup. The &#x60;idempotency_key&#x60; should be unique for each request.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        createTopup: async (createTopupRequest?: CreateTopupRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/topups`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication BearerApiKey required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(createTopupRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Retrieve a topup, identified by the given `id` in the URL. 
+         * @summary Retrieve single topup
+         * @param {string} id ID of the topup request that should be retrieved
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getTopup: async (id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('getTopup', 'id', id)
+            const localVarPath = `/topups/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication BearerApiKey required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Retrieve a list of all topup requests. 
+         * @summary List topups
+         * @param {number} [offset] Offsets the returned list by the given number of topups. The returned topups are ordered and offset by their creation date (DESC).
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listTopups: async (offset?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/topups`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication BearerApiKey required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (offset !== undefined) {
+                localVarQueryParameter['offset'] = offset;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * TopupsApi - functional programming interface
+ * @export
+ */
+export const TopupsApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = TopupsApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @summary Create a topup
+         * @param {CreateTopupRequest} [createTopupRequest] Parameters required to create a new topup. The &#x60;idempotency_key&#x60; should be unique for each request.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async createTopup(createTopupRequest?: CreateTopupRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CreateTopup200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.createTopup(createTopupRequest, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['TopupsApi.createTopup']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Retrieve a topup, identified by the given `id` in the URL. 
+         * @summary Retrieve single topup
+         * @param {string} id ID of the topup request that should be retrieved
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getTopup(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CreateTopup200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getTopup(id, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['TopupsApi.getTopup']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Retrieve a list of all topup requests. 
+         * @summary List topups
+         * @param {number} [offset] Offsets the returned list by the given number of topups. The returned topups are ordered and offset by their creation date (DESC).
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async listTopups(offset?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListTopups200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.listTopups(offset, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['TopupsApi.listTopups']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+    }
+};
+
+/**
+ * TopupsApi - factory interface
+ * @export
+ */
+export const TopupsApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = TopupsApiFp(configuration)
+    return {
+        /**
+         * 
+         * @summary Create a topup
+         * @param {CreateTopupRequest} [createTopupRequest] Parameters required to create a new topup. The &#x60;idempotency_key&#x60; should be unique for each request.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        createTopup(createTopupRequest?: CreateTopupRequest, options?: RawAxiosRequestConfig): AxiosPromise<CreateTopup200Response> {
+            return localVarFp.createTopup(createTopupRequest, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Retrieve a topup, identified by the given `id` in the URL. 
+         * @summary Retrieve single topup
+         * @param {string} id ID of the topup request that should be retrieved
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getTopup(id: string, options?: RawAxiosRequestConfig): AxiosPromise<CreateTopup200Response> {
+            return localVarFp.getTopup(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Retrieve a list of all topup requests. 
+         * @summary List topups
+         * @param {number} [offset] Offsets the returned list by the given number of topups. The returned topups are ordered and offset by their creation date (DESC).
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listTopups(offset?: number, options?: RawAxiosRequestConfig): AxiosPromise<ListTopups200Response> {
+            return localVarFp.listTopups(offset, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * TopupsApi - object-oriented interface
+ * @export
+ * @class TopupsApi
+ * @extends {BaseAPI}
+ */
+export class TopupsApi extends BaseAPI {
+    /**
+     * 
+     * @summary Create a topup
+     * @param {CreateTopupRequest} [createTopupRequest] Parameters required to create a new topup. The &#x60;idempotency_key&#x60; should be unique for each request.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TopupsApi
+     */
+    public createTopup(createTopupRequest?: CreateTopupRequest, options?: RawAxiosRequestConfig) {
+        return TopupsApiFp(this.configuration).createTopup(createTopupRequest, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Retrieve a topup, identified by the given `id` in the URL. 
+     * @summary Retrieve single topup
+     * @param {string} id ID of the topup request that should be retrieved
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TopupsApi
+     */
+    public getTopup(id: string, options?: RawAxiosRequestConfig) {
+        return TopupsApiFp(this.configuration).getTopup(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Retrieve a list of all topup requests. 
+     * @summary List topups
+     * @param {number} [offset] Offsets the returned list by the given number of topups. The returned topups are ordered and offset by their creation date (DESC).
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TopupsApi
+     */
+    public listTopups(offset?: number, options?: RawAxiosRequestConfig) {
+        return TopupsApiFp(this.configuration).listTopups(offset, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
