@@ -1,5 +1,22 @@
 # Changelog
 
+## [4.1.0](https://github.com/tremendous-rewards/tremendous-node/compare/tremendous-v4.0.0...tremendous-v4.1.0) (2026-01-28)
+
+
+### Features
+
+* add currency support to invoices (USD, EUR, GBP) ([74af7fa](https://github.com/tremendous-rewards/tremendous-node/commit/74af7fa96c32d6ca7d93481e42acf284654b4ad3))
+* add new Topups API (create, get, list) ([74af7fa](https://github.com/tremendous-rewards/tremendous-node/commit/74af7fa96c32d6ca7d93481e42acf284654b4ad3))
+* allow BALANCE keyword in get_funding_source ([74af7fa](https://github.com/tremendous-rewards/tremendous-node/commit/74af7fa96c32d6ca7d93481e42acf284654b4ad3))
+* expand fraud review schema with additional fields ([74af7fa](https://github.com/tremendous-rewards/tremendous-node/commit/74af7fa96c32d6ca7d93481e42acf284654b4ad3))
+* regenerate SDK ([#244](https://github.com/tremendous-rewards/tremendous-node/issues/244)) ([74af7fa](https://github.com/tremendous-rewards/tremendous-node/commit/74af7fa96c32d6ca7d93481e42acf284654b4ad3))
+
+
+### Bug Fixes
+
+* make funding source meta fields nullable ([74af7fa](https://github.com/tremendous-rewards/tremendous-node/commit/74af7fa96c32d6ca7d93481e42acf284654b4ad3))
+* update redemption method enum values ([74af7fa](https://github.com/tremendous-rewards/tremendous-node/commit/74af7fa96c32d6ca7d93481e42acf284654b4ad3))
+
 ## [4.0.0](https://github.com/tremendous-rewards/tremendous-node/compare/tremendous-v3.11.0...tremendous-v4.0.0) (2025-10-21)
 
 
