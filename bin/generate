@@ -8,7 +8,7 @@ test -f "$1" && spec="$1" || spec=$(./bin/download-spec)
 
 openapi_generator_version=$(xargs < "${DIR}/../.openapi-generator/VERSION")
 docker run --rm \
-  -v ./:/output \
+  -v "$(pwd)":/output \
   -v $(realpath $spec):/spec.yml \
   "openapitools/openapi-generator-cli:v${openapi_generator_version}" generate \
   -i /spec.yml \
