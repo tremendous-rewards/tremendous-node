@@ -706,6 +706,138 @@ export interface CreateConnectedOrganizationRequest {
 /**
  * 
  * @export
+ * @interface CreateField
+ */
+export interface CreateField {
+    /**
+     * A human-readable name for the field. Can contain letters, numbers, spaces, and underscores. The field\'s `label` (a reference name used in API requests) will be automatically derived from this value. 
+     * @type {string}
+     * @memberof CreateField
+     */
+    'display_name': string;
+    /**
+     * Type of the values of the field  <table>   <thead>     <tr>       <th>Type</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td><code>Checkbox</code></td>       <td>A boolean value (true/false)</td>     </tr>     <tr>       <td><code>Currency</code></td>       <td>A monetary value</td>     </tr>     <tr>       <td><code>Date</code></td>       <td>A date value</td>     </tr>     <tr>       <td><code>Dropdown</code></td>       <td>A single selection from predefined options (see <code>data.options</code>)</td>     </tr>     <tr>       <td><code>Email</code></td>       <td>An email address</td>     </tr>     <tr>       <td><code>List</code></td>       <td>Multiple selections from predefined options (see <code>data.options</code>)</td>     </tr>     <tr>       <td><code>Number</code></td>       <td>A numeric value</td>     </tr>     <tr>       <td><code>Phone</code></td>       <td>A phone number</td>     </tr>     <tr>       <td><code>Text</code></td>       <td>A single-line text value</td>     </tr>     <tr>       <td><code>TextArea</code></td>       <td>A multi-line text value</td>     </tr>   </tbody> </table> 
+     * @type {string}
+     * @memberof CreateField
+     */
+    'data_type': CreateFieldDataTypeEnum;
+    /**
+     * 
+     * @type {CreateFieldRequestData}
+     * @memberof CreateField
+     */
+    'data'?: CreateFieldRequestData;
+    /**
+     * Is this field required (true) or optional (false). Defaults to false.
+     * @type {boolean}
+     * @memberof CreateField
+     */
+    'required'?: boolean;
+    /**
+     * A description of the field\'s purpose
+     * @type {string}
+     * @memberof CreateField
+     */
+    'description'?: string;
+}
+
+export const CreateFieldDataTypeEnum = {
+    Checkbox: 'Checkbox',
+    Currency: 'Currency',
+    Date: 'Date',
+    Dropdown: 'Dropdown',
+    Email: 'Email',
+    List: 'List',
+    Number: 'Number',
+    Phone: 'Phone',
+    Text: 'Text',
+    TextArea: 'TextArea'
+} as const;
+
+export type CreateFieldDataTypeEnum = typeof CreateFieldDataTypeEnum[keyof typeof CreateFieldDataTypeEnum];
+
+/**
+ * 
+ * @export
+ * @interface CreateField200Response
+ */
+export interface CreateField200Response {
+    /**
+     * 
+     * @type {ListFields200ResponseFieldsInner}
+     * @memberof CreateField200Response
+     */
+    'field': ListFields200ResponseFieldsInner;
+}
+/**
+ * 
+ * @export
+ * @interface CreateFieldRequest
+ */
+export interface CreateFieldRequest {
+    /**
+     * A human-readable name for the field. Can contain letters, numbers, spaces, and underscores. The field\'s `label` (a reference name used in API requests) will be automatically derived from this value. 
+     * @type {string}
+     * @memberof CreateFieldRequest
+     */
+    'display_name': string;
+    /**
+     * Type of the values of the field  <table>   <thead>     <tr>       <th>Type</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td><code>Checkbox</code></td>       <td>A boolean value (true/false)</td>     </tr>     <tr>       <td><code>Currency</code></td>       <td>A monetary value</td>     </tr>     <tr>       <td><code>Date</code></td>       <td>A date value</td>     </tr>     <tr>       <td><code>Dropdown</code></td>       <td>A single selection from predefined options (see <code>data.options</code>)</td>     </tr>     <tr>       <td><code>Email</code></td>       <td>An email address</td>     </tr>     <tr>       <td><code>List</code></td>       <td>Multiple selections from predefined options (see <code>data.options</code>)</td>     </tr>     <tr>       <td><code>Number</code></td>       <td>A numeric value</td>     </tr>     <tr>       <td><code>Phone</code></td>       <td>A phone number</td>     </tr>     <tr>       <td><code>Text</code></td>       <td>A single-line text value</td>     </tr>     <tr>       <td><code>TextArea</code></td>       <td>A multi-line text value</td>     </tr>   </tbody> </table> 
+     * @type {string}
+     * @memberof CreateFieldRequest
+     */
+    'data_type': CreateFieldRequestDataTypeEnum;
+    /**
+     * 
+     * @type {CreateFieldRequestData}
+     * @memberof CreateFieldRequest
+     */
+    'data'?: CreateFieldRequestData;
+    /**
+     * Is this field required (true) or optional (false). Defaults to false.
+     * @type {boolean}
+     * @memberof CreateFieldRequest
+     */
+    'required'?: boolean;
+    /**
+     * A description of the field\'s purpose
+     * @type {string}
+     * @memberof CreateFieldRequest
+     */
+    'description'?: string;
+}
+
+export const CreateFieldRequestDataTypeEnum = {
+    Checkbox: 'Checkbox',
+    Currency: 'Currency',
+    Date: 'Date',
+    Dropdown: 'Dropdown',
+    Email: 'Email',
+    List: 'List',
+    Number: 'Number',
+    Phone: 'Phone',
+    Text: 'Text',
+    TextArea: 'TextArea'
+} as const;
+
+export type CreateFieldRequestDataTypeEnum = typeof CreateFieldRequestDataTypeEnum[keyof typeof CreateFieldRequestDataTypeEnum];
+
+/**
+ * Additional configuration for the field. Required for `Dropdown` and `List` data types. 
+ * @export
+ * @interface CreateFieldRequestData
+ */
+export interface CreateFieldRequestData {
+    /**
+     * List of valid options for `Dropdown` and `List` field types. 
+     * @type {Array<string>}
+     * @memberof CreateFieldRequestData
+     */
+    'options'?: Array<string>;
+}
+/**
+ * 
+ * @export
  * @interface CreateInvoice200Response
  */
 export interface CreateInvoice200Response {
@@ -1953,17 +2085,17 @@ export interface Field {
      */
     'label'?: string;
     /**
-     * Type of the values of the field
+     * Type of the values of the field  <table>   <thead>     <tr>       <th>Type</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td><code>Checkbox</code></td>       <td>A boolean value (true/false)</td>     </tr>     <tr>       <td><code>Currency</code></td>       <td>A monetary value</td>     </tr>     <tr>       <td><code>Date</code></td>       <td>A date value</td>     </tr>     <tr>       <td><code>Dropdown</code></td>       <td>A single selection from predefined options (see <code>data.options</code>)</td>     </tr>     <tr>       <td><code>Email</code></td>       <td>An email address</td>     </tr>     <tr>       <td><code>List</code></td>       <td>Multiple selections from predefined options (see <code>data.options</code>)</td>     </tr>     <tr>       <td><code>Number</code></td>       <td>A numeric value</td>     </tr>     <tr>       <td><code>Phone</code></td>       <td>A phone number</td>     </tr>     <tr>       <td><code>Text</code></td>       <td>A single-line text value</td>     </tr>     <tr>       <td><code>TextArea</code></td>       <td>A multi-line text value</td>     </tr>   </tbody> </table> 
      * @type {string}
      * @memberof Field
      */
-    'data_type'?: string;
+    'data_type'?: FieldDataTypeEnum;
     /**
      * 
-     * @type {{ [key: string]: any; }}
+     * @type {ListFields200ResponseFieldsInnerData}
      * @memberof Field
      */
-    'data'?: { [key: string]: any; };
+    'data'?: ListFields200ResponseFieldsInnerData;
     /**
      * Is this field required (true) or optional (false)
      * @type {boolean}
@@ -1977,6 +2109,22 @@ export interface Field {
      */
     'scope'?: string;
 }
+
+export const FieldDataTypeEnum = {
+    Checkbox: 'Checkbox',
+    Currency: 'Currency',
+    Date: 'Date',
+    Dropdown: 'Dropdown',
+    Email: 'Email',
+    List: 'List',
+    Number: 'Number',
+    Phone: 'Phone',
+    Text: 'Text',
+    TextArea: 'TextArea'
+} as const;
+
+export type FieldDataTypeEnum = typeof FieldDataTypeEnum[keyof typeof FieldDataTypeEnum];
+
 /**
  * 
  * @export
@@ -3941,17 +4089,17 @@ export interface ListFields200ResponseFieldsInner {
      */
     'label'?: string;
     /**
-     * Type of the values of the field
+     * Type of the values of the field  <table>   <thead>     <tr>       <th>Type</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td><code>Checkbox</code></td>       <td>A boolean value (true/false)</td>     </tr>     <tr>       <td><code>Currency</code></td>       <td>A monetary value</td>     </tr>     <tr>       <td><code>Date</code></td>       <td>A date value</td>     </tr>     <tr>       <td><code>Dropdown</code></td>       <td>A single selection from predefined options (see <code>data.options</code>)</td>     </tr>     <tr>       <td><code>Email</code></td>       <td>An email address</td>     </tr>     <tr>       <td><code>List</code></td>       <td>Multiple selections from predefined options (see <code>data.options</code>)</td>     </tr>     <tr>       <td><code>Number</code></td>       <td>A numeric value</td>     </tr>     <tr>       <td><code>Phone</code></td>       <td>A phone number</td>     </tr>     <tr>       <td><code>Text</code></td>       <td>A single-line text value</td>     </tr>     <tr>       <td><code>TextArea</code></td>       <td>A multi-line text value</td>     </tr>   </tbody> </table> 
      * @type {string}
      * @memberof ListFields200ResponseFieldsInner
      */
-    'data_type'?: string;
+    'data_type'?: ListFields200ResponseFieldsInnerDataTypeEnum;
     /**
      * 
-     * @type {{ [key: string]: any; }}
+     * @type {ListFields200ResponseFieldsInnerData}
      * @memberof ListFields200ResponseFieldsInner
      */
-    'data'?: { [key: string]: any; };
+    'data'?: ListFields200ResponseFieldsInnerData;
     /**
      * Is this field required (true) or optional (false)
      * @type {boolean}
@@ -3964,6 +4112,41 @@ export interface ListFields200ResponseFieldsInner {
      * @memberof ListFields200ResponseFieldsInner
      */
     'scope'?: string;
+}
+
+export const ListFields200ResponseFieldsInnerDataTypeEnum = {
+    Checkbox: 'Checkbox',
+    Currency: 'Currency',
+    Date: 'Date',
+    Dropdown: 'Dropdown',
+    Email: 'Email',
+    List: 'List',
+    Number: 'Number',
+    Phone: 'Phone',
+    Text: 'Text',
+    TextArea: 'TextArea'
+} as const;
+
+export type ListFields200ResponseFieldsInnerDataTypeEnum = typeof ListFields200ResponseFieldsInnerDataTypeEnum[keyof typeof ListFields200ResponseFieldsInnerDataTypeEnum];
+
+/**
+ * Additional configuration for the field. Only used for `Dropdown` and `List` data types. 
+ * @export
+ * @interface ListFields200ResponseFieldsInnerData
+ */
+export interface ListFields200ResponseFieldsInnerData {
+    /**
+     * List of valid options for `Dropdown` and `List` field types. For `Dropdown`, the user selects one option. For `List`, the user can select multiple options. 
+     * @type {Array<string>}
+     * @memberof ListFields200ResponseFieldsInnerData
+     */
+    'options'?: Array<string>;
+    /**
+     * Optional human-readable labels for each option. Keys are the option values, values are the display labels. If not provided, the option values are used as labels. 
+     * @type {{ [key: string]: string; }}
+     * @memberof ListFields200ResponseFieldsInnerData
+     */
+    'labels'?: { [key: string]: string; };
 }
 /**
  * 
@@ -9626,6 +9809,46 @@ export class ConnectedOrganizationsApi extends BaseAPI {
 export const FieldsApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
+         * Create a custom field to be associated with rewards. Custom fields can be used for reporting and analytics purposes. 
+         * @summary Create field
+         * @param {CreateFieldRequest} createFieldRequest Field details
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        createField: async (createFieldRequest: CreateFieldRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'createFieldRequest' is not null or undefined
+            assertParamExists('createField', 'createFieldRequest', createFieldRequest)
+            const localVarPath = `/fields`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication BearerApiKey required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(createFieldRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * For reporting and analytics purposes, custom fields can be associated with rewards generated through the API. Custom fields must be first added by members of your admin team through the Tremendous Dashboard. 
          * @summary List fields
          * @param {*} [options] Override http request option.
@@ -9670,6 +9893,19 @@ export const FieldsApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = FieldsApiAxiosParamCreator(configuration)
     return {
         /**
+         * Create a custom field to be associated with rewards. Custom fields can be used for reporting and analytics purposes. 
+         * @summary Create field
+         * @param {CreateFieldRequest} createFieldRequest Field details
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async createField(createFieldRequest: CreateFieldRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CreateField200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.createField(createFieldRequest, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['FieldsApi.createField']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
          * For reporting and analytics purposes, custom fields can be associated with rewards generated through the API. Custom fields must be first added by members of your admin team through the Tremendous Dashboard. 
          * @summary List fields
          * @param {*} [options] Override http request option.
@@ -9692,6 +9928,16 @@ export const FieldsApiFactory = function (configuration?: Configuration, basePat
     const localVarFp = FieldsApiFp(configuration)
     return {
         /**
+         * Create a custom field to be associated with rewards. Custom fields can be used for reporting and analytics purposes. 
+         * @summary Create field
+         * @param {CreateFieldRequest} createFieldRequest Field details
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        createField(createFieldRequest: CreateFieldRequest, options?: RawAxiosRequestConfig): AxiosPromise<CreateField200Response> {
+            return localVarFp.createField(createFieldRequest, options).then((request) => request(axios, basePath));
+        },
+        /**
          * For reporting and analytics purposes, custom fields can be associated with rewards generated through the API. Custom fields must be first added by members of your admin team through the Tremendous Dashboard. 
          * @summary List fields
          * @param {*} [options] Override http request option.
@@ -9710,6 +9956,18 @@ export const FieldsApiFactory = function (configuration?: Configuration, basePat
  * @extends {BaseAPI}
  */
 export class FieldsApi extends BaseAPI {
+    /**
+     * Create a custom field to be associated with rewards. Custom fields can be used for reporting and analytics purposes. 
+     * @summary Create field
+     * @param {CreateFieldRequest} createFieldRequest Field details
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof FieldsApi
+     */
+    public createField(createFieldRequest: CreateFieldRequest, options?: RawAxiosRequestConfig) {
+        return FieldsApiFp(this.configuration).createField(createFieldRequest, options).then((request) => request(this.axios, this.basePath));
+    }
+
     /**
      * For reporting and analytics purposes, custom fields can be associated with rewards generated through the API. Custom fields must be first added by members of your admin team through the Tremendous Dashboard. 
      * @summary List fields
