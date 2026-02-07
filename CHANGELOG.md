@@ -1,5 +1,18 @@
 # Changelog
 
+## [4.2.0](https://github.com/tremendous-rewards/tremendous-node/compare/tremendous-v4.1.0...tremendous-v4.2.0) (2026-02-07)
+
+
+### Features
+
+* add create field endpoint (POST /fields) ([0817971](https://github.com/tremendous-rewards/tremendous-node/commit/0817971273bed122ef728906556c429b3d708dee))
+* regenerate SDK ([#250](https://github.com/tremendous-rewards/tremendous-node/issues/250)) ([0817971](https://github.com/tremendous-rewards/tremendous-node/commit/0817971273bed122ef728906556c429b3d708dee))
+
+
+### Bug Fixes
+
+* type field data as structured object instead of untyped record ([0817971](https://github.com/tremendous-rewards/tremendous-node/commit/0817971273bed122ef728906556c429b3d708dee))
+
 ## [4.1.0](https://github.com/tremendous-rewards/tremendous-node/compare/tremendous-v4.0.0...tremendous-v4.1.0) (2026-01-28)
 
 
