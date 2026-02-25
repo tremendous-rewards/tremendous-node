@@ -7,6 +7,12 @@
 
 * add nullable `expires_at` field to Reward responses across all ([f014160](https://github.com/tremendous-rewards/tremendous-node/commit/f0141607110c875597ddc58a2a28cfe6cbdee4cb))
 
+
+### Bug Fixes
+
+* Remove `BGN` currency code reference ([f014160](https://github.com/tremendous-rewards/tremendous-node/commit/f0141607110c875597ddc58a2a28cfe6cbdee4cb))
+
+
 ## [4.2.0](https://github.com/tremendous-rewards/tremendous-node/compare/tremendous-v4.1.0...tremendous-v4.2.0) (2026-02-07)
 
 
