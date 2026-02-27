@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.4.0](https://github.com/tremendous-rewards/tremendous-node/compare/tremendous-v4.3.0...tremendous-v4.4.0) (2026-02-27)
+
+
+### Features
+
+* rename order `status` enum `CART` to `OPEN` ([6ef954e](https://github.com/tremendous-rewards/tremendous-node/commit/6ef954e7da4dd4b45a97cf6284f337d0b31239b9))
+
 ## [4.3.0](https://github.com/tremendous-rewards/tremendous-node/compare/tremendous-v4.2.0...tremendous-v4.3.0) (2026-02-25)
 
 
