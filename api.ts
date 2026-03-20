@@ -983,7 +983,7 @@ export interface CreateOrder200ResponseOrder {
      */
     'created_at': string;
     /**
-     * Execution status of a given order  <table>   <thead>     <tr>       <th>         Status       </th>       <th>         Description       </th>     </tr>   </thead>   <tbody>     <tr>       <td>         <code>           CANCELED         </code>       </td>       <td>         The order and all of its rewards were canceled.       </td>     </tr>     <tr>       <td>         <code>           OPEN         </code>       </td>       <td>         The order has been created, but hasn\'t yet been processed.       </td>     </tr>     <tr>       <td>         <code>           EXECUTED         </code>       </td>       <td>         The order has been executed. Payment has been handled and rewards are being delivered (if applicable).       </td>     </tr>     <tr>       <td>         <code>           FAILED         </code>       </td>       <td>         The order could not be processed due to an error. E.g. due to insufficient funds in the account.       </td>     </tr>     <tr>       <td>         <code>           PENDING APPROVAL         </code>       </td>       <td>         The order has been created but needs approval to be executed.       </td>     </tr>     <tr>       <td>         <code>           PENDING INTERNAL PAYMENT APPROVAL         </code>       </td>       <td>         The order has been created but it is under review and requires approval from our team.       </td>     </tr>    </tbody> </table> 
+     * Execution status of a given order  <table>   <thead>     <tr>       <th>         Status       </th>       <th>         Description       </th>     </tr>   </thead>   <tbody>     <tr>       <td>         <code>           CANCELED         </code>       </td>       <td>         The order and all of its rewards were canceled.       </td>     </tr>     <tr>       <td>         <code>           OPEN         </code>       </td>       <td>         The order has been created, but hasn\'t yet been processed.       </td>     </tr>     <tr>       <td>         <code>           EXECUTED         </code>       </td>       <td>         The order has been executed. Payment has been handled and rewards are being delivered (if applicable).       </td>     </tr>     <tr>       <td>         <code>           FAILED         </code>       </td>       <td>         The order could not be processed due to an error. E.g. due to insufficient funds in the account.       </td>     </tr>     <tr>       <td>         <code>           PENDING APPROVAL         </code>       </td>       <td>         The order has been created but needs approval to be executed.       </td>     </tr>     <tr>       <td>         <code>           PENDING INTERNAL PAYMENT APPROVAL         </code>       </td>       <td>         The order has been created but it is under review and requires approval from our team.       </td>     </tr>     <tr>       <td>         <code>           PENDING SETTLEMENT         </code>       </td>       <td>         The order has been created but the funds are being held until the settlement window clears.       </td>     </tr>    </tbody> </table> 
      * @type {string}
      * @memberof CreateOrder200ResponseOrder
      */
@@ -1020,7 +1020,8 @@ export const CreateOrder200ResponseOrderStatusEnum = {
     Executed: 'EXECUTED',
     Failed: 'FAILED',
     PendingApproval: 'PENDING APPROVAL',
-    PendingInternalPaymentApproval: 'PENDING INTERNAL PAYMENT APPROVAL'
+    PendingInternalPaymentApproval: 'PENDING INTERNAL PAYMENT APPROVAL',
+    PendingSettlement: 'PENDING SETTLEMENT'
 } as const;
 
 export type CreateOrder200ResponseOrderStatusEnum = typeof CreateOrder200ResponseOrderStatusEnum[keyof typeof CreateOrder200ResponseOrderStatusEnum];
@@ -4904,7 +4905,7 @@ export interface ListOrders200ResponseOrdersInner {
      */
     'created_at': string;
     /**
-     * Execution status of a given order  <table>   <thead>     <tr>       <th>         Status       </th>       <th>         Description       </th>     </tr>   </thead>   <tbody>     <tr>       <td>         <code>           CANCELED         </code>       </td>       <td>         The order and all of its rewards were canceled.       </td>     </tr>     <tr>       <td>         <code>           OPEN         </code>       </td>       <td>         The order has been created, but hasn\'t yet been processed.       </td>     </tr>     <tr>       <td>         <code>           EXECUTED         </code>       </td>       <td>         The order has been executed. Payment has been handled and rewards are being delivered (if applicable).       </td>     </tr>     <tr>       <td>         <code>           FAILED         </code>       </td>       <td>         The order could not be processed due to an error. E.g. due to insufficient funds in the account.       </td>     </tr>     <tr>       <td>         <code>           PENDING APPROVAL         </code>       </td>       <td>         The order has been created but needs approval to be executed.       </td>     </tr>     <tr>       <td>         <code>           PENDING INTERNAL PAYMENT APPROVAL         </code>       </td>       <td>         The order has been created but it is under review and requires approval from our team.       </td>     </tr>    </tbody> </table> 
+     * Execution status of a given order  <table>   <thead>     <tr>       <th>         Status       </th>       <th>         Description       </th>     </tr>   </thead>   <tbody>     <tr>       <td>         <code>           CANCELED         </code>       </td>       <td>         The order and all of its rewards were canceled.       </td>     </tr>     <tr>       <td>         <code>           OPEN         </code>       </td>       <td>         The order has been created, but hasn\'t yet been processed.       </td>     </tr>     <tr>       <td>         <code>           EXECUTED         </code>       </td>       <td>         The order has been executed. Payment has been handled and rewards are being delivered (if applicable).       </td>     </tr>     <tr>       <td>         <code>           FAILED         </code>       </td>       <td>         The order could not be processed due to an error. E.g. due to insufficient funds in the account.       </td>     </tr>     <tr>       <td>         <code>           PENDING APPROVAL         </code>       </td>       <td>         The order has been created but needs approval to be executed.       </td>     </tr>     <tr>       <td>         <code>           PENDING INTERNAL PAYMENT APPROVAL         </code>       </td>       <td>         The order has been created but it is under review and requires approval from our team.       </td>     </tr>     <tr>       <td>         <code>           PENDING SETTLEMENT         </code>       </td>       <td>         The order has been created but the funds are being held until the settlement window clears.       </td>     </tr>    </tbody> </table> 
      * @type {string}
      * @memberof ListOrders200ResponseOrdersInner
      */
@@ -4941,7 +4942,8 @@ export const ListOrders200ResponseOrdersInnerStatusEnum = {
     Executed: 'EXECUTED',
     Failed: 'FAILED',
     PendingApproval: 'PENDING APPROVAL',
-    PendingInternalPaymentApproval: 'PENDING INTERNAL PAYMENT APPROVAL'
+    PendingInternalPaymentApproval: 'PENDING INTERNAL PAYMENT APPROVAL',
+    PendingSettlement: 'PENDING SETTLEMENT'
 } as const;
 
 export type ListOrders200ResponseOrdersInnerStatusEnum = typeof ListOrders200ResponseOrdersInnerStatusEnum[keyof typeof ListOrders200ResponseOrdersInnerStatusEnum];
@@ -5105,7 +5107,7 @@ export interface ListProductsResponseProductsInner {
      */
     'description': string;
     /**
-     * The category of the product  <table>   <thead>     <tr>       <th>Category</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td><code>ach</code></td>       <td>Bank transfer to the recipient</td>     </tr>     <tr>       <td><code>charity</code></td>       <td>Donations to a charity</td>     </tr>     <tr>       <td><code>instant_debit_transfer</code></td>       <td>Instant debit transfer to the recipient</td>     </tr>     <tr>       <td><code>merchant_card</code></td>       <td>A gift card for a certain merchant (e.g. Amazon)</td>     </tr>     <tr>       <td><code>paypal</code></td>       <td>Payout via PayPal</td>     </tr>     <tr>       <td><code>venmo</code></td>       <td>Payout via Venmo</td>     </tr>     <tr>       <td><code>visa_card</code></td>       <td>Payout in form of a Visa debit card</td>     </tr>     <tr>       <td><code>cash_app</code></td>       <td>Payout via Cash App</td>     </tr>   </tbody> </table> 
+     * The category of the product  <table>   <thead>     <tr>       <th>Category</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td><code>ach</code></td>       <td>Bank transfer to the recipient</td>     </tr>     <tr>       <td><code>charity</code></td>       <td>Donations to a charity</td>     </tr>     <tr>       <td><code>instant_debit_transfer</code></td>       <td>Instant debit transfer to the recipient</td>     </tr>     <tr>       <td><code>merchant_card</code></td>       <td>A gift card for a certain merchant (e.g. Amazon)</td>     </tr>     <tr>       <td><code>paypal</code></td>       <td>Payout via PayPal</td>     </tr>     <tr>       <td><code>venmo</code></td>       <td>Payout via Venmo</td>     </tr>     <tr>       <td><code>visa_card</code></td>       <td>Payout in form of a Visa debit card</td>     </tr>     <tr>       <td><code>cash_app</code></td>       <td>Payout via Cash App</td>     </tr>     <tr>       <td><code>international_bank</code></td>       <td>Bank transfer to recipients outside of the US</td>     </tr>   </tbody> </table> 
      * @type {string}
      * @memberof ListProductsResponseProductsInner
      */
@@ -5168,7 +5170,8 @@ export const ListProductsResponseProductsInnerCategoryEnum = {
     Paypal: 'paypal',
     Venmo: 'venmo',
     VisaCard: 'visa_card',
-    CashApp: 'cash_app'
+    CashApp: 'cash_app',
+    InternationalBank: 'international_bank'
 } as const;
 
 export type ListProductsResponseProductsInnerCategoryEnum = typeof ListProductsResponseProductsInnerCategoryEnum[keyof typeof ListProductsResponseProductsInnerCategoryEnum];
@@ -6207,7 +6210,7 @@ export interface Order {
      */
     'created_at': string;
     /**
-     * Execution status of a given order  <table>   <thead>     <tr>       <th>         Status       </th>       <th>         Description       </th>     </tr>   </thead>   <tbody>     <tr>       <td>         <code>           CANCELED         </code>       </td>       <td>         The order and all of its rewards were canceled.       </td>     </tr>     <tr>       <td>         <code>           OPEN         </code>       </td>       <td>         The order has been created, but hasn\'t yet been processed.       </td>     </tr>     <tr>       <td>         <code>           EXECUTED         </code>       </td>       <td>         The order has been executed. Payment has been handled and rewards are being delivered (if applicable).       </td>     </tr>     <tr>       <td>         <code>           FAILED         </code>       </td>       <td>         The order could not be processed due to an error. E.g. due to insufficient funds in the account.       </td>     </tr>     <tr>       <td>         <code>           PENDING APPROVAL         </code>       </td>       <td>         The order has been created but needs approval to be executed.       </td>     </tr>     <tr>       <td>         <code>           PENDING INTERNAL PAYMENT APPROVAL         </code>       </td>       <td>         The order has been created but it is under review and requires approval from our team.       </td>     </tr>    </tbody> </table> 
+     * Execution status of a given order  <table>   <thead>     <tr>       <th>         Status       </th>       <th>         Description       </th>     </tr>   </thead>   <tbody>     <tr>       <td>         <code>           CANCELED         </code>       </td>       <td>         The order and all of its rewards were canceled.       </td>     </tr>     <tr>       <td>         <code>           OPEN         </code>       </td>       <td>         The order has been created, but hasn\'t yet been processed.       </td>     </tr>     <tr>       <td>         <code>           EXECUTED         </code>       </td>       <td>         The order has been executed. Payment has been handled and rewards are being delivered (if applicable).       </td>     </tr>     <tr>       <td>         <code>           FAILED         </code>       </td>       <td>         The order could not be processed due to an error. E.g. due to insufficient funds in the account.       </td>     </tr>     <tr>       <td>         <code>           PENDING APPROVAL         </code>       </td>       <td>         The order has been created but needs approval to be executed.       </td>     </tr>     <tr>       <td>         <code>           PENDING INTERNAL PAYMENT APPROVAL         </code>       </td>       <td>         The order has been created but it is under review and requires approval from our team.       </td>     </tr>     <tr>       <td>         <code>           PENDING SETTLEMENT         </code>       </td>       <td>         The order has been created but the funds are being held until the settlement window clears.       </td>     </tr>    </tbody> </table> 
      * @type {string}
      * @memberof Order
      */
@@ -6244,7 +6247,8 @@ export const OrderStatusEnum = {
     Executed: 'EXECUTED',
     Failed: 'FAILED',
     PendingApproval: 'PENDING APPROVAL',
-    PendingInternalPaymentApproval: 'PENDING INTERNAL PAYMENT APPROVAL'
+    PendingInternalPaymentApproval: 'PENDING INTERNAL PAYMENT APPROVAL',
+    PendingSettlement: 'PENDING SETTLEMENT'
 } as const;
 
 export type OrderStatusEnum = typeof OrderStatusEnum[keyof typeof OrderStatusEnum];
@@ -6292,7 +6296,7 @@ export interface OrderBase {
      */
     'created_at': string;
     /**
-     * Execution status of a given order  <table>   <thead>     <tr>       <th>         Status       </th>       <th>         Description       </th>     </tr>   </thead>   <tbody>     <tr>       <td>         <code>           CANCELED         </code>       </td>       <td>         The order and all of its rewards were canceled.       </td>     </tr>     <tr>       <td>         <code>           OPEN         </code>       </td>       <td>         The order has been created, but hasn\'t yet been processed.       </td>     </tr>     <tr>       <td>         <code>           EXECUTED         </code>       </td>       <td>         The order has been executed. Payment has been handled and rewards are being delivered (if applicable).       </td>     </tr>     <tr>       <td>         <code>           FAILED         </code>       </td>       <td>         The order could not be processed due to an error. E.g. due to insufficient funds in the account.       </td>     </tr>     <tr>       <td>         <code>           PENDING APPROVAL         </code>       </td>       <td>         The order has been created but needs approval to be executed.       </td>     </tr>     <tr>       <td>         <code>           PENDING INTERNAL PAYMENT APPROVAL         </code>       </td>       <td>         The order has been created but it is under review and requires approval from our team.       </td>     </tr>    </tbody> </table> 
+     * Execution status of a given order  <table>   <thead>     <tr>       <th>         Status       </th>       <th>         Description       </th>     </tr>   </thead>   <tbody>     <tr>       <td>         <code>           CANCELED         </code>       </td>       <td>         The order and all of its rewards were canceled.       </td>     </tr>     <tr>       <td>         <code>           OPEN         </code>       </td>       <td>         The order has been created, but hasn\'t yet been processed.       </td>     </tr>     <tr>       <td>         <code>           EXECUTED         </code>       </td>       <td>         The order has been executed. Payment has been handled and rewards are being delivered (if applicable).       </td>     </tr>     <tr>       <td>         <code>           FAILED         </code>       </td>       <td>         The order could not be processed due to an error. E.g. due to insufficient funds in the account.       </td>     </tr>     <tr>       <td>         <code>           PENDING APPROVAL         </code>       </td>       <td>         The order has been created but needs approval to be executed.       </td>     </tr>     <tr>       <td>         <code>           PENDING INTERNAL PAYMENT APPROVAL         </code>       </td>       <td>         The order has been created but it is under review and requires approval from our team.       </td>     </tr>     <tr>       <td>         <code>           PENDING SETTLEMENT         </code>       </td>       <td>         The order has been created but the funds are being held until the settlement window clears.       </td>     </tr>    </tbody> </table> 
      * @type {string}
      * @memberof OrderBase
      */
@@ -6323,7 +6327,8 @@ export const OrderBaseStatusEnum = {
     Executed: 'EXECUTED',
     Failed: 'FAILED',
     PendingApproval: 'PENDING APPROVAL',
-    PendingInternalPaymentApproval: 'PENDING INTERNAL PAYMENT APPROVAL'
+    PendingInternalPaymentApproval: 'PENDING INTERNAL PAYMENT APPROVAL',
+    PendingSettlement: 'PENDING SETTLEMENT'
 } as const;
 
 export type OrderBaseStatusEnum = typeof OrderBaseStatusEnum[keyof typeof OrderBaseStatusEnum];
@@ -6378,7 +6383,7 @@ export interface OrderBasePayment {
     'refund'?: PaymentDetailsRefund;
 }
 /**
- * Execution status of a given order  <table>   <thead>     <tr>       <th>         Status       </th>       <th>         Description       </th>     </tr>   </thead>   <tbody>     <tr>       <td>         <code>           CANCELED         </code>       </td>       <td>         The order and all of its rewards were canceled.       </td>     </tr>     <tr>       <td>         <code>           OPEN         </code>       </td>       <td>         The order has been created, but hasn\'t yet been processed.       </td>     </tr>     <tr>       <td>         <code>           EXECUTED         </code>       </td>       <td>         The order has been executed. Payment has been handled and rewards are being delivered (if applicable).       </td>     </tr>     <tr>       <td>         <code>           FAILED         </code>       </td>       <td>         The order could not be processed due to an error. E.g. due to insufficient funds in the account.       </td>     </tr>     <tr>       <td>         <code>           PENDING APPROVAL         </code>       </td>       <td>         The order has been created but needs approval to be executed.       </td>     </tr>     <tr>       <td>         <code>           PENDING INTERNAL PAYMENT APPROVAL         </code>       </td>       <td>         The order has been created but it is under review and requires approval from our team.       </td>     </tr>    </tbody> </table> 
+ * Execution status of a given order  <table>   <thead>     <tr>       <th>         Status       </th>       <th>         Description       </th>     </tr>   </thead>   <tbody>     <tr>       <td>         <code>           CANCELED         </code>       </td>       <td>         The order and all of its rewards were canceled.       </td>     </tr>     <tr>       <td>         <code>           OPEN         </code>       </td>       <td>         The order has been created, but hasn\'t yet been processed.       </td>     </tr>     <tr>       <td>         <code>           EXECUTED         </code>       </td>       <td>         The order has been executed. Payment has been handled and rewards are being delivered (if applicable).       </td>     </tr>     <tr>       <td>         <code>           FAILED         </code>       </td>       <td>         The order could not be processed due to an error. E.g. due to insufficient funds in the account.       </td>     </tr>     <tr>       <td>         <code>           PENDING APPROVAL         </code>       </td>       <td>         The order has been created but needs approval to be executed.       </td>     </tr>     <tr>       <td>         <code>           PENDING INTERNAL PAYMENT APPROVAL         </code>       </td>       <td>         The order has been created but it is under review and requires approval from our team.       </td>     </tr>     <tr>       <td>         <code>           PENDING SETTLEMENT         </code>       </td>       <td>         The order has been created but the funds are being held until the settlement window clears.       </td>     </tr>    </tbody> </table> 
  * @export
  * @enum {string}
  */
@@ -6389,7 +6394,8 @@ export const OrderStatus = {
     Executed: 'EXECUTED',
     Failed: 'FAILED',
     PendingApproval: 'PENDING APPROVAL',
-    PendingInternalPaymentApproval: 'PENDING INTERNAL PAYMENT APPROVAL'
+    PendingInternalPaymentApproval: 'PENDING INTERNAL PAYMENT APPROVAL',
+    PendingSettlement: 'PENDING SETTLEMENT'
 } as const;
 
 export type OrderStatus = typeof OrderStatus[keyof typeof OrderStatus];
@@ -6426,7 +6432,7 @@ export interface OrderWithLink {
      */
     'created_at': string;
     /**
-     * Execution status of a given order  <table>   <thead>     <tr>       <th>         Status       </th>       <th>         Description       </th>     </tr>   </thead>   <tbody>     <tr>       <td>         <code>           CANCELED         </code>       </td>       <td>         The order and all of its rewards were canceled.       </td>     </tr>     <tr>       <td>         <code>           OPEN         </code>       </td>       <td>         The order has been created, but hasn\'t yet been processed.       </td>     </tr>     <tr>       <td>         <code>           EXECUTED         </code>       </td>       <td>         The order has been executed. Payment has been handled and rewards are being delivered (if applicable).       </td>     </tr>     <tr>       <td>         <code>           FAILED         </code>       </td>       <td>         The order could not be processed due to an error. E.g. due to insufficient funds in the account.       </td>     </tr>     <tr>       <td>         <code>           PENDING APPROVAL         </code>       </td>       <td>         The order has been created but needs approval to be executed.       </td>     </tr>     <tr>       <td>         <code>           PENDING INTERNAL PAYMENT APPROVAL         </code>       </td>       <td>         The order has been created but it is under review and requires approval from our team.       </td>     </tr>    </tbody> </table> 
+     * Execution status of a given order  <table>   <thead>     <tr>       <th>         Status       </th>       <th>         Description       </th>     </tr>   </thead>   <tbody>     <tr>       <td>         <code>           CANCELED         </code>       </td>       <td>         The order and all of its rewards were canceled.       </td>     </tr>     <tr>       <td>         <code>           OPEN         </code>       </td>       <td>         The order has been created, but hasn\'t yet been processed.       </td>     </tr>     <tr>       <td>         <code>           EXECUTED         </code>       </td>       <td>         The order has been executed. Payment has been handled and rewards are being delivered (if applicable).       </td>     </tr>     <tr>       <td>         <code>           FAILED         </code>       </td>       <td>         The order could not be processed due to an error. E.g. due to insufficient funds in the account.       </td>     </tr>     <tr>       <td>         <code>           PENDING APPROVAL         </code>       </td>       <td>         The order has been created but needs approval to be executed.       </td>     </tr>     <tr>       <td>         <code>           PENDING INTERNAL PAYMENT APPROVAL         </code>       </td>       <td>         The order has been created but it is under review and requires approval from our team.       </td>     </tr>     <tr>       <td>         <code>           PENDING SETTLEMENT         </code>       </td>       <td>         The order has been created but the funds are being held until the settlement window clears.       </td>     </tr>    </tbody> </table> 
      * @type {string}
      * @memberof OrderWithLink
      */
@@ -6463,7 +6469,8 @@ export const OrderWithLinkStatusEnum = {
     Executed: 'EXECUTED',
     Failed: 'FAILED',
     PendingApproval: 'PENDING APPROVAL',
-    PendingInternalPaymentApproval: 'PENDING INTERNAL PAYMENT APPROVAL'
+    PendingInternalPaymentApproval: 'PENDING INTERNAL PAYMENT APPROVAL',
+    PendingSettlement: 'PENDING SETTLEMENT'
 } as const;
 
 export type OrderWithLinkStatusEnum = typeof OrderWithLinkStatusEnum[keyof typeof OrderWithLinkStatusEnum];
@@ -6584,7 +6591,7 @@ export interface OrderWithoutLink {
      */
     'created_at': string;
     /**
-     * Execution status of a given order  <table>   <thead>     <tr>       <th>         Status       </th>       <th>         Description       </th>     </tr>   </thead>   <tbody>     <tr>       <td>         <code>           CANCELED         </code>       </td>       <td>         The order and all of its rewards were canceled.       </td>     </tr>     <tr>       <td>         <code>           OPEN         </code>       </td>       <td>         The order has been created, but hasn\'t yet been processed.       </td>     </tr>     <tr>       <td>         <code>           EXECUTED         </code>       </td>       <td>         The order has been executed. Payment has been handled and rewards are being delivered (if applicable).       </td>     </tr>     <tr>       <td>         <code>           FAILED         </code>       </td>       <td>         The order could not be processed due to an error. E.g. due to insufficient funds in the account.       </td>     </tr>     <tr>       <td>         <code>           PENDING APPROVAL         </code>       </td>       <td>         The order has been created but needs approval to be executed.       </td>     </tr>     <tr>       <td>         <code>           PENDING INTERNAL PAYMENT APPROVAL         </code>       </td>       <td>         The order has been created but it is under review and requires approval from our team.       </td>     </tr>    </tbody> </table> 
+     * Execution status of a given order  <table>   <thead>     <tr>       <th>         Status       </th>       <th>         Description       </th>     </tr>   </thead>   <tbody>     <tr>       <td>         <code>           CANCELED         </code>       </td>       <td>         The order and all of its rewards were canceled.       </td>     </tr>     <tr>       <td>         <code>           OPEN         </code>       </td>       <td>         The order has been created, but hasn\'t yet been processed.       </td>     </tr>     <tr>       <td>         <code>           EXECUTED         </code>       </td>       <td>         The order has been executed. Payment has been handled and rewards are being delivered (if applicable).       </td>     </tr>     <tr>       <td>         <code>           FAILED         </code>       </td>       <td>         The order could not be processed due to an error. E.g. due to insufficient funds in the account.       </td>     </tr>     <tr>       <td>         <code>           PENDING APPROVAL         </code>       </td>       <td>         The order has been created but needs approval to be executed.       </td>     </tr>     <tr>       <td>         <code>           PENDING INTERNAL PAYMENT APPROVAL         </code>       </td>       <td>         The order has been created but it is under review and requires approval from our team.       </td>     </tr>     <tr>       <td>         <code>           PENDING SETTLEMENT         </code>       </td>       <td>         The order has been created but the funds are being held until the settlement window clears.       </td>     </tr>    </tbody> </table> 
      * @type {string}
      * @memberof OrderWithoutLink
      */
@@ -6621,7 +6628,8 @@ export const OrderWithoutLinkStatusEnum = {
     Executed: 'EXECUTED',
     Failed: 'FAILED',
     PendingApproval: 'PENDING APPROVAL',
-    PendingInternalPaymentApproval: 'PENDING INTERNAL PAYMENT APPROVAL'
+    PendingInternalPaymentApproval: 'PENDING INTERNAL PAYMENT APPROVAL',
+    PendingSettlement: 'PENDING SETTLEMENT'
 } as const;
 
 export type OrderWithoutLinkStatusEnum = typeof OrderWithoutLinkStatusEnum[keyof typeof OrderWithoutLinkStatusEnum];
@@ -6893,7 +6901,7 @@ export interface Product {
      */
     'description': string;
     /**
-     * The category of the product  <table>   <thead>     <tr>       <th>Category</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td><code>ach</code></td>       <td>Bank transfer to the recipient</td>     </tr>     <tr>       <td><code>charity</code></td>       <td>Donations to a charity</td>     </tr>     <tr>       <td><code>instant_debit_transfer</code></td>       <td>Instant debit transfer to the recipient</td>     </tr>     <tr>       <td><code>merchant_card</code></td>       <td>A gift card for a certain merchant (e.g. Amazon)</td>     </tr>     <tr>       <td><code>paypal</code></td>       <td>Payout via PayPal</td>     </tr>     <tr>       <td><code>venmo</code></td>       <td>Payout via Venmo</td>     </tr>     <tr>       <td><code>visa_card</code></td>       <td>Payout in form of a Visa debit card</td>     </tr>     <tr>       <td><code>cash_app</code></td>       <td>Payout via Cash App</td>     </tr>   </tbody> </table> 
+     * The category of the product  <table>   <thead>     <tr>       <th>Category</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td><code>ach</code></td>       <td>Bank transfer to the recipient</td>     </tr>     <tr>       <td><code>charity</code></td>       <td>Donations to a charity</td>     </tr>     <tr>       <td><code>instant_debit_transfer</code></td>       <td>Instant debit transfer to the recipient</td>     </tr>     <tr>       <td><code>merchant_card</code></td>       <td>A gift card for a certain merchant (e.g. Amazon)</td>     </tr>     <tr>       <td><code>paypal</code></td>       <td>Payout via PayPal</td>     </tr>     <tr>       <td><code>venmo</code></td>       <td>Payout via Venmo</td>     </tr>     <tr>       <td><code>visa_card</code></td>       <td>Payout in form of a Visa debit card</td>     </tr>     <tr>       <td><code>cash_app</code></td>       <td>Payout via Cash App</td>     </tr>     <tr>       <td><code>international_bank</code></td>       <td>Bank transfer to recipients outside of the US</td>     </tr>   </tbody> </table> 
      * @type {string}
      * @memberof Product
      */
@@ -6956,7 +6964,8 @@ export const ProductCategoryEnum = {
     Paypal: 'paypal',
     Venmo: 'venmo',
     VisaCard: 'visa_card',
-    CashApp: 'cash_app'
+    CashApp: 'cash_app',
+    InternationalBank: 'international_bank'
 } as const;
 
 export type ProductCategoryEnum = typeof ProductCategoryEnum[keyof typeof ProductCategoryEnum];
@@ -8309,7 +8318,7 @@ export interface SingleRewardOrderWithLinkOrder {
      */
     'created_at': string;
     /**
-     * Execution status of a given order  <table>   <thead>     <tr>       <th>         Status       </th>       <th>         Description       </th>     </tr>   </thead>   <tbody>     <tr>       <td>         <code>           CANCELED         </code>       </td>       <td>         The order and all of its rewards were canceled.       </td>     </tr>     <tr>       <td>         <code>           OPEN         </code>       </td>       <td>         The order has been created, but hasn\'t yet been processed.       </td>     </tr>     <tr>       <td>         <code>           EXECUTED         </code>       </td>       <td>         The order has been executed. Payment has been handled and rewards are being delivered (if applicable).       </td>     </tr>     <tr>       <td>         <code>           FAILED         </code>       </td>       <td>         The order could not be processed due to an error. E.g. due to insufficient funds in the account.       </td>     </tr>     <tr>       <td>         <code>           PENDING APPROVAL         </code>       </td>       <td>         The order has been created but needs approval to be executed.       </td>     </tr>     <tr>       <td>         <code>           PENDING INTERNAL PAYMENT APPROVAL         </code>       </td>       <td>         The order has been created but it is under review and requires approval from our team.       </td>     </tr>    </tbody> </table> 
+     * Execution status of a given order  <table>   <thead>     <tr>       <th>         Status       </th>       <th>         Description       </th>     </tr>   </thead>   <tbody>     <tr>       <td>         <code>           CANCELED         </code>       </td>       <td>         The order and all of its rewards were canceled.       </td>     </tr>     <tr>       <td>         <code>           OPEN         </code>       </td>       <td>         The order has been created, but hasn\'t yet been processed.       </td>     </tr>     <tr>       <td>         <code>           EXECUTED         </code>       </td>       <td>         The order has been executed. Payment has been handled and rewards are being delivered (if applicable).       </td>     </tr>     <tr>       <td>         <code>           FAILED         </code>       </td>       <td>         The order could not be processed due to an error. E.g. due to insufficient funds in the account.       </td>     </tr>     <tr>       <td>         <code>           PENDING APPROVAL         </code>       </td>       <td>         The order has been created but needs approval to be executed.       </td>     </tr>     <tr>       <td>         <code>           PENDING INTERNAL PAYMENT APPROVAL         </code>       </td>       <td>         The order has been created but it is under review and requires approval from our team.       </td>     </tr>     <tr>       <td>         <code>           PENDING SETTLEMENT         </code>       </td>       <td>         The order has been created but the funds are being held until the settlement window clears.       </td>     </tr>    </tbody> </table> 
      * @type {string}
      * @memberof SingleRewardOrderWithLinkOrder
      */
@@ -8346,7 +8355,8 @@ export const SingleRewardOrderWithLinkOrderStatusEnum = {
     Executed: 'EXECUTED',
     Failed: 'FAILED',
     PendingApproval: 'PENDING APPROVAL',
-    PendingInternalPaymentApproval: 'PENDING INTERNAL PAYMENT APPROVAL'
+    PendingInternalPaymentApproval: 'PENDING INTERNAL PAYMENT APPROVAL',
+    PendingSettlement: 'PENDING SETTLEMENT'
 } as const;
 
 export type SingleRewardOrderWithLinkOrderStatusEnum = typeof SingleRewardOrderWithLinkOrderStatusEnum[keyof typeof SingleRewardOrderWithLinkOrderStatusEnum];
@@ -8407,7 +8417,7 @@ export interface SingleRewardOrderWithoutLinkOrder {
      */
     'created_at': string;
     /**
-     * Execution status of a given order  <table>   <thead>     <tr>       <th>         Status       </th>       <th>         Description       </th>     </tr>   </thead>   <tbody>     <tr>       <td>         <code>           CANCELED         </code>       </td>       <td>         The order and all of its rewards were canceled.       </td>     </tr>     <tr>       <td>         <code>           OPEN         </code>       </td>       <td>         The order has been created, but hasn\'t yet been processed.       </td>     </tr>     <tr>       <td>         <code>           EXECUTED         </code>       </td>       <td>         The order has been executed. Payment has been handled and rewards are being delivered (if applicable).       </td>     </tr>     <tr>       <td>         <code>           FAILED         </code>       </td>       <td>         The order could not be processed due to an error. E.g. due to insufficient funds in the account.       </td>     </tr>     <tr>       <td>         <code>           PENDING APPROVAL         </code>       </td>       <td>         The order has been created but needs approval to be executed.       </td>     </tr>     <tr>       <td>         <code>           PENDING INTERNAL PAYMENT APPROVAL         </code>       </td>       <td>         The order has been created but it is under review and requires approval from our team.       </td>     </tr>    </tbody> </table> 
+     * Execution status of a given order  <table>   <thead>     <tr>       <th>         Status       </th>       <th>         Description       </th>     </tr>   </thead>   <tbody>     <tr>       <td>         <code>           CANCELED         </code>       </td>       <td>         The order and all of its rewards were canceled.       </td>     </tr>     <tr>       <td>         <code>           OPEN         </code>       </td>       <td>         The order has been created, but hasn\'t yet been processed.       </td>     </tr>     <tr>       <td>         <code>           EXECUTED         </code>       </td>       <td>         The order has been executed. Payment has been handled and rewards are being delivered (if applicable).       </td>     </tr>     <tr>       <td>         <code>           FAILED         </code>       </td>       <td>         The order could not be processed due to an error. E.g. due to insufficient funds in the account.       </td>     </tr>     <tr>       <td>         <code>           PENDING APPROVAL         </code>       </td>       <td>         The order has been created but needs approval to be executed.       </td>     </tr>     <tr>       <td>         <code>           PENDING INTERNAL PAYMENT APPROVAL         </code>       </td>       <td>         The order has been created but it is under review and requires approval from our team.       </td>     </tr>     <tr>       <td>         <code>           PENDING SETTLEMENT         </code>       </td>       <td>         The order has been created but the funds are being held until the settlement window clears.       </td>     </tr>    </tbody> </table> 
      * @type {string}
      * @memberof SingleRewardOrderWithoutLinkOrder
      */
@@ -8444,7 +8454,8 @@ export const SingleRewardOrderWithoutLinkOrderStatusEnum = {
     Executed: 'EXECUTED',
     Failed: 'FAILED',
     PendingApproval: 'PENDING APPROVAL',
-    PendingInternalPaymentApproval: 'PENDING INTERNAL PAYMENT APPROVAL'
+    PendingInternalPaymentApproval: 'PENDING INTERNAL PAYMENT APPROVAL',
+    PendingSettlement: 'PENDING SETTLEMENT'
 } as const;
 
 export type SingleRewardOrderWithoutLinkOrderStatusEnum = typeof SingleRewardOrderWithoutLinkOrderStatusEnum[keyof typeof SingleRewardOrderWithoutLinkOrderStatusEnum];
