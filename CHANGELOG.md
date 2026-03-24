@@ -1,5 +1,13 @@
 # Changelog
 
+## [4.5.0](https://github.com/tremendous-rewards/tremendous-node/compare/tremendous-v4.4.0...tremendous-v4.5.0) (2026-03-20)
+
+
+### Features
+
+* add `international_bank` to product category enum ([1c2ca3b](https://github.com/tremendous-rewards/tremendous-node/commit/1c2ca3b0b3ef419ba620c1da292414470f95d42f))
+* add `PENDING SETTLEMENT` to order status enum ([1c2ca3b](https://github.com/tremendous-rewards/tremendous-node/commit/1c2ca3b0b3ef419ba620c1da292414470f95d42f))
+
 ## [4.4.0](https://github.com/tremendous-rewards/tremendous-node/compare/tremendous-v4.3.0...tremendous-v4.4.0) (2026-02-27)
 
 
