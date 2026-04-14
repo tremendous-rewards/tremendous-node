@@ -1,5 +1,13 @@
 # Changelog
 
+## [4.5.1](https://github.com/tremendous-rewards/tremendous-node/compare/tremendous-v4.5.0...tremendous-v4.5.1) (2026-04-14)
+
+
+### Bug Fixes
+
+* remove obsolete currency codes `EEK`, `LTL`, `LVL`, `ZMK` ([b22a19c](https://github.com/tremendous-rewards/tremendous-node/commit/b22a19cf4860a24e094760ad55c2697c66b8918e))
+* replace obsolete `BYR` currency code with `BYN` ([b22a19c](https://github.com/tremendous-rewards/tremendous-node/commit/b22a19cf4860a24e094760ad55c2697c66b8918e))
+
 ## [4.5.0](https://github.com/tremendous-rewards/tremendous-node/compare/tremendous-v4.4.0...tremendous-v4.5.0) (2026-03-20)
 
 
