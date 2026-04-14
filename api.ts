@@ -1779,7 +1779,7 @@ export const CurrencyCodes = {
     Bob: 'BOB',
     Brl: 'BRL',
     Bwp: 'BWP',
-    Byr: 'BYR',
+    Byn: 'BYN',
     Bzd: 'BZD',
     Cdf: 'CDF',
     Chf: 'CHF',
@@ -1793,7 +1793,6 @@ export const CurrencyCodes = {
     Dkk: 'DKK',
     Dop: 'DOP',
     Dzd: 'DZD',
-    Eek: 'EEK',
     Egp: 'EGP',
     Ern: 'ERN',
     Etb: 'ETB',
@@ -1822,8 +1821,6 @@ export const CurrencyCodes = {
     Kzt: 'KZT',
     Lbp: 'LBP',
     Lkr: 'LKR',
-    Ltl: 'LTL',
-    Lvl: 'LVL',
     Mad: 'MAD',
     Mdl: 'MDL',
     Mga: 'MGA',
@@ -1874,8 +1871,7 @@ export const CurrencyCodes = {
     Xaf: 'XAF',
     Xof: 'XOF',
     Yer: 'YER',
-    Zar: 'ZAR',
-    Zmk: 'ZMK'
+    Zar: 'ZAR'
 } as const;
 
 export type CurrencyCodes = typeof CurrencyCodes[keyof typeof CurrencyCodes];
@@ -5210,7 +5206,7 @@ export const ListProductsResponseProductsInnerCurrencyCodesEnum = {
     Bob: 'BOB',
     Brl: 'BRL',
     Bwp: 'BWP',
-    Byr: 'BYR',
+    Byn: 'BYN',
     Bzd: 'BZD',
     Cdf: 'CDF',
     Chf: 'CHF',
@@ -5224,7 +5220,6 @@ export const ListProductsResponseProductsInnerCurrencyCodesEnum = {
     Dkk: 'DKK',
     Dop: 'DOP',
     Dzd: 'DZD',
-    Eek: 'EEK',
     Egp: 'EGP',
     Ern: 'ERN',
     Etb: 'ETB',
@@ -5253,8 +5248,6 @@ export const ListProductsResponseProductsInnerCurrencyCodesEnum = {
     Kzt: 'KZT',
     Lbp: 'LBP',
     Lkr: 'LKR',
-    Ltl: 'LTL',
-    Lvl: 'LVL',
     Mad: 'MAD',
     Mdl: 'MDL',
     Mga: 'MGA',
@@ -5305,8 +5298,7 @@ export const ListProductsResponseProductsInnerCurrencyCodesEnum = {
     Xaf: 'XAF',
     Xof: 'XOF',
     Yer: 'YER',
-    Zar: 'ZAR',
-    Zmk: 'ZMK'
+    Zar: 'ZAR'
 } as const;
 
 export type ListProductsResponseProductsInnerCurrencyCodesEnum = typeof ListProductsResponseProductsInnerCurrencyCodesEnum[keyof typeof ListProductsResponseProductsInnerCurrencyCodesEnum];
@@ -5606,7 +5598,7 @@ export const ListRewards200ResponseRewardsInnerValueCurrencyCodeEnum = {
     Bob: 'BOB',
     Brl: 'BRL',
     Bwp: 'BWP',
-    Byr: 'BYR',
+    Byn: 'BYN',
     Bzd: 'BZD',
     Cdf: 'CDF',
     Chf: 'CHF',
@@ -5620,7 +5612,6 @@ export const ListRewards200ResponseRewardsInnerValueCurrencyCodeEnum = {
     Dkk: 'DKK',
     Dop: 'DOP',
     Dzd: 'DZD',
-    Eek: 'EEK',
     Egp: 'EGP',
     Ern: 'ERN',
     Etb: 'ETB',
@@ -5649,8 +5640,6 @@ export const ListRewards200ResponseRewardsInnerValueCurrencyCodeEnum = {
     Kzt: 'KZT',
     Lbp: 'LBP',
     Lkr: 'LKR',
-    Ltl: 'LTL',
-    Lvl: 'LVL',
     Mad: 'MAD',
     Mdl: 'MDL',
     Mga: 'MGA',
@@ -5701,8 +5690,7 @@ export const ListRewards200ResponseRewardsInnerValueCurrencyCodeEnum = {
     Xaf: 'XAF',
     Xof: 'XOF',
     Yer: 'YER',
-    Zar: 'ZAR',
-    Zmk: 'ZMK'
+    Zar: 'ZAR'
 } as const;
 
 export type ListRewards200ResponseRewardsInnerValueCurrencyCodeEnum = typeof ListRewards200ResponseRewardsInnerValueCurrencyCodeEnum[keyof typeof ListRewards200ResponseRewardsInnerValueCurrencyCodeEnum];
@@ -7004,7 +6992,7 @@ export const ProductCurrencyCodesEnum = {
     Bob: 'BOB',
     Brl: 'BRL',
     Bwp: 'BWP',
-    Byr: 'BYR',
+    Byn: 'BYN',
     Bzd: 'BZD',
     Cdf: 'CDF',
     Chf: 'CHF',
@@ -7018,7 +7006,6 @@ export const ProductCurrencyCodesEnum = {
     Dkk: 'DKK',
     Dop: 'DOP',
     Dzd: 'DZD',
-    Eek: 'EEK',
     Egp: 'EGP',
     Ern: 'ERN',
     Etb: 'ETB',
@@ -7047,8 +7034,6 @@ export const ProductCurrencyCodesEnum = {
     Kzt: 'KZT',
     Lbp: 'LBP',
     Lkr: 'LKR',
-    Ltl: 'LTL',
-    Lvl: 'LVL',
     Mad: 'MAD',
     Mdl: 'MDL',
     Mga: 'MGA',
@@ -7099,8 +7084,7 @@ export const ProductCurrencyCodesEnum = {
     Xaf: 'XAF',
     Xof: 'XOF',
     Yer: 'YER',
-    Zar: 'ZAR',
-    Zmk: 'ZMK'
+    Zar: 'ZAR'
 } as const;
 
 export type ProductCurrencyCodesEnum = typeof ProductCurrencyCodesEnum[keyof typeof ProductCurrencyCodesEnum];
@@ -7746,7 +7730,7 @@ export const RewardValueCurrencyCodeEnum = {
     Bob: 'BOB',
     Brl: 'BRL',
     Bwp: 'BWP',
-    Byr: 'BYR',
+    Byn: 'BYN',
     Bzd: 'BZD',
     Cdf: 'CDF',
     Chf: 'CHF',
@@ -7760,7 +7744,6 @@ export const RewardValueCurrencyCodeEnum = {
     Dkk: 'DKK',
     Dop: 'DOP',
     Dzd: 'DZD',
-    Eek: 'EEK',
     Egp: 'EGP',
     Ern: 'ERN',
     Etb: 'ETB',
@@ -7789,8 +7772,6 @@ export const RewardValueCurrencyCodeEnum = {
     Kzt: 'KZT',
     Lbp: 'LBP',
     Lkr: 'LKR',
-    Ltl: 'LTL',
-    Lvl: 'LVL',
     Mad: 'MAD',
     Mdl: 'MDL',
     Mga: 'MGA',
@@ -7841,8 +7822,7 @@ export const RewardValueCurrencyCodeEnum = {
     Xaf: 'XAF',
     Xof: 'XOF',
     Yer: 'YER',
-    Zar: 'ZAR',
-    Zmk: 'ZMK'
+    Zar: 'ZAR'
 } as const;
 
 export type RewardValueCurrencyCodeEnum = typeof RewardValueCurrencyCodeEnum[keyof typeof RewardValueCurrencyCodeEnum];
