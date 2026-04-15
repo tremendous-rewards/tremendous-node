@@ -1,5 +1,13 @@
 # Changelog
 
+## [4.6.0](https://github.com/tremendous-rewards/tremendous-node/compare/tremendous-v4.5.1...tremendous-v4.6.0) (2026-04-15)
+
+
+### Features
+
+* add delete connected organization endpoint ([02caf0a](https://github.com/tremendous-rewards/tremendous-node/commit/02caf0a16ea4eccbfe8b9e095cd5698538e5e866))
+* add delete connected organization member endpoint ([02caf0a](https://github.com/tremendous-rewards/tremendous-node/commit/02caf0a16ea4eccbfe8b9e095cd5698538e5e866))
+
 ## [4.5.1](https://github.com/tremendous-rewards/tremendous-node/compare/tremendous-v4.5.0...tremendous-v4.5.1) (2026-04-14)
 
 
