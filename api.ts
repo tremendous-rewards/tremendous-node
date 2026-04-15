@@ -9303,6 +9303,44 @@ export const ConnectedOrganizationMembersApiAxiosParamCreator = function (config
             };
         },
         /**
+         * Removes a connected organization member. If the member has completed registration and has an associated Tremendous member, that membership is also revoked. The connected organization itself is not affected. 
+         * @summary Remove a connected organization member
+         * @param {string} id ID of the connected organization member to remove. 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deleteConnectedOrganizationMember: async (id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('deleteConnectedOrganizationMember', 'id', id)
+            const localVarPath = `/connected_organization_members/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication BearerApiKey required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * Retrieve the connected organization member, identified by the given `id` in the URL
          * @summary Retrieve a connected organization member
          * @param {string} id ID of the connected organization member that should be retrieved. 
@@ -9429,6 +9467,19 @@ export const ConnectedOrganizationMembersApiFp = function(configuration?: Config
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
+         * Removes a connected organization member. If the member has completed registration and has an associated Tremendous member, that membership is also revoked. The connected organization itself is not affected. 
+         * @summary Remove a connected organization member
+         * @param {string} id ID of the connected organization member to remove. 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async deleteConnectedOrganizationMember(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CreateConnectedOrganizationMember200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.deleteConnectedOrganizationMember(id, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ConnectedOrganizationMembersApi.deleteConnectedOrganizationMember']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
          * Retrieve the connected organization member, identified by the given `id` in the URL
          * @summary Retrieve a connected organization member
          * @param {string} id ID of the connected organization member that should be retrieved. 
@@ -9488,6 +9539,16 @@ export const ConnectedOrganizationMembersApiFactory = function (configuration?: 
             return localVarFp.createConnectedOrganizationMemberSession(id, createConnectedOrganizationMemberSessionRequest, options).then((request) => request(axios, basePath));
         },
         /**
+         * Removes a connected organization member. If the member has completed registration and has an associated Tremendous member, that membership is also revoked. The connected organization itself is not affected. 
+         * @summary Remove a connected organization member
+         * @param {string} id ID of the connected organization member to remove. 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deleteConnectedOrganizationMember(id: string, options?: RawAxiosRequestConfig): AxiosPromise<CreateConnectedOrganizationMember200Response> {
+            return localVarFp.deleteConnectedOrganizationMember(id, options).then((request) => request(axios, basePath));
+        },
+        /**
          * Retrieve the connected organization member, identified by the given `id` in the URL
          * @summary Retrieve a connected organization member
          * @param {string} id ID of the connected organization member that should be retrieved. 
@@ -9542,6 +9603,18 @@ export class ConnectedOrganizationMembersApi extends BaseAPI {
      */
     public createConnectedOrganizationMemberSession(id: string, createConnectedOrganizationMemberSessionRequest: CreateConnectedOrganizationMemberSessionRequest, options?: RawAxiosRequestConfig) {
         return ConnectedOrganizationMembersApiFp(this.configuration).createConnectedOrganizationMemberSession(id, createConnectedOrganizationMemberSessionRequest, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Removes a connected organization member. If the member has completed registration and has an associated Tremendous member, that membership is also revoked. The connected organization itself is not affected. 
+     * @summary Remove a connected organization member
+     * @param {string} id ID of the connected organization member to remove. 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ConnectedOrganizationMembersApi
+     */
+    public deleteConnectedOrganizationMember(id: string, options?: RawAxiosRequestConfig) {
+        return ConnectedOrganizationMembersApiFp(this.configuration).deleteConnectedOrganizationMember(id, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -9613,6 +9686,44 @@ export const ConnectedOrganizationsApiAxiosParamCreator = function (configuratio
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(createConnectedOrganizationRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Deletes a connected organization and revokes the associated OAuth connection. The underlying Tremendous organization is not affected and remains accessible. 
+         * @summary Delete a connected organization
+         * @param {string} id ID of the connected organization to delete. 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deleteConnectedOrganization: async (id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('deleteConnectedOrganization', 'id', id)
+            const localVarPath = `/connected_organizations/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication BearerApiKey required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -9725,6 +9836,19 @@ export const ConnectedOrganizationsApiFp = function(configuration?: Configuratio
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
+         * Deletes a connected organization and revokes the associated OAuth connection. The underlying Tremendous organization is not affected and remains accessible. 
+         * @summary Delete a connected organization
+         * @param {string} id ID of the connected organization to delete. 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async deleteConnectedOrganization(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CreateConnectedOrganization200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.deleteConnectedOrganization(id, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ConnectedOrganizationsApi.deleteConnectedOrganization']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
          * Retrieve the connected organization, identified by the given `id` in the URL
          * @summary Retrieve a connected organization
          * @param {string} id ID of the connected organization that should be retrieved. 
@@ -9772,6 +9896,16 @@ export const ConnectedOrganizationsApiFactory = function (configuration?: Config
             return localVarFp.createConnectedOrganization(createConnectedOrganizationRequest, options).then((request) => request(axios, basePath));
         },
         /**
+         * Deletes a connected organization and revokes the associated OAuth connection. The underlying Tremendous organization is not affected and remains accessible. 
+         * @summary Delete a connected organization
+         * @param {string} id ID of the connected organization to delete. 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deleteConnectedOrganization(id: string, options?: RawAxiosRequestConfig): AxiosPromise<CreateConnectedOrganization200Response> {
+            return localVarFp.deleteConnectedOrganization(id, options).then((request) => request(axios, basePath));
+        },
+        /**
          * Retrieve the connected organization, identified by the given `id` in the URL
          * @summary Retrieve a connected organization
          * @param {string} id ID of the connected organization that should be retrieved. 
@@ -9812,6 +9946,18 @@ export class ConnectedOrganizationsApi extends BaseAPI {
      */
     public createConnectedOrganization(createConnectedOrganizationRequest: CreateConnectedOrganizationRequest, options?: RawAxiosRequestConfig) {
         return ConnectedOrganizationsApiFp(this.configuration).createConnectedOrganization(createConnectedOrganizationRequest, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Deletes a connected organization and revokes the associated OAuth connection. The underlying Tremendous organization is not affected and remains accessible. 
+     * @summary Delete a connected organization
+     * @param {string} id ID of the connected organization to delete. 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ConnectedOrganizationsApi
+     */
+    public deleteConnectedOrganization(id: string, options?: RawAxiosRequestConfig) {
+        return ConnectedOrganizationsApiFp(this.configuration).deleteConnectedOrganization(id, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
