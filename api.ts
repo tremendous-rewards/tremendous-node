@@ -3537,6 +3537,13 @@ export interface Invoice {
      * @type {string}
      * @memberof Invoice
      */
+    'currency_code'?: InvoiceCurrencyCodeEnum;
+    /**
+     * Deprecated: Use `currency_code` instead.
+     * @type {string}
+     * @memberof Invoice
+     * @deprecated
+     */
     'currency'?: InvoiceCurrencyEnum;
     /**
      * 
@@ -3576,6 +3583,13 @@ export interface Invoice {
     'paid_at': string | null;
 }
 
+export const InvoiceCurrencyCodeEnum = {
+    Usd: 'USD',
+    Eur: 'EUR',
+    Gbp: 'GBP'
+} as const;
+
+export type InvoiceCurrencyCodeEnum = typeof InvoiceCurrencyCodeEnum[keyof typeof InvoiceCurrencyCodeEnum];
 export const InvoiceCurrencyEnum = {
     Usd: 'USD',
     Eur: 'EUR',
@@ -4734,6 +4748,13 @@ export interface ListInvoices200ResponseInvoicesInner {
      * @type {string}
      * @memberof ListInvoices200ResponseInvoicesInner
      */
+    'currency_code'?: ListInvoices200ResponseInvoicesInnerCurrencyCodeEnum;
+    /**
+     * Deprecated: Use `currency_code` instead.
+     * @type {string}
+     * @memberof ListInvoices200ResponseInvoicesInner
+     * @deprecated
+     */
     'currency'?: ListInvoices200ResponseInvoicesInnerCurrencyEnum;
     /**
      * 
@@ -4773,6 +4794,13 @@ export interface ListInvoices200ResponseInvoicesInner {
     'paid_at': string | null;
 }
 
+export const ListInvoices200ResponseInvoicesInnerCurrencyCodeEnum = {
+    Usd: 'USD',
+    Eur: 'EUR',
+    Gbp: 'GBP'
+} as const;
+
+export type ListInvoices200ResponseInvoicesInnerCurrencyCodeEnum = typeof ListInvoices200ResponseInvoicesInnerCurrencyCodeEnum[keyof typeof ListInvoices200ResponseInvoicesInnerCurrencyCodeEnum];
 export const ListInvoices200ResponseInvoicesInnerCurrencyEnum = {
     Usd: 'USD',
     Eur: 'EUR',
