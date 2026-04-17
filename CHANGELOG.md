@@ -1,5 +1,17 @@
 # Changelog
 
+## [4.8.0](https://github.com/tremendous-rewards/tremendous-node/compare/tremendous-v4.7.0...tremendous-v4.8.0) (2026-04-17)
+
+
+### Features
+
+* add `currency_code` field to invoices ([a8cc7b6](https://github.com/tremendous-rewards/tremendous-node/commit/a8cc7b6de752f0d6bc10af1ac5d2140501647de2))
+
+
+### Bug Fixes
+
+* deprecate `currency` field on invoices ([a8cc7b6](https://github.com/tremendous-rewards/tremendous-node/commit/a8cc7b6de752f0d6bc10af1ac5d2140501647de2))
+
 ## [4.7.0](https://github.com/tremendous-rewards/tremendous-node/compare/tremendous-v4.6.0...tremendous-v4.7.0) (2026-04-16)
 
 
