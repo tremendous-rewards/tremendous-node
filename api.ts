@@ -88,13 +88,19 @@ export interface BalanceTransaction {
      */
     'created_at': string;
     /**
-     * Amount of the transaction in USD
+     * Amount of the transaction, denominated in `currency_code`.
      * @type {number}
      * @memberof BalanceTransaction
      */
     'amount': number;
     /**
-     * The updated total after the transaction. Note that this running balance may be delayed and contain `null`.
+     * Currency of the transaction amount and running balance. Always matches the organization\'s currency.
+     * @type {string}
+     * @memberof BalanceTransaction
+     */
+    'currency_code': string;
+    /**
+     * The updated total after the transaction, denominated in `currency_code`. Note that this running balance may be delayed and contain `null`.
      * @type {number}
      * @memberof BalanceTransaction
      */
@@ -150,29 +156,35 @@ export interface BalanceTransactionOrder {
  */
 export interface BalanceTransactionOrderPayment {
     /**
-     * Total price of the order before fees (in USD)
+     * Total price of the order before fees, denominated in `currency_code`.
      * @type {number}
      * @memberof BalanceTransactionOrderPayment
      */
     'subtotal': number;
     /**
-     * Total price of the order including fees (in USD)
+     * Total price of the order including fees, denominated in `currency_code`.
      * @type {number}
      * @memberof BalanceTransactionOrderPayment
      */
     'total': number;
     /**
-     * Fees for the order (in USD)
+     * Fees for the order, denominated in `currency_code`.
      * @type {number}
      * @memberof BalanceTransactionOrderPayment
      */
     'fees': number;
     /**
-     * Discount for the order (in USD)
+     * Discount for the order, denominated in `currency_code`.
      * @type {number}
      * @memberof BalanceTransactionOrderPayment
      */
     'discount': number;
+    /**
+     * Currency in which the payment amounts (subtotal, total, fees, discount, refund) are denominated.  This always matches the organization\'s currency. 
+     * @type {string}
+     * @memberof BalanceTransactionOrderPayment
+     */
+    'currency_code': string;
     /**
      * 
      * @type {PaymentDetailsRefund}
@@ -230,6 +242,12 @@ export interface Campaign {
      */
     'products': Array<string>;
     /**
+     * Determines whether fees for premium products are added to the order total (`SENDER`) or deducted from the recipient\'s reward amount (`RECIPIENT`). Campaigns with `RECIPIENT` must include at least one fee-free product. 
+     * @type {string}
+     * @memberof Campaign
+     */
+    'fee_charged_to'?: CampaignFeeChargedToEnum | null;
+    /**
      * 
      * @type {ListCampaigns200ResponseCampaignsInnerWebpageStyle}
      * @memberof Campaign
@@ -242,6 +260,14 @@ export interface Campaign {
      */
     'email_style'?: ListCampaigns200ResponseCampaignsInnerEmailStyle;
 }
+
+export const CampaignFeeChargedToEnum = {
+    Sender: 'SENDER',
+    Recipient: 'RECIPIENT'
+} as const;
+
+export type CampaignFeeChargedToEnum = typeof CampaignFeeChargedToEnum[keyof typeof CampaignFeeChargedToEnum];
+
 /**
  * With a campaign you can define the look & feel of how rewards are sent out. It also lets you set the available products (different gift cards, charity, etc.) recipients can choose from. 
  * @export
@@ -273,6 +299,12 @@ export interface CampaignBase {
      */
     'products'?: Array<string>;
     /**
+     * Determines whether fees for premium products are added to the order total (`SENDER`) or deducted from the recipient\'s reward amount (`RECIPIENT`). Campaigns with `RECIPIENT` must include at least one fee-free product. 
+     * @type {string}
+     * @memberof CampaignBase
+     */
+    'fee_charged_to'?: CampaignBaseFeeChargedToEnum | null;
+    /**
      * 
      * @type {ListCampaigns200ResponseCampaignsInnerWebpageStyle}
      * @memberof CampaignBase
@@ -285,6 +317,14 @@ export interface CampaignBase {
      */
     'email_style'?: ListCampaigns200ResponseCampaignsInnerEmailStyle;
 }
+
+export const CampaignBaseFeeChargedToEnum = {
+    Sender: 'SENDER',
+    Recipient: 'RECIPIENT'
+} as const;
+
+export type CampaignBaseFeeChargedToEnum = typeof CampaignBaseFeeChargedToEnum[keyof typeof CampaignBaseFeeChargedToEnum];
+
 /**
  * Name of the channel in which the order was created
  * @export
@@ -504,6 +544,12 @@ export interface ConnectedOrganizationOrganization {
      */
     'website': string;
     /**
+     * Currency used for this organization\'s balances, orders, and transactions.
+     * @type {string}
+     * @memberof ConnectedOrganizationOrganization
+     */
+    'currency_code'?: string;
+    /**
      * Status of the organization. Organizations need to be approved to be able to use them to send out rewards.
      * @type {string}
      * @memberof ConnectedOrganizationOrganization
@@ -576,6 +622,12 @@ export interface CreateCampaignRequest {
      */
     'products': Array<string>;
     /**
+     * Determines whether fees for premium products are added to the order total (`SENDER`) or deducted from the recipient\'s reward amount (`RECIPIENT`). Campaigns with `RECIPIENT` must include at least one fee-free product. 
+     * @type {string}
+     * @memberof CreateCampaignRequest
+     */
+    'fee_charged_to'?: CreateCampaignRequestFeeChargedToEnum | null;
+    /**
      * 
      * @type {ListCampaigns200ResponseCampaignsInnerWebpageStyle}
      * @memberof CreateCampaignRequest
@@ -588,6 +640,14 @@ export interface CreateCampaignRequest {
      */
     'email_style'?: ListCampaigns200ResponseCampaignsInnerEmailStyle;
 }
+
+export const CreateCampaignRequestFeeChargedToEnum = {
+    Sender: 'SENDER',
+    Recipient: 'RECIPIENT'
+} as const;
+
+export type CreateCampaignRequestFeeChargedToEnum = typeof CreateCampaignRequestFeeChargedToEnum[keyof typeof CreateCampaignRequestFeeChargedToEnum];
+
 /**
  * 
  * @export
@@ -991,7 +1051,7 @@ export interface CreateOrder200ResponseOrder {
      */
     'campaign_id'?: string | null;
     /**
-     * Date the order has been created
+     * Date the order was created
      * @type {string}
      * @memberof CreateOrder200ResponseOrder
      */
@@ -1204,6 +1264,12 @@ export interface CreateOrganization {
      */
     'phone'?: string;
     /**
+     * Currency code for the new organization. Defaults to the current organization\'s currency if not provided.
+     * @type {string}
+     * @memberof CreateOrganization
+     */
+    'currency_code'?: string;
+    /**
      * Timestamp of when the organization has been created. 
      * @type {string}
      * @memberof CreateOrganization
@@ -1260,6 +1326,12 @@ export interface CreateOrganization200ResponseOrganization {
      */
     'phone'?: string | null;
     /**
+     * Currency code for the new organization. Defaults to the current organization\'s currency if not provided.
+     * @type {string}
+     * @memberof CreateOrganization200ResponseOrganization
+     */
+    'currency_code'?: string;
+    /**
      * Timestamp of when the organization has been created. 
      * @type {string}
      * @memberof CreateOrganization200ResponseOrganization
@@ -1315,6 +1387,12 @@ export interface CreateOrganizationForResponse {
      */
     'phone'?: string | null;
     /**
+     * Currency code for the new organization. Defaults to the current organization\'s currency if not provided.
+     * @type {string}
+     * @memberof CreateOrganizationForResponse
+     */
+    'currency_code'?: string;
+    /**
      * Timestamp of when the organization has been created. 
      * @type {string}
      * @memberof CreateOrganizationForResponse
@@ -1364,6 +1442,12 @@ export interface CreateOrganizationProperties {
      */
     'phone'?: string;
     /**
+     * Currency code for the new organization. Defaults to the current organization\'s currency if not provided.
+     * @type {string}
+     * @memberof CreateOrganizationProperties
+     */
+    'currency_code'?: string;
+    /**
      * Timestamp of when the organization has been created. 
      * @type {string}
      * @memberof CreateOrganizationProperties
@@ -1406,6 +1490,12 @@ export interface CreateOrganizationRequest {
      * @memberof CreateOrganizationRequest
      */
     'phone'?: string;
+    /**
+     * Currency code for the new organization. Defaults to the current organization\'s currency if not provided.
+     * @type {string}
+     * @memberof CreateOrganizationRequest
+     */
+    'currency_code'?: string;
 }
 /**
  * A list of the settings that you wish to copy over to the new organization.
@@ -1736,7 +1826,7 @@ export interface CreateTopupRequest {
      */
     'idempotency_key': string;
     /**
-     * Amount in USD intended to be added to your organization’s balance.
+     * Amount to add to your organization\'s balance, denominated in `currency_code`.
      * @type {number}
      * @memberof CreateTopupRequest
      */
@@ -2214,7 +2304,7 @@ export interface FraudConfigIP {
  */
 export interface FraudConfigRedeemedRewardsAmount {
     /**
-     * The total amount in USD of redeemed rewards to use as a threshold.
+     * The total amount of redeemed rewards to use as a threshold. The amount is denominated in the organization\'s currency.
      * @type {number}
      * @memberof FraudConfigRedeemedRewardsAmount
      */
@@ -2375,10 +2465,10 @@ export interface FraudReview {
     'risk'?: FraudReviewRiskEnum;
     /**
      * 
-     * @type {GetFraudReview200ResponseFraudReviewRelatedRewards}
+     * @type {FraudReviewRelatedRewards}
      * @memberof FraudReview
      */
-    'related_rewards'?: GetFraudReview200ResponseFraudReviewRelatedRewards;
+    'related_rewards'?: FraudReviewRelatedRewards;
 }
 
 export const FraudReviewStatusEnum = {
@@ -2738,7 +2828,7 @@ export type FraudReviewRedemptionMethod = typeof FraudReviewRedemptionMethod[key
 
 
 /**
- * 
+ * The related rewards associated with the fraud review.
  * @export
  * @interface FraudReviewRelatedRewards
  */
@@ -2762,11 +2852,17 @@ export interface FraudReviewRelatedRewards {
      */
     'blocked_count'?: number;
     /**
-     * Total amount claimed by the related rewards (in USD).
+     * Total amount claimed by the related rewards, denominated in `currency_code`. 
      * @type {number}
      * @memberof FraudReviewRelatedRewards
      */
     'aggregated_value'?: number;
+    /**
+     * Currency of the aggregated value. Always matches the organization\'s currency.
+     * @type {string}
+     * @memberof FraudReviewRelatedRewards
+     */
+    'currency_code'?: string;
 }
 /**
  * The fraud risk associated with the reward.
@@ -2899,7 +2995,7 @@ export interface FraudRuleRequestConfig {
      */
     'domains'?: Array<string>;
     /**
-     * The total amount in USD of redeemed rewards to use as a threshold.
+     * The total amount of redeemed rewards to use as a threshold. The amount is denominated in the organization\'s currency.
      * @type {number}
      * @memberof FraudRuleRequestConfig
      */
@@ -2930,7 +3026,7 @@ export const FraudRuleRequestConfigPeriodEnum = {
 export type FraudRuleRequestConfigPeriodEnum = typeof FraudRuleRequestConfigPeriodEnum[keyof typeof FraudRuleRequestConfigPeriodEnum];
 
 /**
- * * `review_country` - Flags when the recipient\'s IP country matches the criteria in the rule * `review_ip` - Flags when recipient\'s IP matches one in the list * `review_email` - Flags when the recipient\'s email matches one in the list * `review_redeemed_rewards_count` - Flags when the recipient redeemed more than the number of rewards specified in the config * `review_redeemed_rewards_amount` - Flags when the recipient redeemed more than the total amount specified in the config * `review_multiple_emails` - Flags when recipient\'s device or account has multiple emails associated * `review_vpn` - Flags when VPN is suspected * `review_tremendous_flag_list` - Flags rewards when redemption attributes match at least one criteria defined by the Tremendous flag list * `review_previously_blocked_recipients` - Flags rewards when the recipient has been blocked before * `allow_ip` - Releases a reward when a recipient\'s IP matches one in the list * `allow_email` - Releases a reward when the recipient\'s email matches one in the list 
+ * * `review_country` - Flags when the recipient\'s IP country matches the criteria in the rule * `review_ip` - Flags when recipient\'s IP matches one in the list * `review_email` - Flags when the recipient\'s email matches one in the list * `review_redeemed_rewards_count` - Flags when the recipient redeemed more than the number of rewards specified in the config * `review_redeemed_rewards_amount` - Flags when the recipient redeemed more than the total amount specified in the config. The amount is denominated in the organization\'s currency. * `review_multiple_emails` - Flags when recipient\'s device or account has multiple emails associated * `review_vpn` - Flags when VPN is suspected * `review_tremendous_flag_list` - Flags rewards when redemption attributes match at least one criteria defined by the Tremendous flag list * `review_previously_blocked_recipients` - Flags rewards when the recipient has been blocked before * `allow_ip` - Releases a reward when a recipient\'s IP matches one in the list * `allow_email` - Releases a reward when the recipient\'s email matches one in the list 
  * @export
  * @enum {string}
  */
@@ -2959,7 +3055,7 @@ export type FraudRuleType = typeof FraudRuleType[keyof typeof FraudRuleType];
  */
 export interface FraudRulesListItem {
     /**
-     * * `review_country` - Flags when the recipient\'s IP country matches the criteria in the rule * `review_ip` - Flags when recipient\'s IP matches one in the list * `review_email` - Flags when the recipient\'s email matches one in the list * `review_redeemed_rewards_count` - Flags when the recipient redeemed more than the number of rewards specified in the config * `review_redeemed_rewards_amount` - Flags when the recipient redeemed more than the total amount specified in the config * `review_multiple_emails` - Flags when recipient\'s device or account has multiple emails associated * `review_vpn` - Flags when VPN is suspected * `review_tremendous_flag_list` - Flags rewards when redemption attributes match at least one criteria defined by the Tremendous flag list * `review_previously_blocked_recipients` - Flags rewards when the recipient has been blocked before * `allow_ip` - Releases a reward when a recipient\'s IP matches one in the list * `allow_email` - Releases a reward when the recipient\'s email matches one in the list 
+     * * `review_country` - Flags when the recipient\'s IP country matches the criteria in the rule * `review_ip` - Flags when recipient\'s IP matches one in the list * `review_email` - Flags when the recipient\'s email matches one in the list * `review_redeemed_rewards_count` - Flags when the recipient redeemed more than the number of rewards specified in the config * `review_redeemed_rewards_amount` - Flags when the recipient redeemed more than the total amount specified in the config. The amount is denominated in the organization\'s currency. * `review_multiple_emails` - Flags when recipient\'s device or account has multiple emails associated * `review_vpn` - Flags when VPN is suspected * `review_tremendous_flag_list` - Flags rewards when redemption attributes match at least one criteria defined by the Tremendous flag list * `review_previously_blocked_recipients` - Flags rewards when the recipient has been blocked before * `allow_ip` - Releases a reward when a recipient\'s IP matches one in the list * `allow_email` - Releases a reward when the recipient\'s email matches one in the list 
      * @type {string}
      * @memberof FraudRulesListItem
      */
@@ -3283,11 +3379,17 @@ export interface GetFraudReview200ResponseFraudReviewRelatedRewards {
      */
     'blocked_count'?: number;
     /**
-     * Total amount claimed by the related rewards (in USD).
+     * Total amount claimed by the related rewards, denominated in `currency_code`. 
      * @type {number}
      * @memberof GetFraudReview200ResponseFraudReviewRelatedRewards
      */
     'aggregated_value'?: number;
+    /**
+     * Currency of the aggregated value. Always matches the organization\'s currency.
+     * @type {string}
+     * @memberof GetFraudReview200ResponseFraudReviewRelatedRewards
+     */
+    'currency_code'?: string;
 }
 /**
  * 
@@ -3632,13 +3734,19 @@ export interface ListBalanceTransactions200ResponseTransactionsInner {
      */
     'created_at': string;
     /**
-     * Amount of the transaction in USD
+     * Amount of the transaction, denominated in `currency_code`.
      * @type {number}
      * @memberof ListBalanceTransactions200ResponseTransactionsInner
      */
     'amount': number;
     /**
-     * The updated total after the transaction. Note that this running balance may be delayed and contain `null`.
+     * Currency of the transaction amount and running balance. Always matches the organization\'s currency.
+     * @type {string}
+     * @memberof ListBalanceTransactions200ResponseTransactionsInner
+     */
+    'currency_code': string;
+    /**
+     * The updated total after the transaction, denominated in `currency_code`. Note that this running balance may be delayed and contain `null`.
      * @type {number}
      * @memberof ListBalanceTransactions200ResponseTransactionsInner
      */
@@ -3694,29 +3802,35 @@ export interface ListBalanceTransactions200ResponseTransactionsInnerOrder {
  */
 export interface ListBalanceTransactions200ResponseTransactionsInnerOrderPayment {
     /**
-     * Total price of the order before fees (in USD)
+     * Total price of the order before fees, denominated in `currency_code`.
      * @type {number}
      * @memberof ListBalanceTransactions200ResponseTransactionsInnerOrderPayment
      */
     'subtotal': number;
     /**
-     * Total price of the order including fees (in USD)
+     * Total price of the order including fees, denominated in `currency_code`.
      * @type {number}
      * @memberof ListBalanceTransactions200ResponseTransactionsInnerOrderPayment
      */
     'total': number;
     /**
-     * Fees for the order (in USD)
+     * Fees for the order, denominated in `currency_code`.
      * @type {number}
      * @memberof ListBalanceTransactions200ResponseTransactionsInnerOrderPayment
      */
     'fees': number;
     /**
-     * Discount for the order (in USD)
+     * Discount for the order, denominated in `currency_code`.
      * @type {number}
      * @memberof ListBalanceTransactions200ResponseTransactionsInnerOrderPayment
      */
     'discount': number;
+    /**
+     * Currency in which the payment amounts (subtotal, total, fees, discount, refund) are denominated.  This always matches the organization\'s currency. 
+     * @type {string}
+     * @memberof ListBalanceTransactions200ResponseTransactionsInnerOrderPayment
+     */
+    'currency_code': string;
     /**
      * 
      * @type {ListOrders200ResponseOrdersInnerPaymentRefund}
@@ -3768,6 +3882,12 @@ export interface ListCampaigns200ResponseCampaignsInner {
      */
     'products': Array<string>;
     /**
+     * Determines whether fees for premium products are added to the order total (`SENDER`) or deducted from the recipient\'s reward amount (`RECIPIENT`). Campaigns with `RECIPIENT` must include at least one fee-free product. 
+     * @type {string}
+     * @memberof ListCampaigns200ResponseCampaignsInner
+     */
+    'fee_charged_to'?: ListCampaigns200ResponseCampaignsInnerFeeChargedToEnum | null;
+    /**
      * 
      * @type {ListCampaigns200ResponseCampaignsInnerWebpageStyle}
      * @memberof ListCampaigns200ResponseCampaignsInner
@@ -3780,6 +3900,14 @@ export interface ListCampaigns200ResponseCampaignsInner {
      */
     'email_style'?: ListCampaigns200ResponseCampaignsInnerEmailStyle;
 }
+
+export const ListCampaigns200ResponseCampaignsInnerFeeChargedToEnum = {
+    Sender: 'SENDER',
+    Recipient: 'RECIPIENT'
+} as const;
+
+export type ListCampaigns200ResponseCampaignsInnerFeeChargedToEnum = typeof ListCampaigns200ResponseCampaignsInnerFeeChargedToEnum[keyof typeof ListCampaigns200ResponseCampaignsInnerFeeChargedToEnum];
+
 /**
  * Definition of the email style
  * @export
@@ -4065,6 +4193,12 @@ export interface ListConnectedOrganizations200ResponseConnectedOrganizationsInne
      * @memberof ListConnectedOrganizations200ResponseConnectedOrganizationsInnerOrganization
      */
     'website': string;
+    /**
+     * Currency used for this organization\'s balances, orders, and transactions.
+     * @type {string}
+     * @memberof ListConnectedOrganizations200ResponseConnectedOrganizationsInnerOrganization
+     */
+    'currency_code'?: string;
     /**
      * Status of the organization. Organizations need to be approved to be able to use them to send out rewards.
      * @type {string}
@@ -4368,7 +4502,7 @@ export interface ListFraudRules200Response {
  */
 export interface ListFraudRules200ResponseFraudRulesInner {
     /**
-     * * `review_country` - Flags when the recipient\'s IP country matches the criteria in the rule * `review_ip` - Flags when recipient\'s IP matches one in the list * `review_email` - Flags when the recipient\'s email matches one in the list * `review_redeemed_rewards_count` - Flags when the recipient redeemed more than the number of rewards specified in the config * `review_redeemed_rewards_amount` - Flags when the recipient redeemed more than the total amount specified in the config * `review_multiple_emails` - Flags when recipient\'s device or account has multiple emails associated * `review_vpn` - Flags when VPN is suspected * `review_tremendous_flag_list` - Flags rewards when redemption attributes match at least one criteria defined by the Tremendous flag list * `review_previously_blocked_recipients` - Flags rewards when the recipient has been blocked before * `allow_ip` - Releases a reward when a recipient\'s IP matches one in the list * `allow_email` - Releases a reward when the recipient\'s email matches one in the list 
+     * * `review_country` - Flags when the recipient\'s IP country matches the criteria in the rule * `review_ip` - Flags when recipient\'s IP matches one in the list * `review_email` - Flags when the recipient\'s email matches one in the list * `review_redeemed_rewards_count` - Flags when the recipient redeemed more than the number of rewards specified in the config * `review_redeemed_rewards_amount` - Flags when the recipient redeemed more than the total amount specified in the config. The amount is denominated in the organization\'s currency. * `review_multiple_emails` - Flags when recipient\'s device or account has multiple emails associated * `review_vpn` - Flags when VPN is suspected * `review_tremendous_flag_list` - Flags rewards when redemption attributes match at least one criteria defined by the Tremendous flag list * `review_previously_blocked_recipients` - Flags rewards when the recipient has been blocked before * `allow_ip` - Releases a reward when a recipient\'s IP matches one in the list * `allow_email` - Releases a reward when the recipient\'s email matches one in the list 
      * @type {string}
      * @memberof ListFraudRules200ResponseFraudRulesInner
      */
@@ -4491,19 +4625,43 @@ export type ListFundingSources200ResponseFundingSourcesInnerTypeEnum = typeof Li
  */
 export interface ListFundingSources200ResponseFundingSourcesInnerMeta {
     /**
-     * **Only exists for balance and commercial invoicing.**  For balance: available amount (in cents USD) For commercial invoicing: available credit amount calculated as (credit limit - outstanding balance) (in cents USD)  *Caution: In the \"list funding sources\" endpoint this value is cached and may not be up to date. Use the \"get funding source\" endpoint to get the most up to date value.* 
+     * **Only exists for balance and commercial invoicing.**  For balance: available amount denominated in `currency_code`. For commercial invoicing: available credit amount denominated in `currency_code`, calculated as (credit limit - outstanding balance).  *Caution: In the \"list funding sources\" endpoint this value is cached and may not be up to date. Use the \"get funding source\" endpoint to get the most up to date value.* 
+     * @type {number}
+     * @memberof ListFundingSources200ResponseFundingSourcesInnerMeta
+     */
+    'available_amount'?: number;
+    /**
+     * Same as `available_amount`, but in cents.
      * @type {number}
      * @memberof ListFundingSources200ResponseFundingSourcesInnerMeta
      */
     'available_cents'?: number;
     /**
-     * **Only available when `method` is set to `balance`.**  Funds that are already registered on your Tremendous account but which have not yet been deposited in your account (e.g. payments that need to be manually reviewed by our ops team) (in Cents USD). 
+     * **Only exists for balance and commercial invoicing.**  The currency of the balance or credit amounts (e.g. `available_amount`, `pending_amount`, `credit_limit_amount`).  Always matches the organization\'s currency. 
+     * @type {string}
+     * @memberof ListFundingSources200ResponseFundingSourcesInnerMeta
+     */
+    'currency_code'?: string;
+    /**
+     * **Only available when `method` is set to `balance`.**  Funds registered on your Tremendous account but not yet deposited in your account (e.g. payments that need to be manually reviewed by our ops team). Denominated in `currency_code`. 
+     * @type {number}
+     * @memberof ListFundingSources200ResponseFundingSourcesInnerMeta
+     */
+    'pending_amount'?: number;
+    /**
+     * Same as `pending_amount`, but in cents.
      * @type {number}
      * @memberof ListFundingSources200ResponseFundingSourcesInnerMeta
      */
     'pending_cents'?: number;
     /**
-     * **Only exists for commercial invoicing.**  Available credit limit (in cents USD) 
+     * **Only exists for commercial invoicing.**  Available credit limit denominated in `currency_code`. 
+     * @type {number}
+     * @memberof ListFundingSources200ResponseFundingSourcesInnerMeta
+     */
+    'credit_limit_amount'?: number;
+    /**
+     * Same as `credit_limit_amount`, but in cents.
      * @type {number}
      * @memberof ListFundingSources200ResponseFundingSourcesInnerMeta
      */
@@ -4937,7 +5095,7 @@ export interface ListOrders200ResponseOrdersInner {
      */
     'campaign_id'?: string | null;
     /**
-     * Date the order has been created
+     * Date the order was created
      * @type {string}
      * @memberof ListOrders200ResponseOrdersInner
      */
@@ -4999,35 +5157,41 @@ export const ListOrders200ResponseOrdersInnerChannelEnum = {
 export type ListOrders200ResponseOrdersInnerChannelEnum = typeof ListOrders200ResponseOrdersInnerChannelEnum[keyof typeof ListOrders200ResponseOrdersInnerChannelEnum];
 
 /**
- * Cost breakdown of the order (cost of rewards + fees). Cost and fees are always denominated in USD, independent from the currency of the ordered rewards. Note that this property will only appear for processed orders (`status` is `EXECUTED`).
+ * Cost breakdown of the order (cost of rewards + fees). Cost and fees are denominated in the organization\'s currency (see payment `currency_code`), independent of the ordered rewards\' currency. Note that this property will only appear for processed orders (`status` is `EXECUTED`).
  * @export
  * @interface ListOrders200ResponseOrdersInnerPayment
  */
 export interface ListOrders200ResponseOrdersInnerPayment {
     /**
-     * Total price of the order before fees (in USD)
+     * Total price of the order before fees, denominated in `currency_code`.
      * @type {number}
      * @memberof ListOrders200ResponseOrdersInnerPayment
      */
     'subtotal': number;
     /**
-     * Total price of the order including fees (in USD)
+     * Total price of the order including fees, denominated in `currency_code`.
      * @type {number}
      * @memberof ListOrders200ResponseOrdersInnerPayment
      */
     'total': number;
     /**
-     * Fees for the order (in USD)
+     * Fees for the order, denominated in `currency_code`.
      * @type {number}
      * @memberof ListOrders200ResponseOrdersInnerPayment
      */
     'fees': number;
     /**
-     * Discount for the order (in USD)
+     * Discount for the order, denominated in `currency_code`.
      * @type {number}
      * @memberof ListOrders200ResponseOrdersInnerPayment
      */
     'discount': number;
+    /**
+     * Currency in which the payment amounts (subtotal, total, fees, discount, refund) are denominated.  This always matches the organization\'s currency. 
+     * @type {string}
+     * @memberof ListOrders200ResponseOrdersInnerPayment
+     */
+    'currency_code': string;
     /**
      * 
      * @type {ListOrders200ResponseOrdersInnerPaymentRefund}
@@ -5036,17 +5200,23 @@ export interface ListOrders200ResponseOrdersInnerPayment {
     'refund'?: ListOrders200ResponseOrdersInnerPaymentRefund;
 }
 /**
- * Breakdown of the order refunds (total amount in USD, independent from the currency of the ordered rewards). Note that this property will only appear for canceled orders or orders with canceled rewards. 
+ * Breakdown of the order refunds (total denominated in `currency_code`, independent of the ordered rewards\' currency). Note that this property will only appear for canceled orders or orders with canceled rewards. 
  * @export
  * @interface ListOrders200ResponseOrdersInnerPaymentRefund
  */
 export interface ListOrders200ResponseOrdersInnerPaymentRefund {
     /**
-     * Total amount of the order refunds (in USD)
+     * Total amount of the order refunds, denominated in `currency_code`.
      * @type {number}
      * @memberof ListOrders200ResponseOrdersInnerPaymentRefund
      */
     'total': number;
+    /**
+     * Currency of the refund. Always matches the organization\'s currency.
+     * @type {string}
+     * @memberof ListOrders200ResponseOrdersInnerPaymentRefund
+     */
+    'currency_code': string;
 }
 /**
  * 
@@ -5085,6 +5255,12 @@ export interface ListOrganizations200ResponseOrganizationsInner {
      * @memberof ListOrganizations200ResponseOrganizationsInner
      */
     'website': string;
+    /**
+     * Currency used for this organization\'s balances, orders, and transactions.
+     * @type {string}
+     * @memberof ListOrganizations200ResponseOrganizationsInner
+     */
+    'currency_code'?: string;
     /**
      * Status of the organization. Organizations need to be approved to be able to use them to send out rewards.
      * @type {string}
@@ -5587,7 +5763,7 @@ export interface ListRewards200ResponseRewardsInnerRecipient {
      * @type {string}
      * @memberof ListRewards200ResponseRewardsInnerRecipient
      */
-    'name'?: string;
+    'name'?: string | null;
     /**
      * Email address of the recipient
      * @type {string}
@@ -5864,11 +6040,17 @@ export interface ListTopups200ResponseTopupsInner {
      */
     'id'?: string;
     /**
-     * Amount in USD intended to be added to your organization’s balance.
+     * Amount to add to your organization\'s balance, denominated in `currency_code`.
      * @type {number}
      * @memberof ListTopups200ResponseTopupsInner
      */
     'amount'?: number;
+    /**
+     * Currency of the topup amount. Always matches the organization\'s currency.
+     * @type {string}
+     * @memberof ListTopups200ResponseTopupsInner
+     */
+    'currency_code'?: string;
     /**
      * Amount of the processing fee for the topup (typically reserved for credit card topups).
      * @type {number}
@@ -5882,7 +6064,7 @@ export interface ListTopups200ResponseTopupsInner {
      */
     'funding_source_id'?: string;
     /**
-     * Status of the topup <table>   <thead>     <tr>       <th>         Status       </th>       <th>         Description       </th>     </tr>   </thead>   <tbody>     <tr>       <td>         <code>           created         </code>       </td>       <td>         The topup is processing (and may be under review).       </td>     </tr>     <tr>       <td>         <code>           fully_credited         </code>       </td>       <td>         The funds have been added to the balance.       </td>     </tr>     <tr>       <td>         <code>           reversed         </code>       </td>       <td>         The topup was credited, but then reversed due to a chargeback or ACH return.       </td>     </tr>     <tr>       <td>         <code>           rejected         </code>       </td>       <td>         The topup was rejected by an admin.       </td>     </tr>   </tbody> </table> 
+     * Status of the topup <table>   <thead>     <tr>       <th>         Status       </th>       <th>         Description       </th>     </tr>   </thead>   <tbody>     <tr>       <td>         <code>           created         </code>       </td>       <td>         The topup is processing (and may be under review).       </td>     </tr>     <tr>       <td>         <code>           partially_credited         </code>       </td>       <td>         Some funds have been credited to the balance. The remainder will be credited by <code>expected_settlement_at</code>.       </td>     </tr>     <tr>       <td>         <code>           fully_credited         </code>       </td>       <td>         All funds have been added to the balance.       </td>     </tr>     <tr>       <td>         <code>           reversed         </code>       </td>       <td>         The topup was credited, but then reversed due to a chargeback or ACH return.       </td>     </tr>     <tr>       <td>         <code>           rejected         </code>       </td>       <td>         The topup was rejected by an admin.       </td>     </tr>   </tbody> </table> 
      * @type {string}
      * @memberof ListTopups200ResponseTopupsInner
      */
@@ -5923,6 +6105,24 @@ export interface ListTopups200ResponseTopupsInner {
      * @memberof ListTopups200ResponseTopupsInner
      */
     'idempotency_key'?: string | null;
+    /**
+     * Amount credited to the balance immediately. Equals `amount` for non-ACH topups or ACH debits fully within instant funding limits. Can be 0 if nothing was credited instantly.
+     * @type {number}
+     * @memberof ListTopups200ResponseTopupsInner
+     */
+    'instant_credit_amount'?: number;
+    /**
+     * Amount that will be available once the settlement period elapses. 0 if nothing is settling.
+     * @type {number}
+     * @memberof ListTopups200ResponseTopupsInner
+     */
+    'settled_amount'?: number;
+    /**
+     * Timestamp indicating when the pending amount will be credited to the balance. Null if the topup was fully credited immediately.
+     * @type {string}
+     * @memberof ListTopups200ResponseTopupsInner
+     */
+    'expected_settlement_at'?: string | null;
 }
 /**
  * 
@@ -6234,7 +6434,7 @@ export interface Order {
      */
     'campaign_id'?: string | null;
     /**
-     * Date the order has been created
+     * Date the order was created
      * @type {string}
      * @memberof Order
      */
@@ -6320,7 +6520,7 @@ export interface OrderBase {
      */
     'campaign_id'?: string | null;
     /**
-     * Date the order has been created
+     * Date the order was created
      * @type {string}
      * @memberof OrderBase
      */
@@ -6376,35 +6576,41 @@ export const OrderBaseChannelEnum = {
 export type OrderBaseChannelEnum = typeof OrderBaseChannelEnum[keyof typeof OrderBaseChannelEnum];
 
 /**
- * Cost breakdown of the order (cost of rewards + fees). Cost and fees are always denominated in USD, independent from the currency of the ordered rewards. Note that this property will only appear for processed orders (`status` is `EXECUTED`).
+ * Cost breakdown of the order (cost of rewards + fees). Cost and fees are denominated in the organization\'s currency (see payment `currency_code`), independent of the ordered rewards\' currency. Note that this property will only appear for processed orders (`status` is `EXECUTED`).
  * @export
  * @interface OrderBasePayment
  */
 export interface OrderBasePayment {
     /**
-     * Total price of the order before fees (in USD)
+     * Total price of the order before fees, denominated in `currency_code`.
      * @type {number}
      * @memberof OrderBasePayment
      */
     'subtotal': number;
     /**
-     * Total price of the order including fees (in USD)
+     * Total price of the order including fees, denominated in `currency_code`.
      * @type {number}
      * @memberof OrderBasePayment
      */
     'total': number;
     /**
-     * Fees for the order (in USD)
+     * Fees for the order, denominated in `currency_code`.
      * @type {number}
      * @memberof OrderBasePayment
      */
     'fees': number;
     /**
-     * Discount for the order (in USD)
+     * Discount for the order, denominated in `currency_code`.
      * @type {number}
      * @memberof OrderBasePayment
      */
     'discount': number;
+    /**
+     * Currency in which the payment amounts (subtotal, total, fees, discount, refund) are denominated.  This always matches the organization\'s currency. 
+     * @type {string}
+     * @memberof OrderBasePayment
+     */
+    'currency_code': string;
     /**
      * 
      * @type {PaymentDetailsRefund}
@@ -6456,7 +6662,7 @@ export interface OrderWithLink {
      */
     'campaign_id'?: string | null;
     /**
-     * Date the order has been created
+     * Date the order was created
      * @type {string}
      * @memberof OrderWithLink
      */
@@ -6615,7 +6821,7 @@ export interface OrderWithoutLink {
      */
     'campaign_id'?: string | null;
     /**
-     * Date the order has been created
+     * Date the order was created
      * @type {string}
      * @memberof OrderWithoutLink
      */
@@ -6774,6 +6980,12 @@ export interface Organization {
      */
     'website': string;
     /**
+     * Currency used for this organization\'s balances, orders, and transactions.
+     * @type {string}
+     * @memberof Organization
+     */
+    'currency_code'?: string;
+    /**
      * Status of the organization. Organizations need to be approved to be able to use them to send out rewards.
      * @type {string}
      * @memberof Organization
@@ -6802,29 +7014,35 @@ export type OrganizationStatusEnum = typeof OrganizationStatusEnum[keyof typeof 
  */
 export interface PaymentDetails {
     /**
-     * Total price of the order before fees (in USD)
+     * Total price of the order before fees, denominated in `currency_code`.
      * @type {number}
      * @memberof PaymentDetails
      */
     'subtotal': number;
     /**
-     * Total price of the order including fees (in USD)
+     * Total price of the order including fees, denominated in `currency_code`.
      * @type {number}
      * @memberof PaymentDetails
      */
     'total': number;
     /**
-     * Fees for the order (in USD)
+     * Fees for the order, denominated in `currency_code`.
      * @type {number}
      * @memberof PaymentDetails
      */
     'fees': number;
     /**
-     * Discount for the order (in USD)
+     * Discount for the order, denominated in `currency_code`.
      * @type {number}
      * @memberof PaymentDetails
      */
     'discount': number;
+    /**
+     * Currency in which the payment amounts (subtotal, total, fees, discount, refund) are denominated.  This always matches the organization\'s currency. 
+     * @type {string}
+     * @memberof PaymentDetails
+     */
+    'currency_code': string;
     /**
      * 
      * @type {PaymentDetailsRefund}
@@ -6833,17 +7051,23 @@ export interface PaymentDetails {
     'refund'?: PaymentDetailsRefund;
 }
 /**
- * Breakdown of the order refunds (total amount in USD, independent from the currency of the ordered rewards). Note that this property will only appear for canceled orders or orders with canceled rewards. 
+ * Breakdown of the order refunds (total denominated in `currency_code`, independent of the ordered rewards\' currency). Note that this property will only appear for canceled orders or orders with canceled rewards. 
  * @export
  * @interface PaymentDetailsRefund
  */
 export interface PaymentDetailsRefund {
     /**
-     * Total amount of the order refunds (in USD)
+     * Total amount of the order refunds, denominated in `currency_code`.
      * @type {number}
      * @memberof PaymentDetailsRefund
      */
     'total': number;
+    /**
+     * Currency of the refund. Always matches the organization\'s currency.
+     * @type {string}
+     * @memberof PaymentDetailsRefund
+     */
+    'currency_code': string;
 }
 /**
  * 
@@ -7167,7 +7391,7 @@ export interface Recipient {
      * @type {string}
      * @memberof Recipient
      */
-    'name'?: string;
+    'name'?: string | null;
     /**
      * Email address of the recipient
      * @type {string}
@@ -7188,11 +7412,17 @@ export interface Recipient {
  */
 export interface RefundDetails {
     /**
-     * Total amount of the order refunds (in USD)
+     * Total amount of the order refunds, denominated in `currency_code`.
      * @type {number}
      * @memberof RefundDetails
      */
     'total': number;
+    /**
+     * Currency of the refund. Always matches the organization\'s currency.
+     * @type {string}
+     * @memberof RefundDetails
+     */
+    'currency_code': string;
 }
 /**
  * Reports represent a collection of your Tremendous data that can be filtered and downloaded.  The report object that is returned has a unique ID, a status, and an predicted time of report generation completion. When the report generation is complete, it will also contain an expiring url where you can retrieve your report. 
@@ -7390,7 +7620,7 @@ export interface ReviewIp1 {
  */
 export interface ReviewRedeemedRewardsAmount {
     /**
-     * The total amount in USD of redeemed rewards to use as a threshold.
+     * The total amount of redeemed rewards to use as a threshold. The amount is denominated in the organization\'s currency.
      * @type {number}
      * @memberof ReviewRedeemedRewardsAmount
      */
@@ -8334,7 +8564,7 @@ export interface SingleRewardOrderWithLinkOrder {
      */
     'campaign_id'?: string | null;
     /**
-     * Date the order has been created
+     * Date the order was created
      * @type {string}
      * @memberof SingleRewardOrderWithLinkOrder
      */
@@ -8433,7 +8663,7 @@ export interface SingleRewardOrderWithoutLinkOrder {
      */
     'campaign_id'?: string | null;
     /**
-     * Date the order has been created
+     * Date the order was created
      * @type {string}
      * @memberof SingleRewardOrderWithoutLinkOrder
      */
@@ -8507,11 +8737,17 @@ export interface Topup {
      */
     'id'?: string;
     /**
-     * Amount in USD intended to be added to your organization’s balance.
+     * Amount to add to your organization\'s balance, denominated in `currency_code`.
      * @type {number}
      * @memberof Topup
      */
     'amount'?: number;
+    /**
+     * Currency of the topup amount. Always matches the organization\'s currency.
+     * @type {string}
+     * @memberof Topup
+     */
+    'currency_code'?: string;
     /**
      * Amount of the processing fee for the topup (typically reserved for credit card topups).
      * @type {number}
@@ -8525,7 +8761,7 @@ export interface Topup {
      */
     'funding_source_id'?: string;
     /**
-     * Status of the topup <table>   <thead>     <tr>       <th>         Status       </th>       <th>         Description       </th>     </tr>   </thead>   <tbody>     <tr>       <td>         <code>           created         </code>       </td>       <td>         The topup is processing (and may be under review).       </td>     </tr>     <tr>       <td>         <code>           fully_credited         </code>       </td>       <td>         The funds have been added to the balance.       </td>     </tr>     <tr>       <td>         <code>           reversed         </code>       </td>       <td>         The topup was credited, but then reversed due to a chargeback or ACH return.       </td>     </tr>     <tr>       <td>         <code>           rejected         </code>       </td>       <td>         The topup was rejected by an admin.       </td>     </tr>   </tbody> </table> 
+     * Status of the topup <table>   <thead>     <tr>       <th>         Status       </th>       <th>         Description       </th>     </tr>   </thead>   <tbody>     <tr>       <td>         <code>           created         </code>       </td>       <td>         The topup is processing (and may be under review).       </td>     </tr>     <tr>       <td>         <code>           partially_credited         </code>       </td>       <td>         Some funds have been credited to the balance. The remainder will be credited by <code>expected_settlement_at</code>.       </td>     </tr>     <tr>       <td>         <code>           fully_credited         </code>       </td>       <td>         All funds have been added to the balance.       </td>     </tr>     <tr>       <td>         <code>           reversed         </code>       </td>       <td>         The topup was credited, but then reversed due to a chargeback or ACH return.       </td>     </tr>     <tr>       <td>         <code>           rejected         </code>       </td>       <td>         The topup was rejected by an admin.       </td>     </tr>   </tbody> </table> 
      * @type {string}
      * @memberof Topup
      */
@@ -8566,6 +8802,24 @@ export interface Topup {
      * @memberof Topup
      */
     'idempotency_key'?: string | null;
+    /**
+     * Amount credited to the balance immediately. Equals `amount` for non-ACH topups or ACH debits fully within instant funding limits. Can be 0 if nothing was credited instantly.
+     * @type {number}
+     * @memberof Topup
+     */
+    'instant_credit_amount'?: number;
+    /**
+     * Amount that will be available once the settlement period elapses. 0 if nothing is settling.
+     * @type {number}
+     * @memberof Topup
+     */
+    'settled_amount'?: number;
+    /**
+     * Timestamp indicating when the pending amount will be credited to the balance. Null if the topup was fully credited immediately.
+     * @type {string}
+     * @memberof Topup
+     */
+    'expected_settlement_at'?: string | null;
 }
 /**
  * 
@@ -8586,7 +8840,7 @@ export interface TopupCreateRequest {
      */
     'idempotency_key': string;
     /**
-     * Amount in USD intended to be added to your organization’s balance.
+     * Amount to add to your organization\'s balance, denominated in `currency_code`.
      * @type {number}
      * @memberof TopupCreateRequest
      */
@@ -8623,6 +8877,12 @@ export interface UpdateCampaign {
      */
     'products'?: Array<string>;
     /**
+     * Determines whether fees for premium products are added to the order total (`SENDER`) or deducted from the recipient\'s reward amount (`RECIPIENT`). Campaigns with `RECIPIENT` must include at least one fee-free product. 
+     * @type {string}
+     * @memberof UpdateCampaign
+     */
+    'fee_charged_to'?: UpdateCampaignFeeChargedToEnum | null;
+    /**
      * 
      * @type {ListCampaigns200ResponseCampaignsInnerWebpageStyle}
      * @memberof UpdateCampaign
@@ -8635,6 +8895,14 @@ export interface UpdateCampaign {
      */
     'email_style'?: ListCampaigns200ResponseCampaignsInnerEmailStyle;
 }
+
+export const UpdateCampaignFeeChargedToEnum = {
+    Sender: 'SENDER',
+    Recipient: 'RECIPIENT'
+} as const;
+
+export type UpdateCampaignFeeChargedToEnum = typeof UpdateCampaignFeeChargedToEnum[keyof typeof UpdateCampaignFeeChargedToEnum];
+
 /**
  * With a campaign you can define the look & feel of how rewards are sent out. It also lets you set the available products (different gift cards, charity, etc.) recipients can choose from. 
  * @export
@@ -8660,6 +8928,12 @@ export interface UpdateCampaignRequest {
      */
     'products'?: Array<string>;
     /**
+     * Determines whether fees for premium products are added to the order total (`SENDER`) or deducted from the recipient\'s reward amount (`RECIPIENT`). Campaigns with `RECIPIENT` must include at least one fee-free product. 
+     * @type {string}
+     * @memberof UpdateCampaignRequest
+     */
+    'fee_charged_to'?: UpdateCampaignRequestFeeChargedToEnum | null;
+    /**
      * 
      * @type {ListCampaigns200ResponseCampaignsInnerWebpageStyle}
      * @memberof UpdateCampaignRequest
@@ -8672,6 +8946,14 @@ export interface UpdateCampaignRequest {
      */
     'email_style'?: ListCampaigns200ResponseCampaignsInnerEmailStyle;
 }
+
+export const UpdateCampaignRequestFeeChargedToEnum = {
+    Sender: 'SENDER',
+    Recipient: 'RECIPIENT'
+} as const;
+
+export type UpdateCampaignRequestFeeChargedToEnum = typeof UpdateCampaignRequestFeeChargedToEnum[keyof typeof UpdateCampaignRequestFeeChargedToEnum];
+
 /**
  * 
  * @export
