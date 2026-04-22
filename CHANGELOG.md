@@ -1,5 +1,27 @@
 # Changelog
 
+## [4.9.0](https://github.com/tremendous-rewards/tremendous-node/compare/tremendous-v4.8.0...tremendous-v4.9.0) (2026-04-22)
+
+
+### Features
+
+* add `currency_code` to balance transactions ([cd04278](https://github.com/tremendous-rewards/tremendous-node/commit/cd0427864062399b49efb808fdd18a798ac35171))
+* add `currency_code` to order payment details ([cd04278](https://github.com/tremendous-rewards/tremendous-node/commit/cd0427864062399b49efb808fdd18a798ac35171))
+* add `currency_code` to payment refund details ([cd04278](https://github.com/tremendous-rewards/tremendous-node/commit/cd0427864062399b49efb808fdd18a798ac35171))
+* add `currency_code` to organizations ([cd04278](https://github.com/tremendous-rewards/tremendous-node/commit/cd0427864062399b49efb808fdd18a798ac35171))
+* add `currency_code` to create organization request ([cd04278](https://github.com/tremendous-rewards/tremendous-node/commit/cd0427864062399b49efb808fdd18a798ac35171))
+* add `currency_code` to funding source meta ([cd04278](https://github.com/tremendous-rewards/tremendous-node/commit/cd0427864062399b49efb808fdd18a798ac35171))
+* add `currency_code` to topups ([cd04278](https://github.com/tremendous-rewards/tremendous-node/commit/cd0427864062399b49efb808fdd18a798ac35171))
+* add `currency_code` to fraud review related rewards ([cd04278](https://github.com/tremendous-rewards/tremendous-node/commit/cd0427864062399b49efb808fdd18a798ac35171))
+* add `fee_charged_to` enum to campaigns ([cd04278](https://github.com/tremendous-rewards/tremendous-node/commit/cd0427864062399b49efb808fdd18a798ac35171))
+* add `available_amount`, `pending_amount`, `credit_limit_amount` to funding source meta ([cd04278](https://github.com/tremendous-rewards/tremendous-node/commit/cd0427864062399b49efb808fdd18a798ac35171))
+* add `instant_credit_amount`, `settled_amount`, `expected_settlement_at` to topups ([cd04278](https://github.com/tremendous-rewards/tremendous-node/commit/cd0427864062399b49efb808fdd18a798ac35171))
+* add `partially_credited` topup status ([cd04278](https://github.com/tremendous-rewards/tremendous-node/commit/cd0427864062399b49efb808fdd18a798ac35171))
+
+
+### Bug Fixes
+
+* make recipient `name` field nullable ([cd04278](https://github.com/tremendous-rewards/tremendous-node/commit/cd0427864062399b49efb808fdd18a798ac35171))
 ## [4.8.0](https://github.com/tremendous-rewards/tremendous-node/compare/tremendous-v4.7.0...tremendous-v4.8.0) (2026-04-17)
 
 
