@@ -686,6 +686,24 @@ export interface CreateConnectedOrganizationMemberRequest {
      * @memberof CreateConnectedOrganizationMemberRequest
      */
     'connected_organization_id': string;
+    /**
+     * The name associated with the user in your systems.
+     * @type {string}
+     * @memberof CreateConnectedOrganizationMemberRequest
+     */
+    'external_name'?: string;
+    /**
+     * The email associated with the user in your systems.
+     * @type {string}
+     * @memberof CreateConnectedOrganizationMemberRequest
+     */
+    'external_email'?: string;
+    /**
+     * The role ID to assign to the member within the organization. Only applicable when the connected organization is already linked to an existing Tremendous organization. 
+     * @type {string}
+     * @memberof CreateConnectedOrganizationMemberRequest
+     */
+    'role'?: string;
 }
 /**
  * 
