@@ -1,5 +1,18 @@
 # Changelog
 
+## [4.9.0](https://github.com/tremendous-rewards/tremendous-node/compare/tremendous-v4.8.0...tremendous-v4.9.0) (2026-04-22)
+
+
+### Features
+
+* add `currency_code` to balance transactions ([cd04278](https://github.com/tremendous-rewards/tremendous-node/commit/cd0427864062399b49efb808fdd18a798ac35171))
+* add `partially_credited` topup status ([cd04278](https://github.com/tremendous-rewards/tremendous-node/commit/cd0427864062399b49efb808fdd18a798ac35171))
+
+
+### Bug Fixes
+
+* make recipient `name` field nullable ([cd04278](https://github.com/tremendous-rewards/tremendous-node/commit/cd0427864062399b49efb808fdd18a798ac35171))
+
 ## [4.8.0](https://github.com/tremendous-rewards/tremendous-node/compare/tremendous-v4.7.0...tremendous-v4.8.0) (2026-04-17)
 
 
