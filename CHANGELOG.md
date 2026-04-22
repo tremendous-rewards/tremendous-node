@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.10.0](https://github.com/tremendous-rewards/tremendous-node/compare/tremendous-v4.9.0...tremendous-v4.10.0) (2026-04-22)
+
+
+### Features
+
+* add `external_name`, `external_email`, `role` to connected org ([c77d3ec](https://github.com/tremendous-rewards/tremendous-node/commit/c77d3ecb8def39ed4a6b7cb04fbaecbfa32d18ac))
+
 ## [4.9.0](https://github.com/tremendous-rewards/tremendous-node/compare/tremendous-v4.8.0...tremendous-v4.9.0) (2026-04-22)
 
 
