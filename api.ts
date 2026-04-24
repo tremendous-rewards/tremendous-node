@@ -4652,6 +4652,7 @@ export interface ListFundingSources200ResponseFundingSourcesInnerMeta {
      * Same as `available_amount`, but in cents.
      * @type {number}
      * @memberof ListFundingSources200ResponseFundingSourcesInnerMeta
+     * @deprecated
      */
     'available_cents'?: number;
     /**
@@ -4670,6 +4671,7 @@ export interface ListFundingSources200ResponseFundingSourcesInnerMeta {
      * Same as `pending_amount`, but in cents.
      * @type {number}
      * @memberof ListFundingSources200ResponseFundingSourcesInnerMeta
+     * @deprecated
      */
     'pending_cents'?: number;
     /**
@@ -4682,6 +4684,7 @@ export interface ListFundingSources200ResponseFundingSourcesInnerMeta {
      * Same as `credit_limit_amount`, but in cents.
      * @type {number}
      * @memberof ListFundingSources200ResponseFundingSourcesInnerMeta
+     * @deprecated
      */
     'credit_limit_cents'?: number;
     /**
