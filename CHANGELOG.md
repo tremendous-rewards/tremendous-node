@@ -1,5 +1,18 @@
 # Changelog
 
+## [4.11.0](https://github.com/tremendous-rewards/tremendous-node/compare/tremendous-v4.10.0...tremendous-v4.11.0) (2026-05-01)
+
+
+### Features
+
+* add fraud reason `Allowed country` ([8c4a589](https://github.com/tremendous-rewards/tremendous-node/commit/8c4a5893d803168b74de3e7a7f370f372f10c785))
+* add fraud reason `Device on a Tremendous fraud list` ([8c4a589](https://github.com/tremendous-rewards/tremendous-node/commit/8c4a5893d803168b74de3e7a7f370f372f10c785))
+
+
+### Bug Fixes
+
+* make campaign webpage style `message` nullable ([8c4a589](https://github.com/tremendous-rewards/tremendous-node/commit/8c4a5893d803168b74de3e7a7f370f372f10c785))
+
 ## [4.10.0](https://github.com/tremendous-rewards/tremendous-node/compare/tremendous-v4.9.0...tremendous-v4.10.0) (2026-04-22)
 
 
