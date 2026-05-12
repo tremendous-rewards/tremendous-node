@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.12.0](https://github.com/tremendous-rewards/tremendous-node/compare/tremendous-v4.11.0...tremendous-v4.12.0) (2026-05-12)
+
+
+### Features
+
+* add `auto_add_product_rule` to Campaign ([318330b](https://github.com/tremendous-rewards/tremendous-node/commit/318330ba7f48b6d5b5edeef2126549a8b906afa7))
+
 ## [4.11.0](https://github.com/tremendous-rewards/tremendous-node/compare/tremendous-v4.10.0...tremendous-v4.11.0) (2026-05-01)
 
 
