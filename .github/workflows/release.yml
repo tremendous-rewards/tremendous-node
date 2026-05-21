@@ -61,4 +61,4 @@ jobs:
           node-version: '24.x'
           registry-url: 'https://registry.npmjs.org'
 
-      - run: npm publish *.tgz
+      - run: npm publish ./*.tgz
