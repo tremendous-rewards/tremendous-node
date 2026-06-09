@@ -1,5 +1,16 @@
 # Changelog
 
+## [4.13.0](https://github.com/tremendous-rewards/tremendous-node/compare/tremendous-v4.12.0...tremendous-v4.13.0) (2026-06-09)
+
+
+### Features
+
+* add `Apple Private Relay` fraud review reason ([d15d5ae](https://github.com/tremendous-rewards/tremendous-node/commit/d15d5aedfb4e107978cea0c45708493b9f023af0))
+* add `prefilled_kyb_details` to connected org response ([d15d5ae](https://github.com/tremendous-rewards/tremendous-node/commit/d15d5aedfb4e107978cea0c45708493b9f023af0))
+* add `skip_apple_private_relay` to VPN fraud rule ([d15d5ae](https://github.com/tremendous-rewards/tremendous-node/commit/d15d5aedfb4e107978cea0c45708493b9f023af0))
+* add `wallet` product category ([d15d5ae](https://github.com/tremendous-rewards/tremendous-node/commit/d15d5aedfb4e107978cea0c45708493b9f023af0))
+* add optional `kyb` prefill to connected orgs ([d15d5ae](https://github.com/tremendous-rewards/tremendous-node/commit/d15d5aedfb4e107978cea0c45708493b9f023af0))
+
 ## [4.12.0](https://github.com/tremendous-rewards/tremendous-node/compare/tremendous-v4.11.0...tremendous-v4.12.0) (2026-05-12)
 
 
