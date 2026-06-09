@@ -387,6 +387,12 @@ export interface ConnectedOrganization {
      * @memberof ConnectedOrganization
      */
     'organization'?: ConnectedOrganizationOrganization | null;
+    /**
+     * 
+     * @type {ListConnectedOrganizations200ResponseConnectedOrganizationsInnerPrefilledKybDetails}
+     * @memberof ConnectedOrganization
+     */
+    'prefilled_kyb_details'?: ListConnectedOrganizations200ResponseConnectedOrganizationsInnerPrefilledKybDetails | null;
 }
 /**
  * 
@@ -798,6 +804,61 @@ export interface CreateConnectedOrganizationRequest {
      * @memberof CreateConnectedOrganizationRequest
      */
     'client_id': string;
+    /**
+     * 
+     * @type {CreateConnectedOrganizationRequestKyb}
+     * @memberof CreateConnectedOrganizationRequest
+     */
+    'kyb'?: CreateConnectedOrganizationRequestKyb;
+}
+/**
+ * Optional KYB details to forward for the end client. When provided, these values pre-fill the end client\'s onboarding form and remain fully editable; the end client still reviews and submits. Every field is optional. 
+ * @export
+ * @interface CreateConnectedOrganizationRequestKyb
+ */
+export interface CreateConnectedOrganizationRequestKyb {
+    /**
+     * The registered legal name of the company.
+     * @type {string}
+     * @memberof CreateConnectedOrganizationRequestKyb
+     */
+    'company_name'?: string;
+    /**
+     * The trade name (DBA) the company operates under, if different from its legal name.
+     * @type {string}
+     * @memberof CreateConnectedOrganizationRequestKyb
+     */
+    'doing_business_as'?: string;
+    /**
+     * The company\'s legal entity type. Free-form text — any value is accepted to support entity types outside the common presets. Common values are `Sole proprietorship`, `Corporation (Inc)`, `Limited liability company (LLC)`, `Limited liability partnership (LLP)`, `Public limited company (PLC)`, and `Private limited company (LTD)`. 
+     * @type {string}
+     * @memberof CreateConnectedOrganizationRequestKyb
+     */
+    'company_structure'?: string;
+    /**
+     * The company\'s tax ID or registration number.
+     * @type {string}
+     * @memberof CreateConnectedOrganizationRequestKyb
+     */
+    'company_registration_number'?: string;
+    /**
+     * The ISO 3166-1 alpha-2 country code of the company. Must be a supported country.
+     * @type {string}
+     * @memberof CreateConnectedOrganizationRequestKyb
+     */
+    'country_code'?: string;
+    /**
+     * The company\'s website URL. Must be a well-formed URL.
+     * @type {string}
+     * @memberof CreateConnectedOrganizationRequestKyb
+     */
+    'website_url'?: string;
+    /**
+     * 
+     * @type {ListConnectedOrganizations200ResponseConnectedOrganizationsInnerPrefilledKybDetailsAddress}
+     * @memberof CreateConnectedOrganizationRequestKyb
+     */
+    'address'?: ListConnectedOrganizations200ResponseConnectedOrganizationsInnerPrefilledKybDetailsAddress;
 }
 /**
  * 
@@ -2417,6 +2478,19 @@ export interface FraudConfigReviewEmail {
 /**
  * 
  * @export
+ * @interface FraudConfigReviewVpn
+ */
+export interface FraudConfigReviewVpn {
+    /**
+     * Whether Apple Private Relay traffic should be excluded from VPN fraud review. When omitted or false, Apple Private Relay traffic is flagged with other VPN and proxy traffic. 
+     * @type {boolean}
+     * @memberof FraudConfigReviewVpn
+     */
+    'skip_apple_private_relay'?: boolean;
+}
+/**
+ * 
+ * @export
  * @interface FraudGenericResponse
  */
 export interface FraudGenericResponse {
@@ -2440,7 +2514,7 @@ export interface FraudReview {
      */
     'status'?: FraudReviewStatusEnum;
     /**
-     * The array may contain multiple reasons, depending on which rule(s) flagged the reward for review. Reasons can be any of the following:  * `Disallowed IP` * `Disallowed email` * `Disallowed country` * `Over reward amount limit` * `Over reward count limit` * `VPN detected` * `Device related to multiple emails` * `Device or account related to multiple emails` * `IP on a Tremendous fraud list` * `Bank account on a Tremendous fraud list` * `Fingerprint on a Tremendous fraud list` * `Email on a Tremendous fraud list` * `Phone on a Tremendous fraud list` * `Device on a Tremendous fraud list` * `IP related to a blocked reward` * `Device related to a blocked reward` * `Bank account related to a blocked reward` * `Fingerprint related to a blocked reward` * `Email related to a blocked reward` * `Phone related to a blocked reward` * `Allowed IP` * `Allowed email` * `Allowed country` 
+     * The array may contain multiple reasons, depending on which rule(s) flagged the reward for review. Reasons can be any of the following:  * `Disallowed IP` * `Disallowed email` * `Disallowed country` * `Over reward amount limit` * `Over reward count limit` * `VPN detected` * `Apple Private Relay` * `Device related to multiple emails` * `Device or account related to multiple emails` * `IP on a Tremendous fraud list` * `Bank account on a Tremendous fraud list` * `Fingerprint on a Tremendous fraud list` * `Email on a Tremendous fraud list` * `Phone on a Tremendous fraud list` * `Device on a Tremendous fraud list` * `IP related to a blocked reward` * `Device related to a blocked reward` * `Bank account related to a blocked reward` * `Fingerprint related to a blocked reward` * `Email related to a blocked reward` * `Phone related to a blocked reward` * `Allowed IP` * `Allowed email` * `Allowed country` 
      * @type {Array<string>}
      * @memberof FraudReview
      */
@@ -2521,6 +2595,7 @@ export const FraudReviewReasonsEnum = {
     OverRewardAmountLimit: 'Over reward amount limit',
     OverRewardCountLimit: 'Over reward count limit',
     VpnDetected: 'VPN detected',
+    ApplePrivateRelay: 'Apple Private Relay',
     DeviceRelatedToMultipleEmails: 'Device related to multiple emails',
     DeviceOrAccountRelatedToMultipleEmails: 'Device or account related to multiple emails',
     IpOnATremendousFraudList: 'IP on a Tremendous fraud list',
@@ -2574,7 +2649,7 @@ export interface FraudReviewBase {
      */
     'status'?: FraudReviewBaseStatusEnum;
     /**
-     * The array may contain multiple reasons, depending on which rule(s) flagged the reward for review. Reasons can be any of the following:  * `Disallowed IP` * `Disallowed email` * `Disallowed country` * `Over reward amount limit` * `Over reward count limit` * `VPN detected` * `Device related to multiple emails` * `Device or account related to multiple emails` * `IP on a Tremendous fraud list` * `Bank account on a Tremendous fraud list` * `Fingerprint on a Tremendous fraud list` * `Email on a Tremendous fraud list` * `Phone on a Tremendous fraud list` * `Device on a Tremendous fraud list` * `IP related to a blocked reward` * `Device related to a blocked reward` * `Bank account related to a blocked reward` * `Fingerprint related to a blocked reward` * `Email related to a blocked reward` * `Phone related to a blocked reward` * `Allowed IP` * `Allowed email` * `Allowed country` 
+     * The array may contain multiple reasons, depending on which rule(s) flagged the reward for review. Reasons can be any of the following:  * `Disallowed IP` * `Disallowed email` * `Disallowed country` * `Over reward amount limit` * `Over reward count limit` * `VPN detected` * `Apple Private Relay` * `Device related to multiple emails` * `Device or account related to multiple emails` * `IP on a Tremendous fraud list` * `Bank account on a Tremendous fraud list` * `Fingerprint on a Tremendous fraud list` * `Email on a Tremendous fraud list` * `Phone on a Tremendous fraud list` * `Device on a Tremendous fraud list` * `IP related to a blocked reward` * `Device related to a blocked reward` * `Bank account related to a blocked reward` * `Fingerprint related to a blocked reward` * `Email related to a blocked reward` * `Phone related to a blocked reward` * `Allowed IP` * `Allowed email` * `Allowed country` 
      * @type {Array<string>}
      * @memberof FraudReviewBase
      */
@@ -2643,6 +2718,7 @@ export const FraudReviewBaseReasonsEnum = {
     OverRewardAmountLimit: 'Over reward amount limit',
     OverRewardCountLimit: 'Over reward count limit',
     VpnDetected: 'VPN detected',
+    ApplePrivateRelay: 'Apple Private Relay',
     DeviceRelatedToMultipleEmails: 'Device related to multiple emails',
     DeviceOrAccountRelatedToMultipleEmails: 'Device or account related to multiple emails',
     IpOnATremendousFraudList: 'IP on a Tremendous fraud list',
@@ -2714,7 +2790,7 @@ export interface FraudReviewListItem {
      */
     'status'?: FraudReviewListItemStatusEnum;
     /**
-     * The array may contain multiple reasons, depending on which rule(s) flagged the reward for review. Reasons can be any of the following:  * `Disallowed IP` * `Disallowed email` * `Disallowed country` * `Over reward amount limit` * `Over reward count limit` * `VPN detected` * `Device related to multiple emails` * `Device or account related to multiple emails` * `IP on a Tremendous fraud list` * `Bank account on a Tremendous fraud list` * `Fingerprint on a Tremendous fraud list` * `Email on a Tremendous fraud list` * `Phone on a Tremendous fraud list` * `Device on a Tremendous fraud list` * `IP related to a blocked reward` * `Device related to a blocked reward` * `Bank account related to a blocked reward` * `Fingerprint related to a blocked reward` * `Email related to a blocked reward` * `Phone related to a blocked reward` * `Allowed IP` * `Allowed email` * `Allowed country` 
+     * The array may contain multiple reasons, depending on which rule(s) flagged the reward for review. Reasons can be any of the following:  * `Disallowed IP` * `Disallowed email` * `Disallowed country` * `Over reward amount limit` * `Over reward count limit` * `VPN detected` * `Apple Private Relay` * `Device related to multiple emails` * `Device or account related to multiple emails` * `IP on a Tremendous fraud list` * `Bank account on a Tremendous fraud list` * `Fingerprint on a Tremendous fraud list` * `Email on a Tremendous fraud list` * `Phone on a Tremendous fraud list` * `Device on a Tremendous fraud list` * `IP related to a blocked reward` * `Device related to a blocked reward` * `Bank account related to a blocked reward` * `Fingerprint related to a blocked reward` * `Email related to a blocked reward` * `Phone related to a blocked reward` * `Allowed IP` * `Allowed email` * `Allowed country` 
      * @type {Array<string>}
      * @memberof FraudReviewListItem
      */
@@ -2783,6 +2859,7 @@ export const FraudReviewListItemReasonsEnum = {
     OverRewardAmountLimit: 'Over reward amount limit',
     OverRewardCountLimit: 'Over reward count limit',
     VpnDetected: 'VPN detected',
+    ApplePrivateRelay: 'Apple Private Relay',
     DeviceRelatedToMultipleEmails: 'Device related to multiple emails',
     DeviceOrAccountRelatedToMultipleEmails: 'Device or account related to multiple emails',
     IpOnATremendousFraudList: 'IP on a Tremendous fraud list',
@@ -2829,6 +2906,7 @@ export const FraudReviewReason = {
     OverRewardAmountLimit: 'Over reward amount limit',
     OverRewardCountLimit: 'Over reward count limit',
     VpnDetected: 'VPN detected',
+    ApplePrivateRelay: 'Apple Private Relay',
     DeviceRelatedToMultipleEmails: 'Device related to multiple emails',
     DeviceOrAccountRelatedToMultipleEmails: 'Device or account related to multiple emails',
     IpOnATremendousFraudList: 'IP on a Tremendous fraud list',
@@ -3050,6 +3128,12 @@ export interface FraudRuleRequestConfig {
      * @memberof FraudRuleRequestConfig
      */
     'period': FraudRuleRequestConfigPeriodEnum;
+    /**
+     * Whether Apple Private Relay traffic should be excluded from VPN fraud review. When omitted or false, Apple Private Relay traffic is flagged with other VPN and proxy traffic. 
+     * @type {boolean}
+     * @memberof FraudRuleRequestConfig
+     */
+    'skip_apple_private_relay'?: boolean;
 }
 
 export const FraudRuleRequestConfigTypeEnum = {
@@ -3070,7 +3154,7 @@ export const FraudRuleRequestConfigPeriodEnum = {
 export type FraudRuleRequestConfigPeriodEnum = typeof FraudRuleRequestConfigPeriodEnum[keyof typeof FraudRuleRequestConfigPeriodEnum];
 
 /**
- * * `review_country` - Flags when the recipient\'s IP country matches the criteria in the rule * `review_ip` - Flags when recipient\'s IP matches one in the list * `review_email` - Flags when the recipient\'s email matches one in the list * `review_redeemed_rewards_count` - Flags when the recipient redeemed more than the number of rewards specified in the config * `review_redeemed_rewards_amount` - Flags when the recipient redeemed more than the total amount specified in the config. The amount is denominated in the organization\'s currency. * `review_multiple_emails` - Flags when recipient\'s device or account has multiple emails associated * `review_vpn` - Flags when VPN is suspected * `review_tremendous_flag_list` - Flags rewards when redemption attributes match at least one criteria defined by the Tremendous flag list * `review_previously_blocked_recipients` - Flags rewards when the recipient has been blocked before * `allow_ip` - Releases a reward when a recipient\'s IP matches one in the list * `allow_email` - Releases a reward when the recipient\'s email matches one in the list 
+ * * `review_country` - Flags when the recipient\'s IP country matches the criteria in the rule * `review_ip` - Flags when recipient\'s IP matches one in the list * `review_email` - Flags when the recipient\'s email matches one in the list * `review_redeemed_rewards_count` - Flags when the recipient redeemed more than the number of rewards specified in the config * `review_redeemed_rewards_amount` - Flags when the recipient redeemed more than the total amount specified in the config. The amount is denominated in the organization\'s currency. * `review_multiple_emails` - Flags when recipient\'s device or account has multiple emails associated * `review_vpn` - Flags when VPN or proxy use is suspected. Can be configured to exclude Apple Private Relay. * `review_tremendous_flag_list` - Flags rewards when redemption attributes match at least one criteria defined by the Tremendous flag list * `review_previously_blocked_recipients` - Flags rewards when the recipient has been blocked before * `allow_ip` - Releases a reward when a recipient\'s IP matches one in the list * `allow_email` - Releases a reward when the recipient\'s email matches one in the list 
  * @export
  * @enum {string}
  */
@@ -3099,7 +3183,7 @@ export type FraudRuleType = typeof FraudRuleType[keyof typeof FraudRuleType];
  */
 export interface FraudRulesListItem {
     /**
-     * * `review_country` - Flags when the recipient\'s IP country matches the criteria in the rule * `review_ip` - Flags when recipient\'s IP matches one in the list * `review_email` - Flags when the recipient\'s email matches one in the list * `review_redeemed_rewards_count` - Flags when the recipient redeemed more than the number of rewards specified in the config * `review_redeemed_rewards_amount` - Flags when the recipient redeemed more than the total amount specified in the config. The amount is denominated in the organization\'s currency. * `review_multiple_emails` - Flags when recipient\'s device or account has multiple emails associated * `review_vpn` - Flags when VPN is suspected * `review_tremendous_flag_list` - Flags rewards when redemption attributes match at least one criteria defined by the Tremendous flag list * `review_previously_blocked_recipients` - Flags rewards when the recipient has been blocked before * `allow_ip` - Releases a reward when a recipient\'s IP matches one in the list * `allow_email` - Releases a reward when the recipient\'s email matches one in the list 
+     * * `review_country` - Flags when the recipient\'s IP country matches the criteria in the rule * `review_ip` - Flags when recipient\'s IP matches one in the list * `review_email` - Flags when the recipient\'s email matches one in the list * `review_redeemed_rewards_count` - Flags when the recipient redeemed more than the number of rewards specified in the config * `review_redeemed_rewards_amount` - Flags when the recipient redeemed more than the total amount specified in the config. The amount is denominated in the organization\'s currency. * `review_multiple_emails` - Flags when recipient\'s device or account has multiple emails associated * `review_vpn` - Flags when VPN or proxy use is suspected. Can be configured to exclude Apple Private Relay. * `review_tremendous_flag_list` - Flags rewards when redemption attributes match at least one criteria defined by the Tremendous flag list * `review_previously_blocked_recipients` - Flags rewards when the recipient has been blocked before * `allow_ip` - Releases a reward when a recipient\'s IP matches one in the list * `allow_email` - Releases a reward when the recipient\'s email matches one in the list 
      * @type {string}
      * @memberof FraudRulesListItem
      */
@@ -3279,7 +3363,7 @@ export interface GetFraudReview200ResponseFraudReview {
      */
     'status'?: GetFraudReview200ResponseFraudReviewStatusEnum;
     /**
-     * The array may contain multiple reasons, depending on which rule(s) flagged the reward for review. Reasons can be any of the following:  * `Disallowed IP` * `Disallowed email` * `Disallowed country` * `Over reward amount limit` * `Over reward count limit` * `VPN detected` * `Device related to multiple emails` * `Device or account related to multiple emails` * `IP on a Tremendous fraud list` * `Bank account on a Tremendous fraud list` * `Fingerprint on a Tremendous fraud list` * `Email on a Tremendous fraud list` * `Phone on a Tremendous fraud list` * `Device on a Tremendous fraud list` * `IP related to a blocked reward` * `Device related to a blocked reward` * `Bank account related to a blocked reward` * `Fingerprint related to a blocked reward` * `Email related to a blocked reward` * `Phone related to a blocked reward` * `Allowed IP` * `Allowed email` * `Allowed country` 
+     * The array may contain multiple reasons, depending on which rule(s) flagged the reward for review. Reasons can be any of the following:  * `Disallowed IP` * `Disallowed email` * `Disallowed country` * `Over reward amount limit` * `Over reward count limit` * `VPN detected` * `Apple Private Relay` * `Device related to multiple emails` * `Device or account related to multiple emails` * `IP on a Tremendous fraud list` * `Bank account on a Tremendous fraud list` * `Fingerprint on a Tremendous fraud list` * `Email on a Tremendous fraud list` * `Phone on a Tremendous fraud list` * `Device on a Tremendous fraud list` * `IP related to a blocked reward` * `Device related to a blocked reward` * `Bank account related to a blocked reward` * `Fingerprint related to a blocked reward` * `Email related to a blocked reward` * `Phone related to a blocked reward` * `Allowed IP` * `Allowed email` * `Allowed country` 
      * @type {Array<string>}
      * @memberof GetFraudReview200ResponseFraudReview
      */
@@ -3360,6 +3444,7 @@ export const GetFraudReview200ResponseFraudReviewReasonsEnum = {
     OverRewardAmountLimit: 'Over reward amount limit',
     OverRewardCountLimit: 'Over reward count limit',
     VpnDetected: 'VPN detected',
+    ApplePrivateRelay: 'Apple Private Relay',
     DeviceRelatedToMultipleEmails: 'Device related to multiple emails',
     DeviceOrAccountRelatedToMultipleEmails: 'Device or account related to multiple emails',
     IpOnATremendousFraudList: 'IP on a Tremendous fraud list',
@@ -4245,6 +4330,12 @@ export interface ListConnectedOrganizations200ResponseConnectedOrganizationsInne
      * @memberof ListConnectedOrganizations200ResponseConnectedOrganizationsInner
      */
     'organization'?: ListConnectedOrganizations200ResponseConnectedOrganizationsInnerOrganization | null;
+    /**
+     * 
+     * @type {ListConnectedOrganizations200ResponseConnectedOrganizationsInnerPrefilledKybDetails}
+     * @memberof ListConnectedOrganizations200ResponseConnectedOrganizationsInner
+     */
+    'prefilled_kyb_details'?: ListConnectedOrganizations200ResponseConnectedOrganizationsInnerPrefilledKybDetails | null;
 }
 /**
  * Associated `organization` resource. `null` until the registration flow for the connected organization has been completed.
@@ -4298,6 +4389,86 @@ export const ListConnectedOrganizations200ResponseConnectedOrganizationsInnerOrg
 
 export type ListConnectedOrganizations200ResponseConnectedOrganizationsInnerOrganizationStatusEnum = typeof ListConnectedOrganizations200ResponseConnectedOrganizationsInnerOrganizationStatusEnum[keyof typeof ListConnectedOrganizations200ResponseConnectedOrganizationsInnerOrganizationStatusEnum];
 
+/**
+ * The optional KYB details forwarded when the connected organization was created (see the `kyb` request object), stored to pre-fill the end client\'s onboarding form. Only returned on the create response — it is omitted from the list, retrieve, and delete responses and from webhook payloads. `null` when no KYB details were provided. 
+ * @export
+ * @interface ListConnectedOrganizations200ResponseConnectedOrganizationsInnerPrefilledKybDetails
+ */
+export interface ListConnectedOrganizations200ResponseConnectedOrganizationsInnerPrefilledKybDetails {
+    /**
+     * The registered legal name of the company.
+     * @type {string}
+     * @memberof ListConnectedOrganizations200ResponseConnectedOrganizationsInnerPrefilledKybDetails
+     */
+    'company_name'?: string;
+    /**
+     * The trade name (DBA) the company operates under, if different from its legal name.
+     * @type {string}
+     * @memberof ListConnectedOrganizations200ResponseConnectedOrganizationsInnerPrefilledKybDetails
+     */
+    'doing_business_as'?: string;
+    /**
+     * The company\'s legal entity type. Free-form text — any value is accepted to support entity types outside the common presets. Common values are `Sole proprietorship`, `Corporation (Inc)`, `Limited liability company (LLC)`, `Limited liability partnership (LLP)`, `Public limited company (PLC)`, and `Private limited company (LTD)`. 
+     * @type {string}
+     * @memberof ListConnectedOrganizations200ResponseConnectedOrganizationsInnerPrefilledKybDetails
+     */
+    'company_structure'?: string;
+    /**
+     * The company\'s tax ID or registration number.
+     * @type {string}
+     * @memberof ListConnectedOrganizations200ResponseConnectedOrganizationsInnerPrefilledKybDetails
+     */
+    'company_registration_number'?: string;
+    /**
+     * The ISO 3166-1 alpha-2 country code of the company.
+     * @type {string}
+     * @memberof ListConnectedOrganizations200ResponseConnectedOrganizationsInnerPrefilledKybDetails
+     */
+    'country_code'?: string;
+    /**
+     * The company\'s website URL.
+     * @type {string}
+     * @memberof ListConnectedOrganizations200ResponseConnectedOrganizationsInnerPrefilledKybDetails
+     */
+    'website_url'?: string;
+    /**
+     * 
+     * @type {ListConnectedOrganizations200ResponseConnectedOrganizationsInnerPrefilledKybDetailsAddress}
+     * @memberof ListConnectedOrganizations200ResponseConnectedOrganizationsInnerPrefilledKybDetails
+     */
+    'address'?: ListConnectedOrganizations200ResponseConnectedOrganizationsInnerPrefilledKybDetailsAddress;
+}
+/**
+ * The company\'s address.
+ * @export
+ * @interface ListConnectedOrganizations200ResponseConnectedOrganizationsInnerPrefilledKybDetailsAddress
+ */
+export interface ListConnectedOrganizations200ResponseConnectedOrganizationsInnerPrefilledKybDetailsAddress {
+    /**
+     * Street address.
+     * @type {string}
+     * @memberof ListConnectedOrganizations200ResponseConnectedOrganizationsInnerPrefilledKybDetailsAddress
+     */
+    'line1'?: string;
+    /**
+     * City.
+     * @type {string}
+     * @memberof ListConnectedOrganizations200ResponseConnectedOrganizationsInnerPrefilledKybDetailsAddress
+     */
+    'city'?: string;
+    /**
+     * State, province, or region.
+     * @type {string}
+     * @memberof ListConnectedOrganizations200ResponseConnectedOrganizationsInnerPrefilledKybDetailsAddress
+     */
+    'state'?: string;
+    /**
+     * ZIP or postal code.
+     * @type {string}
+     * @memberof ListConnectedOrganizations200ResponseConnectedOrganizationsInnerPrefilledKybDetailsAddress
+     */
+    'zip'?: string;
+}
 /**
  * 
  * @export
@@ -4434,7 +4605,7 @@ export interface ListFraudReviews200ResponseFraudReviewsInner {
      */
     'status'?: ListFraudReviews200ResponseFraudReviewsInnerStatusEnum;
     /**
-     * The array may contain multiple reasons, depending on which rule(s) flagged the reward for review. Reasons can be any of the following:  * `Disallowed IP` * `Disallowed email` * `Disallowed country` * `Over reward amount limit` * `Over reward count limit` * `VPN detected` * `Device related to multiple emails` * `Device or account related to multiple emails` * `IP on a Tremendous fraud list` * `Bank account on a Tremendous fraud list` * `Fingerprint on a Tremendous fraud list` * `Email on a Tremendous fraud list` * `Phone on a Tremendous fraud list` * `Device on a Tremendous fraud list` * `IP related to a blocked reward` * `Device related to a blocked reward` * `Bank account related to a blocked reward` * `Fingerprint related to a blocked reward` * `Email related to a blocked reward` * `Phone related to a blocked reward` * `Allowed IP` * `Allowed email` * `Allowed country` 
+     * The array may contain multiple reasons, depending on which rule(s) flagged the reward for review. Reasons can be any of the following:  * `Disallowed IP` * `Disallowed email` * `Disallowed country` * `Over reward amount limit` * `Over reward count limit` * `VPN detected` * `Apple Private Relay` * `Device related to multiple emails` * `Device or account related to multiple emails` * `IP on a Tremendous fraud list` * `Bank account on a Tremendous fraud list` * `Fingerprint on a Tremendous fraud list` * `Email on a Tremendous fraud list` * `Phone on a Tremendous fraud list` * `Device on a Tremendous fraud list` * `IP related to a blocked reward` * `Device related to a blocked reward` * `Bank account related to a blocked reward` * `Fingerprint related to a blocked reward` * `Email related to a blocked reward` * `Phone related to a blocked reward` * `Allowed IP` * `Allowed email` * `Allowed country` 
      * @type {Array<string>}
      * @memberof ListFraudReviews200ResponseFraudReviewsInner
      */
@@ -4503,6 +4674,7 @@ export const ListFraudReviews200ResponseFraudReviewsInnerReasonsEnum = {
     OverRewardAmountLimit: 'Over reward amount limit',
     OverRewardCountLimit: 'Over reward count limit',
     VpnDetected: 'VPN detected',
+    ApplePrivateRelay: 'Apple Private Relay',
     DeviceRelatedToMultipleEmails: 'Device related to multiple emails',
     DeviceOrAccountRelatedToMultipleEmails: 'Device or account related to multiple emails',
     IpOnATremendousFraudList: 'IP on a Tremendous fraud list',
@@ -4581,7 +4753,7 @@ export interface ListFraudRules200Response {
  */
 export interface ListFraudRules200ResponseFraudRulesInner {
     /**
-     * * `review_country` - Flags when the recipient\'s IP country matches the criteria in the rule * `review_ip` - Flags when recipient\'s IP matches one in the list * `review_email` - Flags when the recipient\'s email matches one in the list * `review_redeemed_rewards_count` - Flags when the recipient redeemed more than the number of rewards specified in the config * `review_redeemed_rewards_amount` - Flags when the recipient redeemed more than the total amount specified in the config. The amount is denominated in the organization\'s currency. * `review_multiple_emails` - Flags when recipient\'s device or account has multiple emails associated * `review_vpn` - Flags when VPN is suspected * `review_tremendous_flag_list` - Flags rewards when redemption attributes match at least one criteria defined by the Tremendous flag list * `review_previously_blocked_recipients` - Flags rewards when the recipient has been blocked before * `allow_ip` - Releases a reward when a recipient\'s IP matches one in the list * `allow_email` - Releases a reward when the recipient\'s email matches one in the list 
+     * * `review_country` - Flags when the recipient\'s IP country matches the criteria in the rule * `review_ip` - Flags when recipient\'s IP matches one in the list * `review_email` - Flags when the recipient\'s email matches one in the list * `review_redeemed_rewards_count` - Flags when the recipient redeemed more than the number of rewards specified in the config * `review_redeemed_rewards_amount` - Flags when the recipient redeemed more than the total amount specified in the config. The amount is denominated in the organization\'s currency. * `review_multiple_emails` - Flags when recipient\'s device or account has multiple emails associated * `review_vpn` - Flags when VPN or proxy use is suspected. Can be configured to exclude Apple Private Relay. * `review_tremendous_flag_list` - Flags rewards when redemption attributes match at least one criteria defined by the Tremendous flag list * `review_previously_blocked_recipients` - Flags rewards when the recipient has been blocked before * `allow_ip` - Releases a reward when a recipient\'s IP matches one in the list * `allow_email` - Releases a reward when the recipient\'s email matches one in the list 
      * @type {string}
      * @memberof ListFraudRules200ResponseFraudRulesInner
      */
@@ -5403,7 +5575,7 @@ export interface ListProductsResponseProductsInner {
      */
     'description': string;
     /**
-     * The category of the product  <table>   <thead>     <tr>       <th>Category</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td><code>ach</code></td>       <td>Bank transfer to the recipient</td>     </tr>     <tr>       <td><code>charity</code></td>       <td>Donations to a charity</td>     </tr>     <tr>       <td><code>instant_debit_transfer</code></td>       <td>Instant debit transfer to the recipient</td>     </tr>     <tr>       <td><code>merchant_card</code></td>       <td>A gift card for a certain merchant (e.g. Amazon)</td>     </tr>     <tr>       <td><code>paypal</code></td>       <td>Payout via PayPal</td>     </tr>     <tr>       <td><code>venmo</code></td>       <td>Payout via Venmo</td>     </tr>     <tr>       <td><code>visa_card</code></td>       <td>Payout in form of a Visa debit card</td>     </tr>     <tr>       <td><code>cash_app</code></td>       <td>Payout via Cash App</td>     </tr>     <tr>       <td><code>international_bank</code></td>       <td>Bank transfer to recipients outside of the US</td>     </tr>   </tbody> </table> 
+     * The category of the product  <table>   <thead>     <tr>       <th>Category</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td><code>ach</code></td>       <td>Bank transfer to the recipient</td>     </tr>     <tr>       <td><code>charity</code></td>       <td>Donations to a charity</td>     </tr>     <tr>       <td><code>instant_debit_transfer</code></td>       <td>Instant debit transfer to the recipient</td>     </tr>     <tr>       <td><code>merchant_card</code></td>       <td>A gift card for a certain merchant (e.g. Amazon)</td>     </tr>     <tr>       <td><code>paypal</code></td>       <td>Payout via PayPal</td>     </tr>     <tr>       <td><code>venmo</code></td>       <td>Payout via Venmo</td>     </tr>     <tr>       <td><code>visa_card</code></td>       <td>Payout in form of a Visa debit card</td>     </tr>     <tr>       <td><code>cash_app</code></td>       <td>Payout via Cash App</td>     </tr>     <tr>       <td><code>international_bank</code></td>       <td>Bank transfer to recipients outside of the US</td>     </tr>     <tr>       <td><code>wallet</code></td>       <td>Payout to a digital wallet (e.g. GCash, MoMo)</td>     </tr>   </tbody> </table> 
      * @type {string}
      * @memberof ListProductsResponseProductsInner
      */
@@ -5467,7 +5639,8 @@ export const ListProductsResponseProductsInnerCategoryEnum = {
     Venmo: 'venmo',
     VisaCard: 'visa_card',
     CashApp: 'cash_app',
-    InternationalBank: 'international_bank'
+    InternationalBank: 'international_bank',
+    Wallet: 'wallet'
 } as const;
 
 export type ListProductsResponseProductsInnerCategoryEnum = typeof ListProductsResponseProductsInnerCategoryEnum[keyof typeof ListProductsResponseProductsInnerCategoryEnum];
@@ -7237,7 +7410,7 @@ export interface Product {
      */
     'description': string;
     /**
-     * The category of the product  <table>   <thead>     <tr>       <th>Category</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td><code>ach</code></td>       <td>Bank transfer to the recipient</td>     </tr>     <tr>       <td><code>charity</code></td>       <td>Donations to a charity</td>     </tr>     <tr>       <td><code>instant_debit_transfer</code></td>       <td>Instant debit transfer to the recipient</td>     </tr>     <tr>       <td><code>merchant_card</code></td>       <td>A gift card for a certain merchant (e.g. Amazon)</td>     </tr>     <tr>       <td><code>paypal</code></td>       <td>Payout via PayPal</td>     </tr>     <tr>       <td><code>venmo</code></td>       <td>Payout via Venmo</td>     </tr>     <tr>       <td><code>visa_card</code></td>       <td>Payout in form of a Visa debit card</td>     </tr>     <tr>       <td><code>cash_app</code></td>       <td>Payout via Cash App</td>     </tr>     <tr>       <td><code>international_bank</code></td>       <td>Bank transfer to recipients outside of the US</td>     </tr>   </tbody> </table> 
+     * The category of the product  <table>   <thead>     <tr>       <th>Category</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td><code>ach</code></td>       <td>Bank transfer to the recipient</td>     </tr>     <tr>       <td><code>charity</code></td>       <td>Donations to a charity</td>     </tr>     <tr>       <td><code>instant_debit_transfer</code></td>       <td>Instant debit transfer to the recipient</td>     </tr>     <tr>       <td><code>merchant_card</code></td>       <td>A gift card for a certain merchant (e.g. Amazon)</td>     </tr>     <tr>       <td><code>paypal</code></td>       <td>Payout via PayPal</td>     </tr>     <tr>       <td><code>venmo</code></td>       <td>Payout via Venmo</td>     </tr>     <tr>       <td><code>visa_card</code></td>       <td>Payout in form of a Visa debit card</td>     </tr>     <tr>       <td><code>cash_app</code></td>       <td>Payout via Cash App</td>     </tr>     <tr>       <td><code>international_bank</code></td>       <td>Bank transfer to recipients outside of the US</td>     </tr>     <tr>       <td><code>wallet</code></td>       <td>Payout to a digital wallet (e.g. GCash, MoMo)</td>     </tr>   </tbody> </table> 
      * @type {string}
      * @memberof Product
      */
@@ -7301,7 +7474,8 @@ export const ProductCategoryEnum = {
     Venmo: 'venmo',
     VisaCard: 'visa_card',
     CashApp: 'cash_app',
-    InternationalBank: 'international_bank'
+    InternationalBank: 'international_bank',
+    Wallet: 'wallet'
 } as const;
 
 export type ProductCategoryEnum = typeof ProductCategoryEnum[keyof typeof ProductCategoryEnum];
@@ -7757,6 +7931,19 @@ export const ReviewRedeemedRewardsCountPeriodEnum = {
 
 export type ReviewRedeemedRewardsCountPeriodEnum = typeof ReviewRedeemedRewardsCountPeriodEnum[keyof typeof ReviewRedeemedRewardsCountPeriodEnum];
 
+/**
+ * Flag rewards redeemed through VPN or proxy traffic. By default, Apple Private Relay traffic is flagged; set `skip_apple_private_relay` to true to exclude it.
+ * @export
+ * @interface ReviewVpn
+ */
+export interface ReviewVpn {
+    /**
+     * Whether Apple Private Relay traffic should be excluded from VPN fraud review. When omitted or false, Apple Private Relay traffic is flagged with other VPN and proxy traffic. 
+     * @type {boolean}
+     * @memberof ReviewVpn
+     */
+    'skip_apple_private_relay'?: boolean;
+}
 /**
  * A single reward, sent to a recipient. A reward is always part of an order.  Either `products` or `campaign_id` must be specified. 
  * @export
@@ -10071,7 +10258,7 @@ export class ConnectedOrganizationMembersApi extends BaseAPI {
 export const ConnectedOrganizationsApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
-         * Create a connected organization. 
+         * Create a connected organization.  Optionally pass a `kyb` object to forward KYB details you have already collected for the end client. When provided, these values pre-fill the end client\'s onboarding form; the end client still reviews, edits where needed, and submits the form. Every `kyb` field is optional, but any value provided is validated — malformed KYB details (for example an unsupported `country_code` or a malformed `website_url`) return a `400`.  The stored KYB details are echoed back as `prefilled_kyb_details` on this create response only. 
          * @summary Create connected organization
          * @param {CreateConnectedOrganizationRequest} createConnectedOrganizationRequest Connected organization to create
          * @param {*} [options] Override http request option.
@@ -10241,7 +10428,7 @@ export const ConnectedOrganizationsApiFp = function(configuration?: Configuratio
     const localVarAxiosParamCreator = ConnectedOrganizationsApiAxiosParamCreator(configuration)
     return {
         /**
-         * Create a connected organization. 
+         * Create a connected organization.  Optionally pass a `kyb` object to forward KYB details you have already collected for the end client. When provided, these values pre-fill the end client\'s onboarding form; the end client still reviews, edits where needed, and submits the form. Every `kyb` field is optional, but any value provided is validated — malformed KYB details (for example an unsupported `country_code` or a malformed `website_url`) return a `400`.  The stored KYB details are echoed back as `prefilled_kyb_details` on this create response only. 
          * @summary Create connected organization
          * @param {CreateConnectedOrganizationRequest} createConnectedOrganizationRequest Connected organization to create
          * @param {*} [options] Override http request option.
@@ -10304,7 +10491,7 @@ export const ConnectedOrganizationsApiFactory = function (configuration?: Config
     const localVarFp = ConnectedOrganizationsApiFp(configuration)
     return {
         /**
-         * Create a connected organization. 
+         * Create a connected organization.  Optionally pass a `kyb` object to forward KYB details you have already collected for the end client. When provided, these values pre-fill the end client\'s onboarding form; the end client still reviews, edits where needed, and submits the form. Every `kyb` field is optional, but any value provided is validated — malformed KYB details (for example an unsupported `country_code` or a malformed `website_url`) return a `400`.  The stored KYB details are echoed back as `prefilled_kyb_details` on this create response only. 
          * @summary Create connected organization
          * @param {CreateConnectedOrganizationRequest} createConnectedOrganizationRequest Connected organization to create
          * @param {*} [options] Override http request option.
@@ -10355,7 +10542,7 @@ export const ConnectedOrganizationsApiFactory = function (configuration?: Config
  */
 export class ConnectedOrganizationsApi extends BaseAPI {
     /**
-     * Create a connected organization. 
+     * Create a connected organization.  Optionally pass a `kyb` object to forward KYB details you have already collected for the end client. When provided, these values pre-fill the end client\'s onboarding form; the end client still reviews, edits where needed, and submits the form. Every `kyb` field is optional, but any value provided is validated — malformed KYB details (for example an unsupported `country_code` or a malformed `website_url`) return a `400`.  The stored KYB details are echoed back as `prefilled_kyb_details` on this create response only. 
      * @summary Create connected organization
      * @param {CreateConnectedOrganizationRequest} createConnectedOrganizationRequest Connected organization to create
      * @param {*} [options] Override http request option.
@@ -11136,7 +11323,7 @@ export const FraudRulesApiAxiosParamCreator = function (configuration?: Configur
          * Configure a fraud rule of the type passed in the URL. If a rule of the same type already exists, it will be overwritten. 
          * @summary Configure fraud rule
          * @param {FraudRuleRuleTypeEnum} ruleType The rule type to create or update.
-         * @param {FraudRuleRequest} [fraudRuleRequest] Rules &#x60;review_multiple_emails&#x60;, &#x60;review_vpn&#x60;, &#x60;review_tremendous_flaglist&#x60;, and &#x60;review_previously_blocked_recipients&#x60; require no body.
+         * @param {FraudRuleRequest} [fraudRuleRequest] Rules &#x60;review_multiple_emails&#x60;, &#x60;review_tremendous_flaglist&#x60;, and &#x60;review_previously_blocked_recipients&#x60; require no body. &#x60;review_vpn&#x60; also accepts no body for the default behavior. Pass &#x60;config.skip_apple_private_relay&#x60; only to override whether Apple Private Relay traffic is flagged. 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -11279,7 +11466,7 @@ export const FraudRulesApiFp = function(configuration?: Configuration) {
          * Configure a fraud rule of the type passed in the URL. If a rule of the same type already exists, it will be overwritten. 
          * @summary Configure fraud rule
          * @param {FraudRuleRuleTypeEnum} ruleType The rule type to create or update.
-         * @param {FraudRuleRequest} [fraudRuleRequest] Rules &#x60;review_multiple_emails&#x60;, &#x60;review_vpn&#x60;, &#x60;review_tremendous_flaglist&#x60;, and &#x60;review_previously_blocked_recipients&#x60; require no body.
+         * @param {FraudRuleRequest} [fraudRuleRequest] Rules &#x60;review_multiple_emails&#x60;, &#x60;review_tremendous_flaglist&#x60;, and &#x60;review_previously_blocked_recipients&#x60; require no body. &#x60;review_vpn&#x60; also accepts no body for the default behavior. Pass &#x60;config.skip_apple_private_relay&#x60; only to override whether Apple Private Relay traffic is flagged. 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -11339,7 +11526,7 @@ export const FraudRulesApiFactory = function (configuration?: Configuration, bas
          * Configure a fraud rule of the type passed in the URL. If a rule of the same type already exists, it will be overwritten. 
          * @summary Configure fraud rule
          * @param {FraudRuleRuleTypeEnum} ruleType The rule type to create or update.
-         * @param {FraudRuleRequest} [fraudRuleRequest] Rules &#x60;review_multiple_emails&#x60;, &#x60;review_vpn&#x60;, &#x60;review_tremendous_flaglist&#x60;, and &#x60;review_previously_blocked_recipients&#x60; require no body.
+         * @param {FraudRuleRequest} [fraudRuleRequest] Rules &#x60;review_multiple_emails&#x60;, &#x60;review_tremendous_flaglist&#x60;, and &#x60;review_previously_blocked_recipients&#x60; require no body. &#x60;review_vpn&#x60; also accepts no body for the default behavior. Pass &#x60;config.skip_apple_private_relay&#x60; only to override whether Apple Private Relay traffic is flagged. 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -11392,7 +11579,7 @@ export class FraudRulesApi extends BaseAPI {
      * Configure a fraud rule of the type passed in the URL. If a rule of the same type already exists, it will be overwritten. 
      * @summary Configure fraud rule
      * @param {FraudRuleRuleTypeEnum} ruleType The rule type to create or update.
-     * @param {FraudRuleRequest} [fraudRuleRequest] Rules &#x60;review_multiple_emails&#x60;, &#x60;review_vpn&#x60;, &#x60;review_tremendous_flaglist&#x60;, and &#x60;review_previously_blocked_recipients&#x60; require no body.
+     * @param {FraudRuleRequest} [fraudRuleRequest] Rules &#x60;review_multiple_emails&#x60;, &#x60;review_tremendous_flaglist&#x60;, and &#x60;review_previously_blocked_recipients&#x60; require no body. &#x60;review_vpn&#x60; also accepts no body for the default behavior. Pass &#x60;config.skip_apple_private_relay&#x60; only to override whether Apple Private Relay traffic is flagged. 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof FraudRulesApi
