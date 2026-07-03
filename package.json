@@ -29,7 +29,7 @@
     "axios": "^1.6.1"
   },
   "devDependencies": {
-    "@types/node": "^25.0.2",
+    "@types/node": "^26.0.1",
     "typescript": "^6.0.2",
     "vitest": "^4.0.6"
   },
