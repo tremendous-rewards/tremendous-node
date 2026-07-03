@@ -387,12 +387,6 @@ export interface ConnectedOrganization {
      * @memberof ConnectedOrganization
      */
     'organization'?: ConnectedOrganizationOrganization | null;
-    /**
-     * 
-     * @type {ListConnectedOrganizations200ResponseConnectedOrganizationsInnerPrefilledKybDetails}
-     * @memberof ConnectedOrganization
-     */
-    'prefilled_kyb_details'?: ListConnectedOrganizations200ResponseConnectedOrganizationsInnerPrefilledKybDetails | null;
 }
 /**
  * 
@@ -806,59 +800,77 @@ export interface CreateConnectedOrganizationRequest {
     'client_id': string;
     /**
      * 
-     * @type {CreateConnectedOrganizationRequestKyb}
+     * @type {CreateConnectedOrganizationRequestKybPrefill}
      * @memberof CreateConnectedOrganizationRequest
      */
-    'kyb'?: CreateConnectedOrganizationRequestKyb;
+    'kyb_prefill'?: CreateConnectedOrganizationRequestKybPrefill;
 }
 /**
- * Optional KYB details to forward for the end client. When provided, these values pre-fill the end client\'s onboarding form and remain fully editable; the end client still reviews and submits. Every field is optional. 
+ * Optional KYB details to forward for the end client. When provided, these values prefill the end client\'s onboarding form. Every field is optional. 
  * @export
- * @interface CreateConnectedOrganizationRequestKyb
+ * @interface CreateConnectedOrganizationRequestKybPrefill
  */
-export interface CreateConnectedOrganizationRequestKyb {
+export interface CreateConnectedOrganizationRequestKybPrefill {
     /**
      * The registered legal name of the company.
      * @type {string}
-     * @memberof CreateConnectedOrganizationRequestKyb
+     * @memberof CreateConnectedOrganizationRequestKybPrefill
      */
     'company_name'?: string;
     /**
      * The trade name (DBA) the company operates under, if different from its legal name.
      * @type {string}
-     * @memberof CreateConnectedOrganizationRequestKyb
+     * @memberof CreateConnectedOrganizationRequestKybPrefill
      */
     'doing_business_as'?: string;
     /**
-     * The company\'s legal entity type. Free-form text — any value is accepted to support entity types outside the common presets. Common values are `Sole proprietorship`, `Corporation (Inc)`, `Limited liability company (LLC)`, `Limited liability partnership (LLP)`, `Public limited company (PLC)`, and `Private limited company (LTD)`. 
+     * The company\'s legal entity type. Free-form text; any value is accepted. Common values include `Sole proprietorship`, `Corporation (Inc)`, `Limited liability company (LLC)`, `Limited liability partnership (LLP)`, `Public limited company (PLC)`, and `Private limited company (LTD)`. 
      * @type {string}
-     * @memberof CreateConnectedOrganizationRequestKyb
+     * @memberof CreateConnectedOrganizationRequestKybPrefill
      */
     'company_structure'?: string;
     /**
      * The company\'s tax ID or registration number.
      * @type {string}
-     * @memberof CreateConnectedOrganizationRequestKyb
+     * @memberof CreateConnectedOrganizationRequestKybPrefill
      */
     'company_registration_number'?: string;
     /**
      * The ISO 3166-1 alpha-2 country code of the company. Must be a supported country.
      * @type {string}
-     * @memberof CreateConnectedOrganizationRequestKyb
+     * @memberof CreateConnectedOrganizationRequestKybPrefill
      */
     'country_code'?: string;
     /**
      * The company\'s website URL. Must be a well-formed URL.
      * @type {string}
-     * @memberof CreateConnectedOrganizationRequestKyb
+     * @memberof CreateConnectedOrganizationRequestKybPrefill
      */
     'website_url'?: string;
     /**
-     * 
-     * @type {ListConnectedOrganizations200ResponseConnectedOrganizationsInnerPrefilledKybDetailsAddress}
-     * @memberof CreateConnectedOrganizationRequestKyb
+     * The company\'s street address.
+     * @type {string}
+     * @memberof CreateConnectedOrganizationRequestKybPrefill
      */
-    'address'?: ListConnectedOrganizations200ResponseConnectedOrganizationsInnerPrefilledKybDetailsAddress;
+    'address_1'?: string;
+    /**
+     * The company\'s city.
+     * @type {string}
+     * @memberof CreateConnectedOrganizationRequestKybPrefill
+     */
+    'city'?: string;
+    /**
+     * The company\'s state or province.
+     * @type {string}
+     * @memberof CreateConnectedOrganizationRequestKybPrefill
+     */
+    'state'?: string;
+    /**
+     * The company\'s ZIP or postal code.
+     * @type {string}
+     * @memberof CreateConnectedOrganizationRequestKybPrefill
+     */
+    'postal_code'?: string;
 }
 /**
  * 
@@ -4330,12 +4342,6 @@ export interface ListConnectedOrganizations200ResponseConnectedOrganizationsInne
      * @memberof ListConnectedOrganizations200ResponseConnectedOrganizationsInner
      */
     'organization'?: ListConnectedOrganizations200ResponseConnectedOrganizationsInnerOrganization | null;
-    /**
-     * 
-     * @type {ListConnectedOrganizations200ResponseConnectedOrganizationsInnerPrefilledKybDetails}
-     * @memberof ListConnectedOrganizations200ResponseConnectedOrganizationsInner
-     */
-    'prefilled_kyb_details'?: ListConnectedOrganizations200ResponseConnectedOrganizationsInnerPrefilledKybDetails | null;
 }
 /**
  * Associated `organization` resource. `null` until the registration flow for the connected organization has been completed.
@@ -4389,86 +4395,6 @@ export const ListConnectedOrganizations200ResponseConnectedOrganizationsInnerOrg
 
 export type ListConnectedOrganizations200ResponseConnectedOrganizationsInnerOrganizationStatusEnum = typeof ListConnectedOrganizations200ResponseConnectedOrganizationsInnerOrganizationStatusEnum[keyof typeof ListConnectedOrganizations200ResponseConnectedOrganizationsInnerOrganizationStatusEnum];
 
-/**
- * The optional KYB details forwarded when the connected organization was created (see the `kyb` request object), stored to pre-fill the end client\'s onboarding form. Only returned on the create response — it is omitted from the list, retrieve, and delete responses and from webhook payloads. `null` when no KYB details were provided. 
- * @export
- * @interface ListConnectedOrganizations200ResponseConnectedOrganizationsInnerPrefilledKybDetails
- */
-export interface ListConnectedOrganizations200ResponseConnectedOrganizationsInnerPrefilledKybDetails {
-    /**
-     * The registered legal name of the company.
-     * @type {string}
-     * @memberof ListConnectedOrganizations200ResponseConnectedOrganizationsInnerPrefilledKybDetails
-     */
-    'company_name'?: string;
-    /**
-     * The trade name (DBA) the company operates under, if different from its legal name.
-     * @type {string}
-     * @memberof ListConnectedOrganizations200ResponseConnectedOrganizationsInnerPrefilledKybDetails
-     */
-    'doing_business_as'?: string;
-    /**
-     * The company\'s legal entity type. Free-form text — any value is accepted to support entity types outside the common presets. Common values are `Sole proprietorship`, `Corporation (Inc)`, `Limited liability company (LLC)`, `Limited liability partnership (LLP)`, `Public limited company (PLC)`, and `Private limited company (LTD)`. 
-     * @type {string}
-     * @memberof ListConnectedOrganizations200ResponseConnectedOrganizationsInnerPrefilledKybDetails
-     */
-    'company_structure'?: string;
-    /**
-     * The company\'s tax ID or registration number.
-     * @type {string}
-     * @memberof ListConnectedOrganizations200ResponseConnectedOrganizationsInnerPrefilledKybDetails
-     */
-    'company_registration_number'?: string;
-    /**
-     * The ISO 3166-1 alpha-2 country code of the company.
-     * @type {string}
-     * @memberof ListConnectedOrganizations200ResponseConnectedOrganizationsInnerPrefilledKybDetails
-     */
-    'country_code'?: string;
-    /**
-     * The company\'s website URL.
-     * @type {string}
-     * @memberof ListConnectedOrganizations200ResponseConnectedOrganizationsInnerPrefilledKybDetails
-     */
-    'website_url'?: string;
-    /**
-     * 
-     * @type {ListConnectedOrganizations200ResponseConnectedOrganizationsInnerPrefilledKybDetailsAddress}
-     * @memberof ListConnectedOrganizations200ResponseConnectedOrganizationsInnerPrefilledKybDetails
-     */
-    'address'?: ListConnectedOrganizations200ResponseConnectedOrganizationsInnerPrefilledKybDetailsAddress;
-}
-/**
- * The company\'s address.
- * @export
- * @interface ListConnectedOrganizations200ResponseConnectedOrganizationsInnerPrefilledKybDetailsAddress
- */
-export interface ListConnectedOrganizations200ResponseConnectedOrganizationsInnerPrefilledKybDetailsAddress {
-    /**
-     * Street address.
-     * @type {string}
-     * @memberof ListConnectedOrganizations200ResponseConnectedOrganizationsInnerPrefilledKybDetailsAddress
-     */
-    'line1'?: string;
-    /**
-     * City.
-     * @type {string}
-     * @memberof ListConnectedOrganizations200ResponseConnectedOrganizationsInnerPrefilledKybDetailsAddress
-     */
-    'city'?: string;
-    /**
-     * State, province, or region.
-     * @type {string}
-     * @memberof ListConnectedOrganizations200ResponseConnectedOrganizationsInnerPrefilledKybDetailsAddress
-     */
-    'state'?: string;
-    /**
-     * ZIP or postal code.
-     * @type {string}
-     * @memberof ListConnectedOrganizations200ResponseConnectedOrganizationsInnerPrefilledKybDetailsAddress
-     */
-    'zip'?: string;
-}
 /**
  * 
  * @export
@@ -10258,7 +10184,7 @@ export class ConnectedOrganizationMembersApi extends BaseAPI {
 export const ConnectedOrganizationsApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
-         * Create a connected organization.  Optionally pass a `kyb` object to forward KYB details you have already collected for the end client. When provided, these values pre-fill the end client\'s onboarding form; the end client still reviews, edits where needed, and submits the form. Every `kyb` field is optional, but any value provided is validated — malformed KYB details (for example an unsupported `country_code` or a malformed `website_url`) return a `400`.  The stored KYB details are echoed back as `prefilled_kyb_details` on this create response only. 
+         * Create a connected organization.  Optionally pass a `kyb_prefill` object to forward KYB (Know Your Business) details you have already collected for the end client. When provided, these values prefill the end client\'s onboarding form; the end client still reviews, edits where needed, and submits the form. Every `kyb_prefill` field is optional, but any value provided is validated. Malformed KYB details (for example an unsupported `country_code` or a malformed `website_url`) return a `400`. 
          * @summary Create connected organization
          * @param {CreateConnectedOrganizationRequest} createConnectedOrganizationRequest Connected organization to create
          * @param {*} [options] Override http request option.
@@ -10428,7 +10354,7 @@ export const ConnectedOrganizationsApiFp = function(configuration?: Configuratio
     const localVarAxiosParamCreator = ConnectedOrganizationsApiAxiosParamCreator(configuration)
     return {
         /**
-         * Create a connected organization.  Optionally pass a `kyb` object to forward KYB details you have already collected for the end client. When provided, these values pre-fill the end client\'s onboarding form; the end client still reviews, edits where needed, and submits the form. Every `kyb` field is optional, but any value provided is validated — malformed KYB details (for example an unsupported `country_code` or a malformed `website_url`) return a `400`.  The stored KYB details are echoed back as `prefilled_kyb_details` on this create response only. 
+         * Create a connected organization.  Optionally pass a `kyb_prefill` object to forward KYB (Know Your Business) details you have already collected for the end client. When provided, these values prefill the end client\'s onboarding form; the end client still reviews, edits where needed, and submits the form. Every `kyb_prefill` field is optional, but any value provided is validated. Malformed KYB details (for example an unsupported `country_code` or a malformed `website_url`) return a `400`. 
          * @summary Create connected organization
          * @param {CreateConnectedOrganizationRequest} createConnectedOrganizationRequest Connected organization to create
          * @param {*} [options] Override http request option.
@@ -10491,7 +10417,7 @@ export const ConnectedOrganizationsApiFactory = function (configuration?: Config
     const localVarFp = ConnectedOrganizationsApiFp(configuration)
     return {
         /**
-         * Create a connected organization.  Optionally pass a `kyb` object to forward KYB details you have already collected for the end client. When provided, these values pre-fill the end client\'s onboarding form; the end client still reviews, edits where needed, and submits the form. Every `kyb` field is optional, but any value provided is validated — malformed KYB details (for example an unsupported `country_code` or a malformed `website_url`) return a `400`.  The stored KYB details are echoed back as `prefilled_kyb_details` on this create response only. 
+         * Create a connected organization.  Optionally pass a `kyb_prefill` object to forward KYB (Know Your Business) details you have already collected for the end client. When provided, these values prefill the end client\'s onboarding form; the end client still reviews, edits where needed, and submits the form. Every `kyb_prefill` field is optional, but any value provided is validated. Malformed KYB details (for example an unsupported `country_code` or a malformed `website_url`) return a `400`. 
          * @summary Create connected organization
          * @param {CreateConnectedOrganizationRequest} createConnectedOrganizationRequest Connected organization to create
          * @param {*} [options] Override http request option.
@@ -10542,7 +10468,7 @@ export const ConnectedOrganizationsApiFactory = function (configuration?: Config
  */
 export class ConnectedOrganizationsApi extends BaseAPI {
     /**
-     * Create a connected organization.  Optionally pass a `kyb` object to forward KYB details you have already collected for the end client. When provided, these values pre-fill the end client\'s onboarding form; the end client still reviews, edits where needed, and submits the form. Every `kyb` field is optional, but any value provided is validated — malformed KYB details (for example an unsupported `country_code` or a malformed `website_url`) return a `400`.  The stored KYB details are echoed back as `prefilled_kyb_details` on this create response only. 
+     * Create a connected organization.  Optionally pass a `kyb_prefill` object to forward KYB (Know Your Business) details you have already collected for the end client. When provided, these values prefill the end client\'s onboarding form; the end client still reviews, edits where needed, and submits the form. Every `kyb_prefill` field is optional, but any value provided is validated. Malformed KYB details (for example an unsupported `country_code` or a malformed `website_url`) return a `400`. 
      * @summary Create connected organization
      * @param {CreateConnectedOrganizationRequest} createConnectedOrganizationRequest Connected organization to create
      * @param {*} [options] Override http request option.
