@@ -1,5 +1,17 @@
 # Changelog
 
+## [4.14.0](https://github.com/tremendous-rewards/tremendous-node/compare/tremendous-v4.13.0...tremendous-v4.14.0) (2026-07-03)
+
+
+### Features
+
+* rename `kyb` to `kyb_prefill` in connected org create ([8d71686](https://github.com/tremendous-rewards/tremendous-node/commit/8d716864eebb712ad0516743fef9017bfbe51152))
+
+
+### Bug Fixes
+
+* remove `prefilled_kyb_details` from connected org responses ([8d71686](https://github.com/tremendous-rewards/tremendous-node/commit/8d716864eebb712ad0516743fef9017bfbe51152))
+
 ## [4.13.0](https://github.com/tremendous-rewards/tremendous-node/compare/tremendous-v4.12.0...tremendous-v4.13.0) (2026-06-09)
 
 
