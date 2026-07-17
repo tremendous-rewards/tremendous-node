@@ -1,0 +1,31 @@
+--- configuration.mustache (openapi-generator v7.12.0)
++++ configuration.mustache (tremendous)
+@@ -2,6 +2,10 @@
+ /* eslint-disable */
+ {{>licenseInfo}}
+ 
++// Edited by Tremendous, lines 6-7, 85-86: Add custom User Agent with lib's version.
++const { version } = require("../package.json");
++const DefaultUserAgent = `Tremendous Node v${version}`;
++
+ export interface ConfigurationParameters {
+     apiKey?: string | Promise<string> | ((name: string) => string) | ((name: string) => Promise<string>);
+     username?: string;
+@@ -78,15 +82,8 @@
+         this.accessToken = param.accessToken;
+         this.basePath = param.basePath;
+         this.serverIndex = param.serverIndex;
+-        this.baseOptions = {
+-            ...param.baseOptions,
+-            headers: {
+-                {{#httpUserAgent}}
+-                'User-Agent': "{{httpUserAgent}}",
+-                {{/httpUserAgent}}
+-                ...param.baseOptions?.headers,
+-            },
+-        };
++        this.baseOptions = param.baseOptions || {};
++        this.baseOptions.headers = { "User-Agent": DefaultUserAgent };
+         this.formDataCtor = param.formDataCtor;
+     }
+ 
