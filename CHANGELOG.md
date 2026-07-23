@@ -1,5 +1,16 @@
 # Changelog
 
+## [4.15.0](https://github.com/tremendous-rewards/tremendous-node/compare/tremendous-v4.14.0...tremendous-v4.15.0) (2026-07-23)
+
+
+### Features
+
+* add `permission` request body to create API key ([f9f34aa](https://github.com/tremendous-rewards/tremendous-node/commit/f9f34aad61d95cfb2f3e14e5cae9342415ae842b))
+* add `read_write`, `read_only` enum for API keys ([f9f34aa](https://github.com/tremendous-rewards/tremendous-node/commit/f9f34aad61d95cfb2f3e14e5cae9342415ae842b))
+* add `state` field to connected org member sessions ([6d6bf56](https://github.com/tremendous-rewards/tremendous-node/commit/6d6bf563b44a800356bf334c9e789934d1e824f5))
+* add delete member endpoint (`DELETE /members/{id}`) ([6d6bf56](https://github.com/tremendous-rewards/tremendous-node/commit/6d6bf563b44a800356bf334c9e789934d1e824f5))
+* add update member endpoint (`PATCH /members/{id}`) ([6d6bf56](https://github.com/tremendous-rewards/tremendous-node/commit/6d6bf563b44a800356bf334c9e789934d1e824f5))
+
 ## [4.14.0](https://github.com/tremendous-rewards/tremendous-node/compare/tremendous-v4.13.0...tremendous-v4.14.0) (2026-07-03)
 
 
