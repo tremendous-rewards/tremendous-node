@@ -605,6 +605,27 @@ export interface CreateApiKey200Response {
 /**
  * 
  * @export
+ * @interface CreateApiKeyRequest
+ */
+export interface CreateApiKeyRequest {
+    /**
+     * The key\'s permission level. `read_write` (the default) can make any request. `read_only` keys can\'t run data-altering requests: they\'re limited to GET requests and non-writing POST requests, like `/reports`. Omit for `read_write`. 
+     * @type {string}
+     * @memberof CreateApiKeyRequest
+     */
+    'permission'?: CreateApiKeyRequestPermissionEnum;
+}
+
+export const CreateApiKeyRequestPermissionEnum = {
+    ReadWrite: 'read_write',
+    ReadOnly: 'read_only'
+} as const;
+
+export type CreateApiKeyRequestPermissionEnum = typeof CreateApiKeyRequestPermissionEnum[keyof typeof CreateApiKeyRequestPermissionEnum];
+
+/**
+ * 
+ * @export
  * @interface CreateCampaign200Response
  */
 export interface CreateCampaign200Response {
@@ -13160,10 +13181,11 @@ export const OrganizationsApiAxiosParamCreator = function (configuration?: Confi
         /**
          * Creates a new API key. The API key used to make the request will remain active.  Created API keys are generated randomly and returned in the response. **You cannot retrieve them again.** 
          * @summary Create API key
+         * @param {CreateApiKeyRequest} [createApiKeyRequest] Optional settings for the new API key
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        createApiKey: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        createApiKey: async (createApiKeyRequest?: CreateApiKeyRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/organizations/create_api_key`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -13182,9 +13204,12 @@ export const OrganizationsApiAxiosParamCreator = function (configuration?: Confi
 
 
     
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(createApiKeyRequest, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -13316,11 +13341,12 @@ export const OrganizationsApiFp = function(configuration?: Configuration) {
         /**
          * Creates a new API key. The API key used to make the request will remain active.  Created API keys are generated randomly and returned in the response. **You cannot retrieve them again.** 
          * @summary Create API key
+         * @param {CreateApiKeyRequest} [createApiKeyRequest] Optional settings for the new API key
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async createApiKey(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CreateApiKey200Response>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.createApiKey(options);
+        async createApiKey(createApiKeyRequest?: CreateApiKeyRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CreateApiKey200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.createApiKey(createApiKeyRequest, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['OrganizationsApi.createApiKey']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -13376,11 +13402,12 @@ export const OrganizationsApiFactory = function (configuration?: Configuration, 
         /**
          * Creates a new API key. The API key used to make the request will remain active.  Created API keys are generated randomly and returned in the response. **You cannot retrieve them again.** 
          * @summary Create API key
+         * @param {CreateApiKeyRequest} [createApiKeyRequest] Optional settings for the new API key
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        createApiKey(options?: RawAxiosRequestConfig): AxiosPromise<CreateApiKey200Response> {
-            return localVarFp.createApiKey(options).then((request) => request(axios, basePath));
+        createApiKey(createApiKeyRequest?: CreateApiKeyRequest, options?: RawAxiosRequestConfig): AxiosPromise<CreateApiKey200Response> {
+            return localVarFp.createApiKey(createApiKeyRequest, options).then((request) => request(axios, basePath));
         },
         /**
          * Organizations are a way to separate different parts of your business within the same Tremendous account.  You can assign users in your Tremendous team as members to any organization. Users can be members of multiple organizations at once.  API keys belong to a single organization. The API key used in a request determines on behalf of which organization the request is carried out.  **Important note:** When creating an organization, you are required to either pass `with_api_key` or `copy_settings[user]` in the request body as `true`. This ensures that your new Organization can either be accessed via the API or the Dashboard. 
@@ -13424,12 +13451,13 @@ export class OrganizationsApi extends BaseAPI {
     /**
      * Creates a new API key. The API key used to make the request will remain active.  Created API keys are generated randomly and returned in the response. **You cannot retrieve them again.** 
      * @summary Create API key
+     * @param {CreateApiKeyRequest} [createApiKeyRequest] Optional settings for the new API key
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof OrganizationsApi
      */
-    public createApiKey(options?: RawAxiosRequestConfig) {
-        return OrganizationsApiFp(this.configuration).createApiKey(options).then((request) => request(this.axios, this.basePath));
+    public createApiKey(createApiKeyRequest?: CreateApiKeyRequest, options?: RawAxiosRequestConfig) {
+        return OrganizationsApiFp(this.configuration).createApiKey(createApiKeyRequest, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
