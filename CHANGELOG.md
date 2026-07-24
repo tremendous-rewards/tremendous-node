@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.16.0](https://github.com/tremendous-rewards/tremendous-node/compare/tremendous-v4.15.0...tremendous-v4.16.0) (2026-07-24)
+
+
+### Features
+
+* add `currency_code` to connected org creation ([de915a1](https://github.com/tremendous-rewards/tremendous-node/commit/de915a1f10902f011a5a84bc8d0bc509eedda6b8))
+
 ## [4.15.0](https://github.com/tremendous-rewards/tremendous-node/compare/tremendous-v4.14.0...tremendous-v4.15.0) (2026-07-23)
 
 
