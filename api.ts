@@ -838,6 +838,12 @@ export interface CreateConnectedOrganizationRequest {
      */
     'client_id': string;
     /**
+     * The currency used for the connected organization\'s balance. Supported values are `USD`, `EUR`, and `GBP`. Defaults to `USD` if omitted, `null`, or blank. 
+     * @type {string}
+     * @memberof CreateConnectedOrganizationRequest
+     */
+    'currency_code'?: string | null;
+    /**
      * 
      * @type {CreateConnectedOrganizationRequestKybPrefill}
      * @memberof CreateConnectedOrganizationRequest
@@ -10249,7 +10255,7 @@ export class ConnectedOrganizationMembersApi extends BaseAPI {
 export const ConnectedOrganizationsApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
-         * Create a connected organization.  Optionally pass a `kyb_prefill` object to forward KYB (Know Your Business) details you have already collected for the end client. When provided, these values prefill the end client\'s onboarding form; the end client still reviews, edits where needed, and submits the form. Every `kyb_prefill` field is optional, but any value provided is validated. Malformed KYB details (for example an unsupported `country_code` or a malformed `website_url`) return a `400`. 
+         * Create a connected organization.  Optionally pass `currency_code` to set the connected organization\'s balance currency. Supported values are `USD`, `EUR`, and `GBP`. If omitted, the balance currency defaults to `USD`.  Optionally pass a `kyb_prefill` object to forward KYB (Know Your Business) details you have already collected for the end client. When provided, these values prefill the end client\'s onboarding form; the end client still reviews, edits where needed, and submits the form. Every `kyb_prefill` field is optional, but any value provided is validated. Malformed KYB details (for example an unsupported `country_code` or a malformed `website_url`) return a `400`. 
          * @summary Create connected organization
          * @param {CreateConnectedOrganizationRequest} createConnectedOrganizationRequest Connected organization to create
          * @param {*} [options] Override http request option.
@@ -10419,7 +10425,7 @@ export const ConnectedOrganizationsApiFp = function(configuration?: Configuratio
     const localVarAxiosParamCreator = ConnectedOrganizationsApiAxiosParamCreator(configuration)
     return {
         /**
-         * Create a connected organization.  Optionally pass a `kyb_prefill` object to forward KYB (Know Your Business) details you have already collected for the end client. When provided, these values prefill the end client\'s onboarding form; the end client still reviews, edits where needed, and submits the form. Every `kyb_prefill` field is optional, but any value provided is validated. Malformed KYB details (for example an unsupported `country_code` or a malformed `website_url`) return a `400`. 
+         * Create a connected organization.  Optionally pass `currency_code` to set the connected organization\'s balance currency. Supported values are `USD`, `EUR`, and `GBP`. If omitted, the balance currency defaults to `USD`.  Optionally pass a `kyb_prefill` object to forward KYB (Know Your Business) details you have already collected for the end client. When provided, these values prefill the end client\'s onboarding form; the end client still reviews, edits where needed, and submits the form. Every `kyb_prefill` field is optional, but any value provided is validated. Malformed KYB details (for example an unsupported `country_code` or a malformed `website_url`) return a `400`. 
          * @summary Create connected organization
          * @param {CreateConnectedOrganizationRequest} createConnectedOrganizationRequest Connected organization to create
          * @param {*} [options] Override http request option.
@@ -10482,7 +10488,7 @@ export const ConnectedOrganizationsApiFactory = function (configuration?: Config
     const localVarFp = ConnectedOrganizationsApiFp(configuration)
     return {
         /**
-         * Create a connected organization.  Optionally pass a `kyb_prefill` object to forward KYB (Know Your Business) details you have already collected for the end client. When provided, these values prefill the end client\'s onboarding form; the end client still reviews, edits where needed, and submits the form. Every `kyb_prefill` field is optional, but any value provided is validated. Malformed KYB details (for example an unsupported `country_code` or a malformed `website_url`) return a `400`. 
+         * Create a connected organization.  Optionally pass `currency_code` to set the connected organization\'s balance currency. Supported values are `USD`, `EUR`, and `GBP`. If omitted, the balance currency defaults to `USD`.  Optionally pass a `kyb_prefill` object to forward KYB (Know Your Business) details you have already collected for the end client. When provided, these values prefill the end client\'s onboarding form; the end client still reviews, edits where needed, and submits the form. Every `kyb_prefill` field is optional, but any value provided is validated. Malformed KYB details (for example an unsupported `country_code` or a malformed `website_url`) return a `400`. 
          * @summary Create connected organization
          * @param {CreateConnectedOrganizationRequest} createConnectedOrganizationRequest Connected organization to create
          * @param {*} [options] Override http request option.
@@ -10533,7 +10539,7 @@ export const ConnectedOrganizationsApiFactory = function (configuration?: Config
  */
 export class ConnectedOrganizationsApi extends BaseAPI {
     /**
-     * Create a connected organization.  Optionally pass a `kyb_prefill` object to forward KYB (Know Your Business) details you have already collected for the end client. When provided, these values prefill the end client\'s onboarding form; the end client still reviews, edits where needed, and submits the form. Every `kyb_prefill` field is optional, but any value provided is validated. Malformed KYB details (for example an unsupported `country_code` or a malformed `website_url`) return a `400`. 
+     * Create a connected organization.  Optionally pass `currency_code` to set the connected organization\'s balance currency. Supported values are `USD`, `EUR`, and `GBP`. If omitted, the balance currency defaults to `USD`.  Optionally pass a `kyb_prefill` object to forward KYB (Know Your Business) details you have already collected for the end client. When provided, these values prefill the end client\'s onboarding form; the end client still reviews, edits where needed, and submits the form. Every `kyb_prefill` field is optional, but any value provided is validated. Malformed KYB details (for example an unsupported `country_code` or a malformed `website_url`) return a `400`. 
      * @summary Create connected organization
      * @param {CreateConnectedOrganizationRequest} createConnectedOrganizationRequest Connected organization to create
      * @param {*} [options] Override http request option.
