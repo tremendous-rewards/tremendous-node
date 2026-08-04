@@ -1,5 +1,14 @@
 # Changelog
 
+## [4.16.0](https://github.com/tremendous-rewards/tremendous-node/compare/tremendous-v4.15.0...tremendous-v4.16.0) (2026-07-31)
+
+
+### Features
+
+* add `currency_code` to connected org creation ([de915a1](https://github.com/tremendous-rewards/tremendous-node/commit/de915a1f10902f011a5a84bc8d0bc509eedda6b8))
+* add `INVOICE` and `INVOICE_THEN_BALANCE` as ([26cceb1](https://github.com/tremendous-rewards/tremendous-node/commit/26cceb1e87b25c3298368b03a94c47325d1d71cb))
+* support `INVOICE` keyword in funding source ([26cceb1](https://github.com/tremendous-rewards/tremendous-node/commit/26cceb1e87b25c3298368b03a94c47325d1d71cb))
+
 ## [4.15.0](https://github.com/tremendous-rewards/tremendous-node/compare/tremendous-v4.14.0...tremendous-v4.15.0) (2026-07-23)
 
 
