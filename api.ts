@@ -497,6 +497,62 @@ export type ConnectedOrganizationMemberMemberStatusEnum = typeof ConnectedOrgani
 /**
  * 
  * @export
+ * @interface ConnectedOrganizationMemberResponse
+ */
+export interface ConnectedOrganizationMemberResponse {
+    /**
+     * 
+     * @type {ConnectedOrganizationMemberResponseConnectedOrganizationMember}
+     * @memberof ConnectedOrganizationMemberResponse
+     */
+    'connected_organization_member': ConnectedOrganizationMemberResponseConnectedOrganizationMember;
+}
+/**
+ * 
+ * @export
+ * @interface ConnectedOrganizationMemberResponseConnectedOrganizationMember
+ */
+export interface ConnectedOrganizationMemberResponseConnectedOrganizationMember {
+    /**
+     * Tremendous\' identifier for the connected organization member.
+     * @type {string}
+     * @memberof ConnectedOrganizationMemberResponseConnectedOrganizationMember
+     */
+    'id': string;
+    /**
+     * The name associated with the user in your systems.
+     * @type {string}
+     * @memberof ConnectedOrganizationMemberResponseConnectedOrganizationMember
+     */
+    'external_name'?: string | null;
+    /**
+     * The email associated with the user in your systems.
+     * @type {string}
+     * @memberof ConnectedOrganizationMemberResponseConnectedOrganizationMember
+     */
+    'external_email'?: string | null;
+    /**
+     * Timestamp of when the connected organization member was created.
+     * @type {string}
+     * @memberof ConnectedOrganizationMemberResponseConnectedOrganizationMember
+     */
+    'created_at': string;
+    /**
+     * Tremendous\' identifier for the connected organization.
+     * @type {string}
+     * @memberof ConnectedOrganizationMemberResponseConnectedOrganizationMember
+     */
+    'connected_organization_id': string;
+    /**
+     * 
+     * @type {ConnectedOrganizationMemberMember}
+     * @memberof ConnectedOrganizationMemberResponseConnectedOrganizationMember
+     */
+    'member'?: ConnectedOrganizationMemberMember | null;
+}
+/**
+ * 
+ * @export
  * @interface ConnectedOrganizationMemberSession
  */
 export interface ConnectedOrganizationMemberSession {
@@ -534,6 +590,62 @@ export interface ConnectedOrganizationMemberSession {
      * Timestamp of when the session was created.
      * @type {string}
      * @memberof ConnectedOrganizationMemberSession
+     */
+    'created_at': string;
+}
+/**
+ * 
+ * @export
+ * @interface ConnectedOrganizationMemberSessionResponse
+ */
+export interface ConnectedOrganizationMemberSessionResponse {
+    /**
+     * 
+     * @type {ConnectedOrganizationMemberSessionResponseConnectedOrganizationMemberSession}
+     * @memberof ConnectedOrganizationMemberSessionResponse
+     */
+    'connected_organization_member_session': ConnectedOrganizationMemberSessionResponseConnectedOrganizationMemberSession;
+}
+/**
+ * 
+ * @export
+ * @interface ConnectedOrganizationMemberSessionResponseConnectedOrganizationMemberSession
+ */
+export interface ConnectedOrganizationMemberSessionResponseConnectedOrganizationMemberSession {
+    /**
+     * Tremendous\' identifier for the connected organization member.
+     * @type {string}
+     * @memberof ConnectedOrganizationMemberSessionResponseConnectedOrganizationMemberSession
+     */
+    'connected_organization_member_id': string;
+    /**
+     * The URL to start the \"Tremendous for Platforms\" flow.
+     * @type {string}
+     * @memberof ConnectedOrganizationMemberSessionResponseConnectedOrganizationMemberSession
+     */
+    'url': string;
+    /**
+     * The URL used for links that redirect the user back to your site when they\'ve completed their actions on Tremendous.
+     * @type {string}
+     * @memberof ConnectedOrganizationMemberSessionResponseConnectedOrganizationMemberSession
+     */
+    'return_url': string;
+    /**
+     * The opaque `state` value provided when the session was created, forwarded on the initial OAuth grant redirect. `null` when no value was set.
+     * @type {string}
+     * @memberof ConnectedOrganizationMemberSessionResponseConnectedOrganizationMemberSession
+     */
+    'state'?: string | null;
+    /**
+     * Timestamp of when the session will expire.
+     * @type {string}
+     * @memberof ConnectedOrganizationMemberSessionResponseConnectedOrganizationMemberSession
+     */
+    'expires_at': string;
+    /**
+     * Timestamp of when the session was created.
+     * @type {string}
+     * @memberof ConnectedOrganizationMemberSessionResponseConnectedOrganizationMemberSession
      */
     'created_at': string;
 }
@@ -589,6 +701,50 @@ export const ConnectedOrganizationOrganizationStatusEnum = {
 
 export type ConnectedOrganizationOrganizationStatusEnum = typeof ConnectedOrganizationOrganizationStatusEnum[keyof typeof ConnectedOrganizationOrganizationStatusEnum];
 
+/**
+ * 
+ * @export
+ * @interface ConnectedOrganizationResponse
+ */
+export interface ConnectedOrganizationResponse {
+    /**
+     * 
+     * @type {ConnectedOrganizationResponseConnectedOrganization}
+     * @memberof ConnectedOrganizationResponse
+     */
+    'connected_organization': ConnectedOrganizationResponseConnectedOrganization;
+}
+/**
+ * 
+ * @export
+ * @interface ConnectedOrganizationResponseConnectedOrganization
+ */
+export interface ConnectedOrganizationResponseConnectedOrganization {
+    /**
+     * Tremendous\' identifier for the connected organization.
+     * @type {string}
+     * @memberof ConnectedOrganizationResponseConnectedOrganization
+     */
+    'id': string;
+    /**
+     * Client ID of the OAuth app that is to be used by the platform once the integration is complete.
+     * @type {string}
+     * @memberof ConnectedOrganizationResponseConnectedOrganization
+     */
+    'client_id': string;
+    /**
+     * Timestamp of when the connected organization was created.
+     * @type {string}
+     * @memberof ConnectedOrganizationResponseConnectedOrganization
+     */
+    'created_at': string;
+    /**
+     * 
+     * @type {ConnectedOrganizationOrganization}
+     * @memberof ConnectedOrganizationResponseConnectedOrganization
+     */
+    'organization'?: ConnectedOrganizationOrganization | null;
+}
 /**
  * 
  * @export
@@ -898,6 +1054,12 @@ export interface CreateConnectedOrganizationRequestKybPrefill {
      * @memberof CreateConnectedOrganizationRequestKybPrefill
      */
     'address_1'?: string;
+    /**
+     * The second line of the company\'s street address (suite, unit, floor, etc.).
+     * @type {string}
+     * @memberof CreateConnectedOrganizationRequestKybPrefill
+     */
+    'address_2'?: string;
     /**
      * The company\'s city.
      * @type {string}
@@ -1211,7 +1373,7 @@ export interface CreateOrder200ResponseOrder {
      */
     'created_at': string;
     /**
-     * Execution status of a given order  <table>   <thead>     <tr>       <th>         Status       </th>       <th>         Description       </th>     </tr>   </thead>   <tbody>     <tr>       <td>         <code>           CANCELED         </code>       </td>       <td>         The order and all of its rewards were canceled.       </td>     </tr>     <tr>       <td>         <code>           OPEN         </code>       </td>       <td>         The order has been created, but hasn\'t yet been processed.       </td>     </tr>     <tr>       <td>         <code>           EXECUTED         </code>       </td>       <td>         The order has been executed. Payment has been handled and rewards are being delivered (if applicable).       </td>     </tr>     <tr>       <td>         <code>           FAILED         </code>       </td>       <td>         The order could not be processed due to an error. E.g. due to insufficient funds in the account.       </td>     </tr>     <tr>       <td>         <code>           PENDING APPROVAL         </code>       </td>       <td>         The order has been created but needs approval to be executed.       </td>     </tr>     <tr>       <td>         <code>           PENDING INTERNAL PAYMENT APPROVAL         </code>       </td>       <td>         The order has been created but it is under review and requires approval from our team.       </td>     </tr>     <tr>       <td>         <code>           PENDING SETTLEMENT         </code>       </td>       <td>         The order has been created but the funds are being held until the settlement window clears.       </td>     </tr>    </tbody> </table> 
+     * Execution status of a given order  <table>   <thead>     <tr>       <th>Status</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td><code>CANCELED</code></td>       <td>The order and all of its rewards were canceled.</td>     </tr>     <tr>       <td><code>OPEN</code></td>       <td>The order has been created, but hasn\'t yet been processed.</td>     </tr>     <tr>       <td><code>EXECUTED</code></td>       <td>The order has been executed. Payment has been handled and rewards are being delivered (if applicable).</td>     </tr>     <tr>       <td><code>FAILED</code></td>       <td>The order could not be processed due to an error. E.g. due to insufficient funds in the account.</td>     </tr>     <tr>       <td><code>PENDING APPROVAL</code></td>       <td>The order has been created but needs approval to be executed.</td>     </tr>     <tr>       <td><code>PENDING INTERNAL PAYMENT APPROVAL</code></td>       <td>The order has been created but it is under review and requires approval from our team.</td>     </tr>     <tr>       <td><code>PENDING SETTLEMENT</code></td>       <td>The order has been created but the funds are being held until the settlement window clears.</td>     </tr>   </tbody> </table> 
      * @type {string}
      * @memberof CreateOrder200ResponseOrder
      */
@@ -1715,6 +1877,80 @@ export interface CreateOrganizationRequestCopySettings {
 /**
  * 
  * @export
+ * @interface CreateOrganizationResponse
+ */
+export interface CreateOrganizationResponse {
+    /**
+     * 
+     * @type {CreateOrganizationResponseOrganization}
+     * @memberof CreateOrganizationResponse
+     */
+    'organization'?: CreateOrganizationResponseOrganization;
+}
+/**
+ * 
+ * @export
+ * @interface CreateOrganizationResponseOrganization
+ */
+export interface CreateOrganizationResponseOrganization {
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateOrganizationResponseOrganization
+     */
+    'id'?: string;
+    /**
+     * Name of the organization
+     * @type {string}
+     * @memberof CreateOrganizationResponseOrganization
+     */
+    'name': string;
+    /**
+     * URL of the website of that organization
+     * @type {string}
+     * @memberof CreateOrganizationResponseOrganization
+     */
+    'website': string;
+    /**
+     * Default value is `false`. Set to true to also generate an API key associated to the new organization.
+     * @type {boolean}
+     * @memberof CreateOrganizationResponseOrganization
+     */
+    'with_api_key'?: boolean;
+    /**
+     * 
+     * @type {CreateOrganizationRequestCopySettings}
+     * @memberof CreateOrganizationResponseOrganization
+     */
+    'copy_settings'?: CreateOrganizationRequestCopySettings;
+    /**
+     * Phone number of the organization. For non-US phone numbers, specify the country code (prefixed with +).
+     * @type {string}
+     * @memberof CreateOrganizationResponseOrganization
+     */
+    'phone'?: string | null;
+    /**
+     * Currency code for the new organization. Defaults to the current organization\'s currency if not provided.
+     * @type {string}
+     * @memberof CreateOrganizationResponseOrganization
+     */
+    'currency_code'?: string;
+    /**
+     * Timestamp of when the organization has been created. 
+     * @type {string}
+     * @memberof CreateOrganizationResponseOrganization
+     */
+    'created_at'?: string;
+    /**
+     * The API key for the created organization. This property is only returned when `api_key` is set to `true`. 
+     * @type {string}
+     * @memberof CreateOrganizationResponseOrganization
+     */
+    'api_key'?: string;
+}
+/**
+ * 
+ * @export
  * @interface CreateReport200Response
  */
 export interface CreateReport200Response {
@@ -2161,19 +2397,6 @@ export interface CustomField {
     'label'?: string;
 }
 /**
- * 
- * @export
- * @interface DeleteFraudRule200Response
- */
-export interface DeleteFraudRule200Response {
-    /**
-     * A description of the result
-     * @type {string}
-     * @memberof DeleteFraudRule200Response
-     */
-    'message': string;
-}
-/**
  * Details on how the reward is delivered to the recipient. 
  * @export
  * @interface DeliveryDetails
@@ -2602,10 +2825,10 @@ export interface FraudReview {
     'geo'?: ListFraudReviews200ResponseFraudReviewsInnerGeo;
     /**
      * 
-     * @type {OrderWithoutLinkRewardsInner}
+     * @type {RewardResponseReward}
      * @memberof FraudReview
      */
-    'reward'?: OrderWithoutLinkRewardsInner;
+    'reward'?: RewardResponseReward;
     /**
      * The name of the person who reviewed the reward, or `Automatic Review` if the reward was blocked automatically. Rewards can be automatically blocked if they remain in the flagged fraud queue for more than 30 days.  This field is only present if the status is not `flagged`. 
      * @type {string}
@@ -2737,10 +2960,10 @@ export interface FraudReviewBase {
     'geo'?: ListFraudReviews200ResponseFraudReviewsInnerGeo;
     /**
      * 
-     * @type {OrderWithoutLinkRewardsInner}
+     * @type {RewardResponseReward}
      * @memberof FraudReviewBase
      */
-    'reward'?: OrderWithoutLinkRewardsInner;
+    'reward'?: RewardResponseReward;
     /**
      * The name of the person who reviewed the reward, or `Automatic Review` if the reward was blocked automatically. Rewards can be automatically blocked if they remain in the flagged fraud queue for more than 30 days.  This field is only present if the status is not `flagged`. 
      * @type {string}
@@ -2878,10 +3101,10 @@ export interface FraudReviewListItem {
     'geo'?: ListFraudReviews200ResponseFraudReviewsInnerGeo;
     /**
      * 
-     * @type {OrderWithoutLinkRewardsInner}
+     * @type {RewardResponseReward}
      * @memberof FraudReviewListItem
      */
-    'reward'?: OrderWithoutLinkRewardsInner;
+    'reward'?: RewardResponseReward;
     /**
      * The name of the person who reviewed the reward, or `Automatic Review` if the reward was blocked automatically. Rewards can be automatically blocked if they remain in the flagged fraud queue for more than 30 days.  This field is only present if the status is not `flagged`. 
      * @type {string}
@@ -3085,44 +3308,6 @@ export interface FraudRule200Response {
      * @memberof FraudRule200Response
      */
     'message': string;
-}
-/**
- * 
- * @export
- * @interface FraudRule400Response
- */
-export interface FraudRule400Response {
-    /**
-     * HTTP status code of the response
-     * @type {number}
-     * @memberof FraudRule400Response
-     */
-    'status'?: number;
-    /**
-     * 
-     * @type {ListRewards401ResponseErrors}
-     * @memberof FraudRule400Response
-     */
-    'errors': ListRewards401ResponseErrors;
-}
-/**
- * 
- * @export
- * @interface FraudRule422Response
- */
-export interface FraudRule422Response {
-    /**
-     * HTTP status code of the response
-     * @type {number}
-     * @memberof FraudRule422Response
-     */
-    'status'?: number;
-    /**
-     * 
-     * @type {ListRewards401ResponseErrors}
-     * @memberof FraudRule422Response
-     */
-    'errors': ListRewards401ResponseErrors;
 }
 /**
  * 
@@ -3374,25 +3559,6 @@ export interface GenerateRewardLink200ResponseReward {
      * @memberof GenerateRewardLink200ResponseReward
      */
     'link'?: string;
-}
-/**
- * 
- * @export
- * @interface GenerateRewardLink403Response
- */
-export interface GenerateRewardLink403Response {
-    /**
-     * HTTP status code of the response
-     * @type {number}
-     * @memberof GenerateRewardLink403Response
-     */
-    'status'?: number;
-    /**
-     * 
-     * @type {ListRewards401ResponseErrors}
-     * @memberof GenerateRewardLink403Response
-     */
-    'errors': ListRewards401ResponseErrors;
 }
 /**
  * 
@@ -3761,44 +3927,6 @@ export interface InlineObject {
     'error'?: string;
 }
 /**
- * 
- * @export
- * @interface InlineObject1
- */
-export interface InlineObject1 {
-    /**
-     * 
-     * @type {InlineObject1Reward}
-     * @memberof InlineObject1
-     */
-    'reward': InlineObject1Reward;
-}
-/**
- * The redemption token for a reward.
- * @export
- * @interface InlineObject1Reward
- */
-export interface InlineObject1Reward {
-    /**
-     * Tremendous ID of the reward
-     * @type {string}
-     * @memberof InlineObject1Reward
-     */
-    'id'?: string;
-    /**
-     * The token to redeem the reward. 
-     * @type {string}
-     * @memberof InlineObject1Reward
-     */
-    'token'?: string;
-    /**
-     * Date the token expires
-     * @type {string}
-     * @memberof InlineObject1Reward
-     */
-    'expires_at'?: string;
-}
-/**
  * Invoices are instruments to fund your Tremendous account\'s balance.  Invoices can be created by your organization programatically. Once we receive your payment, the invoice is marked as `PAID` and we add the respective funds to your account\'s balance. 
  * @export
  * @interface Invoice
@@ -3895,6 +4023,117 @@ export const InvoiceStatusEnum = {
 } as const;
 
 export type InvoiceStatusEnum = typeof InvoiceStatusEnum[keyof typeof InvoiceStatusEnum];
+
+/**
+ * 
+ * @export
+ * @interface InvoiceResponse
+ */
+export interface InvoiceResponse {
+    /**
+     * 
+     * @type {InvoiceResponseInvoice}
+     * @memberof InvoiceResponse
+     */
+    'invoice': InvoiceResponseInvoice;
+}
+/**
+ * Invoices are instruments to fund your Tremendous account\'s balance.  Invoices can be created by your organization programatically. Once we receive your payment, the invoice is marked as `PAID` and we add the respective funds to your account\'s balance. 
+ * @export
+ * @interface InvoiceResponseInvoice
+ */
+export interface InvoiceResponseInvoice {
+    /**
+     * The invoice number
+     * @type {string}
+     * @memberof InvoiceResponseInvoice
+     */
+    'id': string;
+    /**
+     * Reference to the purchase order number within your organization
+     * @type {string}
+     * @memberof InvoiceResponseInvoice
+     */
+    'po_number'?: string | null;
+    /**
+     * Amount of the invoice
+     * @type {number}
+     * @memberof InvoiceResponseInvoice
+     */
+    'amount': number;
+    /**
+     * Currency of the invoice
+     * @type {string}
+     * @memberof InvoiceResponseInvoice
+     */
+    'currency_code'?: InvoiceResponseInvoiceCurrencyCodeEnum;
+    /**
+     * Deprecated: Use `currency_code` instead.
+     * @type {string}
+     * @memberof InvoiceResponseInvoice
+     * @deprecated
+     */
+    'currency'?: InvoiceResponseInvoiceCurrencyEnum;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof InvoiceResponseInvoice
+     */
+    'international'?: boolean;
+    /**
+     * Status of this invoice  <table>   <thead>     <tr>       <th>Status</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td><code>DELETED</code></td>       <td>Invoice has been deleted by your organization</td>     </tr>     <tr>       <td><code>PAID</code></td>       <td>Invoice has been paid by your organization</td>     </tr>     <tr>       <td><code>OPEN</code></td>       <td>Invoice has been created by your organization but has not been paid, yet</td>     </tr>   </tbody> </table> 
+     * @type {string}
+     * @memberof InvoiceResponseInvoice
+     */
+    'status': InvoiceResponseInvoiceStatusEnum;
+    /**
+     * List of orders related to the invoice (it doesn\'t apply to prefunding)
+     * @type {Array<string>}
+     * @memberof InvoiceResponseInvoice
+     */
+    'orders'?: Array<string>;
+    /**
+     * List of rewards related to the invoice (it doesn\'t apply to prefunding)
+     * @type {Array<string>}
+     * @memberof InvoiceResponseInvoice
+     */
+    'rewards'?: Array<string>;
+    /**
+     * Timestamp of when the invoice has been created. 
+     * @type {string}
+     * @memberof InvoiceResponseInvoice
+     */
+    'created_at': string;
+    /**
+     * Timestamp of when the invoice has been paid. 
+     * @type {string}
+     * @memberof InvoiceResponseInvoice
+     */
+    'paid_at': string | null;
+}
+
+export const InvoiceResponseInvoiceCurrencyCodeEnum = {
+    Usd: 'USD',
+    Eur: 'EUR',
+    Gbp: 'GBP'
+} as const;
+
+export type InvoiceResponseInvoiceCurrencyCodeEnum = typeof InvoiceResponseInvoiceCurrencyCodeEnum[keyof typeof InvoiceResponseInvoiceCurrencyCodeEnum];
+export const InvoiceResponseInvoiceCurrencyEnum = {
+    Usd: 'USD',
+    Eur: 'EUR',
+    Gbp: 'GBP'
+} as const;
+
+export type InvoiceResponseInvoiceCurrencyEnum = typeof InvoiceResponseInvoiceCurrencyEnum[keyof typeof InvoiceResponseInvoiceCurrencyEnum];
+export const InvoiceResponseInvoiceStatusEnum = {
+    Deleted: 'DELETED',
+    Paid: 'PAID',
+    Open: 'OPEN',
+    MarkedAsPaid: 'MARKED_AS_PAID'
+} as const;
+
+export type InvoiceResponseInvoiceStatusEnum = typeof InvoiceResponseInvoiceStatusEnum[keyof typeof InvoiceResponseInvoiceStatusEnum];
 
 /**
  * 
@@ -4976,11 +5215,18 @@ export interface ListFundingSources200ResponseFundingSourcesInnerMeta {
      */
     'interval'?: string | null;
     /**
-     * **Only available when `method` is set to `invoice` and `invoice_type` is `commercial`.**  Day of the week when commercial invoices are generated (\"0\"=Sunday, \"1\"=Monday, etc.). Returns `null` for pro forma invoices. 
+     * **Deprecated: Use `days_of_week` instead.**  **Only available when `method` is set to `invoice` and `invoice_type` is `commercial`.**  Day of the week when commercial invoices are generated (\"0\"=Sunday, \"1\"=Monday, etc.). Accounts with weekly commercial invoicing can have invoices generated on one or two days of the week. Returns the scheduled day when there is one day, and an empty string when there are two days and for non-weekly / pro forma invoices. 
      * @type {string}
      * @memberof ListFundingSources200ResponseFundingSourcesInnerMeta
+     * @deprecated
      */
     'day_of_week'?: string | null;
+    /**
+     * **Only available when `method` is set to `invoice` and `invoice_type` is `commercial`.**  Days of the week when commercial invoices are generated (\"0\"=Sunday, \"1\"=Monday, etc.). Accounts with weekly commercial invoicing can have invoices generated on one or two days of the week. Returns an empty array for non-weekly and for pro forma invoices. 
+     * @type {Array<string>}
+     * @memberof ListFundingSources200ResponseFundingSourcesInnerMeta
+     */
+    'days_of_week'?: Array<string>;
     /**
      * **Only available when `method` is set to `invoice`.**  Net payment terms in days (e.g., \"30\" for Net 30) 
      * @type {string}
@@ -5326,7 +5572,7 @@ export interface ListOrders200ResponseOrdersInner {
      */
     'created_at': string;
     /**
-     * Execution status of a given order  <table>   <thead>     <tr>       <th>         Status       </th>       <th>         Description       </th>     </tr>   </thead>   <tbody>     <tr>       <td>         <code>           CANCELED         </code>       </td>       <td>         The order and all of its rewards were canceled.       </td>     </tr>     <tr>       <td>         <code>           OPEN         </code>       </td>       <td>         The order has been created, but hasn\'t yet been processed.       </td>     </tr>     <tr>       <td>         <code>           EXECUTED         </code>       </td>       <td>         The order has been executed. Payment has been handled and rewards are being delivered (if applicable).       </td>     </tr>     <tr>       <td>         <code>           FAILED         </code>       </td>       <td>         The order could not be processed due to an error. E.g. due to insufficient funds in the account.       </td>     </tr>     <tr>       <td>         <code>           PENDING APPROVAL         </code>       </td>       <td>         The order has been created but needs approval to be executed.       </td>     </tr>     <tr>       <td>         <code>           PENDING INTERNAL PAYMENT APPROVAL         </code>       </td>       <td>         The order has been created but it is under review and requires approval from our team.       </td>     </tr>     <tr>       <td>         <code>           PENDING SETTLEMENT         </code>       </td>       <td>         The order has been created but the funds are being held until the settlement window clears.       </td>     </tr>    </tbody> </table> 
+     * Execution status of a given order  <table>   <thead>     <tr>       <th>Status</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td><code>CANCELED</code></td>       <td>The order and all of its rewards were canceled.</td>     </tr>     <tr>       <td><code>OPEN</code></td>       <td>The order has been created, but hasn\'t yet been processed.</td>     </tr>     <tr>       <td><code>EXECUTED</code></td>       <td>The order has been executed. Payment has been handled and rewards are being delivered (if applicable).</td>     </tr>     <tr>       <td><code>FAILED</code></td>       <td>The order could not be processed due to an error. E.g. due to insufficient funds in the account.</td>     </tr>     <tr>       <td><code>PENDING APPROVAL</code></td>       <td>The order has been created but needs approval to be executed.</td>     </tr>     <tr>       <td><code>PENDING INTERNAL PAYMENT APPROVAL</code></td>       <td>The order has been created but it is under review and requires approval from our team.</td>     </tr>     <tr>       <td><code>PENDING SETTLEMENT</code></td>       <td>The order has been created but the funds are being held until the settlement window clears.</td>     </tr>   </tbody> </table> 
      * @type {string}
      * @memberof ListOrders200ResponseOrdersInner
      */
@@ -6180,25 +6426,6 @@ export interface ListRewards401ResponseErrors {
 /**
  * 
  * @export
- * @interface ListRewards429Response
- */
-export interface ListRewards429Response {
-    /**
-     * HTTP status code of the response
-     * @type {number}
-     * @memberof ListRewards429Response
-     */
-    'status'?: number;
-    /**
-     * 
-     * @type {ListRewards401ResponseErrors}
-     * @memberof ListRewards429Response
-     */
-    'errors': ListRewards401ResponseErrors;
-}
-/**
- * 
- * @export
  * @interface ListRoles200Response
  */
 export interface ListRoles200Response {
@@ -6290,7 +6517,7 @@ export interface ListTopups200ResponseTopupsInner {
      */
     'funding_source_id'?: string;
     /**
-     * Status of the topup <table>   <thead>     <tr>       <th>         Status       </th>       <th>         Description       </th>     </tr>   </thead>   <tbody>     <tr>       <td>         <code>           created         </code>       </td>       <td>         The topup is processing (and may be under review).       </td>     </tr>     <tr>       <td>         <code>           partially_credited         </code>       </td>       <td>         Some funds have been credited to the balance. The remainder will be credited by <code>expected_settlement_at</code>.       </td>     </tr>     <tr>       <td>         <code>           fully_credited         </code>       </td>       <td>         All funds have been added to the balance.       </td>     </tr>     <tr>       <td>         <code>           reversed         </code>       </td>       <td>         The topup was credited, but then reversed due to a chargeback or ACH return.       </td>     </tr>     <tr>       <td>         <code>           rejected         </code>       </td>       <td>         The topup was rejected by an admin.       </td>     </tr>   </tbody> </table> 
+     * Status of the topup  <table>   <thead>     <tr>       <th>Status</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td><code>created</code></td>       <td>The topup is processing (and may be under review).</td>     </tr>     <tr>       <td><code>partially_credited</code></td>       <td>Some funds have been credited to the balance. The remainder will be credited by <code>expected_settlement_at</code>.</td>     </tr>     <tr>       <td><code>fully_credited</code></td>       <td>All funds have been added to the balance.</td>     </tr>     <tr>       <td><code>reversed</code></td>       <td>The topup was credited, but then reversed due to a chargeback or ACH return.</td>     </tr>     <tr>       <td><code>rejected</code></td>       <td>The topup was rejected by an admin.</td>     </tr>   </tbody> </table> 
      * @type {string}
      * @memberof ListTopups200ResponseTopupsInner
      */
@@ -6636,6 +6863,82 @@ export const MemberWithoutEventsStatusEnum = {
 export type MemberWithoutEventsStatusEnum = typeof MemberWithoutEventsStatusEnum[keyof typeof MemberWithoutEventsStatusEnum];
 
 /**
+ * 
+ * @export
+ * @interface MemberWithoutEventsResponse
+ */
+export interface MemberWithoutEventsResponse {
+    /**
+     * 
+     * @type {MemberWithoutEventsResponseMember}
+     * @memberof MemberWithoutEventsResponse
+     */
+    'member': MemberWithoutEventsResponseMember;
+}
+/**
+ * Each organization has one or more users that can access and manage that organization. These users are called members.  Members can take actions via the Tremendous web dashboard directly.  These actions include adding funding sources to the organization, creating Campaigns, and more. 
+ * @export
+ * @interface MemberWithoutEventsResponseMember
+ */
+export interface MemberWithoutEventsResponseMember {
+    /**
+     * 
+     * @type {string}
+     * @memberof MemberWithoutEventsResponseMember
+     */
+    'id': string;
+    /**
+     * Email address of the member
+     * @type {string}
+     * @memberof MemberWithoutEventsResponseMember
+     */
+    'email': string;
+    /**
+     * Full name of the member
+     * @type {string}
+     * @memberof MemberWithoutEventsResponseMember
+     */
+    'name': string | null;
+    /**
+     * Is this member currently active in the organization. If `false`, the member will not be able to access the organization. 
+     * @type {boolean}
+     * @memberof MemberWithoutEventsResponseMember
+     */
+    'active'?: boolean;
+    /**
+     * The role ID associated with the member within the organization. 
+     * @type {string}
+     * @memberof MemberWithoutEventsResponseMember
+     */
+    'role'?: string | null;
+    /**
+     * Current status of the member\'s account.  When creating a member it starts out in the status `INVITED`. As soon as that member open the invitation link and registers an account, the status switches to `REGISTERED`. 
+     * @type {string}
+     * @memberof MemberWithoutEventsResponseMember
+     */
+    'status': MemberWithoutEventsResponseMemberStatusEnum;
+    /**
+     * Timestamp when this member was created.  The `created_at` timestamp is **NOT** returned when retrieving a member (but is part of the response when listing or creating members). 
+     * @type {string}
+     * @memberof MemberWithoutEventsResponseMember
+     */
+    'created_at'?: string;
+    /**
+     * Timestamp when this member most recently logged into the dashboard of the organization associated with this API key. 
+     * @type {string}
+     * @memberof MemberWithoutEventsResponseMember
+     */
+    'last_login_at'?: string | null;
+}
+
+export const MemberWithoutEventsResponseMemberStatusEnum = {
+    Registered: 'REGISTERED',
+    Invited: 'INVITED'
+} as const;
+
+export type MemberWithoutEventsResponseMemberStatusEnum = typeof MemberWithoutEventsResponseMemberStatusEnum[keyof typeof MemberWithoutEventsResponseMemberStatusEnum];
+
+/**
  * An order wraps around the fulfilment of one or more rewards.
  * @export
  * @interface Order
@@ -6666,7 +6969,7 @@ export interface Order {
      */
     'created_at': string;
     /**
-     * Execution status of a given order  <table>   <thead>     <tr>       <th>         Status       </th>       <th>         Description       </th>     </tr>   </thead>   <tbody>     <tr>       <td>         <code>           CANCELED         </code>       </td>       <td>         The order and all of its rewards were canceled.       </td>     </tr>     <tr>       <td>         <code>           OPEN         </code>       </td>       <td>         The order has been created, but hasn\'t yet been processed.       </td>     </tr>     <tr>       <td>         <code>           EXECUTED         </code>       </td>       <td>         The order has been executed. Payment has been handled and rewards are being delivered (if applicable).       </td>     </tr>     <tr>       <td>         <code>           FAILED         </code>       </td>       <td>         The order could not be processed due to an error. E.g. due to insufficient funds in the account.       </td>     </tr>     <tr>       <td>         <code>           PENDING APPROVAL         </code>       </td>       <td>         The order has been created but needs approval to be executed.       </td>     </tr>     <tr>       <td>         <code>           PENDING INTERNAL PAYMENT APPROVAL         </code>       </td>       <td>         The order has been created but it is under review and requires approval from our team.       </td>     </tr>     <tr>       <td>         <code>           PENDING SETTLEMENT         </code>       </td>       <td>         The order has been created but the funds are being held until the settlement window clears.       </td>     </tr>    </tbody> </table> 
+     * Execution status of a given order  <table>   <thead>     <tr>       <th>Status</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td><code>CANCELED</code></td>       <td>The order and all of its rewards were canceled.</td>     </tr>     <tr>       <td><code>OPEN</code></td>       <td>The order has been created, but hasn\'t yet been processed.</td>     </tr>     <tr>       <td><code>EXECUTED</code></td>       <td>The order has been executed. Payment has been handled and rewards are being delivered (if applicable).</td>     </tr>     <tr>       <td><code>FAILED</code></td>       <td>The order could not be processed due to an error. E.g. due to insufficient funds in the account.</td>     </tr>     <tr>       <td><code>PENDING APPROVAL</code></td>       <td>The order has been created but needs approval to be executed.</td>     </tr>     <tr>       <td><code>PENDING INTERNAL PAYMENT APPROVAL</code></td>       <td>The order has been created but it is under review and requires approval from our team.</td>     </tr>     <tr>       <td><code>PENDING SETTLEMENT</code></td>       <td>The order has been created but the funds are being held until the settlement window clears.</td>     </tr>   </tbody> </table> 
      * @type {string}
      * @memberof Order
      */
@@ -6691,10 +6994,10 @@ export interface Order {
     'invoice_id'?: string;
     /**
      * 
-     * @type {Array<OrderWithoutLinkRewardsInner>}
+     * @type {Array<RewardResponseReward>}
      * @memberof Order
      */
-    'rewards'?: Array<OrderWithoutLinkRewardsInner>;
+    'rewards'?: Array<RewardResponseReward>;
 }
 
 export const OrderStatusEnum = {
@@ -6752,7 +7055,7 @@ export interface OrderBase {
      */
     'created_at': string;
     /**
-     * Execution status of a given order  <table>   <thead>     <tr>       <th>         Status       </th>       <th>         Description       </th>     </tr>   </thead>   <tbody>     <tr>       <td>         <code>           CANCELED         </code>       </td>       <td>         The order and all of its rewards were canceled.       </td>     </tr>     <tr>       <td>         <code>           OPEN         </code>       </td>       <td>         The order has been created, but hasn\'t yet been processed.       </td>     </tr>     <tr>       <td>         <code>           EXECUTED         </code>       </td>       <td>         The order has been executed. Payment has been handled and rewards are being delivered (if applicable).       </td>     </tr>     <tr>       <td>         <code>           FAILED         </code>       </td>       <td>         The order could not be processed due to an error. E.g. due to insufficient funds in the account.       </td>     </tr>     <tr>       <td>         <code>           PENDING APPROVAL         </code>       </td>       <td>         The order has been created but needs approval to be executed.       </td>     </tr>     <tr>       <td>         <code>           PENDING INTERNAL PAYMENT APPROVAL         </code>       </td>       <td>         The order has been created but it is under review and requires approval from our team.       </td>     </tr>     <tr>       <td>         <code>           PENDING SETTLEMENT         </code>       </td>       <td>         The order has been created but the funds are being held until the settlement window clears.       </td>     </tr>    </tbody> </table> 
+     * Execution status of a given order  <table>   <thead>     <tr>       <th>Status</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td><code>CANCELED</code></td>       <td>The order and all of its rewards were canceled.</td>     </tr>     <tr>       <td><code>OPEN</code></td>       <td>The order has been created, but hasn\'t yet been processed.</td>     </tr>     <tr>       <td><code>EXECUTED</code></td>       <td>The order has been executed. Payment has been handled and rewards are being delivered (if applicable).</td>     </tr>     <tr>       <td><code>FAILED</code></td>       <td>The order could not be processed due to an error. E.g. due to insufficient funds in the account.</td>     </tr>     <tr>       <td><code>PENDING APPROVAL</code></td>       <td>The order has been created but needs approval to be executed.</td>     </tr>     <tr>       <td><code>PENDING INTERNAL PAYMENT APPROVAL</code></td>       <td>The order has been created but it is under review and requires approval from our team.</td>     </tr>     <tr>       <td><code>PENDING SETTLEMENT</code></td>       <td>The order has been created but the funds are being held until the settlement window clears.</td>     </tr>   </tbody> </table> 
      * @type {string}
      * @memberof OrderBase
      */
@@ -6845,7 +7148,7 @@ export interface OrderBasePayment {
     'refund'?: PaymentDetailsRefund;
 }
 /**
- * Execution status of a given order  <table>   <thead>     <tr>       <th>         Status       </th>       <th>         Description       </th>     </tr>   </thead>   <tbody>     <tr>       <td>         <code>           CANCELED         </code>       </td>       <td>         The order and all of its rewards were canceled.       </td>     </tr>     <tr>       <td>         <code>           OPEN         </code>       </td>       <td>         The order has been created, but hasn\'t yet been processed.       </td>     </tr>     <tr>       <td>         <code>           EXECUTED         </code>       </td>       <td>         The order has been executed. Payment has been handled and rewards are being delivered (if applicable).       </td>     </tr>     <tr>       <td>         <code>           FAILED         </code>       </td>       <td>         The order could not be processed due to an error. E.g. due to insufficient funds in the account.       </td>     </tr>     <tr>       <td>         <code>           PENDING APPROVAL         </code>       </td>       <td>         The order has been created but needs approval to be executed.       </td>     </tr>     <tr>       <td>         <code>           PENDING INTERNAL PAYMENT APPROVAL         </code>       </td>       <td>         The order has been created but it is under review and requires approval from our team.       </td>     </tr>     <tr>       <td>         <code>           PENDING SETTLEMENT         </code>       </td>       <td>         The order has been created but the funds are being held until the settlement window clears.       </td>     </tr>    </tbody> </table> 
+ * Execution status of a given order  <table>   <thead>     <tr>       <th>Status</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td><code>CANCELED</code></td>       <td>The order and all of its rewards were canceled.</td>     </tr>     <tr>       <td><code>OPEN</code></td>       <td>The order has been created, but hasn\'t yet been processed.</td>     </tr>     <tr>       <td><code>EXECUTED</code></td>       <td>The order has been executed. Payment has been handled and rewards are being delivered (if applicable).</td>     </tr>     <tr>       <td><code>FAILED</code></td>       <td>The order could not be processed due to an error. E.g. due to insufficient funds in the account.</td>     </tr>     <tr>       <td><code>PENDING APPROVAL</code></td>       <td>The order has been created but needs approval to be executed.</td>     </tr>     <tr>       <td><code>PENDING INTERNAL PAYMENT APPROVAL</code></td>       <td>The order has been created but it is under review and requires approval from our team.</td>     </tr>     <tr>       <td><code>PENDING SETTLEMENT</code></td>       <td>The order has been created but the funds are being held until the settlement window clears.</td>     </tr>   </tbody> </table> 
  * @export
  * @enum {string}
  */
@@ -6894,7 +7197,7 @@ export interface OrderWithLink {
      */
     'created_at': string;
     /**
-     * Execution status of a given order  <table>   <thead>     <tr>       <th>         Status       </th>       <th>         Description       </th>     </tr>   </thead>   <tbody>     <tr>       <td>         <code>           CANCELED         </code>       </td>       <td>         The order and all of its rewards were canceled.       </td>     </tr>     <tr>       <td>         <code>           OPEN         </code>       </td>       <td>         The order has been created, but hasn\'t yet been processed.       </td>     </tr>     <tr>       <td>         <code>           EXECUTED         </code>       </td>       <td>         The order has been executed. Payment has been handled and rewards are being delivered (if applicable).       </td>     </tr>     <tr>       <td>         <code>           FAILED         </code>       </td>       <td>         The order could not be processed due to an error. E.g. due to insufficient funds in the account.       </td>     </tr>     <tr>       <td>         <code>           PENDING APPROVAL         </code>       </td>       <td>         The order has been created but needs approval to be executed.       </td>     </tr>     <tr>       <td>         <code>           PENDING INTERNAL PAYMENT APPROVAL         </code>       </td>       <td>         The order has been created but it is under review and requires approval from our team.       </td>     </tr>     <tr>       <td>         <code>           PENDING SETTLEMENT         </code>       </td>       <td>         The order has been created but the funds are being held until the settlement window clears.       </td>     </tr>    </tbody> </table> 
+     * Execution status of a given order  <table>   <thead>     <tr>       <th>Status</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td><code>CANCELED</code></td>       <td>The order and all of its rewards were canceled.</td>     </tr>     <tr>       <td><code>OPEN</code></td>       <td>The order has been created, but hasn\'t yet been processed.</td>     </tr>     <tr>       <td><code>EXECUTED</code></td>       <td>The order has been executed. Payment has been handled and rewards are being delivered (if applicable).</td>     </tr>     <tr>       <td><code>FAILED</code></td>       <td>The order could not be processed due to an error. E.g. due to insufficient funds in the account.</td>     </tr>     <tr>       <td><code>PENDING APPROVAL</code></td>       <td>The order has been created but needs approval to be executed.</td>     </tr>     <tr>       <td><code>PENDING INTERNAL PAYMENT APPROVAL</code></td>       <td>The order has been created but it is under review and requires approval from our team.</td>     </tr>     <tr>       <td><code>PENDING SETTLEMENT</code></td>       <td>The order has been created but the funds are being held until the settlement window clears.</td>     </tr>   </tbody> </table> 
      * @type {string}
      * @memberof OrderWithLink
      */
@@ -7053,7 +7356,7 @@ export interface OrderWithoutLink {
      */
     'created_at': string;
     /**
-     * Execution status of a given order  <table>   <thead>     <tr>       <th>         Status       </th>       <th>         Description       </th>     </tr>   </thead>   <tbody>     <tr>       <td>         <code>           CANCELED         </code>       </td>       <td>         The order and all of its rewards were canceled.       </td>     </tr>     <tr>       <td>         <code>           OPEN         </code>       </td>       <td>         The order has been created, but hasn\'t yet been processed.       </td>     </tr>     <tr>       <td>         <code>           EXECUTED         </code>       </td>       <td>         The order has been executed. Payment has been handled and rewards are being delivered (if applicable).       </td>     </tr>     <tr>       <td>         <code>           FAILED         </code>       </td>       <td>         The order could not be processed due to an error. E.g. due to insufficient funds in the account.       </td>     </tr>     <tr>       <td>         <code>           PENDING APPROVAL         </code>       </td>       <td>         The order has been created but needs approval to be executed.       </td>     </tr>     <tr>       <td>         <code>           PENDING INTERNAL PAYMENT APPROVAL         </code>       </td>       <td>         The order has been created but it is under review and requires approval from our team.       </td>     </tr>     <tr>       <td>         <code>           PENDING SETTLEMENT         </code>       </td>       <td>         The order has been created but the funds are being held until the settlement window clears.       </td>     </tr>    </tbody> </table> 
+     * Execution status of a given order  <table>   <thead>     <tr>       <th>Status</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td><code>CANCELED</code></td>       <td>The order and all of its rewards were canceled.</td>     </tr>     <tr>       <td><code>OPEN</code></td>       <td>The order has been created, but hasn\'t yet been processed.</td>     </tr>     <tr>       <td><code>EXECUTED</code></td>       <td>The order has been executed. Payment has been handled and rewards are being delivered (if applicable).</td>     </tr>     <tr>       <td><code>FAILED</code></td>       <td>The order could not be processed due to an error. E.g. due to insufficient funds in the account.</td>     </tr>     <tr>       <td><code>PENDING APPROVAL</code></td>       <td>The order has been created but needs approval to be executed.</td>     </tr>     <tr>       <td><code>PENDING INTERNAL PAYMENT APPROVAL</code></td>       <td>The order has been created but it is under review and requires approval from our team.</td>     </tr>     <tr>       <td><code>PENDING SETTLEMENT</code></td>       <td>The order has been created but the funds are being held until the settlement window clears.</td>     </tr>   </tbody> </table> 
      * @type {string}
      * @memberof OrderWithoutLink
      */
@@ -7078,10 +7381,10 @@ export interface OrderWithoutLink {
     'invoice_id'?: string;
     /**
      * 
-     * @type {Array<OrderWithoutLinkRewardsInner>}
+     * @type {Array<RewardResponseReward>}
      * @memberof OrderWithoutLink
      */
-    'rewards'?: Array<OrderWithoutLinkRewardsInner>;
+    'rewards'?: Array<RewardResponseReward>;
 }
 
 export const OrderWithoutLinkStatusEnum = {
@@ -7108,79 +7411,6 @@ export const OrderWithoutLinkChannelEnum = {
 
 export type OrderWithoutLinkChannelEnum = typeof OrderWithoutLinkChannelEnum[keyof typeof OrderWithoutLinkChannelEnum];
 
-/**
- * A single reward, sent to a recipient. A reward is always part of an order.  Either `products` or `campaign_id` must be specified. 
- * @export
- * @interface OrderWithoutLinkRewardsInner
- */
-export interface OrderWithoutLinkRewardsInner {
-    /**
-     * Tremendous ID of the reward
-     * @type {string}
-     * @memberof OrderWithoutLinkRewardsInner
-     */
-    'id'?: string;
-    /**
-     * Tremendous ID of the order this reward is part of.
-     * @type {string}
-     * @memberof OrderWithoutLinkRewardsInner
-     */
-    'order_id'?: string;
-    /**
-     * Date the reward was created
-     * @type {string}
-     * @memberof OrderWithoutLinkRewardsInner
-     */
-    'created_at'?: string;
-    /**
-     * Expiration date of the reward. If null, the reward does not expire.
-     * @type {string}
-     * @memberof OrderWithoutLinkRewardsInner
-     */
-    'expires_at'?: string | null;
-    /**
-     * ID of the campaign in your account, that defines the available products (different gift cards, charity, etc.) that the recipient can choose from. 
-     * @type {string}
-     * @memberof OrderWithoutLinkRewardsInner
-     */
-    'campaign_id'?: string | null;
-    /**
-     * List of IDs of product (different gift cards, charity, etc.) that will be available to the recipient to choose from.  Providing a `products` array will override the products made available by the campaign specified using the `campaign_id` property unless the `products` array is empty. It will _not_ override other campaign attributes, like the message and customization of the look and feel. 
-     * @type {Array<string>}
-     * @memberof OrderWithoutLinkRewardsInner
-     */
-    'products'?: Array<string>;
-    /**
-     * 
-     * @type {ListRewards200ResponseRewardsInnerValue}
-     * @memberof OrderWithoutLinkRewardsInner
-     */
-    'value'?: ListRewards200ResponseRewardsInnerValue;
-    /**
-     * 
-     * @type {ListRewards200ResponseRewardsInnerRecipient}
-     * @memberof OrderWithoutLinkRewardsInner
-     */
-    'recipient'?: ListRewards200ResponseRewardsInnerRecipient;
-    /**
-     * Timestamp of reward delivery within the next year. Note that if date-time is provided, the time values will be ignored.
-     * @type {string}
-     * @memberof OrderWithoutLinkRewardsInner
-     */
-    'deliver_at'?: string;
-    /**
-     * 
-     * @type {Array<RewardBaseCustomFieldsInner>}
-     * @memberof OrderWithoutLinkRewardsInner
-     */
-    'custom_fields'?: Array<RewardBaseCustomFieldsInner>;
-    /**
-     * 
-     * @type {RewardWithoutLinkDelivery}
-     * @memberof OrderWithoutLinkRewardsInner
-     */
-    'delivery'?: RewardWithoutLinkDelivery;
-}
 /**
  * Organizations are a way to separate different parts of your business within the same Tremendous account. Your root Tremendous account is an organization itself and can have multiple sub-organizations.  You can assign users in your Tremendous team as members to any organization. Users can be members of multiple organizations at once.  Each organizations can have it\'s own API key. 
  * @export
@@ -7232,6 +7462,71 @@ export const OrganizationStatusEnum = {
 } as const;
 
 export type OrganizationStatusEnum = typeof OrganizationStatusEnum[keyof typeof OrganizationStatusEnum];
+
+/**
+ * 
+ * @export
+ * @interface OrganizationResponse
+ */
+export interface OrganizationResponse {
+    /**
+     * 
+     * @type {OrganizationResponseOrganization}
+     * @memberof OrganizationResponse
+     */
+    'organization'?: OrganizationResponseOrganization;
+}
+/**
+ * Organizations are a way to separate different parts of your business within the same Tremendous account. Your root Tremendous account is an organization itself and can have multiple sub-organizations.  You can assign users in your Tremendous team as members to any organization. Users can be members of multiple organizations at once.  Each organizations can have it\'s own API key. 
+ * @export
+ * @interface OrganizationResponseOrganization
+ */
+export interface OrganizationResponseOrganization {
+    /**
+     * 
+     * @type {string}
+     * @memberof OrganizationResponseOrganization
+     */
+    'id'?: string;
+    /**
+     * Name of the organization
+     * @type {string}
+     * @memberof OrganizationResponseOrganization
+     */
+    'name': string;
+    /**
+     * URL of the website of that organization
+     * @type {string}
+     * @memberof OrganizationResponseOrganization
+     */
+    'website': string;
+    /**
+     * Currency used for this organization\'s balances, orders, and transactions.
+     * @type {string}
+     * @memberof OrganizationResponseOrganization
+     */
+    'currency_code'?: string;
+    /**
+     * Status of the organization. Organizations need to be approved to be able to use them to send out rewards.
+     * @type {string}
+     * @memberof OrganizationResponseOrganization
+     */
+    'status'?: OrganizationResponseOrganizationStatusEnum;
+    /**
+     * Timestamp of when the organization has been created.  *This field is only returned when creating an organization.* It is not returned anymore when retrieving or listing organizations. 
+     * @type {string}
+     * @memberof OrganizationResponseOrganization
+     */
+    'created_at'?: string;
+}
+
+export const OrganizationResponseOrganizationStatusEnum = {
+    Pending: 'PENDING',
+    Approved: 'APPROVED',
+    Rejected: 'REJECTED'
+} as const;
+
+export type OrganizationResponseOrganizationStatusEnum = typeof OrganizationResponseOrganizationStatusEnum[keyof typeof OrganizationResponseOrganizationStatusEnum];
 
 /**
  * 
@@ -7701,21 +7996,21 @@ export type ReportStatusEnum = typeof ReportStatusEnum[keyof typeof ReportStatus
 /**
  * 
  * @export
- * @interface ResendReward422Response
+ * @interface ReportResponse
  */
-export interface ResendReward422Response {
-    /**
-     * HTTP status code of the response
-     * @type {number}
-     * @memberof ResendReward422Response
-     */
-    'status'?: number;
+export interface ReportResponse {
     /**
      * 
-     * @type {ListRewards401ResponseErrors}
-     * @memberof ResendReward422Response
+     * @type {CreateReport200ResponseReport}
+     * @memberof ReportResponse
      */
-    'errors': ListRewards401ResponseErrors;
+    'report': CreateReport200ResponseReport;
+    /**
+     * Report status message
+     * @type {string}
+     * @memberof ReportResponse
+     */
+    'message'?: string;
 }
 /**
  * 
@@ -8179,6 +8474,124 @@ export interface RewardLink {
     'link'?: string;
 }
 /**
+ * 
+ * @export
+ * @interface RewardLinkResponse
+ */
+export interface RewardLinkResponse {
+    /**
+     * 
+     * @type {RewardLinkResponseReward}
+     * @memberof RewardLinkResponse
+     */
+    'reward': RewardLinkResponseReward;
+}
+/**
+ * The redemption link for a reward.
+ * @export
+ * @interface RewardLinkResponseReward
+ */
+export interface RewardLinkResponseReward {
+    /**
+     * Tremendous ID of the reward
+     * @type {string}
+     * @memberof RewardLinkResponseReward
+     */
+    'id'?: string;
+    /**
+     * Link to redeem the reward at. You need to deliver this link to the recipient. 
+     * @type {string}
+     * @memberof RewardLinkResponseReward
+     */
+    'link'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface RewardResponse
+ */
+export interface RewardResponse {
+    /**
+     * 
+     * @type {RewardResponseReward}
+     * @memberof RewardResponse
+     */
+    'reward': RewardResponseReward;
+}
+/**
+ * A single reward, sent to a recipient. A reward is always part of an order.  Either `products` or `campaign_id` must be specified. 
+ * @export
+ * @interface RewardResponseReward
+ */
+export interface RewardResponseReward {
+    /**
+     * Tremendous ID of the reward
+     * @type {string}
+     * @memberof RewardResponseReward
+     */
+    'id'?: string;
+    /**
+     * Tremendous ID of the order this reward is part of.
+     * @type {string}
+     * @memberof RewardResponseReward
+     */
+    'order_id'?: string;
+    /**
+     * Date the reward was created
+     * @type {string}
+     * @memberof RewardResponseReward
+     */
+    'created_at'?: string;
+    /**
+     * Expiration date of the reward. If null, the reward does not expire.
+     * @type {string}
+     * @memberof RewardResponseReward
+     */
+    'expires_at'?: string | null;
+    /**
+     * ID of the campaign in your account, that defines the available products (different gift cards, charity, etc.) that the recipient can choose from. 
+     * @type {string}
+     * @memberof RewardResponseReward
+     */
+    'campaign_id'?: string | null;
+    /**
+     * List of IDs of product (different gift cards, charity, etc.) that will be available to the recipient to choose from.  Providing a `products` array will override the products made available by the campaign specified using the `campaign_id` property unless the `products` array is empty. It will _not_ override other campaign attributes, like the message and customization of the look and feel. 
+     * @type {Array<string>}
+     * @memberof RewardResponseReward
+     */
+    'products'?: Array<string>;
+    /**
+     * 
+     * @type {ListRewards200ResponseRewardsInnerValue}
+     * @memberof RewardResponseReward
+     */
+    'value'?: ListRewards200ResponseRewardsInnerValue;
+    /**
+     * 
+     * @type {ListRewards200ResponseRewardsInnerRecipient}
+     * @memberof RewardResponseReward
+     */
+    'recipient'?: ListRewards200ResponseRewardsInnerRecipient;
+    /**
+     * Timestamp of reward delivery within the next year. Note that if date-time is provided, the time values will be ignored.
+     * @type {string}
+     * @memberof RewardResponseReward
+     */
+    'deliver_at'?: string;
+    /**
+     * 
+     * @type {Array<RewardBaseCustomFieldsInner>}
+     * @memberof RewardResponseReward
+     */
+    'custom_fields'?: Array<RewardBaseCustomFieldsInner>;
+    /**
+     * 
+     * @type {RewardWithoutLinkDelivery}
+     * @memberof RewardResponseReward
+     */
+    'delivery'?: RewardWithoutLinkDelivery;
+}
+/**
  * The redemption token for a reward.
  * @export
  * @interface RewardToken
@@ -8200,6 +8613,44 @@ export interface RewardToken {
      * Date the token expires
      * @type {string}
      * @memberof RewardToken
+     */
+    'expires_at'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface RewardTokenResponse
+ */
+export interface RewardTokenResponse {
+    /**
+     * 
+     * @type {RewardTokenResponseReward}
+     * @memberof RewardTokenResponse
+     */
+    'reward': RewardTokenResponseReward;
+}
+/**
+ * The redemption token for a reward.
+ * @export
+ * @interface RewardTokenResponseReward
+ */
+export interface RewardTokenResponseReward {
+    /**
+     * Tremendous ID of the reward
+     * @type {string}
+     * @memberof RewardTokenResponseReward
+     */
+    'id'?: string;
+    /**
+     * The token to redeem the reward. 
+     * @type {string}
+     * @memberof RewardTokenResponseReward
+     */
+    'token'?: string;
+    /**
+     * Date the token expires
+     * @type {string}
+     * @memberof RewardTokenResponseReward
      */
     'expires_at'?: string;
 }
@@ -8810,7 +9261,7 @@ export interface SingleRewardOrderWithLinkOrder {
      */
     'created_at': string;
     /**
-     * Execution status of a given order  <table>   <thead>     <tr>       <th>         Status       </th>       <th>         Description       </th>     </tr>   </thead>   <tbody>     <tr>       <td>         <code>           CANCELED         </code>       </td>       <td>         The order and all of its rewards were canceled.       </td>     </tr>     <tr>       <td>         <code>           OPEN         </code>       </td>       <td>         The order has been created, but hasn\'t yet been processed.       </td>     </tr>     <tr>       <td>         <code>           EXECUTED         </code>       </td>       <td>         The order has been executed. Payment has been handled and rewards are being delivered (if applicable).       </td>     </tr>     <tr>       <td>         <code>           FAILED         </code>       </td>       <td>         The order could not be processed due to an error. E.g. due to insufficient funds in the account.       </td>     </tr>     <tr>       <td>         <code>           PENDING APPROVAL         </code>       </td>       <td>         The order has been created but needs approval to be executed.       </td>     </tr>     <tr>       <td>         <code>           PENDING INTERNAL PAYMENT APPROVAL         </code>       </td>       <td>         The order has been created but it is under review and requires approval from our team.       </td>     </tr>     <tr>       <td>         <code>           PENDING SETTLEMENT         </code>       </td>       <td>         The order has been created but the funds are being held until the settlement window clears.       </td>     </tr>    </tbody> </table> 
+     * Execution status of a given order  <table>   <thead>     <tr>       <th>Status</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td><code>CANCELED</code></td>       <td>The order and all of its rewards were canceled.</td>     </tr>     <tr>       <td><code>OPEN</code></td>       <td>The order has been created, but hasn\'t yet been processed.</td>     </tr>     <tr>       <td><code>EXECUTED</code></td>       <td>The order has been executed. Payment has been handled and rewards are being delivered (if applicable).</td>     </tr>     <tr>       <td><code>FAILED</code></td>       <td>The order could not be processed due to an error. E.g. due to insufficient funds in the account.</td>     </tr>     <tr>       <td><code>PENDING APPROVAL</code></td>       <td>The order has been created but needs approval to be executed.</td>     </tr>     <tr>       <td><code>PENDING INTERNAL PAYMENT APPROVAL</code></td>       <td>The order has been created but it is under review and requires approval from our team.</td>     </tr>     <tr>       <td><code>PENDING SETTLEMENT</code></td>       <td>The order has been created but the funds are being held until the settlement window clears.</td>     </tr>   </tbody> </table> 
      * @type {string}
      * @memberof SingleRewardOrderWithLinkOrder
      */
@@ -8909,7 +9360,7 @@ export interface SingleRewardOrderWithoutLinkOrder {
      */
     'created_at': string;
     /**
-     * Execution status of a given order  <table>   <thead>     <tr>       <th>         Status       </th>       <th>         Description       </th>     </tr>   </thead>   <tbody>     <tr>       <td>         <code>           CANCELED         </code>       </td>       <td>         The order and all of its rewards were canceled.       </td>     </tr>     <tr>       <td>         <code>           OPEN         </code>       </td>       <td>         The order has been created, but hasn\'t yet been processed.       </td>     </tr>     <tr>       <td>         <code>           EXECUTED         </code>       </td>       <td>         The order has been executed. Payment has been handled and rewards are being delivered (if applicable).       </td>     </tr>     <tr>       <td>         <code>           FAILED         </code>       </td>       <td>         The order could not be processed due to an error. E.g. due to insufficient funds in the account.       </td>     </tr>     <tr>       <td>         <code>           PENDING APPROVAL         </code>       </td>       <td>         The order has been created but needs approval to be executed.       </td>     </tr>     <tr>       <td>         <code>           PENDING INTERNAL PAYMENT APPROVAL         </code>       </td>       <td>         The order has been created but it is under review and requires approval from our team.       </td>     </tr>     <tr>       <td>         <code>           PENDING SETTLEMENT         </code>       </td>       <td>         The order has been created but the funds are being held until the settlement window clears.       </td>     </tr>    </tbody> </table> 
+     * Execution status of a given order  <table>   <thead>     <tr>       <th>Status</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td><code>CANCELED</code></td>       <td>The order and all of its rewards were canceled.</td>     </tr>     <tr>       <td><code>OPEN</code></td>       <td>The order has been created, but hasn\'t yet been processed.</td>     </tr>     <tr>       <td><code>EXECUTED</code></td>       <td>The order has been executed. Payment has been handled and rewards are being delivered (if applicable).</td>     </tr>     <tr>       <td><code>FAILED</code></td>       <td>The order could not be processed due to an error. E.g. due to insufficient funds in the account.</td>     </tr>     <tr>       <td><code>PENDING APPROVAL</code></td>       <td>The order has been created but needs approval to be executed.</td>     </tr>     <tr>       <td><code>PENDING INTERNAL PAYMENT APPROVAL</code></td>       <td>The order has been created but it is under review and requires approval from our team.</td>     </tr>     <tr>       <td><code>PENDING SETTLEMENT</code></td>       <td>The order has been created but the funds are being held until the settlement window clears.</td>     </tr>   </tbody> </table> 
      * @type {string}
      * @memberof SingleRewardOrderWithoutLinkOrder
      */
@@ -8934,10 +9385,10 @@ export interface SingleRewardOrderWithoutLinkOrder {
     'invoice_id'?: string;
     /**
      * 
-     * @type {Array<OrderWithoutLinkRewardsInner>}
+     * @type {Array<RewardResponseReward>}
      * @memberof SingleRewardOrderWithoutLinkOrder
      */
-    'rewards'?: Array<OrderWithoutLinkRewardsInner>;
+    'rewards'?: Array<RewardResponseReward>;
 }
 
 export const SingleRewardOrderWithoutLinkOrderStatusEnum = {
@@ -9001,7 +9452,7 @@ export interface Topup {
      */
     'funding_source_id'?: string;
     /**
-     * Status of the topup <table>   <thead>     <tr>       <th>         Status       </th>       <th>         Description       </th>     </tr>   </thead>   <tbody>     <tr>       <td>         <code>           created         </code>       </td>       <td>         The topup is processing (and may be under review).       </td>     </tr>     <tr>       <td>         <code>           partially_credited         </code>       </td>       <td>         Some funds have been credited to the balance. The remainder will be credited by <code>expected_settlement_at</code>.       </td>     </tr>     <tr>       <td>         <code>           fully_credited         </code>       </td>       <td>         All funds have been added to the balance.       </td>     </tr>     <tr>       <td>         <code>           reversed         </code>       </td>       <td>         The topup was credited, but then reversed due to a chargeback or ACH return.       </td>     </tr>     <tr>       <td>         <code>           rejected         </code>       </td>       <td>         The topup was rejected by an admin.       </td>     </tr>   </tbody> </table> 
+     * Status of the topup  <table>   <thead>     <tr>       <th>Status</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td><code>created</code></td>       <td>The topup is processing (and may be under review).</td>     </tr>     <tr>       <td><code>partially_credited</code></td>       <td>Some funds have been credited to the balance. The remainder will be credited by <code>expected_settlement_at</code>.</td>     </tr>     <tr>       <td><code>fully_credited</code></td>       <td>All funds have been added to the balance.</td>     </tr>     <tr>       <td><code>reversed</code></td>       <td>The topup was credited, but then reversed due to a chargeback or ACH return.</td>     </tr>     <tr>       <td><code>rejected</code></td>       <td>The topup was rejected by an admin.</td>     </tr>   </tbody> </table> 
      * @type {string}
      * @memberof Topup
      */
@@ -9085,6 +9536,19 @@ export interface TopupCreateRequest {
      * @memberof TopupCreateRequest
      */
     'amount': number;
+}
+/**
+ * 
+ * @export
+ * @interface TopupResponse
+ */
+export interface TopupResponse {
+    /**
+     * 
+     * @type {ListTopups200ResponseTopupsInner}
+     * @memberof TopupResponse
+     */
+    'topup'?: ListTopups200ResponseTopupsInner;
 }
 /**
  * With a campaign you can define the look & feel of how rewards are sent out. It also lets you set the available products (different gift cards, charity, etc.) recipients can choose from. 
@@ -9209,19 +9673,6 @@ export type UpdateCampaignRequestFeeChargedToEnum = typeof UpdateCampaignRequest
 /**
  * 
  * @export
- * @interface UpdateFraudRuleList200Response
- */
-export interface UpdateFraudRuleList200Response {
-    /**
-     * A description of the result
-     * @type {string}
-     * @memberof UpdateFraudRuleList200Response
-     */
-    'message': string;
-}
-/**
- * 
- * @export
  * @interface UpdateFraudRuleListRequest
  */
 export interface UpdateFraudRuleListRequest {
@@ -9340,6 +9791,44 @@ export interface WebhookPost {
      * @memberof WebhookPost
      */
     'url': string;
+}
+/**
+ * 
+ * @export
+ * @interface WebhookResponse
+ */
+export interface WebhookResponse {
+    /**
+     * 
+     * @type {WebhookResponseWebhook}
+     * @memberof WebhookResponse
+     */
+    'webhook'?: WebhookResponseWebhook;
+}
+/**
+ * 
+ * @export
+ * @interface WebhookResponseWebhook
+ */
+export interface WebhookResponseWebhook {
+    /**
+     * 
+     * @type {string}
+     * @memberof WebhookResponseWebhook
+     */
+    'id'?: string;
+    /**
+     * URL the webhook will make requests to
+     * @type {string}
+     * @memberof WebhookResponseWebhook
+     */
+    'url': string | null;
+    /**
+     * Private key for the webhook
+     * @type {string}
+     * @memberof WebhookResponseWebhook
+     */
+    'private_key'?: string;
 }
 
 /**
@@ -11453,7 +11942,7 @@ export const FraudRulesApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async deleteFraudRule(ruleType: DeleteFraudRuleRuleTypeEnum, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DeleteFraudRule200Response>> {
+        async deleteFraudRule(ruleType: DeleteFraudRuleRuleTypeEnum, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FraudRule200Response>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.deleteFraudRule(ruleType, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['FraudRulesApi.deleteFraudRule']?.[localVarOperationServerIndex]?.url;
@@ -11493,7 +11982,7 @@ export const FraudRulesApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async updateFraudRuleList(ruleType: UpdateFraudRuleListRuleTypeEnum, updateFraudRuleListRequest: UpdateFraudRuleListRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UpdateFraudRuleList200Response>> {
+        async updateFraudRuleList(ruleType: UpdateFraudRuleListRuleTypeEnum, updateFraudRuleListRequest: UpdateFraudRuleListRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FraudRule200Response>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.updateFraudRuleList(ruleType, updateFraudRuleListRequest, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['FraudRulesApi.updateFraudRuleList']?.[localVarOperationServerIndex]?.url;
@@ -11516,7 +12005,7 @@ export const FraudRulesApiFactory = function (configuration?: Configuration, bas
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deleteFraudRule(ruleType: DeleteFraudRuleRuleTypeEnum, options?: RawAxiosRequestConfig): AxiosPromise<DeleteFraudRule200Response> {
+        deleteFraudRule(ruleType: DeleteFraudRuleRuleTypeEnum, options?: RawAxiosRequestConfig): AxiosPromise<FraudRule200Response> {
             return localVarFp.deleteFraudRule(ruleType, options).then((request) => request(axios, basePath));
         },
         /**
@@ -11547,7 +12036,7 @@ export const FraudRulesApiFactory = function (configuration?: Configuration, bas
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateFraudRuleList(ruleType: UpdateFraudRuleListRuleTypeEnum, updateFraudRuleListRequest: UpdateFraudRuleListRequest, options?: RawAxiosRequestConfig): AxiosPromise<UpdateFraudRuleList200Response> {
+        updateFraudRuleList(ruleType: UpdateFraudRuleListRuleTypeEnum, updateFraudRuleListRequest: UpdateFraudRuleListRequest, options?: RawAxiosRequestConfig): AxiosPromise<FraudRule200Response> {
             return localVarFp.updateFraudRuleList(ruleType, updateFraudRuleListRequest, options).then((request) => request(axios, basePath));
         },
     };
