@@ -40,4 +40,6 @@ docker run --rm \
   -g typescript-axios \
   -o /output \
   -t /output/tmp/templates/typescript-axios \
-  -p npmName=tremendous,supportsES6=true,modelPropertyNaming=original
+  -p npmName=tremendous,supportsES6=true,modelPropertyNaming=original \
+  --openapi-normalizer SIMPLIFY_ONEOF_ANYOF=false \
+  --global-property apiDocs=false,modelDocs=false
