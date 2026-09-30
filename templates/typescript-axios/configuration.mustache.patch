@@ -1,18 +1,57 @@
 --- configuration.mustache (openapi-generator v7.25.0)
 +++ configuration.mustache (tremendous)
-@@ -1,6 +1,10 @@
+@@ -1,6 +1,11 @@
  /* tslint:disable */
  {{>licenseInfo}}
  
-+// Edited by Tremendous, lines 5-6, 92-93: Add custom User Agent with lib's version.
++// Edited by Tremendous, lines 5-6, 100-101: Add custom User Agent with lib's version.
 +const { version } = require("../package.json");
 +const DefaultUserAgent = `Tremendous Node v${version}`;
 +
++{{#withAWSV4Signature}}
  interface AWSv4Configuration {
    options?: {
      region?: string
-@@ -85,15 +89,8 @@
+@@ -12,13 +17,16 @@
+     sessionToken?: string
+   }
+ }
+
++{{/withAWSV4Signature}}
+ export interface ConfigurationParameters {
+     apiKey?: string | Promise<string> | ((name: string) => string) | ((name: string) => Promise<string>);
+     username?: string;
+     password?: string;
+     accessToken?: string | Promise<string> | ((name?: string, scopes?: string[]) => string) | ((name?: string, scopes?: string[]) => Promise<string>);
++{{#withAWSV4Signature}}
+     awsv4?: AWSv4Configuration;
++{{/withAWSV4Signature}}
+     basePath?: string;
+     serverIndex?: number;
+     baseOptions?: any;
+@@ -45,6 +53,7 @@
+      * @param scopes oauth2 scope
+      */
+     accessToken?: string | Promise<string> | ((name?: string, scopes?: string[]) => string) | ((name?: string, scopes?: string[]) => Promise<string>);
++{{#withAWSV4Signature}}
+     /**
+      * parameter for aws4 signature security
+      * @param {Object} AWS4Signature - AWS4 Signature security
+@@ -56,6 +65,7 @@
+      * @memberof Configuration
+      */
+     awsv4?: AWSv4Configuration;
++{{/withAWSV4Signature}}
+     /**
+      * override base path
+      */
+@@ -82,18 +92,13 @@
+         this.username = param.username;
+         this.password = param.password;
+         this.accessToken = param.accessToken;
++{{#withAWSV4Signature}}
          this.awsv4 = param.awsv4;
++{{/withAWSV4Signature}}
          this.basePath = param.basePath;
          this.serverIndex = param.serverIndex;
 -        this.baseOptions = {
