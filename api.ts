@@ -18,336 +18,170 @@ import type { AxiosPromise, AxiosInstance, RawAxiosRequestConfig } from 'axios';
 import globalAxios from 'axios';
 // Some imports not used depending on template conditions
 // @ts-ignore
-import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObject, setBearerAuthToObject, setOAuthToObject, setSearchParams, serializeDataIfNeeded, toPathString, createRequestFunction } from './common';
+import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObject, setBearerAuthToObject, setOAuthToObject, setSearchParams, serializeDataIfNeeded, toPathString, createRequestFunction, replaceWithSerializableTypeIfNeeded } from './common';
 import type { RequestArgs } from './base';
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, BaseAPI, RequiredError, operationServerMap } from './base';
 
 /**
  * Ignore flagging rules for rewards redeemed by an email or domain matching this list.
- * @export
- * @interface AllowEmail
  */
 export interface AllowEmail {
     /**
      * The list of emails.
-     * @type {Array<string>}
-     * @memberof AllowEmail
-     */
-    'emails': Array<string>;
-}
-/**
- * The list of emails and domains where a matching redemption will ignore other flagging rules and automatically go through.
- * @export
- * @interface AllowEmail1
- */
-export interface AllowEmail1 {
-    /**
-     * The list of emails.
-     * @type {Array<string>}
-     * @memberof AllowEmail1
      */
     'emails': Array<string>;
 }
 /**
  * Ignore flagging rules for rewards redeemed by an IP matching this list.
- * @export
- * @interface AllowIp
  */
 export interface AllowIp {
     /**
      * The list of IP addresses to flag or allow. Accepts both IPv4 and IPv6 addresses using CIDR notation. 
-     * @type {Array<string>}
-     * @memberof AllowIp
-     */
-    'ips': Array<string>;
-}
-/**
- * The list of IP addresses and/or IP ranges where a matching redemption will ignore other flagging rules and automatically go through.
- * @export
- * @interface AllowIp1
- */
-export interface AllowIp1 {
-    /**
-     * The list of IP addresses to flag or allow. Accepts both IPv4 and IPv6 addresses using CIDR notation. 
-     * @type {Array<string>}
-     * @memberof AllowIp1
      */
     'ips': Array<string>;
 }
 /**
  * A balance transaction represents a specific movement or change in an account\'s balance. 
- * @export
- * @interface BalanceTransaction
  */
 export interface BalanceTransaction {
     /**
      * Date that the transaction was created
-     * @type {string}
-     * @memberof BalanceTransaction
      */
     'created_at': string;
     /**
      * Amount of the transaction, denominated in `currency_code`.
-     * @type {number}
-     * @memberof BalanceTransaction
      */
     'amount': number;
     /**
      * Currency of the transaction amount and running balance. Always matches the organization\'s currency.
-     * @type {string}
-     * @memberof BalanceTransaction
      */
     'currency_code': string;
     /**
      * The updated total after the transaction, denominated in `currency_code`. Note that this running balance may be delayed and contain `null`.
-     * @type {number}
-     * @memberof BalanceTransaction
      */
     'balance': number;
     /**
      * The action that was performed
-     * @type {string}
-     * @memberof BalanceTransaction
      */
     'action': string;
     /**
      * A brief description of the transaction
-     * @type {string}
-     * @memberof BalanceTransaction
      */
     'description': string;
-    /**
-     * 
-     * @type {BalanceTransactionOrder}
-     * @memberof BalanceTransaction
-     */
     'order'?: BalanceTransactionOrder;
 }
 /**
  * Order details
- * @export
- * @interface BalanceTransactionOrder
  */
 export interface BalanceTransactionOrder {
-    /**
-     * 
-     * @type {string}
-     * @memberof BalanceTransactionOrder
-     */
     'id'?: string;
     /**
      * Reference for this order, supplied by the customer.  When set, `external_id` makes order idempotent. All requests that use the same `external_id` after the initial order creation, will result in a response that returns the data of the initially created order. The response will have a `201` response code. These responses **fail** to create any further orders.  It also allows for retrieving by `external_id` instead of `id` only. 
-     * @type {string}
-     * @memberof BalanceTransactionOrder
      */
     'external_id'?: string | null;
-    /**
-     * 
-     * @type {BalanceTransactionOrderPayment}
-     * @memberof BalanceTransactionOrder
-     */
     'payment'?: BalanceTransactionOrderPayment;
 }
-/**
- * 
- * @export
- * @interface BalanceTransactionOrderPayment
- */
 export interface BalanceTransactionOrderPayment {
     /**
      * Total price of the order before fees, denominated in `currency_code`.
-     * @type {number}
-     * @memberof BalanceTransactionOrderPayment
      */
     'subtotal': number;
     /**
      * Total price of the order including fees, denominated in `currency_code`.
-     * @type {number}
-     * @memberof BalanceTransactionOrderPayment
      */
     'total': number;
     /**
      * Fees for the order, denominated in `currency_code`.
-     * @type {number}
-     * @memberof BalanceTransactionOrderPayment
      */
     'fees': number;
     /**
      * Discount for the order, denominated in `currency_code`.
-     * @type {number}
-     * @memberof BalanceTransactionOrderPayment
      */
     'discount': number;
     /**
      * Currency in which the payment amounts (subtotal, total, fees, discount, refund) are denominated.  This always matches the organization\'s currency. 
-     * @type {string}
-     * @memberof BalanceTransactionOrderPayment
      */
     'currency_code': string;
-    /**
-     * 
-     * @type {PaymentDetailsRefund}
-     * @memberof BalanceTransactionOrderPayment
-     */
     'refund'?: PaymentDetailsRefund;
 }
-/**
- * 
- * @export
- * @interface BaseOrderForCreate
- */
 export interface BaseOrderForCreate {
     /**
      * Reference for this order, supplied by the customer.  When set, `external_id` makes order idempotent. All requests that use the same `external_id` after the initial order creation, will result in a response that returns the data of the initially created order. The response will have a `201` response code. These responses **fail** to create any further orders.  It also allows for retrieving by `external_id` instead of `id` only. 
-     * @type {string}
-     * @memberof BaseOrderForCreate
      */
     'external_id'?: string | null;
-    /**
-     * 
-     * @type {SingleRewardOrderPayment}
-     * @memberof BaseOrderForCreate
-     */
     'payment': SingleRewardOrderPayment;
 }
 /**
  * With a campaign you can define the look & feel of how rewards are sent out. It also lets you set the available products (different gift cards, charity, etc.) recipients can choose from. 
- * @export
- * @interface Campaign
  */
 export interface Campaign {
-    /**
-     * 
-     * @type {string}
-     * @memberof Campaign
-     */
     'id'?: string;
     /**
      * Name of the campaign
-     * @type {string}
-     * @memberof Campaign
      */
     'name': string;
     /**
      * Description of the campaign
-     * @type {string}
-     * @memberof Campaign
      */
     'description': string | null;
     /**
      * List of IDs of products (different gift cards, charity, etc.) that are available in this campaign.  On write, the special value `ALL_FEE_FREE` stands for every product in your catalog that carries no fee at the time of the call. 
-     * @type {Array<CampaignBaseProductsInner>}
-     * @memberof Campaign
      */
     'products': Array<CampaignBaseProductsInner>;
     /**
      * Determines whether fees for premium products are added to the order total (`SENDER`) or deducted from the recipient\'s reward amount (`RECIPIENT`). Campaigns with `RECIPIENT` must include at least one fee-free product. 
-     * @type {string}
-     * @memberof Campaign
      */
     'fee_charged_to'?: CampaignFeeChargedToEnum | null;
-    /**
-     * 
-     * @type {ListCampaigns200ResponseCampaignsInnerAutoAddProductRule}
-     * @memberof Campaign
-     */
     'auto_add_product_rule'?: ListCampaigns200ResponseCampaignsInnerAutoAddProductRule | null;
-    /**
-     * 
-     * @type {ListCampaigns200ResponseCampaignsInnerWebpageStyle}
-     * @memberof Campaign
-     */
     'webpage_style'?: ListCampaigns200ResponseCampaignsInnerWebpageStyle;
-    /**
-     * 
-     * @type {ListCampaigns200ResponseCampaignsInnerEmailStyle}
-     * @memberof Campaign
-     */
     'email_style'?: ListCampaigns200ResponseCampaignsInnerEmailStyle;
 }
 
 export const CampaignFeeChargedToEnum = {
     Sender: 'SENDER',
-    Recipient: 'RECIPIENT'
+    Recipient: 'RECIPIENT',
 } as const;
 
 export type CampaignFeeChargedToEnum = typeof CampaignFeeChargedToEnum[keyof typeof CampaignFeeChargedToEnum];
 
 /**
  * With a campaign you can define the look & feel of how rewards are sent out. It also lets you set the available products (different gift cards, charity, etc.) recipients can choose from. 
- * @export
- * @interface CampaignBase
  */
 export interface CampaignBase {
-    /**
-     * 
-     * @type {string}
-     * @memberof CampaignBase
-     */
     'id'?: string;
     /**
      * Name of the campaign
-     * @type {string}
-     * @memberof CampaignBase
      */
     'name'?: string;
     /**
      * Description of the campaign
-     * @type {string}
-     * @memberof CampaignBase
      */
     'description'?: string | null;
     /**
      * List of IDs of products (different gift cards, charity, etc.) that are available in this campaign.  On write, the special value `ALL_FEE_FREE` stands for every product in your catalog that carries no fee at the time of the call. 
-     * @type {Array<CampaignBaseProductsInner>}
-     * @memberof CampaignBase
      */
     'products'?: Array<CampaignBaseProductsInner>;
     /**
      * Determines whether fees for premium products are added to the order total (`SENDER`) or deducted from the recipient\'s reward amount (`RECIPIENT`). Campaigns with `RECIPIENT` must include at least one fee-free product. 
-     * @type {string}
-     * @memberof CampaignBase
      */
     'fee_charged_to'?: CampaignBaseFeeChargedToEnum | null;
-    /**
-     * 
-     * @type {ListCampaigns200ResponseCampaignsInnerAutoAddProductRule}
-     * @memberof CampaignBase
-     */
     'auto_add_product_rule'?: ListCampaigns200ResponseCampaignsInnerAutoAddProductRule | null;
-    /**
-     * 
-     * @type {ListCampaigns200ResponseCampaignsInnerWebpageStyle}
-     * @memberof CampaignBase
-     */
     'webpage_style'?: ListCampaigns200ResponseCampaignsInnerWebpageStyle;
-    /**
-     * 
-     * @type {ListCampaigns200ResponseCampaignsInnerEmailStyle}
-     * @memberof CampaignBase
-     */
     'email_style'?: ListCampaigns200ResponseCampaignsInnerEmailStyle;
 }
 
 export const CampaignBaseFeeChargedToEnum = {
     Sender: 'SENDER',
-    Recipient: 'RECIPIENT'
+    Recipient: 'RECIPIENT',
 } as const;
 
 export type CampaignBaseFeeChargedToEnum = typeof CampaignBaseFeeChargedToEnum[keyof typeof CampaignBaseFeeChargedToEnum];
 
-/**
- * 
- * @export
- * @interface CampaignBaseProductsInner
- */
 export interface CampaignBaseProductsInner {
 }
 /**
  * Name of the channel in which the order was created
- * @export
- * @enum {string}
  */
 
 export const Channel = {
@@ -358,344 +192,196 @@ export const Channel = {
     Qualtrics: 'QUALTRICS',
     Typeform: 'TYPEFORM',
     SurveyMonkey: 'SURVEY MONKEY',
-    Yotpo: 'YOTPO'
+    Yotpo: 'YOTPO',
 } as const;
 
 export type Channel = typeof Channel[keyof typeof Channel];
 
 
-/**
- * 
- * @export
- * @interface ConnectedOrganization
- */
 export interface ConnectedOrganization {
     /**
      * Tremendous\' identifier for the connected organization.
-     * @type {string}
-     * @memberof ConnectedOrganization
      */
     'id': string;
     /**
      * Client ID of the OAuth app that is to be used by the platform once the integration is complete.
-     * @type {string}
-     * @memberof ConnectedOrganization
      */
     'client_id': string;
     /**
      * Timestamp of when the connected organization was created.
-     * @type {string}
-     * @memberof ConnectedOrganization
      */
     'created_at': string;
-    /**
-     * 
-     * @type {ConnectedOrganizationOrganization}
-     * @memberof ConnectedOrganization
-     */
     'organization'?: ConnectedOrganizationOrganization | null;
 }
-/**
- * 
- * @export
- * @interface ConnectedOrganizationMember
- */
 export interface ConnectedOrganizationMember {
     /**
      * Tremendous\' identifier for the connected organization member.
-     * @type {string}
-     * @memberof ConnectedOrganizationMember
      */
     'id': string;
     /**
      * The name associated with the user in your systems.
-     * @type {string}
-     * @memberof ConnectedOrganizationMember
      */
     'external_name'?: string | null;
     /**
      * The email associated with the user in your systems.
-     * @type {string}
-     * @memberof ConnectedOrganizationMember
      */
     'external_email'?: string | null;
     /**
      * Timestamp of when the connected organization member was created.
-     * @type {string}
-     * @memberof ConnectedOrganizationMember
      */
     'created_at': string;
     /**
      * Tremendous\' identifier for the connected organization.
-     * @type {string}
-     * @memberof ConnectedOrganizationMember
      */
     'connected_organization_id': string;
-    /**
-     * 
-     * @type {ConnectedOrganizationMemberMember}
-     * @memberof ConnectedOrganizationMember
-     */
     'member'?: ConnectedOrganizationMemberMember | null;
 }
 /**
  * Associated `member`. `null` until the registration flow for the connected organization has been completed.
- * @export
- * @interface ConnectedOrganizationMemberMember
  */
 export interface ConnectedOrganizationMemberMember {
-    /**
-     * 
-     * @type {string}
-     * @memberof ConnectedOrganizationMemberMember
-     */
     'id': string;
     /**
      * Email address of the member
-     * @type {string}
-     * @memberof ConnectedOrganizationMemberMember
      */
     'email': string;
     /**
      * Full name of the member
-     * @type {string}
-     * @memberof ConnectedOrganizationMemberMember
      */
     'name': string | null;
     /**
      * Is this member currently active in the organization. If `false`, the member will not be able to access the organization. 
-     * @type {boolean}
-     * @memberof ConnectedOrganizationMemberMember
      */
     'active'?: boolean;
     /**
      * The role ID associated with the member within the organization. 
-     * @type {string}
-     * @memberof ConnectedOrganizationMemberMember
      */
     'role'?: string | null;
     /**
      * Current status of the member\'s account.  When creating a member it starts out in the status `INVITED`. As soon as that member open the invitation link and registers an account, the status switches to `REGISTERED`. 
-     * @type {string}
-     * @memberof ConnectedOrganizationMemberMember
      */
     'status': ConnectedOrganizationMemberMemberStatusEnum;
     /**
      * Timestamp when this member was created.  The `created_at` timestamp is **NOT** returned when retrieving a member (but is part of the response when listing or creating members). 
-     * @type {string}
-     * @memberof ConnectedOrganizationMemberMember
      */
     'created_at'?: string;
     /**
      * Timestamp when this member most recently logged into the dashboard of the organization associated with this API key. 
-     * @type {string}
-     * @memberof ConnectedOrganizationMemberMember
      */
     'last_login_at'?: string | null;
 }
 
 export const ConnectedOrganizationMemberMemberStatusEnum = {
     Registered: 'REGISTERED',
-    Invited: 'INVITED'
+    Invited: 'INVITED',
 } as const;
 
 export type ConnectedOrganizationMemberMemberStatusEnum = typeof ConnectedOrganizationMemberMemberStatusEnum[keyof typeof ConnectedOrganizationMemberMemberStatusEnum];
 
-/**
- * 
- * @export
- * @interface ConnectedOrganizationMemberResponse
- */
 export interface ConnectedOrganizationMemberResponse {
-    /**
-     * 
-     * @type {ConnectedOrganizationMemberResponseConnectedOrganizationMember}
-     * @memberof ConnectedOrganizationMemberResponse
-     */
     'connected_organization_member': ConnectedOrganizationMemberResponseConnectedOrganizationMember;
 }
-/**
- * 
- * @export
- * @interface ConnectedOrganizationMemberResponseConnectedOrganizationMember
- */
 export interface ConnectedOrganizationMemberResponseConnectedOrganizationMember {
     /**
      * Tremendous\' identifier for the connected organization member.
-     * @type {string}
-     * @memberof ConnectedOrganizationMemberResponseConnectedOrganizationMember
      */
     'id': string;
     /**
      * The name associated with the user in your systems.
-     * @type {string}
-     * @memberof ConnectedOrganizationMemberResponseConnectedOrganizationMember
      */
     'external_name'?: string | null;
     /**
      * The email associated with the user in your systems.
-     * @type {string}
-     * @memberof ConnectedOrganizationMemberResponseConnectedOrganizationMember
      */
     'external_email'?: string | null;
     /**
      * Timestamp of when the connected organization member was created.
-     * @type {string}
-     * @memberof ConnectedOrganizationMemberResponseConnectedOrganizationMember
      */
     'created_at': string;
     /**
      * Tremendous\' identifier for the connected organization.
-     * @type {string}
-     * @memberof ConnectedOrganizationMemberResponseConnectedOrganizationMember
      */
     'connected_organization_id': string;
-    /**
-     * 
-     * @type {ConnectedOrganizationMemberMember}
-     * @memberof ConnectedOrganizationMemberResponseConnectedOrganizationMember
-     */
     'member'?: ConnectedOrganizationMemberMember | null;
 }
-/**
- * 
- * @export
- * @interface ConnectedOrganizationMemberSession
- */
 export interface ConnectedOrganizationMemberSession {
     /**
      * Tremendous\' identifier for the connected organization member.
-     * @type {string}
-     * @memberof ConnectedOrganizationMemberSession
      */
     'connected_organization_member_id': string;
     /**
      * The URL to start the \"Tremendous for Platforms\" flow.
-     * @type {string}
-     * @memberof ConnectedOrganizationMemberSession
      */
     'url': string;
     /**
      * The URL used for links that redirect the user back to your site when they\'ve completed their actions on Tremendous.
-     * @type {string}
-     * @memberof ConnectedOrganizationMemberSession
      */
     'return_url': string;
     /**
      * The opaque `state` value provided when the session was created, forwarded on the initial OAuth grant redirect. `null` when no value was set.
-     * @type {string}
-     * @memberof ConnectedOrganizationMemberSession
      */
     'state'?: string | null;
     /**
      * Timestamp of when the session will expire.
-     * @type {string}
-     * @memberof ConnectedOrganizationMemberSession
      */
     'expires_at': string;
     /**
      * Timestamp of when the session was created.
-     * @type {string}
-     * @memberof ConnectedOrganizationMemberSession
      */
     'created_at': string;
 }
-/**
- * 
- * @export
- * @interface ConnectedOrganizationMemberSessionResponse
- */
 export interface ConnectedOrganizationMemberSessionResponse {
-    /**
-     * 
-     * @type {ConnectedOrganizationMemberSessionResponseConnectedOrganizationMemberSession}
-     * @memberof ConnectedOrganizationMemberSessionResponse
-     */
     'connected_organization_member_session': ConnectedOrganizationMemberSessionResponseConnectedOrganizationMemberSession;
 }
-/**
- * 
- * @export
- * @interface ConnectedOrganizationMemberSessionResponseConnectedOrganizationMemberSession
- */
 export interface ConnectedOrganizationMemberSessionResponseConnectedOrganizationMemberSession {
     /**
      * Tremendous\' identifier for the connected organization member.
-     * @type {string}
-     * @memberof ConnectedOrganizationMemberSessionResponseConnectedOrganizationMemberSession
      */
     'connected_organization_member_id': string;
     /**
      * The URL to start the \"Tremendous for Platforms\" flow.
-     * @type {string}
-     * @memberof ConnectedOrganizationMemberSessionResponseConnectedOrganizationMemberSession
      */
     'url': string;
     /**
      * The URL used for links that redirect the user back to your site when they\'ve completed their actions on Tremendous.
-     * @type {string}
-     * @memberof ConnectedOrganizationMemberSessionResponseConnectedOrganizationMemberSession
      */
     'return_url': string;
     /**
      * The opaque `state` value provided when the session was created, forwarded on the initial OAuth grant redirect. `null` when no value was set.
-     * @type {string}
-     * @memberof ConnectedOrganizationMemberSessionResponseConnectedOrganizationMemberSession
      */
     'state'?: string | null;
     /**
      * Timestamp of when the session will expire.
-     * @type {string}
-     * @memberof ConnectedOrganizationMemberSessionResponseConnectedOrganizationMemberSession
      */
     'expires_at': string;
     /**
      * Timestamp of when the session was created.
-     * @type {string}
-     * @memberof ConnectedOrganizationMemberSessionResponseConnectedOrganizationMemberSession
      */
     'created_at': string;
 }
 /**
  * Associated `organization` resource. `null` until the registration flow for the connected organization has been completed.
- * @export
- * @interface ConnectedOrganizationOrganization
  */
 export interface ConnectedOrganizationOrganization {
-    /**
-     * 
-     * @type {string}
-     * @memberof ConnectedOrganizationOrganization
-     */
     'id'?: string;
     /**
      * Name of the organization
-     * @type {string}
-     * @memberof ConnectedOrganizationOrganization
      */
     'name': string;
     /**
      * URL of the website of that organization
-     * @type {string}
-     * @memberof ConnectedOrganizationOrganization
      */
     'website': string;
     /**
      * Currency used for this organization\'s balances, orders, and transactions.
-     * @type {string}
-     * @memberof ConnectedOrganizationOrganization
      */
     'currency_code'?: string;
     /**
      * Status of the organization. Organizations need to be approved to be able to use them to send out rewards.
-     * @type {string}
-     * @memberof ConnectedOrganizationOrganization
      */
     'status'?: ConnectedOrganizationOrganizationStatusEnum;
     /**
      * Timestamp of when the organization has been created.  *This field is only returned when creating an organization.* It is not returned anymore when retrieving or listing organizations. 
-     * @type {string}
-     * @memberof ConnectedOrganizationOrganization
      */
     'created_at'?: string;
 }
@@ -703,423 +389,223 @@ export interface ConnectedOrganizationOrganization {
 export const ConnectedOrganizationOrganizationStatusEnum = {
     Pending: 'PENDING',
     Approved: 'APPROVED',
-    Rejected: 'REJECTED'
+    Rejected: 'REJECTED',
 } as const;
 
 export type ConnectedOrganizationOrganizationStatusEnum = typeof ConnectedOrganizationOrganizationStatusEnum[keyof typeof ConnectedOrganizationOrganizationStatusEnum];
 
-/**
- * 
- * @export
- * @interface ConnectedOrganizationResponse
- */
 export interface ConnectedOrganizationResponse {
-    /**
-     * 
-     * @type {ConnectedOrganizationResponseConnectedOrganization}
-     * @memberof ConnectedOrganizationResponse
-     */
     'connected_organization': ConnectedOrganizationResponseConnectedOrganization;
 }
-/**
- * 
- * @export
- * @interface ConnectedOrganizationResponseConnectedOrganization
- */
 export interface ConnectedOrganizationResponseConnectedOrganization {
     /**
      * Tremendous\' identifier for the connected organization.
-     * @type {string}
-     * @memberof ConnectedOrganizationResponseConnectedOrganization
      */
     'id': string;
     /**
      * Client ID of the OAuth app that is to be used by the platform once the integration is complete.
-     * @type {string}
-     * @memberof ConnectedOrganizationResponseConnectedOrganization
      */
     'client_id': string;
     /**
      * Timestamp of when the connected organization was created.
-     * @type {string}
-     * @memberof ConnectedOrganizationResponseConnectedOrganization
      */
     'created_at': string;
-    /**
-     * 
-     * @type {ConnectedOrganizationOrganization}
-     * @memberof ConnectedOrganizationResponseConnectedOrganization
-     */
     'organization'?: ConnectedOrganizationOrganization | null;
 }
-/**
- * 
- * @export
- * @interface CreateApiKey200Response
- */
 export interface CreateApiKey200Response {
     /**
      * The new API key
-     * @type {string}
-     * @memberof CreateApiKey200Response
      */
     'api_key'?: string;
 }
-/**
- * 
- * @export
- * @interface CreateApiKeyRequest
- */
 export interface CreateApiKeyRequest {
     /**
      * The key\'s permission level. `read_write` (the default) can make any request. `read_only` keys can\'t run data-altering requests: they\'re limited to GET requests and non-writing POST requests, like `/reports`. Omit for `read_write`. 
-     * @type {string}
-     * @memberof CreateApiKeyRequest
      */
     'permission'?: CreateApiKeyRequestPermissionEnum;
 }
 
 export const CreateApiKeyRequestPermissionEnum = {
     ReadWrite: 'read_write',
-    ReadOnly: 'read_only'
+    ReadOnly: 'read_only',
 } as const;
 
 export type CreateApiKeyRequestPermissionEnum = typeof CreateApiKeyRequestPermissionEnum[keyof typeof CreateApiKeyRequestPermissionEnum];
 
-/**
- * 
- * @export
- * @interface CreateCampaign200Response
- */
 export interface CreateCampaign200Response {
-    /**
-     * 
-     * @type {ListCampaigns200ResponseCampaignsInner}
-     * @memberof CreateCampaign200Response
-     */
     'campaign': ListCampaigns200ResponseCampaignsInner;
 }
 /**
  * With a campaign you can define the look & feel of how rewards are sent out. It also lets you set the available products (different gift cards, charity, etc.) recipients can choose from. 
- * @export
- * @interface CreateCampaignRequest
  */
 export interface CreateCampaignRequest {
     /**
      * Name of the campaign
-     * @type {string}
-     * @memberof CreateCampaignRequest
      */
     'name': string;
     /**
      * Description of the campaign
-     * @type {string}
-     * @memberof CreateCampaignRequest
      */
     'description': string | null;
     /**
      * List of IDs of products (different gift cards, charity, etc.) that are available in this campaign.  On write, the special value `ALL_FEE_FREE` stands for every product in your catalog that carries no fee at the time of the call. 
-     * @type {Array<ListCampaigns200ResponseCampaignsInnerProductsInner>}
-     * @memberof CreateCampaignRequest
      */
     'products': Array<ListCampaigns200ResponseCampaignsInnerProductsInner>;
     /**
      * Determines whether fees for premium products are added to the order total (`SENDER`) or deducted from the recipient\'s reward amount (`RECIPIENT`). Campaigns with `RECIPIENT` must include at least one fee-free product. 
-     * @type {string}
-     * @memberof CreateCampaignRequest
      */
     'fee_charged_to'?: CreateCampaignRequestFeeChargedToEnum | null;
-    /**
-     * 
-     * @type {ListCampaigns200ResponseCampaignsInnerAutoAddProductRule}
-     * @memberof CreateCampaignRequest
-     */
     'auto_add_product_rule'?: ListCampaigns200ResponseCampaignsInnerAutoAddProductRule | null;
-    /**
-     * 
-     * @type {ListCampaigns200ResponseCampaignsInnerWebpageStyle}
-     * @memberof CreateCampaignRequest
-     */
     'webpage_style'?: ListCampaigns200ResponseCampaignsInnerWebpageStyle;
-    /**
-     * 
-     * @type {ListCampaigns200ResponseCampaignsInnerEmailStyle}
-     * @memberof CreateCampaignRequest
-     */
     'email_style'?: ListCampaigns200ResponseCampaignsInnerEmailStyle;
 }
 
 export const CreateCampaignRequestFeeChargedToEnum = {
     Sender: 'SENDER',
-    Recipient: 'RECIPIENT'
+    Recipient: 'RECIPIENT',
 } as const;
 
 export type CreateCampaignRequestFeeChargedToEnum = typeof CreateCampaignRequestFeeChargedToEnum[keyof typeof CreateCampaignRequestFeeChargedToEnum];
 
-/**
- * 
- * @export
- * @interface CreateConnectedOrganization200Response
- */
 export interface CreateConnectedOrganization200Response {
-    /**
-     * 
-     * @type {ListConnectedOrganizations200ResponseConnectedOrganizationsInner}
-     * @memberof CreateConnectedOrganization200Response
-     */
     'connected_organization': ListConnectedOrganizations200ResponseConnectedOrganizationsInner;
 }
-/**
- * 
- * @export
- * @interface CreateConnectedOrganizationMember200Response
- */
 export interface CreateConnectedOrganizationMember200Response {
-    /**
-     * 
-     * @type {ListConnectedOrganizationMembers200ResponseConnectedOrganizationMembersInner}
-     * @memberof CreateConnectedOrganizationMember200Response
-     */
     'connected_organization_member': ListConnectedOrganizationMembers200ResponseConnectedOrganizationMembersInner;
 }
-/**
- * 
- * @export
- * @interface CreateConnectedOrganizationMemberRequest
- */
 export interface CreateConnectedOrganizationMemberRequest {
     /**
      * The ID of the connected organization.
-     * @type {string}
-     * @memberof CreateConnectedOrganizationMemberRequest
      */
     'connected_organization_id': string;
     /**
      * The name associated with the user in your systems.
-     * @type {string}
-     * @memberof CreateConnectedOrganizationMemberRequest
      */
     'external_name'?: string;
     /**
      * The email associated with the user in your systems.
-     * @type {string}
-     * @memberof CreateConnectedOrganizationMemberRequest
      */
     'external_email'?: string;
     /**
      * The role ID to assign to the member within the organization. Only applicable when the connected organization is already linked to an existing Tremendous organization. 
-     * @type {string}
-     * @memberof CreateConnectedOrganizationMemberRequest
      */
     'role'?: string;
 }
-/**
- * 
- * @export
- * @interface CreateConnectedOrganizationMemberSession200Response
- */
 export interface CreateConnectedOrganizationMemberSession200Response {
-    /**
-     * 
-     * @type {CreateConnectedOrganizationMemberSession200ResponseConnectedOrganizationMemberSession}
-     * @memberof CreateConnectedOrganizationMemberSession200Response
-     */
     'connected_organization_member_session': CreateConnectedOrganizationMemberSession200ResponseConnectedOrganizationMemberSession;
 }
-/**
- * 
- * @export
- * @interface CreateConnectedOrganizationMemberSession200ResponseConnectedOrganizationMemberSession
- */
 export interface CreateConnectedOrganizationMemberSession200ResponseConnectedOrganizationMemberSession {
     /**
      * Tremendous\' identifier for the connected organization member.
-     * @type {string}
-     * @memberof CreateConnectedOrganizationMemberSession200ResponseConnectedOrganizationMemberSession
      */
     'connected_organization_member_id': string;
     /**
      * The URL to start the \"Tremendous for Platforms\" flow.
-     * @type {string}
-     * @memberof CreateConnectedOrganizationMemberSession200ResponseConnectedOrganizationMemberSession
      */
     'url': string;
     /**
      * The URL used for links that redirect the user back to your site when they\'ve completed their actions on Tremendous.
-     * @type {string}
-     * @memberof CreateConnectedOrganizationMemberSession200ResponseConnectedOrganizationMemberSession
      */
     'return_url': string;
     /**
      * The opaque `state` value provided when the session was created, forwarded on the initial OAuth grant redirect. `null` when no value was set.
-     * @type {string}
-     * @memberof CreateConnectedOrganizationMemberSession200ResponseConnectedOrganizationMemberSession
      */
     'state'?: string | null;
     /**
      * Timestamp of when the session will expire.
-     * @type {string}
-     * @memberof CreateConnectedOrganizationMemberSession200ResponseConnectedOrganizationMemberSession
      */
     'expires_at': string;
     /**
      * Timestamp of when the session was created.
-     * @type {string}
-     * @memberof CreateConnectedOrganizationMemberSession200ResponseConnectedOrganizationMemberSession
      */
     'created_at': string;
 }
-/**
- * 
- * @export
- * @interface CreateConnectedOrganizationMemberSessionRequest
- */
 export interface CreateConnectedOrganizationMemberSessionRequest {
     /**
      * The URL used for links that redirect the user back to your site when they\'ve completed their actions on Tremendous.
-     * @type {string}
-     * @memberof CreateConnectedOrganizationMemberSessionRequest
      */
     'return_url': string;
     /**
      * Opaque value forwarded unchanged as the OAuth2 `state` parameter on the initial OAuth grant redirect, letting you round-trip per-user context to your registered OAuth `redirect_uri`. Treat it as untrusted since it travels through the end user\'s browser: sign it or use it as a lookup key rather than trusting a raw value, and keep it short. Does not change `return_url` behavior. 
-     * @type {string}
-     * @memberof CreateConnectedOrganizationMemberSessionRequest
      */
     'state'?: string;
 }
-/**
- * 
- * @export
- * @interface CreateConnectedOrganizationRequest
- */
 export interface CreateConnectedOrganizationRequest {
     /**
      * The client ID of the OAuth application.
-     * @type {string}
-     * @memberof CreateConnectedOrganizationRequest
      */
     'client_id': string;
     /**
      * The currency used for the connected organization\'s balance. Supported values are `USD`, `EUR`, `GBP`, and `CAD`. Defaults to `USD` if omitted, `null`, or blank.
-     * @type {string}
-     * @memberof CreateConnectedOrganizationRequest
      */
     'currency_code'?: string | null;
-    /**
-     * 
-     * @type {CreateConnectedOrganizationRequestKybPrefill}
-     * @memberof CreateConnectedOrganizationRequest
-     */
     'kyb_prefill'?: CreateConnectedOrganizationRequestKybPrefill;
 }
 /**
  * Optional KYB details to forward for the end client. When provided, these values prefill the end client\'s onboarding form. Every field is optional.
- * @export
- * @interface CreateConnectedOrganizationRequestKybPrefill
  */
 export interface CreateConnectedOrganizationRequestKybPrefill {
     /**
      * The registered legal name of the company.
-     * @type {string}
-     * @memberof CreateConnectedOrganizationRequestKybPrefill
      */
     'company_name'?: string;
     /**
      * The trade name (DBA) the company operates under, if different from its legal name.
-     * @type {string}
-     * @memberof CreateConnectedOrganizationRequestKybPrefill
      */
     'doing_business_as'?: string;
     /**
      * The company\'s legal entity type. Free-form text; any value is accepted. Common values include `Sole proprietorship`, `Corporation (Inc)`, `Limited liability company (LLC)`, `Limited liability partnership (LLP)`, `Public limited company (PLC)`, and `Private limited company (LTD)`.
-     * @type {string}
-     * @memberof CreateConnectedOrganizationRequestKybPrefill
      */
     'company_structure'?: string;
     /**
      * The company\'s tax ID or registration number.
-     * @type {string}
-     * @memberof CreateConnectedOrganizationRequestKybPrefill
      */
     'company_registration_number'?: string;
     /**
      * The ISO 3166-1 alpha-2 country code of the company. Must be a supported country.
-     * @type {string}
-     * @memberof CreateConnectedOrganizationRequestKybPrefill
      */
     'country_code'?: string;
     /**
      * The company\'s website URL. Must be a well-formed URL.
-     * @type {string}
-     * @memberof CreateConnectedOrganizationRequestKybPrefill
      */
     'website_url'?: string;
     /**
      * The company\'s street address.
-     * @type {string}
-     * @memberof CreateConnectedOrganizationRequestKybPrefill
      */
     'address_1'?: string;
     /**
      * The second line of the company\'s street address (suite, unit, floor, etc.).
-     * @type {string}
-     * @memberof CreateConnectedOrganizationRequestKybPrefill
      */
     'address_2'?: string;
     /**
      * The company\'s city.
-     * @type {string}
-     * @memberof CreateConnectedOrganizationRequestKybPrefill
      */
     'city'?: string;
     /**
      * The company\'s state or province.
-     * @type {string}
-     * @memberof CreateConnectedOrganizationRequestKybPrefill
      */
     'state'?: string;
     /**
      * The company\'s ZIP or postal code.
-     * @type {string}
-     * @memberof CreateConnectedOrganizationRequestKybPrefill
      */
     'postal_code'?: string;
 }
-/**
- * 
- * @export
- * @interface CreateField
- */
 export interface CreateField {
     /**
      * A human-readable name for the field. Can contain letters, numbers, spaces, and underscores. The field\'s `label` (a reference name used in API requests) will be automatically derived from this value. 
-     * @type {string}
-     * @memberof CreateField
      */
     'display_name': string;
     /**
      * Type of the values of the field  <table>   <thead>     <tr>       <th>Type</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td><code>Checkbox</code></td>       <td>A boolean value (true/false)</td>     </tr>     <tr>       <td><code>Currency</code></td>       <td>A monetary value</td>     </tr>     <tr>       <td><code>Date</code></td>       <td>A date value</td>     </tr>     <tr>       <td><code>Dropdown</code></td>       <td>A single selection from predefined options (see <code>data.options</code>)</td>     </tr>     <tr>       <td><code>Email</code></td>       <td>An email address</td>     </tr>     <tr>       <td><code>List</code></td>       <td>Multiple selections from predefined options (see <code>data.options</code>)</td>     </tr>     <tr>       <td><code>Number</code></td>       <td>A numeric value</td>     </tr>     <tr>       <td><code>Phone</code></td>       <td>A phone number</td>     </tr>     <tr>       <td><code>Text</code></td>       <td>A single-line text value</td>     </tr>     <tr>       <td><code>TextArea</code></td>       <td>A multi-line text value</td>     </tr>   </tbody> </table> 
-     * @type {string}
-     * @memberof CreateField
      */
     'data_type': CreateFieldDataTypeEnum;
-    /**
-     * 
-     * @type {CreateFieldRequestData}
-     * @memberof CreateField
-     */
     'data'?: CreateFieldRequestData;
     /**
      * Is this field required (true) or optional (false). Defaults to false.
-     * @type {boolean}
-     * @memberof CreateField
      */
     'required'?: boolean;
     /**
      * A description of the field\'s purpose
-     * @type {string}
-     * @memberof CreateField
      */
     'description'?: string;
 }
@@ -1134,58 +620,30 @@ export const CreateFieldDataTypeEnum = {
     Number: 'Number',
     Phone: 'Phone',
     Text: 'Text',
-    TextArea: 'TextArea'
+    TextArea: 'TextArea',
 } as const;
 
 export type CreateFieldDataTypeEnum = typeof CreateFieldDataTypeEnum[keyof typeof CreateFieldDataTypeEnum];
 
-/**
- * 
- * @export
- * @interface CreateField200Response
- */
 export interface CreateField200Response {
-    /**
-     * 
-     * @type {ListFields200ResponseFieldsInner}
-     * @memberof CreateField200Response
-     */
     'field': ListFields200ResponseFieldsInner;
 }
-/**
- * 
- * @export
- * @interface CreateFieldRequest
- */
 export interface CreateFieldRequest {
     /**
      * A human-readable name for the field. Can contain letters, numbers, spaces, and underscores. The field\'s `label` (a reference name used in API requests) will be automatically derived from this value. 
-     * @type {string}
-     * @memberof CreateFieldRequest
      */
     'display_name': string;
     /**
      * Type of the values of the field  <table>   <thead>     <tr>       <th>Type</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td><code>Checkbox</code></td>       <td>A boolean value (true/false)</td>     </tr>     <tr>       <td><code>Currency</code></td>       <td>A monetary value</td>     </tr>     <tr>       <td><code>Date</code></td>       <td>A date value</td>     </tr>     <tr>       <td><code>Dropdown</code></td>       <td>A single selection from predefined options (see <code>data.options</code>)</td>     </tr>     <tr>       <td><code>Email</code></td>       <td>An email address</td>     </tr>     <tr>       <td><code>List</code></td>       <td>Multiple selections from predefined options (see <code>data.options</code>)</td>     </tr>     <tr>       <td><code>Number</code></td>       <td>A numeric value</td>     </tr>     <tr>       <td><code>Phone</code></td>       <td>A phone number</td>     </tr>     <tr>       <td><code>Text</code></td>       <td>A single-line text value</td>     </tr>     <tr>       <td><code>TextArea</code></td>       <td>A multi-line text value</td>     </tr>   </tbody> </table> 
-     * @type {string}
-     * @memberof CreateFieldRequest
      */
     'data_type': CreateFieldRequestDataTypeEnum;
-    /**
-     * 
-     * @type {CreateFieldRequestData}
-     * @memberof CreateFieldRequest
-     */
     'data'?: CreateFieldRequestData;
     /**
      * Is this field required (true) or optional (false). Defaults to false.
-     * @type {boolean}
-     * @memberof CreateFieldRequest
      */
     'required'?: boolean;
     /**
      * A description of the field\'s purpose
-     * @type {string}
-     * @memberof CreateFieldRequest
      */
     'description'?: string;
 }
@@ -1200,72 +658,43 @@ export const CreateFieldRequestDataTypeEnum = {
     Number: 'Number',
     Phone: 'Phone',
     Text: 'Text',
-    TextArea: 'TextArea'
+    TextArea: 'TextArea',
 } as const;
 
 export type CreateFieldRequestDataTypeEnum = typeof CreateFieldRequestDataTypeEnum[keyof typeof CreateFieldRequestDataTypeEnum];
 
 /**
  * Additional configuration for the field. Required for `Dropdown` and `List` data types. 
- * @export
- * @interface CreateFieldRequestData
  */
 export interface CreateFieldRequestData {
     /**
      * List of valid options for `Dropdown` and `List` field types. 
-     * @type {Array<string>}
-     * @memberof CreateFieldRequestData
      */
     'options'?: Array<string>;
 }
-/**
- * 
- * @export
- * @interface CreateInvoice200Response
- */
 export interface CreateInvoice200Response {
-    /**
-     * 
-     * @type {ListInvoices200ResponseInvoicesInner}
-     * @memberof CreateInvoice200Response
-     */
     'invoice': ListInvoices200ResponseInvoicesInner;
 }
-/**
- * 
- * @export
- * @interface CreateInvoiceRequest
- */
 export interface CreateInvoiceRequest {
     /**
      * Reference to the purchase order number within your organization
-     * @type {string}
-     * @memberof CreateInvoiceRequest
      */
     'po_number'?: string | null;
     /**
      * Amount of the invoice
-     * @type {number}
-     * @memberof CreateInvoiceRequest
      */
     'amount': number;
     /**
      * Currency of the invoice. Defaults to the organization\'s currency if not provided.
-     * @type {string}
-     * @memberof CreateInvoiceRequest
      */
     'currency_code'?: CreateInvoiceRequestCurrencyCodeEnum;
     /**
      * Deprecated: Use `currency_code` instead.
-     * @type {string}
-     * @memberof CreateInvoiceRequest
      * @deprecated
      */
     'currency'?: CreateInvoiceRequestCurrencyEnum;
     /**
      * A note to be included in the invoice. This is for your internal use and will not be visible to the recipient. 
-     * @type {string}
-     * @memberof CreateInvoiceRequest
      */
     'memo'?: string | null;
 }
@@ -1274,7 +703,7 @@ export const CreateInvoiceRequestCurrencyCodeEnum = {
     Usd: 'USD',
     Eur: 'EUR',
     Gbp: 'GBP',
-    Cad: 'CAD'
+    Cad: 'CAD',
 } as const;
 
 export type CreateInvoiceRequestCurrencyCodeEnum = typeof CreateInvoiceRequestCurrencyCodeEnum[keyof typeof CreateInvoiceRequestCurrencyCodeEnum];
@@ -1282,134 +711,70 @@ export const CreateInvoiceRequestCurrencyEnum = {
     Usd: 'USD',
     Eur: 'EUR',
     Gbp: 'GBP',
-    Cad: 'CAD'
+    Cad: 'CAD',
 } as const;
 
 export type CreateInvoiceRequestCurrencyEnum = typeof CreateInvoiceRequestCurrencyEnum[keyof typeof CreateInvoiceRequestCurrencyEnum];
 
-/**
- * 
- * @export
- * @interface CreateMember
- */
 export interface CreateMember {
     /**
      * Email address of the member
-     * @type {string}
-     * @memberof CreateMember
      */
     'email': string;
     /**
      * The role ID of the member within the organization. 
-     * @type {string}
-     * @memberof CreateMember
      */
     'role': string;
 }
-/**
- * 
- * @export
- * @interface CreateMember200Response
- */
 export interface CreateMember200Response {
-    /**
-     * 
-     * @type {ListMembers200ResponseMembersInner}
-     * @memberof CreateMember200Response
-     */
     'member': ListMembers200ResponseMembersInner;
 }
-/**
- * 
- * @export
- * @interface CreateMemberRequest
- */
 export interface CreateMemberRequest {
     /**
      * Email address of the member
-     * @type {string}
-     * @memberof CreateMemberRequest
      */
     'email': string;
     /**
      * The role ID of the member within the organization. 
-     * @type {string}
-     * @memberof CreateMemberRequest
      */
     'role': string;
 }
-/**
- * 
- * @export
- * @interface CreateOrder200Response
- */
 export interface CreateOrder200Response {
-    /**
-     * 
-     * @type {CreateOrder200ResponseOrder}
-     * @memberof CreateOrder200Response
-     */
     'order': CreateOrder200ResponseOrder;
 }
 /**
  * An order wraps around the fulfilment of one or more rewards.
- * @export
- * @interface CreateOrder200ResponseOrder
  */
 export interface CreateOrder200ResponseOrder {
     /**
      * Tremendous ID of the order
-     * @type {string}
-     * @memberof CreateOrder200ResponseOrder
      */
     'id': string;
     /**
      * Reference for this order, supplied by the customer.  When set, `external_id` makes order idempotent. All requests that use the same `external_id` after the initial order creation, will result in a response that returns the data of the initially created order. The response will have a `201` response code. These responses **fail** to create any further orders.  It also allows for retrieving by `external_id` instead of `id` only. 
-     * @type {string}
-     * @memberof CreateOrder200ResponseOrder
      */
     'external_id'?: string | null;
     /**
      * ID of the campaign in your account, that defines the available products (different gift cards, charity, etc.) that the recipient can choose from. 
-     * @type {string}
-     * @memberof CreateOrder200ResponseOrder
      */
     'campaign_id'?: string | null;
     /**
      * Date the order was created
-     * @type {string}
-     * @memberof CreateOrder200ResponseOrder
      */
     'created_at': string;
     /**
      * Execution status of a given order  <table>   <thead>     <tr>       <th>Status</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td><code>CANCELED</code></td>       <td>The order and all of its rewards were canceled.</td>     </tr>     <tr>       <td><code>OPEN</code></td>       <td>The order has been created, but hasn\'t yet been processed.</td>     </tr>     <tr>       <td><code>EXECUTED</code></td>       <td>The order has been executed. Payment has been handled and rewards are being delivered (if applicable).</td>     </tr>     <tr>       <td><code>FAILED</code></td>       <td>The order could not be processed due to an error. E.g. due to insufficient funds in the account.</td>     </tr>     <tr>       <td><code>PENDING APPROVAL</code></td>       <td>The order has been created but needs approval to be executed.</td>     </tr>     <tr>       <td><code>PENDING INTERNAL PAYMENT APPROVAL</code></td>       <td>The order has been created but it is under review and requires approval from our team.</td>     </tr>     <tr>       <td><code>PENDING SETTLEMENT</code></td>       <td>The order has been created but the funds are being held until the settlement window clears.</td>     </tr>   </tbody> </table> 
-     * @type {string}
-     * @memberof CreateOrder200ResponseOrder
      */
     'status': CreateOrder200ResponseOrderStatusEnum;
     /**
      * Name of the channel in which the order was created
-     * @type {string}
-     * @memberof CreateOrder200ResponseOrder
      */
     'channel'?: CreateOrder200ResponseOrderChannelEnum;
-    /**
-     * 
-     * @type {ListOrders200ResponseOrdersInnerPayment}
-     * @memberof CreateOrder200ResponseOrder
-     */
     'payment'?: ListOrders200ResponseOrdersInnerPayment;
     /**
      * The ID for the invoice associated with this order
-     * @type {string}
-     * @memberof CreateOrder200ResponseOrder
      */
     'invoice_id'?: string;
-    /**
-     * 
-     * @type {Array<CreateOrder200ResponseOrderRewardsInner>}
-     * @memberof CreateOrder200ResponseOrder
-     */
     'rewards'?: Array<CreateOrder200ResponseOrderRewardsInner>;
 }
 
@@ -1420,7 +785,7 @@ export const CreateOrder200ResponseOrderStatusEnum = {
     Failed: 'FAILED',
     PendingApproval: 'PENDING APPROVAL',
     PendingInternalPaymentApproval: 'PENDING INTERNAL PAYMENT APPROVAL',
-    PendingSettlement: 'PENDING SETTLEMENT'
+    PendingSettlement: 'PENDING SETTLEMENT',
 } as const;
 
 export type CreateOrder200ResponseOrderStatusEnum = typeof CreateOrder200ResponseOrderStatusEnum[keyof typeof CreateOrder200ResponseOrderStatusEnum];
@@ -1432,94 +797,54 @@ export const CreateOrder200ResponseOrderChannelEnum = {
     Qualtrics: 'QUALTRICS',
     Typeform: 'TYPEFORM',
     SurveyMonkey: 'SURVEY MONKEY',
-    Yotpo: 'YOTPO'
+    Yotpo: 'YOTPO',
 } as const;
 
 export type CreateOrder200ResponseOrderChannelEnum = typeof CreateOrder200ResponseOrderChannelEnum[keyof typeof CreateOrder200ResponseOrderChannelEnum];
 
 /**
  * A single reward, sent to a recipient. A reward is always part of an order.  Either `products` or `campaign_id` must be specified. 
- * @export
- * @interface CreateOrder200ResponseOrderRewardsInner
  */
 export interface CreateOrder200ResponseOrderRewardsInner {
     /**
      * Tremendous ID of the reward
-     * @type {string}
-     * @memberof CreateOrder200ResponseOrderRewardsInner
      */
     'id'?: string;
     /**
      * Tremendous ID of the order this reward is part of.
-     * @type {string}
-     * @memberof CreateOrder200ResponseOrderRewardsInner
      */
     'order_id'?: string;
     /**
      * Date the reward was created
-     * @type {string}
-     * @memberof CreateOrder200ResponseOrderRewardsInner
      */
     'created_at'?: string;
     /**
      * Expiration date of the reward. If null, the reward does not expire.
-     * @type {string}
-     * @memberof CreateOrder200ResponseOrderRewardsInner
      */
     'expires_at'?: string | null;
-    /**
-     * 
-     * @type {ListRewards200ResponseRewardsInnerValue}
-     * @memberof CreateOrder200ResponseOrderRewardsInner
-     */
     'value'?: ListRewards200ResponseRewardsInnerValue;
-    /**
-     * 
-     * @type {ListRewards200ResponseRewardsInnerRecipient}
-     * @memberof CreateOrder200ResponseOrderRewardsInner
-     */
     'recipient'?: ListRewards200ResponseRewardsInnerRecipient;
     /**
      * Timestamp of reward delivery within the next year. Note that if date-time is provided, the time values will be ignored.
-     * @type {string}
-     * @memberof CreateOrder200ResponseOrderRewardsInner
      */
     'deliver_at'?: string;
-    /**
-     * 
-     * @type {Array<ListRewards200ResponseRewardsInnerCustomFieldsInner>}
-     * @memberof CreateOrder200ResponseOrderRewardsInner
-     */
     'custom_fields'?: Array<ListRewards200ResponseRewardsInnerCustomFieldsInner>;
-    /**
-     * 
-     * @type {CreateOrder200ResponseOrderRewardsInnerDelivery}
-     * @memberof CreateOrder200ResponseOrderRewardsInner
-     */
     'delivery'?: CreateOrder200ResponseOrderRewardsInnerDelivery;
 }
 /**
  * Details on how the reward is delivered to the recipient. 
- * @export
- * @interface CreateOrder200ResponseOrderRewardsInnerDelivery
  */
 export interface CreateOrder200ResponseOrderRewardsInnerDelivery {
     /**
      * How to deliver the reward to the recipient.  <table>   <thead>     <tr>       <th>Delivery Method</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td><code>EMAIL</code></td>       <td>Deliver the reward to the recipient by email</td>     </tr>     <tr>       <td><code>LINK</code></td>       <td>         <p>Deliver the reward to the recipient via a link.</p>         <p>The initial <code>POST /orders</code> response for a link reward includes the link in <code>delivery.link</code>.</p>         <p>The link must then be delivered to the recipient out-of-band.</p>         <p>To obtain a new link for an existing reward, call <code>POST /rewards/{id}/generate_link</code>.</p>       </td>     </tr>     <tr>       <td><code>PHONE</code></td>       <td>Deliver the reward to the recipient by SMS</td>     </tr>   </tbody> </table> 
-     * @type {string}
-     * @memberof CreateOrder200ResponseOrderRewardsInnerDelivery
      */
     'method': CreateOrder200ResponseOrderRewardsInnerDeliveryMethodEnum;
     /**
      * Current status of the delivery of the reward:  * `SCHEDULED` - Reward is scheduled for delivery and will be delivered soon. * `FAILED` - Delivery of reward failed (e.g. email bounced). * `SUCCEEDED` - Reward was successfully delivered (email or text message delivered or reward link active). * `PENDING` - Delivery is pending but not yet scheduled. 
-     * @type {string}
-     * @memberof CreateOrder200ResponseOrderRewardsInnerDelivery
      */
     'status': CreateOrder200ResponseOrderRewardsInnerDeliveryStatusEnum;
     /**
      * Link to redeem the reward at. You need to deliver this link to the recipient. 
-     * @type {string}
-     * @memberof CreateOrder200ResponseOrderRewardsInnerDelivery
      */
     'link'?: string;
 }
@@ -1527,7 +852,7 @@ export interface CreateOrder200ResponseOrderRewardsInnerDelivery {
 export const CreateOrder200ResponseOrderRewardsInnerDeliveryMethodEnum = {
     Email: 'EMAIL',
     Link: 'LINK',
-    Phone: 'PHONE'
+    Phone: 'PHONE',
 } as const;
 
 export type CreateOrder200ResponseOrderRewardsInnerDeliveryMethodEnum = typeof CreateOrder200ResponseOrderRewardsInnerDeliveryMethodEnum[keyof typeof CreateOrder200ResponseOrderRewardsInnerDeliveryMethodEnum];
@@ -1535,481 +860,259 @@ export const CreateOrder200ResponseOrderRewardsInnerDeliveryStatusEnum = {
     Scheduled: 'SCHEDULED',
     Failed: 'FAILED',
     Succeeded: 'SUCCEEDED',
-    Pending: 'PENDING'
+    Pending: 'PENDING',
 } as const;
 
 export type CreateOrder200ResponseOrderRewardsInnerDeliveryStatusEnum = typeof CreateOrder200ResponseOrderRewardsInnerDeliveryStatusEnum[keyof typeof CreateOrder200ResponseOrderRewardsInnerDeliveryStatusEnum];
 
 /**
  * @type CreateOrderRequest
- * @export
  */
 export type CreateOrderRequest = SingleRewardOrder;
 
-/**
- * 
- * @export
- * @interface CreateOrganization
- */
 export interface CreateOrganization {
-    /**
-     * 
-     * @type {string}
-     * @memberof CreateOrganization
-     */
     'id'?: string;
     /**
      * Name of the organization
-     * @type {string}
-     * @memberof CreateOrganization
      */
     'name': string;
     /**
      * URL of the website of that organization
-     * @type {string}
-     * @memberof CreateOrganization
      */
     'website': string;
     /**
      * Default value is `false`. Set to true to also generate an API key associated to the new organization.
-     * @type {boolean}
-     * @memberof CreateOrganization
      */
     'with_api_key': boolean;
-    /**
-     * 
-     * @type {CreateOrganizationRequestCopySettings}
-     * @memberof CreateOrganization
-     */
     'copy_settings'?: CreateOrganizationRequestCopySettings;
     /**
      * Phone number of the organization. For non-US phone numbers, specify the country code (prefixed with +).
-     * @type {string}
-     * @memberof CreateOrganization
      */
     'phone'?: string;
     /**
      * Currency code for the new organization. Defaults to the current organization\'s currency if not provided.
-     * @type {string}
-     * @memberof CreateOrganization
      */
     'currency_code'?: string;
     /**
      * Timestamp of when the organization has been created. 
-     * @type {string}
-     * @memberof CreateOrganization
      */
     'created_at'?: string;
 }
-/**
- * 
- * @export
- * @interface CreateOrganization200Response
- */
 export interface CreateOrganization200Response {
-    /**
-     * 
-     * @type {CreateOrganization200ResponseOrganization}
-     * @memberof CreateOrganization200Response
-     */
     'organization'?: CreateOrganization200ResponseOrganization;
 }
-/**
- * 
- * @export
- * @interface CreateOrganization200ResponseOrganization
- */
 export interface CreateOrganization200ResponseOrganization {
-    /**
-     * 
-     * @type {string}
-     * @memberof CreateOrganization200ResponseOrganization
-     */
     'id'?: string;
     /**
      * Name of the organization
-     * @type {string}
-     * @memberof CreateOrganization200ResponseOrganization
      */
     'name': string;
     /**
      * URL of the website of that organization
-     * @type {string}
-     * @memberof CreateOrganization200ResponseOrganization
      */
     'website': string;
-    /**
-     * 
-     * @type {CreateOrganizationRequestCopySettings}
-     * @memberof CreateOrganization200ResponseOrganization
-     */
     'copy_settings'?: CreateOrganizationRequestCopySettings;
     /**
      * Phone number of the organization. For non-US phone numbers, specify the country code (prefixed with +).
-     * @type {string}
-     * @memberof CreateOrganization200ResponseOrganization
      */
     'phone'?: string | null;
     /**
      * Currency code for the new organization. Defaults to the current organization\'s currency if not provided.
-     * @type {string}
-     * @memberof CreateOrganization200ResponseOrganization
      */
     'currency_code'?: string;
     /**
      * Timestamp of when the organization has been created. 
-     * @type {string}
-     * @memberof CreateOrganization200ResponseOrganization
      */
     'created_at'?: string;
     /**
      * The API key for the created organization. This property is only returned when `api_key` is set to `true`. 
-     * @type {string}
-     * @memberof CreateOrganization200ResponseOrganization
      */
     'api_key'?: string;
 }
-/**
- * 
- * @export
- * @interface CreateOrganizationForResponse
- */
 export interface CreateOrganizationForResponse {
-    /**
-     * 
-     * @type {string}
-     * @memberof CreateOrganizationForResponse
-     */
     'id'?: string;
     /**
      * Name of the organization
-     * @type {string}
-     * @memberof CreateOrganizationForResponse
      */
     'name': string;
     /**
      * URL of the website of that organization
-     * @type {string}
-     * @memberof CreateOrganizationForResponse
      */
     'website': string;
     /**
      * Default value is `false`. Set to true to also generate an API key associated to the new organization.
-     * @type {boolean}
-     * @memberof CreateOrganizationForResponse
      */
     'with_api_key'?: boolean;
-    /**
-     * 
-     * @type {CreateOrganizationRequestCopySettings}
-     * @memberof CreateOrganizationForResponse
-     */
     'copy_settings'?: CreateOrganizationRequestCopySettings;
     /**
      * Phone number of the organization. For non-US phone numbers, specify the country code (prefixed with +).
-     * @type {string}
-     * @memberof CreateOrganizationForResponse
      */
     'phone'?: string | null;
     /**
      * Currency code for the new organization. Defaults to the current organization\'s currency if not provided.
-     * @type {string}
-     * @memberof CreateOrganizationForResponse
      */
     'currency_code'?: string;
     /**
      * Timestamp of when the organization has been created. 
-     * @type {string}
-     * @memberof CreateOrganizationForResponse
      */
     'created_at'?: string;
 }
-/**
- * 
- * @export
- * @interface CreateOrganizationProperties
- */
 export interface CreateOrganizationProperties {
-    /**
-     * 
-     * @type {string}
-     * @memberof CreateOrganizationProperties
-     */
     'id'?: string;
     /**
      * Name of the organization
-     * @type {string}
-     * @memberof CreateOrganizationProperties
      */
     'name'?: string;
     /**
      * URL of the website of that organization
-     * @type {string}
-     * @memberof CreateOrganizationProperties
      */
     'website'?: string;
     /**
      * Default value is `false`. Set to true to also generate an API key associated to the new organization.
-     * @type {boolean}
-     * @memberof CreateOrganizationProperties
      */
     'with_api_key'?: boolean;
-    /**
-     * 
-     * @type {CreateOrganizationRequestCopySettings}
-     * @memberof CreateOrganizationProperties
-     */
     'copy_settings'?: CreateOrganizationRequestCopySettings;
     /**
      * Phone number of the organization. For non-US phone numbers, specify the country code (prefixed with +).
-     * @type {string}
-     * @memberof CreateOrganizationProperties
      */
     'phone'?: string;
     /**
      * Currency code for the new organization. Defaults to the current organization\'s currency if not provided.
-     * @type {string}
-     * @memberof CreateOrganizationProperties
      */
     'currency_code'?: string;
     /**
      * Timestamp of when the organization has been created. 
-     * @type {string}
-     * @memberof CreateOrganizationProperties
      */
     'created_at'?: string;
 }
-/**
- * 
- * @export
- * @interface CreateOrganizationRequest
- */
 export interface CreateOrganizationRequest {
     /**
      * Name of the organization
-     * @type {string}
-     * @memberof CreateOrganizationRequest
      */
     'name': string;
     /**
      * URL of the website of that organization
-     * @type {string}
-     * @memberof CreateOrganizationRequest
      */
     'website': string;
     /**
      * Default value is `false`. Set to true to also generate an API key associated to the new organization.
-     * @type {boolean}
-     * @memberof CreateOrganizationRequest
      */
     'with_api_key': boolean;
-    /**
-     * 
-     * @type {CreateOrganizationRequestCopySettings}
-     * @memberof CreateOrganizationRequest
-     */
     'copy_settings'?: CreateOrganizationRequestCopySettings;
     /**
      * Phone number of the organization. For non-US phone numbers, specify the country code (prefixed with +).
-     * @type {string}
-     * @memberof CreateOrganizationRequest
      */
     'phone'?: string;
     /**
      * Currency code for the new organization. Defaults to the current organization\'s currency if not provided.
-     * @type {string}
-     * @memberof CreateOrganizationRequest
      */
     'currency_code'?: string;
 }
 /**
  * A list of the settings that you wish to copy over to the new organization.
- * @export
- * @interface CreateOrganizationRequestCopySettings
  */
 export interface CreateOrganizationRequestCopySettings {
     /**
      * Copy over the campaigns from the current organization to the new organization. Defaults to `false`.
-     * @type {boolean}
-     * @memberof CreateOrganizationRequestCopySettings
      */
     'campaigns'?: boolean;
     /**
      * Copy over the custom fields from the current organization to the new organization. Defaults to `false`.
-     * @type {boolean}
-     * @memberof CreateOrganizationRequestCopySettings
      */
     'custom_fields'?: boolean;
     /**
      * Copy over the order approvals settings from the current organization to the new organization. Defaults to `false`.
-     * @type {boolean}
-     * @memberof CreateOrganizationRequestCopySettings
      */
     'order_approvals'?: boolean;
     /**
      * Copy over the payment methods from the current organization to the new organization. Defaults to `false`.
-     * @type {boolean}
-     * @memberof CreateOrganizationRequestCopySettings
      */
     'payment_methods'?: boolean;
     /**
      * Copy over the security settings from the current organization to the new organization. Defaults to `true`.
-     * @type {boolean}
-     * @memberof CreateOrganizationRequestCopySettings
      */
     'security_settings'?: boolean;
     /**
      * Copy over the users and custom roles from the current organization to the new organization. Defaults to `false`.
-     * @type {boolean}
-     * @memberof CreateOrganizationRequestCopySettings
      */
     'users'?: boolean;
     /**
      * Copy over the custom roles from the current organization to the new organization. Custom roles are always copied if `users` is `true`. Defaults to `false`.
-     * @type {boolean}
-     * @memberof CreateOrganizationRequestCopySettings
      */
     'custom_roles'?: boolean;
     /**
      * Copy over the fraud prevention settings and rules from the current organization to the new organization. Defaults to `false`.
-     * @type {boolean}
-     * @memberof CreateOrganizationRequestCopySettings
      */
     'fraud_prevention'?: boolean;
     /**
      * Copy over the tax management settings, including the association with the parent tax entity, from the current organization to the new organization. Defaults to `false`.
-     * @type {boolean}
-     * @memberof CreateOrganizationRequestCopySettings
      */
     'tax_management'?: boolean;
 }
-/**
- * 
- * @export
- * @interface CreateOrganizationResponse
- */
 export interface CreateOrganizationResponse {
-    /**
-     * 
-     * @type {CreateOrganizationResponseOrganization}
-     * @memberof CreateOrganizationResponse
-     */
     'organization'?: CreateOrganizationResponseOrganization;
 }
-/**
- * 
- * @export
- * @interface CreateOrganizationResponseOrganization
- */
 export interface CreateOrganizationResponseOrganization {
-    /**
-     * 
-     * @type {string}
-     * @memberof CreateOrganizationResponseOrganization
-     */
     'id'?: string;
     /**
      * Name of the organization
-     * @type {string}
-     * @memberof CreateOrganizationResponseOrganization
      */
     'name': string;
     /**
      * URL of the website of that organization
-     * @type {string}
-     * @memberof CreateOrganizationResponseOrganization
      */
     'website': string;
     /**
      * Default value is `false`. Set to true to also generate an API key associated to the new organization.
-     * @type {boolean}
-     * @memberof CreateOrganizationResponseOrganization
      */
     'with_api_key'?: boolean;
-    /**
-     * 
-     * @type {CreateOrganizationRequestCopySettings}
-     * @memberof CreateOrganizationResponseOrganization
-     */
     'copy_settings'?: CreateOrganizationRequestCopySettings;
     /**
      * Phone number of the organization. For non-US phone numbers, specify the country code (prefixed with +).
-     * @type {string}
-     * @memberof CreateOrganizationResponseOrganization
      */
     'phone'?: string | null;
     /**
      * Currency code for the new organization. Defaults to the current organization\'s currency if not provided.
-     * @type {string}
-     * @memberof CreateOrganizationResponseOrganization
      */
     'currency_code'?: string;
     /**
      * Timestamp of when the organization has been created. 
-     * @type {string}
-     * @memberof CreateOrganizationResponseOrganization
      */
     'created_at'?: string;
     /**
      * The API key for the created organization. This property is only returned when `api_key` is set to `true`. 
-     * @type {string}
-     * @memberof CreateOrganizationResponseOrganization
      */
     'api_key'?: string;
 }
-/**
- * 
- * @export
- * @interface CreateReport200Response
- */
 export interface CreateReport200Response {
-    /**
-     * 
-     * @type {CreateReport200ResponseReport}
-     * @memberof CreateReport200Response
-     */
     'report': CreateReport200ResponseReport;
     /**
      * Report status message
-     * @type {string}
-     * @memberof CreateReport200Response
      */
     'message'?: string;
 }
 /**
  * Reports represent a collection of your Tremendous data that can be filtered and downloaded.  The report object that is returned has a unique ID, a status, and an predicted time of report generation completion. When the report generation is complete, it will also contain an expiring url where you can retrieve your report. 
- * @export
- * @interface CreateReport200ResponseReport
  */
 export interface CreateReport200ResponseReport {
     /**
      * Tremendous ID of the report, used to retrieve your report
-     * @type {string}
-     * @memberof CreateReport200ResponseReport
      */
     'id'?: string;
     /**
      * Status of this report  <table>   <thead>     <tr>       <th>Status</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td><code>CREATED</code></td>       <td>Report has been created</td>     </tr>     <tr>       <td><code>PROCESSING</code></td>       <td>Report is currently being generated</td>     </tr>     <tr>       <td><code>READY_FOR_DOWNLOAD</code></td>       <td>Report generation is complete and ready for download</td>     </tr>     <tr>       <td><code>FAILED</code></td>       <td>Report failed to generate</td>     </tr>   </tbody> </table> 
-     * @type {string}
-     * @memberof CreateReport200ResponseReport
      */
     'status'?: CreateReport200ResponseReportStatusEnum;
     /**
      * Timestamp of when the report was created 
-     * @type {string}
-     * @memberof CreateReport200ResponseReport
      */
     'created_at'?: string;
     /**
      * Timestamp of when the report is expected to finish generating. If the report is complete, this will return the time the report completed generating at. 
-     * @type {string}
-     * @memberof CreateReport200ResponseReport
      */
     'expected_completion_at'?: string;
     /**
      * URL to download the report. Only returned when the report generation is complete and report is ready for download. URL is valid for 7 days from generation completion 
-     * @type {string}
-     * @memberof CreateReport200ResponseReport
      */
     'url'?: string | null;
 }
@@ -2018,113 +1121,68 @@ export const CreateReport200ResponseReportStatusEnum = {
     Created: 'CREATED',
     Processing: 'PROCESSING',
     ReadyForDownload: 'READY_FOR_DOWNLOAD',
-    Failed: 'FAILED'
+    Failed: 'FAILED',
 } as const;
 
 export type CreateReport200ResponseReportStatusEnum = typeof CreateReport200ResponseReportStatusEnum[keyof typeof CreateReport200ResponseReportStatusEnum];
 
-/**
- * 
- * @export
- * @interface CreateReportRequest
- */
 export interface CreateReportRequest {
     /**
      * Type of report for retrieval. <table> <thead> <tr> <th>Report type</th> <th>Description</th> </tr> </thead> <tbody> <tr> <td><code>digital_rewards</code></td> <td>Report for Tremendous digital reward history</td> </tr> </tbody> </table>
-     * @type {string}
-     * @memberof CreateReportRequest
      */
     'report_type': CreateReportRequestReportTypeEnum;
     /**
      * Format the report will be generated in. <table> <thead> <tr> <th>Format</th> <th>Description</th> </tr> </thead> <tbody> <tr> <td><code>csv</code></td> <td>CSV format for report</td> </tr> </tbody> </table>
-     * @type {string}
-     * @memberof CreateReportRequest
      */
     'format': CreateReportRequestFormatEnum;
-    /**
-     * 
-     * @type {CreateReportRequestFilters}
-     * @memberof CreateReportRequest
-     */
     'filters'?: CreateReportRequestFilters | null;
 }
 
 export const CreateReportRequestReportTypeEnum = {
-    DigitalRewards: 'digital_rewards'
+    DigitalRewards: 'digital_rewards',
 } as const;
 
 export type CreateReportRequestReportTypeEnum = typeof CreateReportRequestReportTypeEnum[keyof typeof CreateReportRequestReportTypeEnum];
 export const CreateReportRequestFormatEnum = {
-    Csv: 'csv'
+    Csv: 'csv',
 } as const;
 
 export type CreateReportRequestFormatEnum = typeof CreateReportRequestFormatEnum[keyof typeof CreateReportRequestFormatEnum];
 
 /**
  * Filters to apply to the report. Corresponds to the filters provided in the dashboard 
- * @export
- * @interface CreateReportRequestFilters
  */
 export interface CreateReportRequestFilters {
-    /**
-     * 
-     * @type {CreateReportRequestFiltersDigitalRewards}
-     * @memberof CreateReportRequestFilters
-     */
     'digital_rewards'?: CreateReportRequestFiltersDigitalRewards | null;
 }
 /**
  * Filters object for a `report_type: digital_rewards` report 
- * @export
- * @interface CreateReportRequestFiltersDigitalRewards
  */
 export interface CreateReportRequestFiltersDigitalRewards {
-    /**
-     * 
-     * @type {CreateReportRequestFiltersDigitalRewardsAmount}
-     * @memberof CreateReportRequestFiltersDigitalRewards
-     */
     'amount'?: CreateReportRequestFiltersDigitalRewardsAmount | null;
     /**
      * ID of the Tremendous campaign that this report should be limited to 
-     * @type {string}
-     * @memberof CreateReportRequestFiltersDigitalRewards
      */
     'campaign_id'?: string | null;
-    /**
-     * 
-     * @type {CreateReportRequestFiltersDigitalRewardsCreatedAt}
-     * @memberof CreateReportRequestFiltersDigitalRewards
-     */
     'created_at'?: CreateReportRequestFiltersDigitalRewardsCreatedAt | null;
     /**
      * Delivery date for gifts that should be returned in the report 
-     * @type {string}
-     * @memberof CreateReportRequestFiltersDigitalRewards
      */
     'delivered_at'?: string | null;
     /**
      * Delivery method for rewards returned in the report 
-     * @type {string}
-     * @memberof CreateReportRequestFiltersDigitalRewards
      */
     'delivery_method'?: CreateReportRequestFiltersDigitalRewardsDeliveryMethodEnum | null;
     /**
      * ID of the Tremendous order that this report should be limited to 
-     * @type {string}
-     * @memberof CreateReportRequestFiltersDigitalRewards
      */
     'order_id'?: string | null;
     /**
      * Order status for rewards returned in the report 
-     * @type {string}
-     * @memberof CreateReportRequestFiltersDigitalRewards
      */
     'order_status'?: CreateReportRequestFiltersDigitalRewardsOrderStatusEnum | null;
     /**
      * Status for rewards returned in the report 
-     * @type {Array<string>}
-     * @memberof CreateReportRequestFiltersDigitalRewards
      */
     'status'?: Array<CreateReportRequestFiltersDigitalRewardsStatusEnum> | null;
 }
@@ -2134,7 +1192,7 @@ export const CreateReportRequestFiltersDigitalRewardsDeliveryMethodEnum = {
     Email: 'email',
     Link: 'link',
     Mail: 'mail',
-    Direct: 'direct'
+    Direct: 'direct',
 } as const;
 
 export type CreateReportRequestFiltersDigitalRewardsDeliveryMethodEnum = typeof CreateReportRequestFiltersDigitalRewardsDeliveryMethodEnum[keyof typeof CreateReportRequestFiltersDigitalRewardsDeliveryMethodEnum];
@@ -2142,7 +1200,7 @@ export const CreateReportRequestFiltersDigitalRewardsOrderStatusEnum = {
     Executed: 'executed',
     Canceled: 'canceled',
     Failed: 'failed',
-    PendingApproval: 'pending_approval'
+    PendingApproval: 'pending_approval',
 } as const;
 
 export type CreateReportRequestFiltersDigitalRewardsOrderStatusEnum = typeof CreateReportRequestFiltersDigitalRewardsOrderStatusEnum[keyof typeof CreateReportRequestFiltersDigitalRewardsOrderStatusEnum];
@@ -2150,118 +1208,63 @@ export const CreateReportRequestFiltersDigitalRewardsStatusEnum = {
     Delivered: 'delivered',
     Canceled: 'canceled',
     DeliveryFailed: 'delivery_failed',
-    PendingReview: 'pending_review'
+    PendingReview: 'pending_review',
 } as const;
 
 export type CreateReportRequestFiltersDigitalRewardsStatusEnum = typeof CreateReportRequestFiltersDigitalRewardsStatusEnum[keyof typeof CreateReportRequestFiltersDigitalRewardsStatusEnum];
 
 /**
  * Amount of the rewards returned in the report 
- * @export
- * @interface CreateReportRequestFiltersDigitalRewardsAmount
  */
 export interface CreateReportRequestFiltersDigitalRewardsAmount {
     /**
      * Minimum amount of the rewards that should be returned in the report
-     * @type {number}
-     * @memberof CreateReportRequestFiltersDigitalRewardsAmount
      */
     'gte'?: number;
     /**
      * Maximum amount of the rewards that should be returned in the report
-     * @type {number}
-     * @memberof CreateReportRequestFiltersDigitalRewardsAmount
      */
     'lte'?: number;
 }
 /**
  * Creation dates of rewards returned in the report 
- * @export
- * @interface CreateReportRequestFiltersDigitalRewardsCreatedAt
  */
 export interface CreateReportRequestFiltersDigitalRewardsCreatedAt {
     /**
      * Minimum date the reward was created
-     * @type {string}
-     * @memberof CreateReportRequestFiltersDigitalRewardsCreatedAt
      */
     'gte'?: string;
     /**
      * Maximum date the reward was created
-     * @type {string}
-     * @memberof CreateReportRequestFiltersDigitalRewardsCreatedAt
      */
     'lte'?: string;
 }
-/**
- * 
- * @export
- * @interface CreateTopup200Response
- */
 export interface CreateTopup200Response {
-    /**
-     * 
-     * @type {ListTopups200ResponseTopupsInner}
-     * @memberof CreateTopup200Response
-     */
     'topup'?: ListTopups200ResponseTopupsInner;
 }
-/**
- * 
- * @export
- * @interface CreateTopupRequest
- */
 export interface CreateTopupRequest {
     /**
      * The ID of the funding source to top up.
-     * @type {string}
-     * @memberof CreateTopupRequest
      */
     'funding_source_id': string;
     /**
      * Unique key that ensures this request is only processed once. 
-     * @type {string}
-     * @memberof CreateTopupRequest
      */
     'idempotency_key': string;
     /**
      * Amount to add to your organization\'s balance, denominated in `currency_code`.
-     * @type {number}
-     * @memberof CreateTopupRequest
      */
     'amount': number;
 }
-/**
- * 
- * @export
- * @interface CreateWebhook200Response
- */
 export interface CreateWebhook200Response {
-    /**
-     * 
-     * @type {ListWebhooks200ResponseWebhooksInner}
-     * @memberof CreateWebhook200Response
-     */
     'webhook'?: ListWebhooks200ResponseWebhooksInner;
 }
-/**
- * 
- * @export
- * @interface CreateWebhookRequest
- */
 export interface CreateWebhookRequest {
     /**
      * URL the webhook will make requests to
-     * @type {string}
-     * @memberof CreateWebhookRequest
      */
     'url': string;
 }
-/**
- * 
- * @export
- * @enum {string}
- */
 
 export const CurrencyCodes = {
     Usd: 'USD',
@@ -2374,7 +1377,7 @@ export const CurrencyCodes = {
     Xaf: 'XAF',
     Xof: 'XOF',
     Yer: 'YER',
-    Zar: 'ZAR'
+    Zar: 'ZAR',
 } as const;
 
 export type CurrencyCodes = typeof CurrencyCodes[keyof typeof CurrencyCodes];
@@ -2382,45 +1385,31 @@ export type CurrencyCodes = typeof CurrencyCodes[keyof typeof CurrencyCodes];
 
 /**
  * Reward custom data for searching, tracking or copy (see [Adding custom fields to orders](https://developers.tremendous.com/docs/using-custom-fields-to-add-custom-data-to-rewards).)
- * @export
- * @interface CustomField
  */
 export interface CustomField {
     /**
      * Tremendous ID of the custom field
-     * @type {string}
-     * @memberof CustomField
      */
     'id'?: string;
     /**
      * Value of the custom field
-     * @type {string}
-     * @memberof CustomField
      */
     'value'?: string | null;
     /**
      * Label of the custom field
-     * @type {string}
-     * @memberof CustomField
      */
     'label'?: string;
 }
 /**
  * Details on how the reward is delivered to the recipient. 
- * @export
- * @interface DeliveryDetails
  */
 export interface DeliveryDetails {
     /**
      * How to deliver the reward to the recipient.  <table>   <thead>     <tr>       <th>Delivery Method</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td><code>EMAIL</code></td>       <td>Deliver the reward to the recipient by email</td>     </tr>     <tr>       <td><code>LINK</code></td>       <td>         <p>Deliver the reward to the recipient via a link.</p>         <p>The initial <code>POST /orders</code> response for a link reward includes the link in <code>delivery.link</code>.</p>         <p>The link must then be delivered to the recipient out-of-band.</p>         <p>To obtain a new link for an existing reward, call <code>POST /rewards/{id}/generate_link</code>.</p>       </td>     </tr>     <tr>       <td><code>PHONE</code></td>       <td>Deliver the reward to the recipient by SMS</td>     </tr>   </tbody> </table> 
-     * @type {string}
-     * @memberof DeliveryDetails
      */
     'method'?: DeliveryDetailsMethodEnum;
     /**
      * Current status of the delivery of the reward:  * `SCHEDULED` - Reward is scheduled for delivery and will be delivered soon. * `FAILED` - Delivery of reward failed (e.g. email bounced). * `SUCCEEDED` - Reward was successfully delivered (email or text message delivered or reward link active). * `PENDING` - Delivery is pending but not yet scheduled. 
-     * @type {string}
-     * @memberof DeliveryDetails
      */
     'status'?: DeliveryDetailsStatusEnum;
 }
@@ -2428,7 +1417,7 @@ export interface DeliveryDetails {
 export const DeliveryDetailsMethodEnum = {
     Email: 'EMAIL',
     Link: 'LINK',
-    Phone: 'PHONE'
+    Phone: 'PHONE',
 } as const;
 
 export type DeliveryDetailsMethodEnum = typeof DeliveryDetailsMethodEnum[keyof typeof DeliveryDetailsMethodEnum];
@@ -2436,33 +1425,25 @@ export const DeliveryDetailsStatusEnum = {
     Scheduled: 'SCHEDULED',
     Failed: 'FAILED',
     Succeeded: 'SUCCEEDED',
-    Pending: 'PENDING'
+    Pending: 'PENDING',
 } as const;
 
 export type DeliveryDetailsStatusEnum = typeof DeliveryDetailsStatusEnum[keyof typeof DeliveryDetailsStatusEnum];
 
 /**
  * Details on how the reward is delivered to the recipient. 
- * @export
- * @interface DeliveryDetailsWithLink
  */
 export interface DeliveryDetailsWithLink {
     /**
      * How to deliver the reward to the recipient.  <table>   <thead>     <tr>       <th>Delivery Method</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td><code>EMAIL</code></td>       <td>Deliver the reward to the recipient by email</td>     </tr>     <tr>       <td><code>LINK</code></td>       <td>         <p>Deliver the reward to the recipient via a link.</p>         <p>The initial <code>POST /orders</code> response for a link reward includes the link in <code>delivery.link</code>.</p>         <p>The link must then be delivered to the recipient out-of-band.</p>         <p>To obtain a new link for an existing reward, call <code>POST /rewards/{id}/generate_link</code>.</p>       </td>     </tr>     <tr>       <td><code>PHONE</code></td>       <td>Deliver the reward to the recipient by SMS</td>     </tr>   </tbody> </table> 
-     * @type {string}
-     * @memberof DeliveryDetailsWithLink
      */
     'method': DeliveryDetailsWithLinkMethodEnum;
     /**
      * Current status of the delivery of the reward:  * `SCHEDULED` - Reward is scheduled for delivery and will be delivered soon. * `FAILED` - Delivery of reward failed (e.g. email bounced). * `SUCCEEDED` - Reward was successfully delivered (email or text message delivered or reward link active). * `PENDING` - Delivery is pending but not yet scheduled. 
-     * @type {string}
-     * @memberof DeliveryDetailsWithLink
      */
     'status': DeliveryDetailsWithLinkStatusEnum;
     /**
      * Link to redeem the reward at. You need to deliver this link to the recipient. 
-     * @type {string}
-     * @memberof DeliveryDetailsWithLink
      */
     'link'?: string;
 }
@@ -2470,7 +1451,7 @@ export interface DeliveryDetailsWithLink {
 export const DeliveryDetailsWithLinkMethodEnum = {
     Email: 'EMAIL',
     Link: 'LINK',
-    Phone: 'PHONE'
+    Phone: 'PHONE',
 } as const;
 
 export type DeliveryDetailsWithLinkMethodEnum = typeof DeliveryDetailsWithLinkMethodEnum[keyof typeof DeliveryDetailsWithLinkMethodEnum];
@@ -2478,46 +1459,36 @@ export const DeliveryDetailsWithLinkStatusEnum = {
     Scheduled: 'SCHEDULED',
     Failed: 'FAILED',
     Succeeded: 'SUCCEEDED',
-    Pending: 'PENDING'
+    Pending: 'PENDING',
 } as const;
 
 export type DeliveryDetailsWithLinkStatusEnum = typeof DeliveryDetailsWithLinkStatusEnum[keyof typeof DeliveryDetailsWithLinkStatusEnum];
 
 /**
  * Customizable reward delivery metadata, taking precedence over the related campaign settings. 
- * @export
- * @interface DeliveryMetadata
  */
 export interface DeliveryMetadata {
     /**
      * The \"sender name\" used in the delivery. If it\'s an email reward, \"via Tremendous\" will be appended to the value. Please note that you cannot customize the sender email.
-     * @type {string}
-     * @memberof DeliveryMetadata
      */
     'sender_name'?: string;
     /**
      * The subject line used in the delivery.
-     * @type {string}
-     * @memberof DeliveryMetadata
      */
     'subject_line'?: string;
     /**
      * The content of the message of the reward, shown in the email / SMS and on the landing page.
-     * @type {string}
-     * @memberof DeliveryMetadata
      */
     'message'?: string;
 }
 /**
  * How to deliver the reward to the recipient.  <table>   <thead>     <tr>       <th>Delivery Method</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td><code>EMAIL</code></td>       <td>Deliver the reward to the recipient by email</td>     </tr>     <tr>       <td><code>LINK</code></td>       <td>         <p>Deliver the reward to the recipient via a link.</p>         <p>The initial <code>POST /orders</code> response for a link reward includes the link in <code>delivery.link</code>.</p>         <p>The link must then be delivered to the recipient out-of-band.</p>         <p>To obtain a new link for an existing reward, call <code>POST /rewards/{id}/generate_link</code>.</p>       </td>     </tr>     <tr>       <td><code>PHONE</code></td>       <td>Deliver the reward to the recipient by SMS</td>     </tr>   </tbody> </table> 
- * @export
- * @enum {string}
  */
 
 export const DeliveryMethod = {
     Email: 'EMAIL',
     Link: 'LINK',
-    Phone: 'PHONE'
+    Phone: 'PHONE',
 } as const;
 
 export type DeliveryMethod = typeof DeliveryMethod[keyof typeof DeliveryMethod];
@@ -2525,79 +1496,42 @@ export type DeliveryMethod = typeof DeliveryMethod[keyof typeof DeliveryMethod];
 
 /**
  * Current status of the delivery of the reward:  * `SCHEDULED` - Reward is scheduled for delivery and will be delivered soon. * `FAILED` - Delivery of reward failed (e.g. email bounced). * `SUCCEEDED` - Reward was successfully delivered (email or text message delivered or reward link active). * `PENDING` - Delivery is pending but not yet scheduled. 
- * @export
- * @enum {string}
  */
 
 export const DeliveryStatus = {
     Scheduled: 'SCHEDULED',
     Failed: 'FAILED',
     Succeeded: 'SUCCEEDED',
-    Pending: 'PENDING'
+    Pending: 'PENDING',
 } as const;
 
 export type DeliveryStatus = typeof DeliveryStatus[keyof typeof DeliveryStatus];
 
 
-/**
- * 
- * @export
- * @interface ErrorModel
- */
 export interface ErrorModel {
     /**
      * HTTP status code of the response
-     * @type {number}
-     * @memberof ErrorModel
      */
     'status'?: number;
-    /**
-     * 
-     * @type {ListRewards401ResponseErrors}
-     * @memberof ErrorModel
-     */
     'errors': ListRewards401ResponseErrors;
 }
-/**
- * 
- * @export
- * @interface Field
- */
 export interface Field {
-    /**
-     * 
-     * @type {string}
-     * @memberof Field
-     */
     'id'?: string;
     /**
      * Label of the field
-     * @type {string}
-     * @memberof Field
      */
     'label'?: string;
     /**
      * Type of the values of the field  <table>   <thead>     <tr>       <th>Type</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td><code>Checkbox</code></td>       <td>A boolean value (true/false)</td>     </tr>     <tr>       <td><code>Currency</code></td>       <td>A monetary value</td>     </tr>     <tr>       <td><code>Date</code></td>       <td>A date value</td>     </tr>     <tr>       <td><code>Dropdown</code></td>       <td>A single selection from predefined options (see <code>data.options</code>)</td>     </tr>     <tr>       <td><code>Email</code></td>       <td>An email address</td>     </tr>     <tr>       <td><code>List</code></td>       <td>Multiple selections from predefined options (see <code>data.options</code>)</td>     </tr>     <tr>       <td><code>Number</code></td>       <td>A numeric value</td>     </tr>     <tr>       <td><code>Phone</code></td>       <td>A phone number</td>     </tr>     <tr>       <td><code>Text</code></td>       <td>A single-line text value</td>     </tr>     <tr>       <td><code>TextArea</code></td>       <td>A multi-line text value</td>     </tr>   </tbody> </table> 
-     * @type {string}
-     * @memberof Field
      */
     'data_type'?: FieldDataTypeEnum;
-    /**
-     * 
-     * @type {ListFields200ResponseFieldsInnerData}
-     * @memberof Field
-     */
     'data'?: ListFields200ResponseFieldsInnerData;
     /**
      * Is this field required (true) or optional (false)
-     * @type {boolean}
-     * @memberof Field
      */
     'required'?: boolean;
     /**
      * Type of objects this field gets associated with
-     * @type {string}
-     * @memberof Field
      */
     'scope'?: string;
 }
@@ -2612,93 +1546,54 @@ export const FieldDataTypeEnum = {
     Number: 'Number',
     Phone: 'Phone',
     Text: 'Text',
-    TextArea: 'TextArea'
+    TextArea: 'TextArea',
 } as const;
 
 export type FieldDataTypeEnum = typeof FieldDataTypeEnum[keyof typeof FieldDataTypeEnum];
 
-/**
- * 
- * @export
- * @interface FraudConfigAllowEmail
- */
 export interface FraudConfigAllowEmail {
     /**
      * The list of emails.
-     * @type {Array<string>}
-     * @memberof FraudConfigAllowEmail
      */
     'emails': Array<string>;
 }
-/**
- * 
- * @export
- * @interface FraudConfigCountry
- */
 export interface FraudConfigCountry {
     /**
      * When type is `whitelist`, it flags any countries that *are not* present in the list. When type is `blacklist`, it flags any countries that *are* present in the list. 
-     * @type {string}
-     * @memberof FraudConfigCountry
      */
     'type': FraudConfigCountryTypeEnum;
     /**
      * An array of country codes (ISO-3166 alpha-2 character code)
-     * @type {Array<string>}
-     * @memberof FraudConfigCountry
      */
     'countries': Array<string>;
 }
 
 export const FraudConfigCountryTypeEnum = {
     Whitelist: 'whitelist',
-    Blacklist: 'blacklist'
+    Blacklist: 'blacklist',
 } as const;
 
 export type FraudConfigCountryTypeEnum = typeof FraudConfigCountryTypeEnum[keyof typeof FraudConfigCountryTypeEnum];
 
-/**
- * 
- * @export
- * @interface FraudConfigCountryUpdateList
- */
 export interface FraudConfigCountryUpdateList {
     /**
      * An array of country codes (ISO-3166 alpha-2 character code)
-     * @type {Array<string>}
-     * @memberof FraudConfigCountryUpdateList
      */
     'countries': Array<string>;
 }
-/**
- * 
- * @export
- * @interface FraudConfigIP
- */
 export interface FraudConfigIP {
     /**
      * The list of IP addresses to flag or allow. Accepts both IPv4 and IPv6 addresses using CIDR notation. 
-     * @type {Array<string>}
-     * @memberof FraudConfigIP
      */
     'ips': Array<string>;
 }
-/**
- * 
- * @export
- * @interface FraudConfigRedeemedRewardsAmount
- */
 export interface FraudConfigRedeemedRewardsAmount {
     /**
      * The total amount of redeemed rewards to use as a threshold. The amount is denominated in the organization\'s currency.
-     * @type {number}
-     * @memberof FraudConfigRedeemedRewardsAmount
      */
     'amount': number;
     /**
      * The period, in days, to consider for the count. Use `all_time` to consider any redeemed rewards.
-     * @type {string}
-     * @memberof FraudConfigRedeemedRewardsAmount
      */
     'period': FraudConfigRedeemedRewardsAmountPeriodEnum;
 }
@@ -2709,27 +1604,18 @@ export const FraudConfigRedeemedRewardsAmountPeriodEnum = {
     _90: '90',
     _120: '120',
     _365: '365',
-    AllTime: 'all_time'
+    AllTime: 'all_time',
 } as const;
 
 export type FraudConfigRedeemedRewardsAmountPeriodEnum = typeof FraudConfigRedeemedRewardsAmountPeriodEnum[keyof typeof FraudConfigRedeemedRewardsAmountPeriodEnum];
 
-/**
- * 
- * @export
- * @interface FraudConfigRedeemedRewardsCount
- */
 export interface FraudConfigRedeemedRewardsCount {
     /**
      * The number of redeemed rewards to use as a threshold.
-     * @type {number}
-     * @memberof FraudConfigRedeemedRewardsCount
      */
     'amount': number;
     /**
      * The period, in days, to consider for the count. Use `all_time` to consider any redeemed rewards.
-     * @type {string}
-     * @memberof FraudConfigRedeemedRewardsCount
      */
     'period': FraudConfigRedeemedRewardsCountPeriodEnum;
 }
@@ -2740,140 +1626,82 @@ export const FraudConfigRedeemedRewardsCountPeriodEnum = {
     _90: '90',
     _120: '120',
     _365: '365',
-    AllTime: 'all_time'
+    AllTime: 'all_time',
 } as const;
 
 export type FraudConfigRedeemedRewardsCountPeriodEnum = typeof FraudConfigRedeemedRewardsCountPeriodEnum[keyof typeof FraudConfigRedeemedRewardsCountPeriodEnum];
 
-/**
- * 
- * @export
- * @interface FraudConfigReviewEmail
- */
 export interface FraudConfigReviewEmail {
     /**
      * The list of emails.
-     * @type {Array<string>}
-     * @memberof FraudConfigReviewEmail
      */
     'emails'?: Array<string>;
     /**
      * The list of domains. Any subdomains will also be matched against each entry in the list.
-     * @type {Array<string>}
-     * @memberof FraudConfigReviewEmail
      */
     'domains'?: Array<string>;
 }
-/**
- * 
- * @export
- * @interface FraudConfigReviewVpn
- */
 export interface FraudConfigReviewVpn {
     /**
      * Whether Apple Private Relay traffic should be excluded from VPN fraud review. When omitted or false, Apple Private Relay traffic is flagged with other VPN and proxy traffic. 
-     * @type {boolean}
-     * @memberof FraudConfigReviewVpn
      */
     'skip_apple_private_relay'?: boolean;
 }
-/**
- * 
- * @export
- * @interface FraudGenericResponse
- */
 export interface FraudGenericResponse {
     /**
      * A description of the result
-     * @type {string}
-     * @memberof FraudGenericResponse
      */
     'message': string;
 }
 /**
  * The fraud review associated with a reward.
- * @export
- * @interface FraudReview
  */
 export interface FraudReview {
     /**
      * The current status of the fraud review:  * `flagged` - The reward has been flagged for and waiting manual review. * `blocked` - The reward was reviewed and blocked. * `released` - The reward was reviewed and released. 
-     * @type {string}
-     * @memberof FraudReview
      */
     'status'?: FraudReviewStatusEnum;
     /**
      * The array may contain multiple reasons, depending on which rule(s) flagged the reward for review. Reasons can be any of the following:  * `Disallowed IP` * `Disallowed email` * `Disallowed country` * `Over reward amount limit` * `Over reward count limit` * `VPN detected` * `Apple Private Relay` * `Device related to multiple emails` * `Device or account related to multiple emails` * `IP on a Tremendous fraud list` * `Bank account on a Tremendous fraud list` * `Fingerprint on a Tremendous fraud list` * `Email on a Tremendous fraud list` * `Phone on a Tremendous fraud list` * `Device on a Tremendous fraud list` * `IP related to a blocked reward` * `Device related to a blocked reward` * `Bank account related to a blocked reward` * `Fingerprint related to a blocked reward` * `Email related to a blocked reward` * `Phone related to a blocked reward` * `Allowed IP` * `Allowed email` * `Allowed country` 
-     * @type {Array<string>}
-     * @memberof FraudReview
      */
     'reasons'?: Array<FraudReviewReasonsEnum>;
     /**
      * The device fingerprint, if known.
-     * @type {string}
-     * @memberof FraudReview
      */
     'device_id'?: string;
     /**
      * The product selected to claim the reward
-     * @type {string}
-     * @memberof FraudReview
      */
     'redemption_method'?: FraudReviewRedemptionMethodEnum;
     /**
      * Date the reward was redeemed
-     * @type {string}
-     * @memberof FraudReview
      */
     'redeemed_at'?: string;
-    /**
-     * 
-     * @type {ListFraudReviews200ResponseFraudReviewsInnerGeo}
-     * @memberof FraudReview
-     */
     'geo'?: ListFraudReviews200ResponseFraudReviewsInnerGeo;
-    /**
-     * 
-     * @type {RewardResponseReward}
-     * @memberof FraudReview
-     */
     'reward'?: RewardResponseReward;
     /**
      * The name of the person who reviewed the reward, or `Automatic Review` if the reward was blocked automatically. Rewards can be automatically blocked if they remain in the flagged fraud queue for more than 30 days.  This field is only present if the status is not `flagged`. 
-     * @type {string}
-     * @memberof FraudReview
      */
     'reviewed_by'?: string;
     /**
      * When the reward was blocked or released following fraud review.  This field is only present if the status is not `flagged`. 
-     * @type {string}
-     * @memberof FraudReview
      */
     'reviewed_at'?: string;
     /**
      * A hash of the destination account for redemption methods that require providing 3rd party account details (e.g., PayPal, Venmo, ACH/CashApp, international bank transfers, etc.). The hash is globally unique by redemption method + account combination. This field is omitted for redemption methods that don\'t have a destination account (e.g., merchant cards, charities, etc.). 
-     * @type {string}
-     * @memberof FraudReview
      */
     'redemption_method_account_hash'?: string;
     /**
      * The fraud risk associated with the reward.
-     * @type {string}
-     * @memberof FraudReview
      */
     'risk'?: FraudReviewRiskEnum;
-    /**
-     * 
-     * @type {FraudReviewRelatedRewards}
-     * @memberof FraudReview
-     */
     'related_rewards'?: FraudReviewRelatedRewards;
 }
 
 export const FraudReviewStatusEnum = {
     Flagged: 'flagged',
     Blocked: 'blocked',
-    Released: 'released'
+    Released: 'released',
 } as const;
 
 export type FraudReviewStatusEnum = typeof FraudReviewStatusEnum[keyof typeof FraudReviewStatusEnum];
@@ -2901,7 +1729,7 @@ export const FraudReviewReasonsEnum = {
     PhoneRelatedToABlockedReward: 'Phone related to a blocked reward',
     AllowedIp: 'Allowed IP',
     AllowedEmail: 'Allowed email',
-    AllowedCountry: 'Allowed country'
+    AllowedCountry: 'Allowed country',
 } as const;
 
 export type FraudReviewReasonsEnum = typeof FraudReviewReasonsEnum[keyof typeof FraudReviewReasonsEnum];
@@ -2913,82 +1741,54 @@ export const FraudReviewRedemptionMethodEnum = {
     MerchantCard: 'merchant card',
     Paypal: 'paypal',
     Venmo: 'venmo',
-    VisaCard: 'visa card'
+    VisaCard: 'visa card',
 } as const;
 
 export type FraudReviewRedemptionMethodEnum = typeof FraudReviewRedemptionMethodEnum[keyof typeof FraudReviewRedemptionMethodEnum];
 export const FraudReviewRiskEnum = {
     High: 'high',
     Medium: 'medium',
-    Low: 'low'
+    Low: 'low',
 } as const;
 
 export type FraudReviewRiskEnum = typeof FraudReviewRiskEnum[keyof typeof FraudReviewRiskEnum];
 
 /**
  * The fraud review associated with a reward.
- * @export
- * @interface FraudReviewBase
  */
 export interface FraudReviewBase {
     /**
      * The current status of the fraud review:  * `flagged` - The reward has been flagged for and waiting manual review. * `blocked` - The reward was reviewed and blocked. * `released` - The reward was reviewed and released. 
-     * @type {string}
-     * @memberof FraudReviewBase
      */
     'status'?: FraudReviewBaseStatusEnum;
     /**
      * The array may contain multiple reasons, depending on which rule(s) flagged the reward for review. Reasons can be any of the following:  * `Disallowed IP` * `Disallowed email` * `Disallowed country` * `Over reward amount limit` * `Over reward count limit` * `VPN detected` * `Apple Private Relay` * `Device related to multiple emails` * `Device or account related to multiple emails` * `IP on a Tremendous fraud list` * `Bank account on a Tremendous fraud list` * `Fingerprint on a Tremendous fraud list` * `Email on a Tremendous fraud list` * `Phone on a Tremendous fraud list` * `Device on a Tremendous fraud list` * `IP related to a blocked reward` * `Device related to a blocked reward` * `Bank account related to a blocked reward` * `Fingerprint related to a blocked reward` * `Email related to a blocked reward` * `Phone related to a blocked reward` * `Allowed IP` * `Allowed email` * `Allowed country` 
-     * @type {Array<string>}
-     * @memberof FraudReviewBase
      */
     'reasons'?: Array<FraudReviewBaseReasonsEnum>;
     /**
      * The device fingerprint, if known.
-     * @type {string}
-     * @memberof FraudReviewBase
      */
     'device_id'?: string;
     /**
      * The product selected to claim the reward
-     * @type {string}
-     * @memberof FraudReviewBase
      */
     'redemption_method'?: FraudReviewBaseRedemptionMethodEnum;
     /**
      * Date the reward was redeemed
-     * @type {string}
-     * @memberof FraudReviewBase
      */
     'redeemed_at'?: string;
-    /**
-     * 
-     * @type {ListFraudReviews200ResponseFraudReviewsInnerGeo}
-     * @memberof FraudReviewBase
-     */
     'geo'?: ListFraudReviews200ResponseFraudReviewsInnerGeo;
-    /**
-     * 
-     * @type {RewardResponseReward}
-     * @memberof FraudReviewBase
-     */
     'reward'?: RewardResponseReward;
     /**
      * The name of the person who reviewed the reward, or `Automatic Review` if the reward was blocked automatically. Rewards can be automatically blocked if they remain in the flagged fraud queue for more than 30 days.  This field is only present if the status is not `flagged`. 
-     * @type {string}
-     * @memberof FraudReviewBase
      */
     'reviewed_by'?: string;
     /**
      * When the reward was blocked or released following fraud review.  This field is only present if the status is not `flagged`. 
-     * @type {string}
-     * @memberof FraudReviewBase
      */
     'reviewed_at'?: string;
     /**
      * A hash of the destination account for redemption methods that require providing 3rd party account details (e.g., PayPal, Venmo, ACH/CashApp, international bank transfers, etc.). The hash is globally unique by redemption method + account combination. This field is omitted for redemption methods that don\'t have a destination account (e.g., merchant cards, charities, etc.). 
-     * @type {string}
-     * @memberof FraudReviewBase
      */
     'redemption_method_account_hash'?: string;
 }
@@ -2996,7 +1796,7 @@ export interface FraudReviewBase {
 export const FraudReviewBaseStatusEnum = {
     Flagged: 'flagged',
     Blocked: 'blocked',
-    Released: 'released'
+    Released: 'released',
 } as const;
 
 export type FraudReviewBaseStatusEnum = typeof FraudReviewBaseStatusEnum[keyof typeof FraudReviewBaseStatusEnum];
@@ -3024,7 +1824,7 @@ export const FraudReviewBaseReasonsEnum = {
     PhoneRelatedToABlockedReward: 'Phone related to a blocked reward',
     AllowedIp: 'Allowed IP',
     AllowedEmail: 'Allowed email',
-    AllowedCountry: 'Allowed country'
+    AllowedCountry: 'Allowed country',
 } as const;
 
 export type FraudReviewBaseReasonsEnum = typeof FraudReviewBaseReasonsEnum[keyof typeof FraudReviewBaseReasonsEnum];
@@ -3036,100 +1836,61 @@ export const FraudReviewBaseRedemptionMethodEnum = {
     MerchantCard: 'merchant card',
     Paypal: 'paypal',
     Venmo: 'venmo',
-    VisaCard: 'visa card'
+    VisaCard: 'visa card',
 } as const;
 
 export type FraudReviewBaseRedemptionMethodEnum = typeof FraudReviewBaseRedemptionMethodEnum[keyof typeof FraudReviewBaseRedemptionMethodEnum];
 
-/**
- * 
- * @export
- * @interface FraudReviewGeo
- */
 export interface FraudReviewGeo {
     /**
      * The recipient\'s IP.
-     * @type {string}
-     * @memberof FraudReviewGeo
      */
     'ip'?: string;
     /**
      * The country code (ISO-3166 alpha-2 character code) linked to the recipient\'s IP.
-     * @type {string}
-     * @memberof FraudReviewGeo
      */
     'country'?: string;
     /**
      * The city associated with the recipient\'s IP.
-     * @type {string}
-     * @memberof FraudReviewGeo
      */
     'city'?: string;
 }
 /**
  * The fraud review associated with a reward.
- * @export
- * @interface FraudReviewListItem
  */
 export interface FraudReviewListItem {
     /**
      * The current status of the fraud review:  * `flagged` - The reward has been flagged for and waiting manual review. * `blocked` - The reward was reviewed and blocked. * `released` - The reward was reviewed and released. 
-     * @type {string}
-     * @memberof FraudReviewListItem
      */
     'status'?: FraudReviewListItemStatusEnum;
     /**
      * The array may contain multiple reasons, depending on which rule(s) flagged the reward for review. Reasons can be any of the following:  * `Disallowed IP` * `Disallowed email` * `Disallowed country` * `Over reward amount limit` * `Over reward count limit` * `VPN detected` * `Apple Private Relay` * `Device related to multiple emails` * `Device or account related to multiple emails` * `IP on a Tremendous fraud list` * `Bank account on a Tremendous fraud list` * `Fingerprint on a Tremendous fraud list` * `Email on a Tremendous fraud list` * `Phone on a Tremendous fraud list` * `Device on a Tremendous fraud list` * `IP related to a blocked reward` * `Device related to a blocked reward` * `Bank account related to a blocked reward` * `Fingerprint related to a blocked reward` * `Email related to a blocked reward` * `Phone related to a blocked reward` * `Allowed IP` * `Allowed email` * `Allowed country` 
-     * @type {Array<string>}
-     * @memberof FraudReviewListItem
      */
     'reasons'?: Array<FraudReviewListItemReasonsEnum>;
     /**
      * The device fingerprint, if known.
-     * @type {string}
-     * @memberof FraudReviewListItem
      */
     'device_id'?: string;
     /**
      * The product selected to claim the reward
-     * @type {string}
-     * @memberof FraudReviewListItem
      */
     'redemption_method'?: FraudReviewListItemRedemptionMethodEnum;
     /**
      * Date the reward was redeemed
-     * @type {string}
-     * @memberof FraudReviewListItem
      */
     'redeemed_at'?: string;
-    /**
-     * 
-     * @type {ListFraudReviews200ResponseFraudReviewsInnerGeo}
-     * @memberof FraudReviewListItem
-     */
     'geo'?: ListFraudReviews200ResponseFraudReviewsInnerGeo;
-    /**
-     * 
-     * @type {RewardResponseReward}
-     * @memberof FraudReviewListItem
-     */
     'reward'?: RewardResponseReward;
     /**
      * The name of the person who reviewed the reward, or `Automatic Review` if the reward was blocked automatically. Rewards can be automatically blocked if they remain in the flagged fraud queue for more than 30 days.  This field is only present if the status is not `flagged`. 
-     * @type {string}
-     * @memberof FraudReviewListItem
      */
     'reviewed_by'?: string;
     /**
      * When the reward was blocked or released following fraud review.  This field is only present if the status is not `flagged`. 
-     * @type {string}
-     * @memberof FraudReviewListItem
      */
     'reviewed_at'?: string;
     /**
      * A hash of the destination account for redemption methods that require providing 3rd party account details (e.g., PayPal, Venmo, ACH/CashApp, international bank transfers, etc.). The hash is globally unique by redemption method + account combination. This field is omitted for redemption methods that don\'t have a destination account (e.g., merchant cards, charities, etc.). 
-     * @type {string}
-     * @memberof FraudReviewListItem
      */
     'redemption_method_account_hash'?: string;
 }
@@ -3137,7 +1898,7 @@ export interface FraudReviewListItem {
 export const FraudReviewListItemStatusEnum = {
     Flagged: 'flagged',
     Blocked: 'blocked',
-    Released: 'released'
+    Released: 'released',
 } as const;
 
 export type FraudReviewListItemStatusEnum = typeof FraudReviewListItemStatusEnum[keyof typeof FraudReviewListItemStatusEnum];
@@ -3165,7 +1926,7 @@ export const FraudReviewListItemReasonsEnum = {
     PhoneRelatedToABlockedReward: 'Phone related to a blocked reward',
     AllowedIp: 'Allowed IP',
     AllowedEmail: 'Allowed email',
-    AllowedCountry: 'Allowed country'
+    AllowedCountry: 'Allowed country',
 } as const;
 
 export type FraudReviewListItemReasonsEnum = typeof FraudReviewListItemReasonsEnum[keyof typeof FraudReviewListItemReasonsEnum];
@@ -3177,16 +1938,11 @@ export const FraudReviewListItemRedemptionMethodEnum = {
     MerchantCard: 'merchant card',
     Paypal: 'paypal',
     Venmo: 'venmo',
-    VisaCard: 'visa card'
+    VisaCard: 'visa card',
 } as const;
 
 export type FraudReviewListItemRedemptionMethodEnum = typeof FraudReviewListItemRedemptionMethodEnum[keyof typeof FraudReviewListItemRedemptionMethodEnum];
 
-/**
- * 
- * @export
- * @enum {string}
- */
 
 export const FraudReviewReason = {
     DisallowedIp: 'Disallowed IP',
@@ -3212,17 +1968,12 @@ export const FraudReviewReason = {
     PhoneRelatedToABlockedReward: 'Phone related to a blocked reward',
     AllowedIp: 'Allowed IP',
     AllowedEmail: 'Allowed email',
-    AllowedCountry: 'Allowed country'
+    AllowedCountry: 'Allowed country',
 } as const;
 
 export type FraudReviewReason = typeof FraudReviewReason[keyof typeof FraudReviewReason];
 
 
-/**
- * 
- * @export
- * @enum {string}
- */
 
 export const FraudReviewRedemptionMethod = {
     BankTransfer: 'bank transfer',
@@ -3232,7 +1983,7 @@ export const FraudReviewRedemptionMethod = {
     MerchantCard: 'merchant card',
     Paypal: 'paypal',
     Venmo: 'venmo',
-    VisaCard: 'visa card'
+    VisaCard: 'visa card',
 } as const;
 
 export type FraudReviewRedemptionMethod = typeof FraudReviewRedemptionMethod[keyof typeof FraudReviewRedemptionMethod];
@@ -3240,51 +1991,37 @@ export type FraudReviewRedemptionMethod = typeof FraudReviewRedemptionMethod[key
 
 /**
  * The related rewards associated with the fraud review.
- * @export
- * @interface FraudReviewRelatedRewards
  */
 export interface FraudReviewRelatedRewards {
     /**
      * The IDs of rewards that have similar attributes to the fraud reward. A maximum of 100 IDs is returned. 
-     * @type {Array<string>}
-     * @memberof FraudReviewRelatedRewards
      */
     'ids'?: Array<string>;
     /**
      * How many related rewards were found in total.
-     * @type {number}
-     * @memberof FraudReviewRelatedRewards
      */
     'count'?: number;
     /**
      * How many related rewards have been blocked.
-     * @type {number}
-     * @memberof FraudReviewRelatedRewards
      */
     'blocked_count'?: number;
     /**
      * Total amount claimed by the related rewards, denominated in `currency_code`. 
-     * @type {number}
-     * @memberof FraudReviewRelatedRewards
      */
     'aggregated_value'?: number;
     /**
      * Currency of the aggregated value. Always matches the organization\'s currency.
-     * @type {string}
-     * @memberof FraudReviewRelatedRewards
      */
     'currency_code'?: string;
 }
 /**
  * The fraud risk associated with the reward.
- * @export
- * @enum {string}
  */
 
 export const FraudReviewRisk = {
     High: 'high',
     Medium: 'medium',
-    Low: 'low'
+    Low: 'low',
 } as const;
 
 export type FraudReviewRisk = typeof FraudReviewRisk[keyof typeof FraudReviewRisk];
@@ -3292,104 +2029,67 @@ export type FraudReviewRisk = typeof FraudReviewRisk[keyof typeof FraudReviewRis
 
 /**
  * The current status of the fraud review:  * `flagged` - The reward has been flagged for and waiting manual review. * `blocked` - The reward was reviewed and blocked. * `released` - The reward was reviewed and released. 
- * @export
- * @enum {string}
  */
 
 export const FraudReviewStatus = {
     Flagged: 'flagged',
     Blocked: 'blocked',
-    Released: 'released'
+    Released: 'released',
 } as const;
 
 export type FraudReviewStatus = typeof FraudReviewStatus[keyof typeof FraudReviewStatus];
 
 
-/**
- * 
- * @export
- * @interface FraudRule200Response
- */
 export interface FraudRule200Response {
     /**
      * A description of the result
-     * @type {string}
-     * @memberof FraudRule200Response
      */
     'message': string;
 }
-/**
- * 
- * @export
- * @interface FraudRuleRequest
- */
 export interface FraudRuleRequest {
-    /**
-     * 
-     * @type {FraudRuleRequestConfig}
-     * @memberof FraudRuleRequest
-     */
     'config'?: FraudRuleRequestConfig;
 }
 /**
  * The configuration associated with the rule. The properties allowed depend on the type of rule.
- * @export
- * @interface FraudRuleRequestConfig
  */
 export interface FraudRuleRequestConfig {
     /**
      * When type is `whitelist`, it flags any countries that *are not* present in the list. When type is `blacklist`, it flags any countries that *are* present in the list. 
-     * @type {string}
-     * @memberof FraudRuleRequestConfig
      */
     'type': FraudRuleRequestConfigTypeEnum;
     /**
      * An array of country codes (ISO-3166 alpha-2 character code)
-     * @type {Array<string>}
-     * @memberof FraudRuleRequestConfig
      */
     'countries': Array<string>;
     /**
      * The list of IP addresses to flag or allow. Accepts both IPv4 and IPv6 addresses using CIDR notation. 
-     * @type {Array<string>}
-     * @memberof FraudRuleRequestConfig
      */
     'ips': Array<string>;
     /**
      * The list of emails.
-     * @type {Array<string>}
-     * @memberof FraudRuleRequestConfig
      */
     'emails': Array<string>;
     /**
      * The list of domains. Any subdomains will also be matched against each entry in the list.
-     * @type {Array<string>}
-     * @memberof FraudRuleRequestConfig
      */
     'domains'?: Array<string>;
     /**
      * The total amount of redeemed rewards to use as a threshold. The amount is denominated in the organization\'s currency.
-     * @type {number}
-     * @memberof FraudRuleRequestConfig
      */
     'amount': number;
     /**
      * The period, in days, to consider for the count. Use `all_time` to consider any redeemed rewards.
-     * @type {string}
-     * @memberof FraudRuleRequestConfig
      */
     'period': FraudRuleRequestConfigPeriodEnum;
     /**
      * Whether Apple Private Relay traffic should be excluded from VPN fraud review. When omitted or false, Apple Private Relay traffic is flagged with other VPN and proxy traffic. 
-     * @type {boolean}
-     * @memberof FraudRuleRequestConfig
      */
     'skip_apple_private_relay'?: boolean;
 }
 
 export const FraudRuleRequestConfigTypeEnum = {
     Whitelist: 'whitelist',
-    Blacklist: 'blacklist'
+    Blacklist: 'blacklist',
 } as const;
 
 export type FraudRuleRequestConfigTypeEnum = typeof FraudRuleRequestConfigTypeEnum[keyof typeof FraudRuleRequestConfigTypeEnum];
@@ -3399,15 +2099,13 @@ export const FraudRuleRequestConfigPeriodEnum = {
     _90: '90',
     _120: '120',
     _365: '365',
-    AllTime: 'all_time'
+    AllTime: 'all_time',
 } as const;
 
 export type FraudRuleRequestConfigPeriodEnum = typeof FraudRuleRequestConfigPeriodEnum[keyof typeof FraudRuleRequestConfigPeriodEnum];
 
 /**
  * * `review_country` - Flags when the recipient\'s IP country matches the criteria in the rule * `review_ip` - Flags when recipient\'s IP matches one in the list * `review_email` - Flags when the recipient\'s email matches one in the list * `review_redeemed_rewards_count` - Flags when the recipient redeemed more than the number of rewards specified in the config * `review_redeemed_rewards_amount` - Flags when the recipient redeemed more than the total amount specified in the config. The amount is denominated in the organization\'s currency. * `review_multiple_emails` - Flags when recipient\'s device or account has multiple emails associated * `review_vpn` - Flags when VPN or proxy use is suspected. Can be configured to exclude Apple Private Relay. * `review_tremendous_flag_list` - Flags rewards when redemption attributes match at least one criteria defined by the Tremendous flag list * `review_previously_blocked_recipients` - Flags rewards when the recipient has been blocked before * `allow_ip` - Releases a reward when a recipient\'s IP matches one in the list * `allow_email` - Releases a reward when the recipient\'s email matches one in the list 
- * @export
- * @enum {string}
  */
 
 export const FraudRuleType = {
@@ -3421,7 +2119,7 @@ export const FraudRuleType = {
     ReviewTremendousFlagList: 'review_tremendous_flag_list',
     ReviewPreviouslyBlockedRecipients: 'review_previously_blocked_recipients',
     AllowIp: 'allow_ip',
-    AllowEmail: 'allow_email'
+    AllowEmail: 'allow_email',
 } as const;
 
 export type FraudRuleType = typeof FraudRuleType[keyof typeof FraudRuleType];
@@ -3429,20 +2127,14 @@ export type FraudRuleType = typeof FraudRuleType[keyof typeof FraudRuleType];
 
 /**
  * An active fraud rule
- * @export
- * @interface FraudRulesListItem
  */
 export interface FraudRulesListItem {
     /**
      * * `review_country` - Flags when the recipient\'s IP country matches the criteria in the rule * `review_ip` - Flags when recipient\'s IP matches one in the list * `review_email` - Flags when the recipient\'s email matches one in the list * `review_redeemed_rewards_count` - Flags when the recipient redeemed more than the number of rewards specified in the config * `review_redeemed_rewards_amount` - Flags when the recipient redeemed more than the total amount specified in the config. The amount is denominated in the organization\'s currency. * `review_multiple_emails` - Flags when recipient\'s device or account has multiple emails associated * `review_vpn` - Flags when VPN or proxy use is suspected. Can be configured to exclude Apple Private Relay. * `review_tremendous_flag_list` - Flags rewards when redemption attributes match at least one criteria defined by the Tremendous flag list * `review_previously_blocked_recipients` - Flags rewards when the recipient has been blocked before * `allow_ip` - Releases a reward when a recipient\'s IP matches one in the list * `allow_email` - Releases a reward when the recipient\'s email matches one in the list 
-     * @type {string}
-     * @memberof FraudRulesListItem
      */
     'rule_type'?: FraudRulesListItemRuleTypeEnum;
     /**
      * The configuration associated with the rule. The properties allowed depend on the type of rule. This property is only present for rules that require configuration. 
-     * @type {{ [key: string]: any; }}
-     * @memberof FraudRulesListItem
      */
     'config'?: { [key: string]: any; } | null;
 }
@@ -3458,52 +2150,32 @@ export const FraudRulesListItemRuleTypeEnum = {
     ReviewTremendousFlagList: 'review_tremendous_flag_list',
     ReviewPreviouslyBlockedRecipients: 'review_previously_blocked_recipients',
     AllowIp: 'allow_ip',
-    AllowEmail: 'allow_email'
+    AllowEmail: 'allow_email',
 } as const;
 
 export type FraudRulesListItemRuleTypeEnum = typeof FraudRulesListItemRuleTypeEnum[keyof typeof FraudRulesListItemRuleTypeEnum];
 
 /**
  * 
- * @export
- * @interface FundingSource
  */
 export interface FundingSource {
-    /**
-     * 
-     * @type {string}
-     * @memberof FundingSource
-     */
     'id': string;
     /**
      * You can pay for rewards using different payment methods on Tremendous:  <table>   <thead>     <tr>       <th>Payment Method</th>       <th>Description</th>       </tr>   </thead>   <tbody>     <tr>       <td><code>balance</code></td>       <td>Pre-funded balance in your Tremendous account to draw funds from to send rewards to recipients.</td>     </tr>     <tr>       <td><code>bank_account</code></td>       <td>Bank account to draw funds from to send rewards to recipients.</td>     </tr>     <tr>       <td><code>credit_card</code></td>       <td>Credit card to draw funds from to send rewards to recipients.</td>     </tr>     <tr>       <td><code>invoice</code></td>       <td>Send rewards to recipients and pay by invoice.</td>     </tr>    </tbody> </table> 
-     * @type {string}
-     * @memberof FundingSource
      */
     'method': FundingSourceMethodEnum;
     /**
      * Indicates which actions this funding source can perform.   <table>     <thead>       <tr>         <th>Permission</th>         <th>Description</th>         </tr>     </thead>     <tbody>       <tr>         <td><code>api_orders</code></td>         <td>Usable for orders via API.</td>       </tr>       <tr>         <td><code>dashboard_orders</code></td>         <td>Usable for orders via Tremendous dashboard.</td>       </tr>       <tr>         <td><code>balance_funding</code></td>         <td>Usable to add funds to a balance (via dashboard or API).</td>       </tr>     </tbody>   </table> 
-     * @type {Array<string>}
-     * @memberof FundingSource
      */
     'usage_permissions'?: Array<FundingSourceUsagePermissionsEnum>;
     /**
      * Status of the funding_source    <table>     <thead>       <tr>         <th>Status</th>         <th>Description</th>         </tr>     </thead>     <tbody>       <tr>         <td><code>active</code></td>         <td>Ready for use.</td>       </tr>       <tr>         <td><code>deleted</code></td>         <td>Manually removed, and not usable.</td>       </tr>       <tr>         <td><code>failed</code></td>         <td>Last payment attempt failed, and not usable (contact Tremendous support to reinstate).</td>       </tr>     </tbody>   </table> 
-     * @type {string}
-     * @memberof FundingSource
      */
     'status'?: FundingSourceStatusEnum;
     /**
      * **Only available when `method` is set to `invoice`.** 
-     * @type {string}
-     * @memberof FundingSource
      */
     'type'?: FundingSourceTypeEnum;
-    /**
-     * 
-     * @type {ListFundingSources200ResponseFundingSourcesInnerMeta}
-     * @memberof FundingSource
-     */
     'meta': ListFundingSources200ResponseFundingSourcesInnerMeta;
 }
 
@@ -3511,161 +2183,100 @@ export const FundingSourceMethodEnum = {
     Balance: 'balance',
     BankAccount: 'bank_account',
     CreditCard: 'credit_card',
-    Invoice: 'invoice'
+    Invoice: 'invoice',
 } as const;
 
 export type FundingSourceMethodEnum = typeof FundingSourceMethodEnum[keyof typeof FundingSourceMethodEnum];
 export const FundingSourceUsagePermissionsEnum = {
     ApiOrders: 'api_orders',
     DashboardOrders: 'dashboard_orders',
-    BalanceFunding: 'balance_funding'
+    BalanceFunding: 'balance_funding',
 } as const;
 
 export type FundingSourceUsagePermissionsEnum = typeof FundingSourceUsagePermissionsEnum[keyof typeof FundingSourceUsagePermissionsEnum];
 export const FundingSourceStatusEnum = {
     Active: 'active',
     Deleted: 'deleted',
-    Failed: 'failed'
+    Failed: 'failed',
 } as const;
 
 export type FundingSourceStatusEnum = typeof FundingSourceStatusEnum[keyof typeof FundingSourceStatusEnum];
 export const FundingSourceTypeEnum = {
     Commercial: 'COMMERCIAL',
     ProForma: 'PRO_FORMA',
-    PrefundingOnly: 'PREFUNDING_ONLY'
+    PrefundingOnly: 'PREFUNDING_ONLY',
 } as const;
 
 export type FundingSourceTypeEnum = typeof FundingSourceTypeEnum[keyof typeof FundingSourceTypeEnum];
 
-/**
- * 
- * @export
- * @interface GenerateRewardLink200Response
- */
 export interface GenerateRewardLink200Response {
-    /**
-     * 
-     * @type {GenerateRewardLink200ResponseReward}
-     * @memberof GenerateRewardLink200Response
-     */
     'reward': GenerateRewardLink200ResponseReward;
 }
 /**
  * The redemption link for a reward.
- * @export
- * @interface GenerateRewardLink200ResponseReward
  */
 export interface GenerateRewardLink200ResponseReward {
     /**
      * Tremendous ID of the reward
-     * @type {string}
-     * @memberof GenerateRewardLink200ResponseReward
      */
     'id'?: string;
     /**
      * Link to redeem the reward at. You need to deliver this link to the recipient. 
-     * @type {string}
-     * @memberof GenerateRewardLink200ResponseReward
      */
     'link'?: string;
 }
-/**
- * 
- * @export
- * @interface GetFraudReview200Response
- */
 export interface GetFraudReview200Response {
-    /**
-     * 
-     * @type {GetFraudReview200ResponseFraudReview}
-     * @memberof GetFraudReview200Response
-     */
     'fraud_review': GetFraudReview200ResponseFraudReview;
 }
 /**
  * The fraud review associated with a reward.
- * @export
- * @interface GetFraudReview200ResponseFraudReview
  */
 export interface GetFraudReview200ResponseFraudReview {
     /**
      * The current status of the fraud review:  * `flagged` - The reward has been flagged for and waiting manual review. * `blocked` - The reward was reviewed and blocked. * `released` - The reward was reviewed and released. 
-     * @type {string}
-     * @memberof GetFraudReview200ResponseFraudReview
      */
     'status'?: GetFraudReview200ResponseFraudReviewStatusEnum;
     /**
      * The array may contain multiple reasons, depending on which rule(s) flagged the reward for review. Reasons can be any of the following:  * `Disallowed IP` * `Disallowed email` * `Disallowed country` * `Over reward amount limit` * `Over reward count limit` * `VPN detected` * `Apple Private Relay` * `Device related to multiple emails` * `Device or account related to multiple emails` * `IP on a Tremendous fraud list` * `Bank account on a Tremendous fraud list` * `Fingerprint on a Tremendous fraud list` * `Email on a Tremendous fraud list` * `Phone on a Tremendous fraud list` * `Device on a Tremendous fraud list` * `IP related to a blocked reward` * `Device related to a blocked reward` * `Bank account related to a blocked reward` * `Fingerprint related to a blocked reward` * `Email related to a blocked reward` * `Phone related to a blocked reward` * `Allowed IP` * `Allowed email` * `Allowed country` 
-     * @type {Array<string>}
-     * @memberof GetFraudReview200ResponseFraudReview
      */
     'reasons'?: Array<GetFraudReview200ResponseFraudReviewReasonsEnum>;
     /**
      * The device fingerprint, if known.
-     * @type {string}
-     * @memberof GetFraudReview200ResponseFraudReview
      */
     'device_id'?: string;
     /**
      * The product selected to claim the reward
-     * @type {string}
-     * @memberof GetFraudReview200ResponseFraudReview
      */
     'redemption_method'?: GetFraudReview200ResponseFraudReviewRedemptionMethodEnum;
     /**
      * Date the reward was redeemed
-     * @type {string}
-     * @memberof GetFraudReview200ResponseFraudReview
      */
     'redeemed_at'?: string;
-    /**
-     * 
-     * @type {ListFraudReviews200ResponseFraudReviewsInnerGeo}
-     * @memberof GetFraudReview200ResponseFraudReview
-     */
     'geo'?: ListFraudReviews200ResponseFraudReviewsInnerGeo;
-    /**
-     * 
-     * @type {ListRewards200ResponseRewardsInner}
-     * @memberof GetFraudReview200ResponseFraudReview
-     */
     'reward'?: ListRewards200ResponseRewardsInner;
     /**
      * The name of the person who reviewed the reward, or `Automatic Review` if the reward was blocked automatically. Rewards can be automatically blocked if they remain in the flagged fraud queue for more than 30 days.  This field is only present if the status is not `flagged`. 
-     * @type {string}
-     * @memberof GetFraudReview200ResponseFraudReview
      */
     'reviewed_by'?: string;
     /**
      * When the reward was blocked or released following fraud review.  This field is only present if the status is not `flagged`. 
-     * @type {string}
-     * @memberof GetFraudReview200ResponseFraudReview
      */
     'reviewed_at'?: string;
     /**
      * A hash of the destination account for redemption methods that require providing 3rd party account details (e.g., PayPal, Venmo, ACH/CashApp, international bank transfers, etc.). The hash is globally unique by redemption method + account combination. This field is omitted for redemption methods that don\'t have a destination account (e.g., merchant cards, charities, etc.). 
-     * @type {string}
-     * @memberof GetFraudReview200ResponseFraudReview
      */
     'redemption_method_account_hash'?: string;
     /**
      * The fraud risk associated with the reward.
-     * @type {string}
-     * @memberof GetFraudReview200ResponseFraudReview
      */
     'risk'?: GetFraudReview200ResponseFraudReviewRiskEnum;
-    /**
-     * 
-     * @type {GetFraudReview200ResponseFraudReviewRelatedRewards}
-     * @memberof GetFraudReview200ResponseFraudReview
-     */
     'related_rewards'?: GetFraudReview200ResponseFraudReviewRelatedRewards;
 }
 
 export const GetFraudReview200ResponseFraudReviewStatusEnum = {
     Flagged: 'flagged',
     Blocked: 'blocked',
-    Released: 'released'
+    Released: 'released',
 } as const;
 
 export type GetFraudReview200ResponseFraudReviewStatusEnum = typeof GetFraudReview200ResponseFraudReviewStatusEnum[keyof typeof GetFraudReview200ResponseFraudReviewStatusEnum];
@@ -3693,7 +2304,7 @@ export const GetFraudReview200ResponseFraudReviewReasonsEnum = {
     PhoneRelatedToABlockedReward: 'Phone related to a blocked reward',
     AllowedIp: 'Allowed IP',
     AllowedEmail: 'Allowed email',
-    AllowedCountry: 'Allowed country'
+    AllowedCountry: 'Allowed country',
 } as const;
 
 export type GetFraudReview200ResponseFraudReviewReasonsEnum = typeof GetFraudReview200ResponseFraudReviewReasonsEnum[keyof typeof GetFraudReview200ResponseFraudReviewReasonsEnum];
@@ -3705,307 +2316,171 @@ export const GetFraudReview200ResponseFraudReviewRedemptionMethodEnum = {
     MerchantCard: 'merchant card',
     Paypal: 'paypal',
     Venmo: 'venmo',
-    VisaCard: 'visa card'
+    VisaCard: 'visa card',
 } as const;
 
 export type GetFraudReview200ResponseFraudReviewRedemptionMethodEnum = typeof GetFraudReview200ResponseFraudReviewRedemptionMethodEnum[keyof typeof GetFraudReview200ResponseFraudReviewRedemptionMethodEnum];
 export const GetFraudReview200ResponseFraudReviewRiskEnum = {
     High: 'high',
     Medium: 'medium',
-    Low: 'low'
+    Low: 'low',
 } as const;
 
 export type GetFraudReview200ResponseFraudReviewRiskEnum = typeof GetFraudReview200ResponseFraudReviewRiskEnum[keyof typeof GetFraudReview200ResponseFraudReviewRiskEnum];
 
 /**
  * The related rewards associated with the fraud review.
- * @export
- * @interface GetFraudReview200ResponseFraudReviewRelatedRewards
  */
 export interface GetFraudReview200ResponseFraudReviewRelatedRewards {
     /**
      * The IDs of rewards that have similar attributes to the fraud reward. A maximum of 100 IDs is returned. 
-     * @type {Array<string>}
-     * @memberof GetFraudReview200ResponseFraudReviewRelatedRewards
      */
     'ids'?: Array<string>;
     /**
      * How many related rewards were found in total.
-     * @type {number}
-     * @memberof GetFraudReview200ResponseFraudReviewRelatedRewards
      */
     'count'?: number;
     /**
      * How many related rewards have been blocked.
-     * @type {number}
-     * @memberof GetFraudReview200ResponseFraudReviewRelatedRewards
      */
     'blocked_count'?: number;
     /**
      * Total amount claimed by the related rewards, denominated in `currency_code`. 
-     * @type {number}
-     * @memberof GetFraudReview200ResponseFraudReviewRelatedRewards
      */
     'aggregated_value'?: number;
     /**
      * Currency of the aggregated value. Always matches the organization\'s currency.
-     * @type {string}
-     * @memberof GetFraudReview200ResponseFraudReviewRelatedRewards
      */
     'currency_code'?: string;
 }
-/**
- * 
- * @export
- * @interface GetFundingSource200Response
- */
 export interface GetFundingSource200Response {
-    /**
-     * 
-     * @type {ListFundingSources200ResponseFundingSourcesInner}
-     * @memberof GetFundingSource200Response
-     */
     'funding_source': ListFundingSources200ResponseFundingSourcesInner;
 }
-/**
- * 
- * @export
- * @interface GetMember200Response
- */
 export interface GetMember200Response {
-    /**
-     * 
-     * @type {GetMember200ResponseMember}
-     * @memberof GetMember200Response
-     */
     'member': GetMember200ResponseMember;
 }
 /**
  * Each organization has one or more users that can access and manage that organization. These users are called members.  Members can take actions via the Tremendous web dashboard directly.  These actions include adding funding sources to the organization, creating Campaigns, and more. 
- * @export
- * @interface GetMember200ResponseMember
  */
 export interface GetMember200ResponseMember {
-    /**
-     * 
-     * @type {string}
-     * @memberof GetMember200ResponseMember
-     */
     'id': string;
     /**
      * Email address of the member
-     * @type {string}
-     * @memberof GetMember200ResponseMember
      */
     'email': string;
     /**
      * Full name of the member
-     * @type {string}
-     * @memberof GetMember200ResponseMember
      */
     'name': string | null;
     /**
      * Is this member currently active in the organization. If `false`, the member will not be able to access the organization. 
-     * @type {boolean}
-     * @memberof GetMember200ResponseMember
      */
     'active'?: boolean;
     /**
      * The role ID associated with the member within the organization. 
-     * @type {string}
-     * @memberof GetMember200ResponseMember
      */
     'role'?: string | null;
     /**
      * Current status of the member\'s account.  When creating a member it starts out in the status `INVITED`. As soon as that member open the invitation link and registers an account, the status switches to `REGISTERED`. 
-     * @type {string}
-     * @memberof GetMember200ResponseMember
      */
     'status': GetMember200ResponseMemberStatusEnum;
     /**
      * List of events related to the member.
-     * @type {Array<GetMember200ResponseMemberEventsInner>}
-     * @memberof GetMember200ResponseMember
      */
     'events'?: Array<GetMember200ResponseMemberEventsInner>;
 }
 
 export const GetMember200ResponseMemberStatusEnum = {
     Registered: 'REGISTERED',
-    Invited: 'INVITED'
+    Invited: 'INVITED',
 } as const;
 
 export type GetMember200ResponseMemberStatusEnum = typeof GetMember200ResponseMemberStatusEnum[keyof typeof GetMember200ResponseMemberStatusEnum];
 
-/**
- * 
- * @export
- * @interface GetMember200ResponseMemberEventsInner
- */
 export interface GetMember200ResponseMemberEventsInner {
     /**
      * Event type
-     * @type {string}
-     * @memberof GetMember200ResponseMemberEventsInner
      */
     'type'?: GetMember200ResponseMemberEventsInnerTypeEnum;
     /**
      * Timestamp when the event happened
-     * @type {string}
-     * @memberof GetMember200ResponseMemberEventsInner
      */
     'date_utc'?: string | null;
 }
 
 export const GetMember200ResponseMemberEventsInnerTypeEnum = {
     Created: 'created',
-    LastLogin: 'last_login'
+    LastLogin: 'last_login',
 } as const;
 
 export type GetMember200ResponseMemberEventsInnerTypeEnum = typeof GetMember200ResponseMemberEventsInnerTypeEnum[keyof typeof GetMember200ResponseMemberEventsInnerTypeEnum];
 
-/**
- * 
- * @export
- * @interface GetOrder200Response
- */
 export interface GetOrder200Response {
-    /**
-     * 
-     * @type {ListOrders200ResponseOrdersInner}
-     * @memberof GetOrder200Response
-     */
     'order': ListOrders200ResponseOrdersInner;
 }
-/**
- * 
- * @export
- * @interface GetOrganization200Response
- */
 export interface GetOrganization200Response {
-    /**
-     * 
-     * @type {ListOrganizations200ResponseOrganizationsInner}
-     * @memberof GetOrganization200Response
-     */
     'organization'?: ListOrganizations200ResponseOrganizationsInner;
 }
-/**
- * 
- * @export
- * @interface GetProductResponse
- */
 export interface GetProductResponse {
-    /**
-     * 
-     * @type {ListProductsResponseProductsInner}
-     * @memberof GetProductResponse
-     */
     'product': ListProductsResponseProductsInner;
 }
-/**
- * 
- * @export
- * @interface GetReward200Response
- */
 export interface GetReward200Response {
-    /**
-     * 
-     * @type {ListRewards200ResponseRewardsInner}
-     * @memberof GetReward200Response
-     */
     'reward': ListRewards200ResponseRewardsInner;
 }
-/**
- * 
- * @export
- * @interface InlineObject
- */
 export interface InlineObject {
     /**
      * HTTP status code of the response
-     * @type {number}
-     * @memberof InlineObject
      */
     'status'?: number;
     /**
      * Error message
-     * @type {string}
-     * @memberof InlineObject
      */
     'error'?: string;
 }
 /**
  * Invoices are instruments to fund your Tremendous account\'s balance.  Invoices can be created by your organization programatically. Once we receive your payment, the invoice is marked as `PAID` and we add the respective funds to your account\'s balance. 
- * @export
- * @interface Invoice
  */
 export interface Invoice {
     /**
      * The invoice number
-     * @type {string}
-     * @memberof Invoice
      */
     'id': string;
     /**
      * Reference to the purchase order number within your organization
-     * @type {string}
-     * @memberof Invoice
      */
     'po_number'?: string | null;
     /**
      * Amount of the invoice
-     * @type {number}
-     * @memberof Invoice
      */
     'amount': number;
     /**
      * Currency of the invoice
-     * @type {string}
-     * @memberof Invoice
      */
     'currency_code'?: InvoiceCurrencyCodeEnum;
     /**
      * Deprecated: Use `currency_code` instead.
-     * @type {string}
-     * @memberof Invoice
      * @deprecated
      */
     'currency'?: InvoiceCurrencyEnum;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof Invoice
-     */
     'international'?: boolean;
     /**
      * Status of this invoice  <table>   <thead>     <tr>       <th>Status</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td><code>DELETED</code></td>       <td>Invoice has been deleted by your organization</td>     </tr>     <tr>       <td><code>PAID</code></td>       <td>Invoice has been paid by your organization</td>     </tr>     <tr>       <td><code>OPEN</code></td>       <td>Invoice has been created by your organization but has not been paid, yet</td>     </tr>   </tbody> </table> 
-     * @type {string}
-     * @memberof Invoice
      */
     'status': InvoiceStatusEnum;
     /**
      * List of orders related to the invoice (it doesn\'t apply to prefunding)
-     * @type {Array<string>}
-     * @memberof Invoice
      */
     'orders'?: Array<string>;
     /**
      * List of rewards related to the invoice (it doesn\'t apply to prefunding)
-     * @type {Array<string>}
-     * @memberof Invoice
      */
     'rewards'?: Array<string>;
     /**
      * Timestamp of when the invoice has been created. 
-     * @type {string}
-     * @memberof Invoice
      */
     'created_at': string;
     /**
      * Timestamp of when the invoice has been paid. 
-     * @type {string}
-     * @memberof Invoice
      */
     'paid_at': string | null;
 }
@@ -4014,7 +2489,7 @@ export const InvoiceCurrencyCodeEnum = {
     Usd: 'USD',
     Eur: 'EUR',
     Gbp: 'GBP',
-    Cad: 'CAD'
+    Cad: 'CAD',
 } as const;
 
 export type InvoiceCurrencyCodeEnum = typeof InvoiceCurrencyCodeEnum[keyof typeof InvoiceCurrencyCodeEnum];
@@ -4022,7 +2497,7 @@ export const InvoiceCurrencyEnum = {
     Usd: 'USD',
     Eur: 'EUR',
     Gbp: 'GBP',
-    Cad: 'CAD'
+    Cad: 'CAD',
 } as const;
 
 export type InvoiceCurrencyEnum = typeof InvoiceCurrencyEnum[keyof typeof InvoiceCurrencyEnum];
@@ -4030,95 +2505,58 @@ export const InvoiceStatusEnum = {
     Deleted: 'DELETED',
     Paid: 'PAID',
     Open: 'OPEN',
-    MarkedAsPaid: 'MARKED_AS_PAID'
+    MarkedAsPaid: 'MARKED_AS_PAID',
 } as const;
 
 export type InvoiceStatusEnum = typeof InvoiceStatusEnum[keyof typeof InvoiceStatusEnum];
 
-/**
- * 
- * @export
- * @interface InvoiceResponse
- */
 export interface InvoiceResponse {
-    /**
-     * 
-     * @type {InvoiceResponseInvoice}
-     * @memberof InvoiceResponse
-     */
     'invoice': InvoiceResponseInvoice;
 }
 /**
  * Invoices are instruments to fund your Tremendous account\'s balance.  Invoices can be created by your organization programatically. Once we receive your payment, the invoice is marked as `PAID` and we add the respective funds to your account\'s balance. 
- * @export
- * @interface InvoiceResponseInvoice
  */
 export interface InvoiceResponseInvoice {
     /**
      * The invoice number
-     * @type {string}
-     * @memberof InvoiceResponseInvoice
      */
     'id': string;
     /**
      * Reference to the purchase order number within your organization
-     * @type {string}
-     * @memberof InvoiceResponseInvoice
      */
     'po_number'?: string | null;
     /**
      * Amount of the invoice
-     * @type {number}
-     * @memberof InvoiceResponseInvoice
      */
     'amount': number;
     /**
      * Currency of the invoice
-     * @type {string}
-     * @memberof InvoiceResponseInvoice
      */
     'currency_code'?: InvoiceResponseInvoiceCurrencyCodeEnum;
     /**
      * Deprecated: Use `currency_code` instead.
-     * @type {string}
-     * @memberof InvoiceResponseInvoice
      * @deprecated
      */
     'currency'?: InvoiceResponseInvoiceCurrencyEnum;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof InvoiceResponseInvoice
-     */
     'international'?: boolean;
     /**
      * Status of this invoice  <table>   <thead>     <tr>       <th>Status</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td><code>DELETED</code></td>       <td>Invoice has been deleted by your organization</td>     </tr>     <tr>       <td><code>PAID</code></td>       <td>Invoice has been paid by your organization</td>     </tr>     <tr>       <td><code>OPEN</code></td>       <td>Invoice has been created by your organization but has not been paid, yet</td>     </tr>   </tbody> </table> 
-     * @type {string}
-     * @memberof InvoiceResponseInvoice
      */
     'status': InvoiceResponseInvoiceStatusEnum;
     /**
      * List of orders related to the invoice (it doesn\'t apply to prefunding)
-     * @type {Array<string>}
-     * @memberof InvoiceResponseInvoice
      */
     'orders'?: Array<string>;
     /**
      * List of rewards related to the invoice (it doesn\'t apply to prefunding)
-     * @type {Array<string>}
-     * @memberof InvoiceResponseInvoice
      */
     'rewards'?: Array<string>;
     /**
      * Timestamp of when the invoice has been created. 
-     * @type {string}
-     * @memberof InvoiceResponseInvoice
      */
     'created_at': string;
     /**
      * Timestamp of when the invoice has been paid. 
-     * @type {string}
-     * @memberof InvoiceResponseInvoice
      */
     'paid_at': string | null;
 }
@@ -4127,7 +2565,7 @@ export const InvoiceResponseInvoiceCurrencyCodeEnum = {
     Usd: 'USD',
     Eur: 'EUR',
     Gbp: 'GBP',
-    Cad: 'CAD'
+    Cad: 'CAD',
 } as const;
 
 export type InvoiceResponseInvoiceCurrencyCodeEnum = typeof InvoiceResponseInvoiceCurrencyCodeEnum[keyof typeof InvoiceResponseInvoiceCurrencyCodeEnum];
@@ -4135,7 +2573,7 @@ export const InvoiceResponseInvoiceCurrencyEnum = {
     Usd: 'USD',
     Eur: 'EUR',
     Gbp: 'GBP',
-    Cad: 'CAD'
+    Cad: 'CAD',
 } as const;
 
 export type InvoiceResponseInvoiceCurrencyEnum = typeof InvoiceResponseInvoiceCurrencyEnum[keyof typeof InvoiceResponseInvoiceCurrencyEnum];
@@ -4143,550 +2581,308 @@ export const InvoiceResponseInvoiceStatusEnum = {
     Deleted: 'DELETED',
     Paid: 'PAID',
     Open: 'OPEN',
-    MarkedAsPaid: 'MARKED_AS_PAID'
+    MarkedAsPaid: 'MARKED_AS_PAID',
 } as const;
 
 export type InvoiceResponseInvoiceStatusEnum = typeof InvoiceResponseInvoiceStatusEnum[keyof typeof InvoiceResponseInvoiceStatusEnum];
 
-/**
- * 
- * @export
- * @interface ListBalanceTransactions200Response
- */
 export interface ListBalanceTransactions200Response {
-    /**
-     * 
-     * @type {Array<ListBalanceTransactions200ResponseTransactionsInner>}
-     * @memberof ListBalanceTransactions200Response
-     */
     'transactions': Array<ListBalanceTransactions200ResponseTransactionsInner>;
 }
 /**
  * A balance transaction represents a specific movement or change in an account\'s balance. 
- * @export
- * @interface ListBalanceTransactions200ResponseTransactionsInner
  */
 export interface ListBalanceTransactions200ResponseTransactionsInner {
     /**
      * Date that the transaction was created
-     * @type {string}
-     * @memberof ListBalanceTransactions200ResponseTransactionsInner
      */
     'created_at': string;
     /**
      * Amount of the transaction, denominated in `currency_code`.
-     * @type {number}
-     * @memberof ListBalanceTransactions200ResponseTransactionsInner
      */
     'amount': number;
     /**
      * Currency of the transaction amount and running balance. Always matches the organization\'s currency.
-     * @type {string}
-     * @memberof ListBalanceTransactions200ResponseTransactionsInner
      */
     'currency_code': string;
     /**
      * The updated total after the transaction, denominated in `currency_code`. Note that this running balance may be delayed and contain `null`.
-     * @type {number}
-     * @memberof ListBalanceTransactions200ResponseTransactionsInner
      */
     'balance': number;
     /**
      * The action that was performed
-     * @type {string}
-     * @memberof ListBalanceTransactions200ResponseTransactionsInner
      */
     'action': string;
     /**
      * A brief description of the transaction
-     * @type {string}
-     * @memberof ListBalanceTransactions200ResponseTransactionsInner
      */
     'description': string;
-    /**
-     * 
-     * @type {ListBalanceTransactions200ResponseTransactionsInnerOrder}
-     * @memberof ListBalanceTransactions200ResponseTransactionsInner
-     */
     'order'?: ListBalanceTransactions200ResponseTransactionsInnerOrder;
 }
 /**
  * Order details
- * @export
- * @interface ListBalanceTransactions200ResponseTransactionsInnerOrder
  */
 export interface ListBalanceTransactions200ResponseTransactionsInnerOrder {
-    /**
-     * 
-     * @type {string}
-     * @memberof ListBalanceTransactions200ResponseTransactionsInnerOrder
-     */
     'id'?: string;
     /**
      * Reference for this order, supplied by the customer.  When set, `external_id` makes order idempotent. All requests that use the same `external_id` after the initial order creation, will result in a response that returns the data of the initially created order. The response will have a `201` response code. These responses **fail** to create any further orders.  It also allows for retrieving by `external_id` instead of `id` only. 
-     * @type {string}
-     * @memberof ListBalanceTransactions200ResponseTransactionsInnerOrder
      */
     'external_id'?: string | null;
-    /**
-     * 
-     * @type {ListBalanceTransactions200ResponseTransactionsInnerOrderPayment}
-     * @memberof ListBalanceTransactions200ResponseTransactionsInnerOrder
-     */
     'payment'?: ListBalanceTransactions200ResponseTransactionsInnerOrderPayment;
 }
-/**
- * 
- * @export
- * @interface ListBalanceTransactions200ResponseTransactionsInnerOrderPayment
- */
 export interface ListBalanceTransactions200ResponseTransactionsInnerOrderPayment {
     /**
      * Total price of the order before fees, denominated in `currency_code`.
-     * @type {number}
-     * @memberof ListBalanceTransactions200ResponseTransactionsInnerOrderPayment
      */
     'subtotal': number;
     /**
      * Total price of the order including fees, denominated in `currency_code`.
-     * @type {number}
-     * @memberof ListBalanceTransactions200ResponseTransactionsInnerOrderPayment
      */
     'total': number;
     /**
      * Fees for the order, denominated in `currency_code`.
-     * @type {number}
-     * @memberof ListBalanceTransactions200ResponseTransactionsInnerOrderPayment
      */
     'fees': number;
     /**
      * Discount for the order, denominated in `currency_code`.
-     * @type {number}
-     * @memberof ListBalanceTransactions200ResponseTransactionsInnerOrderPayment
      */
     'discount': number;
     /**
      * Currency in which the payment amounts (subtotal, total, fees, discount, refund) are denominated.  This always matches the organization\'s currency. 
-     * @type {string}
-     * @memberof ListBalanceTransactions200ResponseTransactionsInnerOrderPayment
      */
     'currency_code': string;
-    /**
-     * 
-     * @type {ListOrders200ResponseOrdersInnerPaymentRefund}
-     * @memberof ListBalanceTransactions200ResponseTransactionsInnerOrderPayment
-     */
     'refund'?: ListOrders200ResponseOrdersInnerPaymentRefund;
 }
-/**
- * 
- * @export
- * @interface ListCampaigns200Response
- */
 export interface ListCampaigns200Response {
-    /**
-     * 
-     * @type {Array<ListCampaigns200ResponseCampaignsInner>}
-     * @memberof ListCampaigns200Response
-     */
     'campaigns': Array<ListCampaigns200ResponseCampaignsInner>;
 }
 /**
  * With a campaign you can define the look & feel of how rewards are sent out. It also lets you set the available products (different gift cards, charity, etc.) recipients can choose from. 
- * @export
- * @interface ListCampaigns200ResponseCampaignsInner
  */
 export interface ListCampaigns200ResponseCampaignsInner {
-    /**
-     * 
-     * @type {string}
-     * @memberof ListCampaigns200ResponseCampaignsInner
-     */
     'id'?: string;
     /**
      * Name of the campaign
-     * @type {string}
-     * @memberof ListCampaigns200ResponseCampaignsInner
      */
     'name': string;
     /**
      * Description of the campaign
-     * @type {string}
-     * @memberof ListCampaigns200ResponseCampaignsInner
      */
     'description': string | null;
     /**
      * List of IDs of products (different gift cards, charity, etc.) that are available in this campaign.  On write, the special value `ALL_FEE_FREE` stands for every product in your catalog that carries no fee at the time of the call. 
-     * @type {Array<ListCampaigns200ResponseCampaignsInnerProductsInner>}
-     * @memberof ListCampaigns200ResponseCampaignsInner
      */
     'products': Array<ListCampaigns200ResponseCampaignsInnerProductsInner>;
     /**
      * Determines whether fees for premium products are added to the order total (`SENDER`) or deducted from the recipient\'s reward amount (`RECIPIENT`). Campaigns with `RECIPIENT` must include at least one fee-free product. 
-     * @type {string}
-     * @memberof ListCampaigns200ResponseCampaignsInner
      */
     'fee_charged_to'?: ListCampaigns200ResponseCampaignsInnerFeeChargedToEnum | null;
-    /**
-     * 
-     * @type {ListCampaigns200ResponseCampaignsInnerAutoAddProductRule}
-     * @memberof ListCampaigns200ResponseCampaignsInner
-     */
     'auto_add_product_rule'?: ListCampaigns200ResponseCampaignsInnerAutoAddProductRule | null;
-    /**
-     * 
-     * @type {ListCampaigns200ResponseCampaignsInnerWebpageStyle}
-     * @memberof ListCampaigns200ResponseCampaignsInner
-     */
     'webpage_style'?: ListCampaigns200ResponseCampaignsInnerWebpageStyle;
-    /**
-     * 
-     * @type {ListCampaigns200ResponseCampaignsInnerEmailStyle}
-     * @memberof ListCampaigns200ResponseCampaignsInner
-     */
     'email_style'?: ListCampaigns200ResponseCampaignsInnerEmailStyle;
 }
 
 export const ListCampaigns200ResponseCampaignsInnerFeeChargedToEnum = {
     Sender: 'SENDER',
-    Recipient: 'RECIPIENT'
+    Recipient: 'RECIPIENT',
 } as const;
 
 export type ListCampaigns200ResponseCampaignsInnerFeeChargedToEnum = typeof ListCampaigns200ResponseCampaignsInnerFeeChargedToEnum[keyof typeof ListCampaigns200ResponseCampaignsInnerFeeChargedToEnum];
 
 /**
  * When enabled, newly activated gift card products that match the optional country and currency filters are added to this campaign automatically. Applies to gift cards only — premium options, prepaid cards, and merchant cards with vendor fees are excluded. Affects future rewards only and does not retroactively add products to unredeemed rewards.  On read, `enabled` is `true` whenever a rule is configured; `countries` and `currencies` are only present when the rule actually filters on them — an absent filter matches all values.  On write:   * Omit the field on `PUT` to leave the existing rule unchanged.   * Send `null` or `{ \"enabled\": false }` to clear any existing rule.   * Send `{ \"enabled\": true, ... }` to upsert. `countries` and `currencies` are     optional; when present they must contain at least one entry. To match all     countries (or all currencies), simply omit the key.   * An empty object (`{}`) is rejected because `enabled` is required — use     `{ \"enabled\": false }` or `null` to clear the rule. 
- * @export
- * @interface ListCampaigns200ResponseCampaignsInnerAutoAddProductRule
  */
 export interface ListCampaigns200ResponseCampaignsInnerAutoAddProductRule {
     /**
      * Whether the auto-add rule is active.
-     * @type {boolean}
-     * @memberof ListCampaigns200ResponseCampaignsInnerAutoAddProductRule
      */
     'enabled': boolean;
     /**
      * ISO 3166-1 alpha-2 country codes (uppercase). When omitted, the rule matches all countries; when present, must contain at least one entry. Each code must be covered by at least one active Tremendous product — requests filtering on a country we don\'t currently sell into are rejected with a 422. 
-     * @type {Array<string>}
-     * @memberof ListCampaigns200ResponseCampaignsInnerAutoAddProductRule
      */
     'countries'?: Array<string>;
     /**
      * ISO 4217 currency codes (uppercase). When omitted, the rule matches all currencies; when present, must contain at least one entry. Each code must be covered by at least one active Tremendous product — requests filtering on a currency we don\'t currently sell are rejected with a 422. 
-     * @type {Array<string>}
-     * @memberof ListCampaigns200ResponseCampaignsInnerAutoAddProductRule
      */
     'currencies'?: Array<string>;
 }
 /**
  * Definition of the email style
- * @export
- * @interface ListCampaigns200ResponseCampaignsInnerEmailStyle
  */
 export interface ListCampaigns200ResponseCampaignsInnerEmailStyle {
     /**
      * If sending via email, this is how the email will appear to be sent from
-     * @type {string}
-     * @memberof ListCampaigns200ResponseCampaignsInnerEmailStyle
      */
     'sender_name'?: string | null;
     /**
      * Email subject line
-     * @type {string}
-     * @memberof ListCampaigns200ResponseCampaignsInnerEmailStyle
      */
     'subject_line'?: string | null;
     /**
      * URL of a publicly-accessible image (png, jpeg, jpg, gif, or svg). This image will be copied to our storage location.
-     * @type {string}
-     * @memberof ListCampaigns200ResponseCampaignsInnerEmailStyle
      */
     'logo_image_url'?: string | null;
     /**
      * Image height in pixels
-     * @type {number}
-     * @memberof ListCampaigns200ResponseCampaignsInnerEmailStyle
      */
     'logo_image_height_px'?: number | null;
     /**
      * Logo background color code (hex, rgb, or rgba)
-     * @type {string}
-     * @memberof ListCampaigns200ResponseCampaignsInnerEmailStyle
      */
     'logo_background_color'?: string | null;
     /**
      * Button color code (hex, rgb, or rgba)
-     * @type {string}
-     * @memberof ListCampaigns200ResponseCampaignsInnerEmailStyle
      */
     'button_color'?: string | null;
 }
-/**
- * 
- * @export
- * @interface ListCampaigns200ResponseCampaignsInnerProductsInner
- */
 export interface ListCampaigns200ResponseCampaignsInnerProductsInner {
 }
 /**
  * Definition of the webpage style
- * @export
- * @interface ListCampaigns200ResponseCampaignsInnerWebpageStyle
  */
 export interface ListCampaigns200ResponseCampaignsInnerWebpageStyle {
     /**
      * Headline for the reward page
-     * @type {string}
-     * @memberof ListCampaigns200ResponseCampaignsInnerWebpageStyle
      */
     'headline'?: string | null;
     /**
      * Message for the reward page
-     * @type {string}
-     * @memberof ListCampaigns200ResponseCampaignsInnerWebpageStyle
      */
     'message'?: string | null;
     /**
      * URL of a publicly-accessible image (png, jpeg, jpg, gif, or svg). This image will be copied to our storage location.
-     * @type {string}
-     * @memberof ListCampaigns200ResponseCampaignsInnerWebpageStyle
      */
     'logo_image_url'?: string | null;
     /**
      * Image height in pixels
-     * @type {number}
-     * @memberof ListCampaigns200ResponseCampaignsInnerWebpageStyle
      */
     'logo_image_height_px'?: number | null;
     /**
      * Logo background color code (hex, rgb, or rgba)
-     * @type {string}
-     * @memberof ListCampaigns200ResponseCampaignsInnerWebpageStyle
      */
     'logo_background_color'?: string | null;
     /**
      * Background color code (hex, rgb, or rgba)
-     * @type {string}
-     * @memberof ListCampaigns200ResponseCampaignsInnerWebpageStyle
      */
     'background_color'?: string | null;
 }
-/**
- * 
- * @export
- * @interface ListConnectedOrganizationMembers200Response
- */
 export interface ListConnectedOrganizationMembers200Response {
-    /**
-     * 
-     * @type {Array<ListConnectedOrganizationMembers200ResponseConnectedOrganizationMembersInner>}
-     * @memberof ListConnectedOrganizationMembers200Response
-     */
     'connected_organization_members': Array<ListConnectedOrganizationMembers200ResponseConnectedOrganizationMembersInner>;
     /**
      * The total number of connected organizations across all pages
-     * @type {number}
-     * @memberof ListConnectedOrganizationMembers200Response
      */
     'total_count': number;
 }
-/**
- * 
- * @export
- * @interface ListConnectedOrganizationMembers200ResponseConnectedOrganizationMembersInner
- */
 export interface ListConnectedOrganizationMembers200ResponseConnectedOrganizationMembersInner {
     /**
      * Tremendous\' identifier for the connected organization member.
-     * @type {string}
-     * @memberof ListConnectedOrganizationMembers200ResponseConnectedOrganizationMembersInner
      */
     'id': string;
     /**
      * The name associated with the user in your systems.
-     * @type {string}
-     * @memberof ListConnectedOrganizationMembers200ResponseConnectedOrganizationMembersInner
      */
     'external_name'?: string | null;
     /**
      * The email associated with the user in your systems.
-     * @type {string}
-     * @memberof ListConnectedOrganizationMembers200ResponseConnectedOrganizationMembersInner
      */
     'external_email'?: string | null;
     /**
      * Timestamp of when the connected organization member was created.
-     * @type {string}
-     * @memberof ListConnectedOrganizationMembers200ResponseConnectedOrganizationMembersInner
      */
     'created_at': string;
     /**
      * Tremendous\' identifier for the connected organization.
-     * @type {string}
-     * @memberof ListConnectedOrganizationMembers200ResponseConnectedOrganizationMembersInner
      */
     'connected_organization_id': string;
-    /**
-     * 
-     * @type {ListConnectedOrganizationMembers200ResponseConnectedOrganizationMembersInnerMember}
-     * @memberof ListConnectedOrganizationMembers200ResponseConnectedOrganizationMembersInner
-     */
     'member'?: ListConnectedOrganizationMembers200ResponseConnectedOrganizationMembersInnerMember | null;
 }
 /**
  * Associated `member`. `null` until the registration flow for the connected organization has been completed.
- * @export
- * @interface ListConnectedOrganizationMembers200ResponseConnectedOrganizationMembersInnerMember
  */
 export interface ListConnectedOrganizationMembers200ResponseConnectedOrganizationMembersInnerMember {
-    /**
-     * 
-     * @type {string}
-     * @memberof ListConnectedOrganizationMembers200ResponseConnectedOrganizationMembersInnerMember
-     */
     'id': string;
     /**
      * Email address of the member
-     * @type {string}
-     * @memberof ListConnectedOrganizationMembers200ResponseConnectedOrganizationMembersInnerMember
      */
     'email': string;
     /**
      * Full name of the member
-     * @type {string}
-     * @memberof ListConnectedOrganizationMembers200ResponseConnectedOrganizationMembersInnerMember
      */
     'name': string | null;
     /**
      * Is this member currently active in the organization. If `false`, the member will not be able to access the organization. 
-     * @type {boolean}
-     * @memberof ListConnectedOrganizationMembers200ResponseConnectedOrganizationMembersInnerMember
      */
     'active'?: boolean;
     /**
      * The role ID associated with the member within the organization. 
-     * @type {string}
-     * @memberof ListConnectedOrganizationMembers200ResponseConnectedOrganizationMembersInnerMember
      */
     'role'?: string | null;
     /**
      * Current status of the member\'s account.  When creating a member it starts out in the status `INVITED`. As soon as that member open the invitation link and registers an account, the status switches to `REGISTERED`. 
-     * @type {string}
-     * @memberof ListConnectedOrganizationMembers200ResponseConnectedOrganizationMembersInnerMember
      */
     'status': ListConnectedOrganizationMembers200ResponseConnectedOrganizationMembersInnerMemberStatusEnum;
     /**
      * Timestamp when this member was created.  The `created_at` timestamp is **NOT** returned when retrieving a member (but is part of the response when listing or creating members). 
-     * @type {string}
-     * @memberof ListConnectedOrganizationMembers200ResponseConnectedOrganizationMembersInnerMember
      */
     'created_at'?: string;
     /**
      * Timestamp when this member most recently logged into the dashboard of the organization associated with this API key. 
-     * @type {string}
-     * @memberof ListConnectedOrganizationMembers200ResponseConnectedOrganizationMembersInnerMember
      */
     'last_login_at'?: string | null;
 }
 
 export const ListConnectedOrganizationMembers200ResponseConnectedOrganizationMembersInnerMemberStatusEnum = {
     Registered: 'REGISTERED',
-    Invited: 'INVITED'
+    Invited: 'INVITED',
 } as const;
 
 export type ListConnectedOrganizationMembers200ResponseConnectedOrganizationMembersInnerMemberStatusEnum = typeof ListConnectedOrganizationMembers200ResponseConnectedOrganizationMembersInnerMemberStatusEnum[keyof typeof ListConnectedOrganizationMembers200ResponseConnectedOrganizationMembersInnerMemberStatusEnum];
 
-/**
- * 
- * @export
- * @interface ListConnectedOrganizations200Response
- */
 export interface ListConnectedOrganizations200Response {
-    /**
-     * 
-     * @type {Array<ListConnectedOrganizations200ResponseConnectedOrganizationsInner>}
-     * @memberof ListConnectedOrganizations200Response
-     */
     'connected_organizations': Array<ListConnectedOrganizations200ResponseConnectedOrganizationsInner>;
     /**
      * The total number of connected organizations across all pages
-     * @type {number}
-     * @memberof ListConnectedOrganizations200Response
      */
     'total_count': number;
 }
-/**
- * 
- * @export
- * @interface ListConnectedOrganizations200ResponseConnectedOrganizationsInner
- */
 export interface ListConnectedOrganizations200ResponseConnectedOrganizationsInner {
     /**
      * Tremendous\' identifier for the connected organization.
-     * @type {string}
-     * @memberof ListConnectedOrganizations200ResponseConnectedOrganizationsInner
      */
     'id': string;
     /**
      * Client ID of the OAuth app that is to be used by the platform once the integration is complete.
-     * @type {string}
-     * @memberof ListConnectedOrganizations200ResponseConnectedOrganizationsInner
      */
     'client_id': string;
     /**
      * Timestamp of when the connected organization was created.
-     * @type {string}
-     * @memberof ListConnectedOrganizations200ResponseConnectedOrganizationsInner
      */
     'created_at': string;
-    /**
-     * 
-     * @type {ListConnectedOrganizations200ResponseConnectedOrganizationsInnerOrganization}
-     * @memberof ListConnectedOrganizations200ResponseConnectedOrganizationsInner
-     */
     'organization'?: ListConnectedOrganizations200ResponseConnectedOrganizationsInnerOrganization | null;
 }
 /**
  * Associated `organization` resource. `null` until the registration flow for the connected organization has been completed.
- * @export
- * @interface ListConnectedOrganizations200ResponseConnectedOrganizationsInnerOrganization
  */
 export interface ListConnectedOrganizations200ResponseConnectedOrganizationsInnerOrganization {
-    /**
-     * 
-     * @type {string}
-     * @memberof ListConnectedOrganizations200ResponseConnectedOrganizationsInnerOrganization
-     */
     'id'?: string;
     /**
      * Name of the organization
-     * @type {string}
-     * @memberof ListConnectedOrganizations200ResponseConnectedOrganizationsInnerOrganization
      */
     'name': string;
     /**
      * URL of the website of that organization
-     * @type {string}
-     * @memberof ListConnectedOrganizations200ResponseConnectedOrganizationsInnerOrganization
      */
     'website': string;
     /**
      * Currency used for this organization\'s balances, orders, and transactions.
-     * @type {string}
-     * @memberof ListConnectedOrganizations200ResponseConnectedOrganizationsInnerOrganization
      */
     'currency_code'?: string;
     /**
      * Status of the organization. Organizations need to be approved to be able to use them to send out rewards.
-     * @type {string}
-     * @memberof ListConnectedOrganizations200ResponseConnectedOrganizationsInnerOrganization
      */
     'status'?: ListConnectedOrganizations200ResponseConnectedOrganizationsInnerOrganizationStatusEnum;
     /**
      * Timestamp of when the organization has been created.  *This field is only returned when creating an organization.* It is not returned anymore when retrieving or listing organizations. 
-     * @type {string}
-     * @memberof ListConnectedOrganizations200ResponseConnectedOrganizationsInnerOrganization
      */
     'created_at'?: string;
 }
@@ -4694,64 +2890,31 @@ export interface ListConnectedOrganizations200ResponseConnectedOrganizationsInne
 export const ListConnectedOrganizations200ResponseConnectedOrganizationsInnerOrganizationStatusEnum = {
     Pending: 'PENDING',
     Approved: 'APPROVED',
-    Rejected: 'REJECTED'
+    Rejected: 'REJECTED',
 } as const;
 
 export type ListConnectedOrganizations200ResponseConnectedOrganizationsInnerOrganizationStatusEnum = typeof ListConnectedOrganizations200ResponseConnectedOrganizationsInnerOrganizationStatusEnum[keyof typeof ListConnectedOrganizations200ResponseConnectedOrganizationsInnerOrganizationStatusEnum];
 
-/**
- * 
- * @export
- * @interface ListFields200Response
- */
 export interface ListFields200Response {
-    /**
-     * 
-     * @type {Array<ListFields200ResponseFieldsInner>}
-     * @memberof ListFields200Response
-     */
     'fields'?: Array<ListFields200ResponseFieldsInner>;
 }
-/**
- * 
- * @export
- * @interface ListFields200ResponseFieldsInner
- */
 export interface ListFields200ResponseFieldsInner {
-    /**
-     * 
-     * @type {string}
-     * @memberof ListFields200ResponseFieldsInner
-     */
     'id'?: string;
     /**
      * Label of the field
-     * @type {string}
-     * @memberof ListFields200ResponseFieldsInner
      */
     'label'?: string;
     /**
      * Type of the values of the field  <table>   <thead>     <tr>       <th>Type</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td><code>Checkbox</code></td>       <td>A boolean value (true/false)</td>     </tr>     <tr>       <td><code>Currency</code></td>       <td>A monetary value</td>     </tr>     <tr>       <td><code>Date</code></td>       <td>A date value</td>     </tr>     <tr>       <td><code>Dropdown</code></td>       <td>A single selection from predefined options (see <code>data.options</code>)</td>     </tr>     <tr>       <td><code>Email</code></td>       <td>An email address</td>     </tr>     <tr>       <td><code>List</code></td>       <td>Multiple selections from predefined options (see <code>data.options</code>)</td>     </tr>     <tr>       <td><code>Number</code></td>       <td>A numeric value</td>     </tr>     <tr>       <td><code>Phone</code></td>       <td>A phone number</td>     </tr>     <tr>       <td><code>Text</code></td>       <td>A single-line text value</td>     </tr>     <tr>       <td><code>TextArea</code></td>       <td>A multi-line text value</td>     </tr>   </tbody> </table> 
-     * @type {string}
-     * @memberof ListFields200ResponseFieldsInner
      */
     'data_type'?: ListFields200ResponseFieldsInnerDataTypeEnum;
-    /**
-     * 
-     * @type {ListFields200ResponseFieldsInnerData}
-     * @memberof ListFields200ResponseFieldsInner
-     */
     'data'?: ListFields200ResponseFieldsInnerData;
     /**
      * Is this field required (true) or optional (false)
-     * @type {boolean}
-     * @memberof ListFields200ResponseFieldsInner
      */
     'required'?: boolean;
     /**
      * Type of objects this field gets associated with
-     * @type {string}
-     * @memberof ListFields200ResponseFieldsInner
      */
     'scope'?: string;
 }
@@ -4766,126 +2929,70 @@ export const ListFields200ResponseFieldsInnerDataTypeEnum = {
     Number: 'Number',
     Phone: 'Phone',
     Text: 'Text',
-    TextArea: 'TextArea'
+    TextArea: 'TextArea',
 } as const;
 
 export type ListFields200ResponseFieldsInnerDataTypeEnum = typeof ListFields200ResponseFieldsInnerDataTypeEnum[keyof typeof ListFields200ResponseFieldsInnerDataTypeEnum];
 
 /**
  * Additional configuration for the field. Only used for `Dropdown` and `List` data types. 
- * @export
- * @interface ListFields200ResponseFieldsInnerData
  */
 export interface ListFields200ResponseFieldsInnerData {
     /**
      * List of valid options for `Dropdown` and `List` field types. For `Dropdown`, the user selects one option. For `List`, the user can select multiple options. 
-     * @type {Array<string>}
-     * @memberof ListFields200ResponseFieldsInnerData
      */
     'options'?: Array<string>;
     /**
      * Optional human-readable labels for each option. Keys are the option values, values are the display labels. If not provided, the option values are used as labels. 
-     * @type {{ [key: string]: string; }}
-     * @memberof ListFields200ResponseFieldsInnerData
      */
     'labels'?: { [key: string]: string; };
 }
-/**
- * 
- * @export
- * @interface ListForexResponse
- */
 export interface ListForexResponse {
-    /**
-     * 
-     * @type {{ [key: string]: number; }}
-     * @memberof ListForexResponse
-     */
     'forex': { [key: string]: number; };
 }
-/**
- * 
- * @export
- * @interface ListFraudReviews200Response
- */
 export interface ListFraudReviews200Response {
-    /**
-     * 
-     * @type {Array<ListFraudReviews200ResponseFraudReviewsInner>}
-     * @memberof ListFraudReviews200Response
-     */
     'fraud_reviews': Array<ListFraudReviews200ResponseFraudReviewsInner>;
     /**
      * The total number of fraud reviews
-     * @type {number}
-     * @memberof ListFraudReviews200Response
      */
     'total_count': number;
 }
 /**
  * The fraud review associated with a reward.
- * @export
- * @interface ListFraudReviews200ResponseFraudReviewsInner
  */
 export interface ListFraudReviews200ResponseFraudReviewsInner {
     /**
      * The current status of the fraud review:  * `flagged` - The reward has been flagged for and waiting manual review. * `blocked` - The reward was reviewed and blocked. * `released` - The reward was reviewed and released. 
-     * @type {string}
-     * @memberof ListFraudReviews200ResponseFraudReviewsInner
      */
     'status'?: ListFraudReviews200ResponseFraudReviewsInnerStatusEnum;
     /**
      * The array may contain multiple reasons, depending on which rule(s) flagged the reward for review. Reasons can be any of the following:  * `Disallowed IP` * `Disallowed email` * `Disallowed country` * `Over reward amount limit` * `Over reward count limit` * `VPN detected` * `Apple Private Relay` * `Device related to multiple emails` * `Device or account related to multiple emails` * `IP on a Tremendous fraud list` * `Bank account on a Tremendous fraud list` * `Fingerprint on a Tremendous fraud list` * `Email on a Tremendous fraud list` * `Phone on a Tremendous fraud list` * `Device on a Tremendous fraud list` * `IP related to a blocked reward` * `Device related to a blocked reward` * `Bank account related to a blocked reward` * `Fingerprint related to a blocked reward` * `Email related to a blocked reward` * `Phone related to a blocked reward` * `Allowed IP` * `Allowed email` * `Allowed country` 
-     * @type {Array<string>}
-     * @memberof ListFraudReviews200ResponseFraudReviewsInner
      */
     'reasons'?: Array<ListFraudReviews200ResponseFraudReviewsInnerReasonsEnum>;
     /**
      * The device fingerprint, if known.
-     * @type {string}
-     * @memberof ListFraudReviews200ResponseFraudReviewsInner
      */
     'device_id'?: string;
     /**
      * The product selected to claim the reward
-     * @type {string}
-     * @memberof ListFraudReviews200ResponseFraudReviewsInner
      */
     'redemption_method'?: ListFraudReviews200ResponseFraudReviewsInnerRedemptionMethodEnum;
     /**
      * Date the reward was redeemed
-     * @type {string}
-     * @memberof ListFraudReviews200ResponseFraudReviewsInner
      */
     'redeemed_at'?: string;
-    /**
-     * 
-     * @type {ListFraudReviews200ResponseFraudReviewsInnerGeo}
-     * @memberof ListFraudReviews200ResponseFraudReviewsInner
-     */
     'geo'?: ListFraudReviews200ResponseFraudReviewsInnerGeo;
-    /**
-     * 
-     * @type {ListRewards200ResponseRewardsInner}
-     * @memberof ListFraudReviews200ResponseFraudReviewsInner
-     */
     'reward'?: ListRewards200ResponseRewardsInner;
     /**
      * The name of the person who reviewed the reward, or `Automatic Review` if the reward was blocked automatically. Rewards can be automatically blocked if they remain in the flagged fraud queue for more than 30 days.  This field is only present if the status is not `flagged`. 
-     * @type {string}
-     * @memberof ListFraudReviews200ResponseFraudReviewsInner
      */
     'reviewed_by'?: string;
     /**
      * When the reward was blocked or released following fraud review.  This field is only present if the status is not `flagged`. 
-     * @type {string}
-     * @memberof ListFraudReviews200ResponseFraudReviewsInner
      */
     'reviewed_at'?: string;
     /**
      * A hash of the destination account for redemption methods that require providing 3rd party account details (e.g., PayPal, Venmo, ACH/CashApp, international bank transfers, etc.). The hash is globally unique by redemption method + account combination. This field is omitted for redemption methods that don\'t have a destination account (e.g., merchant cards, charities, etc.). 
-     * @type {string}
-     * @memberof ListFraudReviews200ResponseFraudReviewsInner
      */
     'redemption_method_account_hash'?: string;
 }
@@ -4893,7 +3000,7 @@ export interface ListFraudReviews200ResponseFraudReviewsInner {
 export const ListFraudReviews200ResponseFraudReviewsInnerStatusEnum = {
     Flagged: 'flagged',
     Blocked: 'blocked',
-    Released: 'released'
+    Released: 'released',
 } as const;
 
 export type ListFraudReviews200ResponseFraudReviewsInnerStatusEnum = typeof ListFraudReviews200ResponseFraudReviewsInnerStatusEnum[keyof typeof ListFraudReviews200ResponseFraudReviewsInnerStatusEnum];
@@ -4921,7 +3028,7 @@ export const ListFraudReviews200ResponseFraudReviewsInnerReasonsEnum = {
     PhoneRelatedToABlockedReward: 'Phone related to a blocked reward',
     AllowedIp: 'Allowed IP',
     AllowedEmail: 'Allowed email',
-    AllowedCountry: 'Allowed country'
+    AllowedCountry: 'Allowed country',
 } as const;
 
 export type ListFraudReviews200ResponseFraudReviewsInnerReasonsEnum = typeof ListFraudReviews200ResponseFraudReviewsInnerReasonsEnum[keyof typeof ListFraudReviews200ResponseFraudReviewsInnerReasonsEnum];
@@ -4933,65 +3040,41 @@ export const ListFraudReviews200ResponseFraudReviewsInnerRedemptionMethodEnum = 
     MerchantCard: 'merchant card',
     Paypal: 'paypal',
     Venmo: 'venmo',
-    VisaCard: 'visa card'
+    VisaCard: 'visa card',
 } as const;
 
 export type ListFraudReviews200ResponseFraudReviewsInnerRedemptionMethodEnum = typeof ListFraudReviews200ResponseFraudReviewsInnerRedemptionMethodEnum[keyof typeof ListFraudReviews200ResponseFraudReviewsInnerRedemptionMethodEnum];
 
 /**
  * The Geo location, based on the recipient\'s IP.
- * @export
- * @interface ListFraudReviews200ResponseFraudReviewsInnerGeo
  */
 export interface ListFraudReviews200ResponseFraudReviewsInnerGeo {
     /**
      * The recipient\'s IP.
-     * @type {string}
-     * @memberof ListFraudReviews200ResponseFraudReviewsInnerGeo
      */
     'ip'?: string;
     /**
      * The country code (ISO-3166 alpha-2 character code) linked to the recipient\'s IP.
-     * @type {string}
-     * @memberof ListFraudReviews200ResponseFraudReviewsInnerGeo
      */
     'country'?: string;
     /**
      * The city associated with the recipient\'s IP.
-     * @type {string}
-     * @memberof ListFraudReviews200ResponseFraudReviewsInnerGeo
      */
     'city'?: string;
 }
-/**
- * 
- * @export
- * @interface ListFraudRules200Response
- */
 export interface ListFraudRules200Response {
-    /**
-     * 
-     * @type {Array<ListFraudRules200ResponseFraudRulesInner>}
-     * @memberof ListFraudRules200Response
-     */
     'fraud_rules': Array<ListFraudRules200ResponseFraudRulesInner>;
 }
 /**
  * An active fraud rule
- * @export
- * @interface ListFraudRules200ResponseFraudRulesInner
  */
 export interface ListFraudRules200ResponseFraudRulesInner {
     /**
      * * `review_country` - Flags when the recipient\'s IP country matches the criteria in the rule * `review_ip` - Flags when recipient\'s IP matches one in the list * `review_email` - Flags when the recipient\'s email matches one in the list * `review_redeemed_rewards_count` - Flags when the recipient redeemed more than the number of rewards specified in the config * `review_redeemed_rewards_amount` - Flags when the recipient redeemed more than the total amount specified in the config. The amount is denominated in the organization\'s currency. * `review_multiple_emails` - Flags when recipient\'s device or account has multiple emails associated * `review_vpn` - Flags when VPN or proxy use is suspected. Can be configured to exclude Apple Private Relay. * `review_tremendous_flag_list` - Flags rewards when redemption attributes match at least one criteria defined by the Tremendous flag list * `review_previously_blocked_recipients` - Flags rewards when the recipient has been blocked before * `allow_ip` - Releases a reward when a recipient\'s IP matches one in the list * `allow_email` - Releases a reward when the recipient\'s email matches one in the list 
-     * @type {string}
-     * @memberof ListFraudRules200ResponseFraudRulesInner
      */
     'rule_type'?: ListFraudRules200ResponseFraudRulesInnerRuleTypeEnum;
     /**
      * The configuration associated with the rule. The properties allowed depend on the type of rule. This property is only present for rules that require configuration. 
-     * @type {{ [key: string]: any; }}
-     * @memberof ListFraudRules200ResponseFraudRulesInner
      */
     'config'?: { [key: string]: any; } | null;
 }
@@ -5007,65 +3090,35 @@ export const ListFraudRules200ResponseFraudRulesInnerRuleTypeEnum = {
     ReviewTremendousFlagList: 'review_tremendous_flag_list',
     ReviewPreviouslyBlockedRecipients: 'review_previously_blocked_recipients',
     AllowIp: 'allow_ip',
-    AllowEmail: 'allow_email'
+    AllowEmail: 'allow_email',
 } as const;
 
 export type ListFraudRules200ResponseFraudRulesInnerRuleTypeEnum = typeof ListFraudRules200ResponseFraudRulesInnerRuleTypeEnum[keyof typeof ListFraudRules200ResponseFraudRulesInnerRuleTypeEnum];
 
-/**
- * 
- * @export
- * @interface ListFundingSources200Response
- */
 export interface ListFundingSources200Response {
-    /**
-     * 
-     * @type {Array<ListFundingSources200ResponseFundingSourcesInner>}
-     * @memberof ListFundingSources200Response
-     */
     'funding_sources': Array<ListFundingSources200ResponseFundingSourcesInner>;
 }
 /**
  * 
- * @export
- * @interface ListFundingSources200ResponseFundingSourcesInner
  */
 export interface ListFundingSources200ResponseFundingSourcesInner {
-    /**
-     * 
-     * @type {string}
-     * @memberof ListFundingSources200ResponseFundingSourcesInner
-     */
     'id': string;
     /**
      * You can pay for rewards using different payment methods on Tremendous:  <table>   <thead>     <tr>       <th>Payment Method</th>       <th>Description</th>       </tr>   </thead>   <tbody>     <tr>       <td><code>balance</code></td>       <td>Pre-funded balance in your Tremendous account to draw funds from to send rewards to recipients.</td>     </tr>     <tr>       <td><code>bank_account</code></td>       <td>Bank account to draw funds from to send rewards to recipients.</td>     </tr>     <tr>       <td><code>credit_card</code></td>       <td>Credit card to draw funds from to send rewards to recipients.</td>     </tr>     <tr>       <td><code>invoice</code></td>       <td>Send rewards to recipients and pay by invoice.</td>     </tr>    </tbody> </table> 
-     * @type {string}
-     * @memberof ListFundingSources200ResponseFundingSourcesInner
      */
     'method': ListFundingSources200ResponseFundingSourcesInnerMethodEnum;
     /**
      * Indicates which actions this funding source can perform.   <table>     <thead>       <tr>         <th>Permission</th>         <th>Description</th>         </tr>     </thead>     <tbody>       <tr>         <td><code>api_orders</code></td>         <td>Usable for orders via API.</td>       </tr>       <tr>         <td><code>dashboard_orders</code></td>         <td>Usable for orders via Tremendous dashboard.</td>       </tr>       <tr>         <td><code>balance_funding</code></td>         <td>Usable to add funds to a balance (via dashboard or API).</td>       </tr>     </tbody>   </table> 
-     * @type {Array<string>}
-     * @memberof ListFundingSources200ResponseFundingSourcesInner
      */
     'usage_permissions'?: Array<ListFundingSources200ResponseFundingSourcesInnerUsagePermissionsEnum>;
     /**
      * Status of the funding_source    <table>     <thead>       <tr>         <th>Status</th>         <th>Description</th>         </tr>     </thead>     <tbody>       <tr>         <td><code>active</code></td>         <td>Ready for use.</td>       </tr>       <tr>         <td><code>deleted</code></td>         <td>Manually removed, and not usable.</td>       </tr>       <tr>         <td><code>failed</code></td>         <td>Last payment attempt failed, and not usable (contact Tremendous support to reinstate).</td>       </tr>     </tbody>   </table> 
-     * @type {string}
-     * @memberof ListFundingSources200ResponseFundingSourcesInner
      */
     'status'?: ListFundingSources200ResponseFundingSourcesInnerStatusEnum;
     /**
      * **Only available when `method` is set to `invoice`.** 
-     * @type {string}
-     * @memberof ListFundingSources200ResponseFundingSourcesInner
      */
     'type'?: ListFundingSources200ResponseFundingSourcesInnerTypeEnum;
-    /**
-     * 
-     * @type {ListFundingSources200ResponseFundingSourcesInnerMeta}
-     * @memberof ListFundingSources200ResponseFundingSourcesInner
-     */
     'meta': ListFundingSources200ResponseFundingSourcesInnerMeta;
 }
 
@@ -5073,245 +3126,171 @@ export const ListFundingSources200ResponseFundingSourcesInnerMethodEnum = {
     Balance: 'balance',
     BankAccount: 'bank_account',
     CreditCard: 'credit_card',
-    Invoice: 'invoice'
+    Invoice: 'invoice',
 } as const;
 
 export type ListFundingSources200ResponseFundingSourcesInnerMethodEnum = typeof ListFundingSources200ResponseFundingSourcesInnerMethodEnum[keyof typeof ListFundingSources200ResponseFundingSourcesInnerMethodEnum];
 export const ListFundingSources200ResponseFundingSourcesInnerUsagePermissionsEnum = {
     ApiOrders: 'api_orders',
     DashboardOrders: 'dashboard_orders',
-    BalanceFunding: 'balance_funding'
+    BalanceFunding: 'balance_funding',
 } as const;
 
 export type ListFundingSources200ResponseFundingSourcesInnerUsagePermissionsEnum = typeof ListFundingSources200ResponseFundingSourcesInnerUsagePermissionsEnum[keyof typeof ListFundingSources200ResponseFundingSourcesInnerUsagePermissionsEnum];
 export const ListFundingSources200ResponseFundingSourcesInnerStatusEnum = {
     Active: 'active',
     Deleted: 'deleted',
-    Failed: 'failed'
+    Failed: 'failed',
 } as const;
 
 export type ListFundingSources200ResponseFundingSourcesInnerStatusEnum = typeof ListFundingSources200ResponseFundingSourcesInnerStatusEnum[keyof typeof ListFundingSources200ResponseFundingSourcesInnerStatusEnum];
 export const ListFundingSources200ResponseFundingSourcesInnerTypeEnum = {
     Commercial: 'COMMERCIAL',
     ProForma: 'PRO_FORMA',
-    PrefundingOnly: 'PREFUNDING_ONLY'
+    PrefundingOnly: 'PREFUNDING_ONLY',
 } as const;
 
 export type ListFundingSources200ResponseFundingSourcesInnerTypeEnum = typeof ListFundingSources200ResponseFundingSourcesInnerTypeEnum[keyof typeof ListFundingSources200ResponseFundingSourcesInnerTypeEnum];
 
-/**
- * 
- * @export
- * @interface ListFundingSources200ResponseFundingSourcesInnerMeta
- */
 export interface ListFundingSources200ResponseFundingSourcesInnerMeta {
     /**
      * **Only exists for balance and commercial invoicing.**  For balance: available amount denominated in `currency_code`. For commercial invoicing: available credit amount denominated in `currency_code`, calculated as (credit limit - outstanding balance).  *Caution: In the \"list funding sources\" endpoint this value is cached and may not be up to date. Use the \"get funding source\" endpoint to get the most up to date value.* 
-     * @type {number}
-     * @memberof ListFundingSources200ResponseFundingSourcesInnerMeta
      */
     'available_amount'?: number;
     /**
      * Same as `available_amount`, but in cents.
-     * @type {number}
-     * @memberof ListFundingSources200ResponseFundingSourcesInnerMeta
      * @deprecated
      */
     'available_cents'?: number;
     /**
      * **Only exists for balance and commercial invoicing.**  The currency of the balance or credit amounts (e.g. `available_amount`, `pending_amount`, `credit_limit_amount`).  Always matches the organization\'s currency. 
-     * @type {string}
-     * @memberof ListFundingSources200ResponseFundingSourcesInnerMeta
      */
     'currency_code'?: string;
     /**
      * **Only available when `method` is set to `balance`.**  Funds registered on your Tremendous account but not yet deposited in your account (e.g. payments that need to be manually reviewed by our ops team). Denominated in `currency_code`. 
-     * @type {number}
-     * @memberof ListFundingSources200ResponseFundingSourcesInnerMeta
      */
     'pending_amount'?: number;
     /**
      * Same as `pending_amount`, but in cents.
-     * @type {number}
-     * @memberof ListFundingSources200ResponseFundingSourcesInnerMeta
      * @deprecated
      */
     'pending_cents'?: number;
     /**
      * **Only exists for commercial invoicing.**  Available credit limit denominated in `currency_code`. 
-     * @type {number}
-     * @memberof ListFundingSources200ResponseFundingSourcesInnerMeta
      */
     'credit_limit_amount'?: number;
     /**
      * Same as `credit_limit_amount`, but in cents.
-     * @type {number}
-     * @memberof ListFundingSources200ResponseFundingSourcesInnerMeta
      * @deprecated
      */
     'credit_limit_cents'?: number;
     /**
      * **Only available when `method` is set to `bank_account` or `credit_card`.**  Name of the holder of the bank account or credit_card 
-     * @type {string}
-     * @memberof ListFundingSources200ResponseFundingSourcesInnerMeta
      */
     'accountholder_name'?: string;
     /**
      * **Only available when `method` is set to `bank_account`.**  Is this a checking or savings account 
-     * @type {string}
-     * @memberof ListFundingSources200ResponseFundingSourcesInnerMeta
      */
     'account_type'?: ListFundingSources200ResponseFundingSourcesInnerMetaAccountTypeEnum;
     /**
      * **Only available when `method` is set to `bank_account`.**  Name of the bank 
-     * @type {string}
-     * @memberof ListFundingSources200ResponseFundingSourcesInnerMeta
      */
     'bank_name'?: string | null;
     /**
      * **Only available when `method` is set to `bank_account`.**  Last 4 digits of the account number 
-     * @type {string}
-     * @memberof ListFundingSources200ResponseFundingSourcesInnerMeta
      */
     'account_number_mask'?: string;
     /**
      * **Only available when `method` is set to `bank_account`.**  Last 4 digits of the routing number 
-     * @type {string}
-     * @memberof ListFundingSources200ResponseFundingSourcesInnerMeta
      */
     'account_routing_mask'?: string;
     /**
      * **Only available when `method` is set to `bank_account`.**  Can refunds be deposited to this bank account 
-     * @type {boolean}
-     * @memberof ListFundingSources200ResponseFundingSourcesInnerMeta
      */
     'refundable'?: boolean;
     /**
      * **Only available when `method` is set to `credit_card`.**  Network of the credit card 
-     * @type {string}
-     * @memberof ListFundingSources200ResponseFundingSourcesInnerMeta
      */
     'network'?: ListFundingSources200ResponseFundingSourcesInnerMetaNetworkEnum;
     /**
      * **Only available when `method` is set to `credit_card`.**  Last 4 digits of the credit card number 
-     * @type {string}
-     * @memberof ListFundingSources200ResponseFundingSourcesInnerMeta
      */
     'last4'?: string;
     /**
      * **Only available when `method` is set to `credit_card`.**  Is this credit card expired 
-     * @type {boolean}
-     * @memberof ListFundingSources200ResponseFundingSourcesInnerMeta
      */
     'expired'?: boolean;
     /**
      * **Only available when `method` is set to `credit_card`.**  Year part of card\'s expiration date 
-     * @type {string}
-     * @memberof ListFundingSources200ResponseFundingSourcesInnerMeta
      */
     'year'?: string;
     /**
      * **Only available when `method` is set to `credit_card`.**  Month part of card\'s expiration date 
-     * @type {string}
-     * @memberof ListFundingSources200ResponseFundingSourcesInnerMeta
      */
     'month'?: string;
     /**
      * **Only available when `method` is set to `bank_account` or `credit_card`.**  Point in time when the last order failed using this bank account or credit card as a funding source. 
-     * @type {string}
-     * @memberof ListFundingSources200ResponseFundingSourcesInnerMeta
      */
     'last_payment_failed_at'?: string | null;
     /**
      * **Only available when `method` is set to `invoice`.**  Type of invoice account (e.g., commercial, pro_forma, prefunding_only) 
-     * @type {string}
-     * @memberof ListFundingSources200ResponseFundingSourcesInnerMeta
      */
     'invoice_type'?: string;
     /**
      * **Only available when `method` is set to `invoice` and `invoice_type` is `commercial`.**  Billing interval for commercial invoice generation (daily, weekly, monthly, twice_monthly, or quarterly). Returns `null` for pro forma invoices. 
-     * @type {string}
-     * @memberof ListFundingSources200ResponseFundingSourcesInnerMeta
      */
     'interval'?: string | null;
     /**
      * **Deprecated: Use `days_of_week` instead.**  **Only available when `method` is set to `invoice` and `invoice_type` is `commercial`.**  Day of the week when commercial invoices are generated (\"0\"=Sunday, \"1\"=Monday, etc.). Accounts with weekly commercial invoicing can have invoices generated on one or two days of the week. Returns the scheduled day when there is one day, and an empty string when there are two days and for non-weekly / pro forma invoices. 
-     * @type {string}
-     * @memberof ListFundingSources200ResponseFundingSourcesInnerMeta
      * @deprecated
      */
     'day_of_week'?: string | null;
     /**
      * **Only available when `method` is set to `invoice` and `invoice_type` is `commercial`.**  Days of the week when commercial invoices are generated (\"0\"=Sunday, \"1\"=Monday, etc.). Accounts with weekly commercial invoicing can have invoices generated on one or two days of the week. Returns an empty array for non-weekly and for pro forma invoices. 
-     * @type {Array<string>}
-     * @memberof ListFundingSources200ResponseFundingSourcesInnerMeta
      */
     'days_of_week'?: Array<string>;
     /**
      * **Only available when `method` is set to `invoice`.**  Net payment terms in days (e.g., \"30\" for Net 30) 
-     * @type {string}
-     * @memberof ListFundingSources200ResponseFundingSourcesInnerMeta
      */
     'net'?: string;
     /**
      * **Only available when `method` is set to `invoice`.**  Company name for invoice billing 
-     * @type {string}
-     * @memberof ListFundingSources200ResponseFundingSourcesInnerMeta
      */
     'company_name'?: string;
     /**
      * **Only available when `method` is set to `invoice`.**  Primary billing address line 
-     * @type {string}
-     * @memberof ListFundingSources200ResponseFundingSourcesInnerMeta
      */
     'address_1'?: string | null;
     /**
      * **Only available when `method` is set to `invoice`.**  Secondary billing address line 
-     * @type {string}
-     * @memberof ListFundingSources200ResponseFundingSourcesInnerMeta
      */
     'address_2'?: string | null;
     /**
      * **Only available when `method` is set to `invoice`.**  Billing address city 
-     * @type {string}
-     * @memberof ListFundingSources200ResponseFundingSourcesInnerMeta
      */
     'city'?: string | null;
     /**
      * **Only available when `method` is set to `invoice`.**  Billing address state or province 
-     * @type {string}
-     * @memberof ListFundingSources200ResponseFundingSourcesInnerMeta
      */
     'state'?: string | null;
     /**
      * **Only available when `method` is set to `invoice`.**  Billing address postal code 
-     * @type {string}
-     * @memberof ListFundingSources200ResponseFundingSourcesInnerMeta
      */
     'zip'?: string | null;
     /**
      * **Only available when `method` is set to `invoice`.**  Contact phone number for billing 
-     * @type {string}
-     * @memberof ListFundingSources200ResponseFundingSourcesInnerMeta
      */
     'phone'?: string | null;
     /**
      * **Only available when `method` is set to `invoice`.**  Email addresses for invoice delivery (comma-separated) 
-     * @type {string}
-     * @memberof ListFundingSources200ResponseFundingSourcesInnerMeta
      */
     'emails'?: string | null;
-    /**
-     * 
-     * @type {ListFundingSources200ResponseFundingSourcesInnerMetaFailureDetails}
-     * @memberof ListFundingSources200ResponseFundingSourcesInnerMeta
-     */
     'failure_details'?: ListFundingSources200ResponseFundingSourcesInnerMetaFailureDetails | null;
 }
 
 export const ListFundingSources200ResponseFundingSourcesInnerMetaAccountTypeEnum = {
     Checking: 'checking',
-    Savings: 'savings'
+    Savings: 'savings',
 } as const;
 
 export type ListFundingSources200ResponseFundingSourcesInnerMetaAccountTypeEnum = typeof ListFundingSources200ResponseFundingSourcesInnerMetaAccountTypeEnum[keyof typeof ListFundingSources200ResponseFundingSourcesInnerMetaAccountTypeEnum];
@@ -5325,120 +3304,72 @@ export const ListFundingSources200ResponseFundingSourcesInnerMetaNetworkEnum = {
     Laser: 'Laser',
     Elo: 'Elo',
     Maestro: 'Maestro',
-    Solo: 'Solo'
+    Solo: 'Solo',
 } as const;
 
 export type ListFundingSources200ResponseFundingSourcesInnerMetaNetworkEnum = typeof ListFundingSources200ResponseFundingSourcesInnerMetaNetworkEnum[keyof typeof ListFundingSources200ResponseFundingSourcesInnerMetaNetworkEnum];
 
-/**
- * 
- * @export
- * @interface ListFundingSources200ResponseFundingSourcesInnerMetaFailureDetails
- */
 export interface ListFundingSources200ResponseFundingSourcesInnerMetaFailureDetails {
     /**
      * Payment error code
-     * @type {string}
-     * @memberof ListFundingSources200ResponseFundingSourcesInnerMetaFailureDetails
      */
     'return_code'?: string;
     /**
      * Explanation of the payment error
-     * @type {string}
-     * @memberof ListFundingSources200ResponseFundingSourcesInnerMetaFailureDetails
      */
     'description'?: string;
 }
-/**
- * 
- * @export
- * @interface ListInvoices200Response
- */
 export interface ListInvoices200Response {
-    /**
-     * 
-     * @type {Array<ListInvoices200ResponseInvoicesInner>}
-     * @memberof ListInvoices200Response
-     */
     'invoices': Array<ListInvoices200ResponseInvoicesInner>;
     /**
      * The total number of invoices across all pages
-     * @type {number}
-     * @memberof ListInvoices200Response
      */
     'total_count': number;
 }
 /**
  * Invoices are instruments to fund your Tremendous account\'s balance.  Invoices can be created by your organization programatically. Once we receive your payment, the invoice is marked as `PAID` and we add the respective funds to your account\'s balance. 
- * @export
- * @interface ListInvoices200ResponseInvoicesInner
  */
 export interface ListInvoices200ResponseInvoicesInner {
     /**
      * The invoice number
-     * @type {string}
-     * @memberof ListInvoices200ResponseInvoicesInner
      */
     'id': string;
     /**
      * Reference to the purchase order number within your organization
-     * @type {string}
-     * @memberof ListInvoices200ResponseInvoicesInner
      */
     'po_number'?: string | null;
     /**
      * Amount of the invoice
-     * @type {number}
-     * @memberof ListInvoices200ResponseInvoicesInner
      */
     'amount': number;
     /**
      * Currency of the invoice
-     * @type {string}
-     * @memberof ListInvoices200ResponseInvoicesInner
      */
     'currency_code'?: ListInvoices200ResponseInvoicesInnerCurrencyCodeEnum;
     /**
      * Deprecated: Use `currency_code` instead.
-     * @type {string}
-     * @memberof ListInvoices200ResponseInvoicesInner
      * @deprecated
      */
     'currency'?: ListInvoices200ResponseInvoicesInnerCurrencyEnum;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof ListInvoices200ResponseInvoicesInner
-     */
     'international'?: boolean;
     /**
      * Status of this invoice  <table>   <thead>     <tr>       <th>Status</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td><code>DELETED</code></td>       <td>Invoice has been deleted by your organization</td>     </tr>     <tr>       <td><code>PAID</code></td>       <td>Invoice has been paid by your organization</td>     </tr>     <tr>       <td><code>OPEN</code></td>       <td>Invoice has been created by your organization but has not been paid, yet</td>     </tr>   </tbody> </table> 
-     * @type {string}
-     * @memberof ListInvoices200ResponseInvoicesInner
      */
     'status': ListInvoices200ResponseInvoicesInnerStatusEnum;
     /**
      * List of orders related to the invoice (it doesn\'t apply to prefunding)
-     * @type {Array<string>}
-     * @memberof ListInvoices200ResponseInvoicesInner
      */
     'orders'?: Array<string>;
     /**
      * List of rewards related to the invoice (it doesn\'t apply to prefunding)
-     * @type {Array<string>}
-     * @memberof ListInvoices200ResponseInvoicesInner
      */
     'rewards'?: Array<string>;
     /**
      * Timestamp of when the invoice has been created. 
-     * @type {string}
-     * @memberof ListInvoices200ResponseInvoicesInner
      */
     'created_at': string;
     /**
      * Timestamp of when the invoice has been paid. 
-     * @type {string}
-     * @memberof ListInvoices200ResponseInvoicesInner
      */
     'paid_at': string | null;
 }
@@ -5447,7 +3378,7 @@ export const ListInvoices200ResponseInvoicesInnerCurrencyCodeEnum = {
     Usd: 'USD',
     Eur: 'EUR',
     Gbp: 'GBP',
-    Cad: 'CAD'
+    Cad: 'CAD',
 } as const;
 
 export type ListInvoices200ResponseInvoicesInnerCurrencyCodeEnum = typeof ListInvoices200ResponseInvoicesInnerCurrencyCodeEnum[keyof typeof ListInvoices200ResponseInvoicesInnerCurrencyCodeEnum];
@@ -5455,7 +3386,7 @@ export const ListInvoices200ResponseInvoicesInnerCurrencyEnum = {
     Usd: 'USD',
     Eur: 'EUR',
     Gbp: 'GBP',
-    Cad: 'CAD'
+    Cad: 'CAD',
 } as const;
 
 export type ListInvoices200ResponseInvoicesInnerCurrencyEnum = typeof ListInvoices200ResponseInvoicesInnerCurrencyEnum[keyof typeof ListInvoices200ResponseInvoicesInnerCurrencyEnum];
@@ -5463,165 +3394,96 @@ export const ListInvoices200ResponseInvoicesInnerStatusEnum = {
     Deleted: 'DELETED',
     Paid: 'PAID',
     Open: 'OPEN',
-    MarkedAsPaid: 'MARKED_AS_PAID'
+    MarkedAsPaid: 'MARKED_AS_PAID',
 } as const;
 
 export type ListInvoices200ResponseInvoicesInnerStatusEnum = typeof ListInvoices200ResponseInvoicesInnerStatusEnum[keyof typeof ListInvoices200ResponseInvoicesInnerStatusEnum];
 
-/**
- * 
- * @export
- * @interface ListMembers200Response
- */
 export interface ListMembers200Response {
-    /**
-     * 
-     * @type {Array<ListMembers200ResponseMembersInner>}
-     * @memberof ListMembers200Response
-     */
     'members': Array<ListMembers200ResponseMembersInner>;
 }
 /**
  * Each organization has one or more users that can access and manage that organization. These users are called members.  Members can take actions via the Tremendous web dashboard directly.  These actions include adding funding sources to the organization, creating Campaigns, and more. 
- * @export
- * @interface ListMembers200ResponseMembersInner
  */
 export interface ListMembers200ResponseMembersInner {
-    /**
-     * 
-     * @type {string}
-     * @memberof ListMembers200ResponseMembersInner
-     */
     'id': string;
     /**
      * Email address of the member
-     * @type {string}
-     * @memberof ListMembers200ResponseMembersInner
      */
     'email': string;
     /**
      * Full name of the member
-     * @type {string}
-     * @memberof ListMembers200ResponseMembersInner
      */
     'name': string | null;
     /**
      * Is this member currently active in the organization. If `false`, the member will not be able to access the organization. 
-     * @type {boolean}
-     * @memberof ListMembers200ResponseMembersInner
      */
     'active'?: boolean;
     /**
      * The role ID associated with the member within the organization. 
-     * @type {string}
-     * @memberof ListMembers200ResponseMembersInner
      */
     'role'?: string | null;
     /**
      * Current status of the member\'s account.  When creating a member it starts out in the status `INVITED`. As soon as that member open the invitation link and registers an account, the status switches to `REGISTERED`. 
-     * @type {string}
-     * @memberof ListMembers200ResponseMembersInner
      */
     'status': ListMembers200ResponseMembersInnerStatusEnum;
     /**
      * Timestamp when this member was created.  The `created_at` timestamp is **NOT** returned when retrieving a member (but is part of the response when listing or creating members). 
-     * @type {string}
-     * @memberof ListMembers200ResponseMembersInner
      */
     'created_at'?: string;
     /**
      * Timestamp when this member most recently logged into the dashboard of the organization associated with this API key. 
-     * @type {string}
-     * @memberof ListMembers200ResponseMembersInner
      */
     'last_login_at'?: string | null;
 }
 
 export const ListMembers200ResponseMembersInnerStatusEnum = {
     Registered: 'REGISTERED',
-    Invited: 'INVITED'
+    Invited: 'INVITED',
 } as const;
 
 export type ListMembers200ResponseMembersInnerStatusEnum = typeof ListMembers200ResponseMembersInnerStatusEnum[keyof typeof ListMembers200ResponseMembersInnerStatusEnum];
 
-/**
- * 
- * @export
- * @interface ListOrders200Response
- */
 export interface ListOrders200Response {
-    /**
-     * 
-     * @type {Array<ListOrders200ResponseOrdersInner>}
-     * @memberof ListOrders200Response
-     */
     'orders': Array<ListOrders200ResponseOrdersInner>;
     /**
      * The total number of orders across all pages
-     * @type {number}
-     * @memberof ListOrders200Response
      */
     'total_count': number;
 }
 /**
  * An order wraps around the fulfilment of one or more rewards.
- * @export
- * @interface ListOrders200ResponseOrdersInner
  */
 export interface ListOrders200ResponseOrdersInner {
     /**
      * Tremendous ID of the order
-     * @type {string}
-     * @memberof ListOrders200ResponseOrdersInner
      */
     'id': string;
     /**
      * Reference for this order, supplied by the customer.  When set, `external_id` makes order idempotent. All requests that use the same `external_id` after the initial order creation, will result in a response that returns the data of the initially created order. The response will have a `201` response code. These responses **fail** to create any further orders.  It also allows for retrieving by `external_id` instead of `id` only. 
-     * @type {string}
-     * @memberof ListOrders200ResponseOrdersInner
      */
     'external_id'?: string | null;
     /**
      * ID of the campaign in your account, that defines the available products (different gift cards, charity, etc.) that the recipient can choose from. 
-     * @type {string}
-     * @memberof ListOrders200ResponseOrdersInner
      */
     'campaign_id'?: string | null;
     /**
      * Date the order was created
-     * @type {string}
-     * @memberof ListOrders200ResponseOrdersInner
      */
     'created_at': string;
     /**
      * Execution status of a given order  <table>   <thead>     <tr>       <th>Status</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td><code>CANCELED</code></td>       <td>The order and all of its rewards were canceled.</td>     </tr>     <tr>       <td><code>OPEN</code></td>       <td>The order has been created, but hasn\'t yet been processed.</td>     </tr>     <tr>       <td><code>EXECUTED</code></td>       <td>The order has been executed. Payment has been handled and rewards are being delivered (if applicable).</td>     </tr>     <tr>       <td><code>FAILED</code></td>       <td>The order could not be processed due to an error. E.g. due to insufficient funds in the account.</td>     </tr>     <tr>       <td><code>PENDING APPROVAL</code></td>       <td>The order has been created but needs approval to be executed.</td>     </tr>     <tr>       <td><code>PENDING INTERNAL PAYMENT APPROVAL</code></td>       <td>The order has been created but it is under review and requires approval from our team.</td>     </tr>     <tr>       <td><code>PENDING SETTLEMENT</code></td>       <td>The order has been created but the funds are being held until the settlement window clears.</td>     </tr>   </tbody> </table> 
-     * @type {string}
-     * @memberof ListOrders200ResponseOrdersInner
      */
     'status': ListOrders200ResponseOrdersInnerStatusEnum;
     /**
      * Name of the channel in which the order was created
-     * @type {string}
-     * @memberof ListOrders200ResponseOrdersInner
      */
     'channel'?: ListOrders200ResponseOrdersInnerChannelEnum;
-    /**
-     * 
-     * @type {ListOrders200ResponseOrdersInnerPayment}
-     * @memberof ListOrders200ResponseOrdersInner
-     */
     'payment'?: ListOrders200ResponseOrdersInnerPayment;
     /**
      * The ID for the invoice associated with this order
-     * @type {string}
-     * @memberof ListOrders200ResponseOrdersInner
      */
     'invoice_id'?: string;
-    /**
-     * 
-     * @type {Array<ListRewards200ResponseRewardsInner>}
-     * @memberof ListOrders200ResponseOrdersInner
-     */
     'rewards'?: Array<ListRewards200ResponseRewardsInner>;
 }
 
@@ -5632,7 +3494,7 @@ export const ListOrders200ResponseOrdersInnerStatusEnum = {
     Failed: 'FAILED',
     PendingApproval: 'PENDING APPROVAL',
     PendingInternalPaymentApproval: 'PENDING INTERNAL PAYMENT APPROVAL',
-    PendingSettlement: 'PENDING SETTLEMENT'
+    PendingSettlement: 'PENDING SETTLEMENT',
 } as const;
 
 export type ListOrders200ResponseOrdersInnerStatusEnum = typeof ListOrders200ResponseOrdersInnerStatusEnum[keyof typeof ListOrders200ResponseOrdersInnerStatusEnum];
@@ -5644,126 +3506,76 @@ export const ListOrders200ResponseOrdersInnerChannelEnum = {
     Qualtrics: 'QUALTRICS',
     Typeform: 'TYPEFORM',
     SurveyMonkey: 'SURVEY MONKEY',
-    Yotpo: 'YOTPO'
+    Yotpo: 'YOTPO',
 } as const;
 
 export type ListOrders200ResponseOrdersInnerChannelEnum = typeof ListOrders200ResponseOrdersInnerChannelEnum[keyof typeof ListOrders200ResponseOrdersInnerChannelEnum];
 
 /**
  * Cost breakdown of the order (cost of rewards + fees). Cost and fees are denominated in the organization\'s currency (see payment `currency_code`), independent of the ordered rewards\' currency. Note that this property will only appear for processed orders (`status` is `EXECUTED`).
- * @export
- * @interface ListOrders200ResponseOrdersInnerPayment
  */
 export interface ListOrders200ResponseOrdersInnerPayment {
     /**
      * Total price of the order before fees, denominated in `currency_code`.
-     * @type {number}
-     * @memberof ListOrders200ResponseOrdersInnerPayment
      */
     'subtotal': number;
     /**
      * Total price of the order including fees, denominated in `currency_code`.
-     * @type {number}
-     * @memberof ListOrders200ResponseOrdersInnerPayment
      */
     'total': number;
     /**
      * Fees for the order, denominated in `currency_code`.
-     * @type {number}
-     * @memberof ListOrders200ResponseOrdersInnerPayment
      */
     'fees': number;
     /**
      * Discount for the order, denominated in `currency_code`.
-     * @type {number}
-     * @memberof ListOrders200ResponseOrdersInnerPayment
      */
     'discount': number;
     /**
      * Currency in which the payment amounts (subtotal, total, fees, discount, refund) are denominated.  This always matches the organization\'s currency. 
-     * @type {string}
-     * @memberof ListOrders200ResponseOrdersInnerPayment
      */
     'currency_code': string;
-    /**
-     * 
-     * @type {ListOrders200ResponseOrdersInnerPaymentRefund}
-     * @memberof ListOrders200ResponseOrdersInnerPayment
-     */
     'refund'?: ListOrders200ResponseOrdersInnerPaymentRefund;
 }
 /**
  * Breakdown of the order refunds (total denominated in `currency_code`, independent of the ordered rewards\' currency). Note that this property will only appear for canceled orders or orders with canceled rewards. 
- * @export
- * @interface ListOrders200ResponseOrdersInnerPaymentRefund
  */
 export interface ListOrders200ResponseOrdersInnerPaymentRefund {
     /**
      * Total amount of the order refunds, denominated in `currency_code`.
-     * @type {number}
-     * @memberof ListOrders200ResponseOrdersInnerPaymentRefund
      */
     'total': number;
     /**
      * Currency of the refund. Always matches the organization\'s currency.
-     * @type {string}
-     * @memberof ListOrders200ResponseOrdersInnerPaymentRefund
      */
     'currency_code': string;
 }
-/**
- * 
- * @export
- * @interface ListOrganizations200Response
- */
 export interface ListOrganizations200Response {
-    /**
-     * 
-     * @type {Array<ListOrganizations200ResponseOrganizationsInner>}
-     * @memberof ListOrganizations200Response
-     */
     'organizations'?: Array<ListOrganizations200ResponseOrganizationsInner>;
 }
 /**
  * Organizations are a way to separate different parts of your business within the same Tremendous account. Your root Tremendous account is an organization itself and can have multiple sub-organizations.  You can assign users in your Tremendous team as members to any organization. Users can be members of multiple organizations at once.  Each organizations can have it\'s own API key. 
- * @export
- * @interface ListOrganizations200ResponseOrganizationsInner
  */
 export interface ListOrganizations200ResponseOrganizationsInner {
-    /**
-     * 
-     * @type {string}
-     * @memberof ListOrganizations200ResponseOrganizationsInner
-     */
     'id'?: string;
     /**
      * Name of the organization
-     * @type {string}
-     * @memberof ListOrganizations200ResponseOrganizationsInner
      */
     'name': string;
     /**
      * URL of the website of that organization
-     * @type {string}
-     * @memberof ListOrganizations200ResponseOrganizationsInner
      */
     'website': string;
     /**
      * Currency used for this organization\'s balances, orders, and transactions.
-     * @type {string}
-     * @memberof ListOrganizations200ResponseOrganizationsInner
      */
     'currency_code'?: string;
     /**
      * Status of the organization. Organizations need to be approved to be able to use them to send out rewards.
-     * @type {string}
-     * @memberof ListOrganizations200ResponseOrganizationsInner
      */
     'status'?: ListOrganizations200ResponseOrganizationsInnerStatusEnum;
     /**
      * Timestamp of when the organization has been created.  *This field is only returned when creating an organization.* It is not returned anymore when retrieving or listing organizations. 
-     * @type {string}
-     * @memberof ListOrganizations200ResponseOrganizationsInner
      */
     'created_at'?: string;
 }
@@ -5771,101 +3583,59 @@ export interface ListOrganizations200ResponseOrganizationsInner {
 export const ListOrganizations200ResponseOrganizationsInnerStatusEnum = {
     Pending: 'PENDING',
     Approved: 'APPROVED',
-    Rejected: 'REJECTED'
+    Rejected: 'REJECTED',
 } as const;
 
 export type ListOrganizations200ResponseOrganizationsInnerStatusEnum = typeof ListOrganizations200ResponseOrganizationsInnerStatusEnum[keyof typeof ListOrganizations200ResponseOrganizationsInnerStatusEnum];
 
-/**
- * 
- * @export
- * @interface ListProductsResponse
- */
 export interface ListProductsResponse {
-    /**
-     * 
-     * @type {Array<ListProductsResponseProductsInner>}
-     * @memberof ListProductsResponse
-     */
     'products': Array<ListProductsResponseProductsInner>;
 }
 /**
  * A product represents one way to payout a reward to its recipient. Think:  * Amazon.com gift card (ID: `OKMHM2X2OHYV`) * Donations to Save the Children (ID: `ESRNAD533W5A`) * Virtual Visa debit card (ID: `Q24BD9EZ332JT`)  each of which is one specific product on Tremendous.  > 📘 All available products > > See this [list](https://www.tremendous.com/catalog)  Products can be limited in their availability to recipients by  * geography (field `countries`) * currency (field `currency_codes`) * amount of the reward (field `skus`)   * e.g. adidas gift cards accept any amount between 5 and 200 USD.  See the description of each respective parameter for further details. 
- * @export
- * @interface ListProductsResponseProductsInner
  */
 export interface ListProductsResponseProductsInner {
-    /**
-     * 
-     * @type {string}
-     * @memberof ListProductsResponseProductsInner
-     */
     'id': string;
     /**
      * Name of the product
-     * @type {string}
-     * @memberof ListProductsResponseProductsInner
      */
     'name': string;
     /**
      * Detailed description of the product.
-     * @type {string}
-     * @memberof ListProductsResponseProductsInner
      */
     'description': string;
     /**
      * The category of the product  <table>   <thead>     <tr>       <th>Category</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td><code>ach</code></td>       <td>Bank transfer to the recipient</td>     </tr>     <tr>       <td><code>charity</code></td>       <td>Donations to a charity</td>     </tr>     <tr>       <td><code>instant_debit_transfer</code></td>       <td>Instant debit transfer to the recipient</td>     </tr>     <tr>       <td><code>merchant_card</code></td>       <td>A gift card for a certain merchant (e.g. Amazon)</td>     </tr>     <tr>       <td><code>paypal</code></td>       <td>Payout via PayPal</td>     </tr>     <tr>       <td><code>venmo</code></td>       <td>Payout via Venmo</td>     </tr>     <tr>       <td><code>visa_card</code></td>       <td>Payout in form of a Visa debit card</td>     </tr>     <tr>       <td><code>cash_app</code></td>       <td>Payout via Cash App</td>     </tr>     <tr>       <td><code>international_bank</code></td>       <td>Bank transfer to recipients outside of the US</td>     </tr>     <tr>       <td><code>wallet</code></td>       <td>Payout to a digital wallet (e.g. GCash, MoMo)</td>     </tr>   </tbody> </table> 
-     * @type {string}
-     * @memberof ListProductsResponseProductsInner
      */
     'category': ListProductsResponseProductsInnerCategoryEnum;
     /**
      * Additional classification for the product. Only applicable to products with a `category` of `merchant_card`. Possible subcategories:  * `beauty_and_health` * `digital_financial_services` * `electronics` * `entertainment` * `fashion` * `food_and_drink` * `general_merchandise` * `grocery_and_supermarkets` * `home_and_living` * `mobility_and_fuel` * `sports_and_outdoor_gear` * `travel_and_hospitality` 
-     * @type {string}
-     * @memberof ListProductsResponseProductsInner
      */
     'subcategory'?: ListProductsResponseProductsInnerSubcategoryEnum;
     /**
      * Legal disclosures for this product. Can be in HTML format.
-     * @type {string}
-     * @memberof ListProductsResponseProductsInner
      */
     'disclosure': string;
     /**
      * Products are restricted in their usage based on the amount of the reward. The `skus` array defines bands of denominations in which this product may be used for payouts.  The skus apply to orders in any of the product\'s `currency_codes`. 
-     * @type {Array<ListProductsResponseProductsInnerSkusInner>}
-     * @memberof ListProductsResponseProductsInner
      */
     'skus'?: Array<ListProductsResponseProductsInnerSkusInner>;
     /**
      * Available currencies for this product
-     * @type {Array<string>}
-     * @memberof ListProductsResponseProductsInner
      */
     'currency_codes': Array<ListProductsResponseProductsInnerCurrencyCodesEnum>;
     /**
      * List of countries in which this product is available to recipients.
-     * @type {Array<ListProductsResponseProductsInnerCountriesInner>}
-     * @memberof ListProductsResponseProductsInner
      */
     'countries': Array<ListProductsResponseProductsInnerCountriesInner>;
     /**
      * List of product images associated with this product (e.g. logos or images of the gift cards)
-     * @type {Array<ListProductsResponseProductsInnerImagesInner>}
-     * @memberof ListProductsResponseProductsInner
      */
     'images': Array<ListProductsResponseProductsInnerImagesInner>;
     /**
      * Instructions for how to use the product, if applicable. Mostly used for products with a `category` of `merchant_card`.
-     * @type {string}
-     * @memberof ListProductsResponseProductsInner
      */
     'usage_instructions'?: string;
-    /**
-     * 
-     * @type {ListProductsResponseProductsInnerDocuments}
-     * @memberof ListProductsResponseProductsInner
-     */
     'documents'?: ListProductsResponseProductsInnerDocuments | null;
 }
 
@@ -5879,7 +3649,7 @@ export const ListProductsResponseProductsInnerCategoryEnum = {
     VisaCard: 'visa_card',
     CashApp: 'cash_app',
     InternationalBank: 'international_bank',
-    Wallet: 'wallet'
+    Wallet: 'wallet',
 } as const;
 
 export type ListProductsResponseProductsInnerCategoryEnum = typeof ListProductsResponseProductsInnerCategoryEnum[keyof typeof ListProductsResponseProductsInnerCategoryEnum];
@@ -5895,7 +3665,7 @@ export const ListProductsResponseProductsInnerSubcategoryEnum = {
     HomeAndLiving: 'home_and_living',
     MobilityAndFuel: 'mobility_and_fuel',
     SportsAndOutdoorGear: 'sports_and_outdoor_gear',
-    TravelAndHospitality: 'travel_and_hospitality'
+    TravelAndHospitality: 'travel_and_hospitality',
 } as const;
 
 export type ListProductsResponseProductsInnerSubcategoryEnum = typeof ListProductsResponseProductsInnerSubcategoryEnum[keyof typeof ListProductsResponseProductsInnerSubcategoryEnum];
@@ -6010,104 +3780,67 @@ export const ListProductsResponseProductsInnerCurrencyCodesEnum = {
     Xaf: 'XAF',
     Xof: 'XOF',
     Yer: 'YER',
-    Zar: 'ZAR'
+    Zar: 'ZAR',
 } as const;
 
 export type ListProductsResponseProductsInnerCurrencyCodesEnum = typeof ListProductsResponseProductsInnerCurrencyCodesEnum[keyof typeof ListProductsResponseProductsInnerCurrencyCodesEnum];
 
-/**
- * 
- * @export
- * @interface ListProductsResponseProductsInnerCountriesInner
- */
 export interface ListProductsResponseProductsInnerCountriesInner {
     /**
      * ISO 3166 country code
-     * @type {string}
-     * @memberof ListProductsResponseProductsInnerCountriesInner
      */
     'abbr': string;
 }
 /**
  * URLs and files related to product documentation. 
- * @export
- * @interface ListProductsResponseProductsInnerDocuments
  */
 export interface ListProductsResponseProductsInnerDocuments {
     /**
      * URL to the cardholder agreement PDF file.
-     * @type {string}
-     * @memberof ListProductsResponseProductsInnerDocuments
      */
     'cardholder_agreement_pdf'?: string;
     /**
      * URL to the cardholder agreement web page.
-     * @type {string}
-     * @memberof ListProductsResponseProductsInnerDocuments
      */
     'cardholder_agreement_url'?: string;
     /**
      * URL to the privacy policy web page.
-     * @type {string}
-     * @memberof ListProductsResponseProductsInnerDocuments
      */
     'privacy_policy_url'?: string;
 }
-/**
- * 
- * @export
- * @interface ListProductsResponseProductsInnerImagesInner
- */
 export interface ListProductsResponseProductsInnerImagesInner {
     /**
      * URL to this image
-     * @type {string}
-     * @memberof ListProductsResponseProductsInnerImagesInner
      */
     'src': string;
     /**
      * Type of image
-     * @type {string}
-     * @memberof ListProductsResponseProductsInnerImagesInner
      */
     'type': ListProductsResponseProductsInnerImagesInnerTypeEnum;
     /**
      * The MIME content type of this image
-     * @type {string}
-     * @memberof ListProductsResponseProductsInnerImagesInner
      */
     'content_type'?: string | null;
 }
 
 export const ListProductsResponseProductsInnerImagesInnerTypeEnum = {
     Card: 'card',
-    Logo: 'logo'
+    Logo: 'logo',
 } as const;
 
 export type ListProductsResponseProductsInnerImagesInnerTypeEnum = typeof ListProductsResponseProductsInnerImagesInnerTypeEnum[keyof typeof ListProductsResponseProductsInnerImagesInnerTypeEnum];
 
-/**
- * 
- * @export
- * @interface ListProductsResponseProductsInnerSkusInner
- */
 export interface ListProductsResponseProductsInnerSkusInner {
     /**
      * Minimum amount this product supports, in `currency_code`.
-     * @type {number}
-     * @memberof ListProductsResponseProductsInnerSkusInner
      */
     'min': number;
     /**
      * Maximum amount this product supports, in `currency_code`.
-     * @type {number}
-     * @memberof ListProductsResponseProductsInnerSkusInner
      */
     'max': number;
     /**
      * Currency of `min` and `max`.
-     * @type {string}
-     * @memberof ListProductsResponseProductsInnerSkusInner
      */
     'currency_code': ListProductsResponseProductsInnerSkusInnerCurrencyCodeEnum;
 }
@@ -6223,132 +3956,74 @@ export const ListProductsResponseProductsInnerSkusInnerCurrencyCodeEnum = {
     Xaf: 'XAF',
     Xof: 'XOF',
     Yer: 'YER',
-    Zar: 'ZAR'
+    Zar: 'ZAR',
 } as const;
 
 export type ListProductsResponseProductsInnerSkusInnerCurrencyCodeEnum = typeof ListProductsResponseProductsInnerSkusInnerCurrencyCodeEnum[keyof typeof ListProductsResponseProductsInnerSkusInnerCurrencyCodeEnum];
 
-/**
- * 
- * @export
- * @interface ListRewards200Response
- */
 export interface ListRewards200Response {
-    /**
-     * 
-     * @type {Array<ListRewards200ResponseRewardsInner>}
-     * @memberof ListRewards200Response
-     */
     'rewards'?: Array<ListRewards200ResponseRewardsInner>;
     /**
      * The total number of rewards across all pages
-     * @type {number}
-     * @memberof ListRewards200Response
      */
     'total_count'?: number;
 }
 /**
  * A single reward, sent to a recipient. A reward is always part of an order.  Either `products` or `campaign_id` must be specified. 
- * @export
- * @interface ListRewards200ResponseRewardsInner
  */
 export interface ListRewards200ResponseRewardsInner {
     /**
      * Tremendous ID of the reward
-     * @type {string}
-     * @memberof ListRewards200ResponseRewardsInner
      */
     'id'?: string;
     /**
      * Tremendous ID of the order this reward is part of.
-     * @type {string}
-     * @memberof ListRewards200ResponseRewardsInner
      */
     'order_id'?: string;
     /**
      * Date the reward was created
-     * @type {string}
-     * @memberof ListRewards200ResponseRewardsInner
      */
     'created_at'?: string;
     /**
      * Expiration date of the reward. If null, the reward does not expire.
-     * @type {string}
-     * @memberof ListRewards200ResponseRewardsInner
      */
     'expires_at'?: string | null;
-    /**
-     * 
-     * @type {ListRewards200ResponseRewardsInnerValue}
-     * @memberof ListRewards200ResponseRewardsInner
-     */
     'value'?: ListRewards200ResponseRewardsInnerValue;
-    /**
-     * 
-     * @type {ListRewards200ResponseRewardsInnerRecipient}
-     * @memberof ListRewards200ResponseRewardsInner
-     */
     'recipient'?: ListRewards200ResponseRewardsInnerRecipient;
     /**
      * Timestamp of reward delivery within the next year. Note that if date-time is provided, the time values will be ignored.
-     * @type {string}
-     * @memberof ListRewards200ResponseRewardsInner
      */
     'deliver_at'?: string;
-    /**
-     * 
-     * @type {Array<ListRewards200ResponseRewardsInnerCustomFieldsInner>}
-     * @memberof ListRewards200ResponseRewardsInner
-     */
     'custom_fields'?: Array<ListRewards200ResponseRewardsInnerCustomFieldsInner>;
-    /**
-     * 
-     * @type {ListRewards200ResponseRewardsInnerDelivery}
-     * @memberof ListRewards200ResponseRewardsInner
-     */
     'delivery'?: ListRewards200ResponseRewardsInnerDelivery;
 }
 /**
  * Reward custom data for searching, tracking or copy (see [Adding custom fields to orders](https://developers.tremendous.com/docs/using-custom-fields-to-add-custom-data-to-rewards).)
- * @export
- * @interface ListRewards200ResponseRewardsInnerCustomFieldsInner
  */
 export interface ListRewards200ResponseRewardsInnerCustomFieldsInner {
     /**
      * Tremendous ID of the custom field
-     * @type {string}
-     * @memberof ListRewards200ResponseRewardsInnerCustomFieldsInner
      */
     'id'?: string;
     /**
      * Value of the custom field
-     * @type {string}
-     * @memberof ListRewards200ResponseRewardsInnerCustomFieldsInner
      */
     'value'?: string | null;
     /**
      * Label of the custom field
-     * @type {string}
-     * @memberof ListRewards200ResponseRewardsInnerCustomFieldsInner
      */
     'label'?: string;
 }
 /**
  * Details on how the reward is delivered to the recipient. 
- * @export
- * @interface ListRewards200ResponseRewardsInnerDelivery
  */
 export interface ListRewards200ResponseRewardsInnerDelivery {
     /**
      * How to deliver the reward to the recipient.  <table>   <thead>     <tr>       <th>Delivery Method</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td><code>EMAIL</code></td>       <td>Deliver the reward to the recipient by email</td>     </tr>     <tr>       <td><code>LINK</code></td>       <td>         <p>Deliver the reward to the recipient via a link.</p>         <p>The initial <code>POST /orders</code> response for a link reward includes the link in <code>delivery.link</code>.</p>         <p>The link must then be delivered to the recipient out-of-band.</p>         <p>To obtain a new link for an existing reward, call <code>POST /rewards/{id}/generate_link</code>.</p>       </td>     </tr>     <tr>       <td><code>PHONE</code></td>       <td>Deliver the reward to the recipient by SMS</td>     </tr>   </tbody> </table> 
-     * @type {string}
-     * @memberof ListRewards200ResponseRewardsInnerDelivery
      */
     'method'?: ListRewards200ResponseRewardsInnerDeliveryMethodEnum;
     /**
      * Current status of the delivery of the reward:  * `SCHEDULED` - Reward is scheduled for delivery and will be delivered soon. * `FAILED` - Delivery of reward failed (e.g. email bounced). * `SUCCEEDED` - Reward was successfully delivered (email or text message delivered or reward link active). * `PENDING` - Delivery is pending but not yet scheduled. 
-     * @type {string}
-     * @memberof ListRewards200ResponseRewardsInnerDelivery
      */
     'status'?: ListRewards200ResponseRewardsInnerDeliveryStatusEnum;
 }
@@ -6356,7 +4031,7 @@ export interface ListRewards200ResponseRewardsInnerDelivery {
 export const ListRewards200ResponseRewardsInnerDeliveryMethodEnum = {
     Email: 'EMAIL',
     Link: 'LINK',
-    Phone: 'PHONE'
+    Phone: 'PHONE',
 } as const;
 
 export type ListRewards200ResponseRewardsInnerDeliveryMethodEnum = typeof ListRewards200ResponseRewardsInnerDeliveryMethodEnum[keyof typeof ListRewards200ResponseRewardsInnerDeliveryMethodEnum];
@@ -6364,52 +4039,35 @@ export const ListRewards200ResponseRewardsInnerDeliveryStatusEnum = {
     Scheduled: 'SCHEDULED',
     Failed: 'FAILED',
     Succeeded: 'SUCCEEDED',
-    Pending: 'PENDING'
+    Pending: 'PENDING',
 } as const;
 
 export type ListRewards200ResponseRewardsInnerDeliveryStatusEnum = typeof ListRewards200ResponseRewardsInnerDeliveryStatusEnum[keyof typeof ListRewards200ResponseRewardsInnerDeliveryStatusEnum];
 
 /**
  * Details of the recipient of the reward
- * @export
- * @interface ListRewards200ResponseRewardsInnerRecipient
  */
 export interface ListRewards200ResponseRewardsInnerRecipient {
     /**
      * Name of the recipient
-     * @type {string}
-     * @memberof ListRewards200ResponseRewardsInnerRecipient
      */
     'name'?: string | null;
     /**
      * Email address of the recipient
-     * @type {string}
-     * @memberof ListRewards200ResponseRewardsInnerRecipient
      */
     'email'?: string;
     /**
      * Phone number of the recipient. For non-US phone numbers, specify the country code (prefixed with +).
-     * @type {string}
-     * @memberof ListRewards200ResponseRewardsInnerRecipient
      */
     'phone'?: string;
 }
-/**
- * 
- * @export
- * @interface ListRewards200ResponseRewardsInnerValue
- */
 export interface ListRewards200ResponseRewardsInnerValue {
     /**
      * Amount of the reward
-     * @type {number}
-     * @memberof ListRewards200ResponseRewardsInnerValue
      */
     'denomination': number;
     /**
      * Currency of the reward. Defaults to the organization\'s currency if not provided.
-     * @type {string}
-     * @memberof ListRewards200ResponseRewardsInnerValue
      */
     'currency_code'?: ListRewards200ResponseRewardsInnerValueCurrencyCodeEnum;
 }
@@ -6525,623 +4183,359 @@ export const ListRewards200ResponseRewardsInnerValueCurrencyCodeEnum = {
     Xaf: 'XAF',
     Xof: 'XOF',
     Yer: 'YER',
-    Zar: 'ZAR'
+    Zar: 'ZAR',
 } as const;
 
 export type ListRewards200ResponseRewardsInnerValueCurrencyCodeEnum = typeof ListRewards200ResponseRewardsInnerValueCurrencyCodeEnum[keyof typeof ListRewards200ResponseRewardsInnerValueCurrencyCodeEnum];
 
-/**
- * 
- * @export
- * @interface ListRewards401Response
- */
 export interface ListRewards401Response {
     /**
      * HTTP status code of the response
-     * @type {number}
-     * @memberof ListRewards401Response
      */
     'status'?: number;
-    /**
-     * 
-     * @type {ListRewards401ResponseErrors}
-     * @memberof ListRewards401Response
-     */
     'errors': ListRewards401ResponseErrors;
 }
-/**
- * 
- * @export
- * @interface ListRewards401ResponseErrors
- */
 export interface ListRewards401ResponseErrors {
     /**
      * Error message
-     * @type {string}
-     * @memberof ListRewards401ResponseErrors
      */
     'message'?: string;
     /**
      * Mirrors the request parameters structure, filled only with the (nested) properties that caused an error.
-     * @type {{ [key: string]: any; }}
-     * @memberof ListRewards401ResponseErrors
      */
     'payload'?: { [key: string]: any; };
 }
-/**
- * 
- * @export
- * @interface ListRoles200Response
- */
 export interface ListRoles200Response {
-    /**
-     * 
-     * @type {Array<ListRoles200ResponseRolesInner>}
-     * @memberof ListRoles200Response
-     */
     'roles': Array<ListRoles200ResponseRolesInner>;
 }
 /**
  * Each organization member is assigned a role that defines the permissions they have within the organization. 
- * @export
- * @interface ListRoles200ResponseRolesInner
  */
 export interface ListRoles200ResponseRolesInner {
-    /**
-     * 
-     * @type {string}
-     * @memberof ListRoles200ResponseRolesInner
-     */
     'id': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof ListRoles200ResponseRolesInner
-     */
     'title': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof ListRoles200ResponseRolesInner
-     */
     'description': string;
 }
-/**
- * 
- * @export
- * @interface ListTopups200Response
- */
 export interface ListTopups200Response {
-    /**
-     * 
-     * @type {Array<ListTopups200ResponseTopupsInner>}
-     * @memberof ListTopups200Response
-     */
     'topups'?: Array<ListTopups200ResponseTopupsInner>;
     /**
      * The total number of topups across all pages
-     * @type {number}
-     * @memberof ListTopups200Response
      */
     'total_count'?: number;
 }
-/**
- * 
- * @export
- * @interface ListTopups200ResponseTopupsInner
- */
 export interface ListTopups200ResponseTopupsInner {
     /**
      * Unique identifier for the topup request.
-     * @type {string}
-     * @memberof ListTopups200ResponseTopupsInner
      */
     'id'?: string;
     /**
      * Amount to add to your organization\'s balance, denominated in `currency_code`.
-     * @type {number}
-     * @memberof ListTopups200ResponseTopupsInner
      */
     'amount'?: number;
     /**
      * Currency of the topup amount. Always matches the organization\'s currency.
-     * @type {string}
-     * @memberof ListTopups200ResponseTopupsInner
      */
     'currency_code'?: string;
     /**
      * Amount of the processing fee for the topup (typically reserved for credit card topups).
-     * @type {number}
-     * @memberof ListTopups200ResponseTopupsInner
      */
     'processing_fee'?: number;
     /**
      * ID of the funding_source object used for this topup.
-     * @type {string}
-     * @memberof ListTopups200ResponseTopupsInner
      */
     'funding_source_id'?: string;
     /**
      * Status of the topup  <table>   <thead>     <tr>       <th>Status</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td><code>created</code></td>       <td>The topup is processing (and may be under review).</td>     </tr>     <tr>       <td><code>partially_credited</code></td>       <td>Some funds have been credited to the balance. The remainder will be credited by <code>expected_settlement_at</code>.</td>     </tr>     <tr>       <td><code>fully_credited</code></td>       <td>All funds have been added to the balance.</td>     </tr>     <tr>       <td><code>reversed</code></td>       <td>The topup was credited, but then reversed due to a chargeback or ACH return.</td>     </tr>     <tr>       <td><code>rejected</code></td>       <td>The topup was rejected by an admin.</td>     </tr>   </tbody> </table> 
-     * @type {string}
-     * @memberof ListTopups200ResponseTopupsInner
      */
     'status'?: string;
     /**
      * Timestamp indicating when the topup object was created (when the request was made).
-     * @type {string}
-     * @memberof ListTopups200ResponseTopupsInner
      */
     'created_at'?: string;
     /**
      * Timestamp indicating when the topup amount was fully credited to the balance.
-     * @type {string}
-     * @memberof ListTopups200ResponseTopupsInner
      */
     'fully_credited_at'?: string | null;
     /**
      * Timestamp indicating when the topup was rejected.
-     * @type {string}
-     * @memberof ListTopups200ResponseTopupsInner
      */
     'rejected_at'?: string | null;
     /**
      * Timestamp indicating when the topup was reversed.
-     * @type {string}
-     * @memberof ListTopups200ResponseTopupsInner
      */
     'reversed_at'?: string | null;
     /**
      * A sentence explaining why the topup was reversed.
-     * @type {string}
-     * @memberof ListTopups200ResponseTopupsInner
      */
     'reversed_reason'?: string | null;
     /**
      * Idempotency key to prevent duplicate requests.
-     * @type {string}
-     * @memberof ListTopups200ResponseTopupsInner
      */
     'idempotency_key'?: string | null;
     /**
      * Amount credited to the balance immediately. Equals `amount` for non-ACH topups or ACH debits fully within instant funding limits. Can be 0 if nothing was credited instantly.
-     * @type {number}
-     * @memberof ListTopups200ResponseTopupsInner
      */
     'instant_credit_amount'?: number;
     /**
      * Amount that will be available once the settlement period elapses. 0 if nothing is settling.
-     * @type {number}
-     * @memberof ListTopups200ResponseTopupsInner
      */
     'settled_amount'?: number;
     /**
      * Timestamp indicating when the pending amount will be credited to the balance. Null if the topup was fully credited immediately.
-     * @type {string}
-     * @memberof ListTopups200ResponseTopupsInner
      */
     'expected_settlement_at'?: string | null;
 }
-/**
- * 
- * @export
- * @interface ListWebhookEvents200Response
- */
 export interface ListWebhookEvents200Response {
-    /**
-     * 
-     * @type {Array<string>}
-     * @memberof ListWebhookEvents200Response
-     */
     'events'?: Array<string>;
 }
-/**
- * 
- * @export
- * @interface ListWebhooks200Response
- */
 export interface ListWebhooks200Response {
-    /**
-     * 
-     * @type {Array<ListWebhooks200ResponseWebhooksInner>}
-     * @memberof ListWebhooks200Response
-     */
     'webhooks'?: Array<ListWebhooks200ResponseWebhooksInner>;
 }
-/**
- * 
- * @export
- * @interface ListWebhooks200ResponseWebhooksInner
- */
 export interface ListWebhooks200ResponseWebhooksInner {
-    /**
-     * 
-     * @type {string}
-     * @memberof ListWebhooks200ResponseWebhooksInner
-     */
     'id'?: string;
     /**
      * URL the webhook will make requests to
-     * @type {string}
-     * @memberof ListWebhooks200ResponseWebhooksInner
      */
     'url': string | null;
     /**
      * Private key for the webhook
-     * @type {string}
-     * @memberof ListWebhooks200ResponseWebhooksInner
      */
     'private_key'?: string;
 }
 /**
  * Each organization has one or more users that can access and manage that organization. These users are called members.  Members can take actions via the Tremendous web dashboard directly.  These actions include adding funding sources to the organization, creating Campaigns, and more. 
- * @export
- * @interface Member
  */
 export interface Member {
-    /**
-     * 
-     * @type {string}
-     * @memberof Member
-     */
     'id': string;
     /**
      * Email address of the member
-     * @type {string}
-     * @memberof Member
      */
     'email': string;
     /**
      * Full name of the member
-     * @type {string}
-     * @memberof Member
      */
     'name': string | null;
     /**
      * Is this member currently active in the organization. If `false`, the member will not be able to access the organization. 
-     * @type {boolean}
-     * @memberof Member
      */
     'active'?: boolean;
     /**
      * The role ID associated with the member within the organization. 
-     * @type {string}
-     * @memberof Member
      */
     'role'?: string | null;
     /**
      * Current status of the member\'s account.  When creating a member it starts out in the status `INVITED`. As soon as that member open the invitation link and registers an account, the status switches to `REGISTERED`. 
-     * @type {string}
-     * @memberof Member
      */
     'status': MemberStatusEnum;
     /**
      * Timestamp when this member was created.  The `created_at` timestamp is **NOT** returned when retrieving a member (but is part of the response when listing or creating members). 
-     * @type {string}
-     * @memberof Member
      */
     'created_at'?: string;
     /**
      * Timestamp when this member most recently logged into the dashboard of the organization associated with this API key. 
-     * @type {string}
-     * @memberof Member
      */
     'last_login_at'?: string | null;
 }
 
 export const MemberStatusEnum = {
     Registered: 'REGISTERED',
-    Invited: 'INVITED'
+    Invited: 'INVITED',
 } as const;
 
 export type MemberStatusEnum = typeof MemberStatusEnum[keyof typeof MemberStatusEnum];
 
 /**
  * Each organization has one or more users that can access and manage that organization. These users are called members.  Members can take actions via the Tremendous web dashboard directly.  These actions include adding funding sources to the organization, creating Campaigns, and more. 
- * @export
- * @interface MemberBase
  */
 export interface MemberBase {
-    /**
-     * 
-     * @type {string}
-     * @memberof MemberBase
-     */
     'id': string;
     /**
      * Email address of the member
-     * @type {string}
-     * @memberof MemberBase
      */
     'email': string;
     /**
      * Full name of the member
-     * @type {string}
-     * @memberof MemberBase
      */
     'name': string | null;
     /**
      * Is this member currently active in the organization. If `false`, the member will not be able to access the organization. 
-     * @type {boolean}
-     * @memberof MemberBase
      */
     'active'?: boolean;
     /**
      * The role ID associated with the member within the organization. 
-     * @type {string}
-     * @memberof MemberBase
      */
     'role'?: string | null;
     /**
      * Current status of the member\'s account.  When creating a member it starts out in the status `INVITED`. As soon as that member open the invitation link and registers an account, the status switches to `REGISTERED`. 
-     * @type {string}
-     * @memberof MemberBase
      */
     'status': MemberBaseStatusEnum;
 }
 
 export const MemberBaseStatusEnum = {
     Registered: 'REGISTERED',
-    Invited: 'INVITED'
+    Invited: 'INVITED',
 } as const;
 
 export type MemberBaseStatusEnum = typeof MemberBaseStatusEnum[keyof typeof MemberBaseStatusEnum];
 
 /**
  * Each organization has one or more users that can access and manage that organization. These users are called members.  Members can take actions via the Tremendous web dashboard directly.  These actions include adding funding sources to the organization, creating Campaigns, and more. 
- * @export
- * @interface MemberWithEvents
  */
 export interface MemberWithEvents {
-    /**
-     * 
-     * @type {string}
-     * @memberof MemberWithEvents
-     */
     'id': string;
     /**
      * Email address of the member
-     * @type {string}
-     * @memberof MemberWithEvents
      */
     'email': string;
     /**
      * Full name of the member
-     * @type {string}
-     * @memberof MemberWithEvents
      */
     'name': string | null;
     /**
      * Is this member currently active in the organization. If `false`, the member will not be able to access the organization. 
-     * @type {boolean}
-     * @memberof MemberWithEvents
      */
     'active'?: boolean;
     /**
      * The role ID associated with the member within the organization. 
-     * @type {string}
-     * @memberof MemberWithEvents
      */
     'role'?: string | null;
     /**
      * Current status of the member\'s account.  When creating a member it starts out in the status `INVITED`. As soon as that member open the invitation link and registers an account, the status switches to `REGISTERED`. 
-     * @type {string}
-     * @memberof MemberWithEvents
      */
     'status': MemberWithEventsStatusEnum;
     /**
      * List of events related to the member.
-     * @type {Array<GetMember200ResponseMemberEventsInner>}
-     * @memberof MemberWithEvents
      */
     'events'?: Array<GetMember200ResponseMemberEventsInner>;
 }
 
 export const MemberWithEventsStatusEnum = {
     Registered: 'REGISTERED',
-    Invited: 'INVITED'
+    Invited: 'INVITED',
 } as const;
 
 export type MemberWithEventsStatusEnum = typeof MemberWithEventsStatusEnum[keyof typeof MemberWithEventsStatusEnum];
 
 /**
  * Each organization has one or more users that can access and manage that organization. These users are called members.  Members can take actions via the Tremendous web dashboard directly.  These actions include adding funding sources to the organization, creating Campaigns, and more. 
- * @export
- * @interface MemberWithoutEvents
  */
 export interface MemberWithoutEvents {
-    /**
-     * 
-     * @type {string}
-     * @memberof MemberWithoutEvents
-     */
     'id': string;
     /**
      * Email address of the member
-     * @type {string}
-     * @memberof MemberWithoutEvents
      */
     'email': string;
     /**
      * Full name of the member
-     * @type {string}
-     * @memberof MemberWithoutEvents
      */
     'name': string | null;
     /**
      * Is this member currently active in the organization. If `false`, the member will not be able to access the organization. 
-     * @type {boolean}
-     * @memberof MemberWithoutEvents
      */
     'active'?: boolean;
     /**
      * The role ID associated with the member within the organization. 
-     * @type {string}
-     * @memberof MemberWithoutEvents
      */
     'role'?: string | null;
     /**
      * Current status of the member\'s account.  When creating a member it starts out in the status `INVITED`. As soon as that member open the invitation link and registers an account, the status switches to `REGISTERED`. 
-     * @type {string}
-     * @memberof MemberWithoutEvents
      */
     'status': MemberWithoutEventsStatusEnum;
     /**
      * Timestamp when this member was created.  The `created_at` timestamp is **NOT** returned when retrieving a member (but is part of the response when listing or creating members). 
-     * @type {string}
-     * @memberof MemberWithoutEvents
      */
     'created_at'?: string;
     /**
      * Timestamp when this member most recently logged into the dashboard of the organization associated with this API key. 
-     * @type {string}
-     * @memberof MemberWithoutEvents
      */
     'last_login_at'?: string | null;
 }
 
 export const MemberWithoutEventsStatusEnum = {
     Registered: 'REGISTERED',
-    Invited: 'INVITED'
+    Invited: 'INVITED',
 } as const;
 
 export type MemberWithoutEventsStatusEnum = typeof MemberWithoutEventsStatusEnum[keyof typeof MemberWithoutEventsStatusEnum];
 
-/**
- * 
- * @export
- * @interface MemberWithoutEventsResponse
- */
 export interface MemberWithoutEventsResponse {
-    /**
-     * 
-     * @type {MemberWithoutEventsResponseMember}
-     * @memberof MemberWithoutEventsResponse
-     */
     'member': MemberWithoutEventsResponseMember;
 }
 /**
  * Each organization has one or more users that can access and manage that organization. These users are called members.  Members can take actions via the Tremendous web dashboard directly.  These actions include adding funding sources to the organization, creating Campaigns, and more. 
- * @export
- * @interface MemberWithoutEventsResponseMember
  */
 export interface MemberWithoutEventsResponseMember {
-    /**
-     * 
-     * @type {string}
-     * @memberof MemberWithoutEventsResponseMember
-     */
     'id': string;
     /**
      * Email address of the member
-     * @type {string}
-     * @memberof MemberWithoutEventsResponseMember
      */
     'email': string;
     /**
      * Full name of the member
-     * @type {string}
-     * @memberof MemberWithoutEventsResponseMember
      */
     'name': string | null;
     /**
      * Is this member currently active in the organization. If `false`, the member will not be able to access the organization. 
-     * @type {boolean}
-     * @memberof MemberWithoutEventsResponseMember
      */
     'active'?: boolean;
     /**
      * The role ID associated with the member within the organization. 
-     * @type {string}
-     * @memberof MemberWithoutEventsResponseMember
      */
     'role'?: string | null;
     /**
      * Current status of the member\'s account.  When creating a member it starts out in the status `INVITED`. As soon as that member open the invitation link and registers an account, the status switches to `REGISTERED`. 
-     * @type {string}
-     * @memberof MemberWithoutEventsResponseMember
      */
     'status': MemberWithoutEventsResponseMemberStatusEnum;
     /**
      * Timestamp when this member was created.  The `created_at` timestamp is **NOT** returned when retrieving a member (but is part of the response when listing or creating members). 
-     * @type {string}
-     * @memberof MemberWithoutEventsResponseMember
      */
     'created_at'?: string;
     /**
      * Timestamp when this member most recently logged into the dashboard of the organization associated with this API key. 
-     * @type {string}
-     * @memberof MemberWithoutEventsResponseMember
      */
     'last_login_at'?: string | null;
 }
 
 export const MemberWithoutEventsResponseMemberStatusEnum = {
     Registered: 'REGISTERED',
-    Invited: 'INVITED'
+    Invited: 'INVITED',
 } as const;
 
 export type MemberWithoutEventsResponseMemberStatusEnum = typeof MemberWithoutEventsResponseMemberStatusEnum[keyof typeof MemberWithoutEventsResponseMemberStatusEnum];
 
 /**
  * An order wraps around the fulfilment of one or more rewards.
- * @export
- * @interface Order
  */
 export interface Order {
     /**
      * Tremendous ID of the order
-     * @type {string}
-     * @memberof Order
      */
     'id': string;
     /**
      * Reference for this order, supplied by the customer.  When set, `external_id` makes order idempotent. All requests that use the same `external_id` after the initial order creation, will result in a response that returns the data of the initially created order. The response will have a `201` response code. These responses **fail** to create any further orders.  It also allows for retrieving by `external_id` instead of `id` only. 
-     * @type {string}
-     * @memberof Order
      */
     'external_id'?: string | null;
     /**
      * ID of the campaign in your account, that defines the available products (different gift cards, charity, etc.) that the recipient can choose from. 
-     * @type {string}
-     * @memberof Order
      */
     'campaign_id'?: string | null;
     /**
      * Date the order was created
-     * @type {string}
-     * @memberof Order
      */
     'created_at': string;
     /**
      * Execution status of a given order  <table>   <thead>     <tr>       <th>Status</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td><code>CANCELED</code></td>       <td>The order and all of its rewards were canceled.</td>     </tr>     <tr>       <td><code>OPEN</code></td>       <td>The order has been created, but hasn\'t yet been processed.</td>     </tr>     <tr>       <td><code>EXECUTED</code></td>       <td>The order has been executed. Payment has been handled and rewards are being delivered (if applicable).</td>     </tr>     <tr>       <td><code>FAILED</code></td>       <td>The order could not be processed due to an error. E.g. due to insufficient funds in the account.</td>     </tr>     <tr>       <td><code>PENDING APPROVAL</code></td>       <td>The order has been created but needs approval to be executed.</td>     </tr>     <tr>       <td><code>PENDING INTERNAL PAYMENT APPROVAL</code></td>       <td>The order has been created but it is under review and requires approval from our team.</td>     </tr>     <tr>       <td><code>PENDING SETTLEMENT</code></td>       <td>The order has been created but the funds are being held until the settlement window clears.</td>     </tr>   </tbody> </table> 
-     * @type {string}
-     * @memberof Order
      */
     'status': OrderStatusEnum;
     /**
      * Name of the channel in which the order was created
-     * @type {string}
-     * @memberof Order
      */
     'channel'?: OrderChannelEnum;
-    /**
-     * 
-     * @type {OrderBasePayment}
-     * @memberof Order
-     */
     'payment'?: OrderBasePayment;
     /**
      * The ID for the invoice associated with this order
-     * @type {string}
-     * @memberof Order
      */
     'invoice_id'?: string;
-    /**
-     * 
-     * @type {Array<RewardResponseReward>}
-     * @memberof Order
-     */
     'rewards'?: Array<RewardResponseReward>;
 }
 
@@ -7152,7 +4546,7 @@ export const OrderStatusEnum = {
     Failed: 'FAILED',
     PendingApproval: 'PENDING APPROVAL',
     PendingInternalPaymentApproval: 'PENDING INTERNAL PAYMENT APPROVAL',
-    PendingSettlement: 'PENDING SETTLEMENT'
+    PendingSettlement: 'PENDING SETTLEMENT',
 } as const;
 
 export type OrderStatusEnum = typeof OrderStatusEnum[keyof typeof OrderStatusEnum];
@@ -7164,63 +4558,42 @@ export const OrderChannelEnum = {
     Qualtrics: 'QUALTRICS',
     Typeform: 'TYPEFORM',
     SurveyMonkey: 'SURVEY MONKEY',
-    Yotpo: 'YOTPO'
+    Yotpo: 'YOTPO',
 } as const;
 
 export type OrderChannelEnum = typeof OrderChannelEnum[keyof typeof OrderChannelEnum];
 
 /**
  * An order wraps around the fulfilment of one or more rewards.
- * @export
- * @interface OrderBase
  */
 export interface OrderBase {
     /**
      * Tremendous ID of the order
-     * @type {string}
-     * @memberof OrderBase
      */
     'id': string;
     /**
      * Reference for this order, supplied by the customer.  When set, `external_id` makes order idempotent. All requests that use the same `external_id` after the initial order creation, will result in a response that returns the data of the initially created order. The response will have a `201` response code. These responses **fail** to create any further orders.  It also allows for retrieving by `external_id` instead of `id` only. 
-     * @type {string}
-     * @memberof OrderBase
      */
     'external_id'?: string | null;
     /**
      * ID of the campaign in your account, that defines the available products (different gift cards, charity, etc.) that the recipient can choose from. 
-     * @type {string}
-     * @memberof OrderBase
      */
     'campaign_id'?: string | null;
     /**
      * Date the order was created
-     * @type {string}
-     * @memberof OrderBase
      */
     'created_at': string;
     /**
      * Execution status of a given order  <table>   <thead>     <tr>       <th>Status</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td><code>CANCELED</code></td>       <td>The order and all of its rewards were canceled.</td>     </tr>     <tr>       <td><code>OPEN</code></td>       <td>The order has been created, but hasn\'t yet been processed.</td>     </tr>     <tr>       <td><code>EXECUTED</code></td>       <td>The order has been executed. Payment has been handled and rewards are being delivered (if applicable).</td>     </tr>     <tr>       <td><code>FAILED</code></td>       <td>The order could not be processed due to an error. E.g. due to insufficient funds in the account.</td>     </tr>     <tr>       <td><code>PENDING APPROVAL</code></td>       <td>The order has been created but needs approval to be executed.</td>     </tr>     <tr>       <td><code>PENDING INTERNAL PAYMENT APPROVAL</code></td>       <td>The order has been created but it is under review and requires approval from our team.</td>     </tr>     <tr>       <td><code>PENDING SETTLEMENT</code></td>       <td>The order has been created but the funds are being held until the settlement window clears.</td>     </tr>   </tbody> </table> 
-     * @type {string}
-     * @memberof OrderBase
      */
     'status': OrderBaseStatusEnum;
     /**
      * Name of the channel in which the order was created
-     * @type {string}
-     * @memberof OrderBase
      */
     'channel'?: OrderBaseChannelEnum;
-    /**
-     * 
-     * @type {OrderBasePayment}
-     * @memberof OrderBase
-     */
     'payment'?: OrderBasePayment;
     /**
      * The ID for the invoice associated with this order
-     * @type {string}
-     * @memberof OrderBase
      */
     'invoice_id'?: string;
 }
@@ -7232,7 +4605,7 @@ export const OrderBaseStatusEnum = {
     Failed: 'FAILED',
     PendingApproval: 'PENDING APPROVAL',
     PendingInternalPaymentApproval: 'PENDING INTERNAL PAYMENT APPROVAL',
-    PendingSettlement: 'PENDING SETTLEMENT'
+    PendingSettlement: 'PENDING SETTLEMENT',
 } as const;
 
 export type OrderBaseStatusEnum = typeof OrderBaseStatusEnum[keyof typeof OrderBaseStatusEnum];
@@ -7244,58 +4617,39 @@ export const OrderBaseChannelEnum = {
     Qualtrics: 'QUALTRICS',
     Typeform: 'TYPEFORM',
     SurveyMonkey: 'SURVEY MONKEY',
-    Yotpo: 'YOTPO'
+    Yotpo: 'YOTPO',
 } as const;
 
 export type OrderBaseChannelEnum = typeof OrderBaseChannelEnum[keyof typeof OrderBaseChannelEnum];
 
 /**
  * Cost breakdown of the order (cost of rewards + fees). Cost and fees are denominated in the organization\'s currency (see payment `currency_code`), independent of the ordered rewards\' currency. Note that this property will only appear for processed orders (`status` is `EXECUTED`).
- * @export
- * @interface OrderBasePayment
  */
 export interface OrderBasePayment {
     /**
      * Total price of the order before fees, denominated in `currency_code`.
-     * @type {number}
-     * @memberof OrderBasePayment
      */
     'subtotal': number;
     /**
      * Total price of the order including fees, denominated in `currency_code`.
-     * @type {number}
-     * @memberof OrderBasePayment
      */
     'total': number;
     /**
      * Fees for the order, denominated in `currency_code`.
-     * @type {number}
-     * @memberof OrderBasePayment
      */
     'fees': number;
     /**
      * Discount for the order, denominated in `currency_code`.
-     * @type {number}
-     * @memberof OrderBasePayment
      */
     'discount': number;
     /**
      * Currency in which the payment amounts (subtotal, total, fees, discount, refund) are denominated.  This always matches the organization\'s currency. 
-     * @type {string}
-     * @memberof OrderBasePayment
      */
     'currency_code': string;
-    /**
-     * 
-     * @type {PaymentDetailsRefund}
-     * @memberof OrderBasePayment
-     */
     'refund'?: PaymentDetailsRefund;
 }
 /**
  * Execution status of a given order  <table>   <thead>     <tr>       <th>Status</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td><code>CANCELED</code></td>       <td>The order and all of its rewards were canceled.</td>     </tr>     <tr>       <td><code>OPEN</code></td>       <td>The order has been created, but hasn\'t yet been processed.</td>     </tr>     <tr>       <td><code>EXECUTED</code></td>       <td>The order has been executed. Payment has been handled and rewards are being delivered (if applicable).</td>     </tr>     <tr>       <td><code>FAILED</code></td>       <td>The order could not be processed due to an error. E.g. due to insufficient funds in the account.</td>     </tr>     <tr>       <td><code>PENDING APPROVAL</code></td>       <td>The order has been created but needs approval to be executed.</td>     </tr>     <tr>       <td><code>PENDING INTERNAL PAYMENT APPROVAL</code></td>       <td>The order has been created but it is under review and requires approval from our team.</td>     </tr>     <tr>       <td><code>PENDING SETTLEMENT</code></td>       <td>The order has been created but the funds are being held until the settlement window clears.</td>     </tr>   </tbody> </table> 
- * @export
- * @enum {string}
  */
 
 export const OrderStatus = {
@@ -7305,7 +4659,7 @@ export const OrderStatus = {
     Failed: 'FAILED',
     PendingApproval: 'PENDING APPROVAL',
     PendingInternalPaymentApproval: 'PENDING INTERNAL PAYMENT APPROVAL',
-    PendingSettlement: 'PENDING SETTLEMENT'
+    PendingSettlement: 'PENDING SETTLEMENT',
 } as const;
 
 export type OrderStatus = typeof OrderStatus[keyof typeof OrderStatus];
@@ -7313,63 +4667,37 @@ export type OrderStatus = typeof OrderStatus[keyof typeof OrderStatus];
 
 /**
  * An order wraps around the fulfilment of one or more rewards.
- * @export
- * @interface OrderWithLink
  */
 export interface OrderWithLink {
     /**
      * Tremendous ID of the order
-     * @type {string}
-     * @memberof OrderWithLink
      */
     'id': string;
     /**
      * Reference for this order, supplied by the customer.  When set, `external_id` makes order idempotent. All requests that use the same `external_id` after the initial order creation, will result in a response that returns the data of the initially created order. The response will have a `201` response code. These responses **fail** to create any further orders.  It also allows for retrieving by `external_id` instead of `id` only. 
-     * @type {string}
-     * @memberof OrderWithLink
      */
     'external_id'?: string | null;
     /**
      * ID of the campaign in your account, that defines the available products (different gift cards, charity, etc.) that the recipient can choose from. 
-     * @type {string}
-     * @memberof OrderWithLink
      */
     'campaign_id'?: string | null;
     /**
      * Date the order was created
-     * @type {string}
-     * @memberof OrderWithLink
      */
     'created_at': string;
     /**
      * Execution status of a given order  <table>   <thead>     <tr>       <th>Status</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td><code>CANCELED</code></td>       <td>The order and all of its rewards were canceled.</td>     </tr>     <tr>       <td><code>OPEN</code></td>       <td>The order has been created, but hasn\'t yet been processed.</td>     </tr>     <tr>       <td><code>EXECUTED</code></td>       <td>The order has been executed. Payment has been handled and rewards are being delivered (if applicable).</td>     </tr>     <tr>       <td><code>FAILED</code></td>       <td>The order could not be processed due to an error. E.g. due to insufficient funds in the account.</td>     </tr>     <tr>       <td><code>PENDING APPROVAL</code></td>       <td>The order has been created but needs approval to be executed.</td>     </tr>     <tr>       <td><code>PENDING INTERNAL PAYMENT APPROVAL</code></td>       <td>The order has been created but it is under review and requires approval from our team.</td>     </tr>     <tr>       <td><code>PENDING SETTLEMENT</code></td>       <td>The order has been created but the funds are being held until the settlement window clears.</td>     </tr>   </tbody> </table> 
-     * @type {string}
-     * @memberof OrderWithLink
      */
     'status': OrderWithLinkStatusEnum;
     /**
      * Name of the channel in which the order was created
-     * @type {string}
-     * @memberof OrderWithLink
      */
     'channel'?: OrderWithLinkChannelEnum;
-    /**
-     * 
-     * @type {OrderBasePayment}
-     * @memberof OrderWithLink
-     */
     'payment'?: OrderBasePayment;
     /**
      * The ID for the invoice associated with this order
-     * @type {string}
-     * @memberof OrderWithLink
      */
     'invoice_id'?: string;
-    /**
-     * 
-     * @type {Array<OrderWithLinkRewardsInner>}
-     * @memberof OrderWithLink
-     */
     'rewards'?: Array<OrderWithLinkRewardsInner>;
 }
 
@@ -7380,7 +4708,7 @@ export const OrderWithLinkStatusEnum = {
     Failed: 'FAILED',
     PendingApproval: 'PENDING APPROVAL',
     PendingInternalPaymentApproval: 'PENDING INTERNAL PAYMENT APPROVAL',
-    PendingSettlement: 'PENDING SETTLEMENT'
+    PendingSettlement: 'PENDING SETTLEMENT',
 } as const;
 
 export type OrderWithLinkStatusEnum = typeof OrderWithLinkStatusEnum[keyof typeof OrderWithLinkStatusEnum];
@@ -7392,143 +4720,81 @@ export const OrderWithLinkChannelEnum = {
     Qualtrics: 'QUALTRICS',
     Typeform: 'TYPEFORM',
     SurveyMonkey: 'SURVEY MONKEY',
-    Yotpo: 'YOTPO'
+    Yotpo: 'YOTPO',
 } as const;
 
 export type OrderWithLinkChannelEnum = typeof OrderWithLinkChannelEnum[keyof typeof OrderWithLinkChannelEnum];
 
 /**
  * A single reward, sent to a recipient. A reward is always part of an order.  Either `products` or `campaign_id` must be specified. 
- * @export
- * @interface OrderWithLinkRewardsInner
  */
 export interface OrderWithLinkRewardsInner {
     /**
      * Tremendous ID of the reward
-     * @type {string}
-     * @memberof OrderWithLinkRewardsInner
      */
     'id'?: string;
     /**
      * Tremendous ID of the order this reward is part of.
-     * @type {string}
-     * @memberof OrderWithLinkRewardsInner
      */
     'order_id'?: string;
     /**
      * Date the reward was created
-     * @type {string}
-     * @memberof OrderWithLinkRewardsInner
      */
     'created_at'?: string;
     /**
      * Expiration date of the reward. If null, the reward does not expire.
-     * @type {string}
-     * @memberof OrderWithLinkRewardsInner
      */
     'expires_at'?: string | null;
     /**
      * ID of the campaign in your account, that defines the available products (different gift cards, charity, etc.) that the recipient can choose from. 
-     * @type {string}
-     * @memberof OrderWithLinkRewardsInner
      */
     'campaign_id'?: string | null;
     /**
      * List of IDs of product (different gift cards, charity, etc.) that will be available to the recipient to choose from.  Providing a `products` array will override the products made available by the campaign specified using the `campaign_id` property unless the `products` array is empty. It will _not_ override other campaign attributes, like the message and customization of the look and feel. 
-     * @type {Array<string>}
-     * @memberof OrderWithLinkRewardsInner
      */
     'products'?: Array<string>;
-    /**
-     * 
-     * @type {ListRewards200ResponseRewardsInnerValue}
-     * @memberof OrderWithLinkRewardsInner
-     */
     'value'?: ListRewards200ResponseRewardsInnerValue;
-    /**
-     * 
-     * @type {ListRewards200ResponseRewardsInnerRecipient}
-     * @memberof OrderWithLinkRewardsInner
-     */
     'recipient'?: ListRewards200ResponseRewardsInnerRecipient;
     /**
      * Timestamp of reward delivery within the next year. Note that if date-time is provided, the time values will be ignored.
-     * @type {string}
-     * @memberof OrderWithLinkRewardsInner
      */
     'deliver_at'?: string;
-    /**
-     * 
-     * @type {Array<RewardBaseCustomFieldsInner>}
-     * @memberof OrderWithLinkRewardsInner
-     */
     'custom_fields'?: Array<RewardBaseCustomFieldsInner>;
-    /**
-     * 
-     * @type {RewardWithLinkDelivery}
-     * @memberof OrderWithLinkRewardsInner
-     */
     'delivery'?: RewardWithLinkDelivery;
 }
 /**
  * An order wraps around the fulfilment of one or more rewards.
- * @export
- * @interface OrderWithoutLink
  */
 export interface OrderWithoutLink {
     /**
      * Tremendous ID of the order
-     * @type {string}
-     * @memberof OrderWithoutLink
      */
     'id': string;
     /**
      * Reference for this order, supplied by the customer.  When set, `external_id` makes order idempotent. All requests that use the same `external_id` after the initial order creation, will result in a response that returns the data of the initially created order. The response will have a `201` response code. These responses **fail** to create any further orders.  It also allows for retrieving by `external_id` instead of `id` only. 
-     * @type {string}
-     * @memberof OrderWithoutLink
      */
     'external_id'?: string | null;
     /**
      * ID of the campaign in your account, that defines the available products (different gift cards, charity, etc.) that the recipient can choose from. 
-     * @type {string}
-     * @memberof OrderWithoutLink
      */
     'campaign_id'?: string | null;
     /**
      * Date the order was created
-     * @type {string}
-     * @memberof OrderWithoutLink
      */
     'created_at': string;
     /**
      * Execution status of a given order  <table>   <thead>     <tr>       <th>Status</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td><code>CANCELED</code></td>       <td>The order and all of its rewards were canceled.</td>     </tr>     <tr>       <td><code>OPEN</code></td>       <td>The order has been created, but hasn\'t yet been processed.</td>     </tr>     <tr>       <td><code>EXECUTED</code></td>       <td>The order has been executed. Payment has been handled and rewards are being delivered (if applicable).</td>     </tr>     <tr>       <td><code>FAILED</code></td>       <td>The order could not be processed due to an error. E.g. due to insufficient funds in the account.</td>     </tr>     <tr>       <td><code>PENDING APPROVAL</code></td>       <td>The order has been created but needs approval to be executed.</td>     </tr>     <tr>       <td><code>PENDING INTERNAL PAYMENT APPROVAL</code></td>       <td>The order has been created but it is under review and requires approval from our team.</td>     </tr>     <tr>       <td><code>PENDING SETTLEMENT</code></td>       <td>The order has been created but the funds are being held until the settlement window clears.</td>     </tr>   </tbody> </table> 
-     * @type {string}
-     * @memberof OrderWithoutLink
      */
     'status': OrderWithoutLinkStatusEnum;
     /**
      * Name of the channel in which the order was created
-     * @type {string}
-     * @memberof OrderWithoutLink
      */
     'channel'?: OrderWithoutLinkChannelEnum;
-    /**
-     * 
-     * @type {OrderBasePayment}
-     * @memberof OrderWithoutLink
-     */
     'payment'?: OrderBasePayment;
     /**
      * The ID for the invoice associated with this order
-     * @type {string}
-     * @memberof OrderWithoutLink
      */
     'invoice_id'?: string;
-    /**
-     * 
-     * @type {Array<RewardResponseReward>}
-     * @memberof OrderWithoutLink
-     */
     'rewards'?: Array<RewardResponseReward>;
 }
 
@@ -7539,7 +4805,7 @@ export const OrderWithoutLinkStatusEnum = {
     Failed: 'FAILED',
     PendingApproval: 'PENDING APPROVAL',
     PendingInternalPaymentApproval: 'PENDING INTERNAL PAYMENT APPROVAL',
-    PendingSettlement: 'PENDING SETTLEMENT'
+    PendingSettlement: 'PENDING SETTLEMENT',
 } as const;
 
 export type OrderWithoutLinkStatusEnum = typeof OrderWithoutLinkStatusEnum[keyof typeof OrderWithoutLinkStatusEnum];
@@ -7551,51 +4817,34 @@ export const OrderWithoutLinkChannelEnum = {
     Qualtrics: 'QUALTRICS',
     Typeform: 'TYPEFORM',
     SurveyMonkey: 'SURVEY MONKEY',
-    Yotpo: 'YOTPO'
+    Yotpo: 'YOTPO',
 } as const;
 
 export type OrderWithoutLinkChannelEnum = typeof OrderWithoutLinkChannelEnum[keyof typeof OrderWithoutLinkChannelEnum];
 
 /**
  * Organizations are a way to separate different parts of your business within the same Tremendous account. Your root Tremendous account is an organization itself and can have multiple sub-organizations.  You can assign users in your Tremendous team as members to any organization. Users can be members of multiple organizations at once.  Each organizations can have it\'s own API key. 
- * @export
- * @interface Organization
  */
 export interface Organization {
-    /**
-     * 
-     * @type {string}
-     * @memberof Organization
-     */
     'id'?: string;
     /**
      * Name of the organization
-     * @type {string}
-     * @memberof Organization
      */
     'name': string;
     /**
      * URL of the website of that organization
-     * @type {string}
-     * @memberof Organization
      */
     'website': string;
     /**
      * Currency used for this organization\'s balances, orders, and transactions.
-     * @type {string}
-     * @memberof Organization
      */
     'currency_code'?: string;
     /**
      * Status of the organization. Organizations need to be approved to be able to use them to send out rewards.
-     * @type {string}
-     * @memberof Organization
      */
     'status'?: OrganizationStatusEnum;
     /**
      * Timestamp of when the organization has been created.  *This field is only returned when creating an organization.* It is not returned anymore when retrieving or listing organizations. 
-     * @type {string}
-     * @memberof Organization
      */
     'created_at'?: string;
 }
@@ -7603,64 +4852,37 @@ export interface Organization {
 export const OrganizationStatusEnum = {
     Pending: 'PENDING',
     Approved: 'APPROVED',
-    Rejected: 'REJECTED'
+    Rejected: 'REJECTED',
 } as const;
 
 export type OrganizationStatusEnum = typeof OrganizationStatusEnum[keyof typeof OrganizationStatusEnum];
 
-/**
- * 
- * @export
- * @interface OrganizationResponse
- */
 export interface OrganizationResponse {
-    /**
-     * 
-     * @type {OrganizationResponseOrganization}
-     * @memberof OrganizationResponse
-     */
     'organization'?: OrganizationResponseOrganization;
 }
 /**
  * Organizations are a way to separate different parts of your business within the same Tremendous account. Your root Tremendous account is an organization itself and can have multiple sub-organizations.  You can assign users in your Tremendous team as members to any organization. Users can be members of multiple organizations at once.  Each organizations can have it\'s own API key. 
- * @export
- * @interface OrganizationResponseOrganization
  */
 export interface OrganizationResponseOrganization {
-    /**
-     * 
-     * @type {string}
-     * @memberof OrganizationResponseOrganization
-     */
     'id'?: string;
     /**
      * Name of the organization
-     * @type {string}
-     * @memberof OrganizationResponseOrganization
      */
     'name': string;
     /**
      * URL of the website of that organization
-     * @type {string}
-     * @memberof OrganizationResponseOrganization
      */
     'website': string;
     /**
      * Currency used for this organization\'s balances, orders, and transactions.
-     * @type {string}
-     * @memberof OrganizationResponseOrganization
      */
     'currency_code'?: string;
     /**
      * Status of the organization. Organizations need to be approved to be able to use them to send out rewards.
-     * @type {string}
-     * @memberof OrganizationResponseOrganization
      */
     'status'?: OrganizationResponseOrganizationStatusEnum;
     /**
      * Timestamp of when the organization has been created.  *This field is only returned when creating an organization.* It is not returned anymore when retrieving or listing organizations. 
-     * @type {string}
-     * @memberof OrganizationResponseOrganization
      */
     'created_at'?: string;
 }
@@ -7668,119 +4890,71 @@ export interface OrganizationResponseOrganization {
 export const OrganizationResponseOrganizationStatusEnum = {
     Pending: 'PENDING',
     Approved: 'APPROVED',
-    Rejected: 'REJECTED'
+    Rejected: 'REJECTED',
 } as const;
 
 export type OrganizationResponseOrganizationStatusEnum = typeof OrganizationResponseOrganizationStatusEnum[keyof typeof OrganizationResponseOrganizationStatusEnum];
 
-/**
- * 
- * @export
- * @interface PaymentDetails
- */
 export interface PaymentDetails {
     /**
      * Total price of the order before fees, denominated in `currency_code`.
-     * @type {number}
-     * @memberof PaymentDetails
      */
     'subtotal': number;
     /**
      * Total price of the order including fees, denominated in `currency_code`.
-     * @type {number}
-     * @memberof PaymentDetails
      */
     'total': number;
     /**
      * Fees for the order, denominated in `currency_code`.
-     * @type {number}
-     * @memberof PaymentDetails
      */
     'fees': number;
     /**
      * Discount for the order, denominated in `currency_code`.
-     * @type {number}
-     * @memberof PaymentDetails
      */
     'discount': number;
     /**
      * Currency in which the payment amounts (subtotal, total, fees, discount, refund) are denominated.  This always matches the organization\'s currency. 
-     * @type {string}
-     * @memberof PaymentDetails
      */
     'currency_code': string;
-    /**
-     * 
-     * @type {PaymentDetailsRefund}
-     * @memberof PaymentDetails
-     */
     'refund'?: PaymentDetailsRefund;
 }
 /**
  * Breakdown of the order refunds (total denominated in `currency_code`, independent of the ordered rewards\' currency). Note that this property will only appear for canceled orders or orders with canceled rewards. 
- * @export
- * @interface PaymentDetailsRefund
  */
 export interface PaymentDetailsRefund {
     /**
      * Total amount of the order refunds, denominated in `currency_code`.
-     * @type {number}
-     * @memberof PaymentDetailsRefund
      */
     'total': number;
     /**
      * Currency of the refund. Always matches the organization\'s currency.
-     * @type {string}
-     * @memberof PaymentDetailsRefund
      */
     'currency_code': string;
 }
-/**
- * 
- * @export
- * @interface Payout
- */
 export interface Payout {
     /**
      * Tremendous ID of the payout
-     * @type {string}
-     * @memberof Payout
      */
     'id'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof Payout
-     */
     'status'?: PayoutStatusEnum;
     /**
      * Tremendous ID of the paid out product
-     * @type {string}
-     * @memberof Payout
      */
     'product_id'?: string;
     /**
      * Name of the paid out Product
-     * @type {string}
-     * @memberof Payout
      */
     'product_name'?: string;
     /**
      * Date the payout was created
-     * @type {string}
-     * @memberof Payout
      */
     'created_at'?: string;
     /**
      * Date the payout was executed
-     * @type {string}
-     * @memberof Payout
      */
     'executed_at'?: string | null;
     /**
      * Date when a delayed payout will be executed in the future
-     * @type {string}
-     * @memberof Payout
      */
     'defer_execution_until'?: string | null;
 }
@@ -7791,88 +4965,56 @@ export const PayoutStatusEnum = {
     Failed: 'FAILED',
     Canceled: 'CANCELED',
     OrganizationReview: 'ORGANIZATION_REVIEW',
-    AdminHeld: 'ADMIN_HELD'
+    AdminHeld: 'ADMIN_HELD',
 } as const;
 
 export type PayoutStatusEnum = typeof PayoutStatusEnum[keyof typeof PayoutStatusEnum];
 
 /**
  * A product represents one way to payout a reward to its recipient. Think:  * Amazon.com gift card (ID: `OKMHM2X2OHYV`) * Donations to Save the Children (ID: `ESRNAD533W5A`) * Virtual Visa debit card (ID: `Q24BD9EZ332JT`)  each of which is one specific product on Tremendous.  > 📘 All available products > > See this [list](https://www.tremendous.com/catalog)  Products can be limited in their availability to recipients by  * geography (field `countries`) * currency (field `currency_codes`) * amount of the reward (field `skus`)   * e.g. adidas gift cards accept any amount between 5 and 200 USD.  See the description of each respective parameter for further details. 
- * @export
- * @interface Product
  */
 export interface Product {
-    /**
-     * 
-     * @type {string}
-     * @memberof Product
-     */
     'id': string;
     /**
      * Name of the product
-     * @type {string}
-     * @memberof Product
      */
     'name': string;
     /**
      * Detailed description of the product.
-     * @type {string}
-     * @memberof Product
      */
     'description': string;
     /**
      * The category of the product  <table>   <thead>     <tr>       <th>Category</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td><code>ach</code></td>       <td>Bank transfer to the recipient</td>     </tr>     <tr>       <td><code>charity</code></td>       <td>Donations to a charity</td>     </tr>     <tr>       <td><code>instant_debit_transfer</code></td>       <td>Instant debit transfer to the recipient</td>     </tr>     <tr>       <td><code>merchant_card</code></td>       <td>A gift card for a certain merchant (e.g. Amazon)</td>     </tr>     <tr>       <td><code>paypal</code></td>       <td>Payout via PayPal</td>     </tr>     <tr>       <td><code>venmo</code></td>       <td>Payout via Venmo</td>     </tr>     <tr>       <td><code>visa_card</code></td>       <td>Payout in form of a Visa debit card</td>     </tr>     <tr>       <td><code>cash_app</code></td>       <td>Payout via Cash App</td>     </tr>     <tr>       <td><code>international_bank</code></td>       <td>Bank transfer to recipients outside of the US</td>     </tr>     <tr>       <td><code>wallet</code></td>       <td>Payout to a digital wallet (e.g. GCash, MoMo)</td>     </tr>   </tbody> </table> 
-     * @type {string}
-     * @memberof Product
      */
     'category': ProductCategoryEnum;
     /**
      * Additional classification for the product. Only applicable to products with a `category` of `merchant_card`. Possible subcategories:  * `beauty_and_health` * `digital_financial_services` * `electronics` * `entertainment` * `fashion` * `food_and_drink` * `general_merchandise` * `grocery_and_supermarkets` * `home_and_living` * `mobility_and_fuel` * `sports_and_outdoor_gear` * `travel_and_hospitality` 
-     * @type {string}
-     * @memberof Product
      */
     'subcategory'?: ProductSubcategoryEnum;
     /**
      * Legal disclosures for this product. Can be in HTML format.
-     * @type {string}
-     * @memberof Product
      */
     'disclosure': string;
     /**
      * Products are restricted in their usage based on the amount of the reward. The `skus` array defines bands of denominations in which this product may be used for payouts.  The skus apply to orders in any of the product\'s `currency_codes`. 
-     * @type {Array<ListProductsResponseProductsInnerSkusInner>}
-     * @memberof Product
      */
     'skus'?: Array<ListProductsResponseProductsInnerSkusInner>;
     /**
      * Available currencies for this product
-     * @type {Array<string>}
-     * @memberof Product
      */
     'currency_codes': Array<ProductCurrencyCodesEnum>;
     /**
      * List of countries in which this product is available to recipients.
-     * @type {Array<ListProductsResponseProductsInnerCountriesInner>}
-     * @memberof Product
      */
     'countries': Array<ListProductsResponseProductsInnerCountriesInner>;
     /**
      * List of product images associated with this product (e.g. logos or images of the gift cards)
-     * @type {Array<ListProductsResponseProductsInnerImagesInner>}
-     * @memberof Product
      */
     'images': Array<ListProductsResponseProductsInnerImagesInner>;
     /**
      * Instructions for how to use the product, if applicable. Mostly used for products with a `category` of `merchant_card`.
-     * @type {string}
-     * @memberof Product
      */
     'usage_instructions'?: string;
-    /**
-     * 
-     * @type {ListProductsResponseProductsInnerDocuments}
-     * @memberof Product
-     */
     'documents'?: ListProductsResponseProductsInnerDocuments | null;
 }
 
@@ -7886,7 +5028,7 @@ export const ProductCategoryEnum = {
     VisaCard: 'visa_card',
     CashApp: 'cash_app',
     InternationalBank: 'international_bank',
-    Wallet: 'wallet'
+    Wallet: 'wallet',
 } as const;
 
 export type ProductCategoryEnum = typeof ProductCategoryEnum[keyof typeof ProductCategoryEnum];
@@ -7902,7 +5044,7 @@ export const ProductSubcategoryEnum = {
     HomeAndLiving: 'home_and_living',
     MobilityAndFuel: 'mobility_and_fuel',
     SportsAndOutdoorGear: 'sports_and_outdoor_gear',
-    TravelAndHospitality: 'travel_and_hospitality'
+    TravelAndHospitality: 'travel_and_hospitality',
 } as const;
 
 export type ProductSubcategoryEnum = typeof ProductSubcategoryEnum[keyof typeof ProductSubcategoryEnum];
@@ -8017,114 +5159,77 @@ export const ProductCurrencyCodesEnum = {
     Xaf: 'XAF',
     Xof: 'XOF',
     Yer: 'YER',
-    Zar: 'ZAR'
+    Zar: 'ZAR',
 } as const;
 
 export type ProductCurrencyCodesEnum = typeof ProductCurrencyCodesEnum[keyof typeof ProductCurrencyCodesEnum];
 
 /**
  * URLs and files related to product documentation. 
- * @export
- * @interface ProductDocuments
  */
 export interface ProductDocuments {
     /**
      * URL to the cardholder agreement PDF file.
-     * @type {string}
-     * @memberof ProductDocuments
      */
     'cardholder_agreement_pdf'?: string;
     /**
      * URL to the cardholder agreement web page.
-     * @type {string}
-     * @memberof ProductDocuments
      */
     'cardholder_agreement_url'?: string;
     /**
      * URL to the privacy policy web page.
-     * @type {string}
-     * @memberof ProductDocuments
      */
     'privacy_policy_url'?: string;
 }
 /**
  * Details of the recipient of the reward
- * @export
- * @interface Recipient
  */
 export interface Recipient {
     /**
      * Name of the recipient
-     * @type {string}
-     * @memberof Recipient
      */
     'name'?: string | null;
     /**
      * Email address of the recipient
-     * @type {string}
-     * @memberof Recipient
      */
     'email'?: string;
     /**
      * Phone number of the recipient. For non-US phone numbers, specify the country code (prefixed with +).
-     * @type {string}
-     * @memberof Recipient
      */
     'phone'?: string;
 }
-/**
- * 
- * @export
- * @interface RefundDetails
- */
 export interface RefundDetails {
     /**
      * Total amount of the order refunds, denominated in `currency_code`.
-     * @type {number}
-     * @memberof RefundDetails
      */
     'total': number;
     /**
      * Currency of the refund. Always matches the organization\'s currency.
-     * @type {string}
-     * @memberof RefundDetails
      */
     'currency_code': string;
 }
 /**
  * Reports represent a collection of your Tremendous data that can be filtered and downloaded.  The report object that is returned has a unique ID, a status, and an predicted time of report generation completion. When the report generation is complete, it will also contain an expiring url where you can retrieve your report. 
- * @export
- * @interface Report
  */
 export interface Report {
     /**
      * Tremendous ID of the report, used to retrieve your report
-     * @type {string}
-     * @memberof Report
      */
     'id'?: string;
     /**
      * Status of this report  <table>   <thead>     <tr>       <th>Status</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td><code>CREATED</code></td>       <td>Report has been created</td>     </tr>     <tr>       <td><code>PROCESSING</code></td>       <td>Report is currently being generated</td>     </tr>     <tr>       <td><code>READY_FOR_DOWNLOAD</code></td>       <td>Report generation is complete and ready for download</td>     </tr>     <tr>       <td><code>FAILED</code></td>       <td>Report failed to generate</td>     </tr>   </tbody> </table> 
-     * @type {string}
-     * @memberof Report
      */
     'status'?: ReportStatusEnum;
     /**
      * Timestamp of when the report was created 
-     * @type {string}
-     * @memberof Report
      */
     'created_at'?: string;
     /**
      * Timestamp of when the report is expected to finish generating. If the report is complete, this will return the time the report completed generating at. 
-     * @type {string}
-     * @memberof Report
      */
     'expected_completion_at'?: string;
     /**
      * URL to download the report. Only returned when the report generation is complete and report is ready for download. URL is valid for 7 days from generation completion 
-     * @type {string}
-     * @memberof Report
      */
     'url'?: string | null;
 }
@@ -8133,169 +5238,90 @@ export const ReportStatusEnum = {
     Created: 'CREATED',
     Processing: 'PROCESSING',
     ReadyForDownload: 'READY_FOR_DOWNLOAD',
-    Failed: 'FAILED'
+    Failed: 'FAILED',
 } as const;
 
 export type ReportStatusEnum = typeof ReportStatusEnum[keyof typeof ReportStatusEnum];
 
-/**
- * 
- * @export
- * @interface ReportResponse
- */
 export interface ReportResponse {
-    /**
-     * 
-     * @type {CreateReport200ResponseReport}
-     * @memberof ReportResponse
-     */
     'report': CreateReport200ResponseReport;
     /**
      * Report status message
-     * @type {string}
-     * @memberof ReportResponse
      */
     'message'?: string;
 }
-/**
- * 
- * @export
- * @interface ResendRewardRequest
- */
 export interface ResendRewardRequest {
     /**
      * The new email address of the recipient (only for rewards delivered via email)
-     * @type {string}
-     * @memberof ResendRewardRequest
      */
     'updated_email'?: string;
     /**
      * The new phone number of the recipient (only for rewards delivered via SMS)
-     * @type {string}
-     * @memberof ResendRewardRequest
      */
     'updated_phone'?: string;
 }
 /**
  * Flag rewards redeemed in these countries.
- * @export
- * @interface ReviewCountry
  */
 export interface ReviewCountry {
     /**
      * When type is `whitelist`, it flags any countries that *are not* present in the list. When type is `blacklist`, it flags any countries that *are* present in the list. 
-     * @type {string}
-     * @memberof ReviewCountry
      */
     'type': ReviewCountryTypeEnum;
     /**
      * An array of country codes (ISO-3166 alpha-2 character code)
-     * @type {Array<string>}
-     * @memberof ReviewCountry
      */
     'countries': Array<string>;
 }
 
 export const ReviewCountryTypeEnum = {
     Whitelist: 'whitelist',
-    Blacklist: 'blacklist'
+    Blacklist: 'blacklist',
 } as const;
 
 export type ReviewCountryTypeEnum = typeof ReviewCountryTypeEnum[keyof typeof ReviewCountryTypeEnum];
 
 /**
  * List of countries where a matching redemption will trigger a review.
- * @export
- * @interface ReviewCountry1
  */
 export interface ReviewCountry1 {
     /**
      * An array of country codes (ISO-3166 alpha-2 character code)
-     * @type {Array<string>}
-     * @memberof ReviewCountry1
      */
     'countries': Array<string>;
 }
 /**
  * Flag rewards with an email or domain matching this list.
- * @export
- * @interface ReviewEmail
  */
 export interface ReviewEmail {
     /**
      * The list of emails.
-     * @type {Array<string>}
-     * @memberof ReviewEmail
      */
     'emails'?: Array<string>;
     /**
      * The list of domains. Any subdomains will also be matched against each entry in the list.
-     * @type {Array<string>}
-     * @memberof ReviewEmail
-     */
-    'domains'?: Array<string>;
-}
-/**
- * The list of emails and/or domains where a matching redemption will trigger a review. At least one email or domain is required.
- * @export
- * @interface ReviewEmail1
- */
-export interface ReviewEmail1 {
-    /**
-     * The list of emails.
-     * @type {Array<string>}
-     * @memberof ReviewEmail1
-     */
-    'emails'?: Array<string>;
-    /**
-     * The list of domains. Any subdomains will also be matched against each entry in the list.
-     * @type {Array<string>}
-     * @memberof ReviewEmail1
      */
     'domains'?: Array<string>;
 }
 /**
  * Flag rewards redeemed by an IP matching this list.
- * @export
- * @interface ReviewIp
  */
 export interface ReviewIp {
     /**
      * The list of IP addresses to flag or allow. Accepts both IPv4 and IPv6 addresses using CIDR notation. 
-     * @type {Array<string>}
-     * @memberof ReviewIp
-     */
-    'ips': Array<string>;
-}
-/**
- * List of IP addresses and/or IP ranges where a matching redemption will trigger a review.
- * @export
- * @interface ReviewIp1
- */
-export interface ReviewIp1 {
-    /**
-     * The list of IP addresses to flag or allow. Accepts both IPv4 and IPv6 addresses using CIDR notation. 
-     * @type {Array<string>}
-     * @memberof ReviewIp1
      */
     'ips': Array<string>;
 }
 /**
  * If a recipient, device, or IP redeems more than this dollar value of rewards, flag for review.
- * @export
- * @interface ReviewRedeemedRewardsAmount
  */
 export interface ReviewRedeemedRewardsAmount {
     /**
      * The total amount of redeemed rewards to use as a threshold. The amount is denominated in the organization\'s currency.
-     * @type {number}
-     * @memberof ReviewRedeemedRewardsAmount
      */
     'amount': number;
     /**
      * The period, in days, to consider for the count. Use `all_time` to consider any redeemed rewards.
-     * @type {string}
-     * @memberof ReviewRedeemedRewardsAmount
      */
     'period': ReviewRedeemedRewardsAmountPeriodEnum;
 }
@@ -8306,27 +5332,21 @@ export const ReviewRedeemedRewardsAmountPeriodEnum = {
     _90: '90',
     _120: '120',
     _365: '365',
-    AllTime: 'all_time'
+    AllTime: 'all_time',
 } as const;
 
 export type ReviewRedeemedRewardsAmountPeriodEnum = typeof ReviewRedeemedRewardsAmountPeriodEnum[keyof typeof ReviewRedeemedRewardsAmountPeriodEnum];
 
 /**
  * If a recipient, device, or IP redeems more than this number of rewards, flag for review.
- * @export
- * @interface ReviewRedeemedRewardsCount
  */
 export interface ReviewRedeemedRewardsCount {
     /**
      * The number of redeemed rewards to use as a threshold.
-     * @type {number}
-     * @memberof ReviewRedeemedRewardsCount
      */
     'amount': number;
     /**
      * The period, in days, to consider for the count. Use `all_time` to consider any redeemed rewards.
-     * @type {string}
-     * @memberof ReviewRedeemedRewardsCount
      */
     'period': ReviewRedeemedRewardsCountPeriodEnum;
 }
@@ -8337,484 +5357,264 @@ export const ReviewRedeemedRewardsCountPeriodEnum = {
     _90: '90',
     _120: '120',
     _365: '365',
-    AllTime: 'all_time'
+    AllTime: 'all_time',
 } as const;
 
 export type ReviewRedeemedRewardsCountPeriodEnum = typeof ReviewRedeemedRewardsCountPeriodEnum[keyof typeof ReviewRedeemedRewardsCountPeriodEnum];
 
 /**
  * Flag rewards redeemed through VPN or proxy traffic. By default, Apple Private Relay traffic is flagged; set `skip_apple_private_relay` to true to exclude it.
- * @export
- * @interface ReviewVpn
  */
 export interface ReviewVpn {
     /**
      * Whether Apple Private Relay traffic should be excluded from VPN fraud review. When omitted or false, Apple Private Relay traffic is flagged with other VPN and proxy traffic. 
-     * @type {boolean}
-     * @memberof ReviewVpn
      */
     'skip_apple_private_relay'?: boolean;
 }
 /**
  * A single reward, sent to a recipient. A reward is always part of an order.  Either `products` or `campaign_id` must be specified. 
- * @export
- * @interface Reward
  */
 export interface Reward {
     /**
      * Tremendous ID of the reward
-     * @type {string}
-     * @memberof Reward
      */
     'id'?: string;
     /**
      * Tremendous ID of the order this reward is part of.
-     * @type {string}
-     * @memberof Reward
      */
     'order_id'?: string;
     /**
      * Date the reward was created
-     * @type {string}
-     * @memberof Reward
      */
     'created_at'?: string;
     /**
      * Expiration date of the reward. If null, the reward does not expire.
-     * @type {string}
-     * @memberof Reward
      */
     'expires_at'?: string | null;
     /**
      * ID of the campaign in your account, that defines the available products (different gift cards, charity, etc.) that the recipient can choose from. 
-     * @type {string}
-     * @memberof Reward
      */
     'campaign_id'?: string | null;
     /**
      * List of IDs of product (different gift cards, charity, etc.) that will be available to the recipient to choose from.  Providing a `products` array will override the products made available by the campaign specified using the `campaign_id` property unless the `products` array is empty. It will _not_ override other campaign attributes, like the message and customization of the look and feel. 
-     * @type {Array<string>}
-     * @memberof Reward
      */
     'products'?: Array<string>;
-    /**
-     * 
-     * @type {ListRewards200ResponseRewardsInnerValue}
-     * @memberof Reward
-     */
     'value'?: ListRewards200ResponseRewardsInnerValue;
-    /**
-     * 
-     * @type {ListRewards200ResponseRewardsInnerRecipient}
-     * @memberof Reward
-     */
     'recipient'?: ListRewards200ResponseRewardsInnerRecipient;
     /**
      * Timestamp of reward delivery within the next year. Note that if date-time is provided, the time values will be ignored.
-     * @type {string}
-     * @memberof Reward
      */
     'deliver_at'?: string;
-    /**
-     * 
-     * @type {Array<RewardBaseCustomFieldsInner>}
-     * @memberof Reward
-     */
     'custom_fields'?: Array<RewardBaseCustomFieldsInner>;
-    /**
-     * 
-     * @type {RewardWithoutLinkDelivery}
-     * @memberof Reward
-     */
     'delivery'?: RewardWithoutLinkDelivery;
 }
 /**
  * A single reward, sent to a recipient. A reward is always part of an order.  Either `products` or `campaign_id` must be specified. 
- * @export
- * @interface RewardBase
  */
 export interface RewardBase {
     /**
      * Tremendous ID of the reward
-     * @type {string}
-     * @memberof RewardBase
      */
     'id'?: string;
     /**
      * Tremendous ID of the order this reward is part of.
-     * @type {string}
-     * @memberof RewardBase
      */
     'order_id'?: string;
     /**
      * Date the reward was created
-     * @type {string}
-     * @memberof RewardBase
      */
     'created_at'?: string;
     /**
      * Expiration date of the reward. If null, the reward does not expire.
-     * @type {string}
-     * @memberof RewardBase
      */
     'expires_at'?: string | null;
     /**
      * ID of the campaign in your account, that defines the available products (different gift cards, charity, etc.) that the recipient can choose from. 
-     * @type {string}
-     * @memberof RewardBase
      */
     'campaign_id'?: string | null;
     /**
      * List of IDs of product (different gift cards, charity, etc.) that will be available to the recipient to choose from.  Providing a `products` array will override the products made available by the campaign specified using the `campaign_id` property unless the `products` array is empty. It will _not_ override other campaign attributes, like the message and customization of the look and feel. 
-     * @type {Array<string>}
-     * @memberof RewardBase
      */
     'products'?: Array<string>;
-    /**
-     * 
-     * @type {ListRewards200ResponseRewardsInnerValue}
-     * @memberof RewardBase
-     */
     'value'?: ListRewards200ResponseRewardsInnerValue;
-    /**
-     * 
-     * @type {ListRewards200ResponseRewardsInnerRecipient}
-     * @memberof RewardBase
-     */
     'recipient'?: ListRewards200ResponseRewardsInnerRecipient;
     /**
      * Timestamp of reward delivery within the next year. Note that if date-time is provided, the time values will be ignored.
-     * @type {string}
-     * @memberof RewardBase
      */
     'deliver_at'?: string;
-    /**
-     * 
-     * @type {Array<RewardBaseCustomFieldsInner>}
-     * @memberof RewardBase
-     */
     'custom_fields'?: Array<RewardBaseCustomFieldsInner>;
 }
 /**
  * Reward custom data for searching, tracking or copy (see [Adding custom fields to orders](https://developers.tremendous.com/docs/using-custom-fields-to-add-custom-data-to-rewards).)
- * @export
- * @interface RewardBaseCustomFieldsInner
  */
 export interface RewardBaseCustomFieldsInner {
     /**
      * Tremendous ID of the custom field
-     * @type {string}
-     * @memberof RewardBaseCustomFieldsInner
      */
     'id'?: string;
     /**
      * Value of the custom field
-     * @type {string}
-     * @memberof RewardBaseCustomFieldsInner
      */
     'value'?: string | null;
     /**
      * Label of the custom field
-     * @type {string}
-     * @memberof RewardBaseCustomFieldsInner
      */
     'label'?: string;
 }
 /**
  * A single reward, sent to a recipient. A reward is always part of an order.  Either `products` or `campaign_id` must be specified. 
- * @export
- * @interface RewardForOrderCreate
  */
 export interface RewardForOrderCreate {
     /**
      * Tremendous ID of the reward
-     * @type {string}
-     * @memberof RewardForOrderCreate
      */
     'id'?: string;
     /**
      * Tremendous ID of the order this reward is part of.
-     * @type {string}
-     * @memberof RewardForOrderCreate
      */
     'order_id'?: string;
     /**
      * Date the reward was created
-     * @type {string}
-     * @memberof RewardForOrderCreate
      */
     'created_at'?: string;
     /**
      * Expiration date of the reward. If null, the reward does not expire.
-     * @type {string}
-     * @memberof RewardForOrderCreate
      */
     'expires_at'?: string | null;
     /**
      * ID of the campaign in your account, that defines the available products (different gift cards, charity, etc.) that the recipient can choose from. 
-     * @type {string}
-     * @memberof RewardForOrderCreate
      */
     'campaign_id'?: string | null;
     /**
      * List of IDs of product (different gift cards, charity, etc.) that will be available to the recipient to choose from.  Providing a `products` array will override the products made available by the campaign specified using the `campaign_id` property unless the `products` array is empty. It will _not_ override other campaign attributes, like the message and customization of the look and feel. 
-     * @type {Array<string>}
-     * @memberof RewardForOrderCreate
      */
     'products'?: Array<string>;
-    /**
-     * 
-     * @type {ListRewards200ResponseRewardsInnerValue}
-     * @memberof RewardForOrderCreate
-     */
     'value'?: ListRewards200ResponseRewardsInnerValue;
-    /**
-     * 
-     * @type {ListRewards200ResponseRewardsInnerRecipient}
-     * @memberof RewardForOrderCreate
-     */
     'recipient'?: ListRewards200ResponseRewardsInnerRecipient;
     /**
      * Timestamp of reward delivery within the next year. Note that if date-time is provided, the time values will be ignored.
-     * @type {string}
-     * @memberof RewardForOrderCreate
      */
     'deliver_at'?: string;
-    /**
-     * 
-     * @type {Array<RewardBaseCustomFieldsInner>}
-     * @memberof RewardForOrderCreate
-     */
     'custom_fields'?: Array<RewardBaseCustomFieldsInner>;
     /**
      * Set this to translate the redemption experience for this reward. Pass a 2-letter [ISO-639-1 code](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) for the desired language. Defaults to `en`. 
-     * @type {string}
-     * @memberof RewardForOrderCreate
      */
     'language'?: string;
-    /**
-     * 
-     * @type {SingleRewardOrderRewardDelivery}
-     * @memberof RewardForOrderCreate
-     */
     'delivery'?: SingleRewardOrderRewardDelivery;
 }
 /**
  * The redemption link for a reward.
- * @export
- * @interface RewardLink
  */
 export interface RewardLink {
     /**
      * Tremendous ID of the reward
-     * @type {string}
-     * @memberof RewardLink
      */
     'id'?: string;
     /**
      * Link to redeem the reward at. You need to deliver this link to the recipient. 
-     * @type {string}
-     * @memberof RewardLink
      */
     'link'?: string;
 }
-/**
- * 
- * @export
- * @interface RewardLinkResponse
- */
 export interface RewardLinkResponse {
-    /**
-     * 
-     * @type {RewardLinkResponseReward}
-     * @memberof RewardLinkResponse
-     */
     'reward': RewardLinkResponseReward;
 }
 /**
  * The redemption link for a reward.
- * @export
- * @interface RewardLinkResponseReward
  */
 export interface RewardLinkResponseReward {
     /**
      * Tremendous ID of the reward
-     * @type {string}
-     * @memberof RewardLinkResponseReward
      */
     'id'?: string;
     /**
      * Link to redeem the reward at. You need to deliver this link to the recipient. 
-     * @type {string}
-     * @memberof RewardLinkResponseReward
      */
     'link'?: string;
 }
-/**
- * 
- * @export
- * @interface RewardResponse
- */
 export interface RewardResponse {
-    /**
-     * 
-     * @type {RewardResponseReward}
-     * @memberof RewardResponse
-     */
     'reward': RewardResponseReward;
 }
 /**
  * A single reward, sent to a recipient. A reward is always part of an order.  Either `products` or `campaign_id` must be specified. 
- * @export
- * @interface RewardResponseReward
  */
 export interface RewardResponseReward {
     /**
      * Tremendous ID of the reward
-     * @type {string}
-     * @memberof RewardResponseReward
      */
     'id'?: string;
     /**
      * Tremendous ID of the order this reward is part of.
-     * @type {string}
-     * @memberof RewardResponseReward
      */
     'order_id'?: string;
     /**
      * Date the reward was created
-     * @type {string}
-     * @memberof RewardResponseReward
      */
     'created_at'?: string;
     /**
      * Expiration date of the reward. If null, the reward does not expire.
-     * @type {string}
-     * @memberof RewardResponseReward
      */
     'expires_at'?: string | null;
     /**
      * ID of the campaign in your account, that defines the available products (different gift cards, charity, etc.) that the recipient can choose from. 
-     * @type {string}
-     * @memberof RewardResponseReward
      */
     'campaign_id'?: string | null;
     /**
      * List of IDs of product (different gift cards, charity, etc.) that will be available to the recipient to choose from.  Providing a `products` array will override the products made available by the campaign specified using the `campaign_id` property unless the `products` array is empty. It will _not_ override other campaign attributes, like the message and customization of the look and feel. 
-     * @type {Array<string>}
-     * @memberof RewardResponseReward
      */
     'products'?: Array<string>;
-    /**
-     * 
-     * @type {ListRewards200ResponseRewardsInnerValue}
-     * @memberof RewardResponseReward
-     */
     'value'?: ListRewards200ResponseRewardsInnerValue;
-    /**
-     * 
-     * @type {ListRewards200ResponseRewardsInnerRecipient}
-     * @memberof RewardResponseReward
-     */
     'recipient'?: ListRewards200ResponseRewardsInnerRecipient;
     /**
      * Timestamp of reward delivery within the next year. Note that if date-time is provided, the time values will be ignored.
-     * @type {string}
-     * @memberof RewardResponseReward
      */
     'deliver_at'?: string;
-    /**
-     * 
-     * @type {Array<RewardBaseCustomFieldsInner>}
-     * @memberof RewardResponseReward
-     */
     'custom_fields'?: Array<RewardBaseCustomFieldsInner>;
-    /**
-     * 
-     * @type {RewardWithoutLinkDelivery}
-     * @memberof RewardResponseReward
-     */
     'delivery'?: RewardWithoutLinkDelivery;
 }
 /**
  * The redemption token for a reward.
- * @export
- * @interface RewardToken
  */
 export interface RewardToken {
     /**
      * Tremendous ID of the reward
-     * @type {string}
-     * @memberof RewardToken
      */
     'id'?: string;
     /**
      * The token to redeem the reward. 
-     * @type {string}
-     * @memberof RewardToken
      */
     'token'?: string;
     /**
      * Date the token expires
-     * @type {string}
-     * @memberof RewardToken
      */
     'expires_at'?: string;
 }
-/**
- * 
- * @export
- * @interface RewardTokenResponse
- */
 export interface RewardTokenResponse {
-    /**
-     * 
-     * @type {RewardTokenResponseReward}
-     * @memberof RewardTokenResponse
-     */
     'reward': RewardTokenResponseReward;
 }
 /**
  * The redemption token for a reward.
- * @export
- * @interface RewardTokenResponseReward
  */
 export interface RewardTokenResponseReward {
     /**
      * Tremendous ID of the reward
-     * @type {string}
-     * @memberof RewardTokenResponseReward
      */
     'id'?: string;
     /**
      * The token to redeem the reward. 
-     * @type {string}
-     * @memberof RewardTokenResponseReward
      */
     'token'?: string;
     /**
      * Date the token expires
-     * @type {string}
-     * @memberof RewardTokenResponseReward
      */
     'expires_at'?: string;
 }
-/**
- * 
- * @export
- * @interface RewardValue
- */
 export interface RewardValue {
     /**
      * Amount of the reward
-     * @type {number}
-     * @memberof RewardValue
      */
     'denomination': number;
     /**
      * Currency of the reward. Defaults to the organization\'s currency if not provided.
-     * @type {string}
-     * @memberof RewardValue
      */
     'currency_code'?: RewardValueCurrencyCodeEnum;
 }
@@ -8930,106 +5730,62 @@ export const RewardValueCurrencyCodeEnum = {
     Xaf: 'XAF',
     Xof: 'XOF',
     Yer: 'YER',
-    Zar: 'ZAR'
+    Zar: 'ZAR',
 } as const;
 
 export type RewardValueCurrencyCodeEnum = typeof RewardValueCurrencyCodeEnum[keyof typeof RewardValueCurrencyCodeEnum];
 
 /**
  * A single reward, sent to a recipient. A reward is always part of an order.  Either `products` or `campaign_id` must be specified. 
- * @export
- * @interface RewardWithLink
  */
 export interface RewardWithLink {
     /**
      * Tremendous ID of the reward
-     * @type {string}
-     * @memberof RewardWithLink
      */
     'id'?: string;
     /**
      * Tremendous ID of the order this reward is part of.
-     * @type {string}
-     * @memberof RewardWithLink
      */
     'order_id'?: string;
     /**
      * Date the reward was created
-     * @type {string}
-     * @memberof RewardWithLink
      */
     'created_at'?: string;
     /**
      * Expiration date of the reward. If null, the reward does not expire.
-     * @type {string}
-     * @memberof RewardWithLink
      */
     'expires_at'?: string | null;
     /**
      * ID of the campaign in your account, that defines the available products (different gift cards, charity, etc.) that the recipient can choose from. 
-     * @type {string}
-     * @memberof RewardWithLink
      */
     'campaign_id'?: string | null;
     /**
      * List of IDs of product (different gift cards, charity, etc.) that will be available to the recipient to choose from.  Providing a `products` array will override the products made available by the campaign specified using the `campaign_id` property unless the `products` array is empty. It will _not_ override other campaign attributes, like the message and customization of the look and feel. 
-     * @type {Array<string>}
-     * @memberof RewardWithLink
      */
     'products'?: Array<string>;
-    /**
-     * 
-     * @type {ListRewards200ResponseRewardsInnerValue}
-     * @memberof RewardWithLink
-     */
     'value'?: ListRewards200ResponseRewardsInnerValue;
-    /**
-     * 
-     * @type {ListRewards200ResponseRewardsInnerRecipient}
-     * @memberof RewardWithLink
-     */
     'recipient'?: ListRewards200ResponseRewardsInnerRecipient;
     /**
      * Timestamp of reward delivery within the next year. Note that if date-time is provided, the time values will be ignored.
-     * @type {string}
-     * @memberof RewardWithLink
      */
     'deliver_at'?: string;
-    /**
-     * 
-     * @type {Array<RewardBaseCustomFieldsInner>}
-     * @memberof RewardWithLink
-     */
     'custom_fields'?: Array<RewardBaseCustomFieldsInner>;
-    /**
-     * 
-     * @type {RewardWithLinkDelivery}
-     * @memberof RewardWithLink
-     */
     'delivery'?: RewardWithLinkDelivery;
 }
 /**
  * Details on how the reward is delivered to the recipient. 
- * @export
- * @interface RewardWithLinkDelivery
  */
 export interface RewardWithLinkDelivery {
     /**
      * How to deliver the reward to the recipient.  <table>   <thead>     <tr>       <th>Delivery Method</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td><code>EMAIL</code></td>       <td>Deliver the reward to the recipient by email</td>     </tr>     <tr>       <td><code>LINK</code></td>       <td>         <p>Deliver the reward to the recipient via a link.</p>         <p>The initial <code>POST /orders</code> response for a link reward includes the link in <code>delivery.link</code>.</p>         <p>The link must then be delivered to the recipient out-of-band.</p>         <p>To obtain a new link for an existing reward, call <code>POST /rewards/{id}/generate_link</code>.</p>       </td>     </tr>     <tr>       <td><code>PHONE</code></td>       <td>Deliver the reward to the recipient by SMS</td>     </tr>   </tbody> </table> 
-     * @type {string}
-     * @memberof RewardWithLinkDelivery
      */
     'method': RewardWithLinkDeliveryMethodEnum;
     /**
      * Current status of the delivery of the reward:  * `SCHEDULED` - Reward is scheduled for delivery and will be delivered soon. * `FAILED` - Delivery of reward failed (e.g. email bounced). * `SUCCEEDED` - Reward was successfully delivered (email or text message delivered or reward link active). * `PENDING` - Delivery is pending but not yet scheduled. 
-     * @type {string}
-     * @memberof RewardWithLinkDelivery
      */
     'status': RewardWithLinkDeliveryStatusEnum;
     /**
      * Link to redeem the reward at. You need to deliver this link to the recipient. 
-     * @type {string}
-     * @memberof RewardWithLinkDelivery
      */
     'link'?: string;
 }
@@ -9037,7 +5793,7 @@ export interface RewardWithLinkDelivery {
 export const RewardWithLinkDeliveryMethodEnum = {
     Email: 'EMAIL',
     Link: 'LINK',
-    Phone: 'PHONE'
+    Phone: 'PHONE',
 } as const;
 
 export type RewardWithLinkDeliveryMethodEnum = typeof RewardWithLinkDeliveryMethodEnum[keyof typeof RewardWithLinkDeliveryMethodEnum];
@@ -9045,100 +5801,58 @@ export const RewardWithLinkDeliveryStatusEnum = {
     Scheduled: 'SCHEDULED',
     Failed: 'FAILED',
     Succeeded: 'SUCCEEDED',
-    Pending: 'PENDING'
+    Pending: 'PENDING',
 } as const;
 
 export type RewardWithLinkDeliveryStatusEnum = typeof RewardWithLinkDeliveryStatusEnum[keyof typeof RewardWithLinkDeliveryStatusEnum];
 
 /**
  * A single reward, sent to a recipient. A reward is always part of an order.  Either `products` or `campaign_id` must be specified. 
- * @export
- * @interface RewardWithoutLink
  */
 export interface RewardWithoutLink {
     /**
      * Tremendous ID of the reward
-     * @type {string}
-     * @memberof RewardWithoutLink
      */
     'id'?: string;
     /**
      * Tremendous ID of the order this reward is part of.
-     * @type {string}
-     * @memberof RewardWithoutLink
      */
     'order_id'?: string;
     /**
      * Date the reward was created
-     * @type {string}
-     * @memberof RewardWithoutLink
      */
     'created_at'?: string;
     /**
      * Expiration date of the reward. If null, the reward does not expire.
-     * @type {string}
-     * @memberof RewardWithoutLink
      */
     'expires_at'?: string | null;
     /**
      * ID of the campaign in your account, that defines the available products (different gift cards, charity, etc.) that the recipient can choose from. 
-     * @type {string}
-     * @memberof RewardWithoutLink
      */
     'campaign_id'?: string | null;
     /**
      * List of IDs of product (different gift cards, charity, etc.) that will be available to the recipient to choose from.  Providing a `products` array will override the products made available by the campaign specified using the `campaign_id` property unless the `products` array is empty. It will _not_ override other campaign attributes, like the message and customization of the look and feel. 
-     * @type {Array<string>}
-     * @memberof RewardWithoutLink
      */
     'products'?: Array<string>;
-    /**
-     * 
-     * @type {ListRewards200ResponseRewardsInnerValue}
-     * @memberof RewardWithoutLink
-     */
     'value'?: ListRewards200ResponseRewardsInnerValue;
-    /**
-     * 
-     * @type {ListRewards200ResponseRewardsInnerRecipient}
-     * @memberof RewardWithoutLink
-     */
     'recipient'?: ListRewards200ResponseRewardsInnerRecipient;
     /**
      * Timestamp of reward delivery within the next year. Note that if date-time is provided, the time values will be ignored.
-     * @type {string}
-     * @memberof RewardWithoutLink
      */
     'deliver_at'?: string;
-    /**
-     * 
-     * @type {Array<RewardBaseCustomFieldsInner>}
-     * @memberof RewardWithoutLink
-     */
     'custom_fields'?: Array<RewardBaseCustomFieldsInner>;
-    /**
-     * 
-     * @type {RewardWithoutLinkDelivery}
-     * @memberof RewardWithoutLink
-     */
     'delivery'?: RewardWithoutLinkDelivery;
 }
 /**
  * Details on how the reward is delivered to the recipient. 
- * @export
- * @interface RewardWithoutLinkDelivery
  */
 export interface RewardWithoutLinkDelivery {
     /**
      * How to deliver the reward to the recipient.  <table>   <thead>     <tr>       <th>Delivery Method</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td><code>EMAIL</code></td>       <td>Deliver the reward to the recipient by email</td>     </tr>     <tr>       <td><code>LINK</code></td>       <td>         <p>Deliver the reward to the recipient via a link.</p>         <p>The initial <code>POST /orders</code> response for a link reward includes the link in <code>delivery.link</code>.</p>         <p>The link must then be delivered to the recipient out-of-band.</p>         <p>To obtain a new link for an existing reward, call <code>POST /rewards/{id}/generate_link</code>.</p>       </td>     </tr>     <tr>       <td><code>PHONE</code></td>       <td>Deliver the reward to the recipient by SMS</td>     </tr>   </tbody> </table> 
-     * @type {string}
-     * @memberof RewardWithoutLinkDelivery
      */
     'method'?: RewardWithoutLinkDeliveryMethodEnum;
     /**
      * Current status of the delivery of the reward:  * `SCHEDULED` - Reward is scheduled for delivery and will be delivered soon. * `FAILED` - Delivery of reward failed (e.g. email bounced). * `SUCCEEDED` - Reward was successfully delivered (email or text message delivered or reward link active). * `PENDING` - Delivery is pending but not yet scheduled. 
-     * @type {string}
-     * @memberof RewardWithoutLinkDelivery
      */
     'status'?: RewardWithoutLinkDeliveryStatusEnum;
 }
@@ -9146,7 +5860,7 @@ export interface RewardWithoutLinkDelivery {
 export const RewardWithoutLinkDeliveryMethodEnum = {
     Email: 'EMAIL',
     Link: 'LINK',
-    Phone: 'PHONE'
+    Phone: 'PHONE',
 } as const;
 
 export type RewardWithoutLinkDeliveryMethodEnum = typeof RewardWithoutLinkDeliveryMethodEnum[keyof typeof RewardWithoutLinkDeliveryMethodEnum];
@@ -9154,286 +5868,152 @@ export const RewardWithoutLinkDeliveryStatusEnum = {
     Scheduled: 'SCHEDULED',
     Failed: 'FAILED',
     Succeeded: 'SUCCEEDED',
-    Pending: 'PENDING'
+    Pending: 'PENDING',
 } as const;
 
 export type RewardWithoutLinkDeliveryStatusEnum = typeof RewardWithoutLinkDeliveryStatusEnum[keyof typeof RewardWithoutLinkDeliveryStatusEnum];
 
 /**
  * Each organization member is assigned a role that defines the permissions they have within the organization. 
- * @export
- * @interface Role
  */
 export interface Role {
-    /**
-     * 
-     * @type {string}
-     * @memberof Role
-     */
     'id': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof Role
-     */
     'title': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof Role
-     */
     'description': string;
 }
-/**
- * 
- * @export
- * @interface SimulateWebhookRequest
- */
 export interface SimulateWebhookRequest {
     /**
      * The event to test. See the [List events endpoint reference](/reference/get_webhooks-id-events) for all available events.
-     * @type {string}
-     * @memberof SimulateWebhookRequest
      */
     'event': string;
 }
 /**
  * An order that contains a single reward. The reward is sent to a single recipient. 
- * @export
- * @interface SingleRewardOrder
  */
 export interface SingleRewardOrder {
     /**
      * Reference for this order, supplied by the customer.  When set, `external_id` makes order idempotent. All requests that use the same `external_id` after the initial order creation, will result in a response that returns the data of the initially created order. The response will have a `201` response code. These responses **fail** to create any further orders.  It also allows for retrieving by `external_id` instead of `id` only. 
-     * @type {string}
-     * @memberof SingleRewardOrder
      */
     'external_id'?: string | null;
-    /**
-     * 
-     * @type {SingleRewardOrderPayment}
-     * @memberof SingleRewardOrder
-     */
     'payment'?: SingleRewardOrderPayment;
-    /**
-     * 
-     * @type {SingleRewardOrderReward}
-     * @memberof SingleRewardOrder
-     */
     'reward': SingleRewardOrderReward;
 }
-/**
- * 
- * @export
- * @interface SingleRewardOrderPayment
- */
 export interface SingleRewardOrderPayment {
     /**
      * Tremendous ID of the funding source that will be used to pay for the order.  You can also pass one of the following magic values (case-insensitive):  - `BALANCE` — pay from your Tremendous balance. - `INVOICE` — pay from your commercial invoice account. - `INVOICE_THEN_BALANCE` — pay from your commercial invoice account if doing so wouldn\'t exceed your credit limit, otherwise fall back to your Tremendous balance. The balance must have sufficient funds to pay for the order.  **Note:** `INVOICE` and `INVOICE_THEN_BALANCE` are only available to select Enterprise clients with an existing commercial invoicing setup. If your organization already uses commercial invoicing and you have questions, contact your Customer Success Manager.
-     * @type {string}
-     * @memberof SingleRewardOrderPayment
      */
     'funding_source_id': string;
 }
 /**
  * A single reward, sent to a recipient. A reward is always part of an order.  Either `products` or `campaign_id` must be specified. 
- * @export
- * @interface SingleRewardOrderReward
  */
 export interface SingleRewardOrderReward {
     /**
      * ID of the campaign in your account, that defines the available products (different gift cards, charity, etc.) that the recipient can choose from. 
-     * @type {string}
-     * @memberof SingleRewardOrderReward
      */
     'campaign_id'?: string | null;
     /**
      * List of IDs of product (different gift cards, charity, etc.) that will be available to the recipient to choose from.  Providing a `products` array will override the products made available by the campaign specified using the `campaign_id` property unless the `products` array is empty. It will _not_ override other campaign attributes, like the message and customization of the look and feel. 
-     * @type {Array<string>}
-     * @memberof SingleRewardOrderReward
      */
     'products'?: Array<string>;
-    /**
-     * 
-     * @type {ListRewards200ResponseRewardsInnerValue}
-     * @memberof SingleRewardOrderReward
-     */
     'value'?: ListRewards200ResponseRewardsInnerValue;
-    /**
-     * 
-     * @type {ListRewards200ResponseRewardsInnerRecipient}
-     * @memberof SingleRewardOrderReward
-     */
     'recipient'?: ListRewards200ResponseRewardsInnerRecipient;
     /**
      * Timestamp of reward delivery within the next year. Note that if date-time is provided, the time values will be ignored.
-     * @type {string}
-     * @memberof SingleRewardOrderReward
      */
     'deliver_at'?: string;
-    /**
-     * 
-     * @type {Array<SingleRewardOrderRewardCustomFieldsInner>}
-     * @memberof SingleRewardOrderReward
-     */
     'custom_fields'?: Array<SingleRewardOrderRewardCustomFieldsInner>;
     /**
      * Set this to translate the redemption experience for this reward. Pass a 2-letter [ISO-639-1 code](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) for the desired language. Defaults to `en`. 
-     * @type {string}
-     * @memberof SingleRewardOrderReward
      */
     'language'?: string;
-    /**
-     * 
-     * @type {SingleRewardOrderRewardDelivery}
-     * @memberof SingleRewardOrderReward
-     */
     'delivery'?: SingleRewardOrderRewardDelivery;
 }
 /**
  * Reward custom data for searching, tracking or copy (see [Adding custom fields to orders](https://developers.tremendous.com/docs/using-custom-fields-to-add-custom-data-to-rewards).)
- * @export
- * @interface SingleRewardOrderRewardCustomFieldsInner
  */
 export interface SingleRewardOrderRewardCustomFieldsInner {
     /**
      * Tremendous ID of the custom field
-     * @type {string}
-     * @memberof SingleRewardOrderRewardCustomFieldsInner
      */
     'id'?: string;
     /**
      * Value of the custom field
-     * @type {string}
-     * @memberof SingleRewardOrderRewardCustomFieldsInner
      */
     'value'?: string | null;
 }
 /**
  * Details on how the reward is delivered to the recipient. 
- * @export
- * @interface SingleRewardOrderRewardDelivery
  */
 export interface SingleRewardOrderRewardDelivery {
     /**
      * How to deliver the reward to the recipient.  <table>   <thead>     <tr>       <th>Delivery Method</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td><code>EMAIL</code></td>       <td>Deliver the reward to the recipient by email</td>     </tr>     <tr>       <td><code>LINK</code></td>       <td>         <p>Deliver the reward to the recipient via a link.</p>         <p>The initial <code>POST /orders</code> response for a link reward includes the link in <code>delivery.link</code>.</p>         <p>The link must then be delivered to the recipient out-of-band.</p>         <p>To obtain a new link for an existing reward, call <code>POST /rewards/{id}/generate_link</code>.</p>       </td>     </tr>     <tr>       <td><code>PHONE</code></td>       <td>Deliver the reward to the recipient by SMS</td>     </tr>   </tbody> </table> 
-     * @type {string}
-     * @memberof SingleRewardOrderRewardDelivery
      */
     'method'?: SingleRewardOrderRewardDeliveryMethodEnum;
-    /**
-     * 
-     * @type {SingleRewardOrderRewardDeliveryMeta}
-     * @memberof SingleRewardOrderRewardDelivery
-     */
     'meta'?: SingleRewardOrderRewardDeliveryMeta;
 }
 
 export const SingleRewardOrderRewardDeliveryMethodEnum = {
     Email: 'EMAIL',
     Link: 'LINK',
-    Phone: 'PHONE'
+    Phone: 'PHONE',
 } as const;
 
 export type SingleRewardOrderRewardDeliveryMethodEnum = typeof SingleRewardOrderRewardDeliveryMethodEnum[keyof typeof SingleRewardOrderRewardDeliveryMethodEnum];
 
 /**
  * Customizable reward delivery metadata, taking precedence over the related campaign settings. 
- * @export
- * @interface SingleRewardOrderRewardDeliveryMeta
  */
 export interface SingleRewardOrderRewardDeliveryMeta {
     /**
      * The \"sender name\" used in the delivery. If it\'s an email reward, \"via Tremendous\" will be appended to the value. Please note that you cannot customize the sender email.
-     * @type {string}
-     * @memberof SingleRewardOrderRewardDeliveryMeta
      */
     'sender_name'?: string;
     /**
      * The subject line used in the delivery.
-     * @type {string}
-     * @memberof SingleRewardOrderRewardDeliveryMeta
      */
     'subject_line'?: string;
     /**
      * The content of the message of the reward, shown in the email / SMS and on the landing page.
-     * @type {string}
-     * @memberof SingleRewardOrderRewardDeliveryMeta
      */
     'message'?: string;
 }
-/**
- * 
- * @export
- * @interface SingleRewardOrderWithLink
- */
 export interface SingleRewardOrderWithLink {
-    /**
-     * 
-     * @type {SingleRewardOrderWithLinkOrder}
-     * @memberof SingleRewardOrderWithLink
-     */
     'order': SingleRewardOrderWithLinkOrder;
 }
 /**
  * An order wraps around the fulfilment of one or more rewards.
- * @export
- * @interface SingleRewardOrderWithLinkOrder
  */
 export interface SingleRewardOrderWithLinkOrder {
     /**
      * Tremendous ID of the order
-     * @type {string}
-     * @memberof SingleRewardOrderWithLinkOrder
      */
     'id': string;
     /**
      * Reference for this order, supplied by the customer.  When set, `external_id` makes order idempotent. All requests that use the same `external_id` after the initial order creation, will result in a response that returns the data of the initially created order. The response will have a `201` response code. These responses **fail** to create any further orders.  It also allows for retrieving by `external_id` instead of `id` only. 
-     * @type {string}
-     * @memberof SingleRewardOrderWithLinkOrder
      */
     'external_id'?: string | null;
     /**
      * ID of the campaign in your account, that defines the available products (different gift cards, charity, etc.) that the recipient can choose from. 
-     * @type {string}
-     * @memberof SingleRewardOrderWithLinkOrder
      */
     'campaign_id'?: string | null;
     /**
      * Date the order was created
-     * @type {string}
-     * @memberof SingleRewardOrderWithLinkOrder
      */
     'created_at': string;
     /**
      * Execution status of a given order  <table>   <thead>     <tr>       <th>Status</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td><code>CANCELED</code></td>       <td>The order and all of its rewards were canceled.</td>     </tr>     <tr>       <td><code>OPEN</code></td>       <td>The order has been created, but hasn\'t yet been processed.</td>     </tr>     <tr>       <td><code>EXECUTED</code></td>       <td>The order has been executed. Payment has been handled and rewards are being delivered (if applicable).</td>     </tr>     <tr>       <td><code>FAILED</code></td>       <td>The order could not be processed due to an error. E.g. due to insufficient funds in the account.</td>     </tr>     <tr>       <td><code>PENDING APPROVAL</code></td>       <td>The order has been created but needs approval to be executed.</td>     </tr>     <tr>       <td><code>PENDING INTERNAL PAYMENT APPROVAL</code></td>       <td>The order has been created but it is under review and requires approval from our team.</td>     </tr>     <tr>       <td><code>PENDING SETTLEMENT</code></td>       <td>The order has been created but the funds are being held until the settlement window clears.</td>     </tr>   </tbody> </table> 
-     * @type {string}
-     * @memberof SingleRewardOrderWithLinkOrder
      */
     'status': SingleRewardOrderWithLinkOrderStatusEnum;
     /**
      * Name of the channel in which the order was created
-     * @type {string}
-     * @memberof SingleRewardOrderWithLinkOrder
      */
     'channel'?: SingleRewardOrderWithLinkOrderChannelEnum;
-    /**
-     * 
-     * @type {OrderBasePayment}
-     * @memberof SingleRewardOrderWithLinkOrder
-     */
     'payment'?: OrderBasePayment;
     /**
      * The ID for the invoice associated with this order
-     * @type {string}
-     * @memberof SingleRewardOrderWithLinkOrder
      */
     'invoice_id'?: string;
-    /**
-     * 
-     * @type {Array<OrderWithLinkRewardsInner>}
-     * @memberof SingleRewardOrderWithLinkOrder
-     */
     'rewards'?: Array<OrderWithLinkRewardsInner>;
 }
 
@@ -9444,7 +6024,7 @@ export const SingleRewardOrderWithLinkOrderStatusEnum = {
     Failed: 'FAILED',
     PendingApproval: 'PENDING APPROVAL',
     PendingInternalPaymentApproval: 'PENDING INTERNAL PAYMENT APPROVAL',
-    PendingSettlement: 'PENDING SETTLEMENT'
+    PendingSettlement: 'PENDING SETTLEMENT',
 } as const;
 
 export type SingleRewardOrderWithLinkOrderStatusEnum = typeof SingleRewardOrderWithLinkOrderStatusEnum[keyof typeof SingleRewardOrderWithLinkOrderStatusEnum];
@@ -9456,83 +6036,47 @@ export const SingleRewardOrderWithLinkOrderChannelEnum = {
     Qualtrics: 'QUALTRICS',
     Typeform: 'TYPEFORM',
     SurveyMonkey: 'SURVEY MONKEY',
-    Yotpo: 'YOTPO'
+    Yotpo: 'YOTPO',
 } as const;
 
 export type SingleRewardOrderWithLinkOrderChannelEnum = typeof SingleRewardOrderWithLinkOrderChannelEnum[keyof typeof SingleRewardOrderWithLinkOrderChannelEnum];
 
-/**
- * 
- * @export
- * @interface SingleRewardOrderWithoutLink
- */
 export interface SingleRewardOrderWithoutLink {
-    /**
-     * 
-     * @type {SingleRewardOrderWithoutLinkOrder}
-     * @memberof SingleRewardOrderWithoutLink
-     */
     'order': SingleRewardOrderWithoutLinkOrder;
 }
 /**
  * An order wraps around the fulfilment of one or more rewards.
- * @export
- * @interface SingleRewardOrderWithoutLinkOrder
  */
 export interface SingleRewardOrderWithoutLinkOrder {
     /**
      * Tremendous ID of the order
-     * @type {string}
-     * @memberof SingleRewardOrderWithoutLinkOrder
      */
     'id': string;
     /**
      * Reference for this order, supplied by the customer.  When set, `external_id` makes order idempotent. All requests that use the same `external_id` after the initial order creation, will result in a response that returns the data of the initially created order. The response will have a `201` response code. These responses **fail** to create any further orders.  It also allows for retrieving by `external_id` instead of `id` only. 
-     * @type {string}
-     * @memberof SingleRewardOrderWithoutLinkOrder
      */
     'external_id'?: string | null;
     /**
      * ID of the campaign in your account, that defines the available products (different gift cards, charity, etc.) that the recipient can choose from. 
-     * @type {string}
-     * @memberof SingleRewardOrderWithoutLinkOrder
      */
     'campaign_id'?: string | null;
     /**
      * Date the order was created
-     * @type {string}
-     * @memberof SingleRewardOrderWithoutLinkOrder
      */
     'created_at': string;
     /**
      * Execution status of a given order  <table>   <thead>     <tr>       <th>Status</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td><code>CANCELED</code></td>       <td>The order and all of its rewards were canceled.</td>     </tr>     <tr>       <td><code>OPEN</code></td>       <td>The order has been created, but hasn\'t yet been processed.</td>     </tr>     <tr>       <td><code>EXECUTED</code></td>       <td>The order has been executed. Payment has been handled and rewards are being delivered (if applicable).</td>     </tr>     <tr>       <td><code>FAILED</code></td>       <td>The order could not be processed due to an error. E.g. due to insufficient funds in the account.</td>     </tr>     <tr>       <td><code>PENDING APPROVAL</code></td>       <td>The order has been created but needs approval to be executed.</td>     </tr>     <tr>       <td><code>PENDING INTERNAL PAYMENT APPROVAL</code></td>       <td>The order has been created but it is under review and requires approval from our team.</td>     </tr>     <tr>       <td><code>PENDING SETTLEMENT</code></td>       <td>The order has been created but the funds are being held until the settlement window clears.</td>     </tr>   </tbody> </table> 
-     * @type {string}
-     * @memberof SingleRewardOrderWithoutLinkOrder
      */
     'status': SingleRewardOrderWithoutLinkOrderStatusEnum;
     /**
      * Name of the channel in which the order was created
-     * @type {string}
-     * @memberof SingleRewardOrderWithoutLinkOrder
      */
     'channel'?: SingleRewardOrderWithoutLinkOrderChannelEnum;
-    /**
-     * 
-     * @type {OrderBasePayment}
-     * @memberof SingleRewardOrderWithoutLinkOrder
-     */
     'payment'?: OrderBasePayment;
     /**
      * The ID for the invoice associated with this order
-     * @type {string}
-     * @memberof SingleRewardOrderWithoutLinkOrder
      */
     'invoice_id'?: string;
-    /**
-     * 
-     * @type {Array<RewardResponseReward>}
-     * @memberof SingleRewardOrderWithoutLinkOrder
-     */
     'rewards'?: Array<RewardResponseReward>;
 }
 
@@ -9543,7 +6087,7 @@ export const SingleRewardOrderWithoutLinkOrderStatusEnum = {
     Failed: 'FAILED',
     PendingApproval: 'PENDING APPROVAL',
     PendingInternalPaymentApproval: 'PENDING INTERNAL PAYMENT APPROVAL',
-    PendingSettlement: 'PENDING SETTLEMENT'
+    PendingSettlement: 'PENDING SETTLEMENT',
 } as const;
 
 export type SingleRewardOrderWithoutLinkOrderStatusEnum = typeof SingleRewardOrderWithoutLinkOrderStatusEnum[keyof typeof SingleRewardOrderWithoutLinkOrderStatusEnum];
@@ -9555,430 +6099,237 @@ export const SingleRewardOrderWithoutLinkOrderChannelEnum = {
     Qualtrics: 'QUALTRICS',
     Typeform: 'TYPEFORM',
     SurveyMonkey: 'SURVEY MONKEY',
-    Yotpo: 'YOTPO'
+    Yotpo: 'YOTPO',
 } as const;
 
 export type SingleRewardOrderWithoutLinkOrderChannelEnum = typeof SingleRewardOrderWithoutLinkOrderChannelEnum[keyof typeof SingleRewardOrderWithoutLinkOrderChannelEnum];
 
-/**
- * 
- * @export
- * @interface Topup
- */
 export interface Topup {
     /**
      * Unique identifier for the topup request.
-     * @type {string}
-     * @memberof Topup
      */
     'id'?: string;
     /**
      * Amount to add to your organization\'s balance, denominated in `currency_code`.
-     * @type {number}
-     * @memberof Topup
      */
     'amount'?: number;
     /**
      * Currency of the topup amount. Always matches the organization\'s currency.
-     * @type {string}
-     * @memberof Topup
      */
     'currency_code'?: string;
     /**
      * Amount of the processing fee for the topup (typically reserved for credit card topups).
-     * @type {number}
-     * @memberof Topup
      */
     'processing_fee'?: number;
     /**
      * ID of the funding_source object used for this topup.
-     * @type {string}
-     * @memberof Topup
      */
     'funding_source_id'?: string;
     /**
      * Status of the topup  <table>   <thead>     <tr>       <th>Status</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td><code>created</code></td>       <td>The topup is processing (and may be under review).</td>     </tr>     <tr>       <td><code>partially_credited</code></td>       <td>Some funds have been credited to the balance. The remainder will be credited by <code>expected_settlement_at</code>.</td>     </tr>     <tr>       <td><code>fully_credited</code></td>       <td>All funds have been added to the balance.</td>     </tr>     <tr>       <td><code>reversed</code></td>       <td>The topup was credited, but then reversed due to a chargeback or ACH return.</td>     </tr>     <tr>       <td><code>rejected</code></td>       <td>The topup was rejected by an admin.</td>     </tr>   </tbody> </table> 
-     * @type {string}
-     * @memberof Topup
      */
     'status'?: string;
     /**
      * Timestamp indicating when the topup object was created (when the request was made).
-     * @type {string}
-     * @memberof Topup
      */
     'created_at'?: string;
     /**
      * Timestamp indicating when the topup amount was fully credited to the balance.
-     * @type {string}
-     * @memberof Topup
      */
     'fully_credited_at'?: string | null;
     /**
      * Timestamp indicating when the topup was rejected.
-     * @type {string}
-     * @memberof Topup
      */
     'rejected_at'?: string | null;
     /**
      * Timestamp indicating when the topup was reversed.
-     * @type {string}
-     * @memberof Topup
      */
     'reversed_at'?: string | null;
     /**
      * A sentence explaining why the topup was reversed.
-     * @type {string}
-     * @memberof Topup
      */
     'reversed_reason'?: string | null;
     /**
      * Idempotency key to prevent duplicate requests.
-     * @type {string}
-     * @memberof Topup
      */
     'idempotency_key'?: string | null;
     /**
      * Amount credited to the balance immediately. Equals `amount` for non-ACH topups or ACH debits fully within instant funding limits. Can be 0 if nothing was credited instantly.
-     * @type {number}
-     * @memberof Topup
      */
     'instant_credit_amount'?: number;
     /**
      * Amount that will be available once the settlement period elapses. 0 if nothing is settling.
-     * @type {number}
-     * @memberof Topup
      */
     'settled_amount'?: number;
     /**
      * Timestamp indicating when the pending amount will be credited to the balance. Null if the topup was fully credited immediately.
-     * @type {string}
-     * @memberof Topup
      */
     'expected_settlement_at'?: string | null;
 }
-/**
- * 
- * @export
- * @interface TopupCreateRequest
- */
 export interface TopupCreateRequest {
     /**
      * The ID of the funding source to top up.
-     * @type {string}
-     * @memberof TopupCreateRequest
      */
     'funding_source_id': string;
     /**
      * Unique key that ensures this request is only processed once. 
-     * @type {string}
-     * @memberof TopupCreateRequest
      */
     'idempotency_key': string;
     /**
      * Amount to add to your organization\'s balance, denominated in `currency_code`.
-     * @type {number}
-     * @memberof TopupCreateRequest
      */
     'amount': number;
 }
-/**
- * 
- * @export
- * @interface TopupResponse
- */
 export interface TopupResponse {
-    /**
-     * 
-     * @type {ListTopups200ResponseTopupsInner}
-     * @memberof TopupResponse
-     */
     'topup'?: ListTopups200ResponseTopupsInner;
 }
 /**
  * With a campaign you can define the look & feel of how rewards are sent out. It also lets you set the available products (different gift cards, charity, etc.) recipients can choose from. 
- * @export
- * @interface UpdateCampaign
  */
 export interface UpdateCampaign {
-    /**
-     * 
-     * @type {string}
-     * @memberof UpdateCampaign
-     */
     'id'?: string;
     /**
      * Name of the campaign
-     * @type {string}
-     * @memberof UpdateCampaign
      */
     'name'?: string;
     /**
      * Description of the campaign
-     * @type {string}
-     * @memberof UpdateCampaign
      */
     'description'?: string | null;
     /**
      * List of IDs of products (different gift cards, charity, etc.) that are available in this campaign.  On write, the special value `ALL_FEE_FREE` stands for every product in your catalog that carries no fee at the time of the call. 
-     * @type {Array<CampaignBaseProductsInner>}
-     * @memberof UpdateCampaign
      */
     'products'?: Array<CampaignBaseProductsInner>;
     /**
      * Determines whether fees for premium products are added to the order total (`SENDER`) or deducted from the recipient\'s reward amount (`RECIPIENT`). Campaigns with `RECIPIENT` must include at least one fee-free product. 
-     * @type {string}
-     * @memberof UpdateCampaign
      */
     'fee_charged_to'?: UpdateCampaignFeeChargedToEnum | null;
-    /**
-     * 
-     * @type {ListCampaigns200ResponseCampaignsInnerAutoAddProductRule}
-     * @memberof UpdateCampaign
-     */
     'auto_add_product_rule'?: ListCampaigns200ResponseCampaignsInnerAutoAddProductRule | null;
-    /**
-     * 
-     * @type {ListCampaigns200ResponseCampaignsInnerWebpageStyle}
-     * @memberof UpdateCampaign
-     */
     'webpage_style'?: ListCampaigns200ResponseCampaignsInnerWebpageStyle;
-    /**
-     * 
-     * @type {ListCampaigns200ResponseCampaignsInnerEmailStyle}
-     * @memberof UpdateCampaign
-     */
     'email_style'?: ListCampaigns200ResponseCampaignsInnerEmailStyle;
 }
 
 export const UpdateCampaignFeeChargedToEnum = {
     Sender: 'SENDER',
-    Recipient: 'RECIPIENT'
+    Recipient: 'RECIPIENT',
 } as const;
 
 export type UpdateCampaignFeeChargedToEnum = typeof UpdateCampaignFeeChargedToEnum[keyof typeof UpdateCampaignFeeChargedToEnum];
 
 /**
  * With a campaign you can define the look & feel of how rewards are sent out. It also lets you set the available products (different gift cards, charity, etc.) recipients can choose from. 
- * @export
- * @interface UpdateCampaignRequest
  */
 export interface UpdateCampaignRequest {
     /**
      * Name of the campaign
-     * @type {string}
-     * @memberof UpdateCampaignRequest
      */
     'name'?: string;
     /**
      * Description of the campaign
-     * @type {string}
-     * @memberof UpdateCampaignRequest
      */
     'description'?: string | null;
     /**
      * List of IDs of products (different gift cards, charity, etc.) that are available in this campaign.  On write, the special value `ALL_FEE_FREE` stands for every product in your catalog that carries no fee at the time of the call. 
-     * @type {Array<ListCampaigns200ResponseCampaignsInnerProductsInner>}
-     * @memberof UpdateCampaignRequest
      */
     'products'?: Array<ListCampaigns200ResponseCampaignsInnerProductsInner>;
     /**
      * Determines whether fees for premium products are added to the order total (`SENDER`) or deducted from the recipient\'s reward amount (`RECIPIENT`). Campaigns with `RECIPIENT` must include at least one fee-free product. 
-     * @type {string}
-     * @memberof UpdateCampaignRequest
      */
     'fee_charged_to'?: UpdateCampaignRequestFeeChargedToEnum | null;
-    /**
-     * 
-     * @type {ListCampaigns200ResponseCampaignsInnerAutoAddProductRule}
-     * @memberof UpdateCampaignRequest
-     */
     'auto_add_product_rule'?: ListCampaigns200ResponseCampaignsInnerAutoAddProductRule | null;
-    /**
-     * 
-     * @type {ListCampaigns200ResponseCampaignsInnerWebpageStyle}
-     * @memberof UpdateCampaignRequest
-     */
     'webpage_style'?: ListCampaigns200ResponseCampaignsInnerWebpageStyle;
-    /**
-     * 
-     * @type {ListCampaigns200ResponseCampaignsInnerEmailStyle}
-     * @memberof UpdateCampaignRequest
-     */
     'email_style'?: ListCampaigns200ResponseCampaignsInnerEmailStyle;
 }
 
 export const UpdateCampaignRequestFeeChargedToEnum = {
     Sender: 'SENDER',
-    Recipient: 'RECIPIENT'
+    Recipient: 'RECIPIENT',
 } as const;
 
 export type UpdateCampaignRequestFeeChargedToEnum = typeof UpdateCampaignRequestFeeChargedToEnum[keyof typeof UpdateCampaignRequestFeeChargedToEnum];
 
-/**
- * 
- * @export
- * @interface UpdateFraudRuleListRequest
- */
 export interface UpdateFraudRuleListRequest {
     /**
      * * `add` - append the list to the same key of the current configuration * `remove` - remove the entries in the list from the same key of the current configuration 
-     * @type {string}
-     * @memberof UpdateFraudRuleListRequest
      */
     'operation': UpdateFraudRuleListRequestOperationEnum;
-    /**
-     * 
-     * @type {UpdateFraudRuleListRequestConfig}
-     * @memberof UpdateFraudRuleListRequest
-     */
     'config': UpdateFraudRuleListRequestConfig;
 }
 
 export const UpdateFraudRuleListRequestOperationEnum = {
     Add: 'add',
-    Remove: 'remove'
+    Remove: 'remove',
 } as const;
 
 export type UpdateFraudRuleListRequestOperationEnum = typeof UpdateFraudRuleListRequestOperationEnum[keyof typeof UpdateFraudRuleListRequestOperationEnum];
 
 /**
  * The configuration associated with the rule. The properties allowed depend on the type of rule.
- * @export
- * @interface UpdateFraudRuleListRequestConfig
  */
 export interface UpdateFraudRuleListRequestConfig {
     /**
      * An array of country codes (ISO-3166 alpha-2 character code)
-     * @type {Array<string>}
-     * @memberof UpdateFraudRuleListRequestConfig
      */
     'countries': Array<string>;
     /**
      * The list of IP addresses to flag or allow. Accepts both IPv4 and IPv6 addresses using CIDR notation. 
-     * @type {Array<string>}
-     * @memberof UpdateFraudRuleListRequestConfig
      */
     'ips': Array<string>;
     /**
      * The list of emails.
-     * @type {Array<string>}
-     * @memberof UpdateFraudRuleListRequestConfig
      */
     'emails': Array<string>;
     /**
      * The list of domains. Any subdomains will also be matched against each entry in the list.
-     * @type {Array<string>}
-     * @memberof UpdateFraudRuleListRequestConfig
      */
     'domains'?: Array<string>;
 }
-/**
- * 
- * @export
- * @interface UpdateMember
- */
 export interface UpdateMember {
     /**
      * The role ID to assign to the member within the organization. 
-     * @type {string}
-     * @memberof UpdateMember
      */
     'role': string;
 }
-/**
- * 
- * @export
- * @interface UpdateMemberRequest
- */
 export interface UpdateMemberRequest {
     /**
      * The role ID to assign to the member within the organization. 
-     * @type {string}
-     * @memberof UpdateMemberRequest
      */
     'role': string;
 }
-/**
- * 
- * @export
- * @interface Webhook
- */
 export interface Webhook {
-    /**
-     * 
-     * @type {string}
-     * @memberof Webhook
-     */
     'id'?: string;
     /**
      * URL the webhook will make requests to
-     * @type {string}
-     * @memberof Webhook
      */
     'url': string | null;
     /**
      * Private key for the webhook
-     * @type {string}
-     * @memberof Webhook
      */
     'private_key'?: string;
 }
-/**
- * 
- * @export
- * @interface WebhookPost
- */
 export interface WebhookPost {
     /**
      * URL the webhook will make requests to
-     * @type {string}
-     * @memberof WebhookPost
      */
     'url': string;
 }
-/**
- * 
- * @export
- * @interface WebhookResponse
- */
 export interface WebhookResponse {
-    /**
-     * 
-     * @type {WebhookResponseWebhook}
-     * @memberof WebhookResponse
-     */
     'webhook'?: WebhookResponseWebhook;
 }
-/**
- * 
- * @export
- * @interface WebhookResponseWebhook
- */
 export interface WebhookResponseWebhook {
-    /**
-     * 
-     * @type {string}
-     * @memberof WebhookResponseWebhook
-     */
     'id'?: string;
     /**
      * URL the webhook will make requests to
-     * @type {string}
-     * @memberof WebhookResponseWebhook
      */
     'url': string | null;
     /**
      * Private key for the webhook
-     * @type {string}
-     * @memberof WebhookResponseWebhook
      */
     'private_key'?: string;
 }
 
 /**
  * BalanceTransactionsApi - axios parameter creator
- * @export
  */
 export const BalanceTransactionsApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
@@ -10025,8 +6376,8 @@ export const BalanceTransactionsApiAxiosParamCreator = function (configuration?:
                 localVarQueryParameter['created_at[lte]'] = createdAtLte;
             }
 
+            localVarHeaderParameter['Accept'] = 'application/json';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -10041,7 +6392,6 @@ export const BalanceTransactionsApiAxiosParamCreator = function (configuration?:
 
 /**
  * BalanceTransactionsApi - functional programming interface
- * @export
  */
 export const BalanceTransactionsApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = BalanceTransactionsApiAxiosParamCreator(configuration)
@@ -10067,7 +6417,6 @@ export const BalanceTransactionsApiFp = function(configuration?: Configuration) 
 
 /**
  * BalanceTransactionsApi - factory interface
- * @export
  */
 export const BalanceTransactionsApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
     const localVarFp = BalanceTransactionsApiFp(configuration)
@@ -10090,9 +6439,6 @@ export const BalanceTransactionsApiFactory = function (configuration?: Configura
 
 /**
  * BalanceTransactionsApi - object-oriented interface
- * @export
- * @class BalanceTransactionsApi
- * @extends {BaseAPI}
  */
 export class BalanceTransactionsApi extends BaseAPI {
     /**
@@ -10104,7 +6450,6 @@ export class BalanceTransactionsApi extends BaseAPI {
      * @param {string} [createdAtLte] Only return results where the created_at field is less than or equal to the supplied value. The string needs to be an ISO 8601 datetime.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof BalanceTransactionsApi
      */
     public listBalanceTransactions(offset?: number, limit?: number, createdAtGte?: string, createdAtLte?: string, options?: RawAxiosRequestConfig) {
         return BalanceTransactionsApiFp(this.configuration).listBalanceTransactions(offset, limit, createdAtGte, createdAtLte, options).then((request) => request(this.axios, this.basePath));
@@ -10115,7 +6460,6 @@ export class BalanceTransactionsApi extends BaseAPI {
 
 /**
  * CampaignsApi - axios parameter creator
- * @export
  */
 export const CampaignsApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
@@ -10145,9 +6489,8 @@ export const CampaignsApiAxiosParamCreator = function (configuration?: Configura
             // http bearer authentication required
             await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
-
-    
             localVarHeaderParameter['Content-Type'] = 'application/json';
+            localVarHeaderParameter['Accept'] = 'application/json';
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
@@ -10170,7 +6513,7 @@ export const CampaignsApiAxiosParamCreator = function (configuration?: Configura
             // verify required parameter 'id' is not null or undefined
             assertParamExists('getCampaign', 'id', id)
             const localVarPath = `/campaigns/{id}`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+                .replace('{id}', encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -10186,8 +6529,8 @@ export const CampaignsApiAxiosParamCreator = function (configuration?: Configura
             // http bearer authentication required
             await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
+            localVarHeaderParameter['Accept'] = 'application/json';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -10220,8 +6563,8 @@ export const CampaignsApiAxiosParamCreator = function (configuration?: Configura
             // http bearer authentication required
             await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
+            localVarHeaderParameter['Accept'] = 'application/json';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -10245,7 +6588,7 @@ export const CampaignsApiAxiosParamCreator = function (configuration?: Configura
             // verify required parameter 'updateCampaignRequest' is not null or undefined
             assertParamExists('updateCampaign', 'updateCampaignRequest', updateCampaignRequest)
             const localVarPath = `/campaigns/{id}`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+                .replace('{id}', encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -10261,9 +6604,8 @@ export const CampaignsApiAxiosParamCreator = function (configuration?: Configura
             // http bearer authentication required
             await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
-
-    
             localVarHeaderParameter['Content-Type'] = 'application/json';
+            localVarHeaderParameter['Accept'] = 'application/json';
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
@@ -10280,7 +6622,6 @@ export const CampaignsApiAxiosParamCreator = function (configuration?: Configura
 
 /**
  * CampaignsApi - functional programming interface
- * @export
  */
 export const CampaignsApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = CampaignsApiAxiosParamCreator(configuration)
@@ -10342,7 +6683,6 @@ export const CampaignsApiFp = function(configuration?: Configuration) {
 
 /**
  * CampaignsApi - factory interface
- * @export
  */
 export const CampaignsApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
     const localVarFp = CampaignsApiFp(configuration)
@@ -10392,9 +6732,6 @@ export const CampaignsApiFactory = function (configuration?: Configuration, base
 
 /**
  * CampaignsApi - object-oriented interface
- * @export
- * @class CampaignsApi
- * @extends {BaseAPI}
  */
 export class CampaignsApi extends BaseAPI {
     /**
@@ -10403,7 +6740,6 @@ export class CampaignsApi extends BaseAPI {
      * @param {CreateCampaignRequest} createCampaignRequest Campaign details
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof CampaignsApi
      */
     public createCampaign(createCampaignRequest: CreateCampaignRequest, options?: RawAxiosRequestConfig) {
         return CampaignsApiFp(this.configuration).createCampaign(createCampaignRequest, options).then((request) => request(this.axios, this.basePath));
@@ -10415,7 +6751,6 @@ export class CampaignsApi extends BaseAPI {
      * @param {string} id ID of the campaign that should be retrieved
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof CampaignsApi
      */
     public getCampaign(id: string, options?: RawAxiosRequestConfig) {
         return CampaignsApiFp(this.configuration).getCampaign(id, options).then((request) => request(this.axios, this.basePath));
@@ -10426,7 +6761,6 @@ export class CampaignsApi extends BaseAPI {
      * @summary List campaigns
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof CampaignsApi
      */
     public listCampaigns(options?: RawAxiosRequestConfig) {
         return CampaignsApiFp(this.configuration).listCampaigns(options).then((request) => request(this.axios, this.basePath));
@@ -10439,7 +6773,6 @@ export class CampaignsApi extends BaseAPI {
      * @param {UpdateCampaignRequest} updateCampaignRequest Campaign details
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof CampaignsApi
      */
     public updateCampaign(id: string, updateCampaignRequest: UpdateCampaignRequest, options?: RawAxiosRequestConfig) {
         return CampaignsApiFp(this.configuration).updateCampaign(id, updateCampaignRequest, options).then((request) => request(this.axios, this.basePath));
@@ -10450,7 +6783,6 @@ export class CampaignsApi extends BaseAPI {
 
 /**
  * ConnectedOrganizationMembersApi - axios parameter creator
- * @export
  */
 export const ConnectedOrganizationMembersApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
@@ -10480,9 +6812,8 @@ export const ConnectedOrganizationMembersApiAxiosParamCreator = function (config
             // http bearer authentication required
             await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
-
-    
             localVarHeaderParameter['Content-Type'] = 'application/json';
+            localVarHeaderParameter['Accept'] = 'application/json';
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
@@ -10508,7 +6839,7 @@ export const ConnectedOrganizationMembersApiAxiosParamCreator = function (config
             // verify required parameter 'createConnectedOrganizationMemberSessionRequest' is not null or undefined
             assertParamExists('createConnectedOrganizationMemberSession', 'createConnectedOrganizationMemberSessionRequest', createConnectedOrganizationMemberSessionRequest)
             const localVarPath = `/connected_organization_members/{id}/sessions`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+                .replace('{id}', encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -10524,9 +6855,8 @@ export const ConnectedOrganizationMembersApiAxiosParamCreator = function (config
             // http bearer authentication required
             await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
-
-    
             localVarHeaderParameter['Content-Type'] = 'application/json';
+            localVarHeaderParameter['Accept'] = 'application/json';
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
@@ -10549,7 +6879,7 @@ export const ConnectedOrganizationMembersApiAxiosParamCreator = function (config
             // verify required parameter 'id' is not null or undefined
             assertParamExists('deleteConnectedOrganizationMember', 'id', id)
             const localVarPath = `/connected_organization_members/{id}`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+                .replace('{id}', encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -10565,8 +6895,8 @@ export const ConnectedOrganizationMembersApiAxiosParamCreator = function (config
             // http bearer authentication required
             await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
+            localVarHeaderParameter['Accept'] = 'application/json';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -10587,7 +6917,7 @@ export const ConnectedOrganizationMembersApiAxiosParamCreator = function (config
             // verify required parameter 'id' is not null or undefined
             assertParamExists('getConnectedOrganizationMember', 'id', id)
             const localVarPath = `/connected_organization_members/{id}`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+                .replace('{id}', encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -10603,8 +6933,8 @@ export const ConnectedOrganizationMembersApiAxiosParamCreator = function (config
             // http bearer authentication required
             await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
+            localVarHeaderParameter['Accept'] = 'application/json';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -10654,8 +6984,8 @@ export const ConnectedOrganizationMembersApiAxiosParamCreator = function (config
                 localVarQueryParameter['limit'] = limit;
             }
 
+            localVarHeaderParameter['Accept'] = 'application/json';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -10670,7 +7000,6 @@ export const ConnectedOrganizationMembersApiAxiosParamCreator = function (config
 
 /**
  * ConnectedOrganizationMembersApi - functional programming interface
- * @export
  */
 export const ConnectedOrganizationMembersApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = ConnectedOrganizationMembersApiAxiosParamCreator(configuration)
@@ -10748,7 +7077,6 @@ export const ConnectedOrganizationMembersApiFp = function(configuration?: Config
 
 /**
  * ConnectedOrganizationMembersApi - factory interface
- * @export
  */
 export const ConnectedOrganizationMembersApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
     const localVarFp = ConnectedOrganizationMembersApiFp(configuration)
@@ -10811,9 +7139,6 @@ export const ConnectedOrganizationMembersApiFactory = function (configuration?: 
 
 /**
  * ConnectedOrganizationMembersApi - object-oriented interface
- * @export
- * @class ConnectedOrganizationMembersApi
- * @extends {BaseAPI}
  */
 export class ConnectedOrganizationMembersApi extends BaseAPI {
     /**
@@ -10822,7 +7147,6 @@ export class ConnectedOrganizationMembersApi extends BaseAPI {
      * @param {CreateConnectedOrganizationMemberRequest} createConnectedOrganizationMemberRequest Connected organization member to create
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof ConnectedOrganizationMembersApi
      */
     public createConnectedOrganizationMember(createConnectedOrganizationMemberRequest: CreateConnectedOrganizationMemberRequest, options?: RawAxiosRequestConfig) {
         return ConnectedOrganizationMembersApiFp(this.configuration).createConnectedOrganizationMember(createConnectedOrganizationMemberRequest, options).then((request) => request(this.axios, this.basePath));
@@ -10835,7 +7159,6 @@ export class ConnectedOrganizationMembersApi extends BaseAPI {
      * @param {CreateConnectedOrganizationMemberSessionRequest} createConnectedOrganizationMemberSessionRequest Connected organization member requiring the session
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof ConnectedOrganizationMembersApi
      */
     public createConnectedOrganizationMemberSession(id: string, createConnectedOrganizationMemberSessionRequest: CreateConnectedOrganizationMemberSessionRequest, options?: RawAxiosRequestConfig) {
         return ConnectedOrganizationMembersApiFp(this.configuration).createConnectedOrganizationMemberSession(id, createConnectedOrganizationMemberSessionRequest, options).then((request) => request(this.axios, this.basePath));
@@ -10847,7 +7170,6 @@ export class ConnectedOrganizationMembersApi extends BaseAPI {
      * @param {string} id ID of the connected organization member to remove. 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof ConnectedOrganizationMembersApi
      */
     public deleteConnectedOrganizationMember(id: string, options?: RawAxiosRequestConfig) {
         return ConnectedOrganizationMembersApiFp(this.configuration).deleteConnectedOrganizationMember(id, options).then((request) => request(this.axios, this.basePath));
@@ -10859,7 +7181,6 @@ export class ConnectedOrganizationMembersApi extends BaseAPI {
      * @param {string} id ID of the connected organization member that should be retrieved. 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof ConnectedOrganizationMembersApi
      */
     public getConnectedOrganizationMember(id: string, options?: RawAxiosRequestConfig) {
         return ConnectedOrganizationMembersApiFp(this.configuration).getConnectedOrganizationMember(id, options).then((request) => request(this.axios, this.basePath));
@@ -10873,7 +7194,6 @@ export class ConnectedOrganizationMembersApi extends BaseAPI {
      * @param {number} [limit] Limits the number of connected organizations listed. The maximum value is 100 and the default is 10.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof ConnectedOrganizationMembersApi
      */
     public listConnectedOrganizationMembers(connectedOrganizationId: string, offset?: number, limit?: number, options?: RawAxiosRequestConfig) {
         return ConnectedOrganizationMembersApiFp(this.configuration).listConnectedOrganizationMembers(connectedOrganizationId, offset, limit, options).then((request) => request(this.axios, this.basePath));
@@ -10884,7 +7204,6 @@ export class ConnectedOrganizationMembersApi extends BaseAPI {
 
 /**
  * ConnectedOrganizationsApi - axios parameter creator
- * @export
  */
 export const ConnectedOrganizationsApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
@@ -10914,9 +7233,8 @@ export const ConnectedOrganizationsApiAxiosParamCreator = function (configuratio
             // http bearer authentication required
             await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
-
-    
             localVarHeaderParameter['Content-Type'] = 'application/json';
+            localVarHeaderParameter['Accept'] = 'application/json';
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
@@ -10939,7 +7257,7 @@ export const ConnectedOrganizationsApiAxiosParamCreator = function (configuratio
             // verify required parameter 'id' is not null or undefined
             assertParamExists('deleteConnectedOrganization', 'id', id)
             const localVarPath = `/connected_organizations/{id}`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+                .replace('{id}', encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -10955,8 +7273,8 @@ export const ConnectedOrganizationsApiAxiosParamCreator = function (configuratio
             // http bearer authentication required
             await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
+            localVarHeaderParameter['Accept'] = 'application/json';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -10977,7 +7295,7 @@ export const ConnectedOrganizationsApiAxiosParamCreator = function (configuratio
             // verify required parameter 'id' is not null or undefined
             assertParamExists('getConnectedOrganization', 'id', id)
             const localVarPath = `/connected_organizations/{id}`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+                .replace('{id}', encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -10993,8 +7311,8 @@ export const ConnectedOrganizationsApiAxiosParamCreator = function (configuratio
             // http bearer authentication required
             await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
+            localVarHeaderParameter['Accept'] = 'application/json';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -11037,8 +7355,8 @@ export const ConnectedOrganizationsApiAxiosParamCreator = function (configuratio
                 localVarQueryParameter['limit'] = limit;
             }
 
+            localVarHeaderParameter['Accept'] = 'application/json';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -11053,7 +7371,6 @@ export const ConnectedOrganizationsApiAxiosParamCreator = function (configuratio
 
 /**
  * ConnectedOrganizationsApi - functional programming interface
- * @export
  */
 export const ConnectedOrganizationsApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = ConnectedOrganizationsApiAxiosParamCreator(configuration)
@@ -11116,7 +7433,6 @@ export const ConnectedOrganizationsApiFp = function(configuration?: Configuratio
 
 /**
  * ConnectedOrganizationsApi - factory interface
- * @export
  */
 export const ConnectedOrganizationsApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
     const localVarFp = ConnectedOrganizationsApiFp(configuration)
@@ -11167,9 +7483,6 @@ export const ConnectedOrganizationsApiFactory = function (configuration?: Config
 
 /**
  * ConnectedOrganizationsApi - object-oriented interface
- * @export
- * @class ConnectedOrganizationsApi
- * @extends {BaseAPI}
  */
 export class ConnectedOrganizationsApi extends BaseAPI {
     /**
@@ -11178,7 +7491,6 @@ export class ConnectedOrganizationsApi extends BaseAPI {
      * @param {CreateConnectedOrganizationRequest} createConnectedOrganizationRequest Connected organization to create
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof ConnectedOrganizationsApi
      */
     public createConnectedOrganization(createConnectedOrganizationRequest: CreateConnectedOrganizationRequest, options?: RawAxiosRequestConfig) {
         return ConnectedOrganizationsApiFp(this.configuration).createConnectedOrganization(createConnectedOrganizationRequest, options).then((request) => request(this.axios, this.basePath));
@@ -11190,7 +7502,6 @@ export class ConnectedOrganizationsApi extends BaseAPI {
      * @param {string} id ID of the connected organization to delete. 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof ConnectedOrganizationsApi
      */
     public deleteConnectedOrganization(id: string, options?: RawAxiosRequestConfig) {
         return ConnectedOrganizationsApiFp(this.configuration).deleteConnectedOrganization(id, options).then((request) => request(this.axios, this.basePath));
@@ -11202,7 +7513,6 @@ export class ConnectedOrganizationsApi extends BaseAPI {
      * @param {string} id ID of the connected organization that should be retrieved. 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof ConnectedOrganizationsApi
      */
     public getConnectedOrganization(id: string, options?: RawAxiosRequestConfig) {
         return ConnectedOrganizationsApiFp(this.configuration).getConnectedOrganization(id, options).then((request) => request(this.axios, this.basePath));
@@ -11215,7 +7525,6 @@ export class ConnectedOrganizationsApi extends BaseAPI {
      * @param {number} [limit] Limits the number of connected organizations listed. The maximum value is 100 and the default is 10.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof ConnectedOrganizationsApi
      */
     public listConnectedOrganizations(offset?: number, limit?: number, options?: RawAxiosRequestConfig) {
         return ConnectedOrganizationsApiFp(this.configuration).listConnectedOrganizations(offset, limit, options).then((request) => request(this.axios, this.basePath));
@@ -11226,7 +7535,6 @@ export class ConnectedOrganizationsApi extends BaseAPI {
 
 /**
  * FieldsApi - axios parameter creator
- * @export
  */
 export const FieldsApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
@@ -11256,9 +7564,8 @@ export const FieldsApiAxiosParamCreator = function (configuration?: Configuratio
             // http bearer authentication required
             await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
-
-    
             localVarHeaderParameter['Content-Type'] = 'application/json';
+            localVarHeaderParameter['Accept'] = 'application/json';
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
@@ -11293,8 +7600,8 @@ export const FieldsApiAxiosParamCreator = function (configuration?: Configuratio
             // http bearer authentication required
             await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
+            localVarHeaderParameter['Accept'] = 'application/json';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -11309,7 +7616,6 @@ export const FieldsApiAxiosParamCreator = function (configuration?: Configuratio
 
 /**
  * FieldsApi - functional programming interface
- * @export
  */
 export const FieldsApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = FieldsApiAxiosParamCreator(configuration)
@@ -11344,7 +7650,6 @@ export const FieldsApiFp = function(configuration?: Configuration) {
 
 /**
  * FieldsApi - factory interface
- * @export
  */
 export const FieldsApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
     const localVarFp = FieldsApiFp(configuration)
@@ -11373,9 +7678,6 @@ export const FieldsApiFactory = function (configuration?: Configuration, basePat
 
 /**
  * FieldsApi - object-oriented interface
- * @export
- * @class FieldsApi
- * @extends {BaseAPI}
  */
 export class FieldsApi extends BaseAPI {
     /**
@@ -11384,7 +7686,6 @@ export class FieldsApi extends BaseAPI {
      * @param {CreateFieldRequest} createFieldRequest Field details
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof FieldsApi
      */
     public createField(createFieldRequest: CreateFieldRequest, options?: RawAxiosRequestConfig) {
         return FieldsApiFp(this.configuration).createField(createFieldRequest, options).then((request) => request(this.axios, this.basePath));
@@ -11395,7 +7696,6 @@ export class FieldsApi extends BaseAPI {
      * @summary List fields
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof FieldsApi
      */
     public listFields(options?: RawAxiosRequestConfig) {
         return FieldsApiFp(this.configuration).listFields(options).then((request) => request(this.axios, this.basePath));
@@ -11406,7 +7706,6 @@ export class FieldsApi extends BaseAPI {
 
 /**
  * ForexApi - axios parameter creator
- * @export
  */
 export const ForexApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
@@ -11438,8 +7737,8 @@ export const ForexApiAxiosParamCreator = function (configuration?: Configuration
                 localVarQueryParameter['base'] = base;
             }
 
+            localVarHeaderParameter['Accept'] = 'application/json';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -11454,7 +7753,6 @@ export const ForexApiAxiosParamCreator = function (configuration?: Configuration
 
 /**
  * ForexApi - functional programming interface
- * @export
  */
 export const ForexApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = ForexApiAxiosParamCreator(configuration)
@@ -11477,7 +7775,6 @@ export const ForexApiFp = function(configuration?: Configuration) {
 
 /**
  * ForexApi - factory interface
- * @export
  */
 export const ForexApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
     const localVarFp = ForexApiFp(configuration)
@@ -11497,9 +7794,6 @@ export const ForexApiFactory = function (configuration?: Configuration, basePath
 
 /**
  * ForexApi - object-oriented interface
- * @export
- * @class ForexApi
- * @extends {BaseAPI}
  */
 export class ForexApi extends BaseAPI {
     /**
@@ -11508,7 +7802,6 @@ export class ForexApi extends BaseAPI {
      * @param {string} [base] Base currency code, default is USD.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof ForexApi
      */
     public listForex(base?: string, options?: RawAxiosRequestConfig) {
         return ForexApiFp(this.configuration).listForex(base, options).then((request) => request(this.axios, this.basePath));
@@ -11519,7 +7812,6 @@ export class ForexApi extends BaseAPI {
 
 /**
  * FraudReviewsApi - axios parameter creator
- * @export
  */
 export const FraudReviewsApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
@@ -11534,7 +7826,7 @@ export const FraudReviewsApiAxiosParamCreator = function (configuration?: Config
             // verify required parameter 'id' is not null or undefined
             assertParamExists('blockFraudReview', 'id', id)
             const localVarPath = `/fraud_reviews/{id}/block`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+                .replace('{id}', encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -11550,8 +7842,8 @@ export const FraudReviewsApiAxiosParamCreator = function (configuration?: Config
             // http bearer authentication required
             await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
+            localVarHeaderParameter['Accept'] = 'application/json';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -11572,7 +7864,7 @@ export const FraudReviewsApiAxiosParamCreator = function (configuration?: Config
             // verify required parameter 'id' is not null or undefined
             assertParamExists('getFraudReview', 'id', id)
             const localVarPath = `/fraud_reviews/{id}`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+                .replace('{id}', encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -11588,8 +7880,8 @@ export const FraudReviewsApiAxiosParamCreator = function (configuration?: Config
             // http bearer authentication required
             await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
+            localVarHeaderParameter['Accept'] = 'application/json';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -11657,8 +7949,8 @@ export const FraudReviewsApiAxiosParamCreator = function (configuration?: Config
                 localVarQueryParameter['redeemed_at[lte]'] = redeemedAtLte;
             }
 
+            localVarHeaderParameter['Accept'] = 'application/json';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -11679,7 +7971,7 @@ export const FraudReviewsApiAxiosParamCreator = function (configuration?: Config
             // verify required parameter 'id' is not null or undefined
             assertParamExists('releaseFraudReview', 'id', id)
             const localVarPath = `/fraud_reviews/{id}/release`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+                .replace('{id}', encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -11695,8 +7987,8 @@ export const FraudReviewsApiAxiosParamCreator = function (configuration?: Config
             // http bearer authentication required
             await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
+            localVarHeaderParameter['Accept'] = 'application/json';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -11711,7 +8003,6 @@ export const FraudReviewsApiAxiosParamCreator = function (configuration?: Config
 
 /**
  * FraudReviewsApi - functional programming interface
- * @export
  */
 export const FraudReviewsApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = FraudReviewsApiAxiosParamCreator(configuration)
@@ -11779,7 +8070,6 @@ export const FraudReviewsApiFp = function(configuration?: Configuration) {
 
 /**
  * FraudReviewsApi - factory interface
- * @export
  */
 export const FraudReviewsApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
     const localVarFp = FraudReviewsApiFp(configuration)
@@ -11835,9 +8125,6 @@ export const FraudReviewsApiFactory = function (configuration?: Configuration, b
 
 /**
  * FraudReviewsApi - object-oriented interface
- * @export
- * @class FraudReviewsApi
- * @extends {BaseAPI}
  */
 export class FraudReviewsApi extends BaseAPI {
     /**
@@ -11846,7 +8133,6 @@ export class FraudReviewsApi extends BaseAPI {
      * @param {string} id The ID of the reward that should be blocked.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof FraudReviewsApi
      */
     public blockFraudReview(id: string, options?: RawAxiosRequestConfig) {
         return FraudReviewsApiFp(this.configuration).blockFraudReview(id, options).then((request) => request(this.axios, this.basePath));
@@ -11858,7 +8144,6 @@ export class FraudReviewsApi extends BaseAPI {
      * @param {string} id The ID of the reward that should be retrieved.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof FraudReviewsApi
      */
     public getFraudReview(id: string, options?: RawAxiosRequestConfig) {
         return FraudReviewsApiFp(this.configuration).getFraudReview(id, options).then((request) => request(this.axios, this.basePath));
@@ -11876,7 +8161,6 @@ export class FraudReviewsApi extends BaseAPI {
      * @param {string} [redeemedAtLte] Return results where the redeemed_at field is &lt;&#x3D; the supplied value. Expects an ISO 8601 datetime.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof FraudReviewsApi
      */
     public listFraudReviews(offset?: number, limit?: number, status?: ListFraudReviewsStatusEnum, createdAtGte?: string, createdAtLte?: string, redeemedAtGte?: string, redeemedAtLte?: string, options?: RawAxiosRequestConfig) {
         return FraudReviewsApiFp(this.configuration).listFraudReviews(offset, limit, status, createdAtGte, createdAtLte, redeemedAtGte, redeemedAtLte, options).then((request) => request(this.axios, this.basePath));
@@ -11888,27 +8172,22 @@ export class FraudReviewsApi extends BaseAPI {
      * @param {string} id The ID of the reward that should be released.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof FraudReviewsApi
      */
     public releaseFraudReview(id: string, options?: RawAxiosRequestConfig) {
         return FraudReviewsApiFp(this.configuration).releaseFraudReview(id, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
-/**
- * @export
- */
 export const ListFraudReviewsStatusEnum = {
     Flagged: 'flagged',
     Blocked: 'blocked',
-    Released: 'released'
+    Released: 'released',
 } as const;
 export type ListFraudReviewsStatusEnum = typeof ListFraudReviewsStatusEnum[keyof typeof ListFraudReviewsStatusEnum];
 
 
 /**
  * FraudRulesApi - axios parameter creator
- * @export
  */
 export const FraudRulesApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
@@ -11923,7 +8202,7 @@ export const FraudRulesApiAxiosParamCreator = function (configuration?: Configur
             // verify required parameter 'ruleType' is not null or undefined
             assertParamExists('deleteFraudRule', 'ruleType', ruleType)
             const localVarPath = `/fraud_rules/{rule_type}`
-                .replace(`{${"rule_type"}}`, encodeURIComponent(String(ruleType)));
+                .replace('{rule_type}', encodeURIComponent(String(ruleType)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -11939,8 +8218,8 @@ export const FraudRulesApiAxiosParamCreator = function (configuration?: Configur
             // http bearer authentication required
             await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
+            localVarHeaderParameter['Accept'] = 'application/json';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -11962,7 +8241,7 @@ export const FraudRulesApiAxiosParamCreator = function (configuration?: Configur
             // verify required parameter 'ruleType' is not null or undefined
             assertParamExists('fraudRule', 'ruleType', ruleType)
             const localVarPath = `/fraud_rules/{rule_type}`
-                .replace(`{${"rule_type"}}`, encodeURIComponent(String(ruleType)));
+                .replace('{rule_type}', encodeURIComponent(String(ruleType)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -11978,9 +8257,8 @@ export const FraudRulesApiAxiosParamCreator = function (configuration?: Configur
             // http bearer authentication required
             await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
-
-    
             localVarHeaderParameter['Content-Type'] = 'application/json';
+            localVarHeaderParameter['Accept'] = 'application/json';
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
@@ -12015,8 +8293,8 @@ export const FraudRulesApiAxiosParamCreator = function (configuration?: Configur
             // http bearer authentication required
             await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
+            localVarHeaderParameter['Accept'] = 'application/json';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -12040,7 +8318,7 @@ export const FraudRulesApiAxiosParamCreator = function (configuration?: Configur
             // verify required parameter 'updateFraudRuleListRequest' is not null or undefined
             assertParamExists('updateFraudRuleList', 'updateFraudRuleListRequest', updateFraudRuleListRequest)
             const localVarPath = `/fraud_rules/{rule_type}/update_list`
-                .replace(`{${"rule_type"}}`, encodeURIComponent(String(ruleType)));
+                .replace('{rule_type}', encodeURIComponent(String(ruleType)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -12056,9 +8334,8 @@ export const FraudRulesApiAxiosParamCreator = function (configuration?: Configur
             // http bearer authentication required
             await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
-
-    
             localVarHeaderParameter['Content-Type'] = 'application/json';
+            localVarHeaderParameter['Accept'] = 'application/json';
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
@@ -12075,7 +8352,6 @@ export const FraudRulesApiAxiosParamCreator = function (configuration?: Configur
 
 /**
  * FraudRulesApi - functional programming interface
- * @export
  */
 export const FraudRulesApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = FraudRulesApiAxiosParamCreator(configuration)
@@ -12138,7 +8414,6 @@ export const FraudRulesApiFp = function(configuration?: Configuration) {
 
 /**
  * FraudRulesApi - factory interface
- * @export
  */
 export const FraudRulesApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
     const localVarFp = FraudRulesApiFp(configuration)
@@ -12189,9 +8464,6 @@ export const FraudRulesApiFactory = function (configuration?: Configuration, bas
 
 /**
  * FraudRulesApi - object-oriented interface
- * @export
- * @class FraudRulesApi
- * @extends {BaseAPI}
  */
 export class FraudRulesApi extends BaseAPI {
     /**
@@ -12200,7 +8472,6 @@ export class FraudRulesApi extends BaseAPI {
      * @param {DeleteFraudRuleRuleTypeEnum} ruleType The rule type to create or update.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof FraudRulesApi
      */
     public deleteFraudRule(ruleType: DeleteFraudRuleRuleTypeEnum, options?: RawAxiosRequestConfig) {
         return FraudRulesApiFp(this.configuration).deleteFraudRule(ruleType, options).then((request) => request(this.axios, this.basePath));
@@ -12213,7 +8484,6 @@ export class FraudRulesApi extends BaseAPI {
      * @param {FraudRuleRequest} [fraudRuleRequest] Rules &#x60;review_multiple_emails&#x60;, &#x60;review_tremendous_flaglist&#x60;, and &#x60;review_previously_blocked_recipients&#x60; require no body. &#x60;review_vpn&#x60; also accepts no body for the default behavior. Pass &#x60;config.skip_apple_private_relay&#x60; only to override whether Apple Private Relay traffic is flagged. 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof FraudRulesApi
      */
     public fraudRule(ruleType: FraudRuleRuleTypeEnum, fraudRuleRequest?: FraudRuleRequest, options?: RawAxiosRequestConfig) {
         return FraudRulesApiFp(this.configuration).fraudRule(ruleType, fraudRuleRequest, options).then((request) => request(this.axios, this.basePath));
@@ -12224,7 +8494,6 @@ export class FraudRulesApi extends BaseAPI {
      * @summary List fraud rules
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof FraudRulesApi
      */
     public listFraudRules(options?: RawAxiosRequestConfig) {
         return FraudRulesApiFp(this.configuration).listFraudRules(options).then((request) => request(this.axios, this.basePath));
@@ -12237,16 +8506,12 @@ export class FraudRulesApi extends BaseAPI {
      * @param {UpdateFraudRuleListRequest} updateFraudRuleListRequest The lists to add or remove from the current configuration
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof FraudRulesApi
      */
     public updateFraudRuleList(ruleType: UpdateFraudRuleListRuleTypeEnum, updateFraudRuleListRequest: UpdateFraudRuleListRequest, options?: RawAxiosRequestConfig) {
         return FraudRulesApiFp(this.configuration).updateFraudRuleList(ruleType, updateFraudRuleListRequest, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
-/**
- * @export
- */
 export const DeleteFraudRuleRuleTypeEnum = {
     ReviewCountry: 'review_country',
     ReviewIp: 'review_ip',
@@ -12258,12 +8523,9 @@ export const DeleteFraudRuleRuleTypeEnum = {
     ReviewTremendousFlagList: 'review_tremendous_flag_list',
     ReviewPreviouslyBlockedRecipients: 'review_previously_blocked_recipients',
     AllowIp: 'allow_ip',
-    AllowEmail: 'allow_email'
+    AllowEmail: 'allow_email',
 } as const;
 export type DeleteFraudRuleRuleTypeEnum = typeof DeleteFraudRuleRuleTypeEnum[keyof typeof DeleteFraudRuleRuleTypeEnum];
-/**
- * @export
- */
 export const FraudRuleRuleTypeEnum = {
     ReviewCountry: 'review_country',
     ReviewIp: 'review_ip',
@@ -12275,25 +8537,21 @@ export const FraudRuleRuleTypeEnum = {
     ReviewTremendousFlagList: 'review_tremendous_flag_list',
     ReviewPreviouslyBlockedRecipients: 'review_previously_blocked_recipients',
     AllowIp: 'allow_ip',
-    AllowEmail: 'allow_email'
+    AllowEmail: 'allow_email',
 } as const;
 export type FraudRuleRuleTypeEnum = typeof FraudRuleRuleTypeEnum[keyof typeof FraudRuleRuleTypeEnum];
-/**
- * @export
- */
 export const UpdateFraudRuleListRuleTypeEnum = {
     ReviewCountry: 'review_country',
     ReviewIp: 'review_ip',
     ReviewEmail: 'review_email',
     AllowIp: 'allow_ip',
-    AllowEmail: 'allow_email'
+    AllowEmail: 'allow_email',
 } as const;
 export type UpdateFraudRuleListRuleTypeEnum = typeof UpdateFraudRuleListRuleTypeEnum[keyof typeof UpdateFraudRuleListRuleTypeEnum];
 
 
 /**
  * FundingSourcesApi - axios parameter creator
- * @export
  */
 export const FundingSourcesApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
@@ -12308,7 +8566,7 @@ export const FundingSourcesApiAxiosParamCreator = function (configuration?: Conf
             // verify required parameter 'id' is not null or undefined
             assertParamExists('getFundingSource', 'id', id)
             const localVarPath = `/funding_sources/{id}`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+                .replace('{id}', encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -12324,8 +8582,8 @@ export const FundingSourcesApiAxiosParamCreator = function (configuration?: Conf
             // http bearer authentication required
             await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
+            localVarHeaderParameter['Accept'] = 'application/json';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -12358,8 +8616,8 @@ export const FundingSourcesApiAxiosParamCreator = function (configuration?: Conf
             // http bearer authentication required
             await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
+            localVarHeaderParameter['Accept'] = 'application/json';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -12374,7 +8632,6 @@ export const FundingSourcesApiAxiosParamCreator = function (configuration?: Conf
 
 /**
  * FundingSourcesApi - functional programming interface
- * @export
  */
 export const FundingSourcesApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = FundingSourcesApiAxiosParamCreator(configuration)
@@ -12409,7 +8666,6 @@ export const FundingSourcesApiFp = function(configuration?: Configuration) {
 
 /**
  * FundingSourcesApi - factory interface
- * @export
  */
 export const FundingSourcesApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
     const localVarFp = FundingSourcesApiFp(configuration)
@@ -12438,9 +8694,6 @@ export const FundingSourcesApiFactory = function (configuration?: Configuration,
 
 /**
  * FundingSourcesApi - object-oriented interface
- * @export
- * @class FundingSourcesApi
- * @extends {BaseAPI}
  */
 export class FundingSourcesApi extends BaseAPI {
     /**
@@ -12449,7 +8702,6 @@ export class FundingSourcesApi extends BaseAPI {
      * @param {string} id ID of the funding source that should be retrieved. Can also use &#x60;BALANCE&#x60; or &#x60;INVOICE&#x60; (case-insensitive) to retrieve the corresponding funding source.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof FundingSourcesApi
      */
     public getFundingSource(id: string, options?: RawAxiosRequestConfig) {
         return FundingSourcesApiFp(this.configuration).getFundingSource(id, options).then((request) => request(this.axios, this.basePath));
@@ -12460,7 +8712,6 @@ export class FundingSourcesApi extends BaseAPI {
      * @summary List funding sources
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof FundingSourcesApi
      */
     public listFundingSources(options?: RawAxiosRequestConfig) {
         return FundingSourcesApiFp(this.configuration).listFundingSources(options).then((request) => request(this.axios, this.basePath));
@@ -12471,7 +8722,6 @@ export class FundingSourcesApi extends BaseAPI {
 
 /**
  * InvoicesApi - axios parameter creator
- * @export
  */
 export const InvoicesApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
@@ -12501,9 +8751,8 @@ export const InvoicesApiAxiosParamCreator = function (configuration?: Configurat
             // http bearer authentication required
             await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
-
-    
             localVarHeaderParameter['Content-Type'] = 'application/json';
+            localVarHeaderParameter['Accept'] = 'application/json';
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
@@ -12526,7 +8775,7 @@ export const InvoicesApiAxiosParamCreator = function (configuration?: Configurat
             // verify required parameter 'id' is not null or undefined
             assertParamExists('deleteInvoices', 'id', id)
             const localVarPath = `/invoices/{id}`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+                .replace('{id}', encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -12542,8 +8791,8 @@ export const InvoicesApiAxiosParamCreator = function (configuration?: Configurat
             // http bearer authentication required
             await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
+            localVarHeaderParameter['Accept'] = 'application/json';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -12564,7 +8813,7 @@ export const InvoicesApiAxiosParamCreator = function (configuration?: Configurat
             // verify required parameter 'id' is not null or undefined
             assertParamExists('downloadInvoiceCsv', 'id', id)
             const localVarPath = `/invoices/{id}/csv`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+                .replace('{id}', encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -12580,8 +8829,8 @@ export const InvoicesApiAxiosParamCreator = function (configuration?: Configurat
             // http bearer authentication required
             await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
+            localVarHeaderParameter['Accept'] = 'text/csv,application/json';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -12602,7 +8851,7 @@ export const InvoicesApiAxiosParamCreator = function (configuration?: Configurat
             // verify required parameter 'id' is not null or undefined
             assertParamExists('downloadInvoicePdf', 'id', id)
             const localVarPath = `/invoices/{id}/pdf`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+                .replace('{id}', encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -12618,8 +8867,8 @@ export const InvoicesApiAxiosParamCreator = function (configuration?: Configurat
             // http bearer authentication required
             await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
+            localVarHeaderParameter['Accept'] = 'application/pdf,application/json';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -12640,7 +8889,7 @@ export const InvoicesApiAxiosParamCreator = function (configuration?: Configurat
             // verify required parameter 'id' is not null or undefined
             assertParamExists('getInvoice', 'id', id)
             const localVarPath = `/invoices/{id}`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+                .replace('{id}', encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -12656,8 +8905,8 @@ export const InvoicesApiAxiosParamCreator = function (configuration?: Configurat
             // http bearer authentication required
             await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
+            localVarHeaderParameter['Accept'] = 'application/json';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -12700,8 +8949,8 @@ export const InvoicesApiAxiosParamCreator = function (configuration?: Configurat
                 localVarQueryParameter['limit'] = limit;
             }
 
+            localVarHeaderParameter['Accept'] = 'application/json';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -12716,7 +8965,6 @@ export const InvoicesApiAxiosParamCreator = function (configuration?: Configurat
 
 /**
  * InvoicesApi - functional programming interface
- * @export
  */
 export const InvoicesApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = InvoicesApiAxiosParamCreator(configuration)
@@ -12805,7 +9053,6 @@ export const InvoicesApiFp = function(configuration?: Configuration) {
 
 /**
  * InvoicesApi - factory interface
- * @export
  */
 export const InvoicesApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
     const localVarFp = InvoicesApiFp(configuration)
@@ -12876,9 +9123,6 @@ export const InvoicesApiFactory = function (configuration?: Configuration, baseP
 
 /**
  * InvoicesApi - object-oriented interface
- * @export
- * @class InvoicesApi
- * @extends {BaseAPI}
  */
 export class InvoicesApi extends BaseAPI {
     /**
@@ -12887,7 +9131,6 @@ export class InvoicesApi extends BaseAPI {
      * @param {CreateInvoiceRequest} createInvoiceRequest Invoice details
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof InvoicesApi
      */
     public createInvoice(createInvoiceRequest: CreateInvoiceRequest, options?: RawAxiosRequestConfig) {
         return InvoicesApiFp(this.configuration).createInvoice(createInvoiceRequest, options).then((request) => request(this.axios, this.basePath));
@@ -12899,7 +9142,6 @@ export class InvoicesApi extends BaseAPI {
      * @param {string} id ID of the invoice that should be removed
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof InvoicesApi
      */
     public deleteInvoices(id: string, options?: RawAxiosRequestConfig) {
         return InvoicesApiFp(this.configuration).deleteInvoices(id, options).then((request) => request(this.axios, this.basePath));
@@ -12911,7 +9153,6 @@ export class InvoicesApi extends BaseAPI {
      * @param {string} id ID of the Invoice for that the CSV should be generated
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof InvoicesApi
      */
     public downloadInvoiceCsv(id: string, options?: RawAxiosRequestConfig) {
         return InvoicesApiFp(this.configuration).downloadInvoiceCsv(id, options).then((request) => request(this.axios, this.basePath));
@@ -12923,7 +9164,6 @@ export class InvoicesApi extends BaseAPI {
      * @param {string} id ID of the Invoice for that the PDF should be generated
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof InvoicesApi
      */
     public downloadInvoicePdf(id: string, options?: RawAxiosRequestConfig) {
         return InvoicesApiFp(this.configuration).downloadInvoicePdf(id, options).then((request) => request(this.axios, this.basePath));
@@ -12935,7 +9175,6 @@ export class InvoicesApi extends BaseAPI {
      * @param {string} id ID of the invoice that should be retrieved
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof InvoicesApi
      */
     public getInvoice(id: string, options?: RawAxiosRequestConfig) {
         return InvoicesApiFp(this.configuration).getInvoice(id, options).then((request) => request(this.axios, this.basePath));
@@ -12948,7 +9187,6 @@ export class InvoicesApi extends BaseAPI {
      * @param {number} [limit] Limits the number of invoices listed. The maximum and default value is 10.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof InvoicesApi
      */
     public listInvoices(offset?: number, limit?: number, options?: RawAxiosRequestConfig) {
         return InvoicesApiFp(this.configuration).listInvoices(offset, limit, options).then((request) => request(this.axios, this.basePath));
@@ -12959,7 +9197,6 @@ export class InvoicesApi extends BaseAPI {
 
 /**
  * MembersApi - axios parameter creator
- * @export
  */
 export const MembersApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
@@ -12989,9 +9226,8 @@ export const MembersApiAxiosParamCreator = function (configuration?: Configurati
             // http bearer authentication required
             await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
-
-    
             localVarHeaderParameter['Content-Type'] = 'application/json';
+            localVarHeaderParameter['Accept'] = 'application/json';
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
@@ -13014,7 +9250,7 @@ export const MembersApiAxiosParamCreator = function (configuration?: Configurati
             // verify required parameter 'id' is not null or undefined
             assertParamExists('deleteMember', 'id', id)
             const localVarPath = `/members/{id}`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+                .replace('{id}', encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -13030,8 +9266,8 @@ export const MembersApiAxiosParamCreator = function (configuration?: Configurati
             // http bearer authentication required
             await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
+            localVarHeaderParameter['Accept'] = 'application/json';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -13052,7 +9288,7 @@ export const MembersApiAxiosParamCreator = function (configuration?: Configurati
             // verify required parameter 'id' is not null or undefined
             assertParamExists('getMember', 'id', id)
             const localVarPath = `/members/{id}`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+                .replace('{id}', encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -13068,8 +9304,8 @@ export const MembersApiAxiosParamCreator = function (configuration?: Configurati
             // http bearer authentication required
             await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
+            localVarHeaderParameter['Accept'] = 'application/json';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -13102,8 +9338,8 @@ export const MembersApiAxiosParamCreator = function (configuration?: Configurati
             // http bearer authentication required
             await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
+            localVarHeaderParameter['Accept'] = 'application/json';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -13127,7 +9363,7 @@ export const MembersApiAxiosParamCreator = function (configuration?: Configurati
             // verify required parameter 'updateMemberRequest' is not null or undefined
             assertParamExists('updateMember', 'updateMemberRequest', updateMemberRequest)
             const localVarPath = `/members/{id}`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+                .replace('{id}', encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -13143,9 +9379,8 @@ export const MembersApiAxiosParamCreator = function (configuration?: Configurati
             // http bearer authentication required
             await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
-
-    
             localVarHeaderParameter['Content-Type'] = 'application/json';
+            localVarHeaderParameter['Accept'] = 'application/json';
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
@@ -13162,7 +9397,6 @@ export const MembersApiAxiosParamCreator = function (configuration?: Configurati
 
 /**
  * MembersApi - functional programming interface
- * @export
  */
 export const MembersApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = MembersApiAxiosParamCreator(configuration)
@@ -13237,7 +9471,6 @@ export const MembersApiFp = function(configuration?: Configuration) {
 
 /**
  * MembersApi - factory interface
- * @export
  */
 export const MembersApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
     const localVarFp = MembersApiFp(configuration)
@@ -13297,9 +9530,6 @@ export const MembersApiFactory = function (configuration?: Configuration, basePa
 
 /**
  * MembersApi - object-oriented interface
- * @export
- * @class MembersApi
- * @extends {BaseAPI}
  */
 export class MembersApi extends BaseAPI {
     /**
@@ -13308,7 +9538,6 @@ export class MembersApi extends BaseAPI {
      * @param {CreateMemberRequest} createMemberRequest Member details
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof MembersApi
      */
     public createMember(createMemberRequest: CreateMemberRequest, options?: RawAxiosRequestConfig) {
         return MembersApiFp(this.configuration).createMember(createMemberRequest, options).then((request) => request(this.axios, this.basePath));
@@ -13320,7 +9549,6 @@ export class MembersApi extends BaseAPI {
      * @param {string} id ID of the member to delete
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof MembersApi
      */
     public deleteMember(id: string, options?: RawAxiosRequestConfig) {
         return MembersApiFp(this.configuration).deleteMember(id, options).then((request) => request(this.axios, this.basePath));
@@ -13332,7 +9560,6 @@ export class MembersApi extends BaseAPI {
      * @param {string} id ID of the member to retrieve
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof MembersApi
      */
     public getMember(id: string, options?: RawAxiosRequestConfig) {
         return MembersApiFp(this.configuration).getMember(id, options).then((request) => request(this.axios, this.basePath));
@@ -13343,7 +9570,6 @@ export class MembersApi extends BaseAPI {
      * @summary List members
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof MembersApi
      */
     public listMembers(options?: RawAxiosRequestConfig) {
         return MembersApiFp(this.configuration).listMembers(options).then((request) => request(this.axios, this.basePath));
@@ -13356,7 +9582,6 @@ export class MembersApi extends BaseAPI {
      * @param {UpdateMemberRequest} updateMemberRequest Attributes to update on the member
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof MembersApi
      */
     public updateMember(id: string, updateMemberRequest: UpdateMemberRequest, options?: RawAxiosRequestConfig) {
         return MembersApiFp(this.configuration).updateMember(id, updateMemberRequest, options).then((request) => request(this.axios, this.basePath));
@@ -13367,7 +9592,6 @@ export class MembersApi extends BaseAPI {
 
 /**
  * OrdersApi - axios parameter creator
- * @export
  */
 export const OrdersApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
@@ -13382,7 +9606,7 @@ export const OrdersApiAxiosParamCreator = function (configuration?: Configuratio
             // verify required parameter 'id' is not null or undefined
             assertParamExists('approveOrder', 'id', id)
             const localVarPath = `/order_approvals/{id}/approve`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+                .replace('{id}', encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -13398,8 +9622,8 @@ export const OrdersApiAxiosParamCreator = function (configuration?: Configuratio
             // http bearer authentication required
             await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
+            localVarHeaderParameter['Accept'] = 'application/json';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -13435,9 +9659,8 @@ export const OrdersApiAxiosParamCreator = function (configuration?: Configuratio
             // http bearer authentication required
             await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
-
-    
             localVarHeaderParameter['Content-Type'] = 'application/json';
+            localVarHeaderParameter['Accept'] = 'application/json';
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
@@ -13460,7 +9683,7 @@ export const OrdersApiAxiosParamCreator = function (configuration?: Configuratio
             // verify required parameter 'id' is not null or undefined
             assertParamExists('getOrder', 'id', id)
             const localVarPath = `/orders/{id}`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+                .replace('{id}', encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -13476,8 +9699,8 @@ export const OrdersApiAxiosParamCreator = function (configuration?: Configuratio
             // http bearer authentication required
             await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
+            localVarHeaderParameter['Accept'] = 'application/json';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -13540,8 +9763,8 @@ export const OrdersApiAxiosParamCreator = function (configuration?: Configuratio
                 localVarQueryParameter['limit'] = limit;
             }
 
+            localVarHeaderParameter['Accept'] = 'application/json';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -13562,7 +9785,7 @@ export const OrdersApiAxiosParamCreator = function (configuration?: Configuratio
             // verify required parameter 'id' is not null or undefined
             assertParamExists('rejectOrder', 'id', id)
             const localVarPath = `/order_approvals/{id}/reject`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+                .replace('{id}', encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -13578,8 +9801,8 @@ export const OrdersApiAxiosParamCreator = function (configuration?: Configuratio
             // http bearer authentication required
             await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
+            localVarHeaderParameter['Accept'] = 'application/json';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -13594,7 +9817,6 @@ export const OrdersApiAxiosParamCreator = function (configuration?: Configuratio
 
 /**
  * OrdersApi - functional programming interface
- * @export
  */
 export const OrdersApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = OrdersApiAxiosParamCreator(configuration)
@@ -13674,7 +9896,6 @@ export const OrdersApiFp = function(configuration?: Configuration) {
 
 /**
  * OrdersApi - factory interface
- * @export
  */
 export const OrdersApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
     const localVarFp = OrdersApiFp(configuration)
@@ -13739,9 +9960,6 @@ export const OrdersApiFactory = function (configuration?: Configuration, basePat
 
 /**
  * OrdersApi - object-oriented interface
- * @export
- * @class OrdersApi
- * @extends {BaseAPI}
  */
 export class OrdersApi extends BaseAPI {
     /**
@@ -13750,7 +9968,6 @@ export class OrdersApi extends BaseAPI {
      * @param {string} id ID of the order that should be approved. In case the order has an &#x60;external_id&#x60; reference supplied by the customer on creation, it\&#39;s possible to use it instead.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof OrdersApi
      */
     public approveOrder(id: string, options?: RawAxiosRequestConfig) {
         return OrdersApiFp(this.configuration).approveOrder(id, options).then((request) => request(this.axios, this.basePath));
@@ -13762,7 +9979,6 @@ export class OrdersApi extends BaseAPI {
      * @param {CreateOrderRequest} createOrderRequest Order to create
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof OrdersApi
      */
     public createOrder(createOrderRequest: CreateOrderRequest, options?: RawAxiosRequestConfig) {
         return OrdersApiFp(this.configuration).createOrder(createOrderRequest, options).then((request) => request(this.axios, this.basePath));
@@ -13774,7 +9990,6 @@ export class OrdersApi extends BaseAPI {
      * @param {string} id ID of the order that should be retrieved. In case the order has an &#x60;external_id&#x60; reference supplied by the customer on creation, it\&#39;s possible to use it instead. 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof OrdersApi
      */
     public getOrder(id: string, options?: RawAxiosRequestConfig) {
         return OrdersApiFp(this.configuration).getOrder(id, options).then((request) => request(this.axios, this.basePath));
@@ -13791,7 +10006,6 @@ export class OrdersApi extends BaseAPI {
      * @param {number} [limit] Limits the number of orders listed. The maximum value is 500 and the default is 10.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof OrdersApi
      */
     public listOrders(offset?: number, campaignId?: string, externalId?: string, createdAtGte?: string, createdAtLte?: string, limit?: number, options?: RawAxiosRequestConfig) {
         return OrdersApiFp(this.configuration).listOrders(offset, campaignId, externalId, createdAtGte, createdAtLte, limit, options).then((request) => request(this.axios, this.basePath));
@@ -13803,7 +10017,6 @@ export class OrdersApi extends BaseAPI {
      * @param {string} id ID of the order that should be rejected. In case the order has an &#x60;external_id&#x60; reference supplied by the customer on creation, it\&#39;s possible to use it instead.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof OrdersApi
      */
     public rejectOrder(id: string, options?: RawAxiosRequestConfig) {
         return OrdersApiFp(this.configuration).rejectOrder(id, options).then((request) => request(this.axios, this.basePath));
@@ -13814,7 +10027,6 @@ export class OrdersApi extends BaseAPI {
 
 /**
  * OrganizationsApi - axios parameter creator
- * @export
  */
 export const OrganizationsApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
@@ -13842,9 +10054,8 @@ export const OrganizationsApiAxiosParamCreator = function (configuration?: Confi
             // http bearer authentication required
             await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
-
-    
             localVarHeaderParameter['Content-Type'] = 'application/json';
+            localVarHeaderParameter['Accept'] = 'application/json';
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
@@ -13882,9 +10093,8 @@ export const OrganizationsApiAxiosParamCreator = function (configuration?: Confi
             // http bearer authentication required
             await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
-
-    
             localVarHeaderParameter['Content-Type'] = 'application/json';
+            localVarHeaderParameter['Accept'] = 'application/json';
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
@@ -13907,7 +10117,7 @@ export const OrganizationsApiAxiosParamCreator = function (configuration?: Confi
             // verify required parameter 'id' is not null or undefined
             assertParamExists('getOrganization', 'id', id)
             const localVarPath = `/organizations/{id}`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+                .replace('{id}', encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -13923,8 +10133,8 @@ export const OrganizationsApiAxiosParamCreator = function (configuration?: Confi
             // http bearer authentication required
             await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
+            localVarHeaderParameter['Accept'] = 'application/json';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -13957,8 +10167,8 @@ export const OrganizationsApiAxiosParamCreator = function (configuration?: Confi
             // http bearer authentication required
             await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
+            localVarHeaderParameter['Accept'] = 'application/json';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -13973,7 +10183,6 @@ export const OrganizationsApiAxiosParamCreator = function (configuration?: Confi
 
 /**
  * OrganizationsApi - functional programming interface
- * @export
  */
 export const OrganizationsApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = OrganizationsApiAxiosParamCreator(configuration)
@@ -14034,7 +10243,6 @@ export const OrganizationsApiFp = function(configuration?: Configuration) {
 
 /**
  * OrganizationsApi - factory interface
- * @export
  */
 export const OrganizationsApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
     const localVarFp = OrganizationsApiFp(configuration)
@@ -14083,9 +10291,6 @@ export const OrganizationsApiFactory = function (configuration?: Configuration, 
 
 /**
  * OrganizationsApi - object-oriented interface
- * @export
- * @class OrganizationsApi
- * @extends {BaseAPI}
  */
 export class OrganizationsApi extends BaseAPI {
     /**
@@ -14094,7 +10299,6 @@ export class OrganizationsApi extends BaseAPI {
      * @param {CreateApiKeyRequest} [createApiKeyRequest] Optional settings for the new API key
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof OrganizationsApi
      */
     public createApiKey(createApiKeyRequest?: CreateApiKeyRequest, options?: RawAxiosRequestConfig) {
         return OrganizationsApiFp(this.configuration).createApiKey(createApiKeyRequest, options).then((request) => request(this.axios, this.basePath));
@@ -14106,7 +10310,6 @@ export class OrganizationsApi extends BaseAPI {
      * @param {CreateOrganizationRequest} createOrganizationRequest Organization details
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof OrganizationsApi
      */
     public createOrganization(createOrganizationRequest: CreateOrganizationRequest, options?: RawAxiosRequestConfig) {
         return OrganizationsApiFp(this.configuration).createOrganization(createOrganizationRequest, options).then((request) => request(this.axios, this.basePath));
@@ -14118,7 +10321,6 @@ export class OrganizationsApi extends BaseAPI {
      * @param {string} id ID of the organization to retrieve
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof OrganizationsApi
      */
     public getOrganization(id: string, options?: RawAxiosRequestConfig) {
         return OrganizationsApiFp(this.configuration).getOrganization(id, options).then((request) => request(this.axios, this.basePath));
@@ -14129,7 +10331,6 @@ export class OrganizationsApi extends BaseAPI {
      * @summary List organizations
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof OrganizationsApi
      */
     public listOrganizations(options?: RawAxiosRequestConfig) {
         return OrganizationsApiFp(this.configuration).listOrganizations(options).then((request) => request(this.axios, this.basePath));
@@ -14140,7 +10341,6 @@ export class OrganizationsApi extends BaseAPI {
 
 /**
  * ProductsApi - axios parameter creator
- * @export
  */
 export const ProductsApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
@@ -14155,7 +10355,7 @@ export const ProductsApiAxiosParamCreator = function (configuration?: Configurat
             // verify required parameter 'id' is not null or undefined
             assertParamExists('getProduct', 'id', id)
             const localVarPath = `/products/{id}`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+                .replace('{id}', encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -14171,8 +10371,8 @@ export const ProductsApiAxiosParamCreator = function (configuration?: Configurat
             // http bearer authentication required
             await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
+            localVarHeaderParameter['Accept'] = 'application/json';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -14225,8 +10425,8 @@ export const ProductsApiAxiosParamCreator = function (configuration?: Configurat
                 localVarQueryParameter['subcategory'] = subcategory;
             }
 
+            localVarHeaderParameter['Accept'] = 'application/json';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -14241,7 +10441,6 @@ export const ProductsApiAxiosParamCreator = function (configuration?: Configurat
 
 /**
  * ProductsApi - functional programming interface
- * @export
  */
 export const ProductsApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = ProductsApiAxiosParamCreator(configuration)
@@ -14280,7 +10479,6 @@ export const ProductsApiFp = function(configuration?: Configuration) {
 
 /**
  * ProductsApi - factory interface
- * @export
  */
 export const ProductsApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
     const localVarFp = ProductsApiFp(configuration)
@@ -14313,9 +10511,6 @@ export const ProductsApiFactory = function (configuration?: Configuration, baseP
 
 /**
  * ProductsApi - object-oriented interface
- * @export
- * @class ProductsApi
- * @extends {BaseAPI}
  */
 export class ProductsApi extends BaseAPI {
     /**
@@ -14324,7 +10519,6 @@ export class ProductsApi extends BaseAPI {
      * @param {string} id ID of the product that should be retrieved
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof ProductsApi
      */
     public getProduct(id: string, options?: RawAxiosRequestConfig) {
         return ProductsApiFp(this.configuration).getProduct(id, options).then((request) => request(this.axios, this.basePath));
@@ -14339,7 +10533,6 @@ export class ProductsApi extends BaseAPI {
      * @param {string} [subcategory] Comma-separated list of [subcategories](https://developers.tremendous.com/reference/obj-schema-products-1), used to only retrieve products with the provided subcategories
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof ProductsApi
      */
     public listProducts(id?: string, country?: string, currency?: string, subcategory?: string, options?: RawAxiosRequestConfig) {
         return ProductsApiFp(this.configuration).listProducts(id, country, currency, subcategory, options).then((request) => request(this.axios, this.basePath));
@@ -14350,7 +10543,6 @@ export class ProductsApi extends BaseAPI {
 
 /**
  * ReportsApi - axios parameter creator
- * @export
  */
 export const ReportsApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
@@ -14380,9 +10572,8 @@ export const ReportsApiAxiosParamCreator = function (configuration?: Configurati
             // http bearer authentication required
             await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
-
-    
             localVarHeaderParameter['Content-Type'] = 'application/json';
+            localVarHeaderParameter['Accept'] = 'application/json';
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
@@ -14405,7 +10596,7 @@ export const ReportsApiAxiosParamCreator = function (configuration?: Configurati
             // verify required parameter 'id' is not null or undefined
             assertParamExists('getReport', 'id', id)
             const localVarPath = `/reports/{id}`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+                .replace('{id}', encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -14421,8 +10612,8 @@ export const ReportsApiAxiosParamCreator = function (configuration?: Configurati
             // http bearer authentication required
             await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
+            localVarHeaderParameter['Accept'] = 'application/json';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -14437,7 +10628,6 @@ export const ReportsApiAxiosParamCreator = function (configuration?: Configurati
 
 /**
  * ReportsApi - functional programming interface
- * @export
  */
 export const ReportsApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = ReportsApiAxiosParamCreator(configuration)
@@ -14473,7 +10663,6 @@ export const ReportsApiFp = function(configuration?: Configuration) {
 
 /**
  * ReportsApi - factory interface
- * @export
  */
 export const ReportsApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
     const localVarFp = ReportsApiFp(configuration)
@@ -14503,9 +10692,6 @@ export const ReportsApiFactory = function (configuration?: Configuration, basePa
 
 /**
  * ReportsApi - object-oriented interface
- * @export
- * @class ReportsApi
- * @extends {BaseAPI}
  */
 export class ReportsApi extends BaseAPI {
     /**
@@ -14514,7 +10700,6 @@ export class ReportsApi extends BaseAPI {
      * @param {CreateReportRequest} createReportRequest Report to create
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof ReportsApi
      */
     public createReport(createReportRequest: CreateReportRequest, options?: RawAxiosRequestConfig) {
         return ReportsApiFp(this.configuration).createReport(createReportRequest, options).then((request) => request(this.axios, this.basePath));
@@ -14526,7 +10711,6 @@ export class ReportsApi extends BaseAPI {
      * @param {string} id ID of the report that should be retrieved. ID is returned from &#x60;POST&#x60; to /api/v2/reports 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof ReportsApi
      */
     public getReport(id: string, options?: RawAxiosRequestConfig) {
         return ReportsApiFp(this.configuration).getReport(id, options).then((request) => request(this.axios, this.basePath));
@@ -14537,7 +10721,6 @@ export class ReportsApi extends BaseAPI {
 
 /**
  * RewardsApi - axios parameter creator
- * @export
  */
 export const RewardsApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
@@ -14552,7 +10735,7 @@ export const RewardsApiAxiosParamCreator = function (configuration?: Configurati
             // verify required parameter 'id' is not null or undefined
             assertParamExists('cancelReward', 'id', id)
             const localVarPath = `/rewards/{id}/cancel`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+                .replace('{id}', encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -14568,8 +10751,8 @@ export const RewardsApiAxiosParamCreator = function (configuration?: Configurati
             // http bearer authentication required
             await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
+            localVarHeaderParameter['Accept'] = 'application/json';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -14590,7 +10773,7 @@ export const RewardsApiAxiosParamCreator = function (configuration?: Configurati
             // verify required parameter 'id' is not null or undefined
             assertParamExists('generateRewardLink', 'id', id)
             const localVarPath = `/rewards/{id}/generate_link`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+                .replace('{id}', encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -14606,8 +10789,8 @@ export const RewardsApiAxiosParamCreator = function (configuration?: Configurati
             // http bearer authentication required
             await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
+            localVarHeaderParameter['Accept'] = 'application/json';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -14628,7 +10811,7 @@ export const RewardsApiAxiosParamCreator = function (configuration?: Configurati
             // verify required parameter 'id' is not null or undefined
             assertParamExists('getReward', 'id', id)
             const localVarPath = `/rewards/{id}`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+                .replace('{id}', encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -14644,8 +10827,8 @@ export const RewardsApiAxiosParamCreator = function (configuration?: Configurati
             // http bearer authentication required
             await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
+            localVarHeaderParameter['Accept'] = 'application/json';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -14688,8 +10871,8 @@ export const RewardsApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['limit'] = limit;
             }
 
+            localVarHeaderParameter['Accept'] = 'application/json';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -14711,7 +10894,7 @@ export const RewardsApiAxiosParamCreator = function (configuration?: Configurati
             // verify required parameter 'id' is not null or undefined
             assertParamExists('resendReward', 'id', id)
             const localVarPath = `/rewards/{id}/resend`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+                .replace('{id}', encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -14727,9 +10910,8 @@ export const RewardsApiAxiosParamCreator = function (configuration?: Configurati
             // http bearer authentication required
             await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
-
-    
             localVarHeaderParameter['Content-Type'] = 'application/json';
+            localVarHeaderParameter['Accept'] = 'application/json';
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
@@ -14746,7 +10928,6 @@ export const RewardsApiAxiosParamCreator = function (configuration?: Configurati
 
 /**
  * RewardsApi - functional programming interface
- * @export
  */
 export const RewardsApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = RewardsApiAxiosParamCreator(configuration)
@@ -14823,7 +11004,6 @@ export const RewardsApiFp = function(configuration?: Configuration) {
 
 /**
  * RewardsApi - factory interface
- * @export
  */
 export const RewardsApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
     const localVarFp = RewardsApiFp(configuration)
@@ -14885,9 +11065,6 @@ export const RewardsApiFactory = function (configuration?: Configuration, basePa
 
 /**
  * RewardsApi - object-oriented interface
- * @export
- * @class RewardsApi
- * @extends {BaseAPI}
  */
 export class RewardsApi extends BaseAPI {
     /**
@@ -14896,7 +11073,6 @@ export class RewardsApi extends BaseAPI {
      * @param {string} id ID of the reward that should be canceled
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof RewardsApi
      */
     public cancelReward(id: string, options?: RawAxiosRequestConfig) {
         return RewardsApiFp(this.configuration).cancelReward(id, options).then((request) => request(this.axios, this.basePath));
@@ -14908,7 +11084,6 @@ export class RewardsApi extends BaseAPI {
      * @param {string} id ID of the reward
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof RewardsApi
      */
     public generateRewardLink(id: string, options?: RawAxiosRequestConfig) {
         return RewardsApiFp(this.configuration).generateRewardLink(id, options).then((request) => request(this.axios, this.basePath));
@@ -14920,7 +11095,6 @@ export class RewardsApi extends BaseAPI {
      * @param {string} id ID of the reward that should be retrieved
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof RewardsApi
      */
     public getReward(id: string, options?: RawAxiosRequestConfig) {
         return RewardsApiFp(this.configuration).getReward(id, options).then((request) => request(this.axios, this.basePath));
@@ -14933,7 +11107,6 @@ export class RewardsApi extends BaseAPI {
      * @param {number} [limit] Limits the number of rewards listed. The maximum value is 500 and the default is 100.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof RewardsApi
      */
     public listRewards(offset?: number, limit?: number, options?: RawAxiosRequestConfig) {
         return RewardsApiFp(this.configuration).listRewards(offset, limit, options).then((request) => request(this.axios, this.basePath));
@@ -14946,7 +11119,6 @@ export class RewardsApi extends BaseAPI {
      * @param {ResendRewardRequest} [resendRewardRequest] You can update the email or phone number used for the resend. You can only provide one of &#x60;updated_email&#x60; or &#x60;updated_phone&#x60;, not both. 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof RewardsApi
      */
     public resendReward(id: string, resendRewardRequest?: ResendRewardRequest, options?: RawAxiosRequestConfig) {
         return RewardsApiFp(this.configuration).resendReward(id, resendRewardRequest, options).then((request) => request(this.axios, this.basePath));
@@ -14957,7 +11129,6 @@ export class RewardsApi extends BaseAPI {
 
 /**
  * RolesApi - axios parameter creator
- * @export
  */
 export const RolesApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
@@ -14984,8 +11155,8 @@ export const RolesApiAxiosParamCreator = function (configuration?: Configuration
             // http bearer authentication required
             await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
+            localVarHeaderParameter['Accept'] = 'application/json';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -15000,7 +11171,6 @@ export const RolesApiAxiosParamCreator = function (configuration?: Configuration
 
 /**
  * RolesApi - functional programming interface
- * @export
  */
 export const RolesApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = RolesApiAxiosParamCreator(configuration)
@@ -15022,7 +11192,6 @@ export const RolesApiFp = function(configuration?: Configuration) {
 
 /**
  * RolesApi - factory interface
- * @export
  */
 export const RolesApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
     const localVarFp = RolesApiFp(configuration)
@@ -15041,9 +11210,6 @@ export const RolesApiFactory = function (configuration?: Configuration, basePath
 
 /**
  * RolesApi - object-oriented interface
- * @export
- * @class RolesApi
- * @extends {BaseAPI}
  */
 export class RolesApi extends BaseAPI {
     /**
@@ -15051,7 +11217,6 @@ export class RolesApi extends BaseAPI {
      * @summary List roles
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof RolesApi
      */
     public listRoles(options?: RawAxiosRequestConfig) {
         return RolesApiFp(this.configuration).listRoles(options).then((request) => request(this.axios, this.basePath));
@@ -15062,7 +11227,6 @@ export class RolesApi extends BaseAPI {
 
 /**
  * TopupsApi - axios parameter creator
- * @export
  */
 export const TopupsApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
@@ -15090,9 +11254,8 @@ export const TopupsApiAxiosParamCreator = function (configuration?: Configuratio
             // http bearer authentication required
             await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
-
-    
             localVarHeaderParameter['Content-Type'] = 'application/json';
+            localVarHeaderParameter['Accept'] = 'application/json';
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
@@ -15115,7 +11278,7 @@ export const TopupsApiAxiosParamCreator = function (configuration?: Configuratio
             // verify required parameter 'id' is not null or undefined
             assertParamExists('getTopup', 'id', id)
             const localVarPath = `/topups/{id}`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+                .replace('{id}', encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -15131,8 +11294,8 @@ export const TopupsApiAxiosParamCreator = function (configuration?: Configuratio
             // http bearer authentication required
             await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
+            localVarHeaderParameter['Accept'] = 'application/json';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -15170,8 +11333,8 @@ export const TopupsApiAxiosParamCreator = function (configuration?: Configuratio
                 localVarQueryParameter['offset'] = offset;
             }
 
+            localVarHeaderParameter['Accept'] = 'application/json';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -15186,7 +11349,6 @@ export const TopupsApiAxiosParamCreator = function (configuration?: Configuratio
 
 /**
  * TopupsApi - functional programming interface
- * @export
  */
 export const TopupsApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = TopupsApiAxiosParamCreator(configuration)
@@ -15235,7 +11397,6 @@ export const TopupsApiFp = function(configuration?: Configuration) {
 
 /**
  * TopupsApi - factory interface
- * @export
  */
 export const TopupsApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
     const localVarFp = TopupsApiFp(configuration)
@@ -15275,9 +11436,6 @@ export const TopupsApiFactory = function (configuration?: Configuration, basePat
 
 /**
  * TopupsApi - object-oriented interface
- * @export
- * @class TopupsApi
- * @extends {BaseAPI}
  */
 export class TopupsApi extends BaseAPI {
     /**
@@ -15286,7 +11444,6 @@ export class TopupsApi extends BaseAPI {
      * @param {CreateTopupRequest} [createTopupRequest] Parameters required to create a new topup. The &#x60;idempotency_key&#x60; should be unique for each request.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof TopupsApi
      */
     public createTopup(createTopupRequest?: CreateTopupRequest, options?: RawAxiosRequestConfig) {
         return TopupsApiFp(this.configuration).createTopup(createTopupRequest, options).then((request) => request(this.axios, this.basePath));
@@ -15298,7 +11455,6 @@ export class TopupsApi extends BaseAPI {
      * @param {string} id ID of the topup request that should be retrieved
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof TopupsApi
      */
     public getTopup(id: string, options?: RawAxiosRequestConfig) {
         return TopupsApiFp(this.configuration).getTopup(id, options).then((request) => request(this.axios, this.basePath));
@@ -15310,7 +11466,6 @@ export class TopupsApi extends BaseAPI {
      * @param {number} [offset] Offsets the returned list by the given number of topups. The returned topups are ordered and offset by their creation date (DESC).
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof TopupsApi
      */
     public listTopups(offset?: number, options?: RawAxiosRequestConfig) {
         return TopupsApiFp(this.configuration).listTopups(offset, options).then((request) => request(this.axios, this.basePath));
@@ -15321,7 +11476,6 @@ export class TopupsApi extends BaseAPI {
 
 /**
  * WebhooksApi - axios parameter creator
- * @export
  */
 export const WebhooksApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
@@ -15351,9 +11505,8 @@ export const WebhooksApiAxiosParamCreator = function (configuration?: Configurat
             // http bearer authentication required
             await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
-
-    
             localVarHeaderParameter['Content-Type'] = 'application/json';
+            localVarHeaderParameter['Accept'] = 'application/json';
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
@@ -15376,7 +11529,7 @@ export const WebhooksApiAxiosParamCreator = function (configuration?: Configurat
             // verify required parameter 'id' is not null or undefined
             assertParamExists('deleteWebhook', 'id', id)
             const localVarPath = `/webhooks/{id}`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+                .replace('{id}', encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -15392,8 +11545,8 @@ export const WebhooksApiAxiosParamCreator = function (configuration?: Configurat
             // http bearer authentication required
             await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
+            localVarHeaderParameter['Accept'] = 'application/json';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -15414,7 +11567,7 @@ export const WebhooksApiAxiosParamCreator = function (configuration?: Configurat
             // verify required parameter 'id' is not null or undefined
             assertParamExists('getWebhook', 'id', id)
             const localVarPath = `/webhooks/{id}`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+                .replace('{id}', encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -15430,8 +11583,8 @@ export const WebhooksApiAxiosParamCreator = function (configuration?: Configurat
             // http bearer authentication required
             await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
+            localVarHeaderParameter['Accept'] = 'application/json';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -15452,7 +11605,7 @@ export const WebhooksApiAxiosParamCreator = function (configuration?: Configurat
             // verify required parameter 'id' is not null or undefined
             assertParamExists('listWebhookEvents', 'id', id)
             const localVarPath = `/webhooks/{id}/events`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+                .replace('{id}', encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -15468,8 +11621,8 @@ export const WebhooksApiAxiosParamCreator = function (configuration?: Configurat
             // http bearer authentication required
             await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
+            localVarHeaderParameter['Accept'] = 'application/json';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -15502,8 +11655,8 @@ export const WebhooksApiAxiosParamCreator = function (configuration?: Configurat
             // http bearer authentication required
             await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
+            localVarHeaderParameter['Accept'] = 'application/json';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -15527,7 +11680,7 @@ export const WebhooksApiAxiosParamCreator = function (configuration?: Configurat
             // verify required parameter 'simulateWebhookRequest' is not null or undefined
             assertParamExists('simulateWebhook', 'simulateWebhookRequest', simulateWebhookRequest)
             const localVarPath = `/webhooks/{id}/simulate`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+                .replace('{id}', encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -15543,9 +11696,8 @@ export const WebhooksApiAxiosParamCreator = function (configuration?: Configurat
             // http bearer authentication required
             await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
-
-    
             localVarHeaderParameter['Content-Type'] = 'application/json';
+            localVarHeaderParameter['Accept'] = 'text/html,application/json';
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
@@ -15562,7 +11714,6 @@ export const WebhooksApiAxiosParamCreator = function (configuration?: Configurat
 
 /**
  * WebhooksApi - functional programming interface
- * @export
  */
 export const WebhooksApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = WebhooksApiAxiosParamCreator(configuration)
@@ -15650,7 +11801,6 @@ export const WebhooksApiFp = function(configuration?: Configuration) {
 
 /**
  * WebhooksApi - factory interface
- * @export
  */
 export const WebhooksApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
     const localVarFp = WebhooksApiFp(configuration)
@@ -15720,9 +11870,6 @@ export const WebhooksApiFactory = function (configuration?: Configuration, baseP
 
 /**
  * WebhooksApi - object-oriented interface
- * @export
- * @class WebhooksApi
- * @extends {BaseAPI}
  */
 export class WebhooksApi extends BaseAPI {
     /**
@@ -15731,7 +11878,6 @@ export class WebhooksApi extends BaseAPI {
      * @param {CreateWebhookRequest} createWebhookRequest Webhook details
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof WebhooksApi
      */
     public createWebhook(createWebhookRequest: CreateWebhookRequest, options?: RawAxiosRequestConfig) {
         return WebhooksApiFp(this.configuration).createWebhook(createWebhookRequest, options).then((request) => request(this.axios, this.basePath));
@@ -15743,7 +11889,6 @@ export class WebhooksApi extends BaseAPI {
      * @param {string} id ID of the webhook to delete
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof WebhooksApi
      */
     public deleteWebhook(id: string, options?: RawAxiosRequestConfig) {
         return WebhooksApiFp(this.configuration).deleteWebhook(id, options).then((request) => request(this.axios, this.basePath));
@@ -15755,7 +11900,6 @@ export class WebhooksApi extends BaseAPI {
      * @param {string} id ID of the webhook to retrieve
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof WebhooksApi
      */
     public getWebhook(id: string, options?: RawAxiosRequestConfig) {
         return WebhooksApiFp(this.configuration).getWebhook(id, options).then((request) => request(this.axios, this.basePath));
@@ -15767,7 +11911,6 @@ export class WebhooksApi extends BaseAPI {
      * @param {string} id ID of the webhook to list the events for
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof WebhooksApi
      */
     public listWebhookEvents(id: string, options?: RawAxiosRequestConfig) {
         return WebhooksApiFp(this.configuration).listWebhookEvents(id, options).then((request) => request(this.axios, this.basePath));
@@ -15778,7 +11921,6 @@ export class WebhooksApi extends BaseAPI {
      * @summary List webhooks
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof WebhooksApi
      */
     public listWebhooks(options?: RawAxiosRequestConfig) {
         return WebhooksApiFp(this.configuration).listWebhooks(options).then((request) => request(this.axios, this.basePath));
@@ -15791,7 +11933,6 @@ export class WebhooksApi extends BaseAPI {
      * @param {SimulateWebhookRequest} simulateWebhookRequest Webhook details
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof WebhooksApi
      */
     public simulateWebhook(id: string, simulateWebhookRequest: SimulateWebhookRequest, options?: RawAxiosRequestConfig) {
         return WebhooksApiFp(this.configuration).simulateWebhook(id, simulateWebhookRequest, options).then((request) => request(this.axios, this.basePath));

@@ -1,5 +1,4 @@
 /* tslint:disable */
-/* eslint-disable */
 /**
  * API Endpoints
  * Deliver monetary rewards and incentives to employees, customers, survey participants, and more through the Tremendous API. For organizational tasks, like managing your organization and its members within Tremendous, please see the Tremendous Organizational API.
@@ -12,8 +11,7 @@
  * Do not edit the class manually.
  */
 
-
-// Edited by Tremendous, lines 6-7, 85-86: Add custom User Agent with lib's version.
+// Edited by Tremendous, lines 5-6, 100-101: Add custom User Agent with lib's version.
 const { version } = require("../package.json");
 const DefaultUserAgent = `Tremendous Node v${version}`;
 
@@ -32,49 +30,32 @@ export class Configuration {
     /**
      * parameter for apiKey security
      * @param name security name
-     * @memberof Configuration
      */
     apiKey?: string | Promise<string> | ((name: string) => string) | ((name: string) => Promise<string>);
     /**
      * parameter for basic security
-     *
-     * @type {string}
-     * @memberof Configuration
      */
     username?: string;
     /**
      * parameter for basic security
-     *
-     * @type {string}
-     * @memberof Configuration
      */
     password?: string;
     /**
      * parameter for oauth2 security
      * @param name security name
      * @param scopes oauth2 scope
-     * @memberof Configuration
      */
     accessToken?: string | Promise<string> | ((name?: string, scopes?: string[]) => string) | ((name?: string, scopes?: string[]) => Promise<string>);
     /**
      * override base path
-     *
-     * @type {string}
-     * @memberof Configuration
      */
     basePath?: string;
     /**
      * override server index
-     *
-     * @type {number}
-     * @memberof Configuration
      */
     serverIndex?: number;
     /**
      * base options for axios calls
-     *
-     * @type {any}
-     * @memberof Configuration
      */
     baseOptions?: any;
     /**
@@ -109,7 +90,7 @@ export class Configuration {
      * @return True if the given MIME is JSON, false otherwise.
      */
     public isJsonMime(mime: string): boolean {
-        const jsonMime: RegExp = new RegExp('^(application\/json|[^;/ \t]+\/[^;/ \t]+[+]json)[ \t]*(;.*)?$', 'i');
-        return mime !== null && (jsonMime.test(mime) || mime.toLowerCase() === 'application/json-patch+json');
+        const jsonMime: RegExp = /^(application\/json|[^;/ \t]+\/[^;/ \t]+[+]json)[ \t]*(;.*)?$/i;
+        return mime !== null && jsonMime.test(mime);
     }
 }
