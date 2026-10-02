@@ -12,8 +12,7 @@
  interface AWSv4Configuration {
    options?: {
      region?: string
-@@ -12,13 +17,16 @@
-     sessionToken?: string
+@@ -13,12 +18,15 @@
    }
  }
 
