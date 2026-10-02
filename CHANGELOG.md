@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.17.0](https://github.com/tremendous-rewards/tremendous-node/compare/tremendous-v4.16.0...tremendous-v4.17.0) (2026-10-02)
+
+
+### Features
+
+* add `CAD` to currency enums for invoices and ([36983f9](https://github.com/tremendous-rewards/tremendous-node/commit/36983f96c92ee0e916c688800be4e8b91073ac23))
+
 ## [4.16.0](https://github.com/tremendous-rewards/tremendous-node/compare/tremendous-v4.15.0...tremendous-v4.16.0) (2026-07-31)
 
 
