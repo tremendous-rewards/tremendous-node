@@ -1,5 +1,23 @@
 # Changelog
 
+## [5.0.0](https://github.com/tremendous-rewards/tremendous-node/compare/tremendous-v4.17.0...tremendous-v5.0.0) (2026-10-26)
+
+
+### ⚠ BREAKING CHANGES
+
+* drop support for Node.js 20 ([#384](https://github.com/tremendous-rewards/tremendous-node/issues/384))
+
+### Features
+
+* add `payment_id` field to balance transactions ([45081f6](https://github.com/tremendous-rewards/tremendous-node/commit/45081f6d1288577dfb9b123685e6755698fa086e))
+* drop support for Node.js 20 ([#384](https://github.com/tremendous-rewards/tremendous-node/issues/384)) ([220f03b](https://github.com/tremendous-rewards/tremendous-node/commit/220f03be7fdf9b73eeec91ee398408388de9aede))
+
+
+### Bug Fixes
+
+* make funding source failure detail fields nullable ([45081f6](https://github.com/tremendous-rewards/tremendous-node/commit/45081f6d1288577dfb9b123685e6755698fa086e))
+* remove `HRK` currency code ([45081f6](https://github.com/tremendous-rewards/tremendous-node/commit/45081f6d1288577dfb9b123685e6755698fa086e))
+
 ## [4.17.0](https://github.com/tremendous-rewards/tremendous-node/compare/tremendous-v4.16.0...tremendous-v4.17.0) (2026-10-02)
 
 
