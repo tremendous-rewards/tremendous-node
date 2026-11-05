@@ -1,5 +1,14 @@
 # Changelog
 
+## [5.1.0](https://github.com/tremendous-rewards/tremendous-node/compare/tremendous-v5.0.0...tremendous-v5.1.0) (2026-11-05)
+
+
+### Features
+
+* add `timezone` field to Organization responses ([eec061a](https://github.com/tremendous-rewards/tremendous-node/commit/eec061acaca198eb15b5c78738263bdee4a2066f))
+* add `timezone` input when creating Organizations ([eec061a](https://github.com/tremendous-rewards/tremendous-node/commit/eec061acaca198eb15b5c78738263bdee4a2066f))
+* add `timezone` to create Report request ([eec061a](https://github.com/tremendous-rewards/tremendous-node/commit/eec061acaca198eb15b5c78738263bdee4a2066f))
+
 ## [5.0.0](https://github.com/tremendous-rewards/tremendous-node/compare/tremendous-v4.17.0...tremendous-v5.0.0) (2026-10-26)
 
 
