@@ -1,5 +1,24 @@
 # Changelog
 
+## [6.0.0](https://github.com/tremendous-rewards/tremendous-node/compare/tremendous-v5.0.0...tremendous-v6.0.0) (2026-11-07)
+
+
+### ⚠ BREAKING CHANGES
+
+* remove create API key endpoint
+
+### Features
+
+* add `crypto_currency` product category ([cb688df](https://github.com/tremendous-rewards/tremendous-node/commit/cb688dfd13eaed53bffd84d27d4dd97752f5b298))
+* add `timezone` field to Organization responses ([eec061a](https://github.com/tremendous-rewards/tremendous-node/commit/eec061acaca198eb15b5c78738263bdee4a2066f))
+* add `timezone` input when creating Organizations ([eec061a](https://github.com/tremendous-rewards/tremendous-node/commit/eec061acaca198eb15b5c78738263bdee4a2066f))
+* add `timezone` to create Report request ([eec061a](https://github.com/tremendous-rewards/tremendous-node/commit/eec061acaca198eb15b5c78738263bdee4a2066f))
+
+
+### Bug Fixes
+
+* remove create API key endpoint ([cb688df](https://github.com/tremendous-rewards/tremendous-node/commit/cb688dfd13eaed53bffd84d27d4dd97752f5b298))
+
 ## [5.0.0](https://github.com/tremendous-rewards/tremendous-node/compare/tremendous-v4.17.0...tremendous-v5.0.0) (2026-10-26)
 
 
