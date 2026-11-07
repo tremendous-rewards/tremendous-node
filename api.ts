@@ -420,26 +420,6 @@ export interface ConnectedOrganizationResponseConnectedOrganization {
     'created_at': string;
     'organization'?: ConnectedOrganizationOrganization | null;
 }
-export interface CreateApiKey200Response {
-    /**
-     * The new API key
-     */
-    'api_key'?: string;
-}
-export interface CreateApiKeyRequest {
-    /**
-     * The key\'s permission level. `read_write` (the default) can make any request. `read_only` keys can\'t run data-altering requests: they\'re limited to GET requests and non-writing POST requests, like `/reports`. Omit for `read_write`. 
-     */
-    'permission'?: CreateApiKeyRequestPermissionEnum;
-}
-
-export const CreateApiKeyRequestPermissionEnum = {
-    ReadWrite: 'read_write',
-    ReadOnly: 'read_only',
-} as const;
-
-export type CreateApiKeyRequestPermissionEnum = typeof CreateApiKeyRequestPermissionEnum[keyof typeof CreateApiKeyRequestPermissionEnum];
-
 export interface CreateCampaign200Response {
     'campaign': ListCampaigns200ResponseCampaignsInner;
 }
@@ -3754,7 +3734,7 @@ export interface ListProductsResponseProductsInner {
      */
     'description': string;
     /**
-     * The category of the product  <table>   <thead>     <tr>       <th>Category</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td><code>ach</code></td>       <td>Bank transfer to the recipient</td>     </tr>     <tr>       <td><code>charity</code></td>       <td>Donations to a charity</td>     </tr>     <tr>       <td><code>instant_debit_transfer</code></td>       <td>Instant debit transfer to the recipient</td>     </tr>     <tr>       <td><code>merchant_card</code></td>       <td>A gift card for a certain merchant (e.g. Amazon)</td>     </tr>     <tr>       <td><code>paypal</code></td>       <td>Payout via PayPal</td>     </tr>     <tr>       <td><code>venmo</code></td>       <td>Payout via Venmo</td>     </tr>     <tr>       <td><code>visa_card</code></td>       <td>Payout in form of a Visa debit card</td>     </tr>     <tr>       <td><code>cash_app</code></td>       <td>Payout via Cash App</td>     </tr>     <tr>       <td><code>international_bank</code></td>       <td>Bank transfer to recipients outside of the US</td>     </tr>     <tr>       <td><code>wallet</code></td>       <td>Payout to a digital wallet (e.g. GCash, MoMo)</td>     </tr>   </tbody> </table> 
+     * The category of the product  <table>   <thead>     <tr>       <th>Category</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td><code>ach</code></td>       <td>Bank transfer to the recipient</td>     </tr>     <tr>       <td><code>charity</code></td>       <td>Donations to a charity</td>     </tr>     <tr>       <td><code>instant_debit_transfer</code></td>       <td>Instant debit transfer to the recipient</td>     </tr>     <tr>       <td><code>merchant_card</code></td>       <td>A gift card for a certain merchant (e.g. Amazon)</td>     </tr>     <tr>       <td><code>paypal</code></td>       <td>Payout via PayPal</td>     </tr>     <tr>       <td><code>venmo</code></td>       <td>Payout via Venmo</td>     </tr>     <tr>       <td><code>visa_card</code></td>       <td>Payout in form of a Visa debit card</td>     </tr>     <tr>       <td><code>cash_app</code></td>       <td>Payout via Cash App</td>     </tr>     <tr>       <td><code>international_bank</code></td>       <td>Bank transfer to recipients outside of the US</td>     </tr>     <tr>       <td><code>wallet</code></td>       <td>Payout to a digital wallet (e.g. GCash, MoMo)</td>     </tr>     <tr>       <td><code>crypto_currency</code></td>       <td>Payout in cryptocurrency</td>     </tr>   </tbody> </table> 
      */
     'category': ListProductsResponseProductsInnerCategoryEnum;
     /**
@@ -3799,6 +3779,7 @@ export const ListProductsResponseProductsInnerCategoryEnum = {
     CashApp: 'cash_app',
     InternationalBank: 'international_bank',
     Wallet: 'wallet',
+    CryptoCurrency: 'crypto_currency',
 } as const;
 
 export type ListProductsResponseProductsInnerCategoryEnum = typeof ListProductsResponseProductsInnerCategoryEnum[keyof typeof ListProductsResponseProductsInnerCategoryEnum];
@@ -5138,7 +5119,7 @@ export interface Product {
      */
     'description': string;
     /**
-     * The category of the product  <table>   <thead>     <tr>       <th>Category</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td><code>ach</code></td>       <td>Bank transfer to the recipient</td>     </tr>     <tr>       <td><code>charity</code></td>       <td>Donations to a charity</td>     </tr>     <tr>       <td><code>instant_debit_transfer</code></td>       <td>Instant debit transfer to the recipient</td>     </tr>     <tr>       <td><code>merchant_card</code></td>       <td>A gift card for a certain merchant (e.g. Amazon)</td>     </tr>     <tr>       <td><code>paypal</code></td>       <td>Payout via PayPal</td>     </tr>     <tr>       <td><code>venmo</code></td>       <td>Payout via Venmo</td>     </tr>     <tr>       <td><code>visa_card</code></td>       <td>Payout in form of a Visa debit card</td>     </tr>     <tr>       <td><code>cash_app</code></td>       <td>Payout via Cash App</td>     </tr>     <tr>       <td><code>international_bank</code></td>       <td>Bank transfer to recipients outside of the US</td>     </tr>     <tr>       <td><code>wallet</code></td>       <td>Payout to a digital wallet (e.g. GCash, MoMo)</td>     </tr>   </tbody> </table> 
+     * The category of the product  <table>   <thead>     <tr>       <th>Category</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td><code>ach</code></td>       <td>Bank transfer to the recipient</td>     </tr>     <tr>       <td><code>charity</code></td>       <td>Donations to a charity</td>     </tr>     <tr>       <td><code>instant_debit_transfer</code></td>       <td>Instant debit transfer to the recipient</td>     </tr>     <tr>       <td><code>merchant_card</code></td>       <td>A gift card for a certain merchant (e.g. Amazon)</td>     </tr>     <tr>       <td><code>paypal</code></td>       <td>Payout via PayPal</td>     </tr>     <tr>       <td><code>venmo</code></td>       <td>Payout via Venmo</td>     </tr>     <tr>       <td><code>visa_card</code></td>       <td>Payout in form of a Visa debit card</td>     </tr>     <tr>       <td><code>cash_app</code></td>       <td>Payout via Cash App</td>     </tr>     <tr>       <td><code>international_bank</code></td>       <td>Bank transfer to recipients outside of the US</td>     </tr>     <tr>       <td><code>wallet</code></td>       <td>Payout to a digital wallet (e.g. GCash, MoMo)</td>     </tr>     <tr>       <td><code>crypto_currency</code></td>       <td>Payout in cryptocurrency</td>     </tr>   </tbody> </table> 
      */
     'category': ProductCategoryEnum;
     /**
@@ -5183,6 +5164,7 @@ export const ProductCategoryEnum = {
     CashApp: 'cash_app',
     InternationalBank: 'international_bank',
     Wallet: 'wallet',
+    CryptoCurrency: 'crypto_currency',
 } as const;
 
 export type ProductCategoryEnum = typeof ProductCategoryEnum[keyof typeof ProductCategoryEnum];
@@ -9353,7 +9335,7 @@ export class InvoicesApi extends BaseAPI {
 export const MembersApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
-         * Each organization has one or more users that can access and manage that organization. These users are called members.  Members can take actions via the Tremendous web dashboard directly. These actions include adding funding sources to the organization, creating Campaigns, and more.  ### Permissions  Members can have a role that determine their permissions within the organization. Check the Roles API for the available roles.  To create members of a sub-organizations [create an API key for that organization](/reference/post_organizations-id-create-api-key) first, then use the new API key in the create member request.  ### Inviting new members  After creating a member, an automatic invite is sent to the email address. If the user is not registered yet, that person will then need to sign up for a Tremendous account.  > ❗️ Automatic invitations are not available in the sandbox > > You must manually use the returned `invite_url` field in the payload instead. 
+         * Each organization has one or more users that can access and manage that organization. These users are called members.  Members can take actions via the Tremendous web dashboard directly. These actions include adding funding sources to the organization, creating Campaigns, and more.  ### Permissions  Members can have a role that determine their permissions within the organization. Check the Roles API for the available roles.  To create members of a sub-organization, use an API key for that organization. You can create one in the Tremendous dashboard.  ### Inviting new members  After creating a member, an automatic invite is sent to the email address. If the user is not registered yet, that person will then need to sign up for a Tremendous account.  > ❗️ Automatic invitations are not available in the sandbox > > You must manually use the returned `invite_url` field in the payload instead. 
          * @summary Create member
          * @param {CreateMemberRequest} createMemberRequest Member details
          * @param {*} [options] Override http request option.
@@ -9468,7 +9450,7 @@ export const MembersApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * To list members of a sub-organization [create an API key for that organization](/reference/post_organizations-id-create-api-key) first, then use the new API key in the list members request. 
+         * To list members of a sub-organization, use an API key for that organization. You can create one in the Tremendous dashboard. 
          * @summary List members
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -9554,7 +9536,7 @@ export const MembersApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = MembersApiAxiosParamCreator(configuration)
     return {
         /**
-         * Each organization has one or more users that can access and manage that organization. These users are called members.  Members can take actions via the Tremendous web dashboard directly. These actions include adding funding sources to the organization, creating Campaigns, and more.  ### Permissions  Members can have a role that determine their permissions within the organization. Check the Roles API for the available roles.  To create members of a sub-organizations [create an API key for that organization](/reference/post_organizations-id-create-api-key) first, then use the new API key in the create member request.  ### Inviting new members  After creating a member, an automatic invite is sent to the email address. If the user is not registered yet, that person will then need to sign up for a Tremendous account.  > ❗️ Automatic invitations are not available in the sandbox > > You must manually use the returned `invite_url` field in the payload instead. 
+         * Each organization has one or more users that can access and manage that organization. These users are called members.  Members can take actions via the Tremendous web dashboard directly. These actions include adding funding sources to the organization, creating Campaigns, and more.  ### Permissions  Members can have a role that determine their permissions within the organization. Check the Roles API for the available roles.  To create members of a sub-organization, use an API key for that organization. You can create one in the Tremendous dashboard.  ### Inviting new members  After creating a member, an automatic invite is sent to the email address. If the user is not registered yet, that person will then need to sign up for a Tremendous account.  > ❗️ Automatic invitations are not available in the sandbox > > You must manually use the returned `invite_url` field in the payload instead. 
          * @summary Create member
          * @param {CreateMemberRequest} createMemberRequest Member details
          * @param {*} [options] Override http request option.
@@ -9593,7 +9575,7 @@ export const MembersApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * To list members of a sub-organization [create an API key for that organization](/reference/post_organizations-id-create-api-key) first, then use the new API key in the list members request. 
+         * To list members of a sub-organization, use an API key for that organization. You can create one in the Tremendous dashboard. 
          * @summary List members
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -9628,7 +9610,7 @@ export const MembersApiFactory = function (configuration?: Configuration, basePa
     const localVarFp = MembersApiFp(configuration)
     return {
         /**
-         * Each organization has one or more users that can access and manage that organization. These users are called members.  Members can take actions via the Tremendous web dashboard directly. These actions include adding funding sources to the organization, creating Campaigns, and more.  ### Permissions  Members can have a role that determine their permissions within the organization. Check the Roles API for the available roles.  To create members of a sub-organizations [create an API key for that organization](/reference/post_organizations-id-create-api-key) first, then use the new API key in the create member request.  ### Inviting new members  After creating a member, an automatic invite is sent to the email address. If the user is not registered yet, that person will then need to sign up for a Tremendous account.  > ❗️ Automatic invitations are not available in the sandbox > > You must manually use the returned `invite_url` field in the payload instead. 
+         * Each organization has one or more users that can access and manage that organization. These users are called members.  Members can take actions via the Tremendous web dashboard directly. These actions include adding funding sources to the organization, creating Campaigns, and more.  ### Permissions  Members can have a role that determine their permissions within the organization. Check the Roles API for the available roles.  To create members of a sub-organization, use an API key for that organization. You can create one in the Tremendous dashboard.  ### Inviting new members  After creating a member, an automatic invite is sent to the email address. If the user is not registered yet, that person will then need to sign up for a Tremendous account.  > ❗️ Automatic invitations are not available in the sandbox > > You must manually use the returned `invite_url` field in the payload instead. 
          * @summary Create member
          * @param {CreateMemberRequest} createMemberRequest Member details
          * @param {*} [options] Override http request option.
@@ -9658,7 +9640,7 @@ export const MembersApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.getMember(id, options).then((request) => request(axios, basePath));
         },
         /**
-         * To list members of a sub-organization [create an API key for that organization](/reference/post_organizations-id-create-api-key) first, then use the new API key in the list members request. 
+         * To list members of a sub-organization, use an API key for that organization. You can create one in the Tremendous dashboard. 
          * @summary List members
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -9685,7 +9667,7 @@ export const MembersApiFactory = function (configuration?: Configuration, basePa
  */
 export class MembersApi extends BaseAPI {
     /**
-     * Each organization has one or more users that can access and manage that organization. These users are called members.  Members can take actions via the Tremendous web dashboard directly. These actions include adding funding sources to the organization, creating Campaigns, and more.  ### Permissions  Members can have a role that determine their permissions within the organization. Check the Roles API for the available roles.  To create members of a sub-organizations [create an API key for that organization](/reference/post_organizations-id-create-api-key) first, then use the new API key in the create member request.  ### Inviting new members  After creating a member, an automatic invite is sent to the email address. If the user is not registered yet, that person will then need to sign up for a Tremendous account.  > ❗️ Automatic invitations are not available in the sandbox > > You must manually use the returned `invite_url` field in the payload instead. 
+     * Each organization has one or more users that can access and manage that organization. These users are called members.  Members can take actions via the Tremendous web dashboard directly. These actions include adding funding sources to the organization, creating Campaigns, and more.  ### Permissions  Members can have a role that determine their permissions within the organization. Check the Roles API for the available roles.  To create members of a sub-organization, use an API key for that organization. You can create one in the Tremendous dashboard.  ### Inviting new members  After creating a member, an automatic invite is sent to the email address. If the user is not registered yet, that person will then need to sign up for a Tremendous account.  > ❗️ Automatic invitations are not available in the sandbox > > You must manually use the returned `invite_url` field in the payload instead. 
      * @summary Create member
      * @param {CreateMemberRequest} createMemberRequest Member details
      * @param {*} [options] Override http request option.
@@ -9718,7 +9700,7 @@ export class MembersApi extends BaseAPI {
     }
 
     /**
-     * To list members of a sub-organization [create an API key for that organization](/reference/post_organizations-id-create-api-key) first, then use the new API key in the list members request. 
+     * To list members of a sub-organization, use an API key for that organization. You can create one in the Tremendous dashboard. 
      * @summary List members
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -10183,43 +10165,6 @@ export class OrdersApi extends BaseAPI {
 export const OrganizationsApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
-         * Creates a new API key. The API key used to make the request will remain active.  Created API keys are generated randomly and returned in the response. **You cannot retrieve them again.** 
-         * @summary Create API key
-         * @param {CreateApiKeyRequest} [createApiKeyRequest] Optional settings for the new API key
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        createApiKey: async (createApiKeyRequest?: CreateApiKeyRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/organizations/create_api_key`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication BearerApiKey required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-            localVarHeaderParameter['Accept'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(createApiKeyRequest, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
          * Organizations are a way to separate different parts of your business within the same Tremendous account.  You can assign users in your Tremendous team as members to any organization. Users can be members of multiple organizations at once.  API keys belong to a single organization. The API key used in a request determines on behalf of which organization the request is carried out.  **Important note:** When creating an organization, you are required to either pass `with_api_key` or `copy_settings[user]` in the request body as `true`. This ensures that your new Organization can either be accessed via the API or the Dashboard. 
          * @summary Create organization
          * @param {CreateOrganizationRequest} createOrganizationRequest Organization details
@@ -10340,19 +10285,6 @@ export const OrganizationsApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = OrganizationsApiAxiosParamCreator(configuration)
     return {
         /**
-         * Creates a new API key. The API key used to make the request will remain active.  Created API keys are generated randomly and returned in the response. **You cannot retrieve them again.** 
-         * @summary Create API key
-         * @param {CreateApiKeyRequest} [createApiKeyRequest] Optional settings for the new API key
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async createApiKey(createApiKeyRequest?: CreateApiKeyRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CreateApiKey200Response>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.createApiKey(createApiKeyRequest, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['OrganizationsApi.createApiKey']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
          * Organizations are a way to separate different parts of your business within the same Tremendous account.  You can assign users in your Tremendous team as members to any organization. Users can be members of multiple organizations at once.  API keys belong to a single organization. The API key used in a request determines on behalf of which organization the request is carried out.  **Important note:** When creating an organization, you are required to either pass `with_api_key` or `copy_settings[user]` in the request body as `true`. This ensures that your new Organization can either be accessed via the API or the Dashboard. 
          * @summary Create organization
          * @param {CreateOrganizationRequest} createOrganizationRequest Organization details
@@ -10400,16 +10332,6 @@ export const OrganizationsApiFactory = function (configuration?: Configuration, 
     const localVarFp = OrganizationsApiFp(configuration)
     return {
         /**
-         * Creates a new API key. The API key used to make the request will remain active.  Created API keys are generated randomly and returned in the response. **You cannot retrieve them again.** 
-         * @summary Create API key
-         * @param {CreateApiKeyRequest} [createApiKeyRequest] Optional settings for the new API key
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        createApiKey(createApiKeyRequest?: CreateApiKeyRequest, options?: RawAxiosRequestConfig): AxiosPromise<CreateApiKey200Response> {
-            return localVarFp.createApiKey(createApiKeyRequest, options).then((request) => request(axios, basePath));
-        },
-        /**
          * Organizations are a way to separate different parts of your business within the same Tremendous account.  You can assign users in your Tremendous team as members to any organization. Users can be members of multiple organizations at once.  API keys belong to a single organization. The API key used in a request determines on behalf of which organization the request is carried out.  **Important note:** When creating an organization, you are required to either pass `with_api_key` or `copy_settings[user]` in the request body as `true`. This ensures that your new Organization can either be accessed via the API or the Dashboard. 
          * @summary Create organization
          * @param {CreateOrganizationRequest} createOrganizationRequest Organization details
@@ -10445,17 +10367,6 @@ export const OrganizationsApiFactory = function (configuration?: Configuration, 
  * OrganizationsApi - object-oriented interface
  */
 export class OrganizationsApi extends BaseAPI {
-    /**
-     * Creates a new API key. The API key used to make the request will remain active.  Created API keys are generated randomly and returned in the response. **You cannot retrieve them again.** 
-     * @summary Create API key
-     * @param {CreateApiKeyRequest} [createApiKeyRequest] Optional settings for the new API key
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    public createApiKey(createApiKeyRequest?: CreateApiKeyRequest, options?: RawAxiosRequestConfig) {
-        return OrganizationsApiFp(this.configuration).createApiKey(createApiKeyRequest, options).then((request) => request(this.axios, this.basePath));
-    }
-
     /**
      * Organizations are a way to separate different parts of your business within the same Tremendous account.  You can assign users in your Tremendous team as members to any organization. Users can be members of multiple organizations at once.  API keys belong to a single organization. The API key used in a request determines on behalf of which organization the request is carried out.  **Important note:** When creating an organization, you are required to either pass `with_api_key` or `copy_settings[user]` in the request body as `true`. This ensures that your new Organization can either be accessed via the API or the Dashboard. 
      * @summary Create organization
