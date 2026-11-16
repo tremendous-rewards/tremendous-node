@@ -9374,7 +9374,7 @@ export const MembersApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Removes an existing member from the organization, identified by the given `id` in the URL.  The member loses access to the organization and a `MEMBERS.DELETED` webhook event is emitted. 
+         * Removes an existing member from the organization, identified by the given `id` in the URL.  The member loses access to the organization and a `MEMBERS.DELETED` webhook event is emitted.  Admins can\'t be removed through the API. Remove an Admin in the Tremendous dashboard instead. 
          * @summary Delete member
          * @param {string} id ID of the member to delete
          * @param {*} [options] Override http request option.
@@ -9549,7 +9549,7 @@ export const MembersApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Removes an existing member from the organization, identified by the given `id` in the URL.  The member loses access to the organization and a `MEMBERS.DELETED` webhook event is emitted. 
+         * Removes an existing member from the organization, identified by the given `id` in the URL.  The member loses access to the organization and a `MEMBERS.DELETED` webhook event is emitted.  Admins can\'t be removed through the API. Remove an Admin in the Tremendous dashboard instead. 
          * @summary Delete member
          * @param {string} id ID of the member to delete
          * @param {*} [options] Override http request option.
@@ -9620,7 +9620,7 @@ export const MembersApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.createMember(createMemberRequest, options).then((request) => request(axios, basePath));
         },
         /**
-         * Removes an existing member from the organization, identified by the given `id` in the URL.  The member loses access to the organization and a `MEMBERS.DELETED` webhook event is emitted. 
+         * Removes an existing member from the organization, identified by the given `id` in the URL.  The member loses access to the organization and a `MEMBERS.DELETED` webhook event is emitted.  Admins can\'t be removed through the API. Remove an Admin in the Tremendous dashboard instead. 
          * @summary Delete member
          * @param {string} id ID of the member to delete
          * @param {*} [options] Override http request option.
@@ -9678,7 +9678,7 @@ export class MembersApi extends BaseAPI {
     }
 
     /**
-     * Removes an existing member from the organization, identified by the given `id` in the URL.  The member loses access to the organization and a `MEMBERS.DELETED` webhook event is emitted. 
+     * Removes an existing member from the organization, identified by the given `id` in the URL.  The member loses access to the organization and a `MEMBERS.DELETED` webhook event is emitted.  Admins can\'t be removed through the API. Remove an Admin in the Tremendous dashboard instead. 
      * @summary Delete member
      * @param {string} id ID of the member to delete
      * @param {*} [options] Override http request option.
