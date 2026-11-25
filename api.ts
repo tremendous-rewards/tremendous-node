@@ -2755,6 +2755,10 @@ export interface ListBalanceTransactions200ResponseTransactionsInnerOrderPayment
 }
 export interface ListCampaigns200Response {
     'campaigns': Array<ListCampaigns200ResponseCampaignsInner>;
+    /**
+     * The total number of campaigns across all pages
+     */
+    'total_count': number;
 }
 /**
  * With a campaign you can define the look & feel of how rewards are sent out. It also lets you set the available products (different gift cards, charity, etc.) recipients can choose from. 
@@ -6677,10 +6681,12 @@ export const CampaignsApiAxiosParamCreator = function (configuration?: Configura
         /**
          * Retrieve a list of all campaigns created in your account 
          * @summary List campaigns
+         * @param {number} [limit] Limits the number of campaigns listed. The maximum value is 500. Without a limit, every campaign is returned.
+         * @param {number} [offset] Offsets the returned list by the given number of campaigns. Campaigns come back in the same order on every page.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listCampaigns: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        listCampaigns: async (limit?: number, offset?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/campaigns`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -6696,6 +6702,14 @@ export const CampaignsApiAxiosParamCreator = function (configuration?: Configura
             // authentication BearerApiKey required
             // http bearer authentication required
             await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (limit !== undefined) {
+                localVarQueryParameter['limit'] = limit;
+            }
+
+            if (offset !== undefined) {
+                localVarQueryParameter['offset'] = offset;
+            }
 
             localVarHeaderParameter['Accept'] = 'application/json';
 
@@ -6789,11 +6803,13 @@ export const CampaignsApiFp = function(configuration?: Configuration) {
         /**
          * Retrieve a list of all campaigns created in your account 
          * @summary List campaigns
+         * @param {number} [limit] Limits the number of campaigns listed. The maximum value is 500. Without a limit, every campaign is returned.
+         * @param {number} [offset] Offsets the returned list by the given number of campaigns. Campaigns come back in the same order on every page.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async listCampaigns(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListCampaigns200Response>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.listCampaigns(options);
+        async listCampaigns(limit?: number, offset?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListCampaigns200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.listCampaigns(limit, offset, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['CampaignsApi.listCampaigns']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -6844,11 +6860,13 @@ export const CampaignsApiFactory = function (configuration?: Configuration, base
         /**
          * Retrieve a list of all campaigns created in your account 
          * @summary List campaigns
+         * @param {number} [limit] Limits the number of campaigns listed. The maximum value is 500. Without a limit, every campaign is returned.
+         * @param {number} [offset] Offsets the returned list by the given number of campaigns. Campaigns come back in the same order on every page.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listCampaigns(options?: RawAxiosRequestConfig): AxiosPromise<ListCampaigns200Response> {
-            return localVarFp.listCampaigns(options).then((request) => request(axios, basePath));
+        listCampaigns(limit?: number, offset?: number, options?: RawAxiosRequestConfig): AxiosPromise<ListCampaigns200Response> {
+            return localVarFp.listCampaigns(limit, offset, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -6893,11 +6911,13 @@ export class CampaignsApi extends BaseAPI {
     /**
      * Retrieve a list of all campaigns created in your account 
      * @summary List campaigns
+     * @param {number} [limit] Limits the number of campaigns listed. The maximum value is 500. Without a limit, every campaign is returned.
+     * @param {number} [offset] Offsets the returned list by the given number of campaigns. Campaigns come back in the same order on every page.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    public listCampaigns(options?: RawAxiosRequestConfig) {
-        return CampaignsApiFp(this.configuration).listCampaigns(options).then((request) => request(this.axios, this.basePath));
+    public listCampaigns(limit?: number, offset?: number, options?: RawAxiosRequestConfig) {
+        return CampaignsApiFp(this.configuration).listCampaigns(limit, offset, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
