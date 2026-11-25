@@ -1,5 +1,13 @@
 # Changelog
 
+## [6.1.0](https://github.com/tremendous-rewards/tremendous-node/compare/tremendous-v6.0.0...tremendous-v6.1.0) (2026-11-25)
+
+
+### Features
+
+* add `total_count` to list campaigns response ([94845fa](https://github.com/tremendous-rewards/tremendous-node/commit/94845fa20985f967d09ea5feb2ff5449c056e511))
+* add pagination to list campaigns endpoint ([94845fa](https://github.com/tremendous-rewards/tremendous-node/commit/94845fa20985f967d09ea5feb2ff5449c056e511))
+
 ## [6.0.0](https://github.com/tremendous-rewards/tremendous-node/compare/tremendous-v5.0.0...tremendous-v6.0.0) (2026-11-07)
 
 
